@@ -8,7 +8,7 @@ using UnityEngine;
 public class IdeaCardInspector : Editor
 {
     IdeaCard script;
-
+    SerializedProperty cardDataReference;
     SerializedProperty cardName;
     SerializedProperty cardCost;
     SerializedProperty cardGraph;
@@ -23,8 +23,9 @@ public class IdeaCardInspector : Editor
     private void OnEnable()
     {
         script = target as IdeaCard;
-        
-        cardType = serializedObject.FindProperty(nameof(script.cardType));
+
+        cardDataReference = serializedObject.FindProperty(nameof(script.dataReference));
+        cardType = serializedObject.FindProperty(nameof(script.cardTypeReference));
         cardName = serializedObject.FindProperty(nameof(script.cardName));
         cardCost = serializedObject.FindProperty(nameof(script.creativityCost));
         cardGraph = serializedObject.FindProperty(nameof(script.cardGraph));
@@ -35,7 +36,8 @@ public class IdeaCardInspector : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-
+        EditorGUILayout.PropertyField(cardDataReference);
+        if (cardDataReference.objectReferenceValue == null) EditorGUILayout.HelpBox("Card Data Reference must not be null !", MessageType.Error);
         EditorGUILayout.LabelField("Card Base", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(cardName);
         EditorGUILayout.PropertyField(cardCost);
@@ -142,22 +144,22 @@ public class IdeaCardInspector : Editor
     {
         if((Type)type == typeof(CardTypes))
         {
-            if (script.cardType != null)
+            if (script.cardTypeReference != null)
             {
                 //delete the child asset
-                AssetDatabase.RemoveObjectFromAsset(script.cardType);
+                AssetDatabase.RemoveObjectFromAsset(script.cardTypeReference);
                 AssetDatabase.SaveAssets();
-                script.cardType = null;
+                script.cardTypeReference = null;
             }
         }
         else
         {
-            if(script.cardType!=null)
+            if(script.cardTypeReference != null)
             {
                 //delete the child asset
-                AssetDatabase.RemoveObjectFromAsset(script.cardType);
+                AssetDatabase.RemoveObjectFromAsset(script.cardTypeReference);
                 AssetDatabase.SaveAssets();
-                script.cardType = null;
+                script.cardTypeReference = null;
             }
 
             //var instance = Activator.CreateInstance((Type)type);
@@ -173,7 +175,7 @@ public class IdeaCardInspector : Editor
             AssetDatabase.SaveAssets();
 
             //cardType.objectReferenceValue = instance as CardTypes;
-            script.cardType = instance as CardTypes;
+            script.cardTypeReference = instance as CardTypes;
             EditorUtility.SetDirty(script);
         }
 

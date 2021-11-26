@@ -276,6 +276,19 @@ public class DraftBoard : MonoBehaviour
 
         actionEnded = true;
     }
+    public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded, System.Action onActionEndedMethod)
+    {
+        CardManager.Instance.cardDeck.discardPile.Add(card.data);
+
+        //remove from board list
+        card.currentSlot.currentPlacedCard = null;
+
+        card.ResetCard();
+
+        actionEnded = true;
+
+        onActionEndedMethod.Invoke();
+    }
 
     public void ReturnCardToHand(CardContainer card, bool canPushOverCard, ref bool actionEnded)
     {

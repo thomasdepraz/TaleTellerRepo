@@ -56,19 +56,20 @@ public class CharacterType : CardTypes
         Debug.Log("Castagne avec le perso");
 
         //Le character se prend un coup
-        //stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        Debug.Log($"Character has {stats.baseLifePoints}");
 
         yield return new WaitForSeconds(0.2f);
 
         //Check s'il est encore en vie
         if(stats.baseLifePoints <= 0)//Le character met un coup au player
         {
-            CharacterDeath(ref deathFinished); //No need to update the queue since it'll be cleaned
+            CharacterDeath(ref deathFinished, true); //No need to update the queue since it'll be cleaned
         }
         else
         {
 
-            //GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
+            GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
 
             //check for player death, if still alive then keep going
 
@@ -83,12 +84,13 @@ public class CharacterType : CardTypes
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
         
-        //character.stats.baseLifePoints -= stats.baseAttackDamage;
+        character.stats.baseLifePoints -= stats.baseAttackDamage;
+        Debug.Log($"Other character has {character.stats.baseLifePoints}");
         yield return new WaitForSeconds(0.2f);
 
         if(character.stats.baseLifePoints <= 0)
         {
-            character.CharacterDeath(ref fightEnded);//<-- watch out for the test cases
+            character.CharacterDeath(ref fightEnded, false);//<-- watch out for the test cases
         }
         else
         {
@@ -212,18 +214,26 @@ public class CharacterType : CardTypes
         return characters;
     }
 
-    void CharacterDeath(ref bool deathEnded) //NOT WORKING
+    void CharacterDeath(ref bool deathEnded, bool isCurrentCharacter)
     {
         //Manage character death card discard, card reset, events deletion
-        //CardManager.Instance.board.DiscardCardFromBoard();
-
+        if(!isCurrentCharacter)
+        {
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer,ref deathEnded);
+        }
+        else//If Im currently resolving this card event, the have to be cleared to prevent errors
+        {
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref deathEnded, ClearCharacterEvents);
+        }
+    }
+    void ClearCharacterEvents()
+    {
         //Clear events
         CardManager.Instance.board.ClearEvents();
 
         //Pickup the story processing
         CardManager.Instance.board.UpdateStoryQueue(); //<-- is this solid enough/ maybe implement a  resume processing method in board that is based on the current state of the story processing
     }
-    
     #endregion
     /// <summary>
     /// Update method of the useCount.
