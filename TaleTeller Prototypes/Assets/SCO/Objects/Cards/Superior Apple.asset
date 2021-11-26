@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0543b21e4b38a04e9756e50a8953389, type: 3}
+  m_Name: Superior Apple
+  m_EditorClassIdentifier: 
+  cardName: Superior Apple
+  isKeyCard: 0
+  keyCardActivated: 0
+  interestCooldown: 0
+  currentInterestCooldown: 0
+  creativityBurn: 0
+  type: 1
+  characterBehaviour: 0
+  characterStats:
+    baseLifePoints: 0
+    baseAttackDamage: 0
+  trigger: 0
+  creativityCost: 4
+  effect: {fileID: 11400000, guid: 8eb5d650256f6d041a3e469e105c2cb4, type: 2}
+  deadCardEffect: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: e3bbec142d488b241a7f9cb64f49aad9, type: 3}
+  feedback: {fileID: 0}
+  description: +2 HP
+  effects: []
+  cardType: {fileID: 0}

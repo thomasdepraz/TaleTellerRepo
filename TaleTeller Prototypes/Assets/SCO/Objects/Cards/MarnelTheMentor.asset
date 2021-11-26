@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0543b21e4b38a04e9756e50a8953389, type: 3}
+  m_Name: MarnelTheMentor
+  m_EditorClassIdentifier: 
+  cardName: Marnel The Mentor
+  isKeyCard: 1
+  keyCardActivated: 0
+  interestCooldown: 2
+  currentInterestCooldown: 0
+  creativityBurn: 7
+  type: 0
+  characterBehaviour: 1
+  characterStats:
+    maxLifePoints: 10
+    baseLifePoints: 10
+    maxAttackDamage: 1
+    baseAttackDamage: 1
+  trigger: 1
+  creativityCost: 12
+  effect: {fileID: 11400000, guid: 37d06be521eed414eb992266db263a45, type: 2}
+  deadCardEffect: {fileID: 11400000, guid: 16b132312b464e9448a36374a3b4fbe5, type: 2}
+  cardGraph: {fileID: 21300000, guid: 511789f9a7de26a43a0d5cb62c772951, type: 3}
+  feedback: {fileID: 0}
+  description: 

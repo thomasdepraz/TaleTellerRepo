@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0543b21e4b38a04e9756e50a8953389, type: 3}
+  m_Name: BjorgTheWarrior
+  m_EditorClassIdentifier: 
+  cardName: Bjorg The Warrior
+  isKeyCard: 1
+  keyCardActivated: 0
+  interestCooldown: 0
+  currentInterestCooldown: 0
+  creativityBurn: 0
+  type: 0
+  characterBehaviour: 1
+  characterStats:
+    baseLifePoints: 6
+    baseAttackDamage: 2
+  trigger: 0
+  creativityCost: 7
+  effect: {fileID: 0}
+  deadCardEffect: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: b9236990daf0f2c488c53ef64bed9710, type: 3}
+  feedback: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: '
+
+'
+  effects: []
+  cardType: {fileID: 0}

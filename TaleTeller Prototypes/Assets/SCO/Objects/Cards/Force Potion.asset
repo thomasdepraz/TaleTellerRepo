@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0543b21e4b38a04e9756e50a8953389, type: 3}
+  m_Name: Force Potion
+  m_EditorClassIdentifier: 
+  cardName: Force Potion
+  isKeyCard: 0
+  keyCardActivated: 0
+  interestCooldown: 0
+  currentInterestCooldown: 0
+  creativityBurn: 0
+  type: 1
+  characterBehaviour: 0
+  characterStats:
+    maxLifePoints: 0
+    baseLifePoints: 0
+    maxAttackDamage: 0
+    baseAttackDamage: 0
+  trigger: 0
+  creativityCost: 3
+  effect: {fileID: 11400000, guid: 5e036a966a065ad409423254a2dec7cb, type: 2}
+  deadCardEffect: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 99c66634f5cf62f4eae7a69aa29dec09, type: 3}
+  feedback: {fileID: 0}
+  description: +2 bonus damage
+  effects: []
+  references:
+    version: 1
