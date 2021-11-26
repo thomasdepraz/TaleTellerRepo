@@ -37,5 +37,4 @@ public class IdeaCard : CardData
 
         return data;
     }
-
 }

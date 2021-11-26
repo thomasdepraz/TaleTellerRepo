@@ -2070,6 +2070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47e2400f457c14ba4f9cf5b7c59d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIndex: 0
   canvasGroup: {fileID: 792518294}
   image: {fileID: 792518292}
   defaultSprite: {fileID: 21300000, guid: 7faf0dca4849afc4fb336329dfc1cd32, type: 3}
@@ -2375,6 +2376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47e2400f457c14ba4f9cf5b7c59d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIndex: 2
   canvasGroup: {fileID: 898686631}
   image: {fileID: 898686633}
   defaultSprite: {fileID: 21300000, guid: 7faf0dca4849afc4fb336329dfc1cd32, type: 3}
@@ -3544,6 +3546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47e2400f457c14ba4f9cf5b7c59d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIndex: 1
   canvasGroup: {fileID: 1157132435}
   image: {fileID: 1157132437}
   defaultSprite: {fileID: 21300000, guid: 7faf0dca4849afc4fb336329dfc1cd32, type: 3}
@@ -5295,6 +5298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47e2400f457c14ba4f9cf5b7c59d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIndex: 3
   canvasGroup: {fileID: 1660817578}
   image: {fileID: 1660817580}
   defaultSprite: {fileID: 21300000, guid: 7faf0dca4849afc4fb336329dfc1cd32, type: 3}

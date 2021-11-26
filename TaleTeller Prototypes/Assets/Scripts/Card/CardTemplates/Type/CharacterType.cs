@@ -30,9 +30,6 @@ public class CharacterType : CardTypes
     private int maxUseCount;
 
     #region Fighting Logic
-
-    List<IEnumerator> fightQueue;
-
     /// <summary>
     /// Fight logic between characters /with players. 
     /// </summary>
@@ -40,31 +37,69 @@ public class CharacterType : CardTypes
     {
         List <CharacterType> characters = GetFightingTargets();
 
-        for (int i = 0; i < characters.Count; i++)
-        {
-            CardManager.Instance.board.cardEventQueue.Add(FightVSCharacter(characters[i]));
-        }
-
         //if agressive add player to fighting list
         if(behaviour == CharacterBehaviour.Agressive)
         {
             CardManager.Instance.board.cardEventQueue.Add(FightVSPlayer());
         }
+
+        for (int i = 0; i < characters.Count; i++)
+        {
+            CardManager.Instance.board.cardEventQueue.Add(FightVSCharacter(characters[i]));
+        }
     }
+
     //Here is the actual fighting logic
     IEnumerator FightVSPlayer()
     {
-        //Le player se prend un coup
+        bool deathFinished = false;
         Debug.Log("Castagne avec le perso");
-        yield return null;
-        CardManager.Instance.board.UpdateStoryQueue();
+
+        //Le character se prend un coup
+        //stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+
+        yield return new WaitForSeconds(0.2f);
+
+        //Check s'il est encore en vie
+        if(stats.baseLifePoints <= 0)//Le character met un coup au player
+        {
+            CharacterDeath(ref deathFinished); //No need to update the queue since it'll be cleaned
+        }
+        else
+        {
+
+            //GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
+
+            //check for player death, if still alive then keep going
+
+            yield return new WaitForSeconds(0.2f);
+            CardManager.Instance.board.UpdateStoryQueue();
+        }
     }   
 
     IEnumerator FightVSCharacter(CharacterType character)
     {
+        bool fightEnded = false;
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
-        yield return null;
+        
+        //character.stats.baseLifePoints -= stats.baseAttackDamage;
+        yield return new WaitForSeconds(0.2f);
+
+        if(character.stats.baseLifePoints <= 0)
+        {
+            character.CharacterDeath(ref fightEnded);//<-- watch out for the test cases
+        }
+        else
+        {
+            fightEnded = true;
+        }
+
+        while(!fightEnded)//Wait 
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         CardManager.Instance.board.UpdateStoryQueue();
     }
 
@@ -76,18 +111,99 @@ public class CharacterType : CardTypes
         switch (fightingRange)
         {
             case CharacterFightingRange.None:
+
                 break;
 
             case CharacterFightingRange.Left:
+                #region Left
+                if (data.currentContainer.currentSlot.slotIndex > 0)//Check if can grab left
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex - 1].currentPlacedCard;
+                    if (cardContainer !=null)//Check if thers a card left
+                    {
+                        if(cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if(cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
 
+                                if(otherCharacter.behaviour !=  behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
                 break;
-
             case CharacterFightingRange.Right:
+                #region Right
+                if (data.currentContainer.currentSlot.slotIndex < CardManager.Instance.board.slots.Count - 1)//Check if can grab right
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex + 1].currentPlacedCard;
+                    if (cardContainer != null)//Check if thers a card left
+                    {
+                        if (cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if (cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
 
+                                if (otherCharacter.behaviour != behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
                 break;
 
             case CharacterFightingRange.LeftAndRight:
+                #region Left
+                if (data.currentContainer.currentSlot.slotIndex > 0)//Check if can grab left
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex - 1].currentPlacedCard;
+                    if (cardContainer != null)//Check if thers a card left
+                    {
+                        if (cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if (cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
 
+                                if (otherCharacter.behaviour != behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+                #region Right
+                if (data.currentContainer.currentSlot.slotIndex < CardManager.Instance.board.slots.Count - 1)//Check if can grab right
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex + 1].currentPlacedCard;
+                    if (cardContainer != null)//Check if thers a card left
+                    {
+                        if (cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if (cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
+
+                                if (otherCharacter.behaviour != behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
                 break;
 
             default:
@@ -96,6 +212,18 @@ public class CharacterType : CardTypes
         return characters;
     }
 
+    void CharacterDeath(ref bool deathEnded) //NOT WORKING
+    {
+        //Manage character death card discard, card reset, events deletion
+        //CardManager.Instance.board.DiscardCardFromBoard();
+
+        //Clear events
+        CardManager.Instance.board.ClearEvents();
+
+        //Pickup the story processing
+        CardManager.Instance.board.UpdateStoryQueue(); //<-- is this solid enough/ maybe implement a  resume processing method in board that is based on the current state of the story processing
+    }
+    
     #endregion
     /// <summary>
     /// Update method of the useCount.

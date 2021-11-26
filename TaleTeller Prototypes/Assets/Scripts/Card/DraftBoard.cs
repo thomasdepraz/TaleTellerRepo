@@ -264,6 +264,7 @@ public class DraftBoard : MonoBehaviour
     }
     #endregion
 
+    #region CardManagement Method
     public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded)
     {
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
@@ -320,4 +321,13 @@ public class DraftBoard : MonoBehaviour
         }
     }
 
+    #endregion
+
+    public void ClearEvents()
+    {
+        onStartQueue.Clear();
+        onEndQueue.Clear();
+        cardEffectQueue.Clear();
+        cardEventQueue.Clear();
+    }
 }

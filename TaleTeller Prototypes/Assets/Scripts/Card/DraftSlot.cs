@@ -9,6 +9,7 @@ public class DraftSlot : MonoBehaviour
      , IPointerExitHandler
 {
     CardContainer _currentPlacedCard;
+    public int slotIndex;
     public CardContainer currentPlacedCard
     { 
         get => _currentPlacedCard;
