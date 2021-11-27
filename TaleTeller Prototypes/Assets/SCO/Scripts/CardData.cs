@@ -82,7 +82,7 @@ public class CardData : ScriptableObject
 
 
         //Write logic to determine how the card subscribe to the events
-        if(dataReference.cardType == null)//All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
+        if(data.cardTypeReference == null)//All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
         {
             //Subscribe to onEnterEvent so it at least processes the events if any
             data.onEnterEvent += OnEnter;
@@ -139,6 +139,64 @@ public class CardData : ScriptableObject
     public void ResetCharacterStats()
     {
         characterStats.Reset();
+    }
+
+    public void ResetData(CardData cardToReset)
+    {
+        //Unsubscribe from all events <-- Extend these methods each time we add a new delegate
+        #region Unsubscribe methods
+        if (onStartEvent != null)
+        {
+            foreach(var myDelegate in onStartEvent.GetInvocationList())
+            {
+                onStartEvent -= myDelegate as BoardEvent;
+            }
+        }
+        if (onEnterEvent != null)
+        {
+            foreach (var myDelegate in onEnterEvent.GetInvocationList())
+            {
+                onEnterEvent -= myDelegate as BoardEvent;
+            }
+        }
+        if (onEndEvent != null)
+        {
+            foreach (var myDelegate in onEndEvent.GetInvocationList())
+            {
+                onEndEvent -= myDelegate as BoardEvent;
+            }
+        }
+
+        #endregion
+
+        //Reset data----------------------------------
+
+
+        cardToReset = Instantiate(cardToReset.dataReference);//make data an instance of itself
+
+        //Instantiate other scriptables objects
+        if (cardToReset.cardTypeReference != null)
+        {
+            cardToReset.cardType = Instantiate(cardToReset.cardTypeReference);
+            cardToReset.cardType.InitType(cardToReset);//<--Watch out, subscribing to events can happen in here
+        }
+
+        for (int i = 0; i < cardToReset.effects.Count; i++)
+        {
+            if (effects[i] != null) cardToReset.effects[i] = Instantiate(cardToReset.dataReference.effects[i]);
+        }
+
+        //Write logic to determine how the card subscribe to the events
+        if (cardToReset.dataReference.cardType == null)//All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
+        {
+            //Subscribe to onEnterEvent so it at least processes the events if any
+            cardToReset.onEnterEvent += OnEnter;
+
+            //Subscribe to OnEnd to Discard
+            cardToReset.onEndEvent += OnEnd;
+        }
+
+        //-----------------------
     }
 
 }

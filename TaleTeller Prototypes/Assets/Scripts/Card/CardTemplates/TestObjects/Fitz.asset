@@ -38,7 +38,7 @@ MonoBehaviour:
     baseLifePoints: 0
     baseAttackDamage: 0
   trigger: 0
-  creativityCost: 3
+  creativityCost: 1
   effect: {fileID: 0}
   deadCardEffect: {fileID: 0}
   cardGraph: {fileID: 0}
@@ -80,5 +80,5 @@ MonoBehaviour:
     baseLifePoints: 1
     baseAttackDamage: 1
   behaviour: 2
-  fightingRange: 1
+  fightingRange: 0
   useCount: 2

@@ -26,7 +26,7 @@ public class IdeaCard : CardData
 
 
         //Write logic to determine how the card subscribe to the events
-        if (dataReference.cardType == null)//All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
+        if (data.cardTypeReference == null)//All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
         {
             //Subscribe to onEnterEvent so it at least processes the events if any
             data.onEnterEvent += OnEnter;

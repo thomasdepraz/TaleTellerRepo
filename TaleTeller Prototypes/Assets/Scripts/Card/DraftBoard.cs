@@ -267,10 +267,13 @@ public class DraftBoard : MonoBehaviour
     #region CardManagement Method
     public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded)
     {
+        card.data.ResetData(card.data);
+
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
         
         //remove from board list
         card.currentSlot.currentPlacedCard = null;
+        card.currentSlot.canvasGroup.blocksRaycasts = true;
 
         card.ResetCard();
 
@@ -278,10 +281,13 @@ public class DraftBoard : MonoBehaviour
     }
     public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded, System.Action onActionEndedMethod)
     {
+        card.data.ResetData(card.data);
+
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
 
         //remove from board list
         card.currentSlot.currentPlacedCard = null;
+        card.currentSlot.canvasGroup.blocksRaycasts = true;
 
         card.ResetCard();
 

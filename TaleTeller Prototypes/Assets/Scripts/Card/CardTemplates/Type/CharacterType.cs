@@ -250,7 +250,7 @@ public class CharacterType : CardTypes
         maxUseCount = useCount;
         data.onStartEvent += OnStart;//This is temporary, normally nothing happens on the start event for a character type card
         data.onEnterEvent += OnEnter;// Override onEnter to add fight triggers too
-        data.onEndEvent += OnEnd;
+        data.onEndEvent += OnEndCharacter;
     }
 
     #region Events
@@ -277,7 +277,7 @@ public class CharacterType : CardTypes
     #endregion
 
     #region OnEnd (Return to hand / discard)
-    public void OnEnd()
+    public void OnEndCharacter()
     {
         CardManager.Instance.board.onEndQueue.Add(OnEndRoutine());   
     }
