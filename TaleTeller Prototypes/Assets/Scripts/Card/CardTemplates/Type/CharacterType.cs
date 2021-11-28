@@ -65,6 +65,13 @@ public class CharacterType : CardTypes
         if(stats.baseLifePoints <= 0)//Le character met un coup au player
         {
             CharacterDeath(ref deathFinished, true); //No need to update the queue since it'll be cleaned
+
+            while(!deathFinished)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            //CardManager.Instance.board.UpdateStoryQueue();
         }
         else
         {

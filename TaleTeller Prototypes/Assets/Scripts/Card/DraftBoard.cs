@@ -191,6 +191,10 @@ public class DraftBoard : MonoBehaviour
                 MoveToNextStep();
             }
         }
+        else if(cardEffectQueue.Count == 0 && cardEventQueue.Count == 0)
+        {
+            MoveToNextStep();
+        }
     }
 
     void TriggerRead(int currentSlotIndex)
