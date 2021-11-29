@@ -105,7 +105,7 @@ public class CardData : ScriptableObject
         {
             //Init effect that adds a routine to the manager list
 
-            CardManager.Instance.board.cardEffectQueue.Add(tempEffect());//THIS IS TEMPORARY
+            CardManager.Instance.board.currentQueue.Add(tempEffect());//THIS IS TEMPORARY
         }
     }
 
@@ -113,14 +113,14 @@ public class CardData : ScriptableObject
     {
         Debug.Log("Trigger Effect");
         yield return null;
-        CardManager.Instance.board.UpdateStoryQueue();
+        CardManager.Instance.board.UpdateQueue();
     }
     #endregion
 
     #region OnEnd (Discard)
     public void OnEnd()
     {
-        CardManager.Instance.board.onEndQueue.Add(DiscardRoutine());
+        CardManager.Instance.board.currentQueue.Add(DiscardRoutine());
     }
     private IEnumerator DiscardRoutine()
     {
@@ -130,7 +130,7 @@ public class CardData : ScriptableObject
         yield return new WaitForSeconds(0.5f);
 
         //Unqueue
-        CardManager.Instance.board.UpdateOnEndQueue();
+        CardManager.Instance.board.UpdateQueue();
     }
     #endregion
 

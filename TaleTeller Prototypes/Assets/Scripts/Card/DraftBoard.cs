@@ -3,18 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BoardState
+{
+    Idle,
+    Starting, 
+    Processing, 
+    Closing
+}
 public class DraftBoard : MonoBehaviour
 {
     public int numberOfSlots;
     public List<DraftSlot> slots = new List<DraftSlot>();
 
     //Event Queues
-    [HideInInspector] public List<IEnumerator> onStartQueue = new List<IEnumerator>();
-    [HideInInspector] public List<IEnumerator> onEndQueue = new List<IEnumerator>();
+    [HideInInspector] public List<IEnumerator> currentQueue = new List<IEnumerator>();
     [HideInInspector] public List<IEnumerator> cardEffectQueue = new List<IEnumerator>();
     [HideInInspector] public List<IEnumerator> cardEventQueue = new List<IEnumerator>();
 
     private int currentSlot = 0;
+    [HideInInspector] BoardState currentBoardState;
 
     #region OldLogic
     public void CreateStory()
@@ -69,52 +76,24 @@ public class DraftBoard : MonoBehaviour
     }
     #endregion
 
-
     #region StoryBegin
     public void InitBoard()
     {
-        //Pour chaque slot, on appelle l'event OnStartStory
-        for (int i = 0; i < slots.Count; i++)
-        {
-            if(slots[i].currentPlacedCard != null)
-            {
-                if (slots[i].currentPlacedCard.data.onStartEvent != null)
-                {
-                    slots[i].currentPlacedCard.data.onStartEvent();
-                }
-            }
-        }
-        //Normally have here a bg list of routines to run through
-        if(onStartQueue.Count > 0)
-        {
-            StartCoroutine(onStartQueue[0]);
-        }
-        else
-        {
-            ProcessStory();
-        }
-    }
-    public void UpdateOnStartQueue() //TODO : Add pause management
-    {
-        //Unqueue
-        onStartQueue.RemoveAt(0);
+        currentBoardState = BoardState.Starting;
 
-        //if still event continue
-        if(onStartQueue.Count > 0)
-        {
-            StartCoroutine(onStartQueue[0]);
-        }
-        //else stop and start processing story
-        else
-        {
-            ProcessStory();
-        }
+        //Pour chaque slot, on appelle l'event OnStartStory
+        CallEvents("onStartEvent");
+
+        //Normally have here a bg list of routines to run through
+        StartQueue();
     }
     #endregion
 
     #region ProcessStory
     public void ProcessStory()
     {
+        currentBoardState = BoardState.Processing;
+
         //Move to first step
         MoveToNextStep();
     }
@@ -131,23 +110,7 @@ public class DraftBoard : MonoBehaviour
                 slots[slotIndex-1].currentPlacedCard.data.onEnterEvent();
 
             //go through them if any
-            if(cardEffectQueue.Count > 0)
-            {
-                StartCoroutine(cardEffectQueue[0]);
-            }
-            else
-            {
-                if(cardEventQueue.Count > 0)
-                {
-                    StartCoroutine(cardEventQueue[0]);
-                }
-                else
-                {
-                    //At the end keep going
-                    Debug.Log("NO Events");
-                    MoveToNextStep();
-                }
-            }
+            StartQueue();
         }
         else
         {
@@ -160,41 +123,6 @@ public class DraftBoard : MonoBehaviour
     {
         //Start coroutine for moving that calls for TriggerRead
         StartCoroutine(tempMove(currentSlot));
-    }
-    public void UpdateStoryQueue()
-    {
-        if(cardEffectQueue.Count > 0)//If you havent processed all effect events, continue
-        {
-            //Unqueue
-            cardEffectQueue.RemoveAt(0);
-            
-            if(cardEffectQueue.Count > 0)
-            {
-                StartCoroutine(cardEffectQueue[0]);
-            }
-            else //When all effect are done, you can process with the cardTypes specific events such as fights
-            {
-                if (cardEventQueue.Count > 0) StartCoroutine(cardEventQueue[0]);
-                else MoveToNextStep();
-            }
-        }
-        else if(cardEventQueue.Count > 0)
-        {
-            //Unqueue
-            cardEventQueue.RemoveAt(0);
-            if(cardEventQueue.Count > 0)
-            {
-                StartCoroutine(cardEventQueue[0]);
-            }
-            else //You have gone through every effect and card related events congrats you can proceed
-            {
-                MoveToNextStep();
-            }
-        }
-        else if(cardEffectQueue.Count == 0 && cardEventQueue.Count == 0)
-        {
-            MoveToNextStep();
-        }
     }
 
     void TriggerRead(int currentSlotIndex)
@@ -225,46 +153,18 @@ public class DraftBoard : MonoBehaviour
     #region StoryEnd
     public void CloseBoard()
     {
+        currentBoardState = BoardState.Closing;
         currentSlot = 0;//reset slot pointer
 
         //Pour chaque slot on appelle l'event OnEndStory
-        for (int i = 0; i < slots.Count; i++)
-        {
-            if(slots[i].currentPlacedCard != null)
-            {
-                if(slots[i].currentPlacedCard.data.onEndEvent != null)
-                {
-                    slots[i].currentPlacedCard.data.onEndEvent();
-                }
-            }
-        }
-        if(onEndQueue.Count >0)
-        {
-            //Run through the resulting list
-            StartCoroutine(onEndQueue[0]);
-        }
-        else
-        {
-            Debug.Log("Turn ended");
-            CardManager.Instance.manaSystem.RefillMana(); //TEMPORARY (it'll be elsewhere)
-        }
-    }
-    public void UpdateOnEndQueue() //TODO : Add pause management
-    {
-        //Unqueue
-        onEndQueue.RemoveAt(0);
+        CallEvents("onEndEvent");
 
-        //if still event continue
-        if (onEndQueue.Count > 0)
-        {
-            StartCoroutine(onEndQueue[0]);
-        }
-        //else stop and end turn 
-        else
-        {
-            Debug.Log("Turn ended");
-            CardManager.Instance.manaSystem.RefillMana(); //TEMPORARY (it'll be elsewhere)
-        }
+        StartQueue();
+    }
+    void TempStoryEnd()
+    {
+        Debug.Log("Turn ended");
+        CardManager.Instance.manaSystem.RefillMana(); //TEMPORARY (it'll be elsewhere)
     }
     #endregion
 
@@ -346,11 +246,112 @@ public class DraftBoard : MonoBehaviour
 
     #endregion
 
+    #region EventManagement
+    public void CallEvents(string eventName)
+    {
+        //Run through each slots and call event for each card
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].currentPlacedCard != null)
+            {
+                CardData data = slots[i].currentPlacedCard.data;
+                switch (eventName)
+                {
+                    case nameof(data.onStartEvent):
+                        if (data.onStartEvent != null) data.onStartEvent();
+                        break;
+
+                    case nameof(data.onEndEvent):
+                        if (data.onEndEvent != null) data.onEndEvent();
+                        break;
+                }
+            }
+        }
+
+    }
+
     public void ClearEvents()
     {
-        onStartQueue.Clear();
-        onEndQueue.Clear();
-        cardEffectQueue.Clear();
-        cardEventQueue.Clear();
+        currentQueue.Clear();
     }
+
+    public void ResumeStory()
+    {
+        //based on the current board case it calls the right method
+        switch (currentBoardState)
+        {
+            case BoardState.Idle:
+                break;
+
+            case BoardState.Starting:
+                ProcessStory();
+                break;
+
+            case BoardState.Processing:
+                MoveToNextStep();
+                break;
+
+            case BoardState.Closing:
+                TempStoryEnd();//TEMPORARY
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void StartQueue()
+    {
+        if(currentQueue.Count > 0)
+        {
+            StartCoroutine(currentQueue[0]);
+        }
+        else
+        {
+            ResumeStory();
+        }
+    }
+
+    public void StartQueue(System.Action onEndQueue)
+    {
+        if (currentQueue.Count > 0)
+        {
+            StartCoroutine(currentQueue[0]);
+        }
+        else
+        {
+            onEndQueue();
+        }
+    }
+
+    public void UpdateQueue()//generic update queue method // TODO : Add Pause management
+    {
+        //Unqueue
+        if (currentQueue.Count > 0) currentQueue.RemoveAt(0);
+
+        if(currentQueue.Count > 0)//Play next event 
+        {
+            StartCoroutine(currentQueue[0]);
+        }
+        else//resume the story where you left it
+        {
+            ResumeStory();
+        }
+    }
+
+    public void UpdateQueue(System.Action onEndQueue)
+    {
+        //Unqueue
+        if (currentQueue.Count > 0) currentQueue.RemoveAt(0);
+
+        if (currentQueue.Count > 0)//Play next event 
+        {
+            StartCoroutine(currentQueue[0]);
+        }
+        else//resume the story where you left it
+        {
+            onEndQueue();
+        }
+    }
+    #endregion
 }

@@ -40,12 +40,12 @@ public class CharacterType : CardTypes
         //if agressive add player to fighting list
         if(behaviour == CharacterBehaviour.Agressive)
         {
-            CardManager.Instance.board.cardEventQueue.Add(FightVSPlayer());
+            CardManager.Instance.board.currentQueue.Add(FightVSPlayer());
         }
 
         for (int i = 0; i < characters.Count; i++)
         {
-            CardManager.Instance.board.cardEventQueue.Add(FightVSCharacter(characters[i]));
+            CardManager.Instance.board.currentQueue.Add(FightVSCharacter(characters[i]));
         }
     }
 
@@ -81,7 +81,7 @@ public class CharacterType : CardTypes
             //check for player death, if still alive then keep going
 
             yield return new WaitForSeconds(0.2f);
-            CardManager.Instance.board.UpdateStoryQueue();
+            CardManager.Instance.board.UpdateQueue();
         }
     }   
 
@@ -109,7 +109,7 @@ public class CharacterType : CardTypes
             yield return new WaitForEndOfFrame();
         }
 
-        CardManager.Instance.board.UpdateStoryQueue();
+        CardManager.Instance.board.UpdateQueue();
     }
 
     List<CharacterType> GetFightingTargets()
@@ -239,7 +239,7 @@ public class CharacterType : CardTypes
         CardManager.Instance.board.ClearEvents();
 
         //Pickup the story processing
-        CardManager.Instance.board.UpdateStoryQueue(); //<-- is this solid enough/ maybe implement a  resume processing method in board that is based on the current state of the story processing
+        CardManager.Instance.board.UpdateQueue(); //<-- is this solid enough/ maybe implement a resume processing method in board that is based on the current state of the story processing
     }
     #endregion
     /// <summary>
@@ -266,7 +266,7 @@ public class CharacterType : CardTypes
     public void OnStart()
     {
         //add to OnStartQueue
-        CardManager.Instance.board.onStartQueue.Add(OnStartRoutine());
+        CardManager.Instance.board.currentQueue.Add(OnStartRoutine());
     }
 
     private IEnumerator OnStartRoutine()
@@ -279,14 +279,14 @@ public class CharacterType : CardTypes
         yield return new WaitForSeconds(0.5f);
 
         //Unqueue
-        CardManager.Instance.board.UpdateOnStartQueue();
+        CardManager.Instance.board.UpdateQueue();
     }
     #endregion
 
     #region OnEnd (Return to hand / discard)
     public void OnEndCharacter()
     {
-        CardManager.Instance.board.onEndQueue.Add(OnEndRoutine());   
+        CardManager.Instance.board.currentQueue.Add(OnEndRoutine());   
     }
     //The On End Event of character is different since the use count update and it returns to the hand instead of going directly in the discard pile
     private IEnumerator OnEndRoutine()
@@ -317,7 +317,7 @@ public class CharacterType : CardTypes
 
 
         //Unqueue
-        CardManager.Instance.board.UpdateOnEndQueue();
+        CardManager.Instance.board.UpdateQueue();
     }
     #endregion
 
@@ -329,7 +329,7 @@ public class CharacterType : CardTypes
         {
             //Init effect that adds a routine to the manager list
 
-            CardManager.Instance.board.cardEffectQueue.Add(tempEffect());//THIS IS TEMPORARY
+            CardManager.Instance.board.currentQueue.Add(tempEffect());//THIS IS TEMPORARY
         }
 
         //CardManager.Instance.board.cardEffectQueue.Add(EffectTrigger());
@@ -346,7 +346,7 @@ public class CharacterType : CardTypes
     {
         Debug.Log("Trigger Effect");
         yield return null;
-        CardManager.Instance.board.UpdateStoryQueue();
+        CardManager.Instance.board.UpdateQueue();
     }
     #endregion
 
