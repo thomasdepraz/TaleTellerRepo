@@ -254,6 +254,9 @@ public class CharacterType : CardTypes
     {
         this.data = data;
 
+        //Init card effects
+        data.InitializeCardEffects(data);
+
         maxUseCount = useCount;
         data.onStartEvent += OnStart;//This is temporary, normally nothing happens on the start event for a character type card
         data.onEnterEvent += OnEnter;// Override onEnter to add fight triggers too
@@ -324,29 +327,17 @@ public class CharacterType : CardTypes
     #region OnEnter (Event Trigger + Fight)
     void OnEnter()
     {
-        //add effects to board manager list
-        for (int i = 0; i < data.effects.Count; i++)
-        {
-            //Init effect that adds a routine to the manager list
+        ////add effects to board manager list <-- This is no longer needed normally
+        //for (int i = 0; i < data.effects.Count; i++)
+        //{
+        //    //Init effect that adds a routine to the manager list
 
-            CardManager.Instance.board.currentQueue.Add(tempEffect());//THIS IS TEMPORARY
-        }
+        //    CardManager.Instance.board.currentQueue.Add(tempEffect());//THIS IS TEMPORARY
+        //}
 
         //CardManager.Instance.board.cardEffectQueue.Add(EffectTrigger());
 
         InitFightEvents();
-    }
-    IEnumerator EffectTrigger()
-    {
-        yield return null;
-        //UpdateStoryQueue
-    }
-
-    IEnumerator tempEffect()
-    {
-        Debug.Log("Trigger Effect");
-        yield return null;
-        CardManager.Instance.board.UpdateQueue();
     }
     #endregion
 

@@ -22,6 +22,7 @@ public class DraftBoard : MonoBehaviour
 
     private int currentSlot = 0;
     [HideInInspector] BoardState currentBoardState;
+    System.Action currentOnEndQueueAction;
 
     #region OldLogic
     public void CreateStory()
@@ -335,7 +336,15 @@ public class DraftBoard : MonoBehaviour
         }
         else//resume the story where you left it
         {
-            ResumeStory();
+            if(currentOnEndQueueAction == null)
+            {
+                ResumeStory();
+            }
+            else
+            {
+                currentOnEndQueueAction();
+                currentOnEndQueueAction = null;
+            }
         }
     }
 
