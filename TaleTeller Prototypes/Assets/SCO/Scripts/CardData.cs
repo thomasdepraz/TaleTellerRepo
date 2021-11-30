@@ -82,47 +82,6 @@ public class CardData : ScriptableObject
         return data;
     }
 
-    #region Generic Events
-
-    #region OnEnter (Effect Trigger)
-    public void OnEnter()
-    {
-        //add effects to board manager list
-        for (int i = 0; i < effects.Count; i++)
-        {
-            //Init effect that adds a routine to the manager list
-
-            CardManager.Instance.board.currentQueue.Add(tempEffect());//THIS IS TEMPORARY
-        }
-    }
-
-    IEnumerator tempEffect()
-    {
-        Debug.Log("Trigger Effect");
-        yield return null;
-        CardManager.Instance.board.UpdateQueue();
-    }
-    #endregion
-
-    #region OnEnd (Discard)
-    public void OnEnd()
-    {
-        CardManager.Instance.board.currentQueue.Add(DiscardRoutine());
-    }
-    private IEnumerator DiscardRoutine()
-    {
-        bool routineEnded = false;
-        CardManager.Instance.board.DiscardCardFromBoard(currentContainer, ref routineEnded);
-
-        yield return new WaitForSeconds(0.5f);
-
-        //Unqueue
-        CardManager.Instance.board.UpdateQueue();
-    }
-    #endregion
-
-    #endregion
-
     public void ResetCharacterStats()
     {
         characterStats.Reset();
@@ -145,32 +104,11 @@ public class CardData : ScriptableObject
     {
         //Unsubscribe from all events <-- Extend these methods each time we add a new delegate
         #region Unsubscribe methods
-        if (onStartEvent != null)
-        {
-            foreach(var myDelegate in onStartEvent.GetInvocationList())
-            {
-                onStartEvent -= myDelegate as BoardEvent;
-            }
-        }
-        if (onEnterEvent != null)
-        {
-            foreach (var myDelegate in onEnterEvent.GetInvocationList())
-            {
-                onEnterEvent -= myDelegate as BoardEvent;
-            }
-        }
-        if (onEndEvent != null)
-        {
-            foreach (var myDelegate in onEndEvent.GetInvocationList())
-            {
-                onEndEvent -= myDelegate as BoardEvent;
-            }
-        }
+        UnsubscribeEvents();
 
         #endregion
 
         //Reset data----------------------------------
-
 
         cardToReset = Instantiate(cardToReset.dataReference);//make data an instance of itself
 
@@ -189,14 +127,34 @@ public class CardData : ScriptableObject
         //Write logic to determine how the card subscribe to the events
         if (cardToReset.dataReference.cardType == null)//All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
         {
-            //Subscribe to onEnterEvent so it at least processes the events if any
-            cardToReset.onEnterEvent += OnEnter;
-
-            //Subscribe to OnEnd to Discard
-            cardToReset.onEndEvent += OnEnd;
+            InitializeCardEffects(cardToReset);
         }
-
         //-----------------------
+    }
+
+    public void UnsubscribeEvents()
+    {
+        if (onStartEvent != null)
+        {
+            foreach (var myDelegate in onStartEvent.GetInvocationList())
+            {
+                onStartEvent -= myDelegate as BoardEvent;
+            }
+        }
+        if (onEnterEvent != null)
+        {
+            foreach (var myDelegate in onEnterEvent.GetInvocationList())
+            {
+                onEnterEvent -= myDelegate as BoardEvent;
+            }
+        }
+        if (onEndEvent != null)
+        {
+            foreach (var myDelegate in onEndEvent.GetInvocationList())
+            {
+                onEndEvent -= myDelegate as BoardEvent;
+            }
+        }
     }
 
 }

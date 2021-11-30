@@ -242,6 +242,7 @@ public class CharacterType : CardTypes
         CardManager.Instance.board.UpdateQueue(); //<-- is this solid enough/ maybe implement a resume processing method in board that is based on the current state of the story processing
     }
     #endregion
+
     /// <summary>
     /// Update method of the useCount.
     /// </summary>
@@ -258,7 +259,7 @@ public class CharacterType : CardTypes
         data.InitializeCardEffects(data);
 
         maxUseCount = useCount;
-        data.onStartEvent += OnStart;//This is temporary, normally nothing happens on the start event for a character type card
+        //data.onStartEvent += OnStart;//This is temporary, normally nothing happens on the start event for a character type card
         data.onEnterEvent += OnEnter;// Override onEnter to add fight triggers too
         data.onEndEvent += OnEndCharacter;
     }

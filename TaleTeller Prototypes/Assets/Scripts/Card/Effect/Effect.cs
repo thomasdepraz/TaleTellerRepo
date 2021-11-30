@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,8 +64,20 @@ public class Effect : ScriptableObject
     public string effectName;
     public Trigger trigger;
     public EffectTarget target;
+
+    [ShowIf("ShowRange")]
     public BoardRange[] range;
+
     [HideInInspector] public List<EffectValue> values = new List<EffectValue>();
+
+    #region NaughtyAttributesMethods
+    public bool ShowRange()
+    {
+        if (target == EffectTarget.Board) return true;
+        else return false;
+    }
+    #endregion
+
     //All of these methods needs to be overwritten
     public virtual void InitEffect(CardData card) // <-- Extend this base each time you want to support a new event
     {
