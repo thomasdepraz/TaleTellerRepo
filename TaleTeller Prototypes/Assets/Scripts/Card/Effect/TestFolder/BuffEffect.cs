@@ -13,8 +13,10 @@ public class BuffEffect : BonusEffect
         values.Add(buffValue);
     }
 
-    public override void OnTriggerEffect()
+    public override IEnumerator EffectLogic()
     {
+        Debug.Log("Buff Effect");
+        yield return null;
         List<CardData> targets = GetTargets();
 
         for (int i = 0; i < targets.Count; i++)
@@ -24,16 +26,15 @@ public class BuffEffect : BonusEffect
                 for (int k = 0; k < targets[i].effects[j].values.Count; k++)
                 {
                     //Filter
-                    EffectValue currentValue = targets[i].effects[j].values[k]; 
-                    
-                    if(currentValue.type == buffValue.type)//This is my filter this could be anything
+                    EffectValue currentValue = targets[i].effects[j].values[k];
+
+                    if (currentValue.type == buffValue.type)//This is my filter this could be anything
                     {
                         currentValue.value += buffValue.value;
                     }
                 }
             }
         }
-
 
         CardManager.Instance.board.UpdateQueue();
     }

@@ -71,7 +71,7 @@ MonoBehaviour:
   effectName: 
   trigger: 1
   target: 0
-  range: 03000000
+  range: 04000000
   values: []
   buffValue:
     value: 1
