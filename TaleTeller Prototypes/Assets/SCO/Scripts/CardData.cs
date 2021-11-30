@@ -58,7 +58,7 @@ public class CardData : ScriptableObject
 
 
     //Events specification
-    public delegate void BoardEvent();
+    public delegate void BoardEvent(EventQueue queue);
     public BoardEvent onStartEvent;
     public BoardEvent onEndEvent;
     public BoardEvent onEnterEvent;

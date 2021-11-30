@@ -114,19 +114,19 @@ public class Effect : ScriptableObject
         }
     }
 
-    public virtual void OnTriggerEffect()
+    public virtual void OnTriggerEffect(EventQueue queue)
     {
         //ajouter la coroutine à la queue
-        CardManager.Instance.board.currentQueue.Add(EffectLogic());
+        queue.events.Add(EffectLogic(queue));
     }
 
-    public virtual IEnumerator EffectLogic()
+    public virtual IEnumerator EffectLogic(EventQueue currentQueue)
     {
         //actual effect logic
         Debug.Log("EffectLogicBase");
         yield return null;
         //update queue
-        CardManager.Instance.board.UpdateQueue();
+        currentQueue.UpdateQueue();
     }
 
     public virtual void ResetEffect()

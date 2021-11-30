@@ -28,39 +28,51 @@ public class LocationType : CardTypes
     }
 
     #region OnEnd
-    private void OnLocationEnd()
+    private void OnLocationEnd(EventQueue queue)
     {
-        CardManager.Instance.board.currentQueue.Add(OnEndRoutine());
+        queue.events.Add(OnEndRoutine(queue));
     }
-    private IEnumerator OnEndRoutine()
+    private IEnumerator OnEndRoutine(EventQueue currentQueue)
     {
-        bool discardEnded = false;
+        bool temp = false;
+        EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref discardEnded);
+        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref temp);//<--TODO implement add to event queue parameter
 
-        while (!discardEnded)//Wait while the action has not ended
+        discardQueue.StartQueue();
+
+        while (!discardQueue.resolved)//Wait while the action has not ended
         {
             yield return new WaitForEndOfFrame();
         }
 
         //Unqueue
-        CardManager.Instance.board.UpdateQueue();
+        currentQueue.UpdateQueue();
     }
     #endregion
 
-    #region
-    public void OnStart()
+    #region OnStart
+    public void OnStart(EventQueue queue)
     {
-        CardManager.Instance.board.currentQueue.Add(OnStartRoutine());
+        queue.events.Add(OnStartRoutine(queue));
     }
 
-    IEnumerator OnStartRoutine()
+    IEnumerator OnStartRoutine(EventQueue currentQueue)
     {
-        yield return null;
-        leftEffect.OnTriggerEffect();
-        rightEffect.OnTriggerEffect();
 
-        CardManager.Instance.board.UpdateQueue();//This probably isn't consistent since this part is already part of the queue and the triggers add more events to the same queue
+        EventQueue effectQueue = new EventQueue();
+
+        leftEffect.OnTriggerEffect(effectQueue);
+        rightEffect.OnTriggerEffect(effectQueue);
+
+        effectQueue.StartQueue();
+
+        while(!effectQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        currentQueue.UpdateQueue();
     }
     #endregion
 }

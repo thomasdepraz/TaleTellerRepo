@@ -17,8 +17,6 @@ public class DraftBoard : MonoBehaviour
 
     //Event Queues
     [HideInInspector] public List<IEnumerator> currentQueue = new List<IEnumerator>();
-    [HideInInspector] public List<IEnumerator> cardEffectQueue = new List<IEnumerator>();
-    [HideInInspector] public List<IEnumerator> cardEventQueue = new List<IEnumerator>();
 
     private int currentSlot = 0;
     [HideInInspector] BoardState currentBoardState;
@@ -82,12 +80,26 @@ public class DraftBoard : MonoBehaviour
     {
         currentBoardState = BoardState.Starting;
 
-        //Pour chaque slot, on appelle l'event OnStartStory
-        CallEvents("onStartEvent");
+        //Pour chaque slot, on appelle l'event OnStartStory et on stocke l'event dans la queue
+        EventQueue queue = new EventQueue();
+        CallEvents("onStartEvent", queue);
 
         //Normally have here a bg list of routines to run through
-        StartQueue();
+        //StartQueue();
+        StartCoroutine(InitRoutine(queue));
     }
+    IEnumerator InitRoutine(EventQueue queue)
+    {
+        queue.StartQueue();
+
+        while(!queue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        ResumeStory();
+    }
+
     #endregion
 
     #region ProcessStory
@@ -106,18 +118,34 @@ public class DraftBoard : MonoBehaviour
 
         if(slots[slotIndex - 1].currentPlacedCard != null)
         {
+            EventQueue onEnterQueue = new EventQueue();
             //Make a list of effect event and card type related events by trigger the enter card event
             if(slots[slotIndex-1].currentPlacedCard.data.onEnterEvent !=null)
-                slots[slotIndex-1].currentPlacedCard.data.onEnterEvent();
+            {
+
+                slots[slotIndex-1].currentPlacedCard.data.onEnterEvent(onEnterQueue);
+            }
 
             //go through them if any
-            StartQueue();
+            //StartQueue();
+            StartCoroutine(ReadRoutine(onEnterQueue));
         }
         else
         {
             Debug.Log("No card on slot");
             MoveToNextStep();
         }
+    }
+    IEnumerator ReadRoutine(EventQueue queue)
+    {
+        queue.StartQueue();
+
+        while (!queue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        MoveToNextStep();
     }
 
     void MoveToNextStep()//Move the focus from one step to another thus resolving it's events (Move the player too)
@@ -158,9 +186,22 @@ public class DraftBoard : MonoBehaviour
         currentSlot = 0;//reset slot pointer
 
         //Pour chaque slot on appelle l'event OnEndStory
-        CallEvents("onEndEvent");
+        EventQueue closeQueue = new EventQueue();
+        CallEvents("onEndEvent", closeQueue);
 
-        StartQueue();
+        StartCoroutine(CloseRoutine(closeQueue));
+        //StartQueue();
+    }
+    IEnumerator CloseRoutine(EventQueue queue)
+    {
+        queue.StartQueue();
+
+        while (!queue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        ResumeStory();
     }
     void TempStoryEnd()
     {
@@ -248,7 +289,7 @@ public class DraftBoard : MonoBehaviour
     #endregion
 
     #region EventManagement
-    public void CallEvents(string eventName)
+    public void CallEvents(string eventName, EventQueue queue)
     {
         //Run through each slots and call event for each card
         for (int i = 0; i < slots.Count; i++)
@@ -259,11 +300,11 @@ public class DraftBoard : MonoBehaviour
                 switch (eventName)
                 {
                     case nameof(data.onStartEvent):
-                        if (data.onStartEvent != null) data.onStartEvent();
+                        if (data.onStartEvent != null) data.onStartEvent(queue);
                         break;
 
                     case nameof(data.onEndEvent):
-                        if (data.onEndEvent != null) data.onEndEvent();
+                        if (data.onEndEvent != null) data.onEndEvent(queue);
                         break;
                 }
             }

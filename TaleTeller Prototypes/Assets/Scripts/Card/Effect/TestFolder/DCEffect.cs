@@ -12,9 +12,10 @@ public class DCEffect : MalusEffect
         values.Add(discardValue);
     }
 
-    public override IEnumerator EffectLogic()
+    public override IEnumerator EffectLogic(EventQueue currentQueue)
     {
         bool discardEnded = false;
+        EventQueue discardQueue = new EventQueue();
 
         Debug.Log("DiscardEffect");
         yield return null;
@@ -27,7 +28,7 @@ public class DCEffect : MalusEffect
 
         //----
 
-        //Discard random cards
+        //Discard random cards //TODO add logic to queue events
         for (int i = 0; i < discardValue.value; i++)
         {
             if (targets.Count > 0)
@@ -48,18 +49,19 @@ public class DCEffect : MalusEffect
                     discardEnded = true;
                 }
 
-                while(!discardEnded)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
-
                 targets.RemoveAt(r);
 
             }
             else break;
         }
 
+        discardQueue.StartQueue();
+        while(!discardQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         //Update the event queue <-- This is mandatory
-        CardManager.Instance.board.UpdateQueue();
+        currentQueue.UpdateQueue();
     }
 }

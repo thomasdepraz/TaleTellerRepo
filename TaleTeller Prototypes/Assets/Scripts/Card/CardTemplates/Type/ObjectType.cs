@@ -17,22 +17,25 @@ public class ObjectType : CardTypes
         data.onEndEvent += OnObjectEnd;
     }
 
-    private void OnObjectEnd()
+    private void OnObjectEnd(EventQueue queue)
     {
-        CardManager.Instance.board.currentQueue.Add(OnEndRoutine());
+        queue.events.Add(OnEndRoutine(queue));
     }
-    private IEnumerator OnEndRoutine()
+    private IEnumerator OnEndRoutine(EventQueue currentQueue)
     {
         bool discardEnded = false;
+        EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref discardEnded);
-        
-        while (!discardEnded)//Wait while the action has not ended
+        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref discardEnded);//<TODO Implement add to queue
+
+        discardQueue.StartQueue();
+
+        while (!discardQueue.resolved)//Wait while the action has not ended
         {
             yield return new WaitForEndOfFrame();
         }
 
         //Unqueue
-        CardManager.Instance.board.UpdateQueue();
+        currentQueue.UpdateQueue();
     }
 }
