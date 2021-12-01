@@ -15,16 +15,18 @@ public class JunkCard : CardData
         return data;
     }
 
-    public void DestroyJunkCard(System.Action<bool> callback)
+    public void DestroyJunkCard(EventQueue queue)
     {
         //add destroy to queue
-        CardManager.Instance.board.currentQueue.Add(DestroyJunkCardRoutine(callback));
+        queue.events.Add(DestroyJunkCardRoutine(queue));
     }
 
-    IEnumerator DestroyJunkCardRoutine(System.Action<bool> callback) //LATER probably have this method in the card manager as DestroyCard(CardData data) {}
+    IEnumerator DestroyJunkCardRoutine(EventQueue currentQueue) //LATER probably have this method in the card manager as DestroyCard(CardData data) {}
     {
-        bool destroyEnded = false;
-        
+
+        EventQueue destroyQueue = new EventQueue();
+
+        //TODO implement add to queue event list in function that take time;
         //Discard the card based on where it is 
         if(currentContainer != null) //means it's in the hand or board
         {
@@ -56,11 +58,14 @@ public class JunkCard : CardData
             }
         }
 
-        while (!destroyEnded)
+        destroyQueue.StartQueue();//<-- actual destroy happens here
+
+        while (!destroyQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
 
-        callback(true);
+        //TODO CALL RESUME
+        currentQueue.UpdateQueue();
     }
 }

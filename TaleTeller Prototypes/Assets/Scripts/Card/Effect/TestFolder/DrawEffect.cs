@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DrawEffect : BonusEffect
 {
-    public override IEnumerator EffectLogic()
+    public override IEnumerator EffectLogic(EventQueue currentQueue)
     {
         //return base.EffectLogic();
         Debug.Log("DrawEffect");
         yield return null;
-        CardManager.Instance.board.UpdateQueue();
+        currentQueue.UpdateQueue();
     }
 }

@@ -17,8 +17,6 @@ public class DraftBoard : MonoBehaviour
 
     //Event Queues
     [HideInInspector] public List<IEnumerator> currentQueue = new List<IEnumerator>();
-    [HideInInspector] public List<IEnumerator> cardEffectQueue = new List<IEnumerator>();
-    [HideInInspector] public List<IEnumerator> cardEventQueue = new List<IEnumerator>();
 
     private int currentSlot = 0;
     [HideInInspector] BoardState currentBoardState;
@@ -82,12 +80,26 @@ public class DraftBoard : MonoBehaviour
     {
         currentBoardState = BoardState.Starting;
 
-        //Pour chaque slot, on appelle l'event OnStartStory
-        CallEvents("onStartEvent");
+        //Pour chaque slot, on appelle l'event OnStartStory et on stocke l'event dans la queue
+        EventQueue queue = new EventQueue();
+        CallEvents("onStartEvent", queue);
 
         //Normally have here a bg list of routines to run through
-        StartQueue();
+        //StartQueue();
+        StartCoroutine(InitRoutine(queue));
     }
+    IEnumerator InitRoutine(EventQueue queue)
+    {
+        queue.StartQueue();
+
+        while(!queue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        ResumeStory();
+    }
+
     #endregion
 
     #region ProcessStory
@@ -106,18 +118,34 @@ public class DraftBoard : MonoBehaviour
 
         if(slots[slotIndex - 1].currentPlacedCard != null)
         {
+            EventQueue onEnterQueue = new EventQueue();
             //Make a list of effect event and card type related events by trigger the enter card event
             if(slots[slotIndex-1].currentPlacedCard.data.onEnterEvent !=null)
-                slots[slotIndex-1].currentPlacedCard.data.onEnterEvent();
+            {
+
+                slots[slotIndex-1].currentPlacedCard.data.onEnterEvent(onEnterQueue);
+            }
 
             //go through them if any
-            StartQueue();
+            //StartQueue();
+            StartCoroutine(ReadRoutine(onEnterQueue));
         }
         else
         {
             Debug.Log("No card on slot");
             MoveToNextStep();
         }
+    }
+    IEnumerator ReadRoutine(EventQueue queue)
+    {
+        queue.StartQueue();
+
+        while (!queue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        MoveToNextStep();
     }
 
     void MoveToNextStep()//Move the focus from one step to another thus resolving it's events (Move the player too)
@@ -158,9 +186,22 @@ public class DraftBoard : MonoBehaviour
         currentSlot = 0;//reset slot pointer
 
         //Pour chaque slot on appelle l'event OnEndStory
-        CallEvents("onEndEvent");
+        EventQueue closeQueue = new EventQueue();
+        CallEvents("onEndEvent", closeQueue);
 
-        StartQueue();
+        StartCoroutine(CloseRoutine(closeQueue));
+        //StartQueue();
+    }
+    IEnumerator CloseRoutine(EventQueue queue)
+    {
+        queue.StartQueue();
+
+        while (!queue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        ResumeStory();
     }
     void TempStoryEnd()
     {
@@ -170,47 +211,45 @@ public class DraftBoard : MonoBehaviour
     #endregion
 
     #region CardManagement Method
-    public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded)
+    public void DiscardCardFromBoard(CardContainer card, EventQueue queue)
+    {
+        //new discard method
+        queue.events.Add(DiscardCardFromBoardRoutine(card, queue));
+    }
+    IEnumerator DiscardCardFromBoardRoutine(CardContainer card, EventQueue currentQueue)
     {
         card.data.ResetData(card.data);
 
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
+
+        //remove from board list
+        card.currentSlot.currentPlacedCard = null;
+        card.currentSlot.canvasGroup.blocksRaycasts = true;
+
+        card.ResetCard();
+        yield return new WaitForSeconds(0.2f);//TEMP
+
+        currentQueue.UpdateQueue();
+    }
+
+    public void ReturnCardToHand(CardContainer card, bool canPushOverCard, EventQueue queue)
+    {
+        queue.events.Add(ReturnCardToHandRoutine(card, canPushOverCard, queue));
+    }
+    IEnumerator ReturnCardToHandRoutine(CardContainer card, bool canPushOverCard, EventQueue currentQueue)
+    {
+        yield return null;
+
+        EventQueue returnQueue = new EventQueue();
         
-        //remove from board list
-        card.currentSlot.currentPlacedCard = null;
-        card.currentSlot.canvasGroup.blocksRaycasts = true;
-
-        card.ResetCard();
-
-        actionEnded = true;
-    }
-    public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded, System.Action onActionEndedMethod)
-    {
-        card.data.ResetData(card.data);
-
-        CardManager.Instance.cardDeck.discardPile.Add(card.data);
-
-        //remove from board list
-        card.currentSlot.currentPlacedCard = null;
-        card.currentSlot.canvasGroup.blocksRaycasts = true;
-
-        card.ResetCard();
-
-        actionEnded = true;
-
-        onActionEndedMethod.Invoke();
-    }
-
-    public void ReturnCardToHand(CardContainer card, bool canPushOverCard, ref bool actionEnded)
-    {
-        if(canPushOverCard)
+        if (canPushOverCard)
         {
-            if(CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize)//if max cards in hand make the player select a card
+            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize)//if max cards in hand make the player select a card
             {
                 //MAKE the player pick a card and discard it
 
-                //FOR NOW
-                DiscardCardFromBoard(card, ref actionEnded);
+                //FOR NOW TEMP
+                DiscardCardFromBoard(card, returnQueue);
             }
             else//just return card to hand
             {
@@ -220,15 +259,14 @@ public class DraftBoard : MonoBehaviour
                 card.currentSlot = null;
 
                 //use method from deck to move cardBack to hand
-                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false);
-                actionEnded = true; 
+                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
             }
         }
         else
         {
             if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize + 1)//if max cards in hand discard
             {
-                DiscardCardFromBoard(card, ref actionEnded);
+                DiscardCardFromBoard(card, returnQueue);
             }
             else//just return card to hand
             {
@@ -239,16 +277,24 @@ public class DraftBoard : MonoBehaviour
 
 
                 //use method from deck to move cardBack to hand
-                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false);
-                actionEnded = true;
+                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
             }
         }
+
+        returnQueue.StartQueue(); //Actual discard / return happens here
+
+        while(!returnQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        currentQueue.UpdateQueue();
     }
 
     #endregion
 
     #region EventManagement
-    public void CallEvents(string eventName)
+    public void CallEvents(string eventName, EventQueue queue)
     {
         //Run through each slots and call event for each card
         for (int i = 0; i < slots.Count; i++)
@@ -259,11 +305,11 @@ public class DraftBoard : MonoBehaviour
                 switch (eventName)
                 {
                     case nameof(data.onStartEvent):
-                        if (data.onStartEvent != null) data.onStartEvent();
+                        if (data.onStartEvent != null) data.onStartEvent(queue);
                         break;
 
                     case nameof(data.onEndEvent):
-                        if (data.onEndEvent != null) data.onEndEvent();
+                        if (data.onEndEvent != null) data.onEndEvent(queue);
                         break;
                 }
             }

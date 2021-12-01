@@ -30,7 +30,7 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void DiscardAllHand()
+    public void DiscardAllHand()//TODO Implement queuing system
     {
         int cachedCount = currentHand.Count;
         for (int i = 0; i < cachedCount; i++)
@@ -40,7 +40,7 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void DiscardCardFromHand(CardContainer card)
+    public void DiscardCardFromHand(CardContainer card)//TODO Implement queuing system
     {
         card.data.ResetData(card.data);
 

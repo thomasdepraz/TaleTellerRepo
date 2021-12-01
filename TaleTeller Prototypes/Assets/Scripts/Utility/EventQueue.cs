@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class EventQueue
 {
-    public List<IEnumerator> events;
+    public List<IEnumerator> events = new List<IEnumerator>();
     public bool resolved = false;
     public void StartQueue()
     {
         //StartCoroutine on monobehaviour manager
-        EventManager.Instance.StartCoroutine(events[0]);
+        if(events.Count > 0)
+        {
+            EventManager.Instance.StartCoroutine(events[0]);
+        }
+        else
+        {
+            resolved = true;
+        }
     }
 
     public void UpdateQueue()

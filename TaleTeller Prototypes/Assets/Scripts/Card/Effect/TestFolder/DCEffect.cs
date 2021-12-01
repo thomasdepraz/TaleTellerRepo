@@ -12,9 +12,9 @@ public class DCEffect : MalusEffect
         values.Add(discardValue);
     }
 
-    public override IEnumerator EffectLogic()
+    public override IEnumerator EffectLogic(EventQueue currentQueue)
     {
-        bool discardEnded = false;
+        EventQueue discardQueue = new EventQueue();
 
         Debug.Log("DiscardEffect");
         yield return null;
@@ -27,7 +27,7 @@ public class DCEffect : MalusEffect
 
         //----
 
-        //Discard random cards
+        //Discard random cards //TODO add logic to queue events
         for (int i = 0; i < discardValue.value; i++)
         {
             if (targets.Count > 0)
@@ -36,21 +36,11 @@ public class DCEffect : MalusEffect
 
                 if (target == EffectTarget.Hand)
                 {
-                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer);
-                    discardEnded = true;//<--This is TEMPORARY, this bool should be handled in the DiscardCardFromHand method
+                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer);//TODO missing queue implementation
                 }
                 else if (target == EffectTarget.Board)
                 {
-                    CardManager.Instance.board.DiscardCardFromBoard(targets[r].currentContainer, ref discardEnded);
-                }
-                else
-                {
-                    discardEnded = true;
-                }
-
-                while(!discardEnded)
-                {
-                    yield return new WaitForEndOfFrame();
+                    CardManager.Instance.board.DiscardCardFromBoard(targets[r].currentContainer, discardQueue);
                 }
 
                 targets.RemoveAt(r);
@@ -59,7 +49,14 @@ public class DCEffect : MalusEffect
             else break;
         }
 
+        discardQueue.StartQueue(); //Actual Discard
+
+        while(!discardQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         //Update the event queue <-- This is mandatory
-        CardManager.Instance.board.UpdateQueue();
+        currentQueue.UpdateQueue();
     }
 }
