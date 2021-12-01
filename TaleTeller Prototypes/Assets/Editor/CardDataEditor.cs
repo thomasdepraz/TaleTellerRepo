@@ -27,13 +27,13 @@ public class CardDataEditor : Editor
         if(GUILayout.Button("AddEffect"))
         {
             GenericMenu menu = new GenericMenu();
-            List<Type> effectTypes = EffectManager.GetSubClasses(typeof(Effect));
+            List<Type> effectTypes = UtilityClass.GetSubClasses(typeof(Effect));
             for (int i = 0; i < effectTypes.Count; i++)
             {
-                if(EffectManager.HasSubClasses(effectTypes[i]))
+                if(UtilityClass.HasSubClasses(effectTypes[i]))
                 {
                     menu.AddSeparator("");
-                    List<Type> nestedTypes = EffectManager.GetSubClasses(effectTypes[i]);
+                    List<Type> nestedTypes = UtilityClass.GetSubClasses(effectTypes[i]);
                     for (int j = 0; j < nestedTypes.Count; j++)
                     {
                         AddMenuItem(menu, effectTypes[i].Name + "/" + nestedTypes[j].Name, nestedTypes[j]);

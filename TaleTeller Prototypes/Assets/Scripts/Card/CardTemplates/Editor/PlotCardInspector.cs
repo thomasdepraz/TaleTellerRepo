@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(JunkCard))]
-public class JunkCardInspector : Editor
+[CustomEditor(typeof(PlotCard))]
+public class PlotCardInspector : Editor
 {
-    JunkCard script;
+    PlotCard script;
     SerializedProperty cardDataReference;
     SerializedProperty cardName;
     SerializedProperty cardCost;
@@ -15,14 +15,17 @@ public class JunkCardInspector : Editor
     SerializedProperty effects;
     SerializedProperty cardDescription;
 
-
     SerializedProperty cardType;
 
-
+    //PlotCard variables
+    SerializedProperty plotObjective;
+    SerializedProperty completionTimer;
+    SerializedProperty isMainPlot;
+    SerializedProperty isFinal;
 
     private void OnEnable()
     {
-        script = target as JunkCard;
+        script = target as PlotCard;
 
         cardDataReference = serializedObject.FindProperty(nameof(script.dataReference));
         cardType = serializedObject.FindProperty(nameof(script.cardTypeReference));
@@ -31,11 +34,18 @@ public class JunkCardInspector : Editor
         cardGraph = serializedObject.FindProperty(nameof(script.cardGraph));
         effects = serializedObject.FindProperty(nameof(script.effects));
         cardDescription = serializedObject.FindProperty(nameof(script.description));
+
+
+        plotObjective = serializedObject.FindProperty(nameof(script.objective));
+        completionTimer = serializedObject.FindProperty(nameof(script.completionTimer));
+        isMainPlot = serializedObject.FindProperty(nameof(script.isMainPlot));
+        isFinal = serializedObject.FindProperty(nameof(script.isFinal));
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
+        #region base
         EditorGUILayout.PropertyField(cardDataReference);
         if (cardDataReference.objectReferenceValue == null) EditorGUILayout.HelpBox("Card Data Reference must not be null !", MessageType.Error);
         EditorGUILayout.LabelField("Card Base", EditorStyles.boldLabel);
@@ -100,17 +110,77 @@ public class JunkCardInspector : Editor
                 AddMenuItem(menu, cardTypes[i].Name, cardTypes[i]);
             }
 
-
-
             //Display the menu
             menu.ShowAsContext();
         }
+        EditorGUILayout.PropertyField(cardType);
+        #endregion
+
+        #region PlotCardRelated
+        GUILayout.Space(20);
+        EditorGUILayout.LabelField("Plot Card Properties", EditorStyles.boldLabel);
+
+        EditorGUILayout.PropertyField(plotObjective);
+        if(plotObjective.objectReferenceValue== null)
+        {
+            if(GUILayout.Button("Add Objective", GUILayout.MaxWidth(90)))
+            {
+                GenericMenu menu = new GenericMenu();
+                List<Type> objectiveTypes = UtilityClass.GetSubClasses(typeof(PlotObjective));
+                for (int i = 0; i < objectiveTypes.Count; i++)
+                {
+                    if (UtilityClass.HasSubClasses(objectiveTypes[i]))
+                    {
+                        menu.AddSeparator("");
+                        List<Type> nestedTypes = UtilityClass.GetSubClasses(objectiveTypes[i]);
+                        for (int j = 0; j < nestedTypes.Count; j++)
+                        {
+                            AddMenuObjectiveItem(menu, objectiveTypes[i].Name + "/" + nestedTypes[j].Name, nestedTypes[j]);
+                        }
+                    }
+                    else
+                    {
+                        AddMenuObjectiveItem(menu, objectiveTypes[i].Name, objectiveTypes[i]);
+                    }
+                }
+
+                //Display the menu
+                menu.ShowAsContext();
+            }
+        }
+        else
+        {
+            if (GUILayout.Button("Remove Objective", GUILayout.MaxWidth(120)))
+            {
+                //delete the child asset
+                AssetDatabase.RemoveObjectFromAsset(script.objective);
+                script.objective = null;
+                AssetDatabase.SaveAssets();
+                EditorUtility.SetDirty(script);
+            }
+        }
+
+        GUILayout.Space(10);
+        EditorGUILayout.PropertyField(completionTimer);
+        if (completionTimer.intValue <= 0)
+        {
+            completionTimer.intValue = 0;
+            EditorGUILayout.HelpBox("Completion Timer value should at least be 1", MessageType.Warning);
+        }
+
+
+        EditorGUILayout.PropertyField(isMainPlot);
+        if(isMainPlot.boolValue == true)
+        {
+            EditorGUILayout.PropertyField(isFinal);
+        }
+
+        #endregion
 
         serializedObject.ApplyModifiedProperties();
-        EditorGUILayout.PropertyField(cardType);
-
     }
 
+    #region Menu Methods
     public void AddMenuItem(GenericMenu menu, string path, Type type)
     {
         menu.AddItem(new GUIContent(path), false, OnTypeSelected, type);
@@ -119,6 +189,11 @@ public class JunkCardInspector : Editor
     public void AddMenuEffectItem(GenericMenu menu, string path, Type type)
     {
         menu.AddItem(new GUIContent(path), false, OnEffectSelected, type);
+    }
+
+    public void AddMenuObjectiveItem(GenericMenu menu, string path, Type type)
+    {
+        menu.AddItem(new GUIContent(path), false, OnObjectiveSelected, type);
     }
 
     void OnEffectSelected(object type)
@@ -180,4 +255,24 @@ public class JunkCardInspector : Editor
         }
 
     }
+
+    void OnObjectiveSelected(object type)
+    {
+        //var instance = Activator.CreateInstance((Type)type);
+        ScriptableObject instance = ScriptableObject.CreateInstance((Type)type);
+        instance.name = "PlotObjective_" + type.ToString();
+
+        AssetDatabase.AddObjectToAsset(instance, serializedObject.targetObject);
+
+        // Reimport the asset after adding an object.
+        // Otherwise the change only shows up when saving the project
+        AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(instance));
+        AssetDatabase.SaveAssets();
+
+        //cardType.objectReferenceValue = instance as CardTypes;
+        script.objective = instance as PlotObjective;
+        EditorUtility.SetDirty(script);
+    }
+    #endregion
+
 }

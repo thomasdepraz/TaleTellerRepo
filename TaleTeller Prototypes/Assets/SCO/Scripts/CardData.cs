@@ -77,9 +77,30 @@ public class CardData : ScriptableObject
         else //All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
         {
             InitializeCardEffects(data);
+            data.onEndEvent += OnEnd;
         }
 
         return data;
+    }
+
+    public void OnEnd(EventQueue queue)
+    {
+        queue.events.Add(DiscardOnEndRoutine(queue));
+    }
+    public IEnumerator DiscardOnEndRoutine(EventQueue currentQueue)
+    {
+        EventQueue discardQueue = new EventQueue();
+
+        CardManager.Instance.board.DiscardCardFromBoard(currentContainer, discardQueue);
+
+        discardQueue.StartQueue();
+
+        while (!discardQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        currentQueue.UpdateQueue();
     }
 
     public void ResetCharacterStats()
@@ -100,7 +121,7 @@ public class CardData : ScriptableObject
         }
     }
 
-    public void ResetData(CardData cardToReset)
+    public virtual void ResetData(CardData cardToReset)
     {
         //Unsubscribe from all events <-- Extend these methods each time we add a new delegate
         #region Unsubscribe methods

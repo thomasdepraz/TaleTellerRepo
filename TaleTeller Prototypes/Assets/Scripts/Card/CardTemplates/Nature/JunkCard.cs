@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Junk Card", menuName = "Data/JunkCard")]
 public class JunkCard : CardData
 {
     public override CardData InitializeData(CardData data)

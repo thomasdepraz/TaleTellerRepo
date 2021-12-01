@@ -129,12 +129,6 @@ public class Effect : ScriptableObject
         currentQueue.UpdateQueue();
     }
 
-    public virtual void ResetEffect()
-    {
-        //unsubscribe from the delegate <-- actually its already done in the resetcardData method
-        //subscribedEvent -= OnTriggerEffect;
-    }
-
     public virtual List<CardData> GetTargets()
     {
         List<CardData> targets = new List<CardData>();

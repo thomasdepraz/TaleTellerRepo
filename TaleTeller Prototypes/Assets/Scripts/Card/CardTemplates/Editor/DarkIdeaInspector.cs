@@ -49,13 +49,13 @@ public class DarkIdeaCardInspector : Editor
         if (GUILayout.Button("AddEffect", GUILayout.MaxWidth(90)))
         {
             GenericMenu menu = new GenericMenu();
-            List<Type> effectTypes = EffectManager.GetSubClasses(typeof(Effect));
+            List<Type> effectTypes = UtilityClass.GetSubClasses(typeof(Effect));
             for (int i = 0; i < effectTypes.Count; i++)
             {
-                if (EffectManager.HasSubClasses(effectTypes[i]))
+                if (UtilityClass.HasSubClasses(effectTypes[i]))
                 {
                     menu.AddSeparator("");
-                    List<Type> nestedTypes = EffectManager.GetSubClasses(effectTypes[i]);
+                    List<Type> nestedTypes = UtilityClass.GetSubClasses(effectTypes[i]);
                     for (int j = 0; j < nestedTypes.Count; j++)
                     {
                         AddMenuEffectItem(menu, effectTypes[i].Name + "/" + nestedTypes[j].Name, nestedTypes[j]);
@@ -94,7 +94,7 @@ public class DarkIdeaCardInspector : Editor
         {
             GenericMenu menu = new GenericMenu();
             AddMenuItem(menu, "None", typeof(CardTypes));
-            List<Type> cardTypes = EffectManager.GetSubClasses(typeof(CardTypes));
+            List<Type> cardTypes = UtilityClass.GetSubClasses(typeof(CardTypes));
             for (int i = 0; i < cardTypes.Count; i++)
             {
                 AddMenuItem(menu, cardTypes[i].Name, cardTypes[i]);

@@ -11,5 +11,4 @@ public class IdeaCard : CardData
     {
         return base.InitializeData(data);
     }
-
 }
