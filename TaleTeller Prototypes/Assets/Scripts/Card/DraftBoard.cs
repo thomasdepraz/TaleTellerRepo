@@ -211,47 +211,45 @@ public class DraftBoard : MonoBehaviour
     #endregion
 
     #region CardManagement Method
-    public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded)
+    public void DiscardCardFromBoard(CardContainer card, EventQueue queue)
+    {
+        //new discard method
+        queue.events.Add(DiscardCardFromBoardRoutine(card, queue));
+    }
+    IEnumerator DiscardCardFromBoardRoutine(CardContainer card, EventQueue currentQueue)
     {
         card.data.ResetData(card.data);
 
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
+
+        //remove from board list
+        card.currentSlot.currentPlacedCard = null;
+        card.currentSlot.canvasGroup.blocksRaycasts = true;
+
+        card.ResetCard();
+        yield return new WaitForSeconds(0.2f);//TEMP
+
+        currentQueue.UpdateQueue();
+    }
+
+    public void ReturnCardToHand(CardContainer card, bool canPushOverCard, EventQueue queue)
+    {
+        queue.events.Add(ReturnCardToHandRoutine(card, canPushOverCard, queue));
+    }
+    IEnumerator ReturnCardToHandRoutine(CardContainer card, bool canPushOverCard, EventQueue currentQueue)
+    {
+        yield return null;
+
+        EventQueue returnQueue = new EventQueue();
         
-        //remove from board list
-        card.currentSlot.currentPlacedCard = null;
-        card.currentSlot.canvasGroup.blocksRaycasts = true;
-
-        card.ResetCard();
-
-        actionEnded = true;
-    }
-    public void DiscardCardFromBoard(CardContainer card, ref bool actionEnded, System.Action onActionEndedMethod)
-    {
-        card.data.ResetData(card.data);
-
-        CardManager.Instance.cardDeck.discardPile.Add(card.data);
-
-        //remove from board list
-        card.currentSlot.currentPlacedCard = null;
-        card.currentSlot.canvasGroup.blocksRaycasts = true;
-
-        card.ResetCard();
-
-        actionEnded = true;
-
-        onActionEndedMethod.Invoke();
-    }
-
-    public void ReturnCardToHand(CardContainer card, bool canPushOverCard, ref bool actionEnded)
-    {
-        if(canPushOverCard)
+        if (canPushOverCard)
         {
-            if(CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize)//if max cards in hand make the player select a card
+            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize)//if max cards in hand make the player select a card
             {
                 //MAKE the player pick a card and discard it
 
-                //FOR NOW
-                DiscardCardFromBoard(card, ref actionEnded);
+                //FOR NOW TEMP
+                DiscardCardFromBoard(card, returnQueue);
             }
             else//just return card to hand
             {
@@ -261,15 +259,14 @@ public class DraftBoard : MonoBehaviour
                 card.currentSlot = null;
 
                 //use method from deck to move cardBack to hand
-                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false);
-                actionEnded = true; 
+                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
             }
         }
         else
         {
             if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize + 1)//if max cards in hand discard
             {
-                DiscardCardFromBoard(card, ref actionEnded);
+                DiscardCardFromBoard(card, returnQueue);
             }
             else//just return card to hand
             {
@@ -280,10 +277,18 @@ public class DraftBoard : MonoBehaviour
 
 
                 //use method from deck to move cardBack to hand
-                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false);
-                actionEnded = true;
+                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
             }
         }
+
+        returnQueue.StartQueue(); //Actual discard / return happens here
+
+        while(!returnQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        currentQueue.UpdateQueue();
     }
 
     #endregion

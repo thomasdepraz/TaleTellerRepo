@@ -242,11 +242,12 @@ public class CharacterType : CardTypes
         // Manage character death card discard, card reset, events deletion
         if (!isCurrentCharacter)
         {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref deathEnded);
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
         }
         else//If Im currently resolving this card event, the have to be cleared to prevent errors
         {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref deathEnded, ClearCharacterEvents);
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+            ClearCharacterEvents(discardQueue);//Add queue event 
         }
 
         discardQueue.StartQueue();
@@ -259,13 +260,18 @@ public class CharacterType : CardTypes
         currentQueue.UpdateQueue();
     }
    
-    void ClearCharacterEvents()
+    void ClearCharacterEvents(EventQueue queue)
+    {
+        queue.events.Add(ClearCharacterEventsRoutine(queue));
+    }
+
+    IEnumerator ClearCharacterEventsRoutine(EventQueue currentQueue)
     {
         //Clear events
-        CardManager.Instance.board.ClearEvents();
+        yield return null;
 
-        //Pickup the story processing
-        CardManager.Instance.board.UpdateQueue(); //<-- is this solid enough/ maybe implement a resume processing method in board that is based on the current state of the story processing
+        CardManager.Instance.board.ClearEvents();
+        currentQueue.UpdateQueue();
     }
     #endregion
 
@@ -301,22 +307,20 @@ public class CharacterType : CardTypes
     //The On End Event of character is different since the use count update and it returns to the hand instead of going directly in the discard pile
     private IEnumerator OnEndRoutine(EventQueue currentQueue)
     {
-        bool routineEnded = false;
-
         //Return to hand but cannot push cards out of the hand
-        
+
         UpdateUseCount();//Maybe move this to onStartEvent 
 
         EventQueue discardQueue = new EventQueue();
 
         if(useCount > 0)
         {
-            CardManager.Instance.board.ReturnCardToHand(data.currentContainer, false, ref routineEnded);//TODO implement the add to eventqueue part
+            CardManager.Instance.board.ReturnCardToHand(data.currentContainer, false, discardQueue);//TODO implement the add to eventqueue part
         }
         else//No more uses so its discarded
         {
             useCount = maxUseCount;
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref routineEnded);//TODO implement the add to eventqueue part
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);//TODO implement the add to eventqueue part
         }
 
         discardQueue.StartQueue();//<-- The actual discard happens here

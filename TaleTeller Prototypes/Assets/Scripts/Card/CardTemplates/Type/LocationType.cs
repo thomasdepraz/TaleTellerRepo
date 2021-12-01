@@ -34,10 +34,9 @@ public class LocationType : CardTypes
     }
     private IEnumerator OnEndRoutine(EventQueue currentQueue)
     {
-        bool temp = false;
         EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref temp);//<--TODO implement add to event queue parameter
+        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);//<--TODO implement add to event queue parameter
 
         discardQueue.StartQueue();
 

@@ -14,7 +14,6 @@ public class DCEffect : MalusEffect
 
     public override IEnumerator EffectLogic(EventQueue currentQueue)
     {
-        bool discardEnded = false;
         EventQueue discardQueue = new EventQueue();
 
         Debug.Log("DiscardEffect");
@@ -37,16 +36,11 @@ public class DCEffect : MalusEffect
 
                 if (target == EffectTarget.Hand)
                 {
-                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer);
-                    discardEnded = true;//<--This is TEMPORARY, this bool should be handled in the DiscardCardFromHand method
+                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer);//TODO missing queue implementation
                 }
                 else if (target == EffectTarget.Board)
                 {
-                    CardManager.Instance.board.DiscardCardFromBoard(targets[r].currentContainer, ref discardEnded);
-                }
-                else
-                {
-                    discardEnded = true;
+                    CardManager.Instance.board.DiscardCardFromBoard(targets[r].currentContainer, discardQueue);
                 }
 
                 targets.RemoveAt(r);
@@ -55,7 +49,8 @@ public class DCEffect : MalusEffect
             else break;
         }
 
-        discardQueue.StartQueue();
+        discardQueue.StartQueue(); //Actual Discard
+
         while(!discardQueue.resolved)
         {
             yield return new WaitForEndOfFrame();

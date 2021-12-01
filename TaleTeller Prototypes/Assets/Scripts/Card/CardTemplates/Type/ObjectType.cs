@@ -23,10 +23,9 @@ public class ObjectType : CardTypes
     }
     private IEnumerator OnEndRoutine(EventQueue currentQueue)
     {
-        bool discardEnded = false;
         EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref discardEnded);//<TODO Implement add to queue
+        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);//<TODO Implement add to queue
 
         discardQueue.StartQueue();
 
