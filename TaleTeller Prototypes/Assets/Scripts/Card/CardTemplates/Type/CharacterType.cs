@@ -291,18 +291,18 @@ public class CharacterType : CardTypes
         data.InitializeCardEffects(data);
 
         maxUseCount = useCount;
-        //data.onStartEvent += OnStart;//This is temporary, normally nothing happens on the start event for a character type card
+
         data.onEnterEvent += OnEnter;// Override onEnter to add fight triggers too
-        data.onEndEvent += OnEndCharacter;
     }
 
     #region Events
 
 
     #region OnEnd (Return to hand / discard)
-    public void OnEndCharacter(EventQueue queue)
+
+    public override void OnEnd(EventQueue queue)
     {
-        queue.events.Add(OnEndRoutine(queue));   
+        queue.events.Add(OnEndRoutine(queue));
     }
     //The On End Event of character is different since the use count update and it returns to the hand instead of going directly in the discard pile
     private IEnumerator OnEndRoutine(EventQueue currentQueue)
@@ -350,6 +350,7 @@ public class CharacterType : CardTypes
 
         InitFightEvents(queue);
     }
+
     #endregion
 
     #endregion

@@ -22,13 +22,10 @@ public class LocationType : CardTypes
 
         //onStart both effect happens
         data.onStartEvent += OnStart;
-
-        //onEnd discard the card
-        data.onEndEvent += OnLocationEnd;
     }
 
     #region OnEnd
-    private void OnLocationEnd(EventQueue queue)
+    public override void OnEnd(EventQueue queue)
     {
         queue.events.Add(OnEndRoutine(queue));
     }

@@ -17,25 +17,25 @@ public class PlotCard : CardData
     //TEMP
     public override CardData InitializeData(CardData data)
     {
-        data = Instantiate(dataReference);//make data an instance of itself
+        PlotCard plot = Instantiate(dataReference) as PlotCard;//make data an instance of itself
 
         //Write logic to determine how the card subscribe to the events
-        if (data.cardTypeReference != null)
+        if (plot.cardTypeReference != null)
         {
-            data.cardType = Instantiate(data.cardTypeReference);
-            data.cardType.InitType(data);//<--Watch out, subscribing to events can happen in here
+            plot.cardType = Instantiate(plot.cardTypeReference);
+            plot.cardType.InitType(plot);//<--Watch out, subscribing to events can happen in here
         }
         else //All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
         {
-            InitializeCardEffects(data);
+            InitializeCardEffects(plot);
         }
 
-        data.onEndEvent += OnEndPlot;//TEMP <-- This works only if no type 
+        plot.onEndEvent += plot.OnEndPlot;
 
-        objective = Instantiate(objective);
-        objective.InitObjective(data as PlotCard);
+        plot.objective = Instantiate(plot.objective);
+        plot.objective.InitObjective(plot);
 
-        return data;
+        return plot;
     }
 
     public void OnEndPlot(EventQueue queue)

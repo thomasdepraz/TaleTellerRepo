@@ -45,9 +45,8 @@ public class PlotCardInspector : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        #region base
         EditorGUILayout.PropertyField(cardDataReference);
-        if (cardDataReference.objectReferenceValue == null) EditorGUILayout.HelpBox("Card Data Reference must not be null !", MessageType.Error);
+        //if (cardDataReference.objectReferenceValue == null) EditorGUILayout.HelpBox("Card Data Reference must not be null !", MessageType.Error);
         EditorGUILayout.LabelField("Card Base", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(cardName);
         EditorGUILayout.PropertyField(cardCost);
@@ -95,35 +94,17 @@ public class PlotCardInspector : Editor
 
         EditorGUILayout.PropertyField(cardDescription);
 
+        serializedObject.ApplyModifiedProperties();
+        serializedObject.Update();
 
 
-        GUILayout.Space(10);
-        EditorGUILayout.LabelField("Card Type", EditorStyles.boldLabel);
-
-        if (GUILayout.Button("Select Type", GUILayout.MaxWidth(90)))
-        {
-            GenericMenu menu = new GenericMenu();
-            AddMenuItem(menu, "None", typeof(CardTypes));
-            List<Type> cardTypes = UtilityClass.GetSubClasses(typeof(CardTypes));
-            for (int i = 0; i < cardTypes.Count; i++)
-            {
-                AddMenuItem(menu, cardTypes[i].Name, cardTypes[i]);
-            }
-
-            //Display the menu
-            menu.ShowAsContext();
-        }
-        EditorGUILayout.PropertyField(cardType);
-        #endregion
-
-        #region PlotCardRelated
         GUILayout.Space(20);
         EditorGUILayout.LabelField("Plot Card Properties", EditorStyles.boldLabel);
 
         EditorGUILayout.PropertyField(plotObjective);
-        if(plotObjective.objectReferenceValue== null)
+        if (plotObjective.objectReferenceValue == null)
         {
-            if(GUILayout.Button("Add Objective", GUILayout.MaxWidth(90)))
+            if (GUILayout.Button("Add Objective", GUILayout.MaxWidth(90)))
             {
                 GenericMenu menu = new GenericMenu();
                 List<Type> objectiveTypes = UtilityClass.GetSubClasses(typeof(PlotObjective));
@@ -170,13 +151,31 @@ public class PlotCardInspector : Editor
 
 
         EditorGUILayout.PropertyField(isMainPlot);
-        if(isMainPlot.boolValue == true)
+        if (isMainPlot.boolValue == true)
         {
             EditorGUILayout.PropertyField(isFinal);
         }
+        serializedObject.ApplyModifiedProperties();
 
-        #endregion
 
+        GUILayout.Space(10);
+        EditorGUILayout.LabelField("Card Type", EditorStyles.boldLabel);
+
+        if (GUILayout.Button("Select Type", GUILayout.MaxWidth(90)))
+        {
+            GenericMenu menu = new GenericMenu();
+            AddMenuItem(menu, "None", typeof(CardTypes));
+            List<Type> cardTypes = UtilityClass.GetSubClasses(typeof(CardTypes));
+            for (int i = 0; i < cardTypes.Count; i++)
+            {
+                AddMenuItem(menu, cardTypes[i].Name, cardTypes[i]);
+            }
+
+            //Display the menu
+            menu.ShowAsContext();
+        }
+
+        EditorGUILayout.PropertyField(cardType);
         serializedObject.ApplyModifiedProperties();
     }
 

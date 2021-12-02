@@ -43,7 +43,7 @@ public class CardData : ScriptableObject
     public CardEffect deadCardEffect;
     public Sprite cardGraph;
     [HideInInspector] public CardFeedback feedback;
-    [HideInInspector] public CardContainer currentContainer;
+     public CardContainer currentContainer;
 
     [TextArea(2, 3)]
     public string description;
@@ -73,6 +73,8 @@ public class CardData : ScriptableObject
         {
             data.cardType = Instantiate(data.cardTypeReference);
             data.cardType.InitType(data);//<--Watch out, subscribing to events can happen in here
+
+            data.onEndEvent += data.cardType.OnEnd;
         }
         else //All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
         {

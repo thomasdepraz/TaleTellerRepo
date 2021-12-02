@@ -185,10 +185,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
   - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
   - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
+  - {fileID: 11400000, guid: d727f71537b38264bbf19a0bba2b25f0, type: 2}
+  - {fileID: 11400000, guid: d727f71537b38264bbf19a0bba2b25f0, type: 2}
+  - {fileID: 11400000, guid: d727f71537b38264bbf19a0bba2b25f0, type: 2}
+  - {fileID: 11400000, guid: d727f71537b38264bbf19a0bba2b25f0, type: 2}
   discardPile: []
 --- !u!1001 &16544982
 PrefabInstance:
@@ -3803,7 +3803,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.15
+  m_fontSize: 39.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

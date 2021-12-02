@@ -12,12 +12,9 @@ public class ObjectType : CardTypes
 
         //Init Effects
         data.InitializeCardEffects(data);
-
-        //OnEnd it discards
-        data.onEndEvent += OnObjectEnd;
     }
 
-    private void OnObjectEnd(EventQueue queue)
+    public override void OnEnd(EventQueue queue)
     {
         queue.events.Add(OnEndRoutine(queue));
     }

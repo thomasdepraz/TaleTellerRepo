@@ -127,7 +127,6 @@ public class DraftBoard : MonoBehaviour
             }
 
             //go through them if any
-            //StartQueue();
             StartCoroutine(ReadRoutine(onEnterQueue));
         }
         else
@@ -344,68 +343,6 @@ public class DraftBoard : MonoBehaviour
 
             default:
                 break;
-        }
-    }
-
-    public void StartQueue()
-    {
-        if(currentQueue.Count > 0)
-        {
-            StartCoroutine(currentQueue[0]);
-        }
-        else
-        {
-            ResumeStory();
-        }
-    }
-
-    public void StartQueue(System.Action onEndQueue)
-    {
-        if (currentQueue.Count > 0)
-        {
-            StartCoroutine(currentQueue[0]);
-        }
-        else
-        {
-            onEndQueue();
-        }
-    }
-
-    public void UpdateQueue()//generic update queue method // TODO : Add Pause management
-    {
-        //Unqueue
-        if (currentQueue.Count > 0) currentQueue.RemoveAt(0);
-
-        if(currentQueue.Count > 0)//Play next event 
-        {
-            StartCoroutine(currentQueue[0]);
-        }
-        else//resume the story where you left it
-        {
-            if(currentOnEndQueueAction == null)
-            {
-                ResumeStory();
-            }
-            else
-            {
-                currentOnEndQueueAction();
-                currentOnEndQueueAction = null;
-            }
-        }
-    }
-
-    public void UpdateQueue(System.Action onEndQueue)
-    {
-        //Unqueue
-        if (currentQueue.Count > 0) currentQueue.RemoveAt(0);
-
-        if (currentQueue.Count > 0)//Play next event 
-        {
-            StartCoroutine(currentQueue[0]);
-        }
-        else//resume the story where you left it
-        {
-            onEndQueue();
         }
     }
     #endregion
