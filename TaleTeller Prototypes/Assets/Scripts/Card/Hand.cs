@@ -44,6 +44,7 @@ public class Hand : MonoBehaviour
     {
         card.data.ResetData(card.data);
 
+        currentHand.Remove(card);
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
         card.ResetCard();
     }

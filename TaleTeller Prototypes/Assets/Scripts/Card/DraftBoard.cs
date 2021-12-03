@@ -259,6 +259,7 @@ public class DraftBoard : MonoBehaviour
 
                 //use method from deck to move cardBack to hand
                 CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
+                CardManager.Instance.cardHand.currentHand.Add(card);
             }
         }
         else
@@ -277,6 +278,7 @@ public class DraftBoard : MonoBehaviour
 
                 //use method from deck to move cardBack to hand
                 CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
+                CardManager.Instance.cardHand.currentHand.Add(card);
             }
         }
 

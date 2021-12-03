@@ -196,6 +196,10 @@ public class CardContainer : MonoBehaviour
                         if (manaDifference > 0) CardManager.Instance.manaSystem.LoseMana(manaDifference);
                         else if (manaDifference < 0) CardManager.Instance.manaSystem.GainMana(Mathf.Abs(manaDifference));
 
+                        //Manage hand list
+                        CardManager.Instance.cardHand.currentHand.Remove(CardManager.Instance.hoveredCard);
+                        CardManager.Instance.cardHand.currentHand.Add(this);
+
                     }
                     else
                     {
@@ -232,6 +236,10 @@ public class CardContainer : MonoBehaviour
                         //ApplyManaDiff
                         if (manaDifference > 0) CardManager.Instance.manaSystem.LoseMana(manaDifference);
                         else if (manaDifference < 0) CardManager.Instance.manaSystem.GainMana(Mathf.Abs(manaDifference));
+
+                        //Manage hand list
+                        CardManager.Instance.cardHand.currentHand.Add(CardManager.Instance.hoveredCard);
+                        CardManager.Instance.cardHand.currentHand.Remove(this);
 
                     }
                     else
@@ -275,6 +283,8 @@ public class CardContainer : MonoBehaviour
                     rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
 
                     CardManager.Instance.manaSystem.LoseMana(data.creativityCost);
+
+                    CardManager.Instance.cardHand.currentHand.Remove(this);
                 }
                 else
                 {
@@ -293,15 +303,19 @@ public class CardContainer : MonoBehaviour
                 originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
                 rectTransform.anchoredPosition = originPosition;
 
-                if (currentSlot != null)//Remove card from board !! Add list system
+                if (currentSlot != null)//Remove card from board
                 {
                     currentSlot.currentPlacedCard = null;
                     currentSlot.canvasGroup.blocksRaycasts = true;
                     currentSlot = null;
+
+                    //Refill Mana
+                    CardManager.Instance.manaSystem.GainMana(data.creativityCost);
+
+                    //Add back to hand list 
+                    CardManager.Instance.cardHand.currentHand.Add(this);
                 }
 
-                //Refill Mana
-                CardManager.Instance.manaSystem.GainMana(data.creativityCost);
 
             }
             #endregion
