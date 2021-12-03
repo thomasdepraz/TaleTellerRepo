@@ -31,7 +31,7 @@ public class JunkCard : CardData
         //Discard the card based on where it is 
         if(currentContainer != null) //means it's in the hand or board
         {
-            currentContainer.ResetCard();
+            currentContainer.ResetContainer();
             UnsubscribeEvents();
             Destroy(this);
         }

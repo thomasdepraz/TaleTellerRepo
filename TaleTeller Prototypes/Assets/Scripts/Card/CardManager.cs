@@ -14,6 +14,8 @@ public class CardManager : Singleton<CardManager>
 
     public ManaSystem manaSystem;
 
+    public CardPicker cardPicker;
+
     [HideInInspector] public DraftSlot currentHoveredSlot;
     [HideInInspector] public bool holdingCard;
     [HideInInspector] public CardContainer currentCard;

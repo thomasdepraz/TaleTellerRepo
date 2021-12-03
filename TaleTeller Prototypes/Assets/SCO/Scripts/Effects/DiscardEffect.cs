@@ -24,7 +24,7 @@ public class DiscardEffect : CardEffect
             {
                 int r = Random.Range(0,cardsInHand.Count - 1);
                 CardManager.Instance.cardDeck.discardPile.Add(cardsInHand[r].data);
-                cardsInHand[r].ResetCard();
+                cardsInHand[r].ResetContainer();
                 cardsInHand.RemoveAt(r);
             }
         }

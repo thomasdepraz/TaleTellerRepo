@@ -50,7 +50,7 @@ public class DraftBoard : MonoBehaviour
             if(slots[i].currentPlacedCard != null)
             {
                 //Call reset method on card
-                slots[i].currentPlacedCard.ResetCard();
+                slots[i].currentPlacedCard.ResetContainer();
 
                 //Reset slot
                 slots[i].currentPlacedCard = null;
@@ -225,7 +225,7 @@ public class DraftBoard : MonoBehaviour
         card.currentSlot.currentPlacedCard = null;
         card.currentSlot.canvasGroup.blocksRaycasts = true;
 
-        card.ResetCard();
+        card.ResetContainer();
         yield return new WaitForSeconds(0.2f);//TEMP
 
         currentQueue.UpdateQueue();
@@ -243,23 +243,32 @@ public class DraftBoard : MonoBehaviour
         
         if (canPushOverCard)
         {
-            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize)//if max cards in hand make the player select a card
+            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize-1)//if max cards in hand make the player select a card
             {
                 //MAKE the player pick a card and discard it
+                EventQueue pickQueue = new EventQueue();
+                List<CardData> pickedCards = new List<CardData>();
 
-                //FOR NOW TEMP
-                DiscardCardFromBoard(card, returnQueue);
+                CardManager.Instance.cardPicker.Pick(pickQueue, CardManager.Instance.cardHand.GetHandDataList(), pickedCards, 1, false);
+
+                pickQueue.StartQueue();
+                while(!pickQueue.resolved)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                //discard all of the picked cards
+                for (int i = 0; i < pickedCards.Count; i++)
+                {
+                    CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, returnQueue);
+                }
+
+                //return card to hand
+                ReturnCard(card, returnQueue);
             }
             else//just return card to hand
             {
-                //remove from board list
-                card.currentSlot.currentPlacedCard = null;
-                card.currentSlot.canvasGroup.blocksRaycasts = true;
-                card.currentSlot = null;
-
-                //use method from deck to move cardBack to hand
-                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
-                CardManager.Instance.cardHand.currentHand.Add(card);
+                ReturnCard(card, returnQueue);
             }
         }
         else
@@ -270,15 +279,7 @@ public class DraftBoard : MonoBehaviour
             }
             else//just return card to hand
             {
-                //remove from board list
-                card.currentSlot.currentPlacedCard = null;
-                card.currentSlot.canvasGroup.blocksRaycasts = true;
-                card.currentSlot = null;
-
-
-                //use method from deck to move cardBack to hand
-                CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
-                CardManager.Instance.cardHand.currentHand.Add(card);
+                ReturnCard(card, returnQueue);
             }
         }
 
@@ -292,6 +293,25 @@ public class DraftBoard : MonoBehaviour
         currentQueue.UpdateQueue();
     }
 
+    private void ReturnCard(CardContainer card, EventQueue queue)
+    {
+        queue.events.Add(ReturnCardRoutine(card, queue));
+    }
+    IEnumerator ReturnCardRoutine(CardContainer card, EventQueue queue)
+    {
+        //remove from board list
+        card.currentSlot.currentPlacedCard = null;
+        card.currentSlot.canvasGroup.blocksRaycasts = true;
+        card.currentSlot = null;
+
+
+        //use method from deck to move cardBack to hand
+        CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
+        CardManager.Instance.cardHand.currentHand.Add(card);
+        yield return new WaitForSeconds(0.5f);
+
+        queue.UpdateQueue();
+    }
     #endregion
 
     #region EventManagement

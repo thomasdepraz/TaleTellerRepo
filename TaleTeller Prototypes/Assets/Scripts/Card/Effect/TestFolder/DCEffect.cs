@@ -36,7 +36,7 @@ public class DCEffect : MalusEffect
 
                 if (target == EffectTarget.Hand)
                 {
-                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer);//TODO missing queue implementation
+                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer, discardQueue);
                 }
                 else if (target == EffectTarget.Board)
                 {

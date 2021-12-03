@@ -6,12 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CardContainer : MonoBehaviour
-     , IBeginDragHandler
-     , IEndDragHandler
-     , IDragHandler
-     , IPointerEnterHandler
-     , IPointerExitHandler
- 
 {
     [Header("References")]
     public RectTransform rectTransform;
@@ -57,7 +51,8 @@ public class CardContainer : MonoBehaviour
         }
     }
 
-    public void CardInit(CardData data)
+    #region Init/Reset
+    public void InitializeContainer(CardData data, bool isPlaceHolder = false)
     {
         this.data = data;
 
@@ -65,7 +60,8 @@ public class CardContainer : MonoBehaviour
         healthUI.SetActive(false);
         timerUI.SetActive(false);
 
-        data.currentContainer = this;
+        if(!isPlaceHolder)
+            data.currentContainer = this;
 
         //Change effect if needed
         if (data.keyCardActivated)
@@ -111,13 +107,43 @@ public class CardContainer : MonoBehaviour
         //add random rotation 
         rectTransform.rotation = new Quaternion(0,0,Random.Range(-0.1f,0.1f),1);
     }
+    public void ResetContainer(bool isPlaceholder = false)
+    {
+        //unload Data and deactivate gameobject
+        cardName.text = string.Empty;
+        cardDescription.text = string.Empty;
+        cardCreativityCost.text = string.Empty;
+        
+        if(!isPlaceholder)
+        {
+            data.currentContainer = null;
 
-    public void OnDrag(PointerEventData eventData)
+        }
+        data = null;
+        currentSlot = null;
+
+        rectTransform.position = basePosition;
+
+        //Reset to hidden hand
+
+        if(!isPlaceholder)
+        {
+            CardManager.Instance.cardHand.currentHand.Remove(this);
+            transform.SetParent(CardManager.Instance.cardHandContainer.transform);
+        }
+        
+        
+        gameObject.SetActive(false);
+    }
+    #endregion
+
+    #region Events
+    public void OnDrag()
     {
         //Allows OnBeginDrag and OnEndDrag.
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag()
     {
         if(!GameManager.Instance.storyManager.isReadingStory)//Can only interact with cards if story isnt reading
         {
@@ -145,7 +171,7 @@ public class CardContainer : MonoBehaviour
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag()
     {
         #region Tweening + Graphics
         canTween = false;
@@ -327,7 +353,7 @@ public class CardContainer : MonoBehaviour
         CardManager.Instance.currentCard = null;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter()
     {
         if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
         {
@@ -362,7 +388,7 @@ public class CardContainer : MonoBehaviour
         #endregion
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit()
     {
         if(CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
         {
@@ -387,23 +413,5 @@ public class CardContainer : MonoBehaviour
         }
         #endregion
     }
-
-    public void ResetCard()
-    {
-        //unload Data and deactivate gameobject
-        cardName.text = string.Empty;
-        cardDescription.text = string.Empty;
-        cardCreativityCost.text = string.Empty;
-
-        data.currentContainer = null;
-        data = null;
-        currentSlot = null;
-
-        rectTransform.position = basePosition;
-
-        //Reset to hidden hand
-        CardManager.Instance.cardHand.currentHand.Remove(this);
-        gameObject.SetActive(false);
-        transform.SetParent(CardManager.Instance.cardHandContainer.transform);
-    }
+    #endregion
 }
