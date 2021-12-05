@@ -23,11 +23,30 @@ public enum CardType
     Object, 
     Location
 }
+
+public enum CardRarity
+{
+    Common, 
+    Rare, 
+    Epic, 
+    Legendary
+}
+public enum Archetype
+{
+    None, 
+    Trading, 
+
+
+}
+
 [CreateAssetMenu(fileName = "Card", menuName = "Data/Card", order = 0)]
 public class CardData : ScriptableObject
 {
     public CardData dataReference;
     public string cardName;
+    public CardRarity rarity;
+    public Archetype archetype;
+
     public bool isKeyCard;
     [HideInInspector] public bool keyCardActivated;
     public int interestCooldown;
@@ -57,11 +76,18 @@ public class CardData : ScriptableObject
     [HideInInspector]public CardTypes cardType;
 
 
-    //Events specification
+    //Events
     public delegate void BoardEvent(EventQueue queue);
-    public BoardEvent onStartEvent;
-    public BoardEvent onEndEvent;
-    public BoardEvent onEnterEvent;
+    public BoardEvent onStoryStart;
+    public BoardEvent onStoryEnd;
+    public BoardEvent onTurnEnd;
+    public BoardEvent onTurnStart;
+
+    public delegate void CardEvent(EventQueue queue);
+    public CardEvent onCardEnter;
+    public CardEvent onCardDraw;
+    public CardEvent onCardDiscard;
+    public CardEvent onCardAppear;
 
     //This is how a base card will be initialized (It's meant to be overwritten)
     public virtual CardData InitializeData(CardData data)
@@ -74,12 +100,12 @@ public class CardData : ScriptableObject
             data.cardType = Instantiate(data.cardTypeReference);
             data.cardType.InitType(data);//<--Watch out, subscribing to events can happen in here
 
-            data.onEndEvent += data.cardType.OnEnd;
+            data.onStoryEnd += data.cardType.OnEnd;
         }
         else //All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
         {
             InitializeCardEffects(data);
-            data.onEndEvent += OnEnd;
+            data.onStoryEnd += OnEnd;
         }
 
         return data;
@@ -157,25 +183,61 @@ public class CardData : ScriptableObject
 
     public void UnsubscribeEvents()
     {
-        if (onStartEvent != null)
+        if (onStoryStart != null)
         {
-            foreach (var myDelegate in onStartEvent.GetInvocationList())
+            foreach (var myDelegate in onStoryStart.GetInvocationList())
             {
-                onStartEvent -= myDelegate as BoardEvent;
+                onStoryStart -= myDelegate as BoardEvent;
             }
         }
-        if (onEnterEvent != null)
+        if (onStoryEnd != null)
         {
-            foreach (var myDelegate in onEnterEvent.GetInvocationList())
+            foreach (var myDelegate in onStoryEnd.GetInvocationList())
             {
-                onEnterEvent -= myDelegate as BoardEvent;
+                onStoryEnd -= myDelegate as BoardEvent;
             }
         }
-        if (onEndEvent != null)
+        if (onTurnEnd != null)
         {
-            foreach (var myDelegate in onEndEvent.GetInvocationList())
+            foreach (var myDelegate in onTurnEnd.GetInvocationList())
             {
-                onEndEvent -= myDelegate as BoardEvent;
+                onTurnEnd -= myDelegate as BoardEvent;
+            }
+        }
+        if (onTurnStart != null)
+        {
+            foreach (var myDelegate in onTurnStart.GetInvocationList())
+            {
+                onTurnStart -= myDelegate as BoardEvent;
+            }
+        }
+
+        if (onCardEnter != null)
+        {
+            foreach (var myDelegate in onCardEnter.GetInvocationList())
+            {
+                onCardEnter -= myDelegate as CardEvent;
+            }
+        }
+        if (onCardAppear != null)
+        {
+            foreach (var myDelegate in onCardAppear.GetInvocationList())
+            {
+                onCardAppear -= myDelegate as CardEvent;
+            }
+        }
+        if (onCardDraw != null)
+        {
+            foreach (var myDelegate in onCardDraw.GetInvocationList())
+            {
+                onCardDraw -= myDelegate as CardEvent;
+            }
+        }
+        if (onCardDiscard != null)
+        {
+            foreach (var myDelegate in onCardDiscard.GetInvocationList())
+            {
+                onCardDiscard -= myDelegate as CardEvent;
             }
         }
     }

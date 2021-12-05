@@ -5,26 +5,33 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Junk Card", menuName = "Data/JunkCard")]
 public class JunkCard : CardData
 {
+
+    [HideInInspector] PlotObjective linkedObjective;
+
     public override CardData InitializeData(CardData data)
     {
         data = base.InitializeData(data);
 
-        //subscribe to an event or go reference yourself to the current objective that defining your lifetime //TODO
-        //When the objective is complete it destroys every JunkCard no matter where they are;
 
 
         return data;
     }
 
-    public void DestroyJunkCard(EventQueue queue)
+    public void LinkObjective(PlotObjective objective)
     {
-        //add destroy to queue
+        //subscribe to an event or go reference yourself to the current objective that defining your lifetime //TODO
+        //When the objective is complete it destroys every JunkCard no matter where they are;
+        linkedObjective = objective;
+        objective.onPlotComplete += DestroyJunkCard;
+    }
+
+    void DestroyJunkCard(EventQueue queue)
+    {
         queue.events.Add(DestroyJunkCardRoutine(queue));
     }
 
     IEnumerator DestroyJunkCardRoutine(EventQueue currentQueue) //LATER probably have this method in the card manager as DestroyCard(CardData data) {}
     {
-
         EventQueue destroyQueue = new EventQueue();
 
         //TODO implement add to queue event list in function that take time;
@@ -33,7 +40,6 @@ public class JunkCard : CardData
         {
             currentContainer.ResetContainer();
             UnsubscribeEvents();
-            Destroy(this);
         }
         else 
         {
@@ -43,15 +49,12 @@ public class JunkCard : CardData
                 //remove and destroy
                 CardManager.Instance.cardDeck.cardDeck.Remove(this);
                 UnsubscribeEvents();
-                Destroy(this);
-
             }
             else if(CardManager.Instance.cardDeck.discardPile.Contains(this))
             {
                 //remove and destroy
                 CardManager.Instance.cardDeck.discardPile.Remove(this);
                 UnsubscribeEvents();
-                Destroy(this);
             }
             else
             {

@@ -21,7 +21,7 @@ public class LocationType : CardTypes
         rightEffect.InitEffect(data);
 
         //onStart both effect happens
-        data.onStartEvent += OnStart;
+        data.onStoryStart += OnStart;
     }
 
     #region OnEnd

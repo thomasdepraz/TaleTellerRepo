@@ -52,4 +52,7 @@ MonoBehaviour:
   m_Name: PlotObjective_Test1Objective
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: ' Test'
+  objectiveName: Kill Goblins
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 7a66e9907771da44dab4d432f6f13991, type: 2}
+  - {fileID: 11400000, guid: 7a66e9907771da44dab4d432f6f13991, type: 2}

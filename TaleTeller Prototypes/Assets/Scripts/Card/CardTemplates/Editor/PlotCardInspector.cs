@@ -11,6 +11,8 @@ public class PlotCardInspector : Editor
     SerializedProperty cardDataReference;
     SerializedProperty cardName;
     SerializedProperty cardCost;
+    SerializedProperty cardRarity;
+    SerializedProperty cardArchetype;
     SerializedProperty cardGraph;
     SerializedProperty effects;
     SerializedProperty cardDescription;
@@ -31,6 +33,8 @@ public class PlotCardInspector : Editor
         cardType = serializedObject.FindProperty(nameof(script.cardTypeReference));
         cardName = serializedObject.FindProperty(nameof(script.cardName));
         cardCost = serializedObject.FindProperty(nameof(script.creativityCost));
+        cardRarity = serializedObject.FindProperty(nameof(script.rarity));
+        cardArchetype = serializedObject.FindProperty(nameof(script.archetype));
         cardGraph = serializedObject.FindProperty(nameof(script.cardGraph));
         effects = serializedObject.FindProperty(nameof(script.effects));
         cardDescription = serializedObject.FindProperty(nameof(script.description));
@@ -50,6 +54,8 @@ public class PlotCardInspector : Editor
         EditorGUILayout.LabelField("Card Base", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(cardName);
         EditorGUILayout.PropertyField(cardCost);
+        EditorGUILayout.PropertyField(cardRarity);
+        EditorGUILayout.PropertyField(cardArchetype);
         EditorGUILayout.PropertyField(cardGraph);
         EditorGUILayout.PropertyField(effects);
 

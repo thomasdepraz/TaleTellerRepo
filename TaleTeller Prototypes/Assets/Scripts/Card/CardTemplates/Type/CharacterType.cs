@@ -292,7 +292,7 @@ public class CharacterType : CardTypes
 
         maxUseCount = useCount;
 
-        data.onEnterEvent += OnEnter;// Override onEnter to add fight triggers too
+        data.onCardEnter += OnEnter;// Override onEnter to add fight triggers too
     }
 
     #region Events

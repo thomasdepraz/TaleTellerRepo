@@ -30,12 +30,48 @@ public class PlotCard : CardData
             InitializeCardEffects(plot);
         }
 
-        plot.onEndEvent += plot.OnEndPlot;
+        plot.onStoryEnd += plot.OnEndPlot;
+        plot.onCardAppear += plot.OnPlotAppear;
 
         plot.objective = Instantiate(plot.objective);
-        plot.objective.InitObjective(plot);
+        plot.objective.InitObjective(plot, plot.objective);
 
         return plot;
+    }
+
+
+    public void OnPlotAppear(EventQueue queue)
+    {
+        queue.events.Add(OnPlotAppearRoutine(queue));
+    }
+    IEnumerator OnPlotAppearRoutine(EventQueue currentQueue)
+    {
+        yield return null;
+
+        //if deck dont contains this card then animate to hand
+        if(!CardManager.Instance.cardDeck.cardDeck.Contains(PlotsManager.Instance.currentPickedCard))
+        {
+            EventQueue toHandQueue = new EventQueue();
+
+            PlotsManager.Instance.SendPlotToHand(toHandQueue, PlotsManager.Instance.currentPickedCard);
+
+            toHandQueue.StartQueue();
+            while(!toHandQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+
+        //add all junk cards to deck for now -- TODO later call the appropriate method on plotObjective so it chooses where to send the cards TODO 
+        for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
+        {
+            objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]);
+            CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+        }
+
+
+        currentQueue.UpdateQueue();
     }
 
     public void OnEndPlot(EventQueue queue)
@@ -66,6 +102,20 @@ public class PlotCard : CardData
     IEnumerator CompletePlotRoutine(EventQueue currentQueue)
     {
         yield return null;
+
+        //destroy all linked junk cards
+        EventQueue destroyQueue = new EventQueue();
+
+        objective.onPlotComplete(destroyQueue);
+
+        destroyQueue.StartQueue();
+
+        while(!destroyQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+
         //TODO IMPLEMENT QUEUEING IN HERE
 
         if (isMainPlot)

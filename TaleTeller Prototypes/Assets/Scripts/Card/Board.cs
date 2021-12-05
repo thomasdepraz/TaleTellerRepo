@@ -5,75 +5,23 @@ using UnityEngine;
 
 public enum BoardState
 {
+    None, 
     Idle,
     Starting, 
     Processing, 
     Closing
 }
-public class DraftBoard : MonoBehaviour
+public class Board : MonoBehaviour
 {
     public int numberOfSlots;
-    public List<DraftSlot> slots = new List<DraftSlot>();
+    public List<BoardSlot> slots = new List<BoardSlot>();
 
     //Event Queues
     [HideInInspector] public List<IEnumerator> currentQueue = new List<IEnumerator>();
 
     private int currentSlot = 0;
-    [HideInInspector] BoardState currentBoardState;
-    System.Action currentOnEndQueueAction;
+    [HideInInspector] public BoardState currentBoardState;
 
-    #region OldLogic
-    public void CreateStory()
-    {
-        
-        for (int i = 0; i < slots.Count; i++)
-        {
-            //Create event based on card data
-            if(slots[i].currentPlacedCard != null)
-            {
-                Debug.Log($"Created {slots[i].currentPlacedCard.data.cardName} at step {i+1}.");
-
-                CardData cardData = slots[i].currentPlacedCard.data;
-                CardToInit card = new CardToInit(cardData, i);
-                GameManager.Instance.storyManager.cardsToInit.Add(card);
-                GameManager.Instance.creativityManager.creativity -= GameManager.Instance.creativityManager.currentBoardCreativityCost;
-                GameManager.Instance.creativityManager.currentBoardCreativityCost = 0;//reset board cost
-            }
-        }
-    }
-
-    public void ClearDraft()
-    {
-        for (int i = 0; i < slots.Count; i++)
-        {
-            //place all data to discard Pile and reset card to hiddenhand
-            if(slots[i].currentPlacedCard != null)
-            {
-                //Call reset method on card
-                slots[i].currentPlacedCard.ResetContainer();
-
-                //Reset slot
-                slots[i].currentPlacedCard = null;
-                slots[i].canvasGroup.blocksRaycasts = true;
-            }
-        }
-        //Clear Hand
-        //CardManager.Instance.cardHand.DiscardHand();
-
-        //launch story
-        GameManager.Instance.storyManager.StartStory();
-    }
-
-    public bool IsEmpty()
-    {
-        for (int i = 0; i < slots.Count; i++)
-        {
-            if (slots[i].currentPlacedCard != null)
-                return false;
-        }
-        return true;
-    }
-    #endregion
 
     #region StoryBegin
     public void InitBoard()
@@ -82,7 +30,7 @@ public class DraftBoard : MonoBehaviour
 
         //Pour chaque slot, on appelle l'event OnStartStory et on stocke l'event dans la queue
         EventQueue queue = new EventQueue();
-        CallEvents("onStartEvent", queue);
+        CallBoardEvents("onStoryStart", queue);
 
         //Normally have here a bg list of routines to run through
         //StartQueue();
@@ -120,10 +68,10 @@ public class DraftBoard : MonoBehaviour
         {
             EventQueue onEnterQueue = new EventQueue();
             //Make a list of effect event and card type related events by trigger the enter card event
-            if(slots[slotIndex-1].currentPlacedCard.data.onEnterEvent !=null)
+            if(slots[slotIndex-1].currentPlacedCard.data.onCardEnter !=null)
             {
 
-                slots[slotIndex-1].currentPlacedCard.data.onEnterEvent(onEnterQueue);
+                slots[slotIndex-1].currentPlacedCard.data.onCardEnter(onEnterQueue);
             }
 
             //go through them if any
@@ -186,7 +134,7 @@ public class DraftBoard : MonoBehaviour
 
         //Pour chaque slot on appelle l'event OnEndStory
         EventQueue closeQueue = new EventQueue();
-        CallEvents("onEndEvent", closeQueue);
+        CallBoardEvents("onStoryEnd", closeQueue);
 
         StartCoroutine(CloseRoutine(closeQueue));
         //StartQueue();
@@ -205,6 +153,7 @@ public class DraftBoard : MonoBehaviour
     void TempStoryEnd()
     {
         Debug.Log("Turn ended");
+        currentBoardState = BoardState.None;
         CardManager.Instance.manaSystem.RefillMana(); //TEMPORARY (it'll be elsewhere)
     }
     #endregion
@@ -243,7 +192,7 @@ public class DraftBoard : MonoBehaviour
         
         if (canPushOverCard)
         {
-            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize-1)//if max cards in hand make the player select a card
+            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize)//if max cards in hand make the player select a card
             {
                 //MAKE the player pick a card and discard it
                 EventQueue pickQueue = new EventQueue();
@@ -315,7 +264,7 @@ public class DraftBoard : MonoBehaviour
     #endregion
 
     #region EventManagement
-    public void CallEvents(string eventName, EventQueue queue)
+    public void CallBoardEvents(string eventName, EventQueue queue)
     {
         //Run through each slots and call event for each card
         for (int i = 0; i < slots.Count; i++)
@@ -325,17 +274,16 @@ public class DraftBoard : MonoBehaviour
                 CardData data = slots[i].currentPlacedCard.data;
                 switch (eventName)
                 {
-                    case nameof(data.onStartEvent):
-                        if (data.onStartEvent != null) data.onStartEvent(queue);
+                    case nameof(data.onStoryStart):
+                        if (data.onStoryStart != null) data.onStoryStart(queue); //This line support the call of the start of story event
                         break;
 
-                    case nameof(data.onEndEvent):
-                        if (data.onEndEvent != null) data.onEndEvent(queue);
+                    case nameof(data.onStoryEnd):
+                        if (data.onStoryEnd != null) data.onStoryEnd(queue); //This line support the call of the end of story event
                         break;
                 }
             }
         }
-
     }
 
     public void ClearEvents()
@@ -360,12 +308,24 @@ public class DraftBoard : MonoBehaviour
                 break;
 
             case BoardState.Closing:
-                TempStoryEnd();//TEMPORARY
+                StoryManager.Instance.TurnEnd();
                 break;
 
             default:
                 break;
         }
+    }
+    #endregion
+
+    #region Utility
+    public bool IsEmpty()
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].currentPlacedCard != null)
+                return false;
+        }
+        return true;
     }
     #endregion
 }

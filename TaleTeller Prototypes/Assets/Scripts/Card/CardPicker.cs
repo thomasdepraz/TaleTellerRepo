@@ -77,9 +77,9 @@ public class CardPicker : MonoBehaviour
         ResetPlaceHolders();
 
         LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 
-            onEnd => { canvasGroup.blocksRaycasts = false;});
+            onEnd => { canvasGroup.blocksRaycasts = false; queue.UpdateQueue(); });
 
-        queue.UpdateQueue();
+        
     }
 
 

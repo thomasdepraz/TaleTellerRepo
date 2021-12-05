@@ -8,10 +8,9 @@ public class ManaSystem : MonoBehaviour
     public int maxMana;
     public int currentMana;
 
-    // Start is called before the first frame update
     void Start()
     {
-        RefillMana(); //Temp ? maybe it is elsewhere?
+
     }
 
     public void RefillMana()

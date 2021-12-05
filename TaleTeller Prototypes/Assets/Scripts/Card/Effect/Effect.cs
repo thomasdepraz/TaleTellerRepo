@@ -1,17 +1,20 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public enum Trigger
 {
     None,
-    OnEnter,
+    OnCardEnter,
     OnStoryStart,
     OnStoryEnd,
     OnCardDiscard,
     OnCardDrawn,
-    OnEndTurn
+    OnTurnEnd,
+    OnTurnStart
 }
 public enum EffectTarget
 {
@@ -61,7 +64,7 @@ public class EffectValue
 public class Effect : ScriptableObject
 {
     [HideInInspector] public CardData linkedData;
-    public string effectName;
+    public string description;
     public Trigger trigger;
     public EffectTarget target;
 
@@ -88,25 +91,32 @@ public class Effect : ScriptableObject
             case Trigger.None:
                 break;
 
-            case Trigger.OnEnter:
-                card.onEnterEvent += OnTriggerEffect;
+            case Trigger.OnCardEnter:
+                card.onCardEnter += OnTriggerEffect;
                 break;
 
             case Trigger.OnStoryStart:
-                card.onStartEvent += OnTriggerEffect;
+                card.onStoryStart += OnTriggerEffect;
                 break;
 
             case Trigger.OnStoryEnd:
-                card.onEndEvent += OnTriggerEffect;
+                card.onStoryEnd += OnTriggerEffect;
                 break;
 
             case Trigger.OnCardDiscard:
+                card.onCardDiscard += OnTriggerEffect;
                 break;
 
             case Trigger.OnCardDrawn:
+                card.onCardDraw += OnTriggerEffect;
                 break;
 
-            case Trigger.OnEndTurn:
+            case Trigger.OnTurnStart:
+                card.onTurnStart += OnTriggerEffect;
+                break;
+
+            case Trigger.OnTurnEnd:
+                card.onTurnEnd += OnTriggerEffect;
                 break;
 
             default:
@@ -138,7 +148,7 @@ public class Effect : ScriptableObject
             case EffectTarget.Board:
                 //Process with range
                 #region BoardRange
-                DraftBoard board = CardManager.Instance.board;
+                Board board = CardManager.Instance.board;
                 int currentBoardIndex = linkedData.currentContainer.currentSlot.slotIndex; 
                 for (int index = 0; index < range.Length; index++)
                 {
@@ -262,6 +272,33 @@ public class Effect : ScriptableObject
         //if range is null maybe look at other parameter
         return targets;
     }
+
+    public virtual string GetDescription(Effect effect)
+    {
+        string result = string.Empty;
+        string[] temp = effect.description.Split('$');
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            string value = string.Empty; 
+            if(i%2 == 0)
+            {
+                value = temp[i];
+            }
+            else
+            {
+                Type type = effect.GetType();
+                FieldInfo prop = type.GetField(temp[i]);
+                EffectValue val = prop.GetValue(effect) as EffectValue;
+
+                value = val.value.ToString();
+            }
+            result += value;
+        }
+        
+        return result;
+    }
+
 }
 
 
