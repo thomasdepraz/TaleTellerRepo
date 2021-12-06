@@ -8,8 +8,7 @@ public struct SchemeStep
     public List<CardData> stepOptions;
 }
 
-[CreateAssetMenu(fileName = "N" +
-    "New Plot Scheme", menuName = "Data/Plot Scheme")]
+[CreateAssetMenu(fileName = "New Plot Scheme", menuName = "Data/Plot Scheme")]
 public class MainPlotScheme : ScriptableObject
 {
     public List<SchemeStep> schemeSteps = new List<SchemeStep>();

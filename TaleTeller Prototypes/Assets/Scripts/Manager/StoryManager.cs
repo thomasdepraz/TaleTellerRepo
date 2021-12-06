@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class StoryManager : Singleton<StoryManager>
 {
     [HideInInspector] public int turnCount;
+    public List<EventQueue> queueList = new List<EventQueue>();
 
     [Header("References")]
     public Image fadePanel;
@@ -32,7 +33,7 @@ public class StoryManager : Singleton<StoryManager>
         yield return null;
 
         //TEMP secondary plot deal -- it ll probably be elswhere later 
-        if(turnCount >0 && turnCount%3 == 0)
+        if(turnCount >0 && turnCount%2 == 0)
         {
             EventQueue secondaryPlotsQueue = new EventQueue();
             PlotsManager.Instance.ChooseSecondaryPlots(secondaryPlotsQueue);

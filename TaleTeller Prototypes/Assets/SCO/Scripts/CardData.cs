@@ -162,26 +162,7 @@ public class CardData : ScriptableObject
 
         //Reset data----------------------------------
 
-        cardToReset = Instantiate(cardToReset.dataReference);//make data an instance of itself
-
-        //Instantiate other scriptables objects
-        if (cardToReset.cardTypeReference != null)
-        {
-            cardToReset.cardType = Instantiate(cardToReset.cardTypeReference);
-            cardToReset.cardType.InitType(cardToReset);//<--Watch out, subscribing to events can happen in here
-        }
-
-        for (int i = 0; i < cardToReset.effects.Count; i++)
-        {
-            if (effects[i] != null) cardToReset.effects[i] = Instantiate(cardToReset.dataReference.effects[i]);
-        }
-
-        //Write logic to determine how the card subscribe to the events
-        if (cardToReset.dataReference.cardType == null)//All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
-        {
-            InitializeCardEffects(cardToReset);
-        }
-        //-----------------------
+        cardToReset = InitializeData(cardToReset);
     }
 
     public void UnsubscribeEvents()

@@ -67,10 +67,10 @@ public class Board : MonoBehaviour
         if(slots[slotIndex - 1].currentPlacedCard != null)
         {
             EventQueue onEnterQueue = new EventQueue();
+
             //Make a list of effect event and card type related events by trigger the enter card event
             if(slots[slotIndex-1].currentPlacedCard.data.onCardEnter !=null)
             {
-
                 slots[slotIndex-1].currentPlacedCard.data.onCardEnter(onEnterQueue);
             }
 
@@ -149,12 +149,6 @@ public class Board : MonoBehaviour
         }
 
         ResumeStory();
-    }
-    void TempStoryEnd()
-    {
-        Debug.Log("Turn ended");
-        currentBoardState = BoardState.None;
-        CardManager.Instance.manaSystem.RefillMana(); //TEMPORARY (it'll be elsewhere)
     }
     #endregion
 

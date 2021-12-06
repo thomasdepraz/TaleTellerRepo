@@ -9,8 +9,10 @@ public class EventQueue
     public void StartQueue()
     {
         //StartCoroutine on monobehaviour manager
+
         if(events.Count > 0)
         {
+            StoryManager.Instance.queueList.Add(this);
             EventManager.Instance.StartCoroutine(events[0]);
         }
         else
@@ -31,6 +33,7 @@ public class EventQueue
         else//resume the story where you left it
         {
             resolved = true;
+            StoryManager.Instance.queueList.Remove(this);
         }
     }
 }

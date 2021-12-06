@@ -18,6 +18,7 @@ public class DrawEffect : BonusEffect
 
 
         //Logic that add methods to queue
+        Debug.Log("Draw ?");
         CardManager.Instance.cardDeck.DrawCards((int)drawValue.value, drawQueue);
 
         drawQueue.StartQueue();//Actual draw

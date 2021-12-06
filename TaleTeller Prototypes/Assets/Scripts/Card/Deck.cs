@@ -36,9 +36,9 @@ public class Deck : MonoBehaviour
         return deckToShuffle;
     }
 
-    public void DrawCards(int count, EventQueue queue = null)
+    public void DrawCards(int count, EventQueue queue)
     {
-        StartCoroutine(DrawCardsRoutine(count, queue));
+        queue.events.Add(DrawCardsRoutine(count, queue));
     }
     IEnumerator DrawCardsRoutine(int count, EventQueue queue)
     {
@@ -130,12 +130,26 @@ public class Deck : MonoBehaviour
         EventQueue dealQueue = new EventQueue();
         CardData dealtCard;
 
-        if (card != null) dealtCard = card;
-        else dealtCard = cardDeck[0];
+        if (card != null)
+        {
+            dealtCard = card;
+        }
+        else
+        {
+            dealtCard = cardDeck[0];
+        }
 
         //TODO make the following logic in the queue so it can be animated-----------------
         CardManager.Instance.cardHand.InitCard(dealtCard);
-        cardDeck.RemoveAt(0);
+
+        if(card == null)//Only remove if card = null
+        {
+            cardDeck.RemoveAt(0);
+        }
+        else
+        {
+            if (cardDeck.Contains(card)) cardDeck.Remove(card);
+        }
         yield return new WaitForSeconds(0.2f);//For now Wait 0.2 sec between each draw
         //----------------------------------------------------
 
@@ -160,9 +174,14 @@ public class Deck : MonoBehaviour
 
         CardData dealtCard;
 
-        if (card != null) dealtCard = card;
-        else dealtCard = cardDeck[0];
-
+        if (card != null)
+        {
+            dealtCard = card;
+        }
+        else
+        {
+            dealtCard = cardDeck[0];
+        }
         //Appear(overDrawQueue)//TODO
 
 
