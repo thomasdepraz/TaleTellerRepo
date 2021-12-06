@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CharacterBehaviour
+public enum CharacterBehaviour //TO MOVE
 {
     None,
     Peaceful, 
     Agressive
 }
-public enum CardEventTrigger
+public enum CardEventTrigger//DEPRECATED
 {
     None, 
     OnEncounter,
@@ -22,7 +22,7 @@ public enum CardType
     Character, 
     Object, 
     Location
-}
+}//DEPRECATED
 
 public enum CardRarity
 {
@@ -47,6 +47,7 @@ public class CardData : ScriptableObject
     public CardRarity rarity;
     public Archetype archetype;
 
+    //DEPRECATED
     public bool isKeyCard;
     [HideInInspector] public bool keyCardActivated;
     public int interestCooldown;
@@ -55,14 +56,15 @@ public class CardData : ScriptableObject
     public CardType type;
     public CharacterBehaviour characterBehaviour;
     public CharacterStats characterStats;
+    //---
 
     public CardEventTrigger trigger;
-    public int creativityCost;
-    public CardEffect effect;
-    public CardEffect deadCardEffect;
+    public int creativityCost;//CHANGE NAME
+    public CardEffect effect;//DEPR
+    public CardEffect deadCardEffect;//DEPRE
     public Sprite cardGraph;
-    [HideInInspector] public CardFeedback feedback;
-     public CardContainer currentContainer;
+    [HideInInspector] public CardFeedback feedback;//DEPR
+    public CardContainer currentContainer;
 
     [TextArea(2, 3)]
     public string description;
@@ -88,6 +90,7 @@ public class CardData : ScriptableObject
     public CardEvent onCardDraw;
     public CardEvent onCardDiscard;
     public CardEvent onCardAppear;
+
 
     //This is how a base card will be initialized (It's meant to be overwritten)
     public virtual CardData InitializeData(CardData data)

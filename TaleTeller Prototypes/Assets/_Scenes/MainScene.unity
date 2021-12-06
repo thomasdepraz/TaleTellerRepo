@@ -249,21 +249,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardDeck:
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
+  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
   discardPile: []
   drawAmount: 3
   drawAmountFirstTurn: 5

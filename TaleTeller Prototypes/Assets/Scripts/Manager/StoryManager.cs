@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class StoryManager : Singleton<StoryManager>
 {
-
     [HideInInspector] public int turnCount;
 
     [Header("References")]

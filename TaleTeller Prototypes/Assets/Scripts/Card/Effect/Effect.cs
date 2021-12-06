@@ -18,6 +18,7 @@ public enum Trigger
 }
 public enum EffectTarget
 {
+    None,
     Board,
     Hand,
     Deck,
@@ -48,6 +49,7 @@ public enum EffectValueType
 }
 public enum EffectValueOperator
 {
+    None,
     Addition,
     Substraction,
     Product,
@@ -124,7 +126,7 @@ public class Effect : ScriptableObject
         }
     }
 
-    public virtual void OnTriggerEffect(EventQueue queue)
+    public virtual void OnTriggerEffect(EventQueue queue) //TODO REMOVE VIRTUAL
     {
         //ajouter la coroutine à la queue
         queue.events.Add(EffectLogic(queue));

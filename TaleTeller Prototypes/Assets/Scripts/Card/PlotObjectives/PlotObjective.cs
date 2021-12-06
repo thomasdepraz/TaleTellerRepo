@@ -24,9 +24,7 @@ public class PlotObjective : ScriptableObject
         }
     }
 
-
-
-    public virtual void UpdateStatus(EventQueue queue)
+    public virtual void UpdateStatus(EventQueue queue)//TODO REMOVE VIRTUAL
     {
         //Here is the logic that checks the objective winning condition
         queue.events.Add(UpdateStatusRoutine(queue));
