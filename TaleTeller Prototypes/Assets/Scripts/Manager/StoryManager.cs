@@ -8,7 +8,11 @@ using UnityEngine.UI;
 public class StoryManager : Singleton<StoryManager>
 {
     [HideInInspector] public int turnCount;
-    public List<EventQueue> queueList = new List<EventQueue>();
+    public List<EventQueue> queueList = new List<EventQueue>();//THIS IS FOR DEBUG
+    [HideInInspector] public List<CardData> cardsToDestroy = new List<CardData>();
+
+
+
 
     [Header("References")]
     public Image fadePanel;
@@ -31,9 +35,22 @@ public class StoryManager : Singleton<StoryManager>
     public IEnumerator StartTurnRoutine()
     {
         yield return null;
+        if(turnCount == 0 )
+        {
+            EventQueue mainQueue = new EventQueue();
+
+            PlotsManager.Instance.ChooseMainPlot(mainQueue, PlotsManager.Instance.schemes);
+
+            mainQueue.StartQueue();
+            while(!mainQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
 
         //TEMP secondary plot deal -- it ll probably be elswhere later 
-        if(turnCount >0 && turnCount%2 == 0)
+        if(turnCount >0 && turnCount%2 == 0 && PlotsManager.Instance.secondaryPlots.Count > 0)
         {
             EventQueue secondaryPlotsQueue = new EventQueue();
             PlotsManager.Instance.ChooseSecondaryPlots(secondaryPlotsQueue);
@@ -86,8 +103,24 @@ public class StoryManager : Singleton<StoryManager>
 
     public void TurnEnd()
     {
+        StartCoroutine(TurnEndRoutine());
+    }
+    IEnumerator TurnEndRoutine()
+    {
         Debug.Log("End of turn");
         CardManager.Instance.board.currentBoardState = BoardState.None;
+
+        EventQueue onEndQueue = new EventQueue();
+
+        CallGeneralEvent("onTurnEnd", onEndQueue);
+        
+        onEndQueue.StartQueue();
+
+        while(!onEndQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         TransitionToNextTurn();
     }
 
@@ -111,6 +144,12 @@ public class StoryManager : Singleton<StoryManager>
 
 
         //reset of the hings needing a reset
+        while(cardsToDestroy.Count > 0)
+        {
+            Destroy(cardsToDestroy[0]);
+            cardsToDestroy.RemoveAt(0);
+        }
+
         yield return new WaitForSeconds(1);
 
         //fade out

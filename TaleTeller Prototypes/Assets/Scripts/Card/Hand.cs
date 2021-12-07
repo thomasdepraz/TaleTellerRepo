@@ -47,7 +47,7 @@ public class Hand : MonoBehaviour
     IEnumerator DiscardCardFromHandRoutine(CardContainer card, EventQueue queue)
     {
         yield return null;
-        card.data.ResetData(card.data);
+        card.data = card.data.ResetData(card.data);
 
         currentHand.Remove(card);
         CardManager.Instance.cardDeck.discardPile.Add(card.data);

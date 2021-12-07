@@ -33,6 +33,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Goblin
+  rarity: 0
+  archetype: 0
   isKeyCard: 0
   keyCardActivated: 0
   interestCooldown: 0
@@ -51,6 +53,7 @@ MonoBehaviour:
   feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
+  effectsReferences: []
   effects: []
   cardTypeReference: {fileID: -5754410024143615142}
   cardType: {fileID: 0}

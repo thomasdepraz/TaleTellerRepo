@@ -160,7 +160,7 @@ public class Board : MonoBehaviour
     }
     IEnumerator DiscardCardFromBoardRoutine(CardContainer card, EventQueue currentQueue)
     {
-        card.data.ResetData(card.data);
+        card.data = card.data.ResetData(card.data);
 
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
 

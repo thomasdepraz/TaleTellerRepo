@@ -1862,6 +1862,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ff6f5ac4442e94486970e0721c2e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMainPlotScheme: {fileID: 0}
+  schemes:
+  - {fileID: 11400000, guid: df975ae4d82066246940778f5c8e35e8, type: 2}
+  - {fileID: 11400000, guid: bd3fe45b9e2cc7a418888df2b232bb5b, type: 2}
   secondaryPlots:
   - {fileID: 11400000, guid: d727f71537b38264bbf19a0bba2b25f0, type: 2}
   currentPickedCard: {fileID: 0}
@@ -3862,6 +3866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnCount: 0
+  cardsToDestroy: []
   fadePanel: {fileID: 1666914929}
 --- !u!1 &931476873
 GameObject:
@@ -4512,7 +4517,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.8
+  m_fontSize: 34.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

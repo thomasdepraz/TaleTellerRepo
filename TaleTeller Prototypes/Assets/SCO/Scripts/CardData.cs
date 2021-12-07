@@ -96,8 +96,10 @@ public class CardData : ScriptableObject
     //This is how a base card will be initialized (It's meant to be overwritten)
     public virtual CardData InitializeData(CardData _data)
     {
-       CardData data = Instantiate(_data.dataReference);//make data an instance of itself
-       data.dataReference = _data.dataReference;
+        CardData data = Instantiate(_data.dataReference);//make data an instance of itself
+        data.dataReference = _data.dataReference;
+
+        data.currentContainer = null;
         //Write logic to determine how the card subscribe to the events
         if(_data.cardTypeReference!= null)
         {
@@ -157,76 +159,77 @@ public class CardData : ScriptableObject
         }
     }
 
-    public virtual void ResetData(CardData cardToReset)
+    public virtual CardData ResetData(CardData cardToReset)
     {
         //Unsubscribe from all events <-- Extend these methods each time we add a new delegate
         #region Unsubscribe methods
-        UnsubscribeEvents();
+        UnsubscribeEvents(cardToReset);
 
         #endregion
 
         //Reset data----------------------------------
 
-        cardToReset = InitializeData(cardToReset);
+        
+        return InitializeData(cardToReset); 
     }
 
-    public void UnsubscribeEvents()
+    public void UnsubscribeEvents(CardData cardToReset)
     {
-        if (onStoryStart != null)
+        if (cardToReset.onStoryStart != null)
         {
-            foreach (var myDelegate in onStoryStart.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onStoryStart.GetInvocationList())
             {
-                onStoryStart -= myDelegate as BoardEvent;
+                cardToReset.onStoryStart -= myDelegate as BoardEvent;
             }
         }
-        if (onStoryEnd != null)
+        if (cardToReset.onStoryEnd != null)
         {
-            foreach (var myDelegate in onStoryEnd.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onStoryEnd.GetInvocationList())
             {
-                onStoryEnd -= myDelegate as BoardEvent;
+                cardToReset.onStoryEnd -= myDelegate as BoardEvent;
             }
         }
-        if (onTurnEnd != null)
+        if (cardToReset.onTurnEnd != null)
         {
-            foreach (var myDelegate in onTurnEnd.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onTurnEnd.GetInvocationList())
             {
-                onTurnEnd -= myDelegate as BoardEvent;
+                cardToReset.onTurnEnd -= myDelegate as BoardEvent;
             }
         }
-        if (onTurnStart != null)
+        if (cardToReset.onTurnStart != null)
         {
-            foreach (var myDelegate in onTurnStart.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onTurnStart.GetInvocationList())
             {
-                onTurnStart -= myDelegate as BoardEvent;
+                cardToReset.onTurnStart -= myDelegate as BoardEvent;
             }
         }
 
-        if (onCardEnter != null)
+        if (cardToReset.onCardEnter != null)
         {
-            foreach (var myDelegate in onCardEnter.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onCardEnter.GetInvocationList())
             {
-                onCardEnter -= myDelegate as CardEvent;
+                cardToReset.onCardEnter -= myDelegate as CardEvent;
             }
         }
-        if (onCardAppear != null)
+        if (cardToReset.onCardAppear != null)
         {
-            foreach (var myDelegate in onCardAppear.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onCardAppear.GetInvocationList())
             {
-                onCardAppear -= myDelegate as CardEvent;
+                cardToReset.onCardAppear -= myDelegate as CardEvent;
             }
         }
-        if (onCardDraw != null)
+        if (cardToReset.onCardDraw != null)
         {
-            foreach (var myDelegate in onCardDraw.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onCardDraw.GetInvocationList())
             {
-                onCardDraw -= myDelegate as CardEvent;
+                cardToReset.onCardDraw -= myDelegate as CardEvent;
             }
         }
-        if (onCardDiscard != null)
+        if (cardToReset.onCardDiscard != null)
         {
-            foreach (var myDelegate in onCardDiscard.GetInvocationList())
+            foreach (var myDelegate in cardToReset.onCardDiscard.GetInvocationList())
             {
-                onCardDiscard -= myDelegate as CardEvent;
+                cardToReset.onCardDiscard -= myDelegate as CardEvent;
             }
         }
     }

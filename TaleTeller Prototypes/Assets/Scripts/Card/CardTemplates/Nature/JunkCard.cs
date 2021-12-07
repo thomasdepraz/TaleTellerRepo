@@ -10,11 +10,7 @@ public class JunkCard : CardData
 
     public override CardData InitializeData(CardData data)
     {
-        data = base.InitializeData(data);
-
-
-
-        return data;
+        return base.InitializeData(data);
     }
 
     public void LinkObjective(PlotObjective objective)
@@ -39,7 +35,8 @@ public class JunkCard : CardData
         if(currentContainer != null) //means it's in the hand or board
         {
             currentContainer.ResetContainer();
-            UnsubscribeEvents();
+            UnsubscribeEvents(this);
+            StoryManager.Instance.cardsToDestroy.Add(this);
         }
         else 
         {
@@ -48,13 +45,15 @@ public class JunkCard : CardData
             {
                 //remove and destroy
                 CardManager.Instance.cardDeck.cardDeck.Remove(this);
-                UnsubscribeEvents();
+                UnsubscribeEvents(this);
+                StoryManager.Instance.cardsToDestroy.Add(this);
             }
             else if(CardManager.Instance.cardDeck.discardPile.Contains(this))
             {
                 //remove and destroy
                 CardManager.Instance.cardDeck.discardPile.Remove(this);
-                UnsubscribeEvents();
+                UnsubscribeEvents(this);
+                StoryManager.Instance.cardsToDestroy.Add(this);
             }
             else
             {

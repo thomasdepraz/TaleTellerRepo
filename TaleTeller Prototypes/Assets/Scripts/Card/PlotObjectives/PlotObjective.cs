@@ -18,7 +18,7 @@ public class PlotObjective : ScriptableObject
 
         for (int i = 0; i < linkedJunkedCards.Count; i++)
         {
-            linkedJunkedCards[i].InitializeData(linkedJunkedCards[i]);
+            linkedJunkedCards[i] = linkedJunkedCards[i].InitializeData(linkedJunkedCards[i]) as JunkCard;
             JunkCard card = linkedJunkedCards[i] as JunkCard;
             card.LinkObjective(objective);
         }

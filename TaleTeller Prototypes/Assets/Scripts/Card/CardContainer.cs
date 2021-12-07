@@ -114,6 +114,13 @@ public class CardContainer : MonoBehaviour
         cardDescription.text = string.Empty;
         cardCreativityCost.text = string.Empty;
         
+        if(currentSlot != null)
+        {
+            currentSlot.currentPlacedCard = null;
+            currentSlot.canvasGroup.blocksRaycasts = true;
+            currentSlot = null;
+        }
+
         if(!isPlaceholder)
         {
             data.currentContainer = null;

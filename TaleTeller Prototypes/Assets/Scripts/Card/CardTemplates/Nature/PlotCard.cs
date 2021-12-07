@@ -17,12 +17,17 @@ public class PlotCard : CardData
     //TEMP
     public override CardData InitializeData(CardData data)
     {
-        PlotCard plot = Instantiate(dataReference) as PlotCard;//make data an instance of itself
+        PlotCard plot = Instantiate(data.dataReference) as PlotCard;//make data an instance of itself
+        plot.dataReference = data.dataReference;
+
 
         //Write logic to determine how the card subscribe to the events
-        if (plot.cardTypeReference != null)
+        if (data.cardTypeReference != null)
         {
-            plot.cardType = Instantiate(plot.cardTypeReference);
+            CardTypes type = Instantiate(data.cardTypeReference);
+            plot.cardType = type;
+            plot.cardTypeReference = data.cardTypeReference;
+            
             plot.cardType.InitType(plot);//<--Watch out, subscribing to events can happen in here
         }
         else //All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
@@ -31,7 +36,9 @@ public class PlotCard : CardData
         }
 
         plot.onStoryEnd += plot.OnEndPlot;
+        plot.onTurnEnd += plot.UpdateTimer;
         plot.onCardAppear += plot.OnPlotAppear;
+
 
         plot.objective = Instantiate(plot.objective);
         plot.objective.InitObjective(plot, plot.objective);
@@ -83,7 +90,7 @@ public class PlotCard : CardData
         yield return null;
         EventQueue updateCardStatusQueue = new EventQueue();
 
-        UpdateTimer(updateCardStatusQueue);
+        CardManager.Instance.board.ReturnCardToHand(currentContainer, true, updateCardStatusQueue);
 
         updateCardStatusQueue.StartQueue();
         while(!updateCardStatusQueue.resolved)
@@ -91,6 +98,38 @@ public class PlotCard : CardData
             yield return new WaitForEndOfFrame();
         }
 
+
+        currentQueue.UpdateQueue();
+    }
+
+    public void OnEndPlotComplete(EventQueue queue)
+    {
+        queue.events.Add(OnEndPlotCompleteRoutine(queue));
+    }
+    IEnumerator OnEndPlotCompleteRoutine(EventQueue currentQueue)
+    {
+        yield return null;
+        
+        //Destroy
+        currentContainer.ResetContainer();
+        StoryManager.Instance.cardsToDestroy.Add(this);
+
+        //Choose next card choose next card if not last //TODO
+        if(PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
+        {
+            EventQueue updateQueue = new EventQueue();
+            PlotsManager.Instance.currentMainPlotScheme.UpdateScheme(updateQueue, PlotsManager.Instance.currentMainPlotScheme);
+
+            updateQueue.StartQueue();
+            while(!updateQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        else //If last then go to next acte
+        {
+            Debug.LogError("NORMALEMENT C'EST LA FIN DE l'ACTE");
+        }
 
         currentQueue.UpdateQueue();
     }
@@ -115,7 +154,7 @@ public class PlotCard : CardData
             yield return new WaitForEndOfFrame();
         }
 
-
+        //Reward
         //TODO IMPLEMENT QUEUEING IN HERE
 
         if (isMainPlot)
@@ -135,6 +174,21 @@ public class PlotCard : CardData
         {
             //Secondary plot reward
             Debug.Log("Secondary Plot");
+        }
+
+        
+        //Send to oblivion or wait for end of story to send to oblivion and pickj new plot scheme //TODO implement queuing
+        if(isMainPlot)
+        {
+            //unsubscribe to basic onEndTurn
+            onStoryEnd -= OnEndPlot;
+            onStoryEnd += OnEndPlotComplete;
+        }
+        else
+        {
+            //implement queuing so it takes time
+            currentContainer.ResetContainer();
+            StoryManager.Instance.cardsToDestroy.Add(this);
         }
 
         currentQueue.UpdateQueue();
@@ -164,14 +218,24 @@ public class PlotCard : CardData
 
     public void UpdateTimer(EventQueue queue)
     {
+        queue.events.Add(UpdateTimerRoutine(queue));
+    }
+    IEnumerator UpdateTimerRoutine(EventQueue currentQueue)
+    {
+        yield return null;
         completionTimer--;
         if(completionTimer <= 0)
         {
-            FailPlot(queue);
+            EventQueue failQueue = new EventQueue();
+            FailPlot(failQueue);
+
+            failQueue.StartQueue();
+            while(!failQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
-        else
-        {
-            CardManager.Instance.board.ReturnCardToHand(currentContainer, true,queue);
-        }
+
+        currentQueue.UpdateQueue();
     }
 }

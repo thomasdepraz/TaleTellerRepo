@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlotsManager : Singleton<PlotsManager>
 {
-
+    public MainPlotScheme currentMainPlotScheme;
+    public List<MainPlotScheme> schemes;
     public List<CardData> secondaryPlots = new List<CardData>();
     [HideInInspector] public CardData currentPickedCard;
 
@@ -41,7 +42,7 @@ public class PlotsManager : Singleton<PlotsManager>
         CardManager.Instance.cardPicker.Pick(pickQueue, pickTargets, pickedCard, 1, false);
 
         pickQueue.StartQueue();
-        while(!queue.resolved)
+        while(!pickQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
@@ -51,8 +52,10 @@ public class PlotsManager : Singleton<PlotsManager>
         //Load MainScheme
         EventQueue loadQueue = new EventQueue();
 
-        schemes[index].InitScheme(schemes[index]);
-        schemes[index].LoadStep(loadQueue, schemes[index]);
+        currentMainPlotScheme = schemes[index];
+
+        currentMainPlotScheme = currentMainPlotScheme.InitScheme(currentMainPlotScheme);
+        currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);
 
         loadQueue.StartQueue();
         
@@ -93,7 +96,10 @@ public class PlotsManager : Singleton<PlotsManager>
             {
                 currentPickedCard = pickedCards[i]; //<-- This doesn't work if more than one pickedCard TODO fix this
                 pickedCards[i].onCardAppear(appearQueue); //This manages the appear animation + all the junk apparition
+
+                secondaryPlots.Remove(pickedCards[i]); //TEMP  
             }
+
         }
         else//If the picked card is null send a random plot card to deck
         {

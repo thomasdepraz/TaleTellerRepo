@@ -14,18 +14,19 @@ public class MainPlotScheme : ScriptableObject
     public List<SchemeStep> schemeSteps = new List<SchemeStep>();
     [HideInInspector]public int currentStep;
 
-    public void InitScheme(MainPlotScheme scheme)
+    public MainPlotScheme InitScheme(MainPlotScheme _scheme)
     {
-        scheme = Instantiate(scheme);
+        MainPlotScheme scheme = Instantiate(_scheme);
         scheme.currentStep = 0;
 
-        for (int i = 0; i < schemeSteps.Count; i++)
+        for (int i = 0; i < scheme.schemeSteps.Count; i++)
         {
-            for (int j = 0; j < schemeSteps[i].stepOptions.Count; j++)
+            for (int j = 0; j < scheme.schemeSteps[i].stepOptions.Count; j++)
             {
-                schemeSteps[i].stepOptions[j].InitializeData(schemeSteps[i].stepOptions[j]);
+                scheme.schemeSteps[i].stepOptions[j] = scheme.schemeSteps[i].stepOptions[j].InitializeData(scheme.schemeSteps[i].stepOptions[j]);
             }
         }
+        return scheme;
     }
 
     public void LoadStep(EventQueue queue, MainPlotScheme scheme)
@@ -50,7 +51,7 @@ public class MainPlotScheme : ScriptableObject
             }
 
         }
-        else if(scheme.schemeSteps[scheme.currentStep].stepOptions.Count == 1) //if multiple options make the player pick one of them and send it to the hand
+        else if(scheme.schemeSteps[scheme.currentStep].stepOptions.Count > 1) //if multiple options make the player pick one of them and send it to the hand
         {
             List<CardData> pickedCard = new List<CardData>();
             EventQueue pickQueue = new EventQueue();
@@ -62,9 +63,27 @@ public class MainPlotScheme : ScriptableObject
             {
                 yield return new WaitForEndOfFrame();
             }
+
+            EventQueue toHandQueue = new EventQueue();
+
+            //send card to hand
+            PlotsManager.Instance.SendPlotToHand(toHandQueue, pickedCard[0]);
+
+            toHandQueue.StartQueue();
+            while (!toHandQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
         }
 
         scheme.currentStep++;
         queue.UpdateQueue();
+    }
+
+
+    public void UpdateScheme(EventQueue queue, MainPlotScheme scheme)
+    {
+        LoadStep(queue, scheme);
     }
 }

@@ -73,6 +73,7 @@ public class Deck : MonoBehaviour
                 {
                     Refill(dealQueue);
                     cardsInDeck += discardPile.Count;
+                    i--;
                 }
                 else break;
                 #endregion
