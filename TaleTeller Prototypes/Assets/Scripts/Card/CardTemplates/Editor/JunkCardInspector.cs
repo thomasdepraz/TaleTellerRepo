@@ -33,7 +33,7 @@ public class JunkCardInspector : Editor
         cardRarity = serializedObject.FindProperty(nameof(script.rarity));
         cardArchetype = serializedObject.FindProperty(nameof(script.archetype));
         cardGraph = serializedObject.FindProperty(nameof(script.cardGraph));
-        effects = serializedObject.FindProperty(nameof(script.effects));
+        effects = serializedObject.FindProperty(nameof(script.effectsReferences));
         cardDescription = serializedObject.FindProperty(nameof(script.description));
     }
 
@@ -81,8 +81,8 @@ public class JunkCardInspector : Editor
             if (GUILayout.Button("RemoveEffect", GUILayout.MaxWidth(90)))
             {
                 //delete the child asset
-                AssetDatabase.RemoveObjectFromAsset(script.effects[script.effects.Count - 1]);
-                script.effects.RemoveAt(script.effects.Count - 1);
+                AssetDatabase.RemoveObjectFromAsset(script.effectsReferences[script.effectsReferences.Count - 1]);
+                script.effectsReferences.RemoveAt(script.effectsReferences.Count - 1);
                 AssetDatabase.SaveAssets();
                 EditorUtility.SetDirty(script);
             }
@@ -142,7 +142,7 @@ public class JunkCardInspector : Editor
         AssetDatabase.SaveAssets();
 
         //cardType.objectReferenceValue = instance as CardTypes;
-        script.effects.Add(instance as Effect);
+        script.effectsReferences.Add(instance as Effect);
         EditorUtility.SetDirty(script);
     }
 

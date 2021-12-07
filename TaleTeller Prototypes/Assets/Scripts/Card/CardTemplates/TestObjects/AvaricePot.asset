@@ -47,8 +47,9 @@ MonoBehaviour:
   feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
-  effects:
+  effectsReferences:
   - {fileID: 2093402135667189514}
+  effects: []
   cardTypeReference: {fileID: -1352257238443735590}
   cardType: {fileID: 0}
 --- !u!114 &2093402135667189514

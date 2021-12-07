@@ -14,7 +14,7 @@ public class CardDataEditor : Editor
     private void OnEnable()
     {
         script = target as CardData;
-        effectList = serializedObject.FindProperty(nameof(script.effects));
+        effectList = serializedObject.FindProperty(nameof(script.effectsReferences));
     }
 
     public override void OnInspectorGUI()
@@ -61,6 +61,6 @@ public class CardDataEditor : Editor
     void OnTypeSelected(object type)
     {
         var instance = Activator.CreateInstance((Type)type);
-        script.effects.Add(instance as Effect);
+        script.effectsReferences.Add(instance as Effect);
     }
 }

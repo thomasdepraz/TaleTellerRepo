@@ -71,11 +71,12 @@ public class CardData : ScriptableObject
 
     //TEMP
     [Expandable]
+    public List<Effect> effectsReferences = new List<Effect>();
     public List<Effect> effects = new List<Effect>();
 
     [Expandable]
     public CardTypes cardTypeReference;
-    [HideInInspector]public CardTypes cardType;
+    public CardTypes cardType;
 
 
     //Events
@@ -93,16 +94,18 @@ public class CardData : ScriptableObject
 
 
     //This is how a base card will be initialized (It's meant to be overwritten)
-    public virtual CardData InitializeData(CardData data)
+    public virtual CardData InitializeData(CardData _data)
     {
-        data = Instantiate(dataReference);//make data an instance of itself
-
+       CardData data = Instantiate(_data.dataReference);//make data an instance of itself
+       data.dataReference = _data.dataReference;
         //Write logic to determine how the card subscribe to the events
-        if(data.cardTypeReference!= null)
+        if(_data.cardTypeReference!= null)
         {
-            data.cardType = Instantiate(data.cardTypeReference);
-            data.cardType.InitType(data);//<--Watch out, subscribing to events can happen in here
+            CardTypes type = Instantiate(_data.cardTypeReference);
+            data.cardType = type;
+            data.cardTypeReference = _data.cardTypeReference;
 
+            data.cardType.InitType(data);//<--Watch out, subscribing to events can happen in here
             data.onStoryEnd += data.cardType.OnEnd;
         }
         else //All the events that i subscribe in here must be the one that are overidden if I have a certain cardType
@@ -141,12 +144,14 @@ public class CardData : ScriptableObject
 
     public void InitializeCardEffects(CardData data)
     {
+        data.effects.Clear();
         //InitEffects
-        for (int i = 0; i < data.effects.Count; i++)
+        for (int i = 0; i < data.effectsReferences.Count; i++)
         {
-            if (effects[i] != null)
+            if (effectsReferences[i] != null)
             {
-                data.effects[i] = Instantiate(dataReference.effects[i]);
+                Effect effect = Instantiate(data.dataReference.effectsReferences[i]);
+                data.effects.Add(effect);
                 data.effects[i].InitEffect(data); //<--This handles the subscription for all effects
             }
         }
