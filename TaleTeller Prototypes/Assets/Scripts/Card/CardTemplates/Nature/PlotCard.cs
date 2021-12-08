@@ -20,6 +20,7 @@ public class PlotCard : CardData
         PlotCard plot = Instantiate(data.dataReference) as PlotCard;//make data an instance of itself
         plot.dataReference = data.dataReference;
 
+        data.currentContainer = null;
 
         //Write logic to determine how the card subscribe to the events
         if (data.cardTypeReference != null)

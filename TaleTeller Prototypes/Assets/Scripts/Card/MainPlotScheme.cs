@@ -42,7 +42,10 @@ public class MainPlotScheme : ScriptableObject
             EventQueue toHandQueue = new EventQueue();
 
             //send card to hand
-            PlotsManager.Instance.SendPlotToHand(toHandQueue, scheme.schemeSteps[scheme.currentStep].stepOptions[0]);
+            //PlotsManager.Instance.SendPlotToHand(toHandQueue, scheme.schemeSteps[scheme.currentStep].stepOptions[0]);
+            PlotsManager.Instance.currentPickedCard = scheme.schemeSteps[scheme.currentStep].stepOptions[0];
+            scheme.schemeSteps[scheme.currentStep].stepOptions[0].onCardAppear(toHandQueue);
+
 
             toHandQueue.StartQueue();
             while(!toHandQueue.resolved)
@@ -67,7 +70,9 @@ public class MainPlotScheme : ScriptableObject
             EventQueue toHandQueue = new EventQueue();
 
             //send card to hand
-            PlotsManager.Instance.SendPlotToHand(toHandQueue, pickedCard[0]);
+            //PlotsManager.Instance.SendPlotToHand(toHandQueue, pickedCard[0]);
+            PlotsManager.Instance.currentPickedCard = pickedCard[0];
+            pickedCard[0].onCardAppear(toHandQueue);
 
             toHandQueue.StartQueue();
             while (!toHandQueue.resolved)

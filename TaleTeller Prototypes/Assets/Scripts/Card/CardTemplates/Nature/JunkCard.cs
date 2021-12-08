@@ -10,7 +10,48 @@ public class JunkCard : CardData
 
     public override CardData InitializeData(CardData data)
     {
-        return base.InitializeData(data);
+        JunkCard junk = Instantiate(data.dataReference) as JunkCard;
+        junk.dataReference = data.dataReference;
+
+        data.currentContainer = null;
+
+        if(data.cardTypeReference != null)
+        {
+            CardTypes type = Instantiate(data.cardTypeReference);
+            junk.cardType = type;
+            junk.cardTypeReference = data.cardTypeReference;
+
+            junk.cardType.InitType(junk);
+        }
+        else
+        {
+            InitializeCardEffects(junk);
+        }
+
+        junk.onStoryEnd += junk.OnEndJunk; //subscribe to basic discard behavior
+
+        return junk;
+    }
+
+    public void OnEndJunk(EventQueue queue)
+    {
+        queue.events.Add(OnEndJunkRoutine(queue));
+    }
+    IEnumerator OnEndJunkRoutine(EventQueue currentQueue)
+    {
+        yield return null;
+        EventQueue discardQueue = new EventQueue();
+
+        CardManager.Instance.board.DiscardCardFromBoard(currentContainer, discardQueue);
+
+        discardQueue.StartQueue();
+        while (!discardQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        currentQueue.UpdateQueue();
     }
 
     public void LinkObjective(PlotObjective objective)
