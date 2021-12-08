@@ -74,7 +74,7 @@ public class PlotCard : CardData
         //add all junk cards to deck for now -- TODO later call the appropriate method on plotObjective so it chooses where to send the cards TODO 
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
-            objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]);
+            //objective.linkedJunkedCards[i] = objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]) as JunkCard;
             CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
         }
 
@@ -146,7 +146,7 @@ public class PlotCard : CardData
         //destroy all linked junk cards
         EventQueue destroyQueue = new EventQueue();
 
-        objective.onPlotComplete(destroyQueue);
+        objective.DestroyJunk(destroyQueue);
 
         destroyQueue.StartQueue();
 

@@ -5,9 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Junk Card", menuName = "Data/JunkCard")]
 public class JunkCard : CardData
 {
-
-    [HideInInspector] PlotObjective linkedObjective;
-
+    public PlotObjective objective;
+    public int objectiveIndex;
     public override CardData InitializeData(CardData data)
     {
         JunkCard junk = Instantiate(data.dataReference) as JunkCard;
@@ -30,6 +29,14 @@ public class JunkCard : CardData
 
         junk.onStoryEnd += junk.OnEndJunk; //subscribe to basic discard behavior
 
+        JunkCard reference = data as JunkCard;
+        if (reference.objective != null)
+        {
+            junk.objective = reference.objective;
+            junk.objective.linkedJunkedCards[objectiveIndex] = junk;
+            junk.objectiveIndex = reference.objectiveIndex;
+        }
+
         return junk;
     }
 
@@ -50,19 +57,10 @@ public class JunkCard : CardData
             yield return new WaitForEndOfFrame();
         }
 
-
         currentQueue.UpdateQueue();
     }
 
-    public void LinkObjective(PlotObjective objective)
-    {
-        //subscribe to an event or go reference yourself to the current objective that defining your lifetime //TODO
-        //When the objective is complete it destroys every JunkCard no matter where they are;
-        linkedObjective = objective;
-        objective.onPlotComplete += DestroyJunkCard;
-    }
-
-    void DestroyJunkCard(EventQueue queue)
+    public void DestroyJunkCard(EventQueue queue)
     {
         queue.events.Add(DestroyJunkCardRoutine(queue));
     }
@@ -70,10 +68,9 @@ public class JunkCard : CardData
     IEnumerator DestroyJunkCardRoutine(EventQueue currentQueue) //LATER probably have this method in the card manager as DestroyCard(CardData data) {}
     {
         EventQueue destroyQueue = new EventQueue();
-
         //TODO implement add to queue event list in function that take time;
         //Discard the card based on where it is 
-        if(currentContainer != null) //means it's in the hand or board
+        if (currentContainer != null) //means it's in the hand or board
         {
             currentContainer.ResetContainer();
             UnsubscribeEvents(this);

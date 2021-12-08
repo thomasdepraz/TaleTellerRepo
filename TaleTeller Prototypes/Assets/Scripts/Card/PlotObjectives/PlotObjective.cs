@@ -8,7 +8,6 @@ public class PlotObjective : ScriptableObject
     [HideInInspector] public PlotCard linkedPlotData;
     public string objectiveName;
     public List<JunkCard> linkedJunkedCards = new List<JunkCard>();
-    public Action<EventQueue> onPlotComplete;
 
     public virtual void InitObjective(PlotCard data, PlotObjective objective)
     {
@@ -16,11 +15,11 @@ public class PlotObjective : ScriptableObject
         //Subscribe objectiveUpdate to the related event 
         data.onCardEnter += UpdateStatus;//<-- THIS IS THE GENERIC RULE
 
-        for (int i = 0; i < linkedJunkedCards.Count; i++)
+        for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
-            linkedJunkedCards[i] = linkedJunkedCards[i].InitializeData(linkedJunkedCards[i]) as JunkCard;
-            JunkCard card = linkedJunkedCards[i] as JunkCard;
-            card.LinkObjective(objective);
+            objective.linkedJunkedCards[i] = objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]) as JunkCard;
+            objective.linkedJunkedCards[i].objective = objective;
+            objective.linkedJunkedCards[i].objectiveIndex = i;
         }
     }
 
@@ -41,6 +40,29 @@ public class PlotObjective : ScriptableObject
         completeQueue.StartQueue();
 
         while(!completeQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        currentQueue.UpdateQueue();
+    }
+
+    public void DestroyJunk(EventQueue queue)
+    {
+        queue.events.Add(DestroyJunksRoutine(queue));
+    }
+    IEnumerator DestroyJunksRoutine(EventQueue currentQueue)
+    {
+        yield return null;
+        EventQueue destroyQueue = new EventQueue();
+
+        for (int i = 0; i < linkedJunkedCards.Count; i++)
+        {
+            linkedJunkedCards[i].DestroyJunkCard(destroyQueue);
+        }
+
+        destroyQueue.StartQueue();
+        while(!destroyQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
