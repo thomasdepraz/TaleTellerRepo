@@ -6,12 +6,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CardContainer : MonoBehaviour
-     , IBeginDragHandler
-     , IEndDragHandler
-     , IDragHandler
-     , IPointerEnterHandler
-     , IPointerExitHandler
- 
 {
     [Header("References")]
     public RectTransform rectTransform;
@@ -20,7 +14,7 @@ public class CardContainer : MonoBehaviour
     private Vector3 origin;
     private Vector3 basePosition;
 
-    public DraftSlot currentSlot;
+    public BoardSlot currentSlot;
     public CardData data;
     public TextMeshProUGUI cardName;
     public TextMeshProUGUI cardDescription;
@@ -57,7 +51,8 @@ public class CardContainer : MonoBehaviour
         }
     }
 
-    public void CardInit(CardData data)
+    #region Init/Reset
+    public void InitializeContainer(CardData data, bool isPlaceHolder = false)
     {
         this.data = data;
 
@@ -65,7 +60,8 @@ public class CardContainer : MonoBehaviour
         healthUI.SetActive(false);
         timerUI.SetActive(false);
 
-        data.currentContainer = this;
+        if(!isPlaceHolder)
+            data.currentContainer = this;
 
         //Change effect if needed
         if (data.keyCardActivated)
@@ -111,15 +107,52 @@ public class CardContainer : MonoBehaviour
         //add random rotation 
         rectTransform.rotation = new Quaternion(0,0,Random.Range(-0.1f,0.1f),1);
     }
+    public void ResetContainer(bool isPlaceholder = false)
+    {
+        //unload Data and deactivate gameobject
+        cardName.text = string.Empty;
+        cardDescription.text = string.Empty;
+        cardCreativityCost.text = string.Empty;
+        
+        if(currentSlot != null)
+        {
+            currentSlot.currentPlacedCard = null;
+            currentSlot.canvasGroup.blocksRaycasts = true;
+            currentSlot = null;
+        }
 
-    public void OnDrag(PointerEventData eventData)
+        if(!isPlaceholder)
+        {
+            data.currentContainer = null;
+
+        }
+        data = null;
+        currentSlot = null;
+
+        rectTransform.position = basePosition;
+
+        //Reset to hidden hand
+
+        if(!isPlaceholder)
+        {
+            CardManager.Instance.cardHand.currentHand.Remove(this);
+            transform.SetParent(CardManager.Instance.cardHandContainer.transform);
+        }
+        
+        
+        gameObject.SetActive(false);
+    }
+    #endregion
+
+    #region Events
+    public void OnDrag()
     {
         //Allows OnBeginDrag and OnEndDrag.
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag()
     {
-        if(!GameManager.Instance.storyManager.isReadingStory)//Can only interact with cards if story isnt reading
+        if(CardManager.Instance.board.currentBoardState == BoardState.Idle)//Can only interact with cards if story isnt reading
         {
             #region Tweening + Graphics
             LeanTween.cancel(gameObject);
@@ -145,7 +178,7 @@ public class CardContainer : MonoBehaviour
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag()
     {
         #region Tweening + Graphics
         canTween = false;
@@ -163,7 +196,7 @@ public class CardContainer : MonoBehaviour
             {
                 if (CardManager.Instance.hoveredCard.currentSlot != null) //if other card in board
                 {
-                    DraftSlot tempSlot = CardManager.Instance.hoveredCard.currentSlot;
+                    BoardSlot tempSlot = CardManager.Instance.hoveredCard.currentSlot;
 
                     CardManager.Instance.hoveredCard.currentSlot = currentSlot;
                     CardManager.Instance.hoveredCard.currentSlot.currentPlacedCard = CardManager.Instance.hoveredCard;
@@ -180,7 +213,7 @@ public class CardContainer : MonoBehaviour
                     int manaDifference = CardManager.Instance.hoveredCard.data.creativityCost - data.creativityCost;
                     if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
                     {
-                        DraftSlot tempSlot = currentSlot;
+                        BoardSlot tempSlot = currentSlot;
                         tempSlot.currentPlacedCard = CardManager.Instance.hoveredCard;
                         CardManager.Instance.hoveredCard.currentSlot = tempSlot;
 
@@ -195,6 +228,10 @@ public class CardContainer : MonoBehaviour
                         //ApplyManaDiff
                         if (manaDifference > 0) CardManager.Instance.manaSystem.LoseMana(manaDifference);
                         else if (manaDifference < 0) CardManager.Instance.manaSystem.GainMana(Mathf.Abs(manaDifference));
+
+                        //Manage hand list
+                        CardManager.Instance.cardHand.currentHand.Remove(CardManager.Instance.hoveredCard);
+                        CardManager.Instance.cardHand.currentHand.Add(this);
 
                     }
                     else
@@ -218,7 +255,7 @@ public class CardContainer : MonoBehaviour
 
                     if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
                     {
-                        DraftSlot tempSlot = CardManager.Instance.hoveredCard.currentSlot;
+                        BoardSlot tempSlot = CardManager.Instance.hoveredCard.currentSlot;
                         tempSlot.currentPlacedCard = this;
                         currentSlot = tempSlot;
 
@@ -232,6 +269,10 @@ public class CardContainer : MonoBehaviour
                         //ApplyManaDiff
                         if (manaDifference > 0) CardManager.Instance.manaSystem.LoseMana(manaDifference);
                         else if (manaDifference < 0) CardManager.Instance.manaSystem.GainMana(Mathf.Abs(manaDifference));
+
+                        //Manage hand list
+                        CardManager.Instance.cardHand.currentHand.Add(CardManager.Instance.hoveredCard);
+                        CardManager.Instance.cardHand.currentHand.Remove(this);
 
                     }
                     else
@@ -275,6 +316,8 @@ public class CardContainer : MonoBehaviour
                     rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
 
                     CardManager.Instance.manaSystem.LoseMana(data.creativityCost);
+
+                    CardManager.Instance.cardHand.currentHand.Remove(this);
                 }
                 else
                 {
@@ -293,15 +336,19 @@ public class CardContainer : MonoBehaviour
                 originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
                 rectTransform.anchoredPosition = originPosition;
 
-                if (currentSlot != null)//Remove card from board !! Add list system
+                if (currentSlot != null)//Remove card from board
                 {
                     currentSlot.currentPlacedCard = null;
                     currentSlot.canvasGroup.blocksRaycasts = true;
                     currentSlot = null;
+
+                    //Refill Mana
+                    CardManager.Instance.manaSystem.GainMana(data.creativityCost);
+
+                    //Add back to hand list 
+                    CardManager.Instance.cardHand.currentHand.Add(this);
                 }
 
-                //Refill Mana
-                CardManager.Instance.manaSystem.GainMana(data.creativityCost);
 
             }
             #endregion
@@ -313,83 +360,71 @@ public class CardContainer : MonoBehaviour
         CardManager.Instance.currentCard = null;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter()
     {
-        if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
+        if(CardManager.Instance.board.currentBoardState == BoardState.Idle)
         {
-            CardManager.Instance.hoveredCard = this;
+            if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
+            {
+                CardManager.Instance.hoveredCard = this;
+            }
+
+            #region Tweening
+            if (!LeanTween.isTweening(gameObject))
+                originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
+
+            if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard && canTween)//Check if in hand
+            {
+                canTween = false;
+
+                //Reset card rotation
+                rectTransform.rotation = new Quaternion(0, 0, 0, 0);
+
+                //Scale up and bring to front;
+                LeanTween.cancel(gameObject);
+                siblingIndex = transform.GetSiblingIndex();
+                transform.SetAsLastSibling();
+
+                rectTransform.anchoredPosition = originPosition;
+                originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
+
+                rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
+                rectTransform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
+                //LeanTween.move(rectTransform, rectTransform.anchoredPosition + new Vector2(0, 10f), 0.5f).setEaseOutSine();
+                shadowTransform.gameObject.SetActive(true);
+            }
+            #endregion
         }
-
-        #region Tweening
-        if (!LeanTween.isTweening(gameObject))
-            originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
-
-        if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard && canTween)//Check if in hand
-        {
-            canTween = false;
-
-            //Reset card rotation
-            rectTransform.rotation = new Quaternion(0, 0, 0, 0);
-
-            //Scale up and bring to front;
-            LeanTween.cancel(gameObject);
-            siblingIndex = transform.GetSiblingIndex();
-            transform.SetAsLastSibling();
-
-            rectTransform.anchoredPosition = originPosition;
-            originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
-
-            rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
-            rectTransform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-
-            //LeanTween.move(rectTransform, rectTransform.anchoredPosition + new Vector2(0, 10f), 0.5f).setEaseOutSine();
-            shadowTransform.gameObject.SetActive(true);
-        }
-        #endregion
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPointerExit()
     {
-        if(CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
+        if (CardManager.Instance.board.currentBoardState == BoardState.Idle)
         {
-            CardManager.Instance.hoveredCard = null;
+            if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
+            {
+                CardManager.Instance.hoveredCard = null;
+            }
+
+            #region Tweening
+            canTween = true;
+            if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard)//Check if in hand
+            {
+                //Scale down 
+                shadowTransform.gameObject.SetActive(false);
+                LeanTween.cancel(gameObject);
+                rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0.5f);
+                rectTransform.localScale = Vector3.one;
+
+                //LeanTween.move(rectTransform, originPosition, 0.5f).setEaseOutSine();
+                //rectTransform.anchoredPosition = originPosition;
+
+                if (!isDragging)
+                    transform.SetSiblingIndex(siblingIndex);
+            }
+            #endregion
         }
-
-        #region Tweening
-        canTween = true;
-        if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard)//Check if in hand
-        {
-            //Scale down 
-            shadowTransform.gameObject.SetActive(false);
-            LeanTween.cancel(gameObject);
-            rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0.5f);
-            rectTransform.localScale = Vector3.one;
-
-            //LeanTween.move(rectTransform, originPosition, 0.5f).setEaseOutSine();
-            //rectTransform.anchoredPosition = originPosition;
-
-            if (!isDragging)
-                transform.SetSiblingIndex(siblingIndex);
-        }
-        #endregion
     }
-
-    public void ResetCard()
-    {
-        //unload Data and deactivate gameobject
-        cardName.text = string.Empty;
-        cardDescription.text = string.Empty;
-        cardCreativityCost.text = string.Empty;
-
-        data.currentContainer = null;
-        data = null;
-        currentSlot = null;
-
-        rectTransform.position = basePosition;
-
-        //Reset to hidden hand
-        CardManager.Instance.cardHand.currentHand.Remove(this);
-        gameObject.SetActive(false);
-        transform.SetParent(CardManager.Instance.cardHandContainer.transform);
-    }
+    #endregion
 }

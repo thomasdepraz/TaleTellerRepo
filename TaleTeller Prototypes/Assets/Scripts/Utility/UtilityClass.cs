@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public static class EffectManager
+public static class UtilityClass
 {
     public static List<Type> GetSubClasses(Type type)
     {

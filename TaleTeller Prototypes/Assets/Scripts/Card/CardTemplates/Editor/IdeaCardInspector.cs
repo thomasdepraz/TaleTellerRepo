@@ -8,9 +8,11 @@ using UnityEngine;
 public class IdeaCardInspector : Editor
 {
     IdeaCard script;
-
+    SerializedProperty cardDataReference;
     SerializedProperty cardName;
     SerializedProperty cardCost;
+    SerializedProperty cardRarity;
+    SerializedProperty cardArchetype;
     SerializedProperty cardGraph;
     SerializedProperty effects;
     SerializedProperty cardDescription;
@@ -23,22 +25,28 @@ public class IdeaCardInspector : Editor
     private void OnEnable()
     {
         script = target as IdeaCard;
-        
-        cardType = serializedObject.FindProperty(nameof(script.cardType));
+
+        cardDataReference = serializedObject.FindProperty(nameof(script.dataReference));
+        cardType = serializedObject.FindProperty(nameof(script.cardTypeReference));
         cardName = serializedObject.FindProperty(nameof(script.cardName));
         cardCost = serializedObject.FindProperty(nameof(script.creativityCost));
+        cardRarity = serializedObject.FindProperty(nameof(script.rarity));
+        cardArchetype = serializedObject.FindProperty(nameof(script.archetype));
         cardGraph = serializedObject.FindProperty(nameof(script.cardGraph));
-        effects = serializedObject.FindProperty(nameof(script.effects));
+        effects = serializedObject.FindProperty(nameof(script.effectsReferences));
         cardDescription = serializedObject.FindProperty(nameof(script.description));
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-
+        EditorGUILayout.PropertyField(cardDataReference);
+        if (cardDataReference.objectReferenceValue == null) EditorGUILayout.HelpBox("Card Data Reference must not be null !", MessageType.Error);
         EditorGUILayout.LabelField("Card Base", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(cardName);
         EditorGUILayout.PropertyField(cardCost);
+        EditorGUILayout.PropertyField(cardRarity);
+        EditorGUILayout.PropertyField(cardArchetype);
         EditorGUILayout.PropertyField(cardGraph);
         EditorGUILayout.PropertyField(effects);
 
@@ -47,13 +55,13 @@ public class IdeaCardInspector : Editor
         if (GUILayout.Button("AddEffect", GUILayout.MaxWidth(90)))
         {
             GenericMenu menu = new GenericMenu();
-            List<Type> effectTypes = EffectManager.GetSubClasses(typeof(Effect));
+            List<Type> effectTypes = UtilityClass.GetSubClasses(typeof(Effect));
             for (int i = 0; i < effectTypes.Count; i++)
             {
-                if (EffectManager.HasSubClasses(effectTypes[i]))
+                if (UtilityClass.HasSubClasses(effectTypes[i]))
                 {
                     menu.AddSeparator("");
-                    List<Type> nestedTypes = EffectManager.GetSubClasses(effectTypes[i]);
+                    List<Type> nestedTypes = UtilityClass.GetSubClasses(effectTypes[i]);
                     for (int j = 0; j < nestedTypes.Count; j++)
                     {
                         AddMenuEffectItem(menu, effectTypes[i].Name + "/" + nestedTypes[j].Name, nestedTypes[j]);
@@ -73,8 +81,8 @@ public class IdeaCardInspector : Editor
             if (GUILayout.Button("RemoveEffect", GUILayout.MaxWidth(90)))
             {
                 //delete the child asset
-                AssetDatabase.RemoveObjectFromAsset(script.effects[script.effects.Count - 1]);
-                script.effects.RemoveAt(script.effects.Count - 1);
+                AssetDatabase.RemoveObjectFromAsset(script.effectsReferences[script.effectsReferences.Count - 1]);
+                script.effectsReferences.RemoveAt(script.effectsReferences.Count - 1);
                 AssetDatabase.SaveAssets();
                 EditorUtility.SetDirty(script);
             }
@@ -92,7 +100,7 @@ public class IdeaCardInspector : Editor
         {
             GenericMenu menu = new GenericMenu();
             AddMenuItem(menu, "None", typeof(CardTypes));
-            List<Type> cardTypes = EffectManager.GetSubClasses(typeof(CardTypes));
+            List<Type> cardTypes = UtilityClass.GetSubClasses(typeof(CardTypes));
             for (int i = 0; i < cardTypes.Count; i++)
             {
                 AddMenuItem(menu, cardTypes[i].Name, cardTypes[i]);
@@ -134,7 +142,7 @@ public class IdeaCardInspector : Editor
         AssetDatabase.SaveAssets();
 
         //cardType.objectReferenceValue = instance as CardTypes;
-        script.effects.Add(instance as Effect);
+        script.effectsReferences.Add(instance as Effect);
         EditorUtility.SetDirty(script);
     }
 
@@ -142,22 +150,22 @@ public class IdeaCardInspector : Editor
     {
         if((Type)type == typeof(CardTypes))
         {
-            if (script.cardType != null)
+            if (script.cardTypeReference != null)
             {
                 //delete the child asset
-                AssetDatabase.RemoveObjectFromAsset(script.cardType);
+                AssetDatabase.RemoveObjectFromAsset(script.cardTypeReference);
                 AssetDatabase.SaveAssets();
-                script.cardType = null;
+                script.cardTypeReference = null;
             }
         }
         else
         {
-            if(script.cardType!=null)
+            if(script.cardTypeReference != null)
             {
                 //delete the child asset
-                AssetDatabase.RemoveObjectFromAsset(script.cardType);
+                AssetDatabase.RemoveObjectFromAsset(script.cardTypeReference);
                 AssetDatabase.SaveAssets();
-                script.cardType = null;
+                script.cardTypeReference = null;
             }
 
             //var instance = Activator.CreateInstance((Type)type);
@@ -173,7 +181,7 @@ public class IdeaCardInspector : Editor
             AssetDatabase.SaveAssets();
 
             //cardType.objectReferenceValue = instance as CardTypes;
-            script.cardType = instance as CardTypes;
+            script.cardTypeReference = instance as CardTypes;
             EditorUtility.SetDirty(script);
         }
 

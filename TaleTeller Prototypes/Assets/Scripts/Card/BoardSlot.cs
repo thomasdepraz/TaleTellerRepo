@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraftSlot : MonoBehaviour
+public class BoardSlot : MonoBehaviour
      , IPointerEnterHandler
      , IPointerExitHandler
 {
     CardContainer _currentPlacedCard;
+    public int slotIndex;
     public CardContainer currentPlacedCard
     { 
         get => _currentPlacedCard;

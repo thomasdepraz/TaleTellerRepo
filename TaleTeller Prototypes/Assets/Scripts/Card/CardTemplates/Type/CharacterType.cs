@@ -30,42 +30,95 @@ public class CharacterType : CardTypes
     private int maxUseCount;
 
     #region Fighting Logic
-
-    List<IEnumerator> fightQueue;
-
     /// <summary>
     /// Fight logic between characters /with players. 
     /// </summary>
-    public void InitFightEvents() //All the fights gets added as an event in the board
+    public void InitFightEvents(EventQueue queue) //All the fights gets added as an event in the board //TODO Add multiple strke support
     {
         List <CharacterType> characters = GetFightingTargets();
-
-        for (int i = 0; i < characters.Count; i++)
-        {
-            CardManager.Instance.board.cardEventQueue.Add(FightVSCharacter(characters[i]));
-        }
 
         //if agressive add player to fighting list
         if(behaviour == CharacterBehaviour.Agressive)
         {
-            CardManager.Instance.board.cardEventQueue.Add(FightVSPlayer());
+            queue.events.Add(FightVSPlayer(queue));
+        }
+
+        for (int i = 0; i < characters.Count; i++)
+        {
+            queue.events.Add(FightVSCharacter(characters[i], queue));
         }
     }
+
     //Here is the actual fighting logic
-    IEnumerator FightVSPlayer()
+    IEnumerator FightVSPlayer(EventQueue currentQueue)
     {
-        //Le player se prend un coup
+        bool deathFinished = false;
+        
+
         Debug.Log("Castagne avec le perso");
-        yield return null;
-        CardManager.Instance.board.UpdateStoryQueue();
+
+        //Le character se prend un coup
+        stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        Debug.Log($"Character has {stats.baseLifePoints}");
+
+        yield return new WaitForSeconds(0.2f);
+
+        //Check s'il est encore en vie
+        if(stats.baseLifePoints <= 0)//Le character met un coup au player
+        {
+            EventQueue characterDeathQueue = new EventQueue();
+
+            CharacterDeath(ref deathFinished, true, characterDeathQueue); //No need to update the queue since it'll be cleaned
+
+            characterDeathQueue.StartQueue();
+
+            while(!characterDeathQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            currentQueue.UpdateQueue();
+        }
+        else
+        {
+
+            GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
+
+            //check for player death, if still alive then keep going
+
+            yield return new WaitForSeconds(0.2f);
+            currentQueue.UpdateQueue();
+        }
     }   
 
-    IEnumerator FightVSCharacter(CharacterType character)
+    IEnumerator FightVSCharacter(CharacterType character, EventQueue currentQueue)
     {
+        bool fightEnded = false;
+        EventQueue characterDeathQueue = new EventQueue();
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
-        yield return null;
-        CardManager.Instance.board.UpdateStoryQueue();
+        
+        character.stats.baseLifePoints -= stats.baseAttackDamage;
+        Debug.Log($"Other character has {character.stats.baseLifePoints}");
+        yield return new WaitForSeconds(0.2f);
+
+        if(character.stats.baseLifePoints <= 0)
+        {
+            character.CharacterDeath(ref fightEnded, false, characterDeathQueue);//<-- Add character to queue events
+        }
+        else
+        {
+            fightEnded = true;
+        }
+
+        characterDeathQueue.StartQueue();///<-- actually character death
+
+        while(!characterDeathQueue.resolved)//Wait 
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        currentQueue.UpdateQueue();
     }
 
     List<CharacterType> GetFightingTargets()
@@ -76,18 +129,99 @@ public class CharacterType : CardTypes
         switch (fightingRange)
         {
             case CharacterFightingRange.None:
+
                 break;
 
             case CharacterFightingRange.Left:
+                #region Left
+                if (data.currentContainer.currentSlot.slotIndex > 0)//Check if can grab left
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex - 1].currentPlacedCard;
+                    if (cardContainer !=null)//Check if thers a card left
+                    {
+                        if(cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if(cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
 
+                                if(otherCharacter.behaviour !=  behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
                 break;
-
             case CharacterFightingRange.Right:
+                #region Right
+                if (data.currentContainer.currentSlot.slotIndex < CardManager.Instance.board.slots.Count - 1)//Check if can grab right
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex + 1].currentPlacedCard;
+                    if (cardContainer != null)//Check if thers a card left
+                    {
+                        if (cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if (cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
 
+                                if (otherCharacter.behaviour != behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
                 break;
 
             case CharacterFightingRange.LeftAndRight:
+                #region Left
+                if (data.currentContainer.currentSlot.slotIndex > 0)//Check if can grab left
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex - 1].currentPlacedCard;
+                    if (cardContainer != null)//Check if thers a card left
+                    {
+                        if (cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if (cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
 
+                                if (otherCharacter.behaviour != behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+                #region Right
+                if (data.currentContainer.currentSlot.slotIndex < CardManager.Instance.board.slots.Count - 1)//Check if can grab right
+                {
+                    CardContainer cardContainer = CardManager.Instance.board.slots[data.currentContainer.currentSlot.slotIndex + 1].currentPlacedCard;
+                    if (cardContainer != null)//Check if thers a card left
+                    {
+                        if (cardContainer.data.cardType != null)//Check if theres a type
+                        {
+                            if (cardContainer.data.cardType.GetType() == typeof(CharacterType))//if cardtype of card is charactertype
+                            {
+                                CharacterType otherCharacter = cardContainer.data.cardType as CharacterType;
+
+                                if (otherCharacter.behaviour != behaviour)//if character have opposing behaviour
+                                {
+                                    characters.Add(otherCharacter);
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
                 break;
 
             default:
@@ -96,7 +230,51 @@ public class CharacterType : CardTypes
         return characters;
     }
 
+    void CharacterDeath(ref bool deathEnded, bool isCurrentCharacter, EventQueue currentQueue)
+    {
+        currentQueue.events.Add(CharacterDeathRoutine(deathEnded, isCurrentCharacter, currentQueue));
+    }
+
+    IEnumerator CharacterDeathRoutine(bool deathEnded, bool isCurrentCharacter, EventQueue currentQueue)
+    {
+        EventQueue discardQueue = new EventQueue();
+
+        // Manage character death card discard, card reset, events deletion
+        if (!isCurrentCharacter)
+        {
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+        }
+        else//If Im currently resolving this card event, the have to be cleared to prevent errors
+        {
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+            ClearCharacterEvents(discardQueue);//Add queue event 
+        }
+
+        discardQueue.StartQueue();
+
+        while(!discardQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        currentQueue.UpdateQueue();
+    }
+   
+    void ClearCharacterEvents(EventQueue queue)
+    {
+        queue.events.Add(ClearCharacterEventsRoutine(queue));
+    }
+
+    IEnumerator ClearCharacterEventsRoutine(EventQueue currentQueue)
+    {
+        //Clear events
+        yield return null;
+
+        CardManager.Instance.board.ClearEvents();
+        currentQueue.UpdateQueue();
+    }
     #endregion
+
     /// <summary>
     /// Update method of the useCount.
     /// </summary>
@@ -109,100 +287,70 @@ public class CharacterType : CardTypes
     {
         this.data = data;
 
+        //Init card effects
+        data.InitializeCardEffects(data);
+
         maxUseCount = useCount;
-        data.onStartEvent += OnStart;//This is temporary, normally nothing happens on the start event for a character type card
-        data.onEnterEvent += OnEnter;// Override onEnter to add fight triggers too
-        data.onEndEvent += OnEnd;
+
+        data.onCardEnter += OnEnter;// Override onEnter to add fight triggers too
     }
 
     #region Events
 
-    #region OnStart
-    public void OnStart()
-    {
-        //add to OnStartQueue
-        CardManager.Instance.board.onStartQueue.Add(OnStartRoutine());
-    }
-
-    private IEnumerator OnStartRoutine()
-    {
-        Debug.Log("Il");
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("se passe des trucs");
-
-
-        yield return new WaitForSeconds(0.5f);
-
-        //Unqueue
-        CardManager.Instance.board.UpdateOnStartQueue();
-    }
-    #endregion
 
     #region OnEnd (Return to hand / discard)
-    public void OnEnd()
+
+    public override void OnEnd(EventQueue queue)
     {
-        CardManager.Instance.board.onEndQueue.Add(OnEndRoutine());   
+        queue.events.Add(OnEndRoutine(queue));
     }
     //The On End Event of character is different since the use count update and it returns to the hand instead of going directly in the discard pile
-    private IEnumerator OnEndRoutine()
+    private IEnumerator OnEndRoutine(EventQueue currentQueue)
     {
-        bool routineEnded = false;
-
         //Return to hand but cannot push cards out of the hand
-        
+
         UpdateUseCount();//Maybe move this to onStartEvent 
+
+        EventQueue discardQueue = new EventQueue();
 
         if(useCount > 0)
         {
-            CardManager.Instance.board.ReturnCardToHand(data.currentContainer, false, ref routineEnded);
+            CardManager.Instance.board.ReturnCardToHand(data.currentContainer, false, discardQueue);//TODO implement the add to eventqueue part
         }
         else//No more uses so its discarded
         {
             useCount = maxUseCount;
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, ref routineEnded);
+            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);//TODO implement the add to eventqueue part
         }
 
+        discardQueue.StartQueue();//<-- The actual discard happens here
 
-
-        //yield return new WaitForSeconds(0.5f);
-        while(!routineEnded)//Wait while the action has not ended
+        while(!discardQueue.resolved)//Wait while the action has not ended
         {
             yield return new WaitForEndOfFrame();
         }
 
-
         //Unqueue
-        CardManager.Instance.board.UpdateOnEndQueue();
+        currentQueue.UpdateQueue();
     }
     #endregion
 
     #region OnEnter (Event Trigger + Fight)
-    void OnEnter()
+    void OnEnter(EventQueue queue)
     {
-        //add effects to board manager list
-        for (int i = 0; i < data.effects.Count; i++)
-        {
-            //Init effect that adds a routine to the manager list
+        ////add effects to board manager list <-- This is no longer needed normally
+        //for (int i = 0; i < data.effects.Count; i++)
+        //{
+        //    //Init effect that adds a routine to the manager list
 
-            CardManager.Instance.board.cardEffectQueue.Add(tempEffect());//THIS IS TEMPORARY
-        }
+        //    CardManager.Instance.board.currentQueue.Add(tempEffect());//THIS IS TEMPORARY
+        //}
 
         //CardManager.Instance.board.cardEffectQueue.Add(EffectTrigger());
 
-        InitFightEvents();
-    }
-    IEnumerator EffectTrigger()
-    {
-        yield return null;
-        //UpdateStoryQueue
+        InitFightEvents(queue);
     }
 
-    IEnumerator tempEffect()
-    {
-        Debug.Log("Trigger Effect");
-        yield return null;
-        CardManager.Instance.board.UpdateStoryQueue();
-    }
     #endregion
 
     #endregion

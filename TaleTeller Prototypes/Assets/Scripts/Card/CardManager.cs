@@ -10,11 +10,13 @@ public class CardManager : Singleton<CardManager>
     [Header("References")]
     public Deck cardDeck;
     public Hand cardHand;
-    public DraftBoard board;
+    public Board board;
 
     public ManaSystem manaSystem;
 
-    [HideInInspector] public DraftSlot currentHoveredSlot;
+    public CardPicker cardPicker;
+
+    [HideInInspector] public BoardSlot currentHoveredSlot;
     [HideInInspector] public bool holdingCard;
     [HideInInspector] public CardContainer currentCard;
     [HideInInspector] public CardContainer hoveredCard;

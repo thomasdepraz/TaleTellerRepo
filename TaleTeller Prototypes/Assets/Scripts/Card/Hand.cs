@@ -23,27 +23,47 @@ public class Hand : MonoBehaviour
                 }
 
                 currentHand.Add(hiddenHand[i]);
-                hiddenHand[i].CardInit(data);
+                hiddenHand[i].InitializeContainer(data);
 
                 break;
             }
         }
     }
 
-    public void DiscardAllHand()
+    public void DiscardAllHand()//TODO Implement queuing system
     {
         int cachedCount = currentHand.Count;
         for (int i = 0; i < cachedCount; i++)
         {
             CardManager.Instance.cardDeck.discardPile.Add(currentHand[0].data);
-            currentHand[0].ResetCard();
+            currentHand[0].ResetContainer();
         }
     }
 
-    public void DiscardCardFromHand(CardContainer card)
+    public void DiscardCardFromHand(CardContainer card, EventQueue queue)
     {
+        queue.events.Add(DiscardCardFromHandRoutine(card, queue));
+    }
+    IEnumerator DiscardCardFromHandRoutine(CardContainer card, EventQueue queue)
+    {
+        yield return null;
+        card.data = card.data.ResetData(card.data);
+
+        currentHand.Remove(card);
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
-        card.ResetCard();
+        card.ResetContainer();
+
+        queue.UpdateQueue();
+    }
+
+    public List<CardData> GetHandDataList()
+    {
+        List<CardData> result = new List<CardData>();
+        for (int i = 0; i < currentHand.Count; i++)
+        {
+            result.Add(currentHand[i].data);
+        }
+        return result;
     }
 
     #region Visuals

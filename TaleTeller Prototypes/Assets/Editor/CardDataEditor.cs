@@ -14,7 +14,7 @@ public class CardDataEditor : Editor
     private void OnEnable()
     {
         script = target as CardData;
-        effectList = serializedObject.FindProperty(nameof(script.effects));
+        effectList = serializedObject.FindProperty(nameof(script.effectsReferences));
     }
 
     public override void OnInspectorGUI()
@@ -27,13 +27,13 @@ public class CardDataEditor : Editor
         if(GUILayout.Button("AddEffect"))
         {
             GenericMenu menu = new GenericMenu();
-            List<Type> effectTypes = EffectManager.GetSubClasses(typeof(Effect));
+            List<Type> effectTypes = UtilityClass.GetSubClasses(typeof(Effect));
             for (int i = 0; i < effectTypes.Count; i++)
             {
-                if(EffectManager.HasSubClasses(effectTypes[i]))
+                if(UtilityClass.HasSubClasses(effectTypes[i]))
                 {
                     menu.AddSeparator("");
-                    List<Type> nestedTypes = EffectManager.GetSubClasses(effectTypes[i]);
+                    List<Type> nestedTypes = UtilityClass.GetSubClasses(effectTypes[i]);
                     for (int j = 0; j < nestedTypes.Count; j++)
                     {
                         AddMenuItem(menu, effectTypes[i].Name + "/" + nestedTypes[j].Name, nestedTypes[j]);
@@ -61,6 +61,6 @@ public class CardDataEditor : Editor
     void OnTypeSelected(object type)
     {
         var instance = Activator.CreateInstance((Type)type);
-        script.effects.Add(instance as Effect);
+        script.effectsReferences.Add(instance as Effect);
     }
 }
