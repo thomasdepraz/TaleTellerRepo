@@ -63,15 +63,16 @@ public class Board : MonoBehaviour
     {
         currentSlot = slotIndex;
         Debug.Log($"Reading slot number {slotIndex}");
+        var currentPlacedCard = slots[slotIndex - 1].currentPlacedCard;
 
-        if(slots[slotIndex - 1].currentPlacedCard != null)
+        if (currentPlacedCard != null)
         {
             EventQueue onEnterQueue = new EventQueue();
 
             //Make a list of effect event and card type related events by trigger the enter card event
-            if(slots[slotIndex-1].currentPlacedCard.data.onCardEnter !=null)
+            if(currentPlacedCard.data.onCardEnter !=null)
             {
-                slots[slotIndex-1].currentPlacedCard.data.onCardEnter(onEnterQueue);
+                currentPlacedCard.data.onCardEnter(onEnterQueue, currentPlacedCard.data);
             }
 
             //go through them if any

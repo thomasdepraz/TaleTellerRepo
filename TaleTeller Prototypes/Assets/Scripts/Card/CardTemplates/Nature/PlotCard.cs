@@ -48,11 +48,11 @@ public class PlotCard : CardData
     }
 
 
-    public void OnPlotAppear(EventQueue queue)
+    public void OnPlotAppear(EventQueue queue, CardData data)
     {
-        queue.events.Add(OnPlotAppearRoutine(queue));
+        queue.events.Add(OnPlotAppearRoutine(queue, data));
     }
-    IEnumerator OnPlotAppearRoutine(EventQueue currentQueue)
+    IEnumerator OnPlotAppearRoutine(EventQueue currentQueue, CardData data)
     {
         yield return null;
 

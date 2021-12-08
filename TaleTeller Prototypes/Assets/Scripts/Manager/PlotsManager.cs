@@ -95,7 +95,7 @@ public class PlotsManager : Singleton<PlotsManager>
             for (int i = 0; i < pickedCards.Count; i++)
             {
                 currentPickedCard = pickedCards[i]; //<-- This doesn't work if more than one pickedCard TODO fix this
-                pickedCards[i].onCardAppear(appearQueue); //This manages the appear animation + all the junk apparition
+                pickedCards[i].onCardAppear(appearQueue, pickedCards[i]); //This manages the appear animation + all the junk apparition
 
                 secondaryPlots.Remove(pickedCards[i]); //TEMP  
             }
