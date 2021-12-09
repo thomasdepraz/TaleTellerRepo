@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59ee393ba15f1f34a92c1ee1a2a0f5ee, type: 3}
-  m_Name: New Plot Scheme
+  m_Name: Scheme_APriestisAlwaysTrustable
   m_EditorClassIdentifier: 
   schemeSteps:
   - stepOptions:
-    - {fileID: 11400000, guid: e984671dec79a134ba92511588a01c83, type: 2}
+    - {fileID: 0}
   - stepOptions:
-    - {fileID: 11400000, guid: 5c3f88c9be9df8343be9573191d37aa6, type: 2}
-    - {fileID: 11400000, guid: 5c3f88c9be9df8343be9573191d37aa6, type: 2}
-  currentStep: 2
+    - {fileID: 0}
+    - {fileID: 0}
+  - stepOptions:
+    - {fileID: 0}
+    - {fileID: 0}
+  - stepOptions:
+    - {fileID: 0}
+  currentStep: 0

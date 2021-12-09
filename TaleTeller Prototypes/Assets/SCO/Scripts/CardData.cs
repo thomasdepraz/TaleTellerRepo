@@ -26,6 +26,7 @@ public enum CardType
 
 public enum CardRarity
 {
+    None,
     Common, 
     Rare, 
     Epic, 
@@ -86,11 +87,14 @@ public class CardData : ScriptableObject
     public BoardEvent onTurnEnd;
     public BoardEvent onTurnStart;
 
-    public delegate void CardEvent(EventQueue queue);
+    public delegate void CardEvent(EventQueue queue, CardData data);
     public CardEvent onCardEnter;
     public CardEvent onCardDraw;
     public CardEvent onCardDiscard;
     public CardEvent onCardAppear;
+
+    public CardEvent onCharDeath;
+    public CardEvent onCharFight;
 
 
     //This is how a base card will be initialized (It's meant to be overwritten)
@@ -230,6 +234,13 @@ public class CardData : ScriptableObject
             foreach (var myDelegate in cardToReset.onCardDiscard.GetInvocationList())
             {
                 cardToReset.onCardDiscard -= myDelegate as CardEvent;
+            }
+        }
+        if (cardToReset.onCharDeath != null)
+        {
+            foreach (var myDelegate in cardToReset.onCharDeath.GetInvocationList())
+            {
+                cardToReset.onCharDeath -= myDelegate as CardEvent;
             }
         }
     }

@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7635018581271308197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17430c77a01b7740928049b6e858498, type: 3}
+  m_Name: PlotObjective_TheophilusThePriestObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: Defeat the Demon while Theophilus is on the next step.
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: d62fbd32af1194a4ba300dbc8377c052, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: 01_TheophiliusThePriest
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: TheophiliusThePriest
+  rarity: 0
+  archetype: 0
+  isKeyCard: 0
+  keyCardActivated: 0
+  interestCooldown: 0
+  currentInterestCooldown: 0
+  creativityBurn: 0
+  type: 0
+  characterBehaviour: 0
+  characterStats:
+    baseLifePoints: 0
+    baseAttackDamage: 0
+  trigger: 0
+  creativityCost: 3
+  effect: {fileID: 0}
+  deadCardEffect: {fileID: 0}
+  cardGraph: {fileID: 0}
+  feedback: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: Defeat the Demon while Theophilus is on the next step.
+  effectsReferences: []
+  effects: []
+  cardTypeReference: {fileID: 5556898286618832836}
+  cardType: {fileID: 0}
+  objective: {fileID: -7635018581271308197}
+  completionTimer: 2
+  isMainPlot: 1
+  isFinal: 0
+--- !u!114 &5556898286618832836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 10
+    baseAttackDamage: 3
+  behaviour: 1
+  fightingRange: 3
+  useCount: 2

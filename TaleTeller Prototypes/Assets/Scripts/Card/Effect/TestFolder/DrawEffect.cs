@@ -12,7 +12,7 @@ public class DrawEffect : BonusEffect
         values.Add(drawValue);
     }
 
-    public override IEnumerator EffectLogic(EventQueue currentQueue)
+    public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
         EventQueue drawQueue = new EventQueue();
 
