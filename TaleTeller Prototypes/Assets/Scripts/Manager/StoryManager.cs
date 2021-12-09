@@ -11,9 +11,6 @@ public class StoryManager : Singleton<StoryManager>
     public List<EventQueue> queueList = new List<EventQueue>();//THIS IS FOR DEBUG
     [HideInInspector] public List<CardData> cardsToDestroy = new List<CardData>();
 
-
-
-
     [Header("References")]
     public Image fadePanel;
 

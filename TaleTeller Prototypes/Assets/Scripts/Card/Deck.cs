@@ -128,7 +128,6 @@ public class Deck : MonoBehaviour
     }
     IEnumerator DealRoutine(EventQueue queue, CardData card)
     {
-        EventQueue dealQueue = new EventQueue();
         CardData dealtCard;
 
         if (card != null)
@@ -140,6 +139,19 @@ public class Deck : MonoBehaviour
             dealtCard = cardDeck[0];
         }
 
+        #region Event OnCardDraw
+        EventQueue onCardDrawQueue = new EventQueue();
+        if (dealtCard.onCardDraw != null)
+            dealtCard.onCardDraw(onCardDrawQueue);
+        onCardDrawQueue.StartQueue();
+        while(!onCardDrawQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion 
+
+
+        EventQueue dealQueue = new EventQueue();
         //TODO make the following logic in the queue so it can be animated-----------------
         CardManager.Instance.cardHand.InitCard(dealtCard);
 
