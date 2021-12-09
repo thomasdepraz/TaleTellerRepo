@@ -321,7 +321,6 @@ public class CharacterType : CardTypes
 
     #region Events
 
-
     #region OnEnd (Return to hand / discard)
 
     public override void OnEnd(EventQueue queue)

@@ -9,20 +9,6 @@ public enum CharacterBehaviour //TO MOVE
     Peaceful, 
     Agressive
 }
-public enum CardEventTrigger//DEPRECATED
-{
-    None, 
-    OnEncounter,
-    OnDeath, 
-    OnAppear
-}
-
-public enum CardType
-{
-    Character, 
-    Object, 
-    Location
-}//DEPRECATED
 
 public enum CardRarity
 {
@@ -48,23 +34,8 @@ public class CardData : ScriptableObject
     public CardRarity rarity;
     public Archetype archetype;
 
-    //DEPRECATED
-    public bool isKeyCard;
-    [HideInInspector] public bool keyCardActivated;
-    public int interestCooldown;
-    [HideInInspector] public int currentInterestCooldown;
-    public int creativityBurn;
-    public CardType type;
-    public CharacterBehaviour characterBehaviour;
-    public CharacterStats characterStats;
-    //---
-
-    public CardEventTrigger trigger;
-    public int creativityCost;//CHANGE NAME
-    public CardEffect effect;//DEPR
-    public CardEffect deadCardEffect;//DEPRE
+    public int manaCost;
     public Sprite cardGraph;
-    [HideInInspector] public CardFeedback feedback;//DEPR
     public CardContainer currentContainer;
 
     [TextArea(2, 3)]
@@ -141,11 +112,6 @@ public class CardData : ScriptableObject
         }
 
         currentQueue.UpdateQueue();
-    }
-
-    public void ResetCharacterStats()
-    {
-        characterStats.Reset();
     }
 
     public void InitializeCardEffects(CardData data)

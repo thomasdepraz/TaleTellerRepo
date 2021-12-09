@@ -29,7 +29,7 @@ public class IdeaCardInspector : Editor
         cardDataReference = serializedObject.FindProperty(nameof(script.dataReference));
         cardType = serializedObject.FindProperty(nameof(script.cardTypeReference));
         cardName = serializedObject.FindProperty(nameof(script.cardName));
-        cardCost = serializedObject.FindProperty(nameof(script.creativityCost));
+        cardCost = serializedObject.FindProperty(nameof(script.manaCost));
         cardRarity = serializedObject.FindProperty(nameof(script.rarity));
         cardArchetype = serializedObject.FindProperty(nameof(script.archetype));
         cardGraph = serializedObject.FindProperty(nameof(script.cardGraph));

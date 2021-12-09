@@ -29,10 +29,18 @@ public class LastFight : Effect
 
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
+        CharacterType character = linkedData.cardType as CharacterType;
         if (foughtHeroLast)
-            GameManager.Instance.currentHero.lifePoints -= linkedData.characterStats.baseAttackDamage;
+        {
+
+            GameManager.Instance.currentHero.lifePoints -= character.stats.baseAttackDamage;//TODO Implement queuing for feedback
+        }
         else if(lastCharFought != null)
-            lastCharFought.characterStats.baseLifePoints -= linkedData.characterStats.baseAttackDamage;
+        {
+            CharacterType other = lastCharFought.cardType as CharacterType;
+
+            other.stats.baseLifePoints -= character.stats.baseAttackDamage;
+        }
 
         yield return null;
         currentQueue.UpdateQueue();
