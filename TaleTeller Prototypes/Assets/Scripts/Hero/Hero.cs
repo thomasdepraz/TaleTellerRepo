@@ -12,12 +12,15 @@ public class Hero : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI heroHpUI;
     public TextMeshProUGUI heroAttackUI;
+    public TextMeshProUGUI heroGoldUI;
 
     //Private hero variables
     private int _maxLifePoints;
     private int _lifePoints;
     private int _attackDamage;
     private int _bonusDamage;
+    private int _maxGoldPoints;
+    private int _goldPoints;
     [HideInInspector]public int maxLifePoints
     { 
         get => _maxLifePoints ; 
@@ -74,6 +77,32 @@ public class Hero : MonoBehaviour
 
     [HideInInspector]public int armor;
 
+    [HideInInspector]public int maxGoldPoints
+    {
+        get => _maxGoldPoints;
+        set
+        {
+            _maxGoldPoints = value;
+            heroGoldUI.text = goldPoints + "/" + value.ToString();
+        }
+    }
+
+    [HideInInspector]public int goldPoints
+    {
+        get => _goldPoints;
+        set
+        {
+            _goldPoints = value;
+            
+
+            if (_goldPoints > maxGoldPoints)
+                _goldPoints = maxGoldPoints;
+            else if (_goldPoints < 0)
+                _goldPoints = 0;
+
+            heroGoldUI.text = goldPoints.ToString() + "/" + maxGoldPoints;
+        }
+    }
 
     public void InitializeHero()
     {
@@ -82,6 +111,8 @@ public class Hero : MonoBehaviour
         attackDamage = heroData.baseAttackDamage;
         armor = 0;
         bonusDamage = 0;
+        goldPoints = heroData.baseGold;
+        maxGoldPoints = heroData.baseMaxGold;
 
         //Initialize graphics on story line
     }

@@ -60,7 +60,7 @@ public enum EffectValueOperator
 [System.Serializable]
 public class EffectValue
 {
-    public float value;
+    public int value;
     public EffectValueType type;
     public EffectValueOperator op;
 }
