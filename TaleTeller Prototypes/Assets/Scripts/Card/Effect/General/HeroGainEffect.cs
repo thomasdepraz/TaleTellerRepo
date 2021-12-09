@@ -13,7 +13,7 @@ public class HeroSmallChangeEffect : BonusEffect
         values.Add(gainValue);
     }
 
-    public override IEnumerator EffectLogic(EventQueue currentQueue)
+    public override IEnumerator EffectLogic(EventQueue currentQueue, CardData cardData = null)
     {
         Debug.Log("Hero Gain Effect");
         yield return null;
