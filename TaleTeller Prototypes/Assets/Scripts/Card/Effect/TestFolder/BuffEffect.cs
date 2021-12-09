@@ -13,7 +13,7 @@ public class BuffEffect : BonusEffect
         values.Add(buffValue);
     }
 
-    public override IEnumerator EffectLogic(EventQueue currentQueue)
+    public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
         Debug.Log("Buff Effect");
         yield return null;

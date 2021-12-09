@@ -12,7 +12,7 @@ public class DCEffect : MalusEffect
         values.Add(discardValue);
     }
 
-    public override IEnumerator EffectLogic(EventQueue currentQueue)
+    public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
         EventQueue discardQueue = new EventQueue();
 
