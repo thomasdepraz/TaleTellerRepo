@@ -261,26 +261,29 @@ public class CharacterType : CardTypes
             yield return new WaitForEndOfFrame();
         }
 
-        EventQueue discardQueue = new EventQueue();
-
-        // Manage character death card discard, card reset, events deletion
-        if (!isCurrentCharacter)
+        if (CardManager.Instance.board.IsCardOnBoard(data))
         {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
-        }
-        else//If Im currently resolving this card event, the have to be cleared to prevent errors
-        {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
-            ClearCharacterEvents(discardQueue);//Add queue event 
-        }
+            EventQueue discardQueue = new EventQueue();
 
-        discardQueue.StartQueue();
+            // Manage character death card discard, card reset, events deletion
+            if (!isCurrentCharacter)
+            {
+                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+            }
+            else//If Im currently resolving this card event, the have to be cleared to prevent errors
+            {
+                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+                ClearCharacterEvents(discardQueue);//Add queue event 
+            }
 
-        while(!discardQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
+            discardQueue.StartQueue();
+
+            while (!discardQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
-
+       
         currentQueue.UpdateQueue();
     }
    

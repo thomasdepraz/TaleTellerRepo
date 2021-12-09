@@ -189,6 +189,7 @@ public class StoryManager : Singleton<StoryManager>
     public void HeroLifeFeedback(float value)
     {
         print(value);
+        
         if(value<0)
         {
             //Damage

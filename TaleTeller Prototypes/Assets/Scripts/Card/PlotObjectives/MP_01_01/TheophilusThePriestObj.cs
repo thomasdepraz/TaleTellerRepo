@@ -11,19 +11,25 @@ public class TheophilusThePriestObj : PlotObjective
         //Subscribe UpdateStatus to junk death
         foreach(var junk in data.objective.linkedJunkedCards)
             junk.onCharDeath += UpdateStatus;
+            
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)
     {
         //Test if the junk that trigger the StatusUpdate is next to the plot card
-        bool isNextToJunk =
-            (data.currentContainer.currentSlot.slotIndex - 1 == linkedPlotData.currentContainer.currentSlot.slotIndex)
-            || (data.currentContainer.currentSlot.slotIndex + 1 == linkedPlotData.currentContainer.currentSlot.slotIndex);
+        int slotDistance = 0;
 
-        if (isNextToJunk)
+        if (linkedPlotData.currentContainer.currentSlot != null)
+            slotDistance = Mathf.Abs(linkedPlotData.currentContainer.currentSlot.slotIndex - data.currentContainer.currentSlot.slotIndex);
+
+        if (slotDistance == 1)
         {
             //If so, complet plot
             EventQueue completeQueue = new EventQueue();
+
+            linkedPlotData.CompletePlot(completeQueue);
+            completeQueue.StartQueue();
+
             while (!completeQueue.resolved)
                 yield return new WaitForEndOfFrame();
         }

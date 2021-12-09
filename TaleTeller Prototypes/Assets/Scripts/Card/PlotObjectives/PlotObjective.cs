@@ -14,15 +14,15 @@ public class PlotObjective : ScriptableObject
     {
         linkedPlotData = data;
 
-        //Subscribe objectiveUpdate to the related event 
-        SubscribeUpdateStatus(data);
-
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
             objective.linkedJunkedCards[i] = objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]) as JunkCard;
             objective.linkedJunkedCards[i].objective = objective;
             objective.linkedJunkedCards[i].objectiveIndex = i;
         }
+
+        //Subscribe objectiveUpdate to the related event 
+        SubscribeUpdateStatus(data);
     }
 
     //THIS IS THE GENERIC RULE

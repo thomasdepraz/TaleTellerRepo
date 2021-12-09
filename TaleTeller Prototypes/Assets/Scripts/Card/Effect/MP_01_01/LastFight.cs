@@ -32,10 +32,9 @@ public class LastFight : Effect
         CharacterType character = linkedData.cardType as CharacterType;
         if (foughtHeroLast)
         {
-
             GameManager.Instance.currentHero.lifePoints -= character.stats.baseAttackDamage;//TODO Implement queuing for feedback
         }
-        else if(lastCharFought != null)
+        else if (lastCharFought != null)
         {
             CharacterType other = lastCharFought.cardType as CharacterType;
 

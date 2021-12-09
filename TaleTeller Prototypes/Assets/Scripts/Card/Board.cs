@@ -322,5 +322,15 @@ public class Board : MonoBehaviour
         }
         return true;
     }
+
+    public bool IsCardOnBoard(CardData data)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].currentPlacedCard == data)
+                return true;
+        }
+        return false;
+    }
     #endregion
 }
