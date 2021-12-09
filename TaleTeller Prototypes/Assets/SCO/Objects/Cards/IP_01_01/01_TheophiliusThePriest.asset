@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PlotObjective_TheophilusThePriestObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
-  linkedJunkedCards: []
+  objectiveName: Defeat the Demon while Theophilus is on the next step.
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: d62fbd32af1194a4ba300dbc8377c052, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,13 +49,13 @@ MonoBehaviour:
   cardGraph: {fileID: 0}
   feedback: {fileID: 0}
   currentContainer: {fileID: 0}
-  description: 
+  description: Defeat the Demon while Theophilus is on the next step.
   effectsReferences: []
   effects: []
   cardTypeReference: {fileID: 5556898286618832836}
   cardType: {fileID: 0}
-  objective: {fileID: 0}
-  completionTimer: 0
+  objective: {fileID: -7635018581271308197}
+  completionTimer: 2
   isMainPlot: 1
   isFinal: 0
 --- !u!114 &5556898286618832836
@@ -71,8 +72,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 0
-    baseAttackDamage: 0
-  behaviour: 0
-  fightingRange: 0
-  useCount: 0
+    baseLifePoints: 10
+    baseAttackDamage: 3
+  behaviour: 1
+  fightingRange: 3
+  useCount: 2

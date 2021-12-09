@@ -54,6 +54,8 @@ public class CharacterType : CardTypes
     {
         Debug.Log("Castagne avec le perso");
 
+        if (data.onCharFight != null) data.onCharFight(currentQueue, null);
+
         //Le character se prend un coup
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
         Debug.Log($"Character has {stats.baseLifePoints}");
@@ -91,6 +93,9 @@ public class CharacterType : CardTypes
     IEnumerator FightVSCharacter(CharacterType character, EventQueue currentQueue)
     {
         EventQueue characterDeathQueue = new EventQueue();
+
+        if (data.onCharFight != null) data.onCharFight(currentQueue, character.data);
+
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
         

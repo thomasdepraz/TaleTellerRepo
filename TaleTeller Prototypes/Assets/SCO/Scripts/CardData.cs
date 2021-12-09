@@ -92,7 +92,9 @@ public class CardData : ScriptableObject
     public CardEvent onCardDraw;
     public CardEvent onCardDiscard;
     public CardEvent onCardAppear;
+
     public CardEvent onCharDeath;
+    public CardEvent onCharFight;
 
 
     //This is how a base card will be initialized (It's meant to be overwritten)
