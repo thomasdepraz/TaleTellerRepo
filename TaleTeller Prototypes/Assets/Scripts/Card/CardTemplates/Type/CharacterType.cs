@@ -54,7 +54,15 @@ public class CharacterType : CardTypes
     {
         Debug.Log("Castagne avec le perso");
 
+        #region ONCHARFIGHT Event
+        EventQueue onCharFightQueue = new EventQueue();
         if (data.onCharFight != null) data.onCharFight(currentQueue, null);
+        onCharFightQueue.StartQueue();
+        while (!onCharFightQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion
 
         //Le character se prend un coup
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
@@ -92,9 +100,16 @@ public class CharacterType : CardTypes
 
     IEnumerator FightVSCharacter(CharacterType character, EventQueue currentQueue)
     {
-        EventQueue characterDeathQueue = new EventQueue();
-
+        #region ONCHARFIGHT Event
+        EventQueue onCharFightQueue = new EventQueue();
         if (data.onCharFight != null) data.onCharFight(currentQueue, character.data);
+        onCharFightQueue.StartQueue();
+        while(!onCharFightQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion
+
 
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
@@ -102,6 +117,8 @@ public class CharacterType : CardTypes
         character.stats.baseLifePoints -= stats.baseAttackDamage;
         Debug.Log($"Other character has {character.stats.baseLifePoints}");
         yield return new WaitForSeconds(0.2f);
+
+        EventQueue characterDeathQueue = new EventQueue();
 
         if(character.stats.baseLifePoints <= 0)
         {
