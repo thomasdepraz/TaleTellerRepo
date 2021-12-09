@@ -142,7 +142,7 @@ public class Deck : MonoBehaviour
         #region Event OnCardDraw
         EventQueue onCardDrawQueue = new EventQueue();
         if (dealtCard.onCardDraw != null)
-            dealtCard.onCardDraw(onCardDrawQueue);
+            dealtCard.onCardDraw(onCardDrawQueue, dealtCard);
         onCardDrawQueue.StartQueue();
         while(!onCardDrawQueue.resolved)
         {
