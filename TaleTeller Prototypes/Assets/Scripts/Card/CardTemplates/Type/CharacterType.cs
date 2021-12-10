@@ -23,11 +23,13 @@ public class CharacterType : CardTypes
 
     public CharacterFightingRange fightingRange;
 
+    public bool doubleStrike;
     /// <summary>
     /// How many times the player is able to use the card.
     /// </summary>
     public int useCount;
     private int maxUseCount;
+    
 
     #region Fighting Logic
     /// <summary>
@@ -89,10 +91,13 @@ public class CharacterType : CardTypes
         }
         else
         {
+            int hitCount = doubleStrike ? 2:1;
 
-            GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
-
-            //check for player death, if still alive then keep going
+            for (int i = 0; i < hitCount; i++)
+            {
+                GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
+                //check for player death, if still alive then keep going
+            }
 
             yield return new WaitForSeconds(0.2f);
             currentQueue.UpdateQueue();
@@ -117,7 +122,13 @@ public class CharacterType : CardTypes
 
         //---Encapsulate hit event into a queue for feedback and specifique effects
         EventQueue characterHitQueue = new EventQueue();
-        character.stats.baseLifePoints -= stats.baseAttackDamage;
+        int hitCount = doubleStrike ? 2 : 1;
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            character.stats.baseLifePoints -= stats.baseAttackDamage;
+        }
+        
         data.currentContainer.UpdateCharacterInfo(this);
 
         //Starting the hit Queue
