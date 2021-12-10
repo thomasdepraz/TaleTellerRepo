@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
-  m_Name: 01_TheophiliusThePriest
+  m_Name: 01_PriestTheophilius
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: TheophiliusThePriest

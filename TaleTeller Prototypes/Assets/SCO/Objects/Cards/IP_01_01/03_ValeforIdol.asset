@@ -40,7 +40,7 @@ MonoBehaviour:
   effects: []
   cardTypeReference: {fileID: -5860912044501747805}
   cardType: {fileID: 0}
-  objective: {fileID: 0}
+  objective: {fileID: 7234870132704495972}
   completionTimer: 3
   isMainPlot: 1
   isFinal: 0
@@ -80,6 +80,9 @@ MonoBehaviour:
   m_Name: PlotObjective_ValeforIdolObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
-  linkedJunkedCards: []
-  killObjective: 0
+  objectiveName: 'Defeat the 3 Valefor''s replicas. '
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
+  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
+  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
+  killObjective: 3
