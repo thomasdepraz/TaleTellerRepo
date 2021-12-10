@@ -258,15 +258,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
   - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
   - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
-  - {fileID: 11400000, guid: 6d2d6a4ac2ff26540ad955717d849ea1, type: 2}
-  - {fileID: 11400000, guid: 73e473b54dfcae04292153c82f9b0d2e, type: 2}
-  - {fileID: 11400000, guid: 73e473b54dfcae04292153c82f9b0d2e, type: 2}
-  - {fileID: 11400000, guid: e92f18980cd8228439f1f7b7a3219d07, type: 2}
-  - {fileID: 11400000, guid: e92f18980cd8228439f1f7b7a3219d07, type: 2}
-  - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
-  - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
-  - {fileID: 11400000, guid: e92f18980cd8228439f1f7b7a3219d07, type: 2}
-  - {fileID: 11400000, guid: e92f18980cd8228439f1f7b7a3219d07, type: 2}
   discardPile: []
   drawAmount: 3
   drawAmountFirstTurn: 5
@@ -4524,7 +4515,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.9
+  m_fontSize: 34.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
