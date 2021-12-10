@@ -113,8 +113,21 @@ public class CharacterType : CardTypes
 
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
-        
+
+        //---Encapsulate hit event into a queue for feedback and specifique effects
+        EventQueue characterHitQueue = new EventQueue();
         character.stats.baseLifePoints -= stats.baseAttackDamage;
+
+        //Starting the hit Queue
+        if (character.data.onCharHit != null) character.data.onCharHit(characterHitQueue, data);
+        characterHitQueue.StartQueue();
+
+        while (!characterHitQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //---
+
         Debug.Log($"Other character has {character.stats.baseLifePoints}");
         yield return new WaitForSeconds(0.2f);
 
@@ -244,7 +257,7 @@ public class CharacterType : CardTypes
         return characters;
     }
 
-    void CharacterDeath(bool isCurrentCharacter, EventQueue currentQueue)
+    public void CharacterDeath(bool isCurrentCharacter, EventQueue currentQueue)
     {
         currentQueue.events.Add(CharacterDeathRoutine(isCurrentCharacter, currentQueue));
     }

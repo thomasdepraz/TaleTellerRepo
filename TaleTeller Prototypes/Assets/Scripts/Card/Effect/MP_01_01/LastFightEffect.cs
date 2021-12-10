@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LastFight : Effect
+/// <summary>
+/// Remi Secher - 12/10/2021 00:46 - Creation
+/// </summary>
+
+public class LastFightEffect : Effect
 {
     private CardData lastCharFought = null;
     private bool foughtHeroLast = false;

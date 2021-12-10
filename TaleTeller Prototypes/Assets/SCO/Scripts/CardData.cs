@@ -66,6 +66,7 @@ public class CardData : ScriptableObject
 
     public CardEvent onCharDeath;
     public CardEvent onCharFight;
+    public CardEvent onCharHit;
 
 
     //This is how a base card will be initialized (It's meant to be overwritten)
@@ -207,6 +208,20 @@ public class CardData : ScriptableObject
             foreach (var myDelegate in cardToReset.onCharDeath.GetInvocationList())
             {
                 cardToReset.onCharDeath -= myDelegate as CardEvent;
+            }
+        }
+        if(cardToReset.onCharFight != null)
+        {
+            foreach (var myDelegate in cardToReset.onCharFight.GetInvocationList())
+            {
+                cardToReset.onCharFight -= myDelegate as CardEvent;
+            }
+        }
+        if (cardToReset.onCharHit != null)
+        {
+            foreach (var myDelegate in cardToReset.onCharHit.GetInvocationList())
+            {
+                cardToReset.onCharHit -= myDelegate as CardEvent;
             }
         }
     }
