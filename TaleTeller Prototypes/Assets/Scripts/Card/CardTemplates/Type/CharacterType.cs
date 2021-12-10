@@ -66,6 +66,7 @@ public class CharacterType : CardTypes
 
         //Le character se prend un coup
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        data.currentContainer.UpdateCharacterInfo(this);
         Debug.Log($"Character has {stats.baseLifePoints}");
 
         yield return new WaitForSeconds(0.2f);
@@ -117,6 +118,7 @@ public class CharacterType : CardTypes
         //---Encapsulate hit event into a queue for feedback and specifique effects
         EventQueue characterHitQueue = new EventQueue();
         character.stats.baseLifePoints -= stats.baseAttackDamage;
+        data.currentContainer.UpdateCharacterInfo(this);
 
         //Starting the hit Queue
         if (character.data.onCharHit != null) character.data.onCharHit(characterHitQueue, data);
@@ -321,6 +323,7 @@ public class CharacterType : CardTypes
     public void UpdateUseCount()
     {
         useCount--;
+        data.currentContainer.UpdateCharacterInfo(this);
     }
 
     public override void InitType(CardData data)

@@ -63,6 +63,18 @@ public class CardContainer : MonoBehaviour
         if(!isPlaceHolder)
             data.currentContainer = this;
 
+        if(data.cardType!= null && data.cardType.GetType() == typeof(CharacterType))//If Character
+        {
+            CharacterType character = data.cardType as CharacterType;
+            attackUI.SetActive(true);
+            healthUI.SetActive(true);
+            //timerUI.SetActive(true);
+
+            attackText.text = character.stats.baseAttackDamage.ToString();
+            healthText.text = character.stats.baseLifePoints.ToString();
+            //timerText.text = character.useCount.ToString();
+        }
+
 
         //load Data and activate gameobject
         basePosition = transform.position;
@@ -395,5 +407,19 @@ public class CardContainer : MonoBehaviour
             #endregion
         }
     }
+    #endregion
+
+    #region Utility
+    public void UpdateCharacterInfo(CharacterType character)
+    {
+        attackUI.SetActive(true);
+        healthUI.SetActive(true);
+        //timerUI.SetActive(true);
+
+        attackText.text = character.stats.baseAttackDamage.ToString();
+        healthText.text = character.stats.baseLifePoints.ToString();
+        //timerText.text = character.useCount.ToString();
+    }
+
     #endregion
 }
