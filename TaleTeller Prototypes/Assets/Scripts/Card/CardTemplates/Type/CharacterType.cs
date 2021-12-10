@@ -54,7 +54,15 @@ public class CharacterType : CardTypes
     {
         Debug.Log("Castagne avec le perso");
 
+        #region ONCHARFIGHT Event
+        EventQueue onCharFightQueue = new EventQueue();
         if (data.onCharFight != null) data.onCharFight(currentQueue, null);
+        onCharFightQueue.StartQueue();
+        while (!onCharFightQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion
 
         //Le character se prend un coup
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
@@ -92,16 +100,38 @@ public class CharacterType : CardTypes
 
     IEnumerator FightVSCharacter(CharacterType character, EventQueue currentQueue)
     {
-        EventQueue characterDeathQueue = new EventQueue();
-
+        #region ONCHARFIGHT Event
+        EventQueue onCharFightQueue = new EventQueue();
         if (data.onCharFight != null) data.onCharFight(currentQueue, character.data);
+        onCharFightQueue.StartQueue();
+        while(!onCharFightQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion
+
 
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
-        
+
+        //---Encapsulate hit event into a queue for feedback and specifique effects
+        EventQueue characterHitQueue = new EventQueue();
         character.stats.baseLifePoints -= stats.baseAttackDamage;
+
+        //Starting the hit Queue
+        if (character.data.onCharHit != null) character.data.onCharHit(characterHitQueue, data);
+        characterHitQueue.StartQueue();
+
+        while (!characterHitQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //---
+
         Debug.Log($"Other character has {character.stats.baseLifePoints}");
         yield return new WaitForSeconds(0.2f);
+
+        EventQueue characterDeathQueue = new EventQueue();
 
         if(character.stats.baseLifePoints <= 0)
         {
@@ -227,7 +257,7 @@ public class CharacterType : CardTypes
         return characters;
     }
 
-    void CharacterDeath(bool isCurrentCharacter, EventQueue currentQueue)
+    public void CharacterDeath(bool isCurrentCharacter, EventQueue currentQueue)
     {
         currentQueue.events.Add(CharacterDeathRoutine(isCurrentCharacter, currentQueue));
     }
@@ -244,26 +274,29 @@ public class CharacterType : CardTypes
             yield return new WaitForEndOfFrame();
         }
 
-        EventQueue discardQueue = new EventQueue();
-
-        // Manage character death card discard, card reset, events deletion
-        if (!isCurrentCharacter)
+        if (CardManager.Instance.board.IsCardOnBoard(data))
         {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
-        }
-        else//If Im currently resolving this card event, the have to be cleared to prevent errors
-        {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
-            ClearCharacterEvents(discardQueue);//Add queue event 
-        }
+            EventQueue discardQueue = new EventQueue();
 
-        discardQueue.StartQueue();
+            // Manage character death card discard, card reset, events deletion
+            if (!isCurrentCharacter)
+            {
+                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+            }
+            else//If Im currently resolving this card event, the have to be cleared to prevent errors
+            {
+                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+                ClearCharacterEvents(discardQueue);//Add queue event 
+            }
 
-        while(!discardQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
+            discardQueue.StartQueue();
+
+            while (!discardQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
-
+       
         currentQueue.UpdateQueue();
     }
    
@@ -303,7 +336,6 @@ public class CharacterType : CardTypes
     }
 
     #region Events
-
 
     #region OnEnd (Return to hand / discard)
 

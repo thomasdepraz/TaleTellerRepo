@@ -15,7 +15,9 @@ public enum Trigger
     OnCardDrawn,
     OnTurnEnd,
     OnTurnStart,
-    OnCharDeath
+    OnCharDeath,
+    OnCharFight,
+    OnCharHit,
 }
 public enum EffectTarget
 {
@@ -124,6 +126,14 @@ public class Effect : ScriptableObject
 
             case Trigger.OnCharDeath:
                 card.onCharDeath += OnTriggerEffect;
+                break;
+
+            case Trigger.OnCharFight:
+                card.onCharFight += OnTriggerEffect;
+                break;
+
+            case Trigger.OnCharHit:
+                card.onCharHit += OnTriggerEffect;
                 break;
 
             default:

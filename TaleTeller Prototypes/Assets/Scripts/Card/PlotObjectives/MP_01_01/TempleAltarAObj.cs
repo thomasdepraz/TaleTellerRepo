@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Rémi Sécher - 12/08/2021 22:51 - Creation
+/// Remi Secher - 12/10/2021 00:46 - Creation
 /// </summary>
-public class TheophilusThePriestObj : PlotObjective
+public class TempleAltarAObj : PlotObjective
 {
     public override void SubscribeUpdateStatus(PlotCard data)
     {
-        //Subscribe UpdateStatus to junk death
-        foreach(var junk in data.objective.linkedJunkedCards)
-            junk.onCharDeath += UpdateStatus;
-            
+        data.onCardEnter += UpdateStatus;
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)
     {
-        //Test if the junk that trigger the StatusUpdate is next to the plot card
-        int slotDistance = 0;
+        bool allArtifactOnBoard = true;
 
-        if (linkedPlotData.currentContainer.currentSlot != null)
-            slotDistance = Mathf.Abs(linkedPlotData.currentContainer.currentSlot.slotIndex - data.currentContainer.currentSlot.slotIndex);
+        //Test if All Artifacts are placed on the board
+        foreach(CardData junk in linkedPlotData.objective.linkedJunkedCards)
+        {
+            if(junk.currentContainer.currentSlot == null)
+            {
+                allArtifactOnBoard = false;
+                break;
+            }
+        }
 
-        if (slotDistance == 1)
+        if (allArtifactOnBoard)
         {
             //If so, complet plot
             EventQueue completeQueue = new EventQueue();

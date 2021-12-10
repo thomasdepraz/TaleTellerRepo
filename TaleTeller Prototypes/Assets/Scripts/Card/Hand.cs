@@ -95,21 +95,5 @@ public class Hand : MonoBehaviour
 
         return randomPos;
     }
-
-    public void UpdateKeyCardStatus()
-    {
-        for (int i = 0; i < currentHand.Count; i++)
-        {
-            if (currentHand[i].data.keyCardActivated)
-            {
-                if (currentHand[i].data.currentInterestCooldown <= 0)
-                {
-                    GameManager.Instance.creativityManager.creativity -= currentHand[i].data.creativityBurn;//Affect creativity
-                }
-                currentHand[i].data.currentInterestCooldown -= 1;//Lower cooldown
-                currentHand[i].timerText.text = currentHand[i].data.currentInterestCooldown.ToString();
-            }
-        }
-    }
     #endregion
 }

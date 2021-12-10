@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LastFight : Effect
+/// <summary>
+/// Remi Secher - 12/10/2021 00:46 - Creation
+/// </summary>
+
+public class LastFightEffect : Effect
 {
     private CardData lastCharFought = null;
     private bool foughtHeroLast = false;
@@ -29,10 +33,17 @@ public class LastFight : Effect
 
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
+        CharacterType character = linkedData.cardType as CharacterType;
         if (foughtHeroLast)
-            GameManager.Instance.currentHero.lifePoints -= linkedData.characterStats.baseAttackDamage;
-        else if(lastCharFought != null)
-            lastCharFought.characterStats.baseLifePoints -= linkedData.characterStats.baseAttackDamage;
+        {
+            GameManager.Instance.currentHero.lifePoints -= character.stats.baseAttackDamage;//TODO Implement queuing for feedback
+        }
+        else if (lastCharFought != null)
+        {
+            CharacterType other = lastCharFought.cardType as CharacterType;
+
+            other.stats.baseLifePoints -= character.stats.baseAttackDamage;
+        }
 
         yield return null;
         currentQueue.UpdateQueue();
