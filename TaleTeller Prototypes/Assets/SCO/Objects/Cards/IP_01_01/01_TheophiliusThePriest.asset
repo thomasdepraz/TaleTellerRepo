@@ -22,22 +22,6 @@ MonoBehaviour:
     value: 3
     type: 1
     op: 1
---- !u!114 &-7635018581271308197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b17430c77a01b7740928049b6e858498, type: 3}
-  m_Name: PlotObjective_TheophilusThePriestObj
-  m_EditorClassIdentifier: 
-  linkedPlotData: {fileID: 0}
-  objectiveName: Defeat the Demon while Theophilus is on the next step.
-  linkedJunkedCards:
-  - {fileID: 11400000, guid: d62fbd32af1194a4ba300dbc8377c052, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,4 +69,5 @@ MonoBehaviour:
     baseAttackDamage: 3
   behaviour: 1
   fightingRange: 3
+  doubleStrike: 0
   useCount: 2

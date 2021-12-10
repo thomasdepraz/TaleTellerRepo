@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8723187534865325048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: For each received attack, its Damage increases by +1.
+  trigger: 10
+  target: 1
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 1
+    type: 1
+    op: 1
+  behaviourTargeted: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20,7 +43,8 @@ MonoBehaviour:
   cardGraph: {fileID: 21300000, guid: 477068da7b0424e40a49dfeca0d99051, type: 3}
   currentContainer: {fileID: 0}
   description: "Un golem en pierre.\r"
-  effectsReferences: []
+  effectsReferences:
+  - {fileID: -8723187534865325048}
   effects: []
   cardTypeReference: {fileID: 8253072959681897441}
   cardType: {fileID: 0}
@@ -44,4 +68,5 @@ MonoBehaviour:
     baseAttackDamage: 6
   behaviour: 2
   fightingRange: 3
+  doubleStrike: 0
   useCount: 4
