@@ -46,15 +46,30 @@ public class JunkCard : CardData
     }
     IEnumerator OnEndJunkRoutine(EventQueue currentQueue)
     {
-        yield return null;
-        EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(currentContainer, discardQueue);
-
-        discardQueue.StartQueue();
-        while (!discardQueue.resolved)
+        if(cardType!=null && cardType.GetType()== typeof(CharacterType))
         {
-            yield return new WaitForEndOfFrame();
+            EventQueue returnToHand = new EventQueue();
+
+            CardManager.Instance.board.ReturnCardToHand(currentContainer, false, returnToHand);
+
+            returnToHand.StartQueue();
+            while(!returnToHand.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        else
+        {
+            EventQueue discardQueue = new EventQueue();
+
+            CardManager.Instance.board.DiscardCardFromBoard(currentContainer, discardQueue);
+
+            discardQueue.StartQueue();
+            while (!discardQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         currentQueue.UpdateQueue();
