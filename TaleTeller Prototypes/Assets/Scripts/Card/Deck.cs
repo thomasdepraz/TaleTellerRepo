@@ -69,7 +69,7 @@ public class Deck : MonoBehaviour
             else //Get card from discrad back to deck
             {
                 #region Refill
-                if (discardPile.Count != 0)
+                if (discardPile.Count - i > 0)//NOTE : DOES THIS EVEN WORK?
                 {
                     Refill(dealQueue);
                     cardsInDeck += discardPile.Count;
@@ -142,7 +142,7 @@ public class Deck : MonoBehaviour
         #region Event OnCardDraw
         EventQueue onCardDrawQueue = new EventQueue();
         if (dealtCard.onCardDraw != null)
-            dealtCard.onCardDraw(onCardDrawQueue);
+            dealtCard.onCardDraw(onCardDrawQueue, dealtCard);
         onCardDrawQueue.StartQueue();
         while(!onCardDrawQueue.resolved)
         {

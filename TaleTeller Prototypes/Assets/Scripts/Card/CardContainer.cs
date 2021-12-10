@@ -63,43 +63,24 @@ public class CardContainer : MonoBehaviour
         if(!isPlaceHolder)
             data.currentContainer = this;
 
-        //Change effect if needed
-        if (data.keyCardActivated)
+        if(data.cardType!= null && data.cardType.GetType() == typeof(CharacterType))//If Character
         {
-            data.effect = data.deadCardEffect;
-        }
+            CharacterType character = data.cardType as CharacterType;
+            attackUI.SetActive(true);
+            healthUI.SetActive(true);
+            //timerUI.SetActive(true);
 
-        //Init characterValues
-        data.characterStats.Initialize();
+            attackText.text = character.stats.baseAttackDamage.ToString();
+            healthText.text = character.stats.baseLifePoints.ToString();
+            //timerText.text = character.useCount.ToString();
+        }
 
 
         //load Data and activate gameobject
         basePosition = transform.position;
-        data.currentInterestCooldown = data.interestCooldown;
         cardName.text = data.cardName;
 
-        if(data.type == CardType.Character)
-        {
-            attackUI.SetActive(true);
-            attackText.text = data.characterStats.baseAttackDamage.ToString();
-
-            healthUI.SetActive(true);
-            healthText.text = data.characterStats.baseLifePoints.ToString();
-        }
-
-        if(data.isKeyCard && data.keyCardActivated)
-        {
-            timerUI.SetActive(true);
-            timerText.text = data.currentInterestCooldown.ToString();
-        }
-
-
-        if (data.effect == null)
-            cardDescription.text = data.description;
-        else
-            cardDescription.text = data.effect.effectName;
-
-        cardCreativityCost.text = data.creativityCost.ToString();
+        cardCreativityCost.text = data.manaCost.ToString();
 
         gameObject.SetActive(true);
         originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
@@ -210,7 +191,7 @@ public class CardContainer : MonoBehaviour
                 else //if other card in hand
                 {
                     //If you have enough mana to swap cards
-                    int manaDifference = CardManager.Instance.hoveredCard.data.creativityCost - data.creativityCost;
+                    int manaDifference = CardManager.Instance.hoveredCard.data.manaCost - data.manaCost;
                     if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
                     {
                         BoardSlot tempSlot = currentSlot;
@@ -251,7 +232,7 @@ public class CardContainer : MonoBehaviour
                 if (CardManager.Instance.hoveredCard.currentSlot != null)//If card other card in board
                 {
                     //If you have enough mana to swap cards
-                    int manaDifference = data.creativityCost - CardManager.Instance.hoveredCard.data.creativityCost;
+                    int manaDifference = data.manaCost - CardManager.Instance.hoveredCard.data.manaCost;
 
                     if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
                     {
@@ -302,7 +283,7 @@ public class CardContainer : MonoBehaviour
             if (CardManager.Instance.currentHoveredSlot != null)
             {
                 //if you have enough man else abort and reset card
-                if (CardManager.Instance.manaSystem.CanUseCard(data.creativityCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
+                if (CardManager.Instance.manaSystem.CanUseCard(data.manaCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
                 {
                     if (currentSlot != null)
                     {
@@ -315,7 +296,7 @@ public class CardContainer : MonoBehaviour
                     currentSlot.canvasGroup.blocksRaycasts = false;
                     rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
 
-                    CardManager.Instance.manaSystem.LoseMana(data.creativityCost);
+                    CardManager.Instance.manaSystem.LoseMana(data.manaCost);
 
                     CardManager.Instance.cardHand.currentHand.Remove(this);
                 }
@@ -343,7 +324,7 @@ public class CardContainer : MonoBehaviour
                     currentSlot = null;
 
                     //Refill Mana
-                    CardManager.Instance.manaSystem.GainMana(data.creativityCost);
+                    CardManager.Instance.manaSystem.GainMana(data.manaCost);
 
                     //Add back to hand list 
                     CardManager.Instance.cardHand.currentHand.Add(this);
@@ -426,5 +407,19 @@ public class CardContainer : MonoBehaviour
             #endregion
         }
     }
+    #endregion
+
+    #region Utility
+    public void UpdateCharacterInfo(CharacterType character)
+    {
+        attackUI.SetActive(true);
+        healthUI.SetActive(true);
+        //timerUI.SetActive(true);
+
+        attackText.text = character.stats.baseAttackDamage.ToString();
+        healthText.text = character.stats.baseLifePoints.ToString();
+        //timerText.text = character.useCount.ToString();
+    }
+
     #endregion
 }

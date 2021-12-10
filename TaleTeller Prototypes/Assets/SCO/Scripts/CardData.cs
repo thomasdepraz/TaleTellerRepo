@@ -9,23 +9,10 @@ public enum CharacterBehaviour //TO MOVE
     Peaceful, 
     Agressive
 }
-public enum CardEventTrigger//DEPRECATED
-{
-    None, 
-    OnEncounter,
-    OnDeath, 
-    OnAppear
-}
-
-public enum CardType
-{
-    Character, 
-    Object, 
-    Location
-}//DEPRECATED
 
 public enum CardRarity
 {
+    None,
     Common, 
     Rare, 
     Epic, 
@@ -47,23 +34,8 @@ public class CardData : ScriptableObject
     public CardRarity rarity;
     public Archetype archetype;
 
-    //DEPRECATED
-    public bool isKeyCard;
-    [HideInInspector] public bool keyCardActivated;
-    public int interestCooldown;
-    [HideInInspector] public int currentInterestCooldown;
-    public int creativityBurn;
-    public CardType type;
-    public CharacterBehaviour characterBehaviour;
-    public CharacterStats characterStats;
-    //---
-
-    public CardEventTrigger trigger;
-    public int creativityCost;//CHANGE NAME
-    public CardEffect effect;//DEPR
-    public CardEffect deadCardEffect;//DEPRE
+    public int manaCost;
     public Sprite cardGraph;
-    [HideInInspector] public CardFeedback feedback;//DEPR
     public CardContainer currentContainer;
 
     [TextArea(2, 3)]
@@ -86,11 +58,15 @@ public class CardData : ScriptableObject
     public BoardEvent onTurnEnd;
     public BoardEvent onTurnStart;
 
-    public delegate void CardEvent(EventQueue queue);
+    public delegate void CardEvent(EventQueue queue, CardData data);
     public CardEvent onCardEnter;
     public CardEvent onCardDraw;
     public CardEvent onCardDiscard;
     public CardEvent onCardAppear;
+
+    public CardEvent onCharDeath;
+    public CardEvent onCharFight;
+    public CardEvent onCharHit;
 
 
     //This is how a base card will be initialized (It's meant to be overwritten)
@@ -137,11 +113,6 @@ public class CardData : ScriptableObject
         }
 
         currentQueue.UpdateQueue();
-    }
-
-    public void ResetCharacterStats()
-    {
-        characterStats.Reset();
     }
 
     public void InitializeCardEffects(CardData data)
@@ -230,6 +201,27 @@ public class CardData : ScriptableObject
             foreach (var myDelegate in cardToReset.onCardDiscard.GetInvocationList())
             {
                 cardToReset.onCardDiscard -= myDelegate as CardEvent;
+            }
+        }
+        if (cardToReset.onCharDeath != null)
+        {
+            foreach (var myDelegate in cardToReset.onCharDeath.GetInvocationList())
+            {
+                cardToReset.onCharDeath -= myDelegate as CardEvent;
+            }
+        }
+        if(cardToReset.onCharFight != null)
+        {
+            foreach (var myDelegate in cardToReset.onCharFight.GetInvocationList())
+            {
+                cardToReset.onCharFight -= myDelegate as CardEvent;
+            }
+        }
+        if (cardToReset.onCharHit != null)
+        {
+            foreach (var myDelegate in cardToReset.onCharHit.GetInvocationList())
+            {
+                cardToReset.onCharHit -= myDelegate as CardEvent;
             }
         }
     }

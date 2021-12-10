@@ -14,7 +14,10 @@ public enum Trigger
     OnCardDiscard,
     OnCardDrawn,
     OnTurnEnd,
-    OnTurnStart
+    OnTurnStart,
+    OnCharDeath,
+    OnCharFight,
+    OnCharHit,
 }
 public enum EffectTarget
 {
@@ -59,7 +62,7 @@ public enum EffectValueOperator
 [System.Serializable]
 public class EffectValue
 {
-    public float value;
+    public int value;
     public EffectValueType type;
     public EffectValueOperator op;
 }
@@ -121,6 +124,18 @@ public class Effect : ScriptableObject
                 card.onTurnEnd += OnTriggerEffect;
                 break;
 
+            case Trigger.OnCharDeath:
+                card.onCharDeath += OnTriggerEffect;
+                break;
+
+            case Trigger.OnCharFight:
+                card.onCharFight += OnTriggerEffect;
+                break;
+
+            case Trigger.OnCharHit:
+                card.onCharHit += OnTriggerEffect;
+                break;
+
             default:
                 break;
         }
@@ -131,8 +146,13 @@ public class Effect : ScriptableObject
         //ajouter la coroutine à la queue
         queue.events.Add(EffectLogic(queue));
     }
+    public virtual void OnTriggerEffect(EventQueue queue, CardData data = null) //TODO REMOVE VIRTUAL
+    {
+        //ajouter la coroutine à la queue
+        queue.events.Add(EffectLogic(queue, data));
+    }
 
-    public virtual IEnumerator EffectLogic(EventQueue currentQueue)
+    public virtual IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
         //actual effect logic
         Debug.Log("EffectLogicBase");

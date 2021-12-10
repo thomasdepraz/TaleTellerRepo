@@ -52,13 +52,21 @@ public class CharacterType : CardTypes
     //Here is the actual fighting logic
     IEnumerator FightVSPlayer(EventQueue currentQueue)
     {
-        bool deathFinished = false;
-        
-
         Debug.Log("Castagne avec le perso");
+
+        #region ONCHARFIGHT Event
+        EventQueue onCharFightQueue = new EventQueue();
+        if (data.onCharFight != null) data.onCharFight(currentQueue, null);
+        onCharFightQueue.StartQueue();
+        while (!onCharFightQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion
 
         //Le character se prend un coup
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        data.currentContainer.UpdateCharacterInfo(this);
         Debug.Log($"Character has {stats.baseLifePoints}");
 
         yield return new WaitForSeconds(0.2f);
@@ -68,7 +76,7 @@ public class CharacterType : CardTypes
         {
             EventQueue characterDeathQueue = new EventQueue();
 
-            CharacterDeath(ref deathFinished, true, characterDeathQueue); //No need to update the queue since it'll be cleaned
+            CharacterDeath(true, characterDeathQueue); //No need to update the queue since it'll be cleaned
 
             characterDeathQueue.StartQueue();
 
@@ -93,22 +101,43 @@ public class CharacterType : CardTypes
 
     IEnumerator FightVSCharacter(CharacterType character, EventQueue currentQueue)
     {
-        bool fightEnded = false;
-        EventQueue characterDeathQueue = new EventQueue();
+        #region ONCHARFIGHT Event
+        EventQueue onCharFightQueue = new EventQueue();
+        if (data.onCharFight != null) data.onCharFight(currentQueue, character.data);
+        onCharFightQueue.StartQueue();
+        while(!onCharFightQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion
+
+
         //L'autre perso se prend un coup
         Debug.Log("Castagne entre persos");
-        
+
+        //---Encapsulate hit event into a queue for feedback and specifique effects
+        EventQueue characterHitQueue = new EventQueue();
         character.stats.baseLifePoints -= stats.baseAttackDamage;
+        data.currentContainer.UpdateCharacterInfo(this);
+
+        //Starting the hit Queue
+        if (character.data.onCharHit != null) character.data.onCharHit(characterHitQueue, data);
+        characterHitQueue.StartQueue();
+
+        while (!characterHitQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //---
+
         Debug.Log($"Other character has {character.stats.baseLifePoints}");
         yield return new WaitForSeconds(0.2f);
 
+        EventQueue characterDeathQueue = new EventQueue();
+
         if(character.stats.baseLifePoints <= 0)
         {
-            character.CharacterDeath(ref fightEnded, false, characterDeathQueue);//<-- Add character to queue events
-        }
-        else
-        {
-            fightEnded = true;
+            character.CharacterDeath(false, characterDeathQueue);//<-- Add character to queue events
         }
 
         characterDeathQueue.StartQueue();///<-- actually character death
@@ -230,33 +259,46 @@ public class CharacterType : CardTypes
         return characters;
     }
 
-    void CharacterDeath(ref bool deathEnded, bool isCurrentCharacter, EventQueue currentQueue)
+    public void CharacterDeath(bool isCurrentCharacter, EventQueue currentQueue)
     {
-        currentQueue.events.Add(CharacterDeathRoutine(deathEnded, isCurrentCharacter, currentQueue));
+        currentQueue.events.Add(CharacterDeathRoutine(isCurrentCharacter, currentQueue));
     }
 
-    IEnumerator CharacterDeathRoutine(bool deathEnded, bool isCurrentCharacter, EventQueue currentQueue)
+    IEnumerator CharacterDeathRoutine(bool isCurrentCharacter, EventQueue currentQueue)
     {
-        EventQueue discardQueue = new EventQueue();
+        EventQueue onCharDeathQueue = new EventQueue();
 
-        // Manage character death card discard, card reset, events deletion
-        if (!isCurrentCharacter)
-        {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
-        }
-        else//If Im currently resolving this card event, the have to be cleared to prevent errors
-        {
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
-            ClearCharacterEvents(discardQueue);//Add queue event 
-        }
+        if (data.onCharDeath != null) data.onCharDeath(onCharDeathQueue, data);
 
-        discardQueue.StartQueue();
-
-        while(!discardQueue.resolved)
+        onCharDeathQueue.StartQueue();
+        while (!onCharDeathQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
 
+        if (CardManager.Instance.board.IsCardOnBoard(data))
+        {
+            EventQueue discardQueue = new EventQueue();
+
+            // Manage character death card discard, card reset, events deletion
+            if (!isCurrentCharacter)
+            {
+                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+            }
+            else//If Im currently resolving this card event, the have to be cleared to prevent errors
+            {
+                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+                ClearCharacterEvents(discardQueue);//Add queue event 
+            }
+
+            discardQueue.StartQueue();
+
+            while (!discardQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+       
         currentQueue.UpdateQueue();
     }
    
@@ -281,6 +323,7 @@ public class CharacterType : CardTypes
     public void UpdateUseCount()
     {
         useCount--;
+        data.currentContainer.UpdateCharacterInfo(this);
     }
 
     public override void InitType(CardData data)
@@ -296,7 +339,6 @@ public class CharacterType : CardTypes
     }
 
     #region Events
-
 
     #region OnEnd (Return to hand / discard)
 
@@ -336,7 +378,7 @@ public class CharacterType : CardTypes
     #endregion
 
     #region OnEnter (Event Trigger + Fight)
-    void OnEnter(EventQueue queue)
+    void OnEnter(EventQueue queue, CardData data)
     {
         ////add effects to board manager list <-- This is no longer needed normally
         //for (int i = 0; i < data.effects.Count; i++)

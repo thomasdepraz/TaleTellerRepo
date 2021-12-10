@@ -9,11 +9,10 @@ public class PlotObjective : ScriptableObject
     public string objectiveName;
     public List<JunkCard> linkedJunkedCards = new List<JunkCard>();
 
+    //NOTE: We should surely pass this from void to nothing
     public virtual void InitObjective(PlotCard data, PlotObjective objective)
     {
         linkedPlotData = data;
-        //Subscribe objectiveUpdate to the related event 
-        data.onCardEnter += UpdateStatus;//<-- THIS IS THE GENERIC RULE
 
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
@@ -21,15 +20,23 @@ public class PlotObjective : ScriptableObject
             objective.linkedJunkedCards[i].objective = objective;
             objective.linkedJunkedCards[i].objectiveIndex = i;
         }
+
+        //Subscribe objectiveUpdate to the related event 
+        SubscribeUpdateStatus(data);
     }
 
-    public virtual void UpdateStatus(EventQueue queue)//TODO REMOVE VIRTUAL
+    //THIS IS THE GENERIC RULE
+    //Overide and modify in child if needed
+    public virtual void SubscribeUpdateStatus(PlotCard data) 
+        => data.onCardEnter += UpdateStatus;
+
+    public void UpdateStatus(EventQueue queue, CardData data)//TODO REMOVE VIRTUAL
     {
         //Here is the logic that checks the objective winning condition
-        queue.events.Add(UpdateStatusRoutine(queue));
+        queue.events.Add(UpdateStatusRoutine(queue, data));
     }
 
-    public virtual IEnumerator UpdateStatusRoutine(EventQueue currentQueue)
+    public virtual IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)
     {
         Debug.Log("Update objective routine");
 

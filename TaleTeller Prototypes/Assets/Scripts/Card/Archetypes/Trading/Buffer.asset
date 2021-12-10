@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8374743307673129375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 0
+    baseAttackDamage: 0
+  behaviour: 0
+  fightingRange: 0
+  useCount: 0
+--- !u!114 &-3492923867094058972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf256478834923488b25aa24b2df562, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 1
+  range: 09000000
+  values: []
+  buffValue:
+    value: 1
+    type: 3
+    op: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Buffer
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: 
+  rarity: 0
+  archetype: 0
+  isKeyCard: 0
+  keyCardActivated: 0
+  interestCooldown: 0
+  currentInterestCooldown: 0
+  creativityBurn: 0
+  type: 0
+  characterBehaviour: 0
+  characterStats:
+    baseLifePoints: 0
+    baseAttackDamage: 0
+  trigger: 0
+  creativityCost: 0
+  effect: {fileID: 0}
+  deadCardEffect: {fileID: 0}
+  cardGraph: {fileID: 0}
+  feedback: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -3492923867094058972}
+  effects: []
+  cardTypeReference: {fileID: -8374743307673129375}
+  cardType: {fileID: 0}

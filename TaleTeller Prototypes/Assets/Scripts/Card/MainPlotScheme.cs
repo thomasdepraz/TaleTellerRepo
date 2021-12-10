@@ -36,15 +36,17 @@ public class MainPlotScheme : ScriptableObject
     IEnumerator LoadStepRoutine(EventQueue queue, MainPlotScheme scheme)//TODO
     {
         yield return null;
+        var optionList = scheme.schemeSteps[scheme.currentStep].stepOptions;
+
         //if only one card in current step send it to the hand    
-        if(scheme.schemeSteps[scheme.currentStep].stepOptions.Count == 1)
+        if (optionList.Count == 1)
         {
             EventQueue toHandQueue = new EventQueue();
 
             //send card to hand
             //PlotsManager.Instance.SendPlotToHand(toHandQueue, scheme.schemeSteps[scheme.currentStep].stepOptions[0]);
-            PlotsManager.Instance.currentPickedCard = scheme.schemeSteps[scheme.currentStep].stepOptions[0];
-            scheme.schemeSteps[scheme.currentStep].stepOptions[0].onCardAppear(toHandQueue);
+            PlotsManager.Instance.currentPickedCard = optionList[0];
+            optionList[0].onCardAppear(toHandQueue, optionList[0]);
 
 
             toHandQueue.StartQueue();
@@ -54,12 +56,12 @@ public class MainPlotScheme : ScriptableObject
             }
 
         }
-        else if(scheme.schemeSteps[scheme.currentStep].stepOptions.Count > 1) //if multiple options make the player pick one of them and send it to the hand
+        else if(optionList.Count > 1) //if multiple options make the player pick one of them and send it to the hand
         {
             List<CardData> pickedCard = new List<CardData>();
             EventQueue pickQueue = new EventQueue();
 
-            CardManager.Instance.cardPicker.Pick(pickQueue, scheme.schemeSteps[scheme.currentStep].stepOptions ,pickedCard, 1, false);
+            CardManager.Instance.cardPicker.Pick(pickQueue, optionList, pickedCard, 1, false);
 
             pickQueue.StartQueue();
             while(!pickQueue.resolved)
@@ -72,7 +74,7 @@ public class MainPlotScheme : ScriptableObject
             //send card to hand
             //PlotsManager.Instance.SendPlotToHand(toHandQueue, pickedCard[0]);
             PlotsManager.Instance.currentPickedCard = pickedCard[0];
-            pickedCard[0].onCardAppear(toHandQueue);
+            pickedCard[0].onCardAppear(toHandQueue, pickedCard[0]);
 
             toHandQueue.StartQueue();
             while (!toHandQueue.resolved)

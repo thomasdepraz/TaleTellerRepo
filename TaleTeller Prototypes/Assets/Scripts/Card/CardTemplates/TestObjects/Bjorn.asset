@@ -19,6 +19,28 @@ MonoBehaviour:
   behaviour: 1
   fightingRange: 3
   useCount: 2
+--- !u!114 &-5362527975889865298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8534bb334c7f8d45867ae5392bd8f7f, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 0
+  target: 0
+  range: 
+  values: []
+  discardValue:
+    value: 0
+    type: 0
+    op: 0
 --- !u!114 &-2929948930288730705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38,7 +60,7 @@ MonoBehaviour:
   range: 
   values: []
   discardValue:
-    value: 1
+    value: 0
     type: 3
     op: 1
 --- !u!114 &11400000
@@ -75,6 +97,8 @@ MonoBehaviour:
   feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
+  effectsReferences:
+  - {fileID: -5362527975889865298}
   effects:
   - {fileID: -2929948930288730705}
   cardTypeReference: {fileID: -7395757881901780148}
