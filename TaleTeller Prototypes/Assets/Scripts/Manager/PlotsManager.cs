@@ -107,7 +107,8 @@ public class PlotsManager : Singleton<PlotsManager>
 
             PlotCard card = secondaryPlots[r] as PlotCard;
             card.onCardAppear -= card.OnPlotAppear; //Unsubscribe from the onAppear event since it wont gbe useful later
-            card.onCardDraw += card.onCardAppear;//Subscribe to the onDraw event to spawn correctly the junk cards;
+
+            card.onCardDraw += card.OnPlotAppear;//Subscribe to the onDraw event to spawn correctly the junk cards;
 
             //animate card to deck
             //for now only add it to deck list
