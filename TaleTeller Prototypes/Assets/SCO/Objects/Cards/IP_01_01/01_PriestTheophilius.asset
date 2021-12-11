@@ -22,6 +22,27 @@ MonoBehaviour:
     value: 3
     type: 1
     op: 1
+--- !u!114 &-3838742163466085264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7befc76d238a4244b44f25094d54ef8, type: 3}
+  m_Name: PlotObjective_KillJunkObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 'Defeat the Demon while Theophilus is on the next step. '
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: d62fbd32af1194a4ba300dbc8377c052, type: 2}
+  numberToKill: 1
+  mustKillSpecific: 0
+  specificJunkToKill: []
+  mustBeOnBoard: 1
+  positionToValidate: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39,7 +60,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 511789f9a7de26a43a0d5cb62c772951, type: 3}
   currentContainer: {fileID: 0}
   description: Defeat the Demon while Theophilus is on the next step.
   effectsReferences:
@@ -47,7 +68,7 @@ MonoBehaviour:
   effects: []
   cardTypeReference: {fileID: 5556898286618832836}
   cardType: {fileID: 0}
-  objective: {fileID: -7635018581271308197}
+  objective: {fileID: -3838742163466085264}
   completionTimer: 2
   isMainPlot: 1
   isFinal: 0

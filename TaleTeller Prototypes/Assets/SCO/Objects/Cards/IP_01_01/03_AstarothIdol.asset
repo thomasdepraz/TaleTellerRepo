@@ -36,22 +36,6 @@ MonoBehaviour:
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
---- !u!114 &-2773762533980822048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 792a75615d937c448b0b18ba20f5e01d, type: 3}
-  m_Name: PlotObjective_AstarothIdolObj
-  m_EditorClassIdentifier: 
-  linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat Astaroth the Mighty. '
-  linkedJunkedCards:
-  - {fileID: 11400000, guid: 972fec6b2d75d8a4a92a593aeae0e978, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +63,28 @@ MonoBehaviour:
   effects: []
   cardTypeReference: {fileID: -4658124985768800335}
   cardType: {fileID: 0}
-  objective: {fileID: -2773762533980822048}
+  objective: {fileID: 7673065295867403149}
   completionTimer: 3
   isMainPlot: 1
   isFinal: 0
+--- !u!114 &7673065295867403149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7befc76d238a4244b44f25094d54ef8, type: 3}
+  m_Name: PlotObjective_KillJunkObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 'Defeat Astaroth the Mighty. '
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 972fec6b2d75d8a4a92a593aeae0e978, type: 2}
+  numberToKill: 1
+  mustKillSpecific: 0
+  specificJunkToKill: []
+  mustBeOnBoard: 0
+  positionToValidate: 0
