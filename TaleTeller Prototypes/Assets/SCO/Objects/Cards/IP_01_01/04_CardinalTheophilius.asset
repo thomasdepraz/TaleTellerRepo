@@ -70,7 +70,7 @@ MonoBehaviour:
   effects: []
   cardTypeReference: {fileID: -2171829827178654687}
   cardType: {fileID: 0}
-  objective: {fileID: 0}
+  objective: {fileID: 1072204418088904170}
   completionTimer: 5
   isMainPlot: 1
   isFinal: 1
@@ -87,5 +87,5 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: 'Defeat Theophilus. '
   linkedJunkedCards: []
