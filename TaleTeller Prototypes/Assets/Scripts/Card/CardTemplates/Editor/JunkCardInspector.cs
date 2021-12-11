@@ -48,6 +48,9 @@ public class JunkCardInspector : Editor
         EditorGUILayout.PropertyField(cardRarity);
         EditorGUILayout.PropertyField(cardArchetype);
         EditorGUILayout.PropertyField(cardGraph);
+
+        serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(effects);
 
         EditorGUILayout.BeginHorizontal();
@@ -91,7 +94,7 @@ public class JunkCardInspector : Editor
 
         EditorGUILayout.PropertyField(cardDescription);
 
-
+        serializedObject.ApplyModifiedProperties();
 
         GUILayout.Space(10);
         EditorGUILayout.LabelField("Card Type", EditorStyles.boldLabel);
@@ -113,8 +116,10 @@ public class JunkCardInspector : Editor
         }
 
         serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(cardType);
 
+        serializedObject.ApplyModifiedProperties();
     }
 
     public void AddMenuItem(GenericMenu menu, string path, Type type)

@@ -48,6 +48,9 @@ public class DarkIdeaCardInspector : Editor
         EditorGUILayout.PropertyField(cardRarity);
         EditorGUILayout.PropertyField(cardArchetype);
         EditorGUILayout.PropertyField(cardGraph);
+
+        serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(effects);
 
         EditorGUILayout.BeginHorizontal();
@@ -91,6 +94,7 @@ public class DarkIdeaCardInspector : Editor
 
         EditorGUILayout.PropertyField(cardDescription);
 
+        serializedObject.ApplyModifiedProperties();
 
 
         GUILayout.Space(10);
@@ -113,7 +117,10 @@ public class DarkIdeaCardInspector : Editor
         }
 
         serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(cardType);
+
+        serializedObject.ApplyModifiedProperties();
 
     }
 
