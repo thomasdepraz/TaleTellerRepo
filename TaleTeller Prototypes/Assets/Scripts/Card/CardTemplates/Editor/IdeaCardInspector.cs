@@ -40,6 +40,7 @@ public class IdeaCardInspector : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
+
         EditorGUILayout.PropertyField(cardDataReference);
         if (cardDataReference.objectReferenceValue == null) EditorGUILayout.HelpBox("Card Data Reference must not be null !", MessageType.Error);
         EditorGUILayout.LabelField("Card Base", EditorStyles.boldLabel);
@@ -48,6 +49,9 @@ public class IdeaCardInspector : Editor
         EditorGUILayout.PropertyField(cardRarity);
         EditorGUILayout.PropertyField(cardArchetype);
         EditorGUILayout.PropertyField(cardGraph);
+
+        serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(effects);
 
         EditorGUILayout.BeginHorizontal();
@@ -91,7 +95,7 @@ public class IdeaCardInspector : Editor
 
         EditorGUILayout.PropertyField(cardDescription);
 
-        
+        serializedObject.ApplyModifiedProperties();
 
         GUILayout.Space(10);
         EditorGUILayout.LabelField("Card Type", EditorStyles.boldLabel);
@@ -111,10 +115,12 @@ public class IdeaCardInspector : Editor
             //Display the menu
             menu.ShowAsContext();
         }
-         
+
         serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(cardType);
 
+        serializedObject.ApplyModifiedProperties();
     }
 
     public void AddMenuItem(GenericMenu menu, string path, Type type)

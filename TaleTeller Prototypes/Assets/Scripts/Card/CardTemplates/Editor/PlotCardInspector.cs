@@ -57,6 +57,9 @@ public class PlotCardInspector : Editor
         EditorGUILayout.PropertyField(cardRarity);
         EditorGUILayout.PropertyField(cardArchetype);
         EditorGUILayout.PropertyField(cardGraph);
+
+        serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(effects);
 
         EditorGUILayout.BeginHorizontal();
@@ -101,6 +104,7 @@ public class PlotCardInspector : Editor
         EditorGUILayout.PropertyField(cardDescription);
 
         serializedObject.ApplyModifiedProperties();
+
         serializedObject.Update();
 
 
@@ -161,6 +165,7 @@ public class PlotCardInspector : Editor
         {
             EditorGUILayout.PropertyField(isFinal);
         }
+        
         serializedObject.ApplyModifiedProperties();
 
 
@@ -181,7 +186,10 @@ public class PlotCardInspector : Editor
             menu.ShowAsContext();
         }
 
+        serializedObject.ApplyModifiedProperties();
+
         EditorGUILayout.PropertyField(cardType);
+
         serializedObject.ApplyModifiedProperties();
     }
 
