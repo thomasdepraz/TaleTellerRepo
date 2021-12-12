@@ -157,6 +157,7 @@ public class PlotCard : CardData
 
         //Reward
         //TODO IMPLEMENT QUEUEING IN HERE
+        EventQueue rewardQueue = new EventQueue();
 
         if (isMainPlot)
         {
@@ -164,19 +165,26 @@ public class PlotCard : CardData
             {
                 //Final Step of main plot reward
                 Debug.Log("Complete Final main plot");
+                RewardManager.Instance.ChooseMainPlotRewardFinal(rewardQueue, this);
             }
             else
             {
                 //Main Plot reward
                 Debug.Log("Complete main plot");
+                RewardManager.Instance.ChooseMainPlotReward(rewardQueue, this);
             }
         }
         else
         {
             //Secondary plot reward
             Debug.Log("Secondary Plot");
+            RewardManager.Instance.ChooseSecondaryPlotReward(rewardQueue, this);
         }
-
+        rewardQueue.StartQueue();
+        while(!rewardQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
         
         //Send to oblivion or wait for end of story to send to oblivion and pickj new plot scheme //TODO implement queuing
         if(isMainPlot)
