@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8611134073901905669
+--- !u!114 &-5870541606590928338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,65 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
   m_Name: Effect0
-  m_EditorClassIdentifier: Assembly-CSharp::HeroSmallChangeEffect
+  m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Boosts permanently the Damage of the Hero by +3.
+  description: Boosts permanently his Damage by +1
   trigger: 1
-  target: 0
-  range: 
+  target: 1
+  range: 01000000
   values: []
-  gainValue:
-    value: 3
+  modifierValue:
+    value: 1
     type: 1
     op: 1
---- !u!114 &-7635018581271308197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b17430c77a01b7740928049b6e858498, type: 3}
-  m_Name: PlotObjective_TheophilusThePriestObj
-  m_EditorClassIdentifier: 
-  linkedPlotData: {fileID: 0}
-  objectiveName: Defeat the Demon while Theophilus is on the next step.
-  linkedJunkedCards:
-  - {fileID: 11400000, guid: d62fbd32af1194a4ba300dbc8377c052, type: 2}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
-  m_Name: 01_TheophiliusThePriest
-  m_EditorClassIdentifier: 
-  dataReference: {fileID: 11400000}
-  cardName: TheophiliusThePriest
-  rarity: 0
-  archetype: 0
-  manaCost: 0
-  cardGraph: {fileID: 0}
-  currentContainer: {fileID: 0}
-  description: Defeat the Demon while Theophilus is on the next step.
-  effectsReferences:
-  - {fileID: -8611134073901905669}
-  effects: []
-  cardTypeReference: {fileID: 5556898286618832836}
-  cardType: {fileID: 0}
-  objective: {fileID: -7635018581271308197}
-  completionTimer: 2
-  isMainPlot: 1
-  isFinal: 0
---- !u!114 &5556898286618832836
+  behaviourTargeted: 0
+--- !u!114 &-2171829827178654687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,8 +37,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 10
-    baseAttackDamage: 3
-  behaviour: 1
+    baseLifePoints: 1
+    baseAttackDamage: 4
+  behaviour: 2
   fightingRange: 3
-  useCount: 2
+  doubleStrike: 0
+  useCount: 5
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: 04_CardinalTheophilius
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: 
+  rarity: 0
+  archetype: 0
+  manaCost: 0
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 'Defeat Theophilus.
+
+'
+  effectsReferences:
+  - {fileID: -5870541606590928338}
+  effects: []
+  cardTypeReference: {fileID: -2171829827178654687}
+  cardType: {fileID: 0}
+  objective: {fileID: 201897440602304700}
+  completionTimer: 5
+  isMainPlot: 1
+  isFinal: 1
+--- !u!114 &201897440602304700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1234a385b3bdd9f43a4aac1187d0979f, type: 3}
+  m_Name: PlotObjective_TheophiliusTheCardinalObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 'Defeat Theophilus. '
+  linkedJunkedCards: []

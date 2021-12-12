@@ -99,6 +99,7 @@ public class CharaStatModifierEffect : Effect
                 default:
                     break;
             }
+            t.data.currentContainer.UpdateCharacterInfo(t);
         }
         yield return null;
         currentQueue.UpdateQueue();

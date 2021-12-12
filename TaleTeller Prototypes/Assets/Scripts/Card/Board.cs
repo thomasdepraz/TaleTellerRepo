@@ -327,7 +327,7 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            if (slots[i].currentPlacedCard == data)
+            if (slots[i].currentPlacedCard?.data == data)
                 return true;
         }
         return false;
