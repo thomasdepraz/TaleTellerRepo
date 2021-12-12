@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,6 +16,13 @@ public class RewardManager : Singleton<RewardManager>
 
     public List<CardContainer> batchOneContainers = new List<CardContainer>();
     public List<CardContainer> batchTwoContainers = new List<CardContainer>();
+
+    [Space]
+    public CardContainer secondaryRewardCardContainer;
+    public Button statsRewardButton;
+    public Button actionRewardButton;
+    public TextMeshProUGUI statsButtonDescription;
+    public TextMeshProUGUI actionButtonDescription;
 
 
     [Header("Data")]
@@ -36,6 +44,14 @@ public class RewardManager : Singleton<RewardManager>
     List<CardData> batchTwoSelectedCards = new List<CardData>();
     #endregion
 
+    #region SecondaryPlotReward Variables
+    CardData secondaryPlotSelectedCard;
+    bool selectedStatsReward;
+    bool selectedActionReward;
+    Action<EventQueue> currentStatRewardAction;
+    Action<EventQueue> currentActionRewardAction;
+    #endregion
+
     private void Awake()
     {
         CreateSingleton();
@@ -43,6 +59,7 @@ public class RewardManager : Singleton<RewardManager>
 
     private void Start()
     {
+        #region onClick Init
         for (int i = 0; i < batchOneContainers.Count; i++)
         {
             int j = i;
@@ -59,6 +76,14 @@ public class RewardManager : Singleton<RewardManager>
             entry.callback.AddListener(data => { SelectCard(batchTwoContainers[j]); });
             batchTwoContainers[i].gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
         }
+
+        EventTrigger.Entry _entry = new EventTrigger.Entry();
+        _entry.eventID = EventTriggerType.PointerClick;
+        _entry.callback.AddListener(data => { SelectCardSecondary(secondaryRewardCardContainer); });
+        secondaryRewardCardContainer.gameObject.GetComponent<EventTrigger>().triggers.Add(_entry);
+
+        #endregion
+
 
         InitCards();
     }
@@ -183,6 +208,9 @@ public class RewardManager : Singleton<RewardManager>
     }
     IEnumerator ChooseSecondaryPlotRewardRoutine(EventQueue queue, PlotCard card)//Pick between one card / one action / one hero stats boost
     {
+
+        canvasGroup.blocksRaycasts = true;
+
         //Fade in background
         #region FadeInBackground
         bool fadeEnded = false;
@@ -194,11 +222,53 @@ public class RewardManager : Singleton<RewardManager>
         fadeEnded = false;
         #endregion
 
+        confirmButton.gameObject.SetActive(true);
+
         //Afficher une carte random + un bouton pour les stats + un bouton pour une action random
         InitSecondaryRewardPlaceholder();
         InitStatButton();
         InitActionButton();
 
+        while(!confirmed)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        #region FadeOutBackground
+        Color transparent = new Color(0, 0, 0, 0);
+        LeanTween.color(gameObject, transparent, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
+            onEnd => { canvasGroup.blocksRaycasts = false; });
+
+
+        yield return new WaitForSeconds(fadeSpeed);
+        #endregion
+
+        EventQueue rewardQueue = new EventQueue();
+
+        //Do something according to what you pick
+        if(secondaryPlotSelectedCard != null)
+        {
+            //send card to hand
+            PlotsManager.Instance.SendPlotToDeck(rewardQueue, secondaryPlotSelectedCard);
+
+        }
+        else if(selectedActionReward)//TODO
+        {
+            //play action 
+            currentActionRewardAction(rewardQueue);
+
+        }
+        else if(selectedStatsReward)//TODO
+        {
+            //add stats
+            currentStatRewardAction(rewardQueue);
+
+        }
+        rewardQueue.StartQueue();
+        while(!rewardQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
 
         queue.UpdateQueue();
     }
@@ -404,20 +474,157 @@ public class RewardManager : Singleton<RewardManager>
         confirmButton.gameObject.SetActive(false);
     }
 
+
+    #region Secondary Rewards Utility
     public void InitSecondaryRewardPlaceholder()
     {
-
+        CardData reward =  GetSecondaryPlotCardReward(secondaryRewardCards);
+        secondaryRewardCardContainer.gameObject.SetActive(true);
+        secondaryRewardCardContainer.InitializeContainer(reward, true);
     }
 
     public void InitStatButton()
     {
+        currentStatRewardAction = null;
+        currentStatRewardAction = GetRandomStatUpgrade();
 
+        statsRewardButton.gameObject.SetActive(true);
     }
 
     public void InitActionButton()
     {
+        currentActionRewardAction = null;
+        currentActionRewardAction = GetRandomAction();
 
+        actionRewardButton.gameObject.SetActive(true);
     }
+
+    //TODO Make the feedbacks using properties (get & sets)
+    public void SelectStats()
+    {
+        selectedStatsReward = true;
+
+        if(selectedActionReward)
+        {
+            selectedActionReward = false;
+
+
+        }
+        if(secondaryPlotSelectedCard != null)
+        {
+            //remove card
+            secondaryPlotSelectedCard = null;
+
+        }
+    }
+    public void SelectAction()
+    {
+        selectedActionReward = true;
+
+        if(selectedStatsReward)
+        {
+            selectedStatsReward = false;
+
+
+        }
+        if(secondaryPlotSelectedCard != null)
+        {
+            //remove card
+            secondaryPlotSelectedCard = null;
+
+        }
+    }
+    public void SelectCardSecondary(CardContainer container)
+    {
+        if (selectedStatsReward)
+            selectedStatsReward = false;
+
+        if (selectedActionReward)
+            selectedActionReward = false;
+
+        secondaryPlotSelectedCard = container.data;
+    }
+
+    public Action<EventQueue> GetRandomStatUpgrade()
+    {
+        Action<EventQueue> result = null;
+        int r = Random.Range(0, 3);
+        switch (r)
+        {
+            case 0:
+                result = HealthUpdgrade;
+                statsButtonDescription.text = "Heal 1 HP";
+                break;
+
+            case 1:
+                result = AttackUpgrade;
+                statsButtonDescription.text = "Gain 1 Attack Damage";
+                break;
+
+            case 2:
+                result = GoldUpgrade;
+                statsButtonDescription.text = "Gain 1 Max Gold";
+                break;
+        }
+
+        return result;
+    }
+
+    void HealthUpdgrade(EventQueue queue)
+    {
+        queue.events.Add(StatsUpgrade(queue, "health"));
+    }
+    void AttackUpgrade(EventQueue queue)
+    {
+        queue.events.Add(StatsUpgrade(queue, "attack"));
+    }
+    void GoldUpgrade(EventQueue queue)
+    {
+        queue.events.Add(StatsUpgrade(queue, "gold"));
+    }
+
+    IEnumerator StatsUpgrade(EventQueue queue, string param)
+    {
+
+        switch (param)//TODO implement value calculus so its no always one
+        {
+            case "health":
+                GameManager.Instance.currentHero.maxLifePoints += 1;
+                break;
+
+            case "attack":
+                GameManager.Instance.currentHero.attackDamage += 1;
+                break;
+
+            case "gold":
+                GameManager.Instance.currentHero.maxGoldPoints += 1;
+                break;
+
+            default:
+                Debug.LogError("Param Error");
+                break;
+        }
+        yield return null;
+
+        queue.UpdateQueue();
+    }
+
+    public Action<EventQueue> GetRandomAction()
+    {
+        Action<EventQueue> result = null;
+
+
+        return result;
+    }//TODO
+
+    void ResetSecondaryContainers()
+    {
+        secondaryRewardCardContainer.ResetContainer();
+        actionRewardButton.gameObject.SetActive(false);
+        statsRewardButton.gameObject.SetActive(false);
+    }
+    #endregion
+
 
     #endregion
 }
