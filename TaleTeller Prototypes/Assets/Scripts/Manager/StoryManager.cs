@@ -147,6 +147,8 @@ public class StoryManager : Singleton<StoryManager>
             cardsToDestroy.RemoveAt(0);
         }
 
+        GameManager.Instance.currentHero.bonusDamage = 0; 
+
         yield return new WaitForSeconds(1);
 
         //fade out

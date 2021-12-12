@@ -14,6 +14,13 @@ public class CharaStatModifierEffect : Effect
     public EffectValue modifierValue;
     public TargetBehaviour behaviourTargeted;
 
+    public override void InitEffect(CardData card)
+    {
+        base.InitEffect(card);
+
+        values.Add(modifierValue);
+    }
+
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
         IEnumerable<CharacterType> targets = GetTargets()

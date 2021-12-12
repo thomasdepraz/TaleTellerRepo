@@ -22,6 +22,7 @@ public enum Trigger
 public enum EffectTarget
 {
     None,
+    Hero,
     Board,
     Hand,
     Deck,
@@ -47,7 +48,9 @@ public enum EffectValueType
 {
     Life,
     Attack,
-    Gold, 
+    Gold,
+    Buy,
+    Bankrupt,
     Card
 }
 public enum EffectValueOperator
