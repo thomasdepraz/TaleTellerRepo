@@ -5,23 +5,12 @@ using UnityEngine;
 public class LocationType : CardTypes
 {
     [HideInInspector] public CardData data;
-    public Effect leftEffect;
-    public Effect rightEffect;
     public override void InitType(CardData data)
     {
         this.data = data;
 
         //Init effects
         data.InitializeCardEffects(data);
-
-        leftEffect = Instantiate(leftEffect);
-        leftEffect.InitEffect(data);
-
-        rightEffect = Instantiate(rightEffect);
-        rightEffect.InitEffect(data);
-
-        //onStart both effect happens
-        data.onStoryStart += OnStart;
     }
 
     #region OnEnd
@@ -47,28 +36,4 @@ public class LocationType : CardTypes
     }
     #endregion
 
-    #region OnStart
-    public void OnStart(EventQueue queue)
-    {
-        queue.events.Add(OnStartRoutine(queue));
-    }
-
-    IEnumerator OnStartRoutine(EventQueue currentQueue)
-    {
-
-        EventQueue effectQueue = new EventQueue();
-
-        leftEffect.OnTriggerEffect(effectQueue);
-        rightEffect.OnTriggerEffect(effectQueue);
-
-        effectQueue.StartQueue();
-
-        while(!effectQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
-        currentQueue.UpdateQueue();
-    }
-    #endregion
 }

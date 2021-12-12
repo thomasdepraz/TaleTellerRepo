@@ -14,28 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Gold Bag
-  rarity: 0
+  rarity: 1
   archetype: 1
-  isKeyCard: 0
-  keyCardActivated: 0
-  interestCooldown: 0
-  currentInterestCooldown: 0
-  creativityBurn: 0
-  type: 0
-  characterBehaviour: 0
-  characterStats:
-    baseLifePoints: 0
-    baseAttackDamage: 0
-  trigger: 0
-  creativityCost: 1
-  effect: {fileID: 0}
-  deadCardEffect: {fileID: 0}
+  manaCost: 0
   cardGraph: {fileID: 0}
-  feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: 1657931950193694528}
+  - {fileID: 5896776233198634297}
   effects: []
   cardTypeReference: {fileID: 8388920742943812827}
   cardType: {fileID: 0}
@@ -54,7 +40,29 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: +2 Gold
   trigger: 1
-  target: 0
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 2
+    type: 2
+    op: 1
+--- !u!114 &5896776233198634297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: +2 Gold
+  trigger: 1
+  target: 1
   range: 
   values: []
   gainValue:
