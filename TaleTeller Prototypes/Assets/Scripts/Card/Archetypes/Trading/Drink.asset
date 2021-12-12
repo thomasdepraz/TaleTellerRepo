@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6524936167030415066
+--- !u!114 &-6597037141043016936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,45 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Effect0
-  m_EditorClassIdentifier: Assembly-CSharp::HeroSmallChangeEffect
+  m_Script: {fileID: 11500000, guid: afdd823048dfc3a4394a5bf04ad3e20a, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: +4 Gold
+  description: 
   trigger: 1
   target: 0
   range: 
   values: []
-  gainValue:
-    value: 4
-    type: 2
-    op: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Stack of Coins
-  m_EditorClassIdentifier: 
-  dataReference: {fileID: 11400000}
-  cardName: Stack of Coins
-  rarity: 1
-  archetype: 2
-  manaCost: 1
-  cardGraph: {fileID: 0}
-  currentContainer: {fileID: 0}
-  description: 
-  effectsReferences:
-  - {fileID: 8204728447683457891}
-  effects: []
-  cardTypeReference: {fileID: 271303723266907244}
-  cardType: {fileID: 0}
---- !u!114 &271303723266907244
+  buyValue:
+    value: 2
+    type: 3
+    op: 0
+  effectTriggerIfCanPay: {fileID: 0}
+--- !u!114 &-6423142650506611061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +36,34 @@ MonoBehaviour:
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
---- !u!114 &8204728447683457891
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Drink
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Drink
+  rarity: 2
+  archetype: 2
+  manaCost: 1
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 981707063601592610}
+  - {fileID: -6597037141043016936}
+  - {fileID: 3788778139807712189}
+  effects: []
+  cardTypeReference: {fileID: -6423142650506611061}
+  cardType: {fileID: 0}
+--- !u!114 &981707063601592610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,10 +78,33 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: 
   trigger: 1
-  target: 0
+  target: 1
   range: 
   values: []
   gainValue:
-    value: 4
-    type: 2
+    value: 2
+    type: 0
+    op: 0
+--- !u!114 &3788778139807712189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect2
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 0
+  target: 2
+  range: 0500000009000000
+  values: []
+  modifierValue:
+    value: 2
+    type: 0
     op: 1
+  behaviourTargeted: 0
