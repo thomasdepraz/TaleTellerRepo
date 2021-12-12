@@ -109,7 +109,7 @@ MonoBehaviour:
   gainValue:
     value: 2
     type: 1
-    op: 2
+    op: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

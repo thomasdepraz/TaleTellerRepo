@@ -150,7 +150,6 @@ public class Deck : MonoBehaviour
         }
         #endregion 
 
-
         EventQueue dealQueue = new EventQueue();
         //TODO make the following logic in the queue so it can be animated-----------------
         CardManager.Instance.cardHand.InitCard(dealtCard);

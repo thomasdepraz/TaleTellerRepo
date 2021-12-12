@@ -24,6 +24,7 @@ public enum Archetype
     None, 
     Base,
     Trading, 
+    Vision
 }
 
 [CreateAssetMenu(fileName = "Card", menuName = "Data/Card", order = 0)]

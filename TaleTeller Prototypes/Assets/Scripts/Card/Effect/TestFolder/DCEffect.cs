@@ -32,16 +32,33 @@ public class DCEffect : MalusEffect
         {
             if (targets.Count > 0)
             {
+                EventQueue pickQueue = new EventQueue();
+                List<CardData> pickedCards = new List<CardData>();
+
+                CardManager.Instance.cardPicker.Pick(pickQueue, CardManager.Instance.cardHand.GetHandDataList(), pickedCards, discardValue.value, false);
+
+                pickQueue.StartQueue();
+                while (!pickQueue.resolved)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                //discard all of the picked cards
+                for (int x = 0; x < pickedCards.Count; x++)
+                {
+                    CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, discardQueue);
+                }
+
                 int r = Random.Range(0, targets.Count - 1);
 
-                if (target == EffectTarget.Hand)
+                /*if (target == EffectTarget.Hand)
                 {
                     CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer, discardQueue);
                 }
                 else if (target == EffectTarget.Board)
                 {
                     CardManager.Instance.board.DiscardCardFromBoard(targets[r].currentContainer, discardQueue);
-                }
+                }*/
 
                 targets.RemoveAt(r);
 
