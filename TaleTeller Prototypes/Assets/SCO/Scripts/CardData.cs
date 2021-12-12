@@ -14,6 +14,7 @@ public enum CardRarity
 {
     None,
     Common, 
+    Uncommon,
     Rare, 
     Epic, 
     Legendary
@@ -21,9 +22,8 @@ public enum CardRarity
 public enum Archetype
 {
     None, 
+    Base,
     Trading, 
-
-
 }
 
 [CreateAssetMenu(fileName = "Card", menuName = "Data/Card", order = 0)]
