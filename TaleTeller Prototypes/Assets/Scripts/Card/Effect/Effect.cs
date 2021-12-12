@@ -51,7 +51,10 @@ public enum EffectValueType
     Gold,
     Buy,
     Bankrupt,
-    Card
+    Card,
+    MaxLife,
+    BaseAttack,
+    MaxGold
 }
 public enum EffectValueOperator
 {

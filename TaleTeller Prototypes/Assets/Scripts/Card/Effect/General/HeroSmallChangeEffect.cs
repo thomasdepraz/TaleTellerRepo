@@ -31,6 +31,18 @@ public class HeroSmallChangeEffect : BonusEffect
             case EffectValueType.Gold:
                 GameManager.Instance.currentHero.goldPoints = OperateFromValueOperator(GameManager.Instance.currentHero.goldPoints);
                 break;
+
+            case EffectValueType.BaseAttack:
+                GameManager.Instance.currentHero.attackDamage = OperateFromValueOperator(GameManager.Instance.currentHero.attackDamage);
+                break;
+
+            case EffectValueType.MaxLife:
+                GameManager.Instance.currentHero.maxLifePoints = OperateFromValueOperator(GameManager.Instance.currentHero.maxLifePoints);
+                break;
+
+            case EffectValueType.MaxGold:
+                GameManager.Instance.currentHero.maxGoldPoints = OperateFromValueOperator(GameManager.Instance.currentHero.maxGoldPoints);
+                break;
         }
 
         currentQueue.UpdateQueue();
