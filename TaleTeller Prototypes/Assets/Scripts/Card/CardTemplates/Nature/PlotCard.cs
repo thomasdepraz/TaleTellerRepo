@@ -11,6 +11,7 @@ public class PlotCard : CardData
     public int completionTimer;
     public bool isMainPlot;
     public bool isFinal;
+    public List<CardData> legendaryCardRewards = new List<CardData>();
 
     //Eventually CardData malusCardToSpawn 
 
@@ -43,6 +44,14 @@ public class PlotCard : CardData
 
         plot.objective = Instantiate(plot.objective);
         plot.objective.InitObjective(plot, plot.objective);
+
+
+        //Init legendary rewards
+        for (int i = 0; i < plot.legendaryCardRewards.Count; i++)
+        {
+            plot.legendaryCardRewards[i].InitializeData(plot.legendaryCardRewards[i]);
+        }
+
 
         return plot;
     }

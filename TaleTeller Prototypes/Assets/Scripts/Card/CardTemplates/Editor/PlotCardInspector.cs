@@ -24,6 +24,7 @@ public class PlotCardInspector : Editor
     SerializedProperty completionTimer;
     SerializedProperty isMainPlot;
     SerializedProperty isFinal;
+    SerializedProperty legendaryList;
 
     private void OnEnable()
     {
@@ -44,6 +45,7 @@ public class PlotCardInspector : Editor
         completionTimer = serializedObject.FindProperty(nameof(script.completionTimer));
         isMainPlot = serializedObject.FindProperty(nameof(script.isMainPlot));
         isFinal = serializedObject.FindProperty(nameof(script.isFinal));
+        legendaryList = serializedObject.FindProperty(nameof(script.legendaryCardRewards));
     }
 
     public override void OnInspectorGUI()
@@ -164,6 +166,7 @@ public class PlotCardInspector : Editor
         if (isMainPlot.boolValue == true)
         {
             EditorGUILayout.PropertyField(isFinal);
+            EditorGUILayout.PropertyField(legendaryList);
         }
         
         serializedObject.ApplyModifiedProperties();

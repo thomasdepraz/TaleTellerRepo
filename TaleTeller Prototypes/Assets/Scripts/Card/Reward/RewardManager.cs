@@ -141,16 +141,38 @@ public class RewardManager : Singleton<RewardManager>
         queue.UpdateQueue();
     }
 
-
     public void ChooseMainPlotRewardFinal(EventQueue queue, PlotCard card)
     {
         queue.events.Add(ChooseMainPlotRewardFinalRoutine(queue, card));
     }
     IEnumerator ChooseMainPlotRewardFinalRoutine(EventQueue queue, PlotCard card)//Pick Legendary Card
     {
-        yield return null;
+        List<CardData> pickedCard = new List<CardData>();
 
         //use card picker
+        EventQueue pickerQueue = new EventQueue();
+
+        CardManager.Instance.cardPicker.Pick(pickerQueue, card.legendaryCardRewards ,pickedCard, 1, false);
+
+        pickerQueue.StartQueue();
+        while(!pickerQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        if(pickedCard.Count>0)
+        {
+            EventQueue toDeckQueue = new EventQueue();
+
+            PlotsManager.Instance.SendPlotToDeck(toDeckQueue, pickedCard[0]);
+
+            toDeckQueue.StartQueue();
+            while(!toDeckQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
 
         queue.UpdateQueue();
     }
@@ -161,8 +183,21 @@ public class RewardManager : Singleton<RewardManager>
     }
     IEnumerator ChooseSecondaryPlotRewardRoutine(EventQueue queue, PlotCard card)//Pick between one card / one action / one hero stats boost
     {
-        yield return null;
+        //Fade in background
+        #region FadeInBackground
+        bool fadeEnded = false;
+        LeanTween.color(gameObject, Color.black, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
+        while (!fadeEnded)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        fadeEnded = false;
+        #endregion
 
+        //Afficher une carte random + un bouton pour les stats + un bouton pour une action random
+        InitSecondaryRewardPlaceholder();
+        InitStatButton();
+        InitActionButton();
 
 
         queue.UpdateQueue();
@@ -367,6 +402,21 @@ public class RewardManager : Singleton<RewardManager>
     {
         confirmed = true;
         confirmButton.gameObject.SetActive(false);
+    }
+
+    public void InitSecondaryRewardPlaceholder()
+    {
+
+    }
+
+    public void InitStatButton()
+    {
+
+    }
+
+    public void InitActionButton()
+    {
+
     }
 
     #endregion
