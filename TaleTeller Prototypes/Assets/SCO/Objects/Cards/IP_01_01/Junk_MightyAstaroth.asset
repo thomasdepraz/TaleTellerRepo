@@ -15,7 +15,7 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Heals itself by +2 HP.
   trigger: 1
-  target: 1
+  target: 2
   range: 01000000
   values: []
   modifierValue:
@@ -23,6 +23,7 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

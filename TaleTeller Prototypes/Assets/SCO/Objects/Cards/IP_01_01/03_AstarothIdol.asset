@@ -15,7 +15,7 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Decrease by -3 the HP of any Enemy.
   trigger: 1
-  target: 1
+  target: 2
   range: 0500000009000000
   values: []
   modifierValue:
@@ -23,6 +23,7 @@ MonoBehaviour:
     type: 0
     op: 2
   behaviourTargeted: 2
+  temporaryChange: 0
 --- !u!114 &-4658124985768800335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,5 +87,7 @@ MonoBehaviour:
   numberToKill: 1
   mustKillSpecific: 0
   specificJunkToKill: []
-  mustBeOnBoard: 0
+  plotOnBoard: 0
   positionToValidate: 0
+  otherJunkOnBoard: 0
+  otherJunkToPlace: []

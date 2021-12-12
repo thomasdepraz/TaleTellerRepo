@@ -62,10 +62,10 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: The Player discard 2 Cards.
   trigger: 1
-  target: 2
+  target: 3
   range: 
   values: []
   discardValue:
     value: 2
-    type: 3
+    type: 5
     op: 2

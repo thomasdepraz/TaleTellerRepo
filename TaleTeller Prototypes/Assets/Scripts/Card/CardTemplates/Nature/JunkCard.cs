@@ -35,6 +35,12 @@ public class JunkCard : CardData
             junk.objective = reference.objective;
             junk.objective.linkedJunkedCards[objectiveIndex] = junk;
             junk.objectiveIndex = reference.objectiveIndex;
+
+            if(junk.objective.GetType() == typeof(KillJunkObj))
+            {
+                var obj = (KillJunkObj)junk.objective;
+                obj.SubscribeToJunkDeath(junk);
+            }
         }
 
         return junk;

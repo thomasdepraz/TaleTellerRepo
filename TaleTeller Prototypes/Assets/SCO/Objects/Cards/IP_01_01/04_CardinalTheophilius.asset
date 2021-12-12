@@ -15,7 +15,7 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Boosts permanently his Damage by +1
   trigger: 1
-  target: 1
+  target: 2
   range: 01000000
   values: []
   modifierValue:
@@ -23,6 +23,7 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &-2171829827178654687
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3981729826306011399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: Ennemies DMG +2 until the end of the turn.
+  trigger: 2
+  target: 2
+  range: 02000000
+  values: []
+  modifierValue:
+    value: 2
+    type: 1
+    op: 1
+  behaviourTargeted: 2
+  temporaryChange: 1
+--- !u!114 &-63025082628968401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7befc76d238a4244b44f25094d54ef8, type: 3}
+  m_Name: PlotObjective_KillJunkObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 'Defeat the 3 Armored Cultists. '
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 7e54607fb735e5c468b43f3a350a3277, type: 2}
+  - {fileID: 11400000, guid: 7e54607fb735e5c468b43f3a350a3277, type: 2}
+  - {fileID: 11400000, guid: 7e54607fb735e5c468b43f3a350a3277, type: 2}
+  numberToKill: 3
+  mustKillSpecific: 0
+  specificJunkToKill: []
+  plotOnBoard: 0
+  positionToValidate: 0
+  otherJunkOnBoard: 0
+  otherJunkToPlace: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: 03_TreasureAntechamber-B
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Treasure Antechamber
+  rarity: 0
+  archetype: 0
+  manaCost: 0
+  cardGraph: {fileID: 21300000, guid: 438304088f54f594ea961fab685a52db, type: 3}
+  currentContainer: {fileID: 0}
+  description: 'Defeat the 3 Armored Cultists.
+
+'
+  effectsReferences:
+  - {fileID: -3981729826306011399}
+  - {fileID: 4172616140185651241}
+  effects: []
+  cardTypeReference: {fileID: 8992087060354113490}
+  cardType: {fileID: 0}
+  objective: {fileID: -63025082628968401}
+  completionTimer: 4
+  isMainPlot: 1
+  isFinal: 0
+--- !u!114 &4172616140185651241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: Hero DMG +2 until the end of the turn.
+  trigger: 2
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 2
+    type: 1
+    op: 1
+  temporaryChange: 1
+--- !u!114 &8992087060354113490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f33840752c2ec438be3f9e8461a5a7, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}

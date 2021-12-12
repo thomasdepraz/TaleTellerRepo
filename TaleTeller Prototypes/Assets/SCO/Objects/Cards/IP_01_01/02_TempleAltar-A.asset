@@ -50,12 +50,12 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: For each step passed by the Hero, you draw one card from your Deck.
   trigger: 1
-  target: 2
+  target: 3
   range: 
   values: []
   drawValue:
     value: 1
-    type: 3
+    type: 5
     op: 3
 --- !u!114 &11400000
 MonoBehaviour:

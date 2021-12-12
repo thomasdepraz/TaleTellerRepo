@@ -19,6 +19,7 @@ public class PlaceJunkObj : JunkDrivenObj
     public override void SubscribeUpdateStatus(PlotCard data)
     {
         data.onCardEnter += UpdateStatus;
+        data.onStoryEnd += UpdateStatus;
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)
@@ -46,8 +47,8 @@ public class PlaceJunkObj : JunkDrivenObj
         var junkToPlaceData = specificJunkToPlace.Select(j => j.dataReference);
 
         var junkToTest = mustPlaceAll ?
-            linkedJunkedCards.Where(j => junkToPlaceData.Contains(j.dataReference)) 
-            :linkedJunkedCards;
+            linkedJunkedCards
+            : linkedJunkedCards.Where(j => junkToPlaceData.Contains(j.dataReference));
 
         var junkContainer = junkToTest.Select(j => j.currentContainer);
 
@@ -58,12 +59,21 @@ public class PlaceJunkObj : JunkDrivenObj
                 complete = false;
                 break;
             }
+            else if (!CardManager.Instance.board.IsCardOnBoard(container.data))
+            {
+                complete = false;
+                break;
+            }
         }
 
         if(plotOnBoard && (complete == true))
+        {
             if (linkedPlotData.currentContainer == null)
                 complete = false;
-
+            else if (!CardManager.Instance.board.IsCardOnBoard(linkedPlotData))
+                complete = false;
+        }
+            
         return complete;
     }
 }

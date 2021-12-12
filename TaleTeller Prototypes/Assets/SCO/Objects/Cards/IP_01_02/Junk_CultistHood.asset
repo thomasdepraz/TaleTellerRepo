@@ -55,10 +55,10 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Discard the first Card from the Deck.
   trigger: 1
-  target: 3
+  target: 4
   range: 
   values: []
   discardValue:
     value: 1
-    type: 3
+    type: 5
     op: 2

@@ -15,13 +15,14 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Boosts permanently the Damage of the Hero by +3.
   trigger: 1
-  target: 0
+  target: 1
   range: 
   values: []
   gainValue:
     value: 3
     type: 1
     op: 1
+  temporaryChange: 0
 --- !u!114 &-3838742163466085264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,8 +42,10 @@ MonoBehaviour:
   numberToKill: 1
   mustKillSpecific: 0
   specificJunkToKill: []
-  mustBeOnBoard: 1
+  plotOnBoard: 0
   positionToValidate: 1
+  otherJunkOnBoard: 0
+  otherJunkToPlace: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

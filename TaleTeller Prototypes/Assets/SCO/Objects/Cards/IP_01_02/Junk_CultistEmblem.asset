@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Junk_CultistEmblem
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: 'Cultist''s Toga '
+  cardName: Cultist's Cultist Emblem
   rarity: 0
   archetype: 0
   manaCost: 0
@@ -55,10 +55,10 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Discard the first Card from the Deck.
   trigger: 1
-  target: 3
+  target: 4
   range: 
   values: []
   discardValue:
     value: 1
-    type: 3
+    type: 5
     op: 2

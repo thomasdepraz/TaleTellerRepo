@@ -6,7 +6,7 @@ public class TheophiliusTheCardinalObj : PlotObjective
 {
     public override void SubscribeUpdateStatus(PlotCard data)
     {
-        data.onCharDeath += UpdateStatus;
+        //data.onCharDeath += UpdateStatus;
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)

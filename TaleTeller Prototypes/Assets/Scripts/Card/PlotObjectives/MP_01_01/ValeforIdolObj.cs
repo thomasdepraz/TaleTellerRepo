@@ -8,9 +8,9 @@ public class ValeforIdolObj : PlotObjective
     int killCount;
     public override void SubscribeUpdateStatus(PlotCard data)
     {
-        //Subscribe UpdateStatus to junk death
-        foreach (var junk in data.objective.linkedJunkedCards)
-            junk.onCharDeath += UpdateStatus;
+    //    //Subscribe UpdateStatus to junk death
+    //    foreach (var junk in data.objective.linkedJunkedCards)
+    //        junk.onCharDeath += UpdateStatus;
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)

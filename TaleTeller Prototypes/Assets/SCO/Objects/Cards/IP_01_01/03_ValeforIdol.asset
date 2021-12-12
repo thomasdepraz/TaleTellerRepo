@@ -21,8 +21,10 @@ MonoBehaviour:
   numberToKill: 3
   mustKillSpecific: 0
   specificJunkToKill: []
-  mustBeOnBoard: 0
+  plotOnBoard: 0
   positionToValidate: 0
+  otherJunkOnBoard: 0
+  otherJunkToPlace: []
 --- !u!114 &-5860912044501747805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +84,7 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Decrease by -3 the Damage of any Enemy.
   trigger: 1
-  target: 1
+  target: 2
   range: 0500000009000000
   values: []
   modifierValue:
@@ -90,3 +92,4 @@ MonoBehaviour:
     type: 1
     op: 2
   behaviourTargeted: 2
+  temporaryChange: 0

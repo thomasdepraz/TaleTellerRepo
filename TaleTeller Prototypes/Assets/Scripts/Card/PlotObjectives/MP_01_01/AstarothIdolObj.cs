@@ -8,8 +8,8 @@ public class AstarothIdolObj : PlotObjective
 {
     public override void SubscribeUpdateStatus(PlotCard data)
     {
-        //Subscribe UpdateStatus to junk death
-        foreach (var junk in data.objective.linkedJunkedCards)
-            junk.onCharDeath += UpdateStatus;
+        ////Subscribe UpdateStatus to junk death
+        //foreach (var junk in data.objective.linkedJunkedCards)
+        //    junk.onCharDeath += UpdateStatus;
     }
 }

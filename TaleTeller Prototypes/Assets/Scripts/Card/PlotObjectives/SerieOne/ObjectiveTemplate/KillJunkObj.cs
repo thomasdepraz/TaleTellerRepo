@@ -26,9 +26,16 @@ public class KillJunkObj : JunkDrivenObj
 
     [Header("Plot Position Restrictions")]
     [Tooltip("Check this if the plot need to be on board to validate a kill")]
-    public bool mustBeOnBoard;
-    [ShowIf("mustBeOnBoard"), SerializeField]
+    public bool plotOnBoard;
+    [ShowIf("plotOnBoard"), SerializeField]
     protected PlotPos positionToValidate;
+
+    [Header("Junk Position Restriction")]
+    [Tooltip("Check this if other junk need to be on the board when the junk is killed")]
+    public bool otherJunkOnBoard;
+    [ShowIf("otherJunkOnBoard")]
+    public List<JunkCard> otherJunkToPlace = new List<JunkCard>();
+
 
     public override void SubscribeUpdateStatus(PlotCard data)
     {
@@ -37,11 +44,16 @@ public class KillJunkObj : JunkDrivenObj
         //Subscribe UpdateStatus to junk death
         foreach (var junk in data.objective.linkedJunkedCards)
         {
-            if (mustKillSpecific)
-                if (!specificJunkToKill.Contains(junk.dataReference))
-                    continue;
-            junk.onCharDeath += UpdateStatus;
+            SubscribeToJunkDeath(junk);
         }
+    }
+
+    public void SubscribeToJunkDeath(JunkCard junk)
+    {
+        if (mustKillSpecific)
+            if (!specificJunkToKill.Contains(junk.dataReference))
+                return;
+        junk.onCharDeath += UpdateStatus;
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)
@@ -81,7 +93,7 @@ public class KillJunkObj : JunkDrivenObj
     {
         bool increaseCount = true;
 
-        if (mustBeOnBoard)
+        if (plotOnBoard)
         {
             if (linkedPlotData.currentContainer.currentSlot != null)
             {
@@ -99,7 +111,24 @@ public class KillJunkObj : JunkDrivenObj
                 increaseCount = false;
         }
 
-        if(increaseCount)
+        if (otherJunkOnBoard)
+        {
+            var cardDataBoard = CardManager.Instance.board.slots
+                .Where(s => s.currentPlacedCard.data != data)
+                .Select(s => s.currentPlacedCard.data.dataReference);
+            var searchedJunkData = otherJunkToPlace.Select(j => j.dataReference).ToList();
+
+            foreach (CardData boardData in cardDataBoard)
+            {
+                if (searchedJunkData.Contains(boardData))
+                    searchedJunkData.Remove(boardData);
+            }
+
+            if (searchedJunkData.Count > 0)
+                increaseCount = false;
+        }
+
+        if (increaseCount)
             killCount++;
     }
 }

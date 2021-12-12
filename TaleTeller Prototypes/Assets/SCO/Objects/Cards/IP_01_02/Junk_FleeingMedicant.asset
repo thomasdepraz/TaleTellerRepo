@@ -42,12 +42,12 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Each time it get hit, draw 2 Card.
   trigger: 10
-  target: 2
+  target: 3
   range: 
   values: []
   drawValue:
-    value: 1
-    type: 3
+    value: 2
+    type: 5
     op: 1
 --- !u!114 &7545299564641475019
 MonoBehaviour:

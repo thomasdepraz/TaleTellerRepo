@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HeroData
   m_EditorClassIdentifier: 
   baseLifePoints: 20
-  baseAttackDamage: 1
+  baseAttackDamage: 20
   baseGold: 0
   baseMaxGold: 10
