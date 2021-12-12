@@ -15,7 +15,7 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Boosts permanently his Damage by +1
   trigger: 1
-  target: 1
+  target: 2
   range: 01000000
   values: []
   modifierValue:
@@ -23,6 +23,7 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &-2171829827178654687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,11 +71,11 @@ MonoBehaviour:
   effects: []
   cardTypeReference: {fileID: -2171829827178654687}
   cardType: {fileID: 0}
-  objective: {fileID: 201897440602304700}
+  objective: {fileID: 1072204418088904170}
   completionTimer: 5
   isMainPlot: 1
   isFinal: 1
---- !u!114 &201897440602304700
+--- !u!114 &1072204418088904170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,8 +84,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1234a385b3bdd9f43a4aac1187d0979f, type: 3}
-  m_Name: PlotObjective_TheophiliusTheCardinalObj
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
   objectiveName: 'Defeat Theophilus. '

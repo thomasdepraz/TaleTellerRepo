@@ -18,6 +18,7 @@ MonoBehaviour:
     baseAttackDamage: 6
   behaviour: 2
   fightingRange: 3
+  doubleStrike: 0
   useCount: 2
 --- !u!114 &-33065891949352848
 MonoBehaviour:
@@ -34,7 +35,7 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: 'Deathrattle : The Enemy attack the last NPC or Hero who fought it.'
   trigger: 8
-  target: 1
+  target: 0
   range: 02000000
   values: []
 --- !u!114 &11400000

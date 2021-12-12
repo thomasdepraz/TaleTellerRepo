@@ -25,9 +25,8 @@ public class TempleAltarAObj : PlotObjective
             }
         }
 
-        if (allArtifactOnBoard)
+        if (PlotCompletionTest())
         {
-            //If so, complet plot
             EventQueue completeQueue = new EventQueue();
 
             linkedPlotData.CompletePlot(completeQueue);
@@ -37,9 +36,15 @@ public class TempleAltarAObj : PlotObjective
                 yield return new WaitForEndOfFrame();
         }
         else
-            //Else, go on
             yield return new WaitForEndOfFrame();
 
         currentQueue.UpdateQueue();
+    }
+
+    public bool PlotCompletionTest()
+    {
+        bool complete = false;
+
+        return complete;
     }
 }

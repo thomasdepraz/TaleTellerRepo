@@ -21,7 +21,7 @@ MonoBehaviour:
   drawValue:
     value: 2
     type: 5
-    op: 0
+    op: 1
 --- !u!114 &-4333080455492639140
 MonoBehaviour:
   m_ObjectHideFlags: 0

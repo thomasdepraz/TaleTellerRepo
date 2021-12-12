@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7347452110440273144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7befc76d238a4244b44f25094d54ef8, type: 3}
+  m_Name: PlotObjective_KillJunkObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 'Defeat the 3 Valefor''s replicas. '
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
+  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
+  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
+  numberToKill: 3
+  mustKillSpecific: 0
+  specificJunkToKill: []
+  plotOnBoard: 0
+  positionToValidate: 0
+  otherJunkOnBoard: 0
+  otherJunkToPlace: []
 --- !u!114 &-5860912044501747805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,7 +65,7 @@ MonoBehaviour:
   effects: []
   cardTypeReference: {fileID: -5860912044501747805}
   cardType: {fileID: 0}
-  objective: {fileID: 7234870132704495972}
+  objective: {fileID: -7347452110440273144}
   completionTimer: 3
   isMainPlot: 1
   isFinal: 0
@@ -59,7 +84,7 @@ MonoBehaviour:
   linkedData: {fileID: 0}
   description: Decrease by -3 the Damage of any Enemy.
   trigger: 1
-  target: 1
+  target: 2
   range: 0500000009000000
   values: []
   modifierValue:
@@ -67,22 +92,4 @@ MonoBehaviour:
     type: 1
     op: 2
   behaviourTargeted: 2
---- !u!114 &7234870132704495972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d23f221cc5f3d04fb77179c1d1b9261, type: 3}
-  m_Name: PlotObjective_ValeforIdolObj
-  m_EditorClassIdentifier: 
-  linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat the 3 Valefor''s replicas. '
-  linkedJunkedCards:
-  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
-  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
-  - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
-  killObjective: 3
+  temporaryChange: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DCEffect : MalusEffect
 {
@@ -23,7 +24,7 @@ public class DCEffect : MalusEffect
         List<CardData> targets = GetTargets();
 
         //Eventually filter the targets based on any property of the card you want -----
-
+        targets = targets.Where(t => t.GetType() != typeof(PlotCard)).ToList();
 
         //----
 
