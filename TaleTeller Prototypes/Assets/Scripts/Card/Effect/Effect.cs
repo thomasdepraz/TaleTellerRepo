@@ -56,7 +56,8 @@ public enum EffectValueType
     Card,
     MaxLife,
     BaseAttack,
-    MaxGold
+    MaxGold,
+    Choice
 }
 public enum EffectValueOperator
 {

@@ -1,29 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7795545901990621282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
-  m_Name: Effect1
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: 
-  trigger: 11
-  target: 2
-  range: 01000000
-  values: []
-  modifierValue:
-    value: 1
-    type: 1
-    op: 2
-  behaviourTargeted: 0
---- !u!114 &-603127733907315173
+--- !u!114 &-9207299857787731969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +19,11 @@ MonoBehaviour:
   range: 01000000
   values: []
   modifierValue:
-    value: 1
+    value: 6
     type: 0
-    op: 2
+    op: 1
   behaviourTargeted: 0
---- !u!114 &11400000
+--- !u!114 &-8201480308475489576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,26 +32,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Conjurer
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect1
   m_EditorClassIdentifier: 
-  dataReference: {fileID: 11400000}
-  cardName: Conjurer
-  rarity: 3
-  archetype: 3
-  manaCost: 2
-  cardGraph: {fileID: 0}
-  currentContainer: {fileID: 0}
+  linkedData: {fileID: 0}
   description: 
-  effectsReferences:
-  - {fileID: -603127733907315173}
-  - {fileID: -7795545901990621282}
-  - {fileID: 1212984328777861950}
-  - {fileID: 541559321432311043}
-  effects: []
-  cardTypeReference: {fileID: 2083461853720186675}
-  cardType: {fileID: 0}
---- !u!114 &541559321432311043
+  trigger: 11
+  target: 2
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 3
+    type: 1
+    op: 1
+  behaviourTargeted: 0
+--- !u!114 &-5485318600038900049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,11 +65,11 @@ MonoBehaviour:
   range: 01000000
   values: []
   modifierValue:
-    value: 4
+    value: 1
     type: 1
-    op: 1
+    op: 2
   behaviourTargeted: 0
---- !u!114 &1212984328777861950
+--- !u!114 &-2473154341330226124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,11 +88,39 @@ MonoBehaviour:
   range: 01000000
   values: []
   modifierValue:
-    value: 2
+    value: 1
     type: 0
-    op: 1
+    op: 2
   behaviourTargeted: 0
---- !u!114 &2083461853720186675
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Old Sage
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Old Sage
+  rarity: 3
+  archetype: 3
+  manaCost: 2
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -9207299857787731969}
+  - {fileID: -8201480308475489576}
+  - {fileID: -2473154341330226124}
+  - {fileID: -5485318600038900049}
+  effects: []
+  cardTypeReference: {fileID: 2561184032536904974}
+  cardType: {fileID: 0}
+--- !u!114 &2561184032536904974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

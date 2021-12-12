@@ -28,8 +28,7 @@ public class DCEffect : MalusEffect
         //----
 
         //Discard random cards //TODO add logic to queue events
-        for (int i = 0; i < discardValue.value; i++)
-        {
+
             if (targets.Count > 0)
             {
                 EventQueue pickQueue = new EventQueue();
@@ -44,27 +43,12 @@ public class DCEffect : MalusEffect
                 }
 
                 //discard all of the picked cards
-                for (int x = 0; x < pickedCards.Count; x++)
+                for (int i = 0; i < pickedCards.Count; i++)
                 {
                     CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, discardQueue);
                 }
 
-                int r = Random.Range(0, targets.Count - 1);
-
-                /*if (target == EffectTarget.Hand)
-                {
-                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer, discardQueue);
-                }
-                else if (target == EffectTarget.Board)
-                {
-                    CardManager.Instance.board.DiscardCardFromBoard(targets[r].currentContainer, discardQueue);
-                }*/
-
-                targets.RemoveAt(r);
-
             }
-            else break;
-        }
 
         discardQueue.StartQueue(); //Actual Discard
 
