@@ -27,7 +27,9 @@ public class BuyEffect : Effect
             //Buy Feedback 
             yield return new WaitForSeconds(1);
 
-            buyQueue.events.Add(effectTriggerIfCanPay.EffectLogic(buyQueue));
+            linkedData.effects[linkedData.effects.IndexOf(this) + 1].OnTriggerEffect(buyQueue);
+
+            //effectTriggerIfCanPay.OnTriggerEffect(buyQueue);
         }
 
         buyQueue.StartQueue();
