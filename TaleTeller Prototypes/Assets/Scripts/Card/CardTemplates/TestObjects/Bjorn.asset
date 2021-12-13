@@ -14,34 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 3
+    baseLifePoints: 5
     baseAttackDamage: 2
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
   useCount: 2
---- !u!114 &-5362527975889865298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8534bb334c7f8d45867ae5392bd8f7f, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: 
-  trigger: 1
-  target: 3
-  range: 
-  values: []
-  discardValue:
-    value: 1
-    type: 5
-    op: 2
 --- !u!114 &-2929948930288730705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,8 +62,7 @@ MonoBehaviour:
   cardGraph: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
-  effectsReferences:
-  - {fileID: -5362527975889865298}
+  effectsReferences: []
   effects:
   - {fileID: -2929948930288730705}
   cardTypeReference: {fileID: -7395757881901780148}

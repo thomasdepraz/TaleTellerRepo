@@ -209,7 +209,6 @@ public class CardVisuals : MonoBehaviour
         cardDescriptionText.text = BuildDescription(data);
     }
 
-
     public void UpdateCharacterElements(CharacterType character)
     {
         switch(character.behaviour)//NOTE move the hardcoded string into a scriptable object or smthing
@@ -260,6 +259,38 @@ public class CardVisuals : MonoBehaviour
         }
        
         return result;
+    }
+
+
+    public void ShakeCard(CardContainer container, EventQueue queue)
+    {
+        LeanTween.rotateZ(container.gameObject, -3, 0.025f).setEaseOutCubic().setOnComplete(
+            value => LeanTween.rotateZ(container.gameObject, 3, 0.05f).setEaseInOutCubic().setLoopPingPong(2).setOnComplete(
+                val => LeanTween.rotateZ(container.gameObject, 0, 0.025f).setEaseOutCubic().setOnComplete(end => queue.resolved = true)));
+    }
+
+    public void CardAttack(CardContainer container, int direction, EventQueue queue = null)
+    {
+        if(Mathf.Abs(direction)> 0)
+        {
+            float originX = container.rectTransform.anchoredPosition.x;
+            LeanTween.moveLocalX(container.gameObject, originX + direction * -2f, 0.5f).setEaseOutQuint().setOnComplete(
+                value=> LeanTween.moveLocalX(container.gameObject, originX + direction * 50, 0.2f).setEaseInQuint().setOnComplete(
+                    val=> LeanTween.moveLocalX(container.gameObject, originX, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
+        }
+        else
+        {
+            float originY = container.rectTransform.anchoredPosition.y;
+            LeanTween.moveLocalY(container.gameObject, originY - 2f, 0.5f).setEaseOutQuint().setOnComplete(
+               value => LeanTween.moveLocalY(container.gameObject, originY + 50, 0.2f).setEaseInQuint().setOnComplete(
+                   val => LeanTween.moveLocalY(container.gameObject, originY, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
+        }
+    }
+    public void HealthFeedback()
+    {
+
+
+
     }
 
 
