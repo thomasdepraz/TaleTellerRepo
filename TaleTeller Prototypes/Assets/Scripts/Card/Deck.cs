@@ -210,7 +210,6 @@ public class Deck : MonoBehaviour
         //the card can be burn or push another card from the board
         if (dealtCard.GetType() == typeof(PlotCard)) //if its a plot card it pushes cards from the board
         {
-
             EventQueue pickQueue = new EventQueue();
             List<CardData> pickedCards = new List<CardData>();
 

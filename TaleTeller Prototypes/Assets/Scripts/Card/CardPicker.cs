@@ -45,9 +45,6 @@ public class CardPicker : MonoBehaviour
         if (!isInstantaneous) confirmed = false;
         else confirmed = true;
 
-        Color transparent = new Color(0, 0, 0, 0);
-        yield return null;
-
         //Fade in background
         bool fadeEnded = false;
         LeanTween.color(gameObject, Color.black, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; }) ;
@@ -76,6 +73,7 @@ public class CardPicker : MonoBehaviour
 
         ResetPlaceHolders();
 
+        Color transparent = new Color(0, 0, 0, 0);
         LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 
             onEnd => { canvasGroup.blocksRaycasts = false; queue.UpdateQueue(); });
 
