@@ -27,7 +27,7 @@ public class ValueChangeEffect : ValueModifierEffect
     }
 
     [Header("Modifier Param")]
-    private TypeToTarget allEffectValueModification;
+    private TypeToTarget effectValueModification;
     [Tooltip("Check this to revert the modification on storyEnd")]
     public bool modifyTemporary;
 
@@ -37,7 +37,7 @@ public class ValueChangeEffect : ValueModifierEffect
     {
         base.InitEffect(card);
 
-            values.Add(allEffectValueModification.modification);
+            values.Add(effectValueModification.modification);
 
         if (modifyTemporary)
             card.onStoryEnd += StartReverseModify;
@@ -56,44 +56,37 @@ public class ValueChangeEffect : ValueModifierEffect
         foreach (CardData card in targetedCards)
         {
             targetedEffect.AddRange(
-                card.effects.Where(e => e.values.Any(v => v.type == allEffectValueModification.typeToTarget && v.op == allEffectValueModification.operatorToTarget)));
+                card.effects.Where(e => e.values.Any(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget)));
         }
 
         foreach (Effect effect in targetedEffect)
         {
-            var targetedValues = effect.values.Where(v => v.type == allEffectValueModification.typeToTarget && v.op == allEffectValueModification.operatorToTarget) ;
+            var targetedValues = effect.values.Where(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget) ;
 
             foreach (EffectValue value in targetedValues)
             {
                 valuesInfos.Add(new ModifyValuesInfos(effect, value));
 
-                if (allEffectValueModification.typeToTarget != EffectValueType.Card)
+                switch (effectValueModification.modification.op)
                 {
-                    switch (allEffectValueModification.modification.op)
-                    {
-                        case EffectValueOperator.Addition:
-                            value.value += allEffectValueModification.modification.value;
-                            break;
+                    case EffectValueOperator.Addition:
+                        value.value += effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Division:
-                            value.value /= allEffectValueModification.modification.value;
-                            break;
+                    case EffectValueOperator.Division:
+                        value.value /= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Product:
-                            value.value *= allEffectValueModification.modification.value;
-                            break;
+                    case EffectValueOperator.Product:
+                        value.value *= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Substraction:
-                            value.value -= allEffectValueModification.modification.value;
-                            break;
+                    case EffectValueOperator.Substraction:
+                        value.value -= effectValueModification.modification.value;
+                        break;
 
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    value.value += allEffectValueModification.modification.value;
+                    default:
+                        break;
                 }
             }
         }
@@ -108,33 +101,26 @@ public class ValueChangeEffect : ValueModifierEffect
         {
             if (infos.effect?.linkedData?.currentContainer)
             {
-                if (effectValueToModifiy.type != EffectValueType.Card)
+                switch (effectValueModification.modification.op)
                 {
-                    switch (effectValueToModifiy.op)
-                    {
-                        case EffectValueOperator.Addition:
-                            infos.effect.values.Where(v => v == infos.value).First().value -= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Addition:
+                        infos.effect.values.Where(v => v == infos.value).First().value -= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Division:
-                            infos.effect.values.Where(v => v == infos.value).First().value *= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Division:
+                        infos.effect.values.Where(v => v == infos.value).First().value *= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Product:
-                            infos.effect.values.Where(v => v == infos.value).First().value /= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Product:
+                        infos.effect.values.Where(v => v == infos.value).First().value /= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Substraction:
-                            infos.effect.values.Where(v => v == infos.value).First().value += effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Substraction:
+                        infos.effect.values.Where(v => v == infos.value).First().value += effectValueModification.modification.value;
+                        break;
 
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    infos.effect.values.Where(v => v == infos.value).First().value -= effectValueToModifiy.value;
+                    default:
+                        break;
                 }
 
             }
