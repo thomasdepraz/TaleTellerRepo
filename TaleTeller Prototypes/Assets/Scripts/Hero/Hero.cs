@@ -1,18 +1,21 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
-    [Header("Stats")]
-    public int heroReviveCost;
-
     [Header("References")]
     [SerializeField] public HeroBaseData heroData;
 
     [Header("UI")]
+    public Image hpFrame;
+    public Image attackFrame;
+    public Image goldFrame;
+    [Space]
     public TextMeshProUGUI heroHpUI;
     public TextMeshProUGUI heroAttackUI;
     public TextMeshProUGUI heroGoldUI;
+
 
     //Private hero variables
     private int _maxLifePoints;
@@ -28,6 +31,7 @@ public class Hero : MonoBehaviour
         {
             _maxLifePoints = value;
             heroHpUI.text = lifePoints + "/" + value.ToString();
+            FrameTweening(hpFrame.gameObject);
         }
     }
     [HideInInspector]public int lifePoints 
@@ -50,6 +54,8 @@ public class Hero : MonoBehaviour
             //Different feedack if damage taken or if healed
             if(diff != 0 && diff!= maxLifePoints)
                 GameManager.Instance.storyManager.HeroLifeFeedback(diff);
+
+            FrameTweening(hpFrame.gameObject);
         }
     }
     [HideInInspector]public int attackDamage
@@ -59,6 +65,7 @@ public class Hero : MonoBehaviour
         {
             _attackDamage = value;
             heroAttackUI.text = value.ToString();
+            FrameTweening(attackFrame.gameObject);
         }
     }
     [HideInInspector]public int bonusDamage
@@ -72,6 +79,8 @@ public class Hero : MonoBehaviour
                 heroAttackUI.text = _attackDamage.ToString() + " + " + value.ToString();
             else
                 heroAttackUI.text = _attackDamage.ToString();
+
+            FrameTweening(attackFrame.gameObject);
         }
     }
 
@@ -84,6 +93,7 @@ public class Hero : MonoBehaviour
         {
             _maxGoldPoints = value;
             heroGoldUI.text = goldPoints + "/" + value.ToString();
+            FrameTweening(goldFrame.gameObject);
         }
     }
 
@@ -101,6 +111,7 @@ public class Hero : MonoBehaviour
                 _goldPoints = 0;
 
             heroGoldUI.text = goldPoints.ToString() + "/" + maxGoldPoints;
+            FrameTweening(goldFrame.gameObject);
         }
     }
 
@@ -113,8 +124,6 @@ public class Hero : MonoBehaviour
         bonusDamage = 0;
         goldPoints = heroData.baseGold;
         maxGoldPoints = heroData.baseMaxGold;
-
-        //Initialize graphics on story line
     }
     
     // Start is called before the first frame update
@@ -123,9 +132,9 @@ public class Hero : MonoBehaviour
         InitializeHero();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void FrameTweening(GameObject frame)
     {
-        
+        LeanTween.scale(frame, new Vector3(1.1f, 1.1f, 1.1f), 0.2f).setEaseInOutCubic().setLoopPingPong(1);
     }
 }
