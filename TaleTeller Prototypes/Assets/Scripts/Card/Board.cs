@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public enum BoardState
 {
@@ -276,6 +277,15 @@ public class Board : MonoBehaviour
                     case nameof(data.onStoryEnd):
                         if (data.onStoryEnd != null) data.onStoryEnd(queue); //This line support the call of the end of story event
                         break;
+
+                    case nameof(data.illumination):
+                        if (data.illumination != null) data.illumination(queue);
+                        break;
+
+                    case nameof(data.overload):
+                        if (data.overload != null) data.overload(queue);
+                        break;
+
                 }
             }
         }

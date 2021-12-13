@@ -30,6 +30,12 @@ public class PlotObjective : ScriptableObject
     public virtual void SubscribeUpdateStatus(PlotCard data) 
         => data.onCardEnter += UpdateStatus;
 
+    public void UpdateStatus(EventQueue queue)//TODO REMOVE VIRTUAL
+    {
+        //Here is the logic that checks the objective winning condition
+        queue.events.Add(UpdateStatusRoutine(queue, null));
+    }
+
     public void UpdateStatus(EventQueue queue, CardData data)//TODO REMOVE VIRTUAL
     {
         //Here is the logic that checks the objective winning condition

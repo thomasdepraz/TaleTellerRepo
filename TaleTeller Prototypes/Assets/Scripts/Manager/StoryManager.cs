@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,23 +61,6 @@ public class StoryManager : Singleton<StoryManager>
         }
 
 
-        //Mana refill
-        CardManager.Instance.manaSystem.RefillMana();
-
-        //On Turn Begin Events
-        if (turnCount > 0)
-        {
-            EventQueue onStartTurnQueue = new EventQueue();
-
-            CallGeneralEvent("onTurnStart", onStartTurnQueue);
-
-            onStartTurnQueue.StartQueue();
-            while(!onStartTurnQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-        }
-
         //Deal Cards
         int numberOfCardsToDeal = 0;
         if (turnCount == 0)
@@ -93,6 +77,23 @@ public class StoryManager : Singleton<StoryManager>
         {
             yield return new WaitForEndOfFrame();
         }
+
+        //On Turn Begin Events
+        if (turnCount > 0)
+        {
+            EventQueue onStartTurnQueue = new EventQueue();
+
+            CallGeneralEvent("onTurnStart", onStartTurnQueue);
+
+            onStartTurnQueue.StartQueue();
+            while (!onStartTurnQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        //Mana Init
+        CardManager.Instance.manaSystem.StartTurnManaInit();
 
         //Enable interaction with cards and go button
         CardManager.Instance.board.currentBoardState = BoardState.Idle;
@@ -146,6 +147,8 @@ public class StoryManager : Singleton<StoryManager>
             Destroy(cardsToDestroy[0]);
             cardsToDestroy.RemoveAt(0);
         }
+
+        GameManager.Instance.currentHero.bonusDamage = 0; 
 
         yield return new WaitForSeconds(1);
 

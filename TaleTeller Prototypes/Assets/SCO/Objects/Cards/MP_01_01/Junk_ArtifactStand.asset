@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9055926932675580383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Effect0
+  m_EditorClassIdentifier: Assembly-CSharp::HeroSmallChangeEffect
+  linkedData: {fileID: 0}
+  description: The Hero takes 4 Damage.
+  trigger: 1
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 4
+    type: 0
+    op: 2
+  temporaryChange: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
+  m_Name: Junk_ArtifactStand
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: 'Piece of Artifact (Stand) '
+  rarity: 0
+  archetype: 0
+  manaCost: 0
+  cardGraph: {fileID: 21300000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
+  currentContainer: {fileID: 0}
+  description: "Les jambes d'une statuette.\r"
+  effectsReferences:
+  - {fileID: -9055926932675580383}
+  effects: []
+  cardTypeReference: {fileID: 6818503586894006659}
+  cardType: {fileID: 0}
+  objective: {fileID: 0}
+  objectiveIndex: 0
+--- !u!114 &6818503586894006659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}

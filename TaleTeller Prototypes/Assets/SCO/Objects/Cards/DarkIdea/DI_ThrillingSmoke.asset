@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-304829799497380990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: "On Enter: Les alli\xE9es perdent 1 ATK"
+  trigger: 1
+  target: 2
+  range: 0500000009000000
+  values: []
+  modifierValue:
+    value: 1
+    type: 1
+    op: 2
+  behaviourTargeted: 1
+  temporaryChange: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2da51b505a97244a37f6280d9bc249, type: 3}
+  m_Name: DI_ThrillingSmoke
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: '" Thrilling Smoke" '
+  rarity: 0
+  archetype: 0
+  manaCost: 0
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: "Une fum\xE9e rose avec des paillettes\r\n"
+  effectsReferences:
+  - {fileID: 1453343127823823298}
+  - {fileID: -304829799497380990}
+  effects: []
+  cardTypeReference: {fileID: 8564673809877255836}
+  cardType: {fileID: 0}
+--- !u!114 &1453343127823823298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056f46d3945187c4684672eca36839ee, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: Obsessing
+  trigger: 7
+  target: 0
+  range: 
+  values: []
+  manaModificationValue:
+    value: 1
+    type: 9
+    op: 2
+  turnToLast: 1
+--- !u!114 &8564673809877255836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}

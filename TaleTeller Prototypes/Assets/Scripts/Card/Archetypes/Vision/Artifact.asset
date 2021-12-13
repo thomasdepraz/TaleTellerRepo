@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5125809298781709372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74ed66125fff484da8e3bfc2169aa1a, type: 3}
+  m_Name: Effect2
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 4
+  range: 
+  values: []
+  choiceValue:
+    value: 2
+    type: 9
+    op: 0
+--- !u!114 &-2849355998673068844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 2
+  range: 0500000009000000
+  values: []
+  gainValue:
+    value: 4
+    type: 0
+    op: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Artifact
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Artifact
+  rarity: 4
+  archetype: 3
+  manaCost: 1
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -2849355998673068844}
+  - {fileID: 2110018113262470679}
+  - {fileID: -5125809298781709372}
+  effects: []
+  cardTypeReference: {fileID: 2213873534620985300}
+  cardType: {fileID: 0}
+--- !u!114 &2110018113262470679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 2
+  range: 0500000009000000
+  values: []
+  gainValue:
+    value: 4
+    type: 1
+    op: 1
+--- !u!114 &2213873534620985300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}

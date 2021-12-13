@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DCEffect : MalusEffect
 {
@@ -23,31 +24,32 @@ public class DCEffect : MalusEffect
         List<CardData> targets = GetTargets();
 
         //Eventually filter the targets based on any property of the card you want -----
-
+        targets = targets.Where(t => t.GetType() != typeof(PlotCard)).ToList();
 
         //----
 
         //Discard random cards //TODO add logic to queue events
-        for (int i = 0; i < discardValue.value; i++)
-        {
+
             if (targets.Count > 0)
             {
-                int r = Random.Range(0, targets.Count - 1);
+                EventQueue pickQueue = new EventQueue();
+                List<CardData> pickedCards = new List<CardData>();
 
-                if (target == EffectTarget.Hand)
+                CardManager.Instance.cardPicker.Pick(pickQueue, CardManager.Instance.cardHand.GetHandDataList(), pickedCards, discardValue.value, false);
+
+                pickQueue.StartQueue();
+                while (!pickQueue.resolved)
                 {
-                    CardManager.Instance.cardHand.DiscardCardFromHand(targets[r].currentContainer, discardQueue);
-                }
-                else if (target == EffectTarget.Board)
-                {
-                    CardManager.Instance.board.DiscardCardFromBoard(targets[r].currentContainer, discardQueue);
+                    yield return new WaitForEndOfFrame();
                 }
 
-                targets.RemoveAt(r);
+                //discard all of the picked cards
+                for (int i = 0; i < pickedCards.Count; i++)
+                {
+                    CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, discardQueue);
+                }
 
             }
-            else break;
-        }
 
         discardQueue.StartQueue(); //Actual Discard
 

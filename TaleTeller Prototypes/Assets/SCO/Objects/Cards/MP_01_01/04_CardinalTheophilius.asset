@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5870541606590928338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: Boosts permanently his Damage by +1
+  trigger: 1
+  target: 2
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 1
+    type: 1
+    op: 1
+  behaviourTargeted: 0
+  temporaryChange: 0
+--- !u!114 &-2171829827178654687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 1
+    baseAttackDamage: 4
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  useCount: 5
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: 04_CardinalTheophilius
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: 
+  rarity: 0
+  archetype: 0
+  manaCost: 0
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 'Defeat Theophilus.
+
+'
+  effectsReferences:
+  - {fileID: -5870541606590928338}
+  effects: []
+  cardTypeReference: {fileID: -2171829827178654687}
+  cardType: {fileID: 0}
+  objective: {fileID: 1072204418088904170}
+  completionTimer: 5
+  isMainPlot: 1
+  isFinal: 1
+--- !u!114 &1072204418088904170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 'Defeat Theophilus. '
+  linkedJunkedCards: []
