@@ -29,22 +29,8 @@ MonoBehaviour:
   cardName: Avarice Pot
   rarity: 0
   archetype: 0
-  isKeyCard: 0
-  keyCardActivated: 0
-  interestCooldown: 0
-  currentInterestCooldown: 0
-  creativityBurn: 0
-  type: 0
-  characterBehaviour: 0
-  characterStats:
-    baseLifePoints: 0
-    baseAttackDamage: 0
-  trigger: 0
-  creativityCost: 1
-  effect: {fileID: 0}
-  deadCardEffect: {fileID: 0}
+  manaCost: 0
   cardGraph: {fileID: 0}
-  feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -65,7 +51,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Draw
+  description: Draw $drawValue$ card(s).
   trigger: 1
   target: 0
   range: 
