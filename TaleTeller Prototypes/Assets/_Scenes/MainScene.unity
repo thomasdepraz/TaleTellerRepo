@@ -8679,7 +8679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba97327e9151ee47bcc2d8153277479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMana: 6
+  maxManaBase: 6
+  maxManaModifier: 0
   currentMana: 0
 --- !u!1 &1266171740
 GameObject:
@@ -14156,10 +14157,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e92f18980cd8228439f1f7b7a3219d07, type: 2}
   - {fileID: 11400000, guid: e92f18980cd8228439f1f7b7a3219d07, type: 2}
   - {fileID: 11400000, guid: e92f18980cd8228439f1f7b7a3219d07, type: 2}
-  - {fileID: 11400000, guid: 73e473b54dfcae04292153c82f9b0d2e, type: 2}
-  - {fileID: 11400000, guid: 73e473b54dfcae04292153c82f9b0d2e, type: 2}
-  - {fileID: 11400000, guid: 73e473b54dfcae04292153c82f9b0d2e, type: 2}
-  - {fileID: 11400000, guid: 73e473b54dfcae04292153c82f9b0d2e, type: 2}
 --- !u!1 &2100259929
 GameObject:
   m_ObjectHideFlags: 0

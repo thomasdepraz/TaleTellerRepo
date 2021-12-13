@@ -82,7 +82,7 @@ MonoBehaviour:
   dataReference: {fileID: 11400000}
   cardName: 'Midas the Prophet of Mendicity '
   rarity: 0
-  archetype: 0
+  archetype: 2
   manaCost: 1
   cardGraph: {fileID: 21300000, guid: 438304088f54f594ea961fab685a52db, type: 3}
   currentContainer: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &5853567621954174126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +156,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 66b80b5a5bbe52f44bc7fa34f2b754dc, type: 2}
   - {fileID: 11400000, guid: 66b80b5a5bbe52f44bc7fa34f2b754dc, type: 2}
   - {fileID: 11400000, guid: 3ab90b80baa4e174d8f224a40920ad58, type: 2}
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []
 --- !u!114 &6365024334818842942
 MonoBehaviour:
   m_ObjectHideFlags: 0
