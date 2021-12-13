@@ -16,12 +16,7 @@ public class CardContainer : MonoBehaviour
 
     public BoardSlot currentSlot;
     public CardData data;
-    public TextMeshProUGUI cardName;
-    public TextMeshProUGUI cardDescription;
-    public TextMeshProUGUI cardCreativityCost;
-
-    public GameObject attackUI, healthUI, timerUI;
-    public TextMeshProUGUI attackText, healthText, timerText;
+    public CardVisuals visuals;
 
     public RectTransform shadowTransform;
 
@@ -56,45 +51,27 @@ public class CardContainer : MonoBehaviour
     {
         this.data = data;
 
-        attackUI.SetActive(false);
-        healthUI.SetActive(false);
-        timerUI.SetActive(false);
+        //load Data and activate gameobject
+        visuals.InitializeVisuals(data);
+
+        basePosition = transform.position;
 
         if(!isPlaceHolder)
             data.currentContainer = this;
 
-        if(data.cardType!= null && data.cardType.GetType() == typeof(CharacterType))//If Character
-        {
-            CharacterType character = data.cardType as CharacterType;
-            attackUI.SetActive(true);
-            healthUI.SetActive(true);
-            //timerUI.SetActive(true);
-
-            attackText.text = character.stats.baseAttackDamage.ToString();
-            healthText.text = character.stats.baseLifePoints.ToString();
-            //timerText.text = character.useCount.ToString();
-        }
-
-
-        //load Data and activate gameobject
-        basePosition = transform.position;
-        cardName.text = data.cardName;
-
-        cardCreativityCost.text = data.manaCost.ToString();
 
         gameObject.SetActive(true);
         originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
 
         //add random rotation 
         rectTransform.rotation = new Quaternion(0,0,Random.Range(-0.1f,0.1f),1);
+
+
+
     }
     public void ResetContainer(bool isPlaceholder = false)
     {
         //unload Data and deactivate gameobject
-        cardName.text = string.Empty;
-        cardDescription.text = string.Empty;
-        cardCreativityCost.text = string.Empty;
-        
         if(currentSlot != null)
         {
             currentSlot.currentPlacedCard = null;
@@ -412,14 +389,16 @@ public class CardContainer : MonoBehaviour
     #region Utility
     public void UpdateCharacterInfo(CharacterType character)
     {
-        attackUI.SetActive(true);
-        healthUI.SetActive(true);
-        //timerUI.SetActive(true);
-
-        attackText.text = character.stats.baseAttackDamage.ToString();
-        healthText.text = character.stats.baseLifePoints.ToString();
-        //timerText.text = character.useCount.ToString();
+        visuals.UpdateCharacterElements(character);
     }
 
+    public void UpdatePlotInfo(PlotCard card)
+    {
+        visuals.UpdatePlotElements(card);
+    }
+    public void UpdateBaseInfo()
+    {
+        visuals.UpdateBaseElements(data);
+    }
     #endregion
 }
