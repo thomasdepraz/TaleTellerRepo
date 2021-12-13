@@ -298,8 +298,26 @@ public class CharacterType : CardTypes
             }
             else//If Im currently resolving this card event, the have to be cleared to prevent errors
             {
-                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
-                ClearCharacterEvents(discardQueue);//Add queue event 
+                ClearCharacterEvents(discardQueue); 
+
+                if(data.GetType() != typeof(PlotCard))//Only discard on death if not plot card
+                {
+                    CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+                }
+                else//Maybe do something else
+                {
+                    PlotCard plot = data as PlotCard;
+                    if(plot.isMainPlot) //if main hide the card
+                    {
+                        //TEMP do next choice for now later hide the card
+                        plot.OnEndPlotComplete(discardQueue);
+                    }
+                    else //if secondary send to oblivion
+                    {
+                        data.currentContainer.ResetContainer();
+                        StoryManager.Instance.cardsToDestroy.Add(data);
+                    }
+                }
             }
 
             discardQueue.StartQueue();

@@ -118,7 +118,6 @@ public class PlotCard : CardData
     }
     IEnumerator OnEndPlotCompleteRoutine(EventQueue currentQueue)
     {
-        yield return null;
         
         //Destroy
         currentContainer.ResetContainer();
@@ -216,7 +215,7 @@ public class PlotCard : CardData
     {
         queue.events.Add(FailPilotRoutine(queue));
     }
-    public IEnumerator FailPilotRoutine(EventQueue currentQueue)
+    public IEnumerator FailPilotRoutine(EventQueue currentQueue)//TODO
     {
         yield return null;
         if (isMainPlot)
