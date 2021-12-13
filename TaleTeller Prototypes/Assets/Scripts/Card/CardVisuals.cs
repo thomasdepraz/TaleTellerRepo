@@ -206,10 +206,7 @@ public class CardVisuals : MonoBehaviour
         cardNameText.text = data.cardName;
 
         //GetDescription // Update Description
-        //cardDescriptionText.text = BuildDescription(data);
-
-        //TEMP
-        cardDescriptionText.text = data.description;
+        cardDescriptionText.text = BuildDescription(data);
     }
 
 
@@ -247,6 +244,20 @@ public class CardVisuals : MonoBehaviour
     public string BuildDescription(CardData data)
     {
         string result = String.Empty;
+
+
+        for (int i = 0; i < data.effects.Count; i++)
+        {
+            result += data.effects[i].GetDescription(data.effects[i]);
+            result += "\n";   
+        }
+
+        //Add objective description ? NOTE
+        if(data.GetType() == typeof(PlotCard))
+        {
+            PlotCard plot = data as PlotCard;
+            result += "Objective : " + plot.objective.objectiveName;
+        }
        
         return result;
     }
