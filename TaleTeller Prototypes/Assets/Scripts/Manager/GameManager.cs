@@ -1,17 +1,19 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 
 public class GameManager : Singleton<GameManager>
 {
     [Header("References")]
     public Hero currentHero;
     public StoryManager storyManager;
-    public CreativityManager creativityManager;
     public GameObject goButton;
     public Image fadePanel;
-    public GameObject gameOverText;
     public Pointer pointer;
+    public Button returnToMenuButton;
 
     public void Awake()
     {
@@ -31,37 +33,41 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void Update()
-    {
-        if(gameOverText.activeSelf)
-        {
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-
-        }
-
-    }
-
     #region GameOver
-    public void GameOver()
+    public void GameOver(EventQueue queue)
     {
-        StartCoroutine(GameOverCoroutine());
+        queue.events.Add(GameOverCoroutine(queue));
     }
 
-    IEnumerator GameOverCoroutine()
+    IEnumerator GameOverCoroutine(EventQueue queue)
     {
+        //Fade To Black
+        //NOTE USE SOMETHING ELSE LATER
         Fade(true);
-        yield return new WaitForSeconds(0.8f);
-        gameOverText.SetActive(true);
+        yield return new WaitForSeconds(1);
+
+        List<EventQueue> events  = new List<EventQueue>();
+        events = StoryManager.Instance.queueList;
+
+        //Destroy all event queue and stop all of there coroutines
+        while(events.Count > 1)
+        {
+            for (int i = 0; i < events[0].events.Count; i++)
+            {
+                StopCoroutine(events[0].events[i]);
+            }
+
+            events.RemoveAt(0);
+        }
+
+
+        //Return to Menu Button
+        returnToMenuButton.gameObject.SetActive(true);
     }
-    
-    
     #endregion
+
+    public void LoadScene(string sceneName)
+    {
+        //SceneManager.LoadScene(sceneName);//TODO
+    }   
 }

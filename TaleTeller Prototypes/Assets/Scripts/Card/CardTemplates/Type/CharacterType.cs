@@ -97,6 +97,24 @@ public class CharacterType : CardTypes
             {
                 GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
                 //check for player death, if still alive then keep going
+
+                if(GameManager.Instance.currentHero.lifePoints <=0 )
+                {
+                    //Dead player animation
+
+
+                    EventQueue gameOverQueue = new EventQueue();
+                    GameManager.Instance.GameOver(gameOverQueue);
+                    gameOverQueue.StartQueue();
+                    while(!gameOverQueue.resolved)
+                    {
+                        yield return new WaitForEndOfFrame();
+                    }
+
+                }
+
+
+
             }
 
             yield return new WaitForSeconds(0.2f);

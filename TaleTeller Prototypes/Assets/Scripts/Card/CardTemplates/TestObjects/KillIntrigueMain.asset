@@ -16,22 +16,8 @@ MonoBehaviour:
   cardName: Kill Main
   rarity: 0
   archetype: 0
-  isKeyCard: 0
-  keyCardActivated: 0
-  interestCooldown: 0
-  currentInterestCooldown: 0
-  creativityBurn: 0
-  type: 0
-  characterBehaviour: 0
-  characterStats:
-    baseLifePoints: 0
-    baseAttackDamage: 0
-  trigger: 0
-  creativityCost: 0
-  effect: {fileID: 0}
-  deadCardEffect: {fileID: 0}
+  manaCost: 0
   cardGraph: {fileID: 0}
-  feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences: []
@@ -39,9 +25,10 @@ MonoBehaviour:
   cardTypeReference: {fileID: 0}
   cardType: {fileID: 0}
   objective: {fileID: 1248595633527693001}
-  completionTimer: 3
+  completionTimer: 1
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &1248595633527693001
 MonoBehaviour:
   m_ObjectHideFlags: 0
