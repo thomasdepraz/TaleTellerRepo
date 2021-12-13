@@ -57,7 +57,7 @@ public enum EffectValueType
     MaxLife,
     BaseAttack,
     MaxGold,
-    Choice
+    Choice,
     ManaMax,
     CardCost
 }
