@@ -35,7 +35,7 @@ public class DCEffect : MalusEffect
                 EventQueue pickQueue = new EventQueue();
                 List<CardData> pickedCards = new List<CardData>();
 
-                CardManager.Instance.cardPicker.Pick(pickQueue, CardManager.Instance.cardHand.GetHandDataList(), pickedCards, discardValue.value, false);
+                CardManager.Instance.cardPicker.Pick(pickQueue, targets, pickedCards, discardValue.value, false);
 
                 pickQueue.StartQueue();
                 while (!pickQueue.resolved)

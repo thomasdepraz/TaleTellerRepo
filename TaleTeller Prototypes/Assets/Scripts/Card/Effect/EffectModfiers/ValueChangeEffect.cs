@@ -21,12 +21,15 @@ public class ValueChangeEffect : ValueModifierEffect
     [Serializable]
     private struct TypeToTarget
     {
+        [SerializeField]
         internal EffectValueType typeToTarget;
+        [SerializeField]
         internal EffectValueOperator operatorToTarget;
+        [SerializeField]
         internal EffectValue modification;
     }
 
-    [Header("Modifier Param")]
+    [Header("Modifier Param"), SerializeField]
     private TypeToTarget effectValueModification;
     [Tooltip("Check this to revert the modification on storyEnd")]
     public bool modifyTemporary;
