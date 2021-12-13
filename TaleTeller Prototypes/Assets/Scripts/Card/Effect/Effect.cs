@@ -17,7 +17,7 @@ public enum Trigger
     OnTurnStart,
     OnCharDeath,
     OnCharFight,
-    OnCharHit,
+    OnCharHit
 }
 public enum EffectTarget
 {
@@ -54,7 +54,9 @@ public enum EffectValueType
     Card,
     MaxLife,
     BaseAttack,
-    MaxGold
+    MaxGold,
+    ManaMax,
+    CardCost
 }
 public enum EffectValueOperator
 {
