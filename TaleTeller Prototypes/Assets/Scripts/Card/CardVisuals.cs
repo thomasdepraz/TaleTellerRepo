@@ -206,8 +206,12 @@ public class CardVisuals : MonoBehaviour
         cardNameText.text = data.cardName;
 
         //GetDescription // Update Description
-        cardDescriptionText.text = BuildDescription(data);
+        //cardDescriptionText.text = BuildDescription(data);
+
+        //TEMP
+        cardDescriptionText.text = data.description;
     }
+
 
     public void UpdateCharacterElements(CharacterType character)
     {
