@@ -117,17 +117,6 @@ public class Hero : MonoBehaviour
         //Initialize graphics on story line
     }
     
-    public void ReviveHero()
-    {
-        //Apply creativityCost of reviving
-        GameManager.Instance.creativityManager.creativity -= heroReviveCost;
-
-        //Reset hero stats
-        lifePoints = maxLifePoints;
-        bonusDamage = 0;
-    }
-
-
     // Start is called before the first frame update
     void Start()
     {

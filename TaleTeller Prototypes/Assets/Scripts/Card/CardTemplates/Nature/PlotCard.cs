@@ -220,14 +220,28 @@ public class PlotCard : CardData
         yield return null;
         if (isMainPlot)
         {
-            //GameOver
+            //Show the card + why the player lost
 
+
+            //GameOver
+            EventQueue gameOverQueue = new EventQueue();
+
+            GameManager.Instance.GameOver(gameOverQueue);
+
+            gameOverQueue.StartQueue();
+            while(!gameOverQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
         else
         {
-            //Add malus card to player discard pile
+            // TODO Add malus card to player discard pile
 
-            //DestroyCard
+
+            //DestroyCard -- NOTE REGROUP THIS FUNCTION SOMEWHERE
+            currentContainer.ResetContainer();
+            StoryManager.Instance.cardsToDestroy.Add(this);
         }
 
         currentQueue.UpdateQueue();
