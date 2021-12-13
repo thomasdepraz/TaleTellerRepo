@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DrawXEffect : Effect
 {
+    public EffectValue xParameterMultiplier;
+
     public EffectValue xParameter;
-    public enum CardTypeParameter { None, Object, Character, Location };
+    public enum CardTypeParameter { None, All, Object, Character, Location };
 
     public CardTypeParameter cardTypeParameter;
 
@@ -13,7 +15,7 @@ public class DrawXEffect : Effect
     {
         base.InitEffect(card);
 
-        values.Add(xParameter);
+        values.Add(xParameterMultiplier);
     }
 
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
@@ -24,7 +26,11 @@ public class DrawXEffect : Effect
 
         int numberOfCardsToDraw = 0;
 
-        if (cardTypeParameter == CardTypeParameter.None)
+        if (cardTypeParameter == CardTypeParameter.All)
+        {
+            numberOfCardsToDraw = targets.Count;
+        }
+        else if (cardTypeParameter == CardTypeParameter.None)
             for (int i = 0; i < targets.Count; i++)
             {
                 if (linkedData != targets[i])
@@ -35,7 +41,7 @@ public class DrawXEffect : Effect
                         {
                             if (targets[i].effects[x].values[z].type == xParameter.type)
                             {
-                                numberOfCardsToDraw += xParameter.value;
+                                numberOfCardsToDraw += xParameterMultiplier.value;
                             }
                         }
                     }
@@ -51,21 +57,21 @@ public class DrawXEffect : Effect
                         case CardTypeParameter.Object:
                             if (targets[i].cardType is ObjectType)
                             {
-                                numberOfCardsToDraw += xParameter.value;
+                                numberOfCardsToDraw += xParameterMultiplier.value;
                             }
                             break;
 
                         case CardTypeParameter.Character:
                             if (targets[i].cardType is CharacterType)
                             {
-                                numberOfCardsToDraw += xParameter.value;
+                                numberOfCardsToDraw += xParameterMultiplier.value;
                             }
                             break;
 
                         case CardTypeParameter.Location:
                             if (targets[i].cardType is LocationType)
                             {
-                                numberOfCardsToDraw += xParameter.value;
+                                numberOfCardsToDraw += xParameterMultiplier.value;
                             }
                             break;
                     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class ValueChangeEffect : ValueModifierEffect
 {
@@ -17,8 +18,16 @@ public class ValueChangeEffect : ValueModifierEffect
         }
     }
 
+    [Serializable]
+    private struct TypeToTarget
+    {
+        internal EffectValueType typeToTarget;
+        internal EffectValueOperator operatorToTarget;
+        internal EffectValue modification;
+    }
+
     [Header("Modifier Param")]
-    public EffectValue effectValueToModifiy;
+    private TypeToTarget allEffectValueModification;
     [Tooltip("Check this to revert the modification on storyEnd")]
     public bool modifyTemporary;
 
@@ -27,6 +36,8 @@ public class ValueChangeEffect : ValueModifierEffect
     public override void InitEffect(CardData card)
     {
         base.InitEffect(card);
+
+            values.Add(allEffectValueModification.modification);
 
         if (modifyTemporary)
             card.onStoryEnd += StartReverseModify;
@@ -45,35 +56,35 @@ public class ValueChangeEffect : ValueModifierEffect
         foreach (CardData card in targetedCards)
         {
             targetedEffect.AddRange(
-                card.effects.Where(e => e.values.Any(v => v.type == effectValueToModifiy.type && v.op == effectValueToModifiy.op)));
+                card.effects.Where(e => e.values.Any(v => v.type == allEffectValueModification.typeToTarget && v.op == allEffectValueModification.operatorToTarget)));
         }
 
         foreach (Effect effect in targetedEffect)
         {
-            var targetedValues = effect.values.Where(v => v.type == effectValueToModifiy.type && v.op == effectValueToModifiy.op);
+            var targetedValues = effect.values.Where(v => v.type == allEffectValueModification.typeToTarget && v.op == allEffectValueModification.operatorToTarget) ;
 
             foreach (EffectValue value in targetedValues)
             {
                 valuesInfos.Add(new ModifyValuesInfos(effect, value));
 
-                if (effectValueToModifiy.type != EffectValueType.Card)
+                if (allEffectValueModification.typeToTarget != EffectValueType.Card)
                 {
-                    switch (effectValueToModifiy.op)
+                    switch (allEffectValueModification.modification.op)
                     {
                         case EffectValueOperator.Addition:
-                            value.value += effectValueToModifiy.value;
+                            value.value += allEffectValueModification.modification.value;
                             break;
 
                         case EffectValueOperator.Division:
-                            value.value /= effectValueToModifiy.value;
+                            value.value /= allEffectValueModification.modification.value;
                             break;
 
                         case EffectValueOperator.Product:
-                            value.value *= effectValueToModifiy.value;
+                            value.value *= allEffectValueModification.modification.value;
                             break;
 
                         case EffectValueOperator.Substraction:
-                            value.value -= effectValueToModifiy.value;
+                            value.value -= allEffectValueModification.modification.value;
                             break;
 
                         default:
@@ -82,7 +93,7 @@ public class ValueChangeEffect : ValueModifierEffect
                 }
                 else
                 {
-                    value.value += effectValueToModifiy.value;
+                    value.value += allEffectValueModification.modification.value;
                 }
             }
         }
