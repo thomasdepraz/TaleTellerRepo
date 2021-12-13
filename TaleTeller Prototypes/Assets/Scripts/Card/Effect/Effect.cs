@@ -17,7 +17,9 @@ public enum Trigger
     OnTurnStart,
     OnCharDeath,
     OnCharFight,
-    OnCharHit
+    OnCharHit,
+    Illumination,
+    Overload
 }
 public enum EffectTarget
 {
@@ -55,6 +57,7 @@ public enum EffectValueType
     MaxLife,
     BaseAttack,
     MaxGold,
+    Choice
     ManaMax,
     CardCost
 }
@@ -144,6 +147,14 @@ public class Effect : ScriptableObject
                 card.onCharHit += OnTriggerEffect;
                 break;
 
+            case Trigger.Illumination : 
+                card.illumination += OnTriggerEffect;
+                break;
+
+            case Trigger.Overload:
+                card.overload += OnTriggerEffect;
+                break;
+
             default:
                 break;
         }
@@ -151,12 +162,12 @@ public class Effect : ScriptableObject
 
     public virtual void OnTriggerEffect(EventQueue queue) //TODO REMOVE VIRTUAL
     {
-        //ajouter la coroutine à la queue
+        //ajouter la coroutine ï¿½ la queue
         queue.events.Add(EffectLogic(queue));
     }
     public virtual void OnTriggerEffect(EventQueue queue, CardData data = null) //TODO REMOVE VIRTUAL
     {
-        //ajouter la coroutine à la queue
+        //ajouter la coroutine ï¿½ la queue
         queue.events.Add(EffectLogic(queue, data));
     }
 

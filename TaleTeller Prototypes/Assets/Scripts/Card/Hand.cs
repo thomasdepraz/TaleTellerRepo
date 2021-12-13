@@ -46,8 +46,33 @@ public class Hand : MonoBehaviour
     }
     IEnumerator DiscardCardFromHandRoutine(CardContainer card, EventQueue queue)
     {
-        yield return null;
+        #region Event OnCardDiscard
+        EventQueue onCardDiscardQueue = new EventQueue();
+
+        if (card.data.onCardDiscard != null)
+            card.data.onCardDiscard(onCardDiscardQueue, card.data);
+
+        onCardDiscardQueue.StartQueue();
+        while (!onCardDiscardQueue.resolved)
+        { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        #region Event OnAnyCardDiscard (Overload)
+        EventQueue overloadQueue = new EventQueue();
+
+        CardManager.Instance.board.CallBoardEvents("overload", overloadQueue);
+
+        overloadQueue.StartQueue();
+        while (!overloadQueue.resolved)
+        { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+
+
         card.data = card.data.ResetData(card.data);
+
+
+
 
         currentHand.Remove(card);
         CardManager.Instance.cardDeck.discardPile.Add(card.data);

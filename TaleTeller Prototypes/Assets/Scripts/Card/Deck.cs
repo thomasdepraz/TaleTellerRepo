@@ -148,8 +148,17 @@ public class Deck : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        #endregion 
+        #endregion
 
+        #region Event OnAnyCardDrawn (Illumination)
+        EventQueue illuminationQueue = new EventQueue();
+
+        CardManager.Instance.board.CallBoardEvents("illumination", illuminationQueue);
+
+        illuminationQueue.StartQueue();
+        while(!illuminationQueue.resolved)
+        { yield return new WaitForEndOfFrame(); }
+        #endregion
 
         EventQueue dealQueue = new EventQueue();
         //TODO make the following logic in the queue so it can be animated-----------------

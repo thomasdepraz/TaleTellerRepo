@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawXEffect : Effect
+public class DrawXDependingTypeEffect : Effect
 {
     public EffectValue xParameter;
     public enum CardTypeParameter { None, Object, Character, Location };
@@ -90,5 +90,5 @@ public class DrawXEffect : Effect
 
         currentQueue.UpdateQueue();
     }
-}
 
+}

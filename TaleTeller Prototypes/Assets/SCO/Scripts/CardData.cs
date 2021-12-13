@@ -24,6 +24,7 @@ public enum Archetype
     None, 
     Base,
     Trading, 
+    Vision
 }
 
 [CreateAssetMenu(fileName = "Card", menuName = "Data/Card", order = 0)]
@@ -57,6 +58,8 @@ public class CardData : ScriptableObject
     public BoardEvent onStoryEnd;
     public BoardEvent onTurnEnd;
     public BoardEvent onTurnStart;
+    public BoardEvent illumination;
+    public BoardEvent overload;
 
     public delegate void CardEvent(EventQueue queue, CardData data);
     public CardEvent onCardEnter;
@@ -174,6 +177,21 @@ public class CardData : ScriptableObject
                 cardToReset.onTurnStart -= myDelegate as BoardEvent;
             }
         }
+        if (cardToReset.illumination != null)
+        {
+            foreach (var myDelegate in cardToReset.illumination.GetInvocationList())
+            {
+                cardToReset.illumination -= myDelegate as BoardEvent;
+            }
+        }
+        if (cardToReset.overload != null)
+        {
+            foreach (var myDelegate in cardToReset.overload.GetInvocationList())
+            {
+                cardToReset.overload -= myDelegate as BoardEvent;
+            }
+        }
+
 
         if (cardToReset.onCardEnter != null)
         {
