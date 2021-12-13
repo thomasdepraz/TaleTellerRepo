@@ -88,26 +88,3 @@ MonoBehaviour:
     value: 3
     type: 5
     op: 1
---- !u!114 &1730910495762319684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5b1c94cd704fa46b8e38ba3f28afd7, type: 3}
-  m_Name: Effect2
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: 
-  trigger: 0
-  target: 0
-  range: 
-  values: []
-  effectValueToModifiy:
-    value: 0
-    type: 0
-    op: 0
-  modifyTemporary: 0

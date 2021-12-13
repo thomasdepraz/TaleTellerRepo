@@ -43,15 +43,15 @@ public class ValueChangeEffect : ValueModifierEffect
             card.onStoryEnd += StartReverseModify;
     }
 
-    private void StartReverseModify(EventQueue queue)
-    {
-        queue.events.Add(ReverseModify(queue));
-    }
+     private void StartReverseModify(EventQueue queue)
+     {
+         queue.events.Add(ReverseModify(queue));
+     }
 
-    public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
-    {
-        var targetedCards = GetTargets();
-        List<Effect> targetedEffect = new List<Effect>();
+     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
+     {
+         var targetedCards = GetTargets();
+         List<Effect> targetedEffect = new List<Effect>();
 
         foreach (CardData card in targetedCards)
         {
@@ -63,9 +63,9 @@ public class ValueChangeEffect : ValueModifierEffect
         {
             var targetedValues = effect.values.Where(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget) ;
 
-            foreach (EffectValue value in targetedValues)
-            {
-                valuesInfos.Add(new ModifyValuesInfos(effect, value));
+             foreach (EffectValue value in targetedValues)
+             {
+                 valuesInfos.Add(new ModifyValuesInfos(effect, value));
 
                 switch (effectValueModification.modification.op)
                 {
@@ -91,9 +91,9 @@ public class ValueChangeEffect : ValueModifierEffect
             }
         }
 
-        yield return null;
-        currentQueue.UpdateQueue();
-    }
+         yield return null;
+         currentQueue.UpdateQueue();
+     }
 
     private IEnumerator ReverseModify(EventQueue queue)
     {
@@ -123,11 +123,11 @@ public class ValueChangeEffect : ValueModifierEffect
                         break;
                 }
 
-            }
+             }
 
-        }
+         }
 
-        yield return null;
-        queue.UpdateQueue();
-    }
+         yield return null;
+         queue.UpdateQueue();
+     }
 }
