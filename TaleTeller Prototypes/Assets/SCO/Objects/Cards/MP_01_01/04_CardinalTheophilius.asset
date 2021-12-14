@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Boosts permanently his Damage by +1
+  description: Gains itself + $modifierValue$ ATK Max.
   trigger: 1
   target: 2
   range: 01000000
@@ -75,6 +75,7 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 1
+  legendaryCardRewards: []
 --- !u!114 &1072204418088904170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,3 +91,6 @@ MonoBehaviour:
   linkedPlotData: {fileID: 0}
   objectiveName: 'Defeat Theophilus. '
   linkedJunkedCards: []
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []

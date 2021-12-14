@@ -38,7 +38,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: Restore +$gainValue$ HP.
   trigger: 1
   target: 1
   range: 
@@ -47,6 +47,7 @@ MonoBehaviour:
     value: 2
     type: 0
     op: 1
+  temporaryChange: 0
 --- !u!114 &3530037240211539447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +70,7 @@ MonoBehaviour:
     value: 0
     type: 0
     op: 0
+  temporaryChange: 0
 --- !u!114 &5079544832870409150
 MonoBehaviour:
   m_ObjectHideFlags: 0

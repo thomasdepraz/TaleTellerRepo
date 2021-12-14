@@ -69,6 +69,7 @@ MonoBehaviour:
   completionTimer: 3
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &3514053841172149742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Decrease by -3 the Damage of any Enemy.
+  description: Decrease by -$modifierValue$ ATK to any Evil characters.
   trigger: 1
   target: 2
   range: 0500000009000000

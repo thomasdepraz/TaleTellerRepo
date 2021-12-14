@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: For each step passed by the Hero, you draw one card from your Deck.
+  description: Draw $drawValue$ for each passed step.
   trigger: 1
   target: 3
   range: 
@@ -86,3 +86,4 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
