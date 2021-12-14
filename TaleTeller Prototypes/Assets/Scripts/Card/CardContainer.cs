@@ -53,6 +53,15 @@ public class CardContainer : MonoBehaviour
         {
             visuals.CardAttack(this, 0, new EventQueue());
         }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            visuals.EffectChangeFeedback(this, 1, new EventQueue());
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            visuals.EffectChangeFeedback(this, -1, new EventQueue());
+        }
+
     }
 
     #region Init/Reset
