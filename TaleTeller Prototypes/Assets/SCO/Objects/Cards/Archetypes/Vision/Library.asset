@@ -1,5 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7789928927547762029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc973acbbfda78747bee623593e0265c, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 2
+  range: 03000000
+  values: []
+  xParameterMultiplier:
+    value: 2
+    type: 5
+    op: 2
+  xParameter:
+    value: 0
+    type: 0
+    op: 0
+  cardTypeParameter: 1
+--- !u!114 &-7063442708471675679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f33840752c2ec438be3f9e8461a5a7, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22,8 +62,9 @@ MonoBehaviour:
   description: 
   effectsReferences:
   - {fileID: 1582580441359881252}
+  - {fileID: -7789928927547762029}
   effects: []
-  cardTypeReference: {fileID: 0}
+  cardTypeReference: {fileID: -7063442708471675679}
   cardType: {fileID: 0}
 --- !u!114 &1582580441359881252
 MonoBehaviour:

@@ -294,7 +294,7 @@ public class RewardManager : Singleton<RewardManager>
 
         List<CardData> result = new List<CardData>();
 
-        //FOR NOW PICK RANDOM CARDS WITHIN THIS FILTERD LIST -- LATER ADD WEIGHT AND DROP RATES
+        //NOTE FOR NOW PICK RANDOM CARDS WITHIN THIS FILTERD LIST -- LATER ADD WEIGHT AND DROP RATES
         for (int i = 0; i < count; i++)
         {
             if(filterdList.Count>0)

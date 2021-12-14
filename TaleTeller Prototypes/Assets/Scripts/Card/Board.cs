@@ -16,6 +16,7 @@ public class Board : MonoBehaviour
 {
     public int numberOfSlots;
     public List<BoardSlot> slots = new List<BoardSlot>();
+    public StoryLine storyLine;
 
     //Event Queues
     [HideInInspector] public List<IEnumerator> currentQueue = new List<IEnumerator>();
@@ -100,7 +101,7 @@ public class Board : MonoBehaviour
     void MoveToNextStep()//Move the focus from one step to another thus resolving it's events (Move the player too)
     {
         //Start coroutine for moving that calls for TriggerRead
-        StartCoroutine(tempMove(currentSlot));
+        StartCoroutine(Move(currentSlot));
     }
 
     void TriggerRead(int currentSlotIndex)
@@ -117,12 +118,15 @@ public class Board : MonoBehaviour
         }
     }
 
-    IEnumerator tempMove(int index)//Temp coroutine to test movement
+    IEnumerator Move(int index)//Temp coroutine to test movement
     {
-        Debug.Log("Start Moving");
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log("Stopped Moving");
-        yield return new WaitForSeconds(0.2f);
+        EventQueue moveQueue = new EventQueue();
+        storyLine.MovePlayer(moveQueue, index);
+        moveQueue.StartQueue();
+        while(!moveQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
 
         TriggerRead(index);
     }

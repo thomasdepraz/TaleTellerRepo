@@ -16,6 +16,8 @@ MonoBehaviour:
   objectiveName: 'Defeat the Guardian of the Temple while this card is on the Track. '
   linkedJunkedCards:
   - {fileID: 11400000, guid: d822834893ee77f40b1fbc48768f338a, type: 2}
+  junkSpawnLocations: 00000000
+  junksPositionsInDeck: 
   numberToKill: 1
   mustKillSpecific: 0
   specificJunkToKill: []

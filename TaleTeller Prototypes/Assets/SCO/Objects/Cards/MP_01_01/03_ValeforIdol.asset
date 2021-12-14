@@ -18,6 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
   - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
   - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
+  junkSpawnLocations: 000000000000000000000000
+  junksPositionsInDeck: 
   numberToKill: 3
   mustKillSpecific: 0
   specificJunkToKill: []

@@ -1,15 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ManaSystem : MonoBehaviour
 {
     [Header("Data")]
-    public int maxManaBase;
-    public int maxManaModifier;
-    public int currentMana;
+    public int _maxManaBase;
+    public int _maxManaModifier;
+    public int _currentMana;
 
+    public int maxManaBase
+    {
+        get => _maxManaBase;
+        set
+        {
+            _maxManaBase = value;
+            UpdateManaText();
+        }
+    }
+    public int maxManaModifier
+    {
+        get => _maxManaModifier;
+        set
+        {
+            _maxManaModifier = value;
+            UpdateManaText();
+        }
+    }
+    public int currentMana
+    {
+        get => _currentMana;
+        set
+        {
+            _currentMana = value;
+            UpdateManaText();
+        }
+    }
     public int ActualMaxMana
     {
         get 
@@ -18,6 +47,11 @@ public class ManaSystem : MonoBehaviour
             return manaToReturn; 
         }
     }
+
+    [Header("References")]
+    public Image manaFrame;
+    public Image manaFill;
+    public TextMeshProUGUI manaCountText;
 
     //ManaPool Modifier CallStackSystem
     public struct ManaPoolModifier
@@ -39,7 +73,8 @@ public class ManaSystem : MonoBehaviour
 
     void Start()
     {
-
+        //Init Text correctly
+        UpdateManaText();
     }
 
     public void StartTurnManaInit()
@@ -76,9 +111,16 @@ public class ManaSystem : MonoBehaviour
         if (currentMana - amount <= 0) currentMana = 0;
         else currentMana -= amount;
     }
+
     public bool CanUseCard(int cardCost)
     {
         if (currentMana - cardCost < 0) return false;
         else return true;
+    }
+
+    void UpdateManaText()
+    {
+        manaCountText.text = currentMana.ToString() + "/" + ActualMaxMana.ToString();
+        manaFill.fillAmount = (float)currentMana / (float)ActualMaxMana;
     }
 }

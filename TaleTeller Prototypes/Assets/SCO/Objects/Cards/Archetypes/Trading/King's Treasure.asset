@@ -87,6 +87,10 @@ MonoBehaviour:
   target: 2
   range: 0300000004000000
   values: []
+  xParameterMultiplier:
+    value: 2
+    type: 5
+    op: 1
   xParameter:
     value: 1
     type: 3

@@ -83,11 +83,38 @@ public class PlotCard : CardData
         //add all junk cards to deck for now -- TODO later call the appropriate method on plotObjective so it chooses where to send the cards TODO 
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
-            //objective.linkedJunkedCards[i] = objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]) as JunkCard;
-            CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+            switch(objective.junkSpawnLocations[i])
+            {
+                case PlotObjective.JunkSpawnLocation.EndDeck:
+                    //objective.linkedJunkedCards[i] = objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]) as JunkCard;
+                    CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+                    break;
+                case PlotObjective.JunkSpawnLocation.DeckRandom:
+                    CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count),objective.linkedJunkedCards[i]);
+                    break;
+                case PlotObjective.JunkSpawnLocation.XInDeck:
+                    if(!(objective.junksPositionsInDeck[i] > CardManager.Instance.cardDeck.cardDeck.Count))
+                        CardManager.Instance.cardDeck.cardDeck.Insert(objective.junksPositionsInDeck[i], objective.linkedJunkedCards[i]);
+                    else
+                        CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+                    break;
+                case PlotObjective.JunkSpawnLocation.Hand:
+                    CardManager.Instance.cardDeck.cardDeck.Insert(i, objective.linkedJunkedCards[i]);
+
+                    EventQueue drawQueue = new EventQueue();
+
+                    CardManager.Instance.cardDeck.DrawCards(1, drawQueue);
+
+                    drawQueue.StartQueue();//Actual draw
+                    while (!drawQueue.resolved)
+                    {
+                        yield return new WaitForEndOfFrame();
+                    }
+
+                    break;
+            }
+            
         }
-
-
         currentQueue.UpdateQueue();
     }
 
@@ -220,14 +247,28 @@ public class PlotCard : CardData
         yield return null;
         if (isMainPlot)
         {
-            //GameOver
+            //Show the card + why the player lost
 
+
+            //GameOver
+            EventQueue gameOverQueue = new EventQueue();
+
+            GameManager.Instance.GameOver(gameOverQueue);
+
+            gameOverQueue.StartQueue();
+            while(!gameOverQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
         else
         {
-            //Add malus card to player discard pile
+            // TODO Add malus card to player discard pile
 
-            //DestroyCard
+
+            //DestroyCard -- NOTE REGROUP THIS FUNCTION SOMEWHERE
+            currentContainer.ResetContainer();
+            StoryManager.Instance.cardsToDestroy.Add(this);
         }
 
         currentQueue.UpdateQueue();
@@ -241,6 +282,7 @@ public class PlotCard : CardData
     {
         yield return null;
         completionTimer--;
+        currentContainer.UpdatePlotInfo(this);
         if(completionTimer <= 0)
         {
             EventQueue failQueue = new EventQueue();

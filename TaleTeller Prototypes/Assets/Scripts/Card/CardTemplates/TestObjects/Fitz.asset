@@ -14,24 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Fitz
-  isKeyCard: 0
-  keyCardActivated: 0
-  interestCooldown: 0
-  currentInterestCooldown: 0
-  creativityBurn: 0
-  type: 0
-  characterBehaviour: 0
-  characterStats:
-    baseLifePoints: 0
-    baseAttackDamage: 0
-  trigger: 0
-  creativityCost: 1
-  effect: {fileID: 0}
-  deadCardEffect: {fileID: 0}
+  rarity: 0
+  archetype: 0
+  manaCost: 1
   cardGraph: {fileID: 0}
-  feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
+  effectsReferences: []
   effects:
   - {fileID: 7211528286915917914}
   cardTypeReference: {fileID: 4669547158987740351}
@@ -50,10 +39,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 2
+    baseLifePoints: 5
     baseAttackDamage: 1
-  behaviour: 1
-  fightingRange: 2
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
   useCount: 2
 --- !u!114 &7211528286915917914
 MonoBehaviour:
@@ -68,7 +58,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  effectName: 
+  description: 
   trigger: 1
   target: 0
   range: 04000000
