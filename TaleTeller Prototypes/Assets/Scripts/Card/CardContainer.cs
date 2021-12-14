@@ -44,6 +44,15 @@ public class CardContainer : MonoBehaviour
             rectTransform.position = targetTransform.position;
             rectTransform.rotation = Quaternion.Lerp(rectTransform.rotation, new Quaternion(CardManager.Instance.pointerRef.pointerDirection.y, -CardManager.Instance.pointerRef.pointerDirection.x, 0, 1), Time.deltaTime);
         }
+
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            visuals.ShakeCard(this, new EventQueue());
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            visuals.CardAttack(this, 0, new EventQueue());
+        }
     }
 
     #region Init/Reset

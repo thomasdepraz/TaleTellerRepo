@@ -52,6 +52,7 @@ MonoBehaviour:
   completionTimer: 2
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &49987609378645259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +82,8 @@ MonoBehaviour:
   objectiveName: 'Place the Fleeing Medicant Cultist on the Track. '
   linkedJunkedCards:
   - {fileID: 11400000, guid: 567b89d34fe502241ab38edbe11aec7e, type: 2}
+  junkSpawnLocations: 03000000
+  junksPositionsInDeck: 0a000000
   mustPlaceAll: 1
   specificJunkToPlace: []
   plotOnBoard: 0
@@ -102,11 +105,6 @@ MonoBehaviour:
   target: 2
   range: 03000000
   values: []
-  effectValueToModifiy:
-    value: 0
-    type: 0
-    op: 0
-  modifyTemporary: 0
   targetedType: 0
   targetedOperator: 1
   nullifyTemporary: 1

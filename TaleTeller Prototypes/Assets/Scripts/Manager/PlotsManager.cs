@@ -112,7 +112,6 @@ public class PlotsManager : Singleton<PlotsManager>
 
             //animate card to deck
             //for now only add it to deck list
-
             SendPlotToDeck(appearQueue, card);
         }
 

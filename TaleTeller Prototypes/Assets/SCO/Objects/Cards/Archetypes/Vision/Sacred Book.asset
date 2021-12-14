@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: Draw $X Parameter$ for each characters aside.
   trigger: 1
   target: 2
   range: 0500000009000000
   values: []
-  xParameter:
+  xParameterMultiplier:
     value: 2
     type: 5
     op: 1
-  cardTypeParameter: 2
+  xParameter:
+    value: 0
+    type: 0
+    op: 0
+  cardTypeParameter: 3
 --- !u!114 &-279494856332862322
 MonoBehaviour:
   m_ObjectHideFlags: 0

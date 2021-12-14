@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: Restore + $gainValue$ HP.
   trigger: 0
   target: 1
   range: 
@@ -22,6 +22,7 @@ MonoBehaviour:
     value: 4
     type: 0
     op: 1
+  temporaryChange: 0
 --- !u!114 &-6833076309367214480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +36,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: '<b>Buy ($buyValue$)</b> : '
   trigger: 1
   target: 0
   range: 

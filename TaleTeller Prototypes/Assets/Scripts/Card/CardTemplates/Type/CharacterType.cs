@@ -67,8 +67,21 @@ public class CharacterType : CardTypes
         #endregion
 
         //Le character se prend un coup
+
+        #region Player Attack Feedback
+        CardManager.Instance.board.storyLine.HeroContainerAttackFeedBack();
+        yield return new WaitForSeconds(0.7f);
+        #endregion
+
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
         data.currentContainer.UpdateCharacterInfo(this);
+
+        #region Damage feedback
+        EventQueue characterDamageQueue = new EventQueue();
+        data.currentContainer.visuals.ShakeCard(data.currentContainer, characterDamageQueue);
+        while(!characterDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
         Debug.Log($"Character has {stats.baseLifePoints}");
 
         yield return new WaitForSeconds(0.2f);
@@ -95,7 +108,19 @@ public class CharacterType : CardTypes
 
             for (int i = 0; i < hitCount; i++)
             {
+                #region Attack Feedback
+                data.currentContainer.visuals.CardAttack(data.currentContainer, 0);
+                yield return new WaitForSeconds(0.7f);
+                #endregion
+
                 GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
+
+                #region ¨Player Damage Feedback
+                EventQueue playerDamageQueue = new EventQueue();
+                CardManager.Instance.board.storyLine.HeroContainerDamageFeedback(playerDamageQueue);
+                while(!playerDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+                #endregion
+
                 //check for player death, if still alive then keep going
 
                 if(GameManager.Instance.currentHero.lifePoints <=0 )
@@ -124,56 +149,76 @@ public class CharacterType : CardTypes
 
     IEnumerator FightVSCharacter(CharacterType character, EventQueue currentQueue)
     {
-        #region ONCHARFIGHT Event
-        EventQueue onCharFightQueue = new EventQueue();
-        if (data.onCharFight != null) data.onCharFight(currentQueue, character.data);
-        onCharFightQueue.StartQueue();
-        while(!onCharFightQueue.resolved)
+        if(stats.baseLifePoints > 0)
         {
-            yield return new WaitForEndOfFrame();
-        }
-        #endregion
+            #region ONCHARFIGHT Event
+            EventQueue onCharFightQueue = new EventQueue();
+            if (data.onCharFight != null) data.onCharFight(currentQueue, character.data);
+            onCharFightQueue.StartQueue();
+            while(!onCharFightQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            #endregion
 
 
-        //L'autre perso se prend un coup
-        Debug.Log("Castagne entre persos");
+            //L'autre perso se prend un coup
+            Debug.Log("Castagne entre persos");
 
-        //---Encapsulate hit event into a queue for feedback and specifique effects
-        EventQueue characterHitQueue = new EventQueue();
-        int hitCount = doubleStrike ? 2 : 1;
+            //---Encapsulate hit event into a queue for feedback and specifique effects
+            int direction = data.currentContainer.currentSlot.slotIndex - character.data.currentContainer.currentSlot.slotIndex > 0 ? -1 : 1;
 
-        for (int i = 0; i < hitCount; i++)
-        {
-            character.stats.baseLifePoints -= stats.baseAttackDamage;
-        }
-        
-        data.currentContainer.UpdateCharacterInfo(this);
+            int hitCount = doubleStrike ? 2 : 1;
 
-        //Starting the hit Queue
-        if (character.data.onCharHit != null) character.data.onCharHit(characterHitQueue, data);
-        characterHitQueue.StartQueue();
+            for (int i = 0; i < hitCount; i++)//NOTE MAYBE IMPLEMENT THIS INTO THE QUEUE
+            {
+                #region Attack Feedback
+                data.currentContainer.visuals.CardAttack(data.currentContainer, direction);
+                yield return new WaitForSeconds(0.7f);
+                #endregion
+                #region Damage feedback
+                EventQueue characterDamageQueue = new EventQueue();
+                data.currentContainer.visuals.ShakeCard(character.data.currentContainer, characterDamageQueue);
+                while (!characterDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+                #endregion
 
-        while (!characterHitQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        //---
+                character.stats.baseLifePoints -= stats.baseAttackDamage;
+                character.data.currentContainer.UpdateCharacterInfo(character);//Update card text
 
-        Debug.Log($"Other character has {character.stats.baseLifePoints}");
-        yield return new WaitForSeconds(0.2f);
+                #region OnCharHit Event
+                //Starting the hit Queue
+                EventQueue characterHitQueue = new EventQueue();
+                if (character.data.onCharHit != null) character.data.onCharHit(characterHitQueue, data);
+                characterHitQueue.StartQueue();
 
-        EventQueue characterDeathQueue = new EventQueue();
+                while (!characterHitQueue.resolved)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+                //---
+                #endregion
+            }
 
-        if(character.stats.baseLifePoints <= 0)
-        {
-            character.CharacterDeath(false, characterDeathQueue);//<-- Add character to queue events
-        }
+            data.currentContainer.UpdateCharacterInfo(this);
 
-        characterDeathQueue.StartQueue();///<-- actually character death
 
-        while(!characterDeathQueue.resolved)//Wait 
-        {
-            yield return new WaitForEndOfFrame();
+
+            Debug.Log($"Other character has {character.stats.baseLifePoints}");
+            yield return new WaitForSeconds(0.2f);
+
+            EventQueue characterDeathQueue = new EventQueue();
+
+            if(character.stats.baseLifePoints <= 0)
+            {
+                character.CharacterDeath(false, characterDeathQueue);//<-- Add character to queue events
+            }
+
+            characterDeathQueue.StartQueue();///<-- actually character death
+
+            while(!characterDeathQueue.resolved)//Wait 
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         currentQueue.UpdateQueue();

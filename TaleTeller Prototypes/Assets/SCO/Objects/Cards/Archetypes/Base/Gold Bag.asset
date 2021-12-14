@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: +2 Gold
+  description: Earn + $gainValue$ GOLD.
   trigger: 1
   target: 1
   range: 
@@ -69,6 +69,7 @@ MonoBehaviour:
     value: 2
     type: 2
     op: 1
+  temporaryChange: 0
 --- !u!114 &8388920742943812827
 MonoBehaviour:
   m_ObjectHideFlags: 0

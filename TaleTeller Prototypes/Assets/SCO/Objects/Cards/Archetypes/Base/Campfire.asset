@@ -38,8 +38,6 @@ MonoBehaviour:
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
-  leftEffect: {fileID: 0}
-  rightEffect: {fileID: 0}
 --- !u!114 &4757669373660205392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,7 +51,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Heal 3
+  description: Restore + $modifierValue$ HP.
   trigger: 2
   target: 2
   range: 03000000
@@ -63,3 +61,4 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  temporaryChange: 0

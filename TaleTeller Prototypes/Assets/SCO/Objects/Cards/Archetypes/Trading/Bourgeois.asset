@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect3
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: Deal - $gainValue$ ATK to the Hero.
   trigger: 0
   target: 1
   range: 
@@ -22,6 +22,7 @@ MonoBehaviour:
     value: 3
     type: 1
     op: 2
+  temporaryChange: 0
 --- !u!114 &-3890705368206760767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +36,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: '<b>Buy ($buyValue$)</b> :'
   trigger: 1
   target: 0
   range: 
@@ -58,7 +59,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: '<b>Bankrupt ($bankruptValue$)</b> :'
   trigger: 1
   target: 0
   range: 
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: The Hero earns + $gainValue$ GOLD.
   trigger: 0
   target: 1
   range: 
@@ -118,6 +119,7 @@ MonoBehaviour:
     value: 1
     type: 2
     op: 1
+  temporaryChange: 0
 --- !u!114 &8008105223019584466
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class ValueChangeEffect : ValueModifierEffect
 {
@@ -17,8 +18,19 @@ public class ValueChangeEffect : ValueModifierEffect
         }
     }
 
-    [Header("Modifier Param")]
-    public EffectValue effectValueToModifiy;
+    [Serializable]
+    private struct TypeToTarget
+    {
+        [SerializeField]
+        internal EffectValueType typeToTarget;
+        [SerializeField]
+        internal EffectValueOperator operatorToTarget;
+        [SerializeField]
+        internal EffectValue modification;
+    }
+
+    [Header("Modifier Param"), SerializeField]
+    private TypeToTarget effectValueModification;
     [Tooltip("Check this to revert the modification on storyEnd")]
     public bool modifyTemporary;
 
@@ -28,68 +40,63 @@ public class ValueChangeEffect : ValueModifierEffect
     {
         base.InitEffect(card);
 
+            values.Add(effectValueModification.modification);
+
         if (modifyTemporary)
             card.onStoryEnd += StartReverseModify;
     }
 
-    private void StartReverseModify(EventQueue queue)
-    {
-        queue.events.Add(ReverseModify(queue));
-    }
+     private void StartReverseModify(EventQueue queue)
+     {
+         queue.events.Add(ReverseModify(queue));
+     }
 
-    public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
-    {
-        var targetedCards = GetTargets();
-        List<Effect> targetedEffect = new List<Effect>();
+     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
+     {
+         var targetedCards = GetTargets();
+         List<Effect> targetedEffect = new List<Effect>();
 
         foreach (CardData card in targetedCards)
         {
             targetedEffect.AddRange(
-                card.effects.Where(e => e.values.Any(v => v.type == effectValueToModifiy.type && v.op == effectValueToModifiy.op)));
+                card.effects.Where(e => e.values.Any(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget)));
         }
 
         foreach (Effect effect in targetedEffect)
         {
-            var targetedValues = effect.values.Where(v => v.type == effectValueToModifiy.type && v.op == effectValueToModifiy.op);
+            var targetedValues = effect.values.Where(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget) ;
 
-            foreach (EffectValue value in targetedValues)
-            {
-                valuesInfos.Add(new ModifyValuesInfos(effect, value));
+             foreach (EffectValue value in targetedValues)
+             {
+                 valuesInfos.Add(new ModifyValuesInfos(effect, value));
 
-                if (effectValueToModifiy.type != EffectValueType.Card)
+                switch (effectValueModification.modification.op)
                 {
-                    switch (effectValueToModifiy.op)
-                    {
-                        case EffectValueOperator.Addition:
-                            value.value += effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Addition:
+                        value.value += effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Division:
-                            value.value /= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Division:
+                        value.value /= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Product:
-                            value.value *= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Product:
+                        value.value *= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Substraction:
-                            value.value -= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Substraction:
+                        value.value -= effectValueModification.modification.value;
+                        break;
 
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    value.value += effectValueToModifiy.value;
+                    default:
+                        break;
                 }
             }
         }
 
-        yield return null;
-        currentQueue.UpdateQueue();
-    }
+         yield return null;
+         currentQueue.UpdateQueue();
+     }
 
     private IEnumerator ReverseModify(EventQueue queue)
     {
@@ -97,40 +104,33 @@ public class ValueChangeEffect : ValueModifierEffect
         {
             if (infos.effect?.linkedData?.currentContainer)
             {
-                if (effectValueToModifiy.type != EffectValueType.Card)
+                switch (effectValueModification.modification.op)
                 {
-                    switch (effectValueToModifiy.op)
-                    {
-                        case EffectValueOperator.Addition:
-                            infos.effect.values.Where(v => v == infos.value).First().value -= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Addition:
+                        infos.effect.values.Where(v => v == infos.value).First().value -= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Division:
-                            infos.effect.values.Where(v => v == infos.value).First().value *= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Division:
+                        infos.effect.values.Where(v => v == infos.value).First().value *= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Product:
-                            infos.effect.values.Where(v => v == infos.value).First().value /= effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Product:
+                        infos.effect.values.Where(v => v == infos.value).First().value /= effectValueModification.modification.value;
+                        break;
 
-                        case EffectValueOperator.Substraction:
-                            infos.effect.values.Where(v => v == infos.value).First().value += effectValueToModifiy.value;
-                            break;
+                    case EffectValueOperator.Substraction:
+                        infos.effect.values.Where(v => v == infos.value).First().value += effectValueModification.modification.value;
+                        break;
 
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    infos.effect.values.Where(v => v == infos.value).First().value -= effectValueToModifiy.value;
+                    default:
+                        break;
                 }
 
-            }
+             }
 
-        }
+         }
 
-        yield return null;
-        queue.UpdateQueue();
-    }
+         yield return null;
+         queue.UpdateQueue();
+     }
 }
