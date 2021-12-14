@@ -163,6 +163,7 @@ public class Deck : MonoBehaviour
         EventQueue dealQueue = new EventQueue();
 
         //TODO make the following logic in the queue so it can be animated-----------------
+        
         EventQueue initQueue = new EventQueue();
         CardManager.Instance.cardHand.InitCard(initQueue, dealtCard);
         initQueue.StartQueue();
@@ -208,7 +209,8 @@ public class Deck : MonoBehaviour
             dealtCard = cardDeck[0];
         }
         //Appear(overDrawQueue)//TODO
-        Appear(overdrawQueue, dealtCard);
+        if(card.currentContainer == null)
+            Appear(overdrawQueue, dealtCard);
 
         //the card can be burn or push another card from the board
         if (dealtCard.GetType() == typeof(PlotCard)) //if its a plot card it pushes cards from the board

@@ -137,6 +137,8 @@ public class PlotsManager : Singleton<PlotsManager>
         yield return null;
 
         EventQueue toHandQueue = new EventQueue();
+        //Make the card appear
+        PlotAppear(toHandQueue, card);
 
         if(CardManager.Instance.cardHand.currentHand.Count + 1 > CardManager.Instance.cardHand.maxHandSize)
         {
@@ -166,10 +168,55 @@ public class PlotsManager : Singleton<PlotsManager>
     {
         yield return null;
 
+        //Make the card appear and send it to the deck
+        EventQueue appearQueue = new EventQueue();
+        PlotAppear(appearQueue, card);
+        PlotToDeck(appearQueue, card);
+        appearQueue.StartQueue();
+        while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
         CardManager.Instance.cardDeck.cardDeck.Add(card);
 
         queue.UpdateQueue();
     }
+
+    public void PlotAppear(EventQueue queue, CardData card)
+    {
+        queue.events.Add(PlotAppearRoutine(queue, card));
+    }
+    IEnumerator PlotAppearRoutine(EventQueue queue, CardData card)
+    {
+        #region Init Container
+        EventQueue initQueue = new EventQueue();
+        CardManager.Instance.cardHand.InitCard(initQueue, card, false);
+        initQueue.StartQueue();
+        while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+        card.currentContainer.rectTransform.localPosition = CardManager.Instance.plotAppearTransform.localPosition;
+
+        EventQueue appearFeedback = new EventQueue();
+        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.plotAppearTransform.localPosition, true, true, appearFeedback);
+        while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+
+        queue.UpdateQueue();
+    }
+
+    public void PlotToDeck(EventQueue queue, CardData card)
+    {
+        queue.events.Add(PlotToDeckRoutine(queue, card));
+    }
+    IEnumerator PlotToDeckRoutine(EventQueue queue, CardData card)
+    {
+
+        EventQueue toDeckFeedback = new EventQueue();
+        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, false, toDeckFeedback);
+        while (!toDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+        card.currentContainer.ResetContainer();
+        queue.UpdateQueue();
+    }
+
     #endregion
 
 }

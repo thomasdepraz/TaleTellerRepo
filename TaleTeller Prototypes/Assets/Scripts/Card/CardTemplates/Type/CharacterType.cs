@@ -374,8 +374,15 @@ public class CharacterType : CardTypes
                     PlotCard plot = data as PlotCard;
                     if(plot.isMainPlot) //if main hide the card
                     {
-                        //TEMP do next choice for now later hide the card
-                        plot.OnEndPlotComplete(discardQueue);
+                        if(behaviour == CharacterBehaviour.Agressive)
+                        {
+                            //TEMP do next choice for now later hide the card
+                            plot.OnEndPlotComplete(discardQueue);
+                        }
+                        else if(behaviour == CharacterBehaviour.Peaceful)
+                        {
+                            plot.FailPlot(discardQueue);//if kill peacful then plot is lost 
+                        }
                     }
                     else //if secondary send to oblivion
                     {
