@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: "Main Fin de Tour: Placer la premi\xE8re carte du deck \xE0 la d\xE9fausse"
+  description: At the end of the turn, Discard the top Card of your Deck if is in
+    your Hand.
   trigger: 6
   target: 4
   range: 
@@ -41,7 +42,7 @@ MonoBehaviour:
   manaCost: 2
   cardGraph: {fileID: 21300000, guid: de9c8fd5687978c488c1ae476e88577d, type: 3}
   currentContainer: {fileID: 0}
-  description: "tasse caf\xE9 renvers\xE9 sur du papier\r\n"
+  description: "Tasse de caf\xE9 renvers\xE9e sur du papier\r\n"
   effectsReferences:
   - {fileID: -258427061655211035}
   effects: []

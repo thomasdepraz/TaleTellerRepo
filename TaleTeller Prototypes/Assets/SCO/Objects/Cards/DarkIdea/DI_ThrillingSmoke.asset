@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: "On Enter: Les alli\xE9es perdent 1 ATK"
+  description: '<b>Beginning</b> : Each Good characters nearby loses - $modifierValue$
+    ATK.'
   trigger: 1
   target: 2
   range: 0500000009000000
@@ -43,7 +44,7 @@ MonoBehaviour:
   manaCost: 0
   cardGraph: {fileID: 0}
   currentContainer: {fileID: 0}
-  description: "Une fum\xE9e rose avec des paillettes\r\n"
+  description: "Fum\xE9e rose avec des paillettes\r\n"
   effectsReferences:
   - {fileID: 1453343127823823298}
   - {fileID: -304829799497380990}
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Obsessing
+  description: <b>Obsessing</b>
   trigger: 7
   target: 0
   range: 

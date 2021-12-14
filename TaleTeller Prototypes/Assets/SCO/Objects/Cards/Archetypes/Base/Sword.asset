@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: Assembly-CSharp::HeroSmallChangeEffect
   linkedData: {fileID: 0}
-  description: +2 DMG
+  description: 
   trigger: 1
   target: 1
   range: 
@@ -35,6 +35,7 @@ MonoBehaviour:
     value: 2
     type: 1
     op: 1
+  temporaryChange: 0
 --- !u!114 &-4821803556280145319
 MonoBehaviour:
   m_ObjectHideFlags: 0

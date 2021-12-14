@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Obsessing
+  description: <b>Obsessing</b>
   trigger: 7
   target: 0
   range: 
@@ -55,7 +55,7 @@ MonoBehaviour:
   manaCost: 0
   cardGraph: {fileID: 21300000, guid: de9c8fd5687978c488c1ae476e88577d, type: 3}
   currentContainer: {fileID: 0}
-  description: '"faut avouer que c''est plutot une boisson d''homme"
+  description: '"Faut avouer que c''est plutot une boisson d''homme"
 
 '
   effectsReferences:
