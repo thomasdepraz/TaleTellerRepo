@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Buy ($buyValue$)</b> :'
+  description: 'HERO => <b>Buy ($buyValue$)</b> :'
   trigger: 1
   target: 0
   range: 
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Bankrupt ($bankruptValue$)</b> :'
+  description: 'HERO => <b>Bankrupt ($bankruptValue$)</b> :'
   trigger: 1
   target: 0
   range: 
@@ -139,4 +139,5 @@ MonoBehaviour:
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 2

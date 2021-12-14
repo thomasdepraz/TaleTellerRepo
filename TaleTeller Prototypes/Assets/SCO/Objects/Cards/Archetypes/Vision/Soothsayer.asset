@@ -66,6 +66,7 @@ MonoBehaviour:
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 2
 --- !u!114 &6264358770750085995
 MonoBehaviour:
@@ -80,7 +81,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Choice $choiceValue$.
+  description: HAND => Choice $choiceValue$.
   trigger: 1
   target: 4
   range: 

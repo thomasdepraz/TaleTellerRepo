@@ -94,7 +94,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Increase the value of the keywords "Draw" and "Discard" by 1.
+  description: ALL => Increase the value of the keywords "Draw" and "Discard" by
+    1.
   trigger: 2
   target: 2
   range: 02000000
