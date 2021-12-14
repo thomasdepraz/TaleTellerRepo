@@ -74,7 +74,7 @@ public class CharacterType : CardTypes
         yield return new WaitForSeconds(0.7f);
         #endregion
 
-        stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage + GameManager.Instance.currentHero.bonusDamage;
         if (undying) Mathf.Clamp(stats.baseLifePoints, 0, Mathf.Infinity);
         data.currentContainer.UpdateCharacterInfo(this);
 
@@ -117,7 +117,7 @@ public class CharacterType : CardTypes
 
                 GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
 
-                #region ¨Player Damage Feedback
+                #region ï¿½Player Damage Feedback
                 EventQueue playerDamageQueue = new EventQueue();
                 CardManager.Instance.board.storyLine.HeroContainerDamageFeedback(playerDamageQueue);
                 while(!playerDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
