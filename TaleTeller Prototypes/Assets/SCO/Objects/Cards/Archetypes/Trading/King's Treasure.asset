@@ -42,6 +42,7 @@ MonoBehaviour:
     value: 2
     type: 2
     op: 1
+  temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +87,10 @@ MonoBehaviour:
   target: 2
   range: 0300000004000000
   values: []
+  xParameterMultiplier:
+    value: 2
+    type: 5
+    op: 1
   xParameter:
     value: 1
     type: 3

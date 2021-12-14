@@ -30,7 +30,8 @@ public class BuffEffect : BonusEffect
 
                     if (currentValue.type == buffValue.type)//This is my filter this could be anything
                     {
-                        currentValue.value += buffValue.value;
+                        if(currentValue.op == buffValue.op)
+                            currentValue.value += buffValue.value;
                     }
                 }
             }
