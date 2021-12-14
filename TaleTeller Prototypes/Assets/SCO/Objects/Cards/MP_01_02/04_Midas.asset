@@ -66,6 +66,7 @@ MonoBehaviour:
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 5
 --- !u!114 &11400000
 MonoBehaviour:
@@ -101,7 +102,12 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 0
-  legendaryCardRewards: []
+  legendaryCardRewards:
+  - {fileID: 11400000, guid: 3dc0d704ba7443b4e84d649c08f14e4c, type: 2}
+  - {fileID: 11400000, guid: 7303c6fd77582ee4f871cee5f9d27196, type: 2}
+  - {fileID: 11400000, guid: b0d8b7a5814ac704ba0326f97af5893c, type: 2}
+  - {fileID: 11400000, guid: 48206bddb9fce104eaece2a1ff10a84a, type: 2}
+  - {fileID: 11400000, guid: 30b64b5c2aedcc84291cb51e146e4558, type: 2}
 --- !u!114 &5853567621954174126
 MonoBehaviour:
   m_ObjectHideFlags: 0
