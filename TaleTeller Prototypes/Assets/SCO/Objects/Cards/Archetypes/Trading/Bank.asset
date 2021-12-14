@@ -35,7 +35,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Reduce the value of each keyword "Buy" by - $buffValue$.
+  description: Reduce the value of each keyword "Bankrupt" by - $buffValue$.
   trigger: 2
   target: 2
   range: 0300000004000000

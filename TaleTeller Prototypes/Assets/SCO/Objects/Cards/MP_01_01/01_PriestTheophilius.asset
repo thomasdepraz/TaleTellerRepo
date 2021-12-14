@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Boosts permanently the Damage of the Hero by +$gainValue$.
+  description: The Hero gains + $gainValue$ ATK.
   trigger: 1
   target: 1
   range: 

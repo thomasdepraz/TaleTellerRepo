@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: "Main fin de tour: Augmente le cout en mana de \"1\" carte al\xE9atoire
-    dans la main de 1"
+  description: At the end of the turn, Increase the cost of a random Card in your
+    hand by +1 if is in your Hand.
   trigger: 14
   target: 3
   range: 
@@ -44,7 +44,7 @@ MonoBehaviour:
   manaCost: 0
   cardGraph: {fileID: 21300000, guid: 477068da7b0424e40a49dfeca0d99051, type: 3}
   currentContainer: {fileID: 0}
-  description: "personnage \xE9nerv\xE9\r"
+  description: "Personne \xE9nerv\xE9e"
   effectsReferences:
   - {fileID: -89949283618581415}
   effects: []

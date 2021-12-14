@@ -32,7 +32,7 @@ MonoBehaviour:
   manaCost: 0
   cardGraph: {fileID: 21300000, guid: 5f7fa9a7940a64e79b5a42d9f661d42c, type: 3}
   currentContainer: {fileID: 0}
-  description: "stand de convention de m\xE9talleux\r\n"
+  description: "Stand de convention de m\xE9talleux\r\n"
   effectsReferences:
   - {fileID: 4787905367060843769}
   - {fileID: 3210800275581549871}
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Tous les personnages agressif gagne 1 ATK
+  description: Gives + $modifierValue$ ATK to all Evil characters.
   trigger: 2
   target: 2
   range: 02000000
@@ -76,7 +76,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Main fin de tour: Hero Hp -1'
+  description: At the end of the turn, Deal - $gainValue$ HP to the Hero if is in
+    your Hand.
   trigger: 6
   target: 1
   range: 

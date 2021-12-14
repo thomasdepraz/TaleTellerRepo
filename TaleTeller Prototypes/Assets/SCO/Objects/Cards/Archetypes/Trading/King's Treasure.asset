@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: For each keyword "Buy" nearby, draw $X Parameter$.
+  description: For each keyword "Buy" nearby, draw 1.
   trigger: 1
   target: 2
   range: 0300000004000000

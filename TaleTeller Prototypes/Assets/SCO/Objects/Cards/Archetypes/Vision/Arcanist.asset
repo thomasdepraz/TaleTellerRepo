@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Overload : '
+  description: '<b>Overload</b> : Gains +$modifierValue$ HP / +1 ATK.'
   trigger: 12
   target: 2
   range: 01000000
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Illumination : Gains +$modifierValue$ HP / +1 ATK.'
+  description: '<b>Illumination</b> : Gains +$modifierValue$ HP / +1 ATK.'
   trigger: 11
   target: 2
   range: 01000000

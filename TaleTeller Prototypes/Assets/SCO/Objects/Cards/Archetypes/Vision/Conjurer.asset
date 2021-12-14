@@ -23,6 +23,7 @@ MonoBehaviour:
     type: 1
     op: 2
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &-603127733907315173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,7 +37,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: '<b>Illumination</b> : Loses - $modifierValue$ HP / 1 ATK.'
   trigger: 11
   target: 2
   range: 01000000
@@ -46,6 +47,7 @@ MonoBehaviour:
     type: 0
     op: 2
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +99,7 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &1212984328777861950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +113,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: '<b>Overload</b> : Gains + $modifierValue$ HP / +4 ATK.'
   trigger: 12
   target: 2
   range: 01000000
@@ -120,6 +123,7 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &2083461853720186675
 MonoBehaviour:
   m_ObjectHideFlags: 0
