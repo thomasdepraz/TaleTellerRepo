@@ -8026,6 +8026,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1242236472}
     m_Modifications:
+    - target: {fileID: 4084148799544866491, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
+      propertyPath: cardDeck.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084148799544866491, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
+      propertyPath: cardDeck.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: a2134eca17ddaf4409e74cdae5cb8855, type: 2}
+    - target: {fileID: 4084148799544866491, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
+      propertyPath: cardDeck.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 511e06a8ca1ed944e9f7fcb775e501c9, type: 2}
+    - target: {fileID: 4084148799544866491, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
+      propertyPath: cardDeck.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9cfbc345ea606264eba4e74f20e4673a, type: 2}
+    - target: {fileID: 4084148799544866491, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
+      propertyPath: cardDeck.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 254890d673b79a04288ff5f996b26c5e, type: 2}
+    - target: {fileID: 4084148799544866491, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
+      propertyPath: cardDeck.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: acd4ca70f8d43bd4b81d0a0bde6ea291, type: 2}
+    - target: {fileID: 4084148799544866491, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
+      propertyPath: cardDeck.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 646ee577c7d72a6418a0d243d87c5b3b, type: 2}
     - target: {fileID: 4084148799544866492, guid: 6629b1a171e54d648a6573ba4384db72, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

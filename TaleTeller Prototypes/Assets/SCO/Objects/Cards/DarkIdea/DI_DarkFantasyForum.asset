@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Name: DI_DarkFantasyForum
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: 'Dark Fantasy Forum '
+  cardName: '<color=white>Dark Fantasy Forum '
   rarity: 0
   archetype: 0
   manaCost: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: ALL => Gives + $modifierValue$ ATK to all Evil characters.
+  description: <color=white>ALL => Gives + $modifierValue$ ATK to all Evil characters.
   trigger: 2
   target: 2
   range: 02000000
@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: HERO => At the end of the turn, Deal - $gainValue$ HP to the Hero
-    if is in your Hand.
+  description: <color=white>HERO => At the end of the turn, Deal - $gainValue$ HP
+    to the Hero if is in your Hand.
   trigger: 6
   target: 1
   range: 
