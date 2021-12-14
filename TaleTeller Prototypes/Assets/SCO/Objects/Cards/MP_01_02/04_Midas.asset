@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: DMG +3
+  description: Gains itself + $modifierValue$ ATK.
   trigger: 0
   target: 2
   range: 01000000
@@ -37,7 +37,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Buy(1)
+  description: '<b>Buy (1)</b> :'
   trigger: 1
   target: 1
   range: 
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: Effect3
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: DMG -1
+  description: Loses itself - $modifierValue$ ATK.
   trigger: 0
   target: 2
   range: 01000000
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat Midas the God of Mendicity. '
+  objectiveName: 'Defeat Midas the Prophet of Mendicity. '
   linkedJunkedCards:
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Bankrupt (3) '
+  description: '<b>Bankrupt (3)</b> :'
   trigger: 1
   target: 1
   range: 

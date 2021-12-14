@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: For each received attack, its Damage increases by +1.
+  description: For each received attack, it gains + $modifierValue$ ATK..
   trigger: 10
   target: 2
   range: 01000000

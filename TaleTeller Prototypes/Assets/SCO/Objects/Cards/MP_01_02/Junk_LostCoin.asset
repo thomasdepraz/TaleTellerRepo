@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: Assembly-CSharp::HeroSmallChangeEffect
   linkedData: {fileID: 0}
-  description: The Hero gains +1 Gold.
+  description: The Hero earns + $gainValue$ GOLD.
   trigger: 1
   target: 1
   range: 
