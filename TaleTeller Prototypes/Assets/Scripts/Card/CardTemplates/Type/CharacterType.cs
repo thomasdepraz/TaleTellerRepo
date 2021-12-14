@@ -68,8 +68,13 @@ public class CharacterType : CardTypes
 
         //Le character se prend un coup
 
-        
+        #region Player Attack Feedback
+        CardManager.Instance.board.storyLine.HeroContainerAttackFeedBack();
+        yield return new WaitForSeconds(0.7f);
+        #endregion
+
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        data.currentContainer.UpdateCharacterInfo(this);
 
         #region Damage feedback
         EventQueue characterDamageQueue = new EventQueue();
@@ -77,7 +82,6 @@ public class CharacterType : CardTypes
         while(!characterDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
 
-        data.currentContainer.UpdateCharacterInfo(this);
         Debug.Log($"Character has {stats.baseLifePoints}");
 
         yield return new WaitForSeconds(0.2f);
@@ -105,12 +109,18 @@ public class CharacterType : CardTypes
             for (int i = 0; i < hitCount; i++)
             {
                 #region Attack Feedback
-                EventQueue characterAttackQueue = new EventQueue();
-                data.currentContainer.visuals.CardAttack(data.currentContainer, 0,characterAttackQueue);
-                while (!characterAttackQueue.resolved) { yield return new WaitForEndOfFrame(); }
+                data.currentContainer.visuals.CardAttack(data.currentContainer, 0);
+                yield return new WaitForSeconds(0.7f);
                 #endregion
 
                 GameManager.Instance.currentHero.lifePoints -= stats.baseAttackDamage;
+
+                #region ¨Player Damage Feedback
+                EventQueue playerDamageQueue = new EventQueue();
+                CardManager.Instance.board.storyLine.HeroContainerDamageFeedback(playerDamageQueue);
+                while(!playerDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+                #endregion
+
                 //check for player death, if still alive then keep going
 
                 if(GameManager.Instance.currentHero.lifePoints <=0 )

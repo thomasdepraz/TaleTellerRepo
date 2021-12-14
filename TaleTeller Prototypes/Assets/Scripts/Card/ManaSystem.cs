@@ -50,6 +50,7 @@ public class ManaSystem : MonoBehaviour
 
     [Header("References")]
     public Image manaFrame;
+    public Image manaFill;
     public TextMeshProUGUI manaCountText;
 
     //ManaPool Modifier CallStackSystem
@@ -120,5 +121,6 @@ public class ManaSystem : MonoBehaviour
     void UpdateManaText()
     {
         manaCountText.text = currentMana.ToString() + "/" + ActualMaxMana.ToString();
+        manaFill.fillAmount = (float)currentMana / (float)ActualMaxMana;
     }
 }
