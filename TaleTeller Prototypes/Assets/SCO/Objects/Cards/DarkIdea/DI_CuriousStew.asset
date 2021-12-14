@@ -23,6 +23,52 @@ MonoBehaviour:
     type: 9
     op: 2
   turnToLast: 1
+--- !u!114 &-6968927246892907630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect2
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 0
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 1
+    type: 1
+    op: 2
+  temporaryChange: 0
+--- !u!114 &-5717779811218502836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afdd823048dfc3a4394a5bf04ad3e20a, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 1
+  range: 
+  values: []
+  buyValue:
+    value: 8
+    type: 3
+    op: 2
+  effectTriggerIfCanPay: {fileID: 0}
 --- !u!114 &-4353397734383623284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +106,8 @@ MonoBehaviour:
 '
   effectsReferences:
   - {fileID: -8029139657430624933}
+  - {fileID: -5717779811218502836}
+  - {fileID: -6968927246892907630}
   effects: []
   cardTypeReference: {fileID: -4353397734383623284}
   cardType: {fileID: 0}

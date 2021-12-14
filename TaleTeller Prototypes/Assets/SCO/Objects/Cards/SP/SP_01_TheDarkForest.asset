@@ -39,6 +39,9 @@ MonoBehaviour:
   linkedPlotData: {fileID: 0}
   objectiveName: 
   linkedJunkedCards: []
+  junkSpawnLocations: 
+  junksPositionsInDeck: 
+  plotOnBoard: 0
   restriction: 0
   typeRestrictions: []
 --- !u!114 &-79476425369138332
@@ -80,10 +83,11 @@ MonoBehaviour:
   effects: []
   cardTypeReference: {fileID: -79476425369138332}
   cardType: {fileID: 0}
-  objective: {fileID: 0}
+  objective: {fileID: 7266538328612659625}
   completionTimer: 2
   isMainPlot: 0
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &33654365924650370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,8 +106,39 @@ MonoBehaviour:
   target: 2
   range: 02000000
   values: []
-  effectValueToModifiy:
-    value: 5
-    type: 0
-    op: 1
+  effectValueModification:
+    typeToTarget: 0
+    operatorToTarget: 0
+    modification:
+      value: 0
+      type: 0
+      op: 0
   modifyTemporary: 0
+--- !u!114 &7266538328612659625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07819e3126eeb2041b49d44ab9484ec1, type: 3}
+  m_Name: PlotObjective_PlaceObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 
+  linkedJunkedCards: []
+  junkSpawnLocations: 
+  junksPositionsInDeck: 
+  plotOnBoard: 1
+  restriction: 0
+  typeRestrictions:
+  - typeToHave: 0
+    characterType: 1
+    restrictionMethod: 1
+    count: 2
+  - typeToHave: 2
+    characterType: 1
+    restrictionMethod: 1
+    count: 2

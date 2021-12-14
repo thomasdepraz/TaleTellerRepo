@@ -19,7 +19,7 @@ public class PlaceObj : BoardDrivenObj
 
         [SerializeField]
         internal CardType typeToHave;
-        [SerializeField, ShowIf("ShowCharacterType")]
+        [SerializeField, ShowIf("ShowCharacterType"), AllowNesting]
         internal CharacterType characterType;
         [SerializeField]
         internal RestrictionMethod restrictionMethod;
