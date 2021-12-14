@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: Place this card, 2 Evil characters and 1 Object on the Track.
+  objectiveName: Place this card, 2 Good characters and 1 Object on the Track.
   linkedJunkedCards: []
   junkSpawnLocations: 
   junksPositionsInDeck: 
@@ -135,10 +135,10 @@ MonoBehaviour:
   restriction: 0
   typeRestrictions:
   - typeToHave: 0
-    characterType: 1
+    characterType: 0
     restrictionMethod: 1
     count: 2
   - typeToHave: 2
     characterType: 1
     restrictionMethod: 1
-    count: 2
+    count: 1

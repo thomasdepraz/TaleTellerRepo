@@ -283,7 +283,7 @@ public class CardVisuals : MonoBehaviour
         {
             CharacterType chara = data.cardType as CharacterType;
 
-            if(chara.doubleStrike) result += "<b>Double Strike<\\b>" + "\n";
+            if(chara.doubleStrike) result += "<b>Double Strike</b>" + "\n";
 
         }
         for (int i = 0; i < data.effects.Count; i++)
