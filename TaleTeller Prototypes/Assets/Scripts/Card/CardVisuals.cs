@@ -97,6 +97,7 @@ public class CardVisuals : MonoBehaviour
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
+            cardTimerFrame.gameObject.SetActive(false);
 
         }
         else if (dataType == typeof(PlotCard))
@@ -107,7 +108,7 @@ public class CardVisuals : MonoBehaviour
 
             plotIcon.gameObject.SetActive(true);
             plotUnderFlag.gameObject.SetActive(true);
-            cardTimerFrame.gameObject.SetActive(false);
+            cardTimerFrame.gameObject.SetActive(true);
 
 
             PlotCard card = data as PlotCard;
@@ -125,6 +126,7 @@ public class CardVisuals : MonoBehaviour
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
+            cardTimerFrame.gameObject.SetActive(false);
 
         }
         else if(dataType == typeof(JunkCard))
@@ -135,6 +137,7 @@ public class CardVisuals : MonoBehaviour
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
+            cardTimerFrame.gameObject.SetActive(false);
         }
 
         if(data.rarity != CardRarity.None)
@@ -190,9 +193,13 @@ public class CardVisuals : MonoBehaviour
 
                 characterAttackFrame.gameObject.SetActive(true);
                 characterHealthFrame.gameObject.SetActive(true);
-                cardTimerFrame.gameObject.SetActive(true);
 
-                if(dataType == typeof(DarkIdeaCard))
+                if (data.GetType() != typeof(JunkCard))
+                    cardTimerFrame.gameObject.SetActive(true);
+                else
+                    cardTimerFrame.gameObject.SetActive(false);
+
+                if (dataType == typeof(DarkIdeaCard))
                 {
                     characterAttackFrame.sprite = curseCharacterAttack;
                     characterHealthFrame.sprite = curseCharacterHealth;
@@ -210,7 +217,6 @@ public class CardVisuals : MonoBehaviour
             {
                 characterAttackFrame.gameObject.SetActive(false);
                 characterHealthFrame.gameObject.SetActive(false);
-                cardTimerFrame.gameObject.SetActive(false);
             }
 
             if(cardType == typeof(ObjectType))
@@ -231,7 +237,7 @@ public class CardVisuals : MonoBehaviour
             characterAttackFrame.gameObject.SetActive(false);
             characterHealthFrame.gameObject.SetActive(false);
 
-            if(data.GetType() !=  typeof(PlotCard))
+            if(data.GetType() !=  typeof(PlotCard) || data.GetType() == typeof(JunkCard))
             {
                 cardTimerFrame.gameObject.SetActive(false);
             }

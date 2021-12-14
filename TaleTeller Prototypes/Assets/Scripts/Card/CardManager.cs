@@ -13,6 +13,7 @@ public class CardManager : Singleton<CardManager>
     public Board board;
     public RectTransform discardPileTransform;
     public RectTransform deckTransform;
+    public RectTransform plotAppearTransform;
 
     public ManaSystem manaSystem;
 

@@ -93,17 +93,17 @@ public class RewardManager : Singleton<RewardManager>
     {
         for (int i = 0; i < secondaryRewardCards.Count; i++)
         {
-            secondaryRewardCards[i].InitializeData(secondaryRewardCards[i]);
+            secondaryRewardCards[i] = secondaryRewardCards[i].InitializeData(secondaryRewardCards[i]);
         }
 
         for (int i = 0; i < rewardPoolTrading.Count; i++)
         {
-            rewardPoolTrading[i].InitializeData(rewardPoolTrading[i]);
+            rewardPoolTrading[i] =  rewardPoolTrading[i].InitializeData(rewardPoolTrading[i]);
         }
 
         for (int i = 0; i < rewardPoolVision.Count; i++)
         {
-            rewardPoolVision[i].InitializeData(rewardPoolVision[i]);
+            rewardPoolVision[i] =  rewardPoolVision[i].InitializeData(rewardPoolVision[i]);
         }
     }
 
@@ -117,9 +117,9 @@ public class RewardManager : Singleton<RewardManager>
         List<CardData> firstBatch = GetMainPlotRewardsFirstBatch(GetArchetypeList(card), 6);
         List<CardData> secondBatch = GetMainPlotRewardsSecondBatch(GetArchetypeList(card), 3, GetRandomRarity());
 
+        confirmed = false;
         canvasGroup.blocksRaycasts = true;
-        confirmButton.gameObject.SetActive(true);
-        batchOneNumberToSelect = 3;
+        batchOneNumberToSelect = 2;
         batchTwoNumberToSelect = 1;//NOTE PROBABLY NEED TO EXPOSE THOSE VARIABLES
 
         //Fade in background
@@ -133,6 +133,7 @@ public class RewardManager : Singleton<RewardManager>
         fadeEnded = false;
         #endregion
 
+        confirmButton.gameObject.SetActive(true);
         InitializePlaceholder(firstBatch, 1);
         InitializePlaceholder(secondBatch, 2);
 
@@ -216,6 +217,7 @@ public class RewardManager : Singleton<RewardManager>
     {
 
         canvasGroup.blocksRaycasts = true;
+        confirmed = false;
 
         //Fade in background
         #region FadeInBackground
@@ -239,6 +241,8 @@ public class RewardManager : Singleton<RewardManager>
         {
             yield return new WaitForEndOfFrame();
         }
+
+        ResetSecondaryContainers();
 
         #region FadeOutBackground
         Color transparent = new Color(0, 0, 0, 0);
@@ -270,7 +274,6 @@ public class RewardManager : Singleton<RewardManager>
 
         }
 
-        ResetSecondaryContainers();
 
         rewardQueue.StartQueue();
         while(!rewardQueue.resolved)
@@ -395,6 +398,7 @@ public class RewardManager : Singleton<RewardManager>
             {
                 if (placeholders[i].data == null)
                 {
+                    placeholders[i].selfImage.color = Color.white;
                     placeholders[i].gameObject.SetActive(true);
                     placeholders[i].InitializeContainer(targets[i], true);
                     break;
@@ -429,6 +433,7 @@ public class RewardManager : Singleton<RewardManager>
             if (batchOneSelectedCards.Contains(container.data))
             {
                 //Hide selected shader
+                container.selfImage.color = Color.white;
 
                 //Remove from list
                 batchOneSelectedCards.Remove(container.data);
@@ -444,6 +449,7 @@ public class RewardManager : Singleton<RewardManager>
             else if (!batchOneSelectedCards.Contains(container.data))
             {
                 //show selected shader
+                container.selfImage.color = Color.green;
 
                 //add to list
                 batchOneSelectedCards.Add(container.data);
@@ -456,6 +462,7 @@ public class RewardManager : Singleton<RewardManager>
             if (batchTwoSelectedCards.Contains(container.data))
             {
                 //Hide selected shader
+                container.selfImage.color = Color.white;
 
                 //Remove from list
                 batchTwoSelectedCards.Remove(container.data);
@@ -471,6 +478,7 @@ public class RewardManager : Singleton<RewardManager>
             else if (!batchTwoSelectedCards.Contains(container.data))
             {
                 //show selected shader
+                container.selfImage.color = Color.green;
 
                 //add to list
                 batchTwoSelectedCards.Add(container.data);

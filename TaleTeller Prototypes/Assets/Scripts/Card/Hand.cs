@@ -13,7 +13,7 @@ public class Hand : MonoBehaviour
     {
         queue.events.Add(InitCardRoutine(queue, data, deal));
     }
-    public IEnumerator InitCardRoutine(EventQueue queue, CardData data, bool fromDeck)
+    public IEnumerator InitCardRoutine(EventQueue queue, CardData data, bool deal)
     {
         yield return null;
         if(data.currentContainer == null)
@@ -27,7 +27,7 @@ public class Hand : MonoBehaviour
                     hiddenHand[i].rectTransform.SetParent(handTransform);
 
                     //Set parent and move
-                    if (fromDeck)
+                    if (deal)
                     {
                         hiddenHand[i].visuals.MoveCard(hiddenHand[i], RandomPositionInRect(handTransform), true, true, queue);
                         yield return new WaitForSeconds(0.2f);
@@ -38,10 +38,10 @@ public class Hand : MonoBehaviour
         }
         else
         {
-            if (fromDeck)
+            if (deal)
             {
                 data.currentContainer.rectTransform.SetParent(handTransform);
-                data.currentContainer.visuals.MoveCard(data.currentContainer, RandomPositionInRect(handTransform), true, true, queue);
+                data.currentContainer.visuals.MoveCard(data.currentContainer, RandomPositionInRect(handTransform), false, false, queue);
                 yield return new WaitForSeconds(0.2f);
             }
         }
@@ -62,6 +62,7 @@ public class Hand : MonoBehaviour
     {
         queue.events.Add(DiscardCardFromHandRoutine(card, queue));
     }
+
     IEnumerator DiscardCardFromHandRoutine(CardContainer card, EventQueue queue)
     {
         #region Event OnCardDiscard

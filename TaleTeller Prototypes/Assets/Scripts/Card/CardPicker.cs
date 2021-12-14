@@ -89,6 +89,7 @@ public class CardPicker : MonoBehaviour
             {
                 if(cardPlaceholders[i].data == null)
                 {
+                    cardPlaceholders[i].selfImage.color = Color.white;
                     cardPlaceholders[i].gameObject.SetActive(true);
                     cardPlaceholders[i].InitializeContainer(targets[i], true);
                     break;
@@ -113,6 +114,7 @@ public class CardPicker : MonoBehaviour
         if(selectedCards.Contains(container.data))
         {
             //Hide selected shader
+            container.selfImage.color = Color.white;
 
             //Remove from list
             selectedCards.Remove(container.data);
@@ -129,6 +131,7 @@ public class CardPicker : MonoBehaviour
         else if(!selectedCards.Contains(container.data))
         {
             //show selected shader
+            container.selfImage.color = Color.green;
 
             //add to list
             selectedCards.Add(container.data);
