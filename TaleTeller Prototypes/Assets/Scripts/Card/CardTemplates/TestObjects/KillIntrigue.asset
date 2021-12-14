@@ -16,24 +16,11 @@ MonoBehaviour:
   cardName: Kill Plot
   rarity: 0
   archetype: 0
-  isKeyCard: 0
-  keyCardActivated: 0
-  interestCooldown: 0
-  currentInterestCooldown: 0
-  creativityBurn: 0
-  type: 0
-  characterBehaviour: 0
-  characterStats:
-    baseLifePoints: 0
-    baseAttackDamage: 0
-  trigger: 0
-  creativityCost: 0
-  effect: {fileID: 0}
-  deadCardEffect: {fileID: 0}
+  manaCost: 0
   cardGraph: {fileID: 0}
-  feedback: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
+  effectsReferences: []
   effects: []
   cardTypeReference: {fileID: 0}
   cardType: {fileID: 0}
@@ -41,6 +28,7 @@ MonoBehaviour:
   completionTimer: 3
   isMainPlot: 0
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &1248595633527693001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,3 +46,5 @@ MonoBehaviour:
   linkedJunkedCards:
   - {fileID: 11400000, guid: 7a66e9907771da44dab4d432f6f13991, type: 2}
   - {fileID: 11400000, guid: 7a66e9907771da44dab4d432f6f13991, type: 2}
+  junkSpawnLocations: 0000000000000000
+  junksPositionsInDeck: 

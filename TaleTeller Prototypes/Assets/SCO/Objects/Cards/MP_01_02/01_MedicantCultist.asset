@@ -54,7 +54,7 @@ MonoBehaviour:
   dataReference: {fileID: 11400000}
   cardName: 'Medicant Cultist '
   rarity: 0
-  archetype: 0
+  archetype: 2
   manaCost: 2
   cardGraph: {fileID: 21300000, guid: 511789f9a7de26a43a0d5cb62c772951, type: 3}
   currentContainer: {fileID: 0}
@@ -99,4 +99,4 @@ MonoBehaviour:
   junkSpawnLocations: 02000000020000000200000002000000020000000200000002000000020000000200000002000000
   junksPositionsInDeck: 
   typeToDump: 2
-  amountToDump: 20
+  amountToDump: 8
