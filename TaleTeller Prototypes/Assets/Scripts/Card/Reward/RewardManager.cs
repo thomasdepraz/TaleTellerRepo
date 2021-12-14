@@ -119,7 +119,7 @@ public class RewardManager : Singleton<RewardManager>
 
         confirmed = false;
         canvasGroup.blocksRaycasts = true;
-        batchOneNumberToSelect = 3;
+        batchOneNumberToSelect = 2;
         batchTwoNumberToSelect = 1;//NOTE PROBABLY NEED TO EXPOSE THOSE VARIABLES
 
         //Fade in background
@@ -398,6 +398,7 @@ public class RewardManager : Singleton<RewardManager>
             {
                 if (placeholders[i].data == null)
                 {
+                    placeholders[i].selfImage.color = Color.white;
                     placeholders[i].gameObject.SetActive(true);
                     placeholders[i].InitializeContainer(targets[i], true);
                     break;
@@ -432,6 +433,7 @@ public class RewardManager : Singleton<RewardManager>
             if (batchOneSelectedCards.Contains(container.data))
             {
                 //Hide selected shader
+                container.selfImage.color = Color.white;
 
                 //Remove from list
                 batchOneSelectedCards.Remove(container.data);
@@ -447,6 +449,7 @@ public class RewardManager : Singleton<RewardManager>
             else if (!batchOneSelectedCards.Contains(container.data))
             {
                 //show selected shader
+                container.selfImage.color = Color.green;
 
                 //add to list
                 batchOneSelectedCards.Add(container.data);
@@ -459,6 +462,7 @@ public class RewardManager : Singleton<RewardManager>
             if (batchTwoSelectedCards.Contains(container.data))
             {
                 //Hide selected shader
+                container.selfImage.color = Color.white;
 
                 //Remove from list
                 batchTwoSelectedCards.Remove(container.data);
@@ -474,6 +478,7 @@ public class RewardManager : Singleton<RewardManager>
             else if (!batchTwoSelectedCards.Contains(container.data))
             {
                 //show selected shader
+                container.selfImage.color = Color.green;
 
                 //add to list
                 batchTwoSelectedCards.Add(container.data);
