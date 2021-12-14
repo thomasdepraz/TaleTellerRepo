@@ -19,6 +19,7 @@ MonoBehaviour:
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 3
 --- !u!114 &-4222415161089856297
 MonoBehaviour:
@@ -33,7 +34,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Earn + $gainValue$ GOLD.
+  description: HERO => Earn + $gainValue$ GOLD.
   trigger: 1
   target: 1
   range: 
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: For each keyword "Buy" nearby, draw 1.
+  description: HAND => For each keyword "Buy" nearby, draw 1.
   trigger: 1
   target: 2
   range: 0300000004000000

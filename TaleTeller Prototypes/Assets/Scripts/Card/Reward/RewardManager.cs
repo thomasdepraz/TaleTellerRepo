@@ -347,15 +347,9 @@ public class RewardManager : Singleton<RewardManager>
         CardRarity result = CardRarity.None;
 
         //TEMP FOR NOW PICK A RANDOM RARITY -- LATER ADD RATES
-        int r = Random.Range(1, 5);
+        int r = Random.Range(3, 5);
         switch(r)
         {
-            case 1:
-                result = CardRarity.Common;
-                break;
-            case 2:
-                result = CardRarity.Uncommon;
-                break;
             case 3:
                 result = CardRarity.Rare;
                 break;

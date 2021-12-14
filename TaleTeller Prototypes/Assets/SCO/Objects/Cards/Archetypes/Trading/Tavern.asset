@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Restore + $modifierValue$ HP.
+  description: ALL => Restore + $modifierValue$ HP.
   trigger: 2
   target: 2
   range: 0400000003000000
@@ -37,7 +37,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Buy ($buyValue$)</b> :'
+  description: 'HERO => <b>Buy ($buyValue$)</b> :'
   trigger: 1
   target: 0
   range: 

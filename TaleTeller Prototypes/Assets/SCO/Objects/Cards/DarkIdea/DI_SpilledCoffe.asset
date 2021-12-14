@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: At the end of the turn, Discard the top Card of your Deck if is in
-    your Hand.
+  description: HAND => At the end of the turn, Discard the top Card of your Deck
+    if is in your Hand.
   trigger: 6
   target: 4
   range: 

@@ -66,6 +66,7 @@ MonoBehaviour:
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 5
 --- !u!114 &11400000
 MonoBehaviour:
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Bankrupt (3)</b> :'
+  description: 'SELF => <b>Bankrupt (3)</b> :'
   trigger: 1
   target: 1
   range: 

@@ -74,6 +74,7 @@ MonoBehaviour:
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 2
 --- !u!114 &7595181082945820335
 MonoBehaviour:
@@ -88,7 +89,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: The Hero gains + $gainValue$ ATK.
+  description: HERO => The Hero gains + $gainValue$ ATK.
   trigger: 1
   target: 1
   range: 

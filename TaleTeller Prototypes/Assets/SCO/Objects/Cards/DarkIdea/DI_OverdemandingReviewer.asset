@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: At the end of the turn, Increase the cost of a random Card in your
-    hand by +1 if is in your Hand.
-  trigger: 14
+  description: HAND => At the end of the turn, Increase the cost of a random Card
+    in your hand by +1 if is in your Hand.
+  trigger: 6
   target: 3
   range: 
   values: []
@@ -69,4 +69,5 @@ MonoBehaviour:
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 2
