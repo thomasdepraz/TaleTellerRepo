@@ -73,7 +73,7 @@ public class CharacterType : CardTypes
         yield return new WaitForSeconds(0.7f);
         #endregion
 
-        stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage + GameManager.Instance.currentHero.bonusDamage;
         data.currentContainer.UpdateCharacterInfo(this);
 
         #region Damage feedback

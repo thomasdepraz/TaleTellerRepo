@@ -256,7 +256,6 @@ public class RewardManager : Singleton<RewardManager>
         {
             //send card to hand
             PlotsManager.Instance.SendPlotToDeck(rewardQueue, secondaryPlotSelectedCard);
-
         }
         else if(selectedActionReward)//TODO
         {
@@ -270,6 +269,9 @@ public class RewardManager : Singleton<RewardManager>
             currentStatRewardAction(rewardQueue);
 
         }
+
+        ResetSecondaryContainers();
+
         rewardQueue.StartQueue();
         while(!rewardQueue.resolved)
         {
@@ -631,6 +633,8 @@ public class RewardManager : Singleton<RewardManager>
         secondaryRewardCardContainer.ResetContainer();
         actionRewardButton.gameObject.SetActive(false);
         statsRewardButton.gameObject.SetActive(false);
+
+        confirmButton.gameObject.SetActive(false);
     }
     #endregion
 
