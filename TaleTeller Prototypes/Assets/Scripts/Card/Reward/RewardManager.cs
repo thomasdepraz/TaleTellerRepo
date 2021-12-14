@@ -33,6 +33,7 @@ public class RewardManager : Singleton<RewardManager>
     //Different Pools based on each archetype -- ALL OF THESE CARDS MUST BE INSTANTIATED
     public List<CardData> secondaryRewardCards = new List<CardData>();
     public List<CardData> rewardPoolTrading = new List<CardData>();
+    public List<CardData> rewardPoolVision = new List<CardData>();
 
     //
     bool confirmed;
@@ -98,6 +99,11 @@ public class RewardManager : Singleton<RewardManager>
         for (int i = 0; i < rewardPoolTrading.Count; i++)
         {
             rewardPoolTrading[i].InitializeData(rewardPoolTrading[i]);
+        }
+
+        for (int i = 0; i < rewardPoolVision.Count; i++)
+        {
+            rewardPoolVision[i].InitializeData(rewardPoolVision[i]);
         }
     }
 
@@ -369,6 +375,9 @@ public class RewardManager : Singleton<RewardManager>
 
             case Archetype.Trading:
                 return rewardPoolTrading;
+
+            case Archetype.Vision:
+                return rewardPoolVision;
         }
         Debug.LogError("Archetype List wasn't found");
         return null;

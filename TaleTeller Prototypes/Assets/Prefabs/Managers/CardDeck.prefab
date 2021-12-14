@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4084148799544866493}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -70,16 +70,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardDeck:
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: d2d5ea40aa2fee948bc499947409e06b, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
-  - {fileID: 11400000, guid: af8056670de60c8489f11c2f88c5a8ff, type: 2}
+  - {fileID: 11400000, guid: e55569a6cd4a0bc41a37c9564af440dd, type: 2}
+  - {fileID: 11400000, guid: 7a0ee1ac1216b4a4783934b63f6f60ac, type: 2}
+  - {fileID: 11400000, guid: 8d274d9a746f8d34cb75c6f36cc6572c, type: 2}
+  - {fileID: 11400000, guid: 5e00d49528fcb3141b52373475909cb1, type: 2}
+  - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
+  - {fileID: 11400000, guid: e7a61fcebb3e9f34db9803ac0bf267dc, type: 2}
+  - {fileID: 11400000, guid: 16fd94ca1944e2b43a3156020a0b11c4, type: 2}
+  - {fileID: 11400000, guid: 25439e01db2c24b48a19f963595dc0cb, type: 2}
+  - {fileID: 11400000, guid: fce0a78ed800efb4298f0e5fde1de25e, type: 2}
+  - {fileID: 11400000, guid: 6be3023763b94b64e91c54f87dc03b1d, type: 2}
+  - {fileID: 11400000, guid: e55569a6cd4a0bc41a37c9564af440dd, type: 2}
+  - {fileID: 11400000, guid: 5e00d49528fcb3141b52373475909cb1, type: 2}
+  - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
+  - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
+  - {fileID: 11400000, guid: 16fd94ca1944e2b43a3156020a0b11c4, type: 2}
+  - {fileID: 11400000, guid: fce0a78ed800efb4298f0e5fde1de25e, type: 2}
   discardPile: []
   drawAmount: 3
   drawAmountFirstTurn: 5

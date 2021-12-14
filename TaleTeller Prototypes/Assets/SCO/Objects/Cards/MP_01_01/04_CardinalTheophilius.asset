@@ -72,7 +72,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: -2171829827178654687}
   cardType: {fileID: 0}
   objective: {fileID: 1072204418088904170}
-  completionTimer: 5
+  completionTimer: 6
   isMainPlot: 1
   isFinal: 1
   legendaryCardRewards: []
@@ -91,6 +91,8 @@ MonoBehaviour:
   linkedPlotData: {fileID: 0}
   objectiveName: 'Defeat Theophilus. '
   linkedJunkedCards: []
+  junkSpawnLocations: 
+  junksPositionsInDeck: 
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []

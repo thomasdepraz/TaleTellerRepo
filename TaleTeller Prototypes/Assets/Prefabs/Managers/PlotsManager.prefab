@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4449273303055044008}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMainPlotScheme: {fileID: 0}
   schemes:
-  - {fileID: 11400000, guid: df975ae4d82066246940778f5c8e35e8, type: 2}
-  - {fileID: 11400000, guid: bd3fe45b9e2cc7a418888df2b232bb5b, type: 2}
+  - {fileID: 11400000, guid: 52ee8f02be29efc4bbb8e9eaffc7a20f, type: 2}
+  - {fileID: 11400000, guid: dbd06201fc0a9e044ab0215871c1d387, type: 2}
   secondaryPlots:
   - {fileID: 11400000, guid: d727f71537b38264bbf19a0bba2b25f0, type: 2}
   currentPickedCard: {fileID: 0}

@@ -16,6 +16,6 @@ MonoBehaviour:
   - stepOptions:
     - {fileID: 11400000, guid: 97c6d0b27a5ffeb4fbe1fa709ea1ad74, type: 2}
   - stepOptions:
-    - {fileID: 11400000, guid: d727f71537b38264bbf19a0bba2b25f0, type: 2}
+    - {fileID: 11400000, guid: e984671dec79a134ba92511588a01c83, type: 2}
     - {fileID: 11400000, guid: 5c3f88c9be9df8343be9573191d37aa6, type: 2}
   currentStep: 2

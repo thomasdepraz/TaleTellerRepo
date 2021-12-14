@@ -286,11 +286,11 @@ public class CardVisuals : MonoBehaviour
                    val => LeanTween.moveLocalY(container.gameObject, originY, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
         }
     }
-    public void HealthFeedback()
+
+    public void EffectChangeFeedback(CardContainer container, int direction, EventQueue queue)
     {
-
-
-
+        Vector3 scale = direction > 0 ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(0.8f, 0.8f, 0.8f);
+        LeanTween.scale(container.gameObject, scale, 0.1f ).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value=> { if (queue != null) queue.resolved = true; });
     }
 
 
