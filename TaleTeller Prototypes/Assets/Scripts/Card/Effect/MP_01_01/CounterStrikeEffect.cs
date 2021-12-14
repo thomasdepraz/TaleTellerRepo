@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Remi Secher - 12/10/2021 01:14 - Creation
+/// Remi Secher - 12/10/2021 01:14 - Creation /!\ DEPRECATED /!\
 /// </summary>
 public class CounterStrikeEffect : Effect
 {
