@@ -9,25 +9,43 @@ public class Hand : MonoBehaviour
     public List<CardContainer> currentHand = new List<CardContainer>();
     public int maxHandSize;
 
-    public void InitCard(CardData data, bool fromDeck = true)
+    public void InitCard(EventQueue queue, CardData data, bool deal = true)
     {
-        for (int i = 0; i < hiddenHand.Count; i++)
+        queue.events.Add(InitCardRoutine(queue, data, deal));
+    }
+    public IEnumerator InitCardRoutine(EventQueue queue, CardData data, bool fromDeck)
+    {
+        yield return null;
+        if(data.currentContainer == null)
         {
-            if(!hiddenHand[i].gameObject.activeSelf)
+            for (int i = 0; i < hiddenHand.Count; i++)
             {
-                //Set parent and move
-                if (fromDeck)
+                if (!hiddenHand[i].gameObject.activeSelf)
                 {
+                    currentHand.Add(hiddenHand[i]);
+                    hiddenHand[i].InitializeContainer(data);
                     hiddenHand[i].rectTransform.SetParent(handTransform);
-                    MoveCard(hiddenHand[i],RandomPositionInRect(handTransform), true);
+
+                    //Set parent and move
+                    if (fromDeck)
+                    {
+                        hiddenHand[i].visuals.MoveCard(hiddenHand[i], RandomPositionInRect(handTransform), true, true, queue);
+                        yield return new WaitForSeconds(0.2f);
+                    }
+                    break;
                 }
-
-                currentHand.Add(hiddenHand[i]);
-                hiddenHand[i].InitializeContainer(data);
-
-                break;
             }
         }
+        else
+        {
+            if (fromDeck)
+            {
+                data.currentContainer.rectTransform.SetParent(handTransform);
+                data.currentContainer.visuals.MoveCard(data.currentContainer, RandomPositionInRect(handTransform), true, true, queue);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+        queue.UpdateQueue();
     }
 
     public void DiscardAllHand()//TODO Implement queuing system
@@ -67,13 +85,12 @@ public class Hand : MonoBehaviour
         { yield return new WaitForEndOfFrame(); }
         #endregion
 
-
+        //Add feedback
+        EventQueue feedback = new EventQueue();
+        card.visuals.MoveCard(card,CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         card.data = card.data.ResetData(card.data);
-
-
-
-
         currentHand.Remove(card);
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
         card.ResetContainer();

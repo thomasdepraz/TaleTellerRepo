@@ -273,7 +273,13 @@ public class CardVisuals : MonoBehaviour
     {
         string result = String.Empty;
 
+        if(data.cardType?.GetType() == typeof(CharacterType))
+        {
+            CharacterType chara = data.cardType as CharacterType;
 
+            if(chara.doubleStrike) result += "<b>Double Strike<\\b>" + "\n";
+
+        }
         for (int i = 0; i < data.effects.Count; i++)
         {
             result += data.effects[i].GetDescription(data.effects[i]);
@@ -290,7 +296,7 @@ public class CardVisuals : MonoBehaviour
         return result;
     }
 
-
+    #region Tweening
     public void ShakeCard(CardContainer container, EventQueue queue)
     {
         LeanTween.rotateZ(container.gameObject, -3, 0.025f).setEaseOutCubic().setOnComplete(
@@ -322,5 +328,32 @@ public class CardVisuals : MonoBehaviour
         LeanTween.scale(container.gameObject, scale, 0.1f ).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value=> { if (queue != null) queue.resolved = true; });
     }
 
+    public void MoveCard(CardContainer container, Vector3 target,bool useScale ,bool appear, EventQueue queue = null)
+    {
+        if(useScale)
+        {
+            if(appear)
+            {
+                container.rectTransform.localScale = Vector3.zero;
+                container.selfImage.color = Color.black;
+
+                LeanTween.value(gameObject, container.selfImage.color, Color.white, 0.3f).setOnUpdate((Color val) => { container.selfImage.color = val; });
+                LeanTween.scale(container.rectTransform, Vector3.one, 0.5f).setEaseInOutQuint();
+                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+            }
+            else
+            {
+                LeanTween.value(gameObject, container.selfImage.color, Color.black, 0.8f).setOnUpdate((Color val) => { container.selfImage.color = val; });
+                LeanTween.scale(container.rectTransform, Vector3.zero, 0.8f).setEaseInOutQuint();
+                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+            }
+        }
+        else
+        {
+            LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+        }
+    }
+
+    #endregion
 
 }
