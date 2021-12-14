@@ -18,10 +18,13 @@ MonoBehaviour:
   target: 2
   range: 02000000
   values: []
-  effectValueToModifiy:
-    value: 1
-    type: 5
-    op: 1
+  effectValueModification:
+    typeToTarget: 0
+    operatorToTarget: 0
+    modification:
+      value: 0
+      type: 0
+      op: 0
   modifyTemporary: 0
 --- !u!114 &-764083229735582325
 MonoBehaviour:
@@ -74,7 +77,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: 8009666320636331403}
   cardType: {fileID: 0}
   objective: {fileID: -764083229735582325}
-  completionTimer: 4
+  completionTimer: 5
   isMainPlot: 1
   isFinal: 0
   legendaryCardRewards: []
@@ -96,10 +99,13 @@ MonoBehaviour:
   target: 2
   range: 02000000
   values: []
-  effectValueToModifiy:
-    value: 1
-    type: 5
-    op: 2
+  effectValueModification:
+    typeToTarget: 0
+    operatorToTarget: 0
+    modification:
+      value: 0
+      type: 0
+      op: 0
   modifyTemporary: 0
 --- !u!114 &8009666320636331403
 MonoBehaviour:

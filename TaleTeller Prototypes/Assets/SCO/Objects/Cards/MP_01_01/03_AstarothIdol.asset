@@ -65,7 +65,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: -4658124985768800335}
   cardType: {fileID: 0}
   objective: {fileID: 7673065295867403149}
-  completionTimer: 3
+  completionTimer: 4
   isMainPlot: 1
   isFinal: 0
   legendaryCardRewards: []

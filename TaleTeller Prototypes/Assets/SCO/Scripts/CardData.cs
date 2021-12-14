@@ -24,7 +24,9 @@ public enum Archetype
     None, 
     Base,
     Trading, 
-    Vision
+    Vision,
+
+    NumberOfArchetypes//Always last Archetype
 }
 
 [CreateAssetMenu(fileName = "Card", menuName = "Data/Card", order = 0)]
