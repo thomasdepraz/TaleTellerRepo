@@ -70,6 +70,7 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &2477744728477637892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,5 +96,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
+  junkSpawnLocations: 02000000020000000200000002000000020000000200000002000000020000000200000002000000
+  junksPositionsInDeck: 
   typeToDump: 2
   amountToDump: 20

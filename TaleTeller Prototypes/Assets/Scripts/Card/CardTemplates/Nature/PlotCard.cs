@@ -93,7 +93,10 @@ public class PlotCard : CardData
                     CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count),objective.linkedJunkedCards[i]);
                     break;
                 case PlotObjective.JunkSpawnLocation.XInDeck:
-                    CardManager.Instance.cardDeck.cardDeck.Insert(objective.junksPositionsInDeck[i], objective.linkedJunkedCards[i]);
+                    if(!(objective.junksPositionsInDeck[i] > CardManager.Instance.cardDeck.cardDeck.Count))
+                        CardManager.Instance.cardDeck.cardDeck.Insert(objective.junksPositionsInDeck[i], objective.linkedJunkedCards[i]);
+                    else
+                        CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
                     break;
                 case PlotObjective.JunkSpawnLocation.Hand:
                     CardManager.Instance.cardDeck.cardDeck.Insert(i, objective.linkedJunkedCards[i]);
