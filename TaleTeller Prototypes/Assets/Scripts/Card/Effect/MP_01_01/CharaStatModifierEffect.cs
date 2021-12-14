@@ -62,6 +62,12 @@ public class CharaStatModifierEffect : Effect
                     {
                         case EffectValueOperator.Addition:
                             t.stats.baseAttackDamage += modifierValue.value;
+
+                            #region feedback
+                            EventQueue feedback = new EventQueue();
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedback);
+                            while(!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+                            #endregion 
                             break;
                         case EffectValueOperator.Division:
                             t.stats.baseAttackDamage /= modifierValue.value;

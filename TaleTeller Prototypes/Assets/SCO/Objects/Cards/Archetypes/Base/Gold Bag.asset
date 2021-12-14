@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Gold Bag
   rarity: 1
   archetype: 1
-  manaCost: 0
+  manaCost: 1
   cardGraph: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
