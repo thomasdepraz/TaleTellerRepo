@@ -51,7 +51,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: 5556898286618832836}
   cardType: {fileID: 0}
   objective: {fileID: -3838742163466085264}
-  completionTimer: 3
+  completionTimer: 4
   isMainPlot: 1
   isFinal: 0
   legendaryCardRewards: []
@@ -70,10 +70,11 @@ MonoBehaviour:
   data: {fileID: 0}
   stats:
     baseLifePoints: 10
-    baseAttackDamage: 3
+    baseAttackDamage: 2
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
+  undying: 0
   useCount: 2
 --- !u!114 &7595181082945820335
 MonoBehaviour:

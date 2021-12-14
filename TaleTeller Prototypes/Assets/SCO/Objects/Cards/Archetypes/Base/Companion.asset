@@ -19,7 +19,8 @@ MonoBehaviour:
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
-  useCount: 5
+  undying: 0
+  useCount: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
