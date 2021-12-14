@@ -39,6 +39,8 @@ MonoBehaviour:
   objectiveName: 'Defeat the Demon while Theophilus is on the next step. '
   linkedJunkedCards:
   - {fileID: 11400000, guid: d62fbd32af1194a4ba300dbc8377c052, type: 2}
+  junkSpawnLocations: 00000000
+  junksPositionsInDeck: 
   numberToKill: 1
   mustKillSpecific: 0
   specificJunkToKill: []
@@ -75,6 +77,7 @@ MonoBehaviour:
   completionTimer: 2
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &5556898286618832836
 MonoBehaviour:
   m_ObjectHideFlags: 0

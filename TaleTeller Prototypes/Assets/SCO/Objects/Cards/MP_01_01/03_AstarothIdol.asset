@@ -68,6 +68,7 @@ MonoBehaviour:
   completionTimer: 3
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &7673065295867403149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +85,8 @@ MonoBehaviour:
   objectiveName: 'Defeat Astaroth the Mighty. '
   linkedJunkedCards:
   - {fileID: 11400000, guid: 972fec6b2d75d8a4a92a593aeae0e978, type: 2}
+  junkSpawnLocations: 00000000
+  junksPositionsInDeck: 
   numberToKill: 1
   mustKillSpecific: 0
   specificJunkToKill: []

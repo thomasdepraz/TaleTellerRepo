@@ -32,6 +32,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac87816fddd2e3141818f090b951b809, type: 2}
   - {fileID: 11400000, guid: 97a7210a2e2596d4c804a26a264392f2, type: 2}
   - {fileID: 11400000, guid: f502345eaec116944b8f1eb91c94dae3, type: 2}
+  junkSpawnLocations: 02000000020000000200000002000000
+  junksPositionsInDeck: 
   mustPlaceAll: 1
   specificJunkToPlace: []
   plotOnBoard: 0
@@ -86,3 +88,4 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
+  legendaryCardRewards: []
