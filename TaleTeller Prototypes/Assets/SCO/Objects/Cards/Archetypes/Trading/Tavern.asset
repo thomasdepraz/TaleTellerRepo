@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: Restore + $modifierValue$ HP.
   trigger: 2
   target: 2
   range: 0400000003000000
@@ -23,6 +23,7 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  temporaryChange: 0
 --- !u!114 &-2251519273942829760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,7 +37,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: '<b>Buy ($buyValue$)</b> :'
   trigger: 1
   target: 0
   range: 
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: The Hero gains + $gainValue$ HP Max.
   trigger: 0
   target: 1
   range: 
@@ -95,6 +96,7 @@ MonoBehaviour:
     value: 3
     type: 6
     op: 1
+  temporaryChange: 0
 --- !u!114 &1714582858014566928
 MonoBehaviour:
   m_ObjectHideFlags: 0

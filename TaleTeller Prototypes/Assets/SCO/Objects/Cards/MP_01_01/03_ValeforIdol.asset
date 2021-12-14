@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Decrease by -3 the Damage of any Enemy.
+  description: Decrease by -$modifierValue$ ATK to any Evil characters.
   trigger: 1
   target: 2
   range: 0500000009000000

@@ -33,7 +33,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Increase its Damage by +2.
+  description: Gains + $modifierValue$ ATK.
   trigger: 1
   target: 2
   range: 01000000

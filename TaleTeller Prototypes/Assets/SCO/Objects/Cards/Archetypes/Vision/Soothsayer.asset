@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Soothsayer
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: Soothsayer
+  cardName: Fairy
   rarity: 2
   archetype: 3
   manaCost: 1
