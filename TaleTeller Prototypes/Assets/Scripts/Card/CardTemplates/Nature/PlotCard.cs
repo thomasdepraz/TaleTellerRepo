@@ -282,6 +282,7 @@ public class PlotCard : CardData
     {
         yield return null;
         completionTimer--;
+        currentContainer.UpdatePlotInfo(this);
         if(completionTimer <= 0)
         {
             EventQueue failQueue = new EventQueue();
