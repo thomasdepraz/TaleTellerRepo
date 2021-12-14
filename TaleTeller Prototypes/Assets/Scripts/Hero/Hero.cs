@@ -132,7 +132,6 @@ public class Hero : MonoBehaviour
         InitializeHero();
     }
 
-
     public void FrameTweening(GameObject frame)
     {
         LeanTween.scale(frame, new Vector3(1.1f, 1.1f, 1.1f), 0.2f).setEaseInOutCubic().setLoopPingPong(1);
