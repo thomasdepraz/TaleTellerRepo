@@ -24,6 +24,7 @@ public class CharacterType : CardTypes
     public CharacterFightingRange fightingRange;
 
     public bool doubleStrike;
+    public bool undying;
     /// <summary>
     /// How many times the player is able to use the card.
     /// </summary>
@@ -74,6 +75,7 @@ public class CharacterType : CardTypes
         #endregion
 
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage;
+        if (undying) Mathf.Clamp(stats.baseLifePoints, 0, Mathf.Infinity);
         data.currentContainer.UpdateCharacterInfo(this);
 
         #region Damage feedback
