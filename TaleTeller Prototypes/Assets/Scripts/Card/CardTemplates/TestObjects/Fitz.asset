@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Fitz
-  rarity: 0
+  rarity: 1
   archetype: 0
   manaCost: 1
   cardGraph: {fileID: 0}

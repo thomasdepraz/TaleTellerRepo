@@ -161,8 +161,12 @@ public class Deck : MonoBehaviour
         #endregion
 
         EventQueue dealQueue = new EventQueue();
+
         //TODO make the following logic in the queue so it can be animated-----------------
-        CardManager.Instance.cardHand.InitCard(dealtCard);
+        EventQueue initQueue = new EventQueue();
+        CardManager.Instance.cardHand.InitCard(initQueue, dealtCard);
+        initQueue.StartQueue();
+        while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
         if(card == null)//Only remove if card = null
         {
@@ -172,7 +176,6 @@ public class Deck : MonoBehaviour
         {
             if (cardDeck.Contains(card)) cardDeck.Remove(card);
         }
-        yield return new WaitForSeconds(0.2f);//For now Wait 0.2 sec between each draw
         //----------------------------------------------------
 
         dealQueue.StartQueue();
@@ -205,7 +208,7 @@ public class Deck : MonoBehaviour
             dealtCard = cardDeck[0];
         }
         //Appear(overDrawQueue)//TODO
-
+        Appear(overdrawQueue, dealtCard);
 
         //the card can be burn or push another card from the board
         if (dealtCard.GetType() == typeof(PlotCard)) //if its a plot card it pushes cards from the board
@@ -231,7 +234,7 @@ public class Deck : MonoBehaviour
         }
         else
         {
-            Burn(overdrawQueue);
+            Burn(overdrawQueue, dealtCard);
         }
 
         overdrawQueue.StartQueue();
@@ -243,11 +246,11 @@ public class Deck : MonoBehaviour
         queue.UpdateQueue();
     }
 
-    void Burn(EventQueue queue)
+    void Burn(EventQueue queue, CardData card)
     {
-        queue.events.Add(BurnRoutine(queue));
+        queue.events.Add(BurnRoutine(queue, card));
     } 
-    IEnumerator BurnRoutine(EventQueue queue)
+    IEnumerator BurnRoutine(EventQueue queue, CardData card)
     {
         yield return null;
 
@@ -255,8 +258,15 @@ public class Deck : MonoBehaviour
 
         //TODO implement this to queue so it can be animated --- 
 
-        discardPile.Add(cardDeck[0]);
-        cardDeck.RemoveAt(0);
+        //Add feedback
+        EventQueue feedback = new EventQueue();
+        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+
+        discardPile.Add(card);
+        if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer)) CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
+        if(cardDeck.Contains(card))cardDeck.Remove(card);
 
         //------------------------------------------------------
 
@@ -269,15 +279,27 @@ public class Deck : MonoBehaviour
         queue.UpdateQueue();
     }
 
-    //void DiscardFromDeck(EventQueue queue)
-    //{
-    //    queue.events.Add(DiscardFromDeckRoutine(queue));
-    //}
-    //IEnumerator DiscardFromDeckRoutine(EventQueue queue)
-    //{
-    //    yield return null;
+    void Appear(EventQueue queue, CardData card)
+    {
+        queue.events.Add(AppearRoutine(queue, card));
+    }
+    IEnumerator AppearRoutine(EventQueue queue, CardData card)
+    {
+        yield return null;
 
+        #region Init Container
+        EventQueue initQueue = new EventQueue();
+        CardManager.Instance.cardHand.InitCard(initQueue, card, false);
+        initQueue.StartQueue();
+        while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
 
-    //}
+        EventQueue appearFeedback = new EventQueue();
+        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, true, appearFeedback );
+        while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+        queue.UpdateQueue();
+    }
+
     #endregion
 }

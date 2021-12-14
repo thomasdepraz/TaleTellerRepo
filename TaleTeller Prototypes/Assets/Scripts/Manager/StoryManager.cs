@@ -78,6 +78,11 @@ public class StoryManager : Singleton<StoryManager>
             yield return new WaitForEndOfFrame();
         }
 
+        yield return new WaitForSeconds(1f);
+
+        //Mana Init
+        CardManager.Instance.manaSystem.StartTurnManaInit();
+
         //On Turn Begin Events
         if (turnCount > 0)
         {
@@ -92,8 +97,6 @@ public class StoryManager : Singleton<StoryManager>
             }
         }
 
-        //Mana Init
-        CardManager.Instance.manaSystem.StartTurnManaInit();
 
         //Enable interaction with cards and go button
         CardManager.Instance.board.currentBoardState = BoardState.Idle;

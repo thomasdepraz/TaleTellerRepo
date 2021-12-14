@@ -20,6 +20,8 @@ public class CardVisuals : MonoBehaviour
     public Image cardFrame;
     [Space]
     public Sprite characterFrame;
+    public Sprite characterFrameGood;
+    public Sprite characterFrameBad;
     public Sprite itemFrame;
     public Sprite placeFrame;
 
@@ -37,14 +39,20 @@ public class CardVisuals : MonoBehaviour
     public Sprite itemIcon;
     public Sprite placeIcon;
 
+    [Header("Card Rarity")]
+    public Image cardRarity;
+    [Space]
+    public Sprite commonRarity;
+    public Sprite uncommonRarity;
+    public Sprite rareRarity;
+    public Sprite epicRarity;
+    public Sprite legendaryRarity;
+
     [Header("Character Elements")]
-    public Image characterAffilitionFrame;
     public Image characterHealthFrame;
     public Image characterAttackFrame;
 
     [Space]
-    public Sprite normalCharacterAffiliation;
-    public Sprite curseCharacterAffiliation;
     public Sprite normalCharacterHealth;
     public Sprite curseCharacterHealth;
     public Sprite normalCharacterAttack;
@@ -73,7 +81,6 @@ public class CardVisuals : MonoBehaviour
     [Space]
     public TextMeshProUGUI characterAttackText;
     public TextMeshProUGUI characterHealthText;
-    public TextMeshProUGUI characterAffiliationText;
     public TextMeshProUGUI timerText;
     #endregion
 
@@ -129,6 +136,34 @@ public class CardVisuals : MonoBehaviour
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
         }
+
+        if(data.rarity != CardRarity.None)
+        {
+            cardRarity.gameObject.SetActive(true);
+            switch (data.rarity)
+            {
+                case CardRarity.Common:
+                    cardRarity.sprite = commonRarity;
+                    break;
+                case CardRarity.Uncommon:
+                    cardRarity.sprite = uncommonRarity;
+                    break;
+                case CardRarity.Rare:
+                    cardRarity.sprite = rareRarity;
+                    break;
+                case CardRarity.Epic:
+                    cardRarity.sprite = epicRarity;
+                    break;
+                case CardRarity.Legendary:
+                    cardRarity.sprite = legendaryRarity;
+                    break;
+            }
+        }
+        else
+        {
+            cardRarity.gameObject.SetActive(false);
+        }
+
         #endregion
 
         //Init type based values
@@ -139,24 +174,33 @@ public class CardVisuals : MonoBehaviour
             if(cardType == typeof(CharacterType))
             {
                 cardIcon.sprite = characterIcon;
-                cardFrame.sprite = characterFrame;
+                CharacterType chara = data.cardType as CharacterType;
+                if(chara.behaviour == CharacterBehaviour.Agressive)
+                {
+                    cardFrame.sprite = characterFrameBad;
+                }
+                else if(chara.behaviour == CharacterBehaviour.Agressive)
+                {
+                    cardFrame.sprite = characterFrameGood;
+                }
+                else
+                {
+                    cardFrame.sprite = characterFrame;
+                }
 
                 characterAttackFrame.gameObject.SetActive(true);
                 characterHealthFrame.gameObject.SetActive(true);
                 cardTimerFrame.gameObject.SetActive(true);
-                characterAffilitionFrame.gameObject.SetActive(true);
 
                 if(dataType == typeof(DarkIdeaCard))
                 {
                     characterAttackFrame.sprite = curseCharacterAttack;
                     characterHealthFrame.sprite = curseCharacterHealth;
-                    characterAffilitionFrame.sprite = curseCharacterAffiliation;
                 }
                 else
                 {
                     characterAttackFrame.sprite = normalCharacterAttack;
                     characterHealthFrame.sprite = normalCharacterHealth;
-                    characterAffilitionFrame.sprite = normalCharacterAffiliation;
                 }
 
                 CharacterType character = data.cardType as CharacterType;
@@ -167,7 +211,6 @@ public class CardVisuals : MonoBehaviour
                 characterAttackFrame.gameObject.SetActive(false);
                 characterHealthFrame.gameObject.SetActive(false);
                 cardTimerFrame.gameObject.SetActive(false);
-                characterAffilitionFrame.gameObject.SetActive(false);
             }
 
             if(cardType == typeof(ObjectType))
@@ -187,7 +230,6 @@ public class CardVisuals : MonoBehaviour
             //
             characterAttackFrame.gameObject.SetActive(false);
             characterHealthFrame.gameObject.SetActive(false);
-            characterAffilitionFrame.gameObject.SetActive(false);
 
             if(data.GetType() !=  typeof(PlotCard))
             {
@@ -211,19 +253,6 @@ public class CardVisuals : MonoBehaviour
 
     public void UpdateCharacterElements(CharacterType character)
     {
-        switch(character.behaviour)//NOTE move the hardcoded string into a scriptable object or smthing
-        {
-            case CharacterBehaviour.Agressive:
-                characterAffiliationText.text = "Bad";
-                break;
-            case CharacterBehaviour.Peaceful:
-                characterAffiliationText.text = "Good";
-                break;
-            case CharacterBehaviour.None:
-                characterAffiliationText.text = "Neutral";
-                break;
-        }
-
         characterAttackText.text = character.stats.baseAttackDamage.ToString();
         characterHealthText.text = character.stats.baseLifePoints.ToString();
 
@@ -244,7 +273,13 @@ public class CardVisuals : MonoBehaviour
     {
         string result = String.Empty;
 
+        if(data.cardType?.GetType() == typeof(CharacterType))
+        {
+            CharacterType chara = data.cardType as CharacterType;
 
+            if(chara.doubleStrike) result += "<b>Double Strike<\\b>" + "\n";
+
+        }
         for (int i = 0; i < data.effects.Count; i++)
         {
             result += data.effects[i].GetDescription(data.effects[i]);
@@ -261,7 +296,7 @@ public class CardVisuals : MonoBehaviour
         return result;
     }
 
-
+    #region Tweening
     public void ShakeCard(CardContainer container, EventQueue queue)
     {
         LeanTween.rotateZ(container.gameObject, -3, 0.025f).setEaseOutCubic().setOnComplete(
@@ -293,5 +328,32 @@ public class CardVisuals : MonoBehaviour
         LeanTween.scale(container.gameObject, scale, 0.1f ).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value=> { if (queue != null) queue.resolved = true; });
     }
 
+    public void MoveCard(CardContainer container, Vector3 target,bool useScale ,bool appear, EventQueue queue = null)
+    {
+        if(useScale)
+        {
+            if(appear)
+            {
+                container.rectTransform.localScale = Vector3.zero;
+                container.selfImage.color = Color.black;
+
+                LeanTween.value(gameObject, container.selfImage.color, Color.white, 0.3f).setOnUpdate((Color val) => { container.selfImage.color = val; });
+                LeanTween.scale(container.rectTransform, Vector3.one, 0.5f).setEaseInOutQuint();
+                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+            }
+            else
+            {
+                LeanTween.value(gameObject, container.selfImage.color, Color.black, 0.8f).setOnUpdate((Color val) => { container.selfImage.color = val; });
+                LeanTween.scale(container.rectTransform, Vector3.zero, 0.8f).setEaseInOutQuint();
+                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+            }
+        }
+        else
+        {
+            LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+        }
+    }
+
+    #endregion
 
 }

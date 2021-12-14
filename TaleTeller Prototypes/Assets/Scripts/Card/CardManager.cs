@@ -11,6 +11,8 @@ public class CardManager : Singleton<CardManager>
     public Deck cardDeck;
     public Hand cardHand;
     public Board board;
+    public RectTransform discardPileTransform;
+    public RectTransform deckTransform;
 
     public ManaSystem manaSystem;
 

@@ -166,6 +166,12 @@ public class Board : MonoBehaviour
     }
     IEnumerator DiscardCardFromBoardRoutine(CardContainer card, EventQueue currentQueue)
     {
+        //Add feedback
+        EventQueue feedback = new EventQueue();
+        card.visuals.MoveCard(card, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+
         card.data = card.data.ResetData(card.data);
 
         CardManager.Instance.cardDeck.discardPile.Add(card.data);
@@ -175,7 +181,6 @@ public class Board : MonoBehaviour
         card.currentSlot.canvasGroup.blocksRaycasts = true;
 
         card.ResetContainer();
-        yield return new WaitForSeconds(0.2f);//TEMP
 
         currentQueue.UpdateQueue();
     }
