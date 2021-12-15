@@ -23,7 +23,7 @@ MonoBehaviour:
   cardAmount: 1
   manaCostModification:
     value: 1
-    type: 10
+    type: 11
     op: 1
 --- !u!114 &11400000
 MonoBehaviour:

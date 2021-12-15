@@ -77,7 +77,9 @@ public class CardCostModificationEffect : ManaEffect
 
                 default:
                     break;
-            } 
+            }
+
+            card.currentContainer.UpdateBaseInfo();
         }
     }
 }

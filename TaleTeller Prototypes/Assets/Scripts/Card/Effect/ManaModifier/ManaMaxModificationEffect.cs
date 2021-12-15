@@ -6,6 +6,7 @@ public class ManaMaxModificationEffect: ManaEffect
 {
     public EffectValue manaModificationValue;
     public int turnToLast;
+    public bool triggerNextTurn;
 
     public override void InitEffect(CardData card)
     {
@@ -15,8 +16,9 @@ public class ManaMaxModificationEffect: ManaEffect
 
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
-        var manaModifier = new ManaSystem.ManaPoolModifier(manaModificationValue.value, turnToLast, this);
-        CardManager.Instance.manaSystem.AddManaPoolModifier(manaModifier);
+        var manaSystem = CardManager.Instance.manaSystem;
+        var manaModifier = manaSystem.CreateManaPoolModifier(manaModificationValue.value, turnToLast, this);
+        CardManager.Instance.manaSystem.AddManaPoolModifier(manaModifier, triggerNextTurn);
         
         yield return null;
         currentQueue.UpdateQueue();

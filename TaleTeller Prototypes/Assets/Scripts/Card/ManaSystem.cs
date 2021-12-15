@@ -27,6 +27,8 @@ public class ManaSystem : MonoBehaviour
         set
         {
             _maxManaModifier = value;
+            if (currentMana > ActualMaxMana)
+                currentMana = ActualMaxMana;
             UpdateManaText();
         }
     }
@@ -54,7 +56,7 @@ public class ManaSystem : MonoBehaviour
     public TextMeshProUGUI manaCountText;
 
     //ManaPool Modifier CallStackSystem
-    public struct ManaPoolModifier
+    public class ManaPoolModifier
     {
         internal int modifierValue;
         internal int turnBeforeFade;
@@ -79,6 +81,8 @@ public class ManaSystem : MonoBehaviour
 
     public void StartTurnManaInit()
     {
+        maxManaModifier = 0;
+
         for (int i = 0; i < poolModifiers.Count(); i++)
         {
             var modifier = poolModifiers[i];
@@ -95,9 +99,21 @@ public class ManaSystem : MonoBehaviour
         currentMana = ActualMaxMana;
     }
 
-    public void AddManaPoolModifier(ManaPoolModifier modifier)
+    public void AddManaPoolModifier(ManaPoolModifier modifier, bool triggerNextTurn)
     {
         poolModifiers.Add(modifier);
+
+        if (!triggerNextTurn)
+        {
+            maxManaModifier += modifier.modifierValue;
+            modifier.turnBeforeFade -= 1;
+        }
+    }
+
+    public ManaPoolModifier CreateManaPoolModifier(int _value, int _turn, Effect _source, string _explainer = null)
+    {
+        var modifier = new ManaPoolModifier(_value, _turn, _source, _explainer);
+        return modifier;
     }
 
     public void GainMana(int amount)

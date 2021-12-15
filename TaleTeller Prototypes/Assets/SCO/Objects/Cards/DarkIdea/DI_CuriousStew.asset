@@ -19,10 +19,11 @@ MonoBehaviour:
   range: 
   values: []
   manaModificationValue:
-    value: 1
-    type: 9
+    value: -1
+    type: 10
     op: 2
   turnToLast: 1
+  triggerNextTurn: 0
 --- !u!114 &-6968927246892907630
 MonoBehaviour:
   m_ObjectHideFlags: 0
