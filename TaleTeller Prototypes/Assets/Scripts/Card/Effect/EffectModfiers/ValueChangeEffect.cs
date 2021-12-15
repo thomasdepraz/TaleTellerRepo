@@ -100,10 +100,15 @@ public class ValueChangeEffect : ValueModifierEffect
                 }
 
                 effect.linkedData.currentContainer.visuals.UpdateBaseElements(effect.linkedData);
+             }
+
+            if (targetedValues.Count() == 0)
+            {
+                feedbackQueue.resolved = true;
             }
         }
 
-        if (targetedCards.Count == 0)
+        if (targetedEffect.Count == 0)
         {
             feedbackQueue.resolved = true;
         }

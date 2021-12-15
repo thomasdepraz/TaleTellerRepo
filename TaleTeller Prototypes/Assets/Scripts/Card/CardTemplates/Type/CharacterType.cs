@@ -75,7 +75,7 @@ public class CharacterType : CardTypes
         #endregion
 
         stats.baseLifePoints -= GameManager.Instance.currentHero.attackDamage + GameManager.Instance.currentHero.bonusDamage;
-        if (undying) Mathf.Clamp(stats.baseLifePoints, 0, Mathf.Infinity);
+        if (undying) stats.baseLifePoints = (int) Mathf.Clamp(stats.baseLifePoints, 1, Mathf.Infinity);
         data.currentContainer.UpdateCharacterInfo(this);
 
         #region Damage feedback
@@ -185,6 +185,7 @@ public class CharacterType : CardTypes
                 #endregion
 
                 character.stats.baseLifePoints -= stats.baseAttackDamage;
+                if (character.undying) character.stats.baseLifePoints = (int) Mathf.Clamp(character.stats.baseLifePoints, 1, Mathf.Infinity);
                 character.data.currentContainer.UpdateCharacterInfo(character);//Update card text
 
                 #region OnCharHit Event
