@@ -13,6 +13,9 @@ public class CardPicker : MonoBehaviour
     public Button confirmButton;
     public CanvasGroup canvasGroup;
     public TextMeshProUGUI instructionText;
+    public TextMeshProUGUI descriptionPickText;
+    public TextMeshProUGUI descriptionChoice1Text;
+    public TextMeshProUGUI descriptionChoice2Text;
 
     [Header("Data")]
     public float backgroundFadeSpeed;
@@ -33,11 +36,11 @@ public class CardPicker : MonoBehaviour
         }
     }
 
-    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
+    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction, string description = null, string description1 = null, string description2 = null)
     {
-        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, isInstantaneous, instruction)) ;
+        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, isInstantaneous, instruction, description, description1, description2)) ;
     }
-    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
+    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction, string description = null, string description1 = null, string description2 = null)
     {
         canvasGroup.blocksRaycasts = true;
         selectedCards = pickedCards;
@@ -60,6 +63,15 @@ public class CardPicker : MonoBehaviour
         instructionText.gameObject.SetActive(true);
         instructionText.text = instruction;
 
+        descriptionPickText.gameObject.SetActive(true);
+        descriptionPickText.text = description;
+
+        descriptionChoice1Text.gameObject.SetActive(true);
+        descriptionChoice1Text.text = description1;
+
+        descriptionChoice2Text.gameObject.SetActive(true);
+        descriptionChoice2Text.text = description2;
+
         //TODO fade in cards
 
 
@@ -77,6 +89,12 @@ public class CardPicker : MonoBehaviour
 
         ResetPlaceHolders();
         instructionText.gameObject.SetActive(false);
+
+        descriptionPickText.gameObject.SetActive(false);
+
+        descriptionChoice1Text.gameObject.SetActive(false);
+
+        descriptionChoice2Text.gameObject.SetActive(false);
 
         Color transparent = new Color(0, 0, 0, 0);
         LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 

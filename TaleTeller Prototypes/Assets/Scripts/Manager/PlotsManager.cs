@@ -6,6 +6,8 @@ public class PlotsManager : Singleton<PlotsManager>
 {
     public MainPlotScheme currentMainPlotScheme;
     public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
+    public string descriptionSchemeChoice1;
+    public string descriptionSchemeChoice2;
     public List<CardData> secondaryPlots = new List<CardData>();
     public List<CardData> darkIdeas = new List<CardData>();
 
@@ -46,7 +48,7 @@ public class PlotsManager : Singleton<PlotsManager>
             pickTargets.Add(schemes[i].schemeSteps[0].stepOptions[0]);
         }
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, pickTargets, pickedCard, 1, false, "Choose how your plot starts");
+        CardManager.Instance.cardPicker.Pick(pickQueue, pickTargets, pickedCard, 1, false, "Choose the subject of your plot", null, descriptionSchemeChoice1, descriptionSchemeChoice2);
 
         pickQueue.StartQueue();
         while(!pickQueue.resolved)
@@ -85,7 +87,7 @@ public class PlotsManager : Singleton<PlotsManager>
         EventQueue pickQueue = new EventQueue();
         List<CardData> pickedCards = new List<CardData>();
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, "Choose one of these secondary plots");
+        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, "Choose a secondary plot");
 
         pickQueue.StartQueue();
 

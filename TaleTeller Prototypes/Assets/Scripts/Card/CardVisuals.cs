@@ -332,10 +332,13 @@ public class CardVisuals : MonoBehaviour
         else
         {
             manaCostText.text = data.manaCost.ToString();
+            manaCostText.color = Color.black;
             cardNameText.text = data.cardName;
+            cardNameText.color = Color.black;
 
             //GetDescription // Update Description
             cardDescriptionText.text = BuildDescription(data);
+            cardDescriptionText.color = Color.black;
         }
     }
 
@@ -354,11 +357,14 @@ public class CardVisuals : MonoBehaviour
         else
         {
             characterAttackText.text = character.stats.baseAttackDamage.ToString();
+            characterAttackText.color = Color.black;
             characterHealthText.text = character.stats.baseLifePoints.ToString();
+            characterHealthText.color = Color.black;
 
             if (character.data.GetType() != typeof(PlotCard))
             {
                 timerText.text = character.useCount.ToString();
+                timerText.color = Color.black;
             }
         }
         
