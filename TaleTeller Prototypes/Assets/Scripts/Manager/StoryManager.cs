@@ -26,11 +26,6 @@ public class StoryManager : Singleton<StoryManager>
         StartTurn();
     }
 
-    public void Update()
-    {
-        Debug.Log("");
-    }
-
     public void StartTurn()
     {
         StartCoroutine(StartTurnRoutine());
@@ -190,6 +185,13 @@ public class StoryManager : Singleton<StoryManager>
             }
         }
     }
+
+    public void NextStoryArc()
+    {
+        PlotsManager.Instance.schemes.Remove(PlotsManager.Instance.currentMainPlotScheme);
+        turnCount = -1;
+    }
+
 
     #region Feedbacks
     public void HeroLifeFeedback(float value)

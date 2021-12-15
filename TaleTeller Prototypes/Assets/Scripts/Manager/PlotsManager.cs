@@ -61,9 +61,9 @@ public class PlotsManager : Singleton<PlotsManager>
         //Load MainScheme
         EventQueue loadQueue = new EventQueue();
 
+        schemes[index] = schemes[index].InitScheme(schemes[index]);
         currentMainPlotScheme = schemes[index];
 
-        currentMainPlotScheme = currentMainPlotScheme.InitScheme(currentMainPlotScheme);
         currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);
 
         loadQueue.StartQueue();

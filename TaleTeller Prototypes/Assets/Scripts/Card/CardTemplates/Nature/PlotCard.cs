@@ -41,6 +41,7 @@ public class PlotCard : CardData
 
         plot.onStoryEnd += plot.OnEndPlot;
         plot.onTurnEnd += plot.UpdateTimer;
+
         plot.onCardAppear += plot.OnPlotAppear;
 
 
@@ -184,6 +185,7 @@ public class PlotCard : CardData
         else //If last then go to next acte
         {
             Debug.LogError("NORMALEMENT C'EST LA FIN DE l'ACTE");
+            StoryManager.Instance.NextStoryArc();
         }
 
         currentQueue.UpdateQueue();
