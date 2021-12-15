@@ -51,6 +51,8 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                 break;
         }
 
+        EventQueue feedbackQueue = new EventQueue();
+
         //TODO: Inset queue for feedback
         foreach (CharacterType t in targets.ToList())
         {
@@ -62,20 +64,26 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                     {
                         case EffectValueOperator.Addition:
                             t.stats.baseAttackDamage += modifierValue.value;
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
                             break;
                         case EffectValueOperator.Division:
                             t.stats.baseAttackDamage /= modifierValue.value;
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
                             break;
                         case EffectValueOperator.Product:
                             t.stats.baseAttackDamage *= modifierValue.value;
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
                             break;
                         case EffectValueOperator.Substraction:
                             t.stats.baseAttackDamage -= modifierValue.value;
                             t.stats.baseAttackDamage = (int)Mathf.Clamp(t.stats.baseAttackDamage, 0, Mathf.Infinity);
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
                             break;
                         default:
                             break;
                     }
+
+                    t.data.currentContainer.visuals.UpdateBaseElements(t.data);
 
                     break;
                 case EffectValueType.Life:
@@ -84,19 +92,25 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                     {
                         case EffectValueOperator.Addition:
                             t.stats.baseLifePoints += modifierValue.value;
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
                             break;
                         case EffectValueOperator.Division:
                             t.stats.baseLifePoints /= modifierValue.value;
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
                             break;
                         case EffectValueOperator.Product:
                             t.stats.baseLifePoints *= modifierValue.value;
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
                             break;
                         case EffectValueOperator.Substraction:
                             t.stats.baseLifePoints -= modifierValue.value;
+                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
                             break;
                         default:
                             break;
                     }
+
+                    t.data.currentContainer.visuals.UpdateBaseElements(t.data);
 
                     //NOTE: This situation justify that the process to damage a character need to be encapsulated somewhere
                     EventQueue characterDeathQueue = new EventQueue();
@@ -118,6 +132,11 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                     break;
             }
             t.data.currentContainer.UpdateCharacterInfo(t);
+        }
+
+        while (!feedbackQueue.resolved)//Wait 
+        {
+            yield return new WaitForEndOfFrame();
         }
         yield return null;
         currentQueue.UpdateQueue();

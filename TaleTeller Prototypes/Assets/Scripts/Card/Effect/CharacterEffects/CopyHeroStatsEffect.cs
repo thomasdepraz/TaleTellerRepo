@@ -63,14 +63,25 @@ public class CopyHeroStatsEffect : CharacterStatsEffect
     {
         var targets = GetTargetsExtension();
 
-        foreach(CharacterType chara in targets)
+        EventQueue feedbackQueue = new EventQueue();
+
+        foreach (CharacterType chara in targets)
         {
             if (changeAttackInto.modifyThisStat)
                 CharacStatsChanger(ref chara.stats.baseAttackDamage, changeAttackInto);
             if (changeHealthInto.modifyThisStat)
                 CharacStatsChanger(ref chara.stats.baseLifePoints, changeHealthInto);
+
+            chara.data.currentContainer.visuals.EffectChangeFeedback(chara.data.currentContainer, 1, feedbackQueue);
+
+            chara.data.currentContainer.visuals.UpdateBaseElements(chara.data);
         }
-       
+
+        while (!feedbackQueue.resolved)//Wait 
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         yield return null;
         currentQueue.UpdateQueue();
     }

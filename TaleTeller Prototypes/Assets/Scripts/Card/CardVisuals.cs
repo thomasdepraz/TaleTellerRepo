@@ -318,22 +318,51 @@ public class CardVisuals : MonoBehaviour
 
     public void UpdateBaseElements(CardData data)
     {
-        manaCostText.text = data.manaCost.ToString();
-        cardNameText.text = data.cardName;
+        if(data is DarkIdeaCard)
+        {
+            manaCostText.text = data.manaCost.ToString();
+            manaCostText.color = Color.white;
+            cardNameText.text = data.cardName;
+            cardNameText.color = Color.white;
 
-        //GetDescription // Update Description
-        cardDescriptionText.text = BuildDescription(data);
+            //GetDescription // Update Description
+            cardDescriptionText.text = BuildDescription(data);
+            cardDescriptionText.color = Color.white;
+        }
+        else
+        {
+            manaCostText.text = data.manaCost.ToString();
+            cardNameText.text = data.cardName;
+
+            //GetDescription // Update Description
+            cardDescriptionText.text = BuildDescription(data);
+        }
     }
 
     public void UpdateCharacterElements(CharacterType character)
     {
-        characterAttackText.text = character.stats.baseAttackDamage.ToString();
-        characterHealthText.text = character.stats.baseLifePoints.ToString();
-
-        if(character.data.GetType() !=  typeof(PlotCard))
+        if (character.data is DarkIdeaCard)
         {
+            characterAttackText.text = character.stats.baseAttackDamage.ToString();
+            characterAttackText.color = Color.white;
+            characterHealthText.text = character.stats.baseLifePoints.ToString();
+            characterHealthText.color = Color.white;
+
             timerText.text = character.useCount.ToString();
+            timerText.color = Color.white;
         }
+        else
+        {
+            characterAttackText.text = character.stats.baseAttackDamage.ToString();
+            characterHealthText.text = character.stats.baseLifePoints.ToString();
+
+            if (character.data.GetType() != typeof(PlotCard))
+            {
+                timerText.text = character.useCount.ToString();
+            }
+        }
+        
+        
     }
 
     public void UpdatePlotElements(PlotCard card)

@@ -40,7 +40,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 12
+    baseLifePoints: 14
     baseAttackDamage: 4
   behaviour: 2
   fightingRange: 3
