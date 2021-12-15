@@ -61,7 +61,7 @@ public class MainPlotScheme : ScriptableObject
             List<CardData> pickedCard = new List<CardData>();
             EventQueue pickQueue = new EventQueue();
 
-            CardManager.Instance.cardPicker.Pick(pickQueue, optionList, pickedCard, 1, false);
+            CardManager.Instance.cardPicker.Pick(pickQueue, optionList, pickedCard, 1, false, "Choose how your plot goes on");
 
             pickQueue.StartQueue();
             while(!pickQueue.resolved)

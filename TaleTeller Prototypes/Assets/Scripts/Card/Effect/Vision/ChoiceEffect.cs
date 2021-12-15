@@ -41,7 +41,7 @@ public class ChoiceEffect : Effect
                 EventQueue pickQueue = new EventQueue();
                 List<CardData> pickedCards = new List<CardData>();
 
-                CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, false);
+                CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, false, "Choose one of these cards");
 
                 pickQueue.StartQueue();
                 while (!pickQueue.resolved)

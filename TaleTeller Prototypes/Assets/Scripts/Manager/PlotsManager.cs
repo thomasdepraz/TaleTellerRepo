@@ -46,7 +46,7 @@ public class PlotsManager : Singleton<PlotsManager>
             pickTargets.Add(schemes[i].schemeSteps[0].stepOptions[0]);
         }
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, pickTargets, pickedCard, 1, false);
+        CardManager.Instance.cardPicker.Pick(pickQueue, pickTargets, pickedCard, 1, false, "Choose how your plot starts");
 
         pickQueue.StartQueue();
         while(!pickQueue.resolved)
@@ -85,7 +85,7 @@ public class PlotsManager : Singleton<PlotsManager>
         EventQueue pickQueue = new EventQueue();
         List<CardData> pickedCards = new List<CardData>();
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false);
+        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, "Choose one of these secondary plots");
 
         pickQueue.StartQueue();
 

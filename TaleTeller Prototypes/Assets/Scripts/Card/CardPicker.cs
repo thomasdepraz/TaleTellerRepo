@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class CardPicker : MonoBehaviour
     public Image backgroundPanel;
     public Button confirmButton;
     public CanvasGroup canvasGroup;
+    public TextMeshProUGUI instructionText;
 
     [Header("Data")]
     public float backgroundFadeSpeed;
@@ -31,11 +33,11 @@ public class CardPicker : MonoBehaviour
         }
     }
 
-    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, bool isInstantaneous)
+    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
     {
-        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, isInstantaneous)) ;
+        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, isInstantaneous, instruction)) ;
     }
-    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, bool isInstantaneous)
+    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
     {
         canvasGroup.blocksRaycasts = true;
         selectedCards = pickedCards;
@@ -55,6 +57,8 @@ public class CardPicker : MonoBehaviour
         fadeEnded = false;
 
         InitializePlaceholders(targetCards);
+        instructionText.gameObject.SetActive(true);
+        instructionText.text = instruction;
 
         //TODO fade in cards
 
@@ -72,6 +76,7 @@ public class CardPicker : MonoBehaviour
         }
 
         ResetPlaceHolders();
+        instructionText.gameObject.SetActive(false);
 
         Color transparent = new Color(0, 0, 0, 0);
         LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 

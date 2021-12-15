@@ -203,7 +203,7 @@ public class Board : MonoBehaviour
                 EventQueue pickQueue = new EventQueue();
                 List<CardData> pickedCards = new List<CardData>();
 
-                CardManager.Instance.cardPicker.Pick(pickQueue, CardManager.Instance.cardHand.GetHandDataList(), pickedCards, 1, false);
+                CardManager.Instance.cardPicker.Pick(pickQueue, CardManager.Instance.cardHand.GetHandDataList(), pickedCards, 1, false, "Choose a card to discard");
 
                 pickQueue.StartQueue();
                 while(!pickQueue.resolved)

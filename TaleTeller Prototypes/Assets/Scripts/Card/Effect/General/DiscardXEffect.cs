@@ -99,7 +99,7 @@ public class DiscardXEffect : Effect
             EventQueue pickQueue = new EventQueue();
             List<CardData> pickedCards = new List<CardData>();
 
-            CardManager.Instance.cardPicker.Pick(pickQueue, targetsToDiscard, pickedCards, numberOfCardsToDiscard, false);
+            CardManager.Instance.cardPicker.Pick(pickQueue, targetsToDiscard, pickedCards, numberOfCardsToDiscard, false, "Choose " + numberOfCardsToDiscard.ToString() + " card(s) to discard");
 
             pickQueue.StartQueue();
             while (!pickQueue.resolved)

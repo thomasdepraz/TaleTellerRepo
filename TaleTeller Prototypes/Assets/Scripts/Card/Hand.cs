@@ -104,7 +104,8 @@ public class Hand : MonoBehaviour
         List<CardData> result = new List<CardData>();
         for (int i = 0; i < currentHand.Count; i++)
         {
-            result.Add(currentHand[i].data);
+            if(result.GetType() == typeof(PlotCard))
+                result.Add(currentHand[i].data);
         }
         return result;
     }
