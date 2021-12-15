@@ -62,6 +62,8 @@ public class ValueChangeEffect : ValueModifierEffect
                 card.effects.Where(e => e.values.Any(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget)));
         }
 
+        EventQueue feedbackQueue = new EventQueue();
+
         foreach (Effect effect in targetedEffect)
         {
             var targetedValues = effect.values.Where(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget) ;
@@ -74,27 +76,40 @@ public class ValueChangeEffect : ValueModifierEffect
                 {
                     case EffectValueOperator.Addition:
                         value.value += effectValueModification.modification.value;
+                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, 1, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Division:
                         value.value /= effectValueModification.modification.value;
+                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, -1, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Product:
                         value.value *= effectValueModification.modification.value;
+                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, 1, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Substraction:
                         value.value -= effectValueModification.modification.value;
+                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, -1, feedbackQueue);
                         break;
 
                     default:
                         break;
                 }
+
+                effect.linkedData.currentContainer.visuals.UpdateBaseElements(effect.linkedData);
             }
         }
 
-         yield return null;
+        
+
+        while (!feedbackQueue.resolved)//Wait 
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return null;
          currentQueue.UpdateQueue();
      }
 

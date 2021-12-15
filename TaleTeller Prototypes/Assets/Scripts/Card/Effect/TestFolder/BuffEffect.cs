@@ -19,6 +19,8 @@ public class BuffEffect : BonusEffect
         yield return null;
         List<CardData> targets = GetTargets();
 
+        EventQueue feedbackQueue = new EventQueue();
+
         for (int i = 0; i < targets.Count; i++)
         {
             for (int j = 0; j < targets[i].effects.Count; j++)
@@ -31,10 +33,23 @@ public class BuffEffect : BonusEffect
                     if (currentValue.type == buffValue.type)//This is my filter this could be anything
                     {
                         if(currentValue.op == buffValue.op)
+                        {
                             currentValue.value += buffValue.value;
+
+                            targets[i].currentContainer.visuals.EffectChangeFeedback(targets[i].currentContainer, 1, feedbackQueue);
+
+                            targets[i].currentContainer.visuals.UpdateBaseElements(data);
+                        }
                     }
                 }
             }
+        }
+
+
+
+        while (!feedbackQueue.resolved)//Wait 
+        {
+            yield return new WaitForEndOfFrame();
         }
 
         currentQueue.UpdateQueue();
