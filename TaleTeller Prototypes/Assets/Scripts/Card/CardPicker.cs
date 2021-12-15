@@ -44,7 +44,10 @@ public class CardPicker : MonoBehaviour
     {
         canvasGroup.blocksRaycasts = true;
         selectedCards = pickedCards;
-        numberToSelect = numberToPick;
+
+        if (numberToPick <= targetCards.Count) numberToSelect = numberToPick;
+        else numberToSelect = targetCards.Count;
+
         confirmButton.interactable = false;
 
         if (!isInstantaneous) confirmed = false;
