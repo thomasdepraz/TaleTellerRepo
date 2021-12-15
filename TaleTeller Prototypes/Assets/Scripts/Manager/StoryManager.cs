@@ -26,6 +26,11 @@ public class StoryManager : Singleton<StoryManager>
         StartTurn();
     }
 
+    private void Update()
+    {
+        Debug.Log("");
+    }
+
     public void StartTurn()
     {
         StartCoroutine(StartTurnRoutine());
