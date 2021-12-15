@@ -18,12 +18,29 @@ public class CardVisuals : MonoBehaviour
 
     [Header("Card Frames")]
     public Image cardFrame;
+    public Image cardFrameMask;
     [Space]
-    public Sprite characterFrame;
+    public Sprite characterFrameNeutral;
     public Sprite characterFrameGood;
     public Sprite characterFrameBad;
     public Sprite itemFrame;
     public Sprite placeFrame;
+    public Sprite characterFrameMask;
+    public Sprite itemFrameMask;
+    public Sprite placeFrameMask;
+    [Space]
+    public Sprite curseCharacterFrameNeutral;
+    public Sprite curseCharacterFrameGood;
+    public Sprite curseCharacterFrameBad;
+    public Sprite curseItemFrame;
+    public Sprite cursePlaceFrame;
+    public Sprite curseCharacterFrameMask;
+    public Sprite curseItemFrameMask;
+    public Sprite cursePlaceFrameMask;
+
+    [Header("Illustration")]
+    public Image cardIllustration;
+
 
     [Header("Card Flags")]
     public Image cardFlag;
@@ -88,11 +105,14 @@ public class CardVisuals : MonoBehaviour
     {
         //Init basics
         #region Basics
+        cardIllustration.sprite = data.cardGraph;
+
         Type dataType = data.GetType();
         if(dataType == typeof(IdeaCard))
         {
             cardBackgound.sprite = ideaBackground;
             cardFlag.sprite = ideaFlag;
+
             cardManaFrame.sprite = normalManaFrame;
 
             plotIcon.gameObject.SetActive(false);
@@ -180,15 +200,43 @@ public class CardVisuals : MonoBehaviour
                 CharacterType chara = data.cardType as CharacterType;
                 if(chara.behaviour == CharacterBehaviour.Agressive)
                 {
-                    cardFrame.sprite = characterFrameBad;
+                    if(data.GetType() == typeof(DarkIdeaCard))
+                    {
+                        cardFrame.sprite = curseCharacterFrameBad;
+                        cardFrameMask.sprite = curseCharacterFrameMask;
+                    }
+                    else
+                    {
+                        cardFrame.sprite = characterFrameBad;
+                        cardFrameMask.sprite = characterFrameMask;
+                    }
+
                 }
-                else if(chara.behaviour == CharacterBehaviour.Agressive)
+                else if(chara.behaviour == CharacterBehaviour.Peaceful)
                 {
-                    cardFrame.sprite = characterFrameGood;
+                    if (data.GetType() == typeof(DarkIdeaCard))
+                    {
+                        cardFrame.sprite = curseCharacterFrameGood;
+                        cardFrameMask.sprite = curseCharacterFrameMask;
+                    }
+                    else
+                    {
+                        cardFrame.sprite = characterFrameGood;
+                        cardFrameMask.sprite = characterFrameMask;
+                    }
                 }
                 else
                 {
-                    cardFrame.sprite = characterFrame;
+                    if (data.GetType() == typeof(DarkIdeaCard))
+                    {
+                        cardFrame.sprite = curseCharacterFrameNeutral;
+                        cardFrameMask.sprite = curseCharacterFrameMask;
+                    }
+                    else
+                    {
+                        cardFrame.sprite = characterFrameNeutral;
+                        cardFrameMask.sprite = characterFrameMask;
+                    }
                 }
 
                 characterAttackFrame.gameObject.SetActive(true);
@@ -222,13 +270,33 @@ public class CardVisuals : MonoBehaviour
             if(cardType == typeof(ObjectType))
             {
                 cardIcon.sprite = itemIcon;
-                cardFrame.sprite = itemFrame;
+
+                if(data.GetType() == typeof(DarkIdeaCard))
+                {
+                    cardFrame.sprite = curseItemFrame;
+                    cardFrameMask.sprite = curseItemFrameMask;
+                }
+                else
+                {
+                    cardFrame.sprite = itemFrame;
+                    cardFrameMask.sprite = itemFrameMask;
+                }
+
             }
 
             if(cardType == typeof(LocationType))
             {
                 cardIcon.sprite = placeIcon;
-                cardFrame.sprite = placeFrame;
+                if (data.GetType() == typeof(DarkIdeaCard))
+                {
+                    cardFrame.sprite = cursePlaceFrame;
+                    cardFrameMask.sprite = cursePlaceFrameMask;
+                }
+                else
+                {
+                    cardFrame.sprite = placeFrame;
+                    cardFrameMask.sprite = placeFrameMask;
+                }
             }
         }
         else
