@@ -28,6 +28,7 @@ MonoBehaviour:
   completionTimer: 2
   isMainPlot: 0
   isFinal: 0
+  legendaryCardRewards: []
 --- !u!114 &844368311689511782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,11 +43,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 18
+    baseLifePoints: 8
     baseAttackDamage: 2
   behaviour: 2
   fightingRange: 3
   doubleStrike: 1
+  undying: 0
   useCount: 2
 --- !u!114 &2588712512055619325
 MonoBehaviour:
@@ -61,12 +63,14 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: Defeat the Bounty Hunter without other Evil Characters on the Track.
   linkedJunkedCards: []
+  junkSpawnLocations: 
+  junksPositionsInDeck: 
   boardRestriction: 1
   restriction: 0
   typeRestrictions:
   - typeToHave: 0
     characterType: 1
     restrictionMethod: 0
-    count: 0
+    count: 1
