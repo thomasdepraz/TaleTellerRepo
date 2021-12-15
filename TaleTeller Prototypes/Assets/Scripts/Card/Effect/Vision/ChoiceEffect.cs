@@ -31,7 +31,8 @@ public class ChoiceEffect : Effect
 
             List<CardData> cardsForChoice = new List<CardData>();
 
-            for (int x = 0; x < 3; x++)
+            int index = targets.Count < 3 ? targets.Count : 3; 
+            for (int x = 0; x < index; x++)
             {
                 cardsForChoice.Add(targets[x]);
             }
@@ -73,6 +74,10 @@ public class ChoiceEffect : Effect
                 }
 
                 discardQueue.StartQueue();
+                while(!discardQueue.resolved)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
             }
             else break;
         }
