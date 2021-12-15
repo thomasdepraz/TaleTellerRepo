@@ -280,6 +280,12 @@ public class CardContainer : MonoBehaviour
                 //if you have enough man else abort and reset card
                 if (CardManager.Instance.manaSystem.CanUseCard(data.manaCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
                 {
+                    if(currentSlot == null)
+                    {
+                        CardManager.Instance.manaSystem.LoseMana(data.manaCost);
+                        CardManager.Instance.cardHand.currentHand.Remove(this);
+                    }
+
                     if (currentSlot != null)
                     {
                         currentSlot.currentPlacedCard = null;
@@ -291,9 +297,7 @@ public class CardContainer : MonoBehaviour
                     currentSlot.canvasGroup.blocksRaycasts = false;
                     rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
 
-                    CardManager.Instance.manaSystem.LoseMana(data.manaCost);
 
-                    CardManager.Instance.cardHand.currentHand.Remove(this);
                 }
                 else
                 {
