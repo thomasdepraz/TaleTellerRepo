@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Name: PI_LE_MidasDigit
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: 'Mida''s Digit '
+  cardName: Mida's Cristal
   rarity: 5
   archetype: 0
   manaCost: 1
@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: 'Left & Right => Nearby Character''s statistiques become X/X. (X =
+    Hero''s GOLD amount) '
   trigger: 1
   target: 2
   range: 0500000009000000

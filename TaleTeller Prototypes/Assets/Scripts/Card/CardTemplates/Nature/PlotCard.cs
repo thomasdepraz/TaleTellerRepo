@@ -52,7 +52,7 @@ public class PlotCard : CardData
         //Init legendary rewards
         for (int i = 0; i < plot.legendaryCardRewards.Count; i++)
         {
-            plot.legendaryCardRewards[i].InitializeData(plot.legendaryCardRewards[i]);
+            plot.legendaryCardRewards[i] = plot.legendaryCardRewards[i].InitializeData(plot.legendaryCardRewards[i]);
         }
 
 
