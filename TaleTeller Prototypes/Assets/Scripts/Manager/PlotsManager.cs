@@ -61,7 +61,7 @@ public class PlotsManager : Singleton<PlotsManager>
         //Load MainScheme
         EventQueue loadQueue = new EventQueue();
 
-        schemes[index] = schemes[index].InitScheme(schemes[index]);
+        schemes[index] = schemes[index].InitScheme(schemes[index]); //Note maybe leave the shemes list untouched and only instantiate a copy
         currentMainPlotScheme = schemes[index];
 
         currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);

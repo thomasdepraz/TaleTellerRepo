@@ -80,6 +80,7 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                             t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
                             break;
                         default:
+                            feedbackQueue.resolved = true;
                             break;
                     }
 
@@ -107,6 +108,7 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                             t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
                             break;
                         default:
+                            feedbackQueue.resolved = true;
                             break;
                     }
 
@@ -132,6 +134,11 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                     break;
             }
             t.data.currentContainer.UpdateCharacterInfo(t);
+        }
+
+        if(targets.ToArray().Length == 0)
+        {
+            feedbackQueue.resolved = true;
         }
 
         while (!feedbackQueue.resolved)//Wait 

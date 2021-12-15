@@ -45,7 +45,10 @@ public class BuffEffect : BonusEffect
             }
         }
 
-
+        if (targets.Count == 0)
+        {
+            feedbackQueue.resolved = true;
+        }
 
         while (!feedbackQueue.resolved)//Wait 
         {
