@@ -95,6 +95,7 @@ public class ValueChangeEffect : ValueModifierEffect
                         break;
 
                     default:
+                        feedbackQueue.resolved = true;
                         break;
                 }
 
@@ -102,7 +103,10 @@ public class ValueChangeEffect : ValueModifierEffect
             }
         }
 
-        
+        if (targetedCards.Count == 0)
+        {
+            feedbackQueue.resolved = true;
+        }
 
         while (!feedbackQueue.resolved)//Wait 
         {

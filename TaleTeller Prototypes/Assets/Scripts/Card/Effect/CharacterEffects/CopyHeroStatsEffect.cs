@@ -77,6 +77,11 @@ public class CopyHeroStatsEffect : CharacterStatsEffect
             chara.data.currentContainer.visuals.UpdateBaseElements(chara.data);
         }
 
+        if (targets.Count == 0)
+        {
+            feedbackQueue.resolved = true;
+        }
+
         while (!feedbackQueue.resolved)//Wait 
         {
             yield return new WaitForEndOfFrame();
