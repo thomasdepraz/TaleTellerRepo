@@ -182,7 +182,7 @@ public class PlotsManager : Singleton<PlotsManager>
         appearQueue.StartQueue();
         while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-        CardManager.Instance.cardDeck.cardDeck.Add(card);
+        if(!CardManager.Instance.cardDeck.cardDeck.Contains(card)) CardManager.Instance.cardDeck.cardDeck.Add(card);
 
         queue.UpdateQueue();
     }

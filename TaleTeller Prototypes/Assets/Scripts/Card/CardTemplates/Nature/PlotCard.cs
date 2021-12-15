@@ -88,25 +88,42 @@ public class PlotCard : CardData
             switch(objective.junkSpawnLocations[i])
             {
                 case PlotObjective.JunkSpawnLocation.EndDeck:
-                    //objective.linkedJunkedCards[i] = objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]) as JunkCard;
                     CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+                    
+                    EventQueue endDeckfeedback = new EventQueue();
+                    PlotsManager.Instance.SendPlotToDeck(endDeckfeedback, objective.linkedJunkedCards[i]);
+                    endDeckfeedback.StartQueue();
+                    while(!endDeckfeedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+
                     break;
                 case PlotObjective.JunkSpawnLocation.DeckRandom:
                     CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count),objective.linkedJunkedCards[i]);
+
+                    EventQueue deckRandomFeedback = new EventQueue();
+                    PlotsManager.Instance.SendPlotToDeck(deckRandomFeedback, objective.linkedJunkedCards[i]);
+                    deckRandomFeedback.StartQueue();
+                    while (!deckRandomFeedback.resolved) { yield return new WaitForEndOfFrame();}
+
+
                     break;
                 case PlotObjective.JunkSpawnLocation.XInDeck:
-                    if(!(objective.junksPositionsInDeck[i] > CardManager.Instance.cardDeck.cardDeck.Count))
+                    if (!(objective.junksPositionsInDeck[i] > CardManager.Instance.cardDeck.cardDeck.Count))
                         CardManager.Instance.cardDeck.cardDeck.Insert(objective.junksPositionsInDeck[i], objective.linkedJunkedCards[i]);
                     else
                         CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+
+                    EventQueue xInDeckFeedback = new EventQueue();
+                    PlotsManager.Instance.SendPlotToDeck(xInDeckFeedback, objective.linkedJunkedCards[i]);
+                    xInDeckFeedback.StartQueue();
+                    while (!xInDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+
                     break;
                 case PlotObjective.JunkSpawnLocation.Hand:
-                    CardManager.Instance.cardDeck.cardDeck.Insert(i, objective.linkedJunkedCards[i]);
 
                     EventQueue drawQueue = new EventQueue();
-
-                    CardManager.Instance.cardDeck.DrawCards(1, drawQueue);
-
+                    PlotsManager.Instance.SendPlotToHand(drawQueue, objective.linkedJunkedCards[i]);
                     drawQueue.StartQueue();//Actual draw
                     while (!drawQueue.resolved)
                     {
