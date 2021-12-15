@@ -55,7 +55,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: b3abce7efa3854a4cb1dd6b47f553027, type: 3}
+  cardGraph: {fileID: 21300000, guid: e8944846c8433714496c569730de0cb4, type: 3}
   currentContainer: {fileID: 0}
   description: "Defeat the Guardian of the Temple while this card is on the Track.\r"
   effectsReferences:

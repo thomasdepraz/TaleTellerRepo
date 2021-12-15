@@ -23,14 +23,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
-  m_Name: Junk_ArtifactBust
+  m_Name: Junk_ArtifactMiddle
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: 'Piece of Artifact (Bust) '
+  cardName: 'Piece of Artifact (Middle) '
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 19b133b1ada49b34f8dd66b3170b3069, type: 3}
   currentContainer: {fileID: 0}
   description: 'Le corps d''une statuette.
 

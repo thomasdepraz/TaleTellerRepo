@@ -69,7 +69,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 438304088f54f594ea961fab685a52db, type: 3}
+  cardGraph: {fileID: 21300000, guid: 43c7256fa740b754ea113ad918640f4b, type: 3}
   currentContainer: {fileID: 0}
   description: 'Defeat the 3 Armored Cultists.
 

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Soothsayer
+  m_Name: Fairy
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Fairy
   rarity: 2
   archetype: 3
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: d1d3b6b8624052b40af06baf8e48d820, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

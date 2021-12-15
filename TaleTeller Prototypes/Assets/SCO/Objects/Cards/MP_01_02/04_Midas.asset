@@ -85,7 +85,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 21300000, guid: 438304088f54f594ea961fab685a52db, type: 3}
+  cardGraph: {fileID: 21300000, guid: a6e0b2f4458f838418d58e3e5415d7f7, type: 3}
   currentContainer: {fileID: 0}
   description: 'Defeat Midas the God of Mendicity.
 
