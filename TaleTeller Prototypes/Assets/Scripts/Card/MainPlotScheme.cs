@@ -6,6 +6,9 @@ using UnityEngine;
 public struct SchemeStep
 {
     public List<CardData> stepOptions;
+    public string descriptionChapterChoice;
+    public string descriptionChapterChoice1;
+    public string descriptionChapterChoice2;
 }
 
 [CreateAssetMenu(fileName = "New Plot Scheme", menuName = "Data/Plot Scheme")]
@@ -38,6 +41,31 @@ public class MainPlotScheme : ScriptableObject
         yield return null;
         var optionList = scheme.schemeSteps[scheme.currentStep].stepOptions;
 
+        List<CardData> pickedCard = new List<CardData>();
+        EventQueue pickQueue = new EventQueue();
+
+        CardManager.Instance.cardPicker.Pick(pickQueue, optionList, pickedCard, 1, false, "Choose how your plot goes on", scheme.schemeSteps[scheme.currentStep].descriptionChapterChoice, scheme.schemeSteps[scheme.currentStep].descriptionChapterChoice1, scheme.schemeSteps[scheme.currentStep].descriptionChapterChoice2);
+
+        pickQueue.StartQueue();
+        while (!pickQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        EventQueue toHandQueue = new EventQueue();
+
+        //send card to hand
+        //PlotsManager.Instance.SendPlotToHand(toHandQueue, pickedCard[0]);
+        PlotsManager.Instance.currentPickedCard = pickedCard[0];
+        pickedCard[0].onCardAppear(toHandQueue, pickedCard[0]);
+
+        toHandQueue.StartQueue();
+        while (!toHandQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        /*Old System
         //if only one card in current step send it to the hand    
         if (optionList.Count == 1)
         {
@@ -82,7 +110,7 @@ public class MainPlotScheme : ScriptableObject
                 yield return new WaitForEndOfFrame();
             }
 
-        }
+        }*/
 
         scheme.currentStep++;
         queue.UpdateQueue();
