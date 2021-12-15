@@ -85,23 +85,19 @@ public class StoryManager : Singleton<StoryManager>
 
         yield return new WaitForSeconds(1f);
 
+
+        #region OnTurnStartEvent
+        EventQueue onStartTurnQueue = new EventQueue();
+        CallGeneralEvent("onTurnStart", onStartTurnQueue);
+        onStartTurnQueue.StartQueue();
+        while (!onStartTurnQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        #endregion
+
         //Mana Init
         CardManager.Instance.manaSystem.StartTurnManaInit();
-
-        //On Turn Begin Events
-        if (turnCount > 0)
-        {
-            EventQueue onStartTurnQueue = new EventQueue();
-
-            CallGeneralEvent("onTurnStart", onStartTurnQueue);
-
-            onStartTurnQueue.StartQueue();
-            while (!onStartTurnQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-        }
-
 
         //Enable interaction with cards and go button
         CardManager.Instance.board.currentBoardState = BoardState.Idle;
