@@ -209,7 +209,7 @@ public class Deck : MonoBehaviour
             dealtCard = cardDeck[0];
         }
         //Appear(overDrawQueue)//TODO
-        if(card.currentContainer == null)
+        if(dealtCard.currentContainer == null)
             Appear(overdrawQueue, dealtCard);
 
         //the card can be burn or push another card from the board
