@@ -21,7 +21,7 @@ public class TitleScreenManager : MonoBehaviour
     {
         SceneManager.LoadScene("SettingsScene", LoadSceneMode.Single);
     }
-
+    
     public void ExitGame()
     {
         Application.Quit();

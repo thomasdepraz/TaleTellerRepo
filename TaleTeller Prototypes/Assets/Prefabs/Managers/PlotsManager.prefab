@@ -50,4 +50,11 @@ MonoBehaviour:
   secondaryPlots:
   - {fileID: 11400000, guid: 7aa82f276377ea44fa643c68bfb336a1, type: 2}
   - {fileID: 11400000, guid: c41c6efca595671499f81ebfe9556c81, type: 2}
+  darkIdeas:
+  - {fileID: 11400000, guid: 9cfbc345ea606264eba4e74f20e4673a, type: 2}
+  - {fileID: 11400000, guid: 254890d673b79a04288ff5f996b26c5e, type: 2}
+  - {fileID: 11400000, guid: acd4ca70f8d43bd4b81d0a0bde6ea291, type: 2}
+  - {fileID: 11400000, guid: 511e06a8ca1ed944e9f7fcb775e501c9, type: 2}
+  - {fileID: 11400000, guid: a2134eca17ddaf4409e74cdae5cb8855, type: 2}
+  - {fileID: 11400000, guid: 646ee577c7d72a6418a0d243d87c5b3b, type: 2}
   currentPickedCard: {fileID: 0}

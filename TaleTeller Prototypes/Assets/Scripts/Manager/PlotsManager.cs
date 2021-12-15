@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlotsManager : Singleton<PlotsManager>
 {
     public MainPlotScheme currentMainPlotScheme;
-    public List<MainPlotScheme> schemes;
+    public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
     public List<CardData> secondaryPlots = new List<CardData>();
+    public List<CardData> darkIdeas = new List<CardData>();
+
     [HideInInspector] public CardData currentPickedCard;
 
     private void Awake()
@@ -20,6 +22,11 @@ public class PlotsManager : Singleton<PlotsManager>
         for (int i = 0; i < secondaryPlots.Count; i++)
         {
             secondaryPlots[i] = secondaryPlots[i].InitializeData(secondaryPlots[i]); 
+        }
+        for (int i = 0; i < darkIdeas.Count; i++)
+        {
+            darkIdeas[i] = darkIdeas[i].InitializeData(darkIdeas[i]);
+
         }
 
     }

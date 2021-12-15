@@ -265,8 +265,13 @@ public class PlotCard : CardData
         }
         else
         {
-            // TODO Add malus card to player discard pile
-
+            //TEMP pick a random card within the list and add it to the deck
+            CardData darkIdea = PlotsManager.Instance.darkIdeas[Random.Range(0, PlotsManager.Instance.darkIdeas.Count-1)];
+            EventQueue sendToDeckQueue = new EventQueue();
+            PlotsManager.Instance.SendPlotToDeck(sendToDeckQueue, darkIdea);
+            sendToDeckQueue.StartQueue();
+            while (!sendToDeckQueue.resolved) { yield return new WaitForEndOfFrame(); }
+            
 
             //DestroyCard -- NOTE REGROUP THIS FUNCTION SOMEWHERE
             currentContainer.ResetContainer();
