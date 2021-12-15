@@ -30,7 +30,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 5f7fa9a7940a64e79b5a42d9f661d42c, type: 3}
+  cardGraph: {fileID: 21300000, guid: 12d7564dec07a4342b4123fedc89607d, type: 3}
   currentContainer: {fileID: 0}
   description: "Stand de convention de m\xE9talleux\r\n"
   effectsReferences:

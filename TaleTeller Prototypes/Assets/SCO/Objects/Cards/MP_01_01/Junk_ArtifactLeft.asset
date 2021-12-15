@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2554650139399878043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Effect0
+  m_EditorClassIdentifier: Assembly-CSharp::HeroSmallChangeEffect
+  linkedData: {fileID: 0}
+  description: HERO => The Hero takes 4 Damage.
+  trigger: 1
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 4
+    type: 0
+    op: 2
+  temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10,24 +33,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
-  m_Name: Junk_CultistToga
+  m_Name: Junk_ArtifactLeft
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: 'Cultist''s Toga '
+  cardName: 'Piece of Artifact (Left) '
   rarity: 0
   archetype: 0
-  manaCost: 1
-  cardGraph: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  manaCost: 0
+  cardGraph: {fileID: 21300000, guid: c1270f3a39fbbac4280efbae8400f37b, type: 3}
   currentContainer: {fileID: 0}
-  description: Discard the first Card from the Deck.
+  description: "La t\xEAte d'une statuette.\r\n"
   effectsReferences:
-  - {fileID: 9040972079829810977}
+  - {fileID: -2554650139399878043}
   effects: []
-  cardTypeReference: {fileID: 5212657184759817850}
+  cardTypeReference: {fileID: 2655021911120684851}
   cardType: {fileID: 0}
   objective: {fileID: 0}
   objectiveIndex: 0
---- !u!114 &5212657184759817850
+--- !u!114 &2655021911120684851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,25 +63,3 @@ MonoBehaviour:
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
---- !u!114 &9040972079829810977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 740123b6a8f047148b71c556dd4e2b09, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: HAND => Discard the top Card from the Deck.
-  trigger: 1
-  target: 4
-  range: 
-  values: []
-  discardValue:
-    value: 1
-    type: 5
-    op: 2
