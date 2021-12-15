@@ -35,7 +35,7 @@ MonoBehaviour:
   m_Name: Pot Seller
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: Potier
+  cardName: Potter
   rarity: 1
   archetype: 1
   manaCost: 2

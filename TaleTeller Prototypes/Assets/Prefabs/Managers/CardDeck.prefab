@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardDeck:
   - {fileID: 11400000, guid: e55569a6cd4a0bc41a37c9564af440dd, type: 2}
-  - {fileID: 11400000, guid: 7a0ee1ac1216b4a4783934b63f6f60ac, type: 2}
+  - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
   - {fileID: 11400000, guid: 8d274d9a746f8d34cb75c6f36cc6572c, type: 2}
   - {fileID: 11400000, guid: 5e00d49528fcb3141b52373475909cb1, type: 2}
   - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
