@@ -42,7 +42,7 @@ public class CardContainer : MonoBehaviour
             //follow 
             shadowTransform.rotation = new Quaternion(0,0,0,1);
             rectTransform.position = targetTransform.position;
-            rectTransform.rotation = Quaternion.Lerp(rectTransform.rotation, new Quaternion(CardManager.Instance.pointerRef.pointerDirection.y, -CardManager.Instance.pointerRef.pointerDirection.x, 0, 1), Time.deltaTime);
+            rectTransform.rotation = Quaternion.Lerp(rectTransform.rotation, new Quaternion(CardManager.Instance.pointerRef.pointerDirection.y*0.3f, -CardManager.Instance.pointerRef.pointerDirection.x*0.3f, 0, 1), Time.deltaTime);
         }
 
         if(Input.GetKeyDown(KeyCode.S))
