@@ -21,7 +21,7 @@ MonoBehaviour:
   numberToKill: 1
   mustKillSpecific: 0
   specificJunkToKill: []
-  plotOnBoard: 0
+  plotOnBoard: 1
   positionToValidate: 0
   otherJunkOnBoard: 0
   otherJunkToPlace: []
