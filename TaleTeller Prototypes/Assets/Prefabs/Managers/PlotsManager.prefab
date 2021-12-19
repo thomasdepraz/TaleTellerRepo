@@ -47,6 +47,11 @@ MonoBehaviour:
   schemes:
   - {fileID: 11400000, guid: 52ee8f02be29efc4bbb8e9eaffc7a20f, type: 2}
   - {fileID: 11400000, guid: dbd06201fc0a9e044ab0215871c1d387, type: 2}
+  descriptionSchemeChoice1: In this Main Plot, the Hero will begin his journey by
+    visiting an extremely poor town. A Cult is collecting money for the inhabitants,
+    but things might be very different...
+  descriptionSchemeChoice2: In this Main Plot, the Hero is going to save a strange
+    priest. But be careful, the habit does not make the monk...
   secondaryPlots:
   - {fileID: 11400000, guid: 7aa82f276377ea44fa643c68bfb336a1, type: 2}
   - {fileID: 11400000, guid: c41c6efca595671499f81ebfe9556c81, type: 2}

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.45
+  m_fontSize: 27.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.85
+  m_fontSize: 28.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.2
+  m_fontSize: 23
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -680,59 +680,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9aac8f4b7eacbd4d8dc7ae557a5d05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 140c1c4975675034ca9c0052491aa1f8, type: 2}
   cardBackgound: {fileID: 2894164525577369283}
-  ideaBackground: {fileID: 21300000, guid: cf7a31a642746a745bbcb80eb3dc4e67, type: 3}
-  curseBackground: {fileID: 21300000, guid: 4bd387f8df14e7746b8142d2b89588ae, type: 3}
-  plotBackground: {fileID: 21300000, guid: 3aa93ec26372f33429e87486f0917fa1, type: 3}
-  junkBackground: {fileID: 21300000, guid: 4958e4ccf02ebb64f83502dfbe823bb6, type: 3}
   cardFrame: {fileID: 3826040916744941750}
   cardFrameMask: {fileID: 8013362111786621112}
-  characterFrameNeutral: {fileID: 21300000, guid: 08901d22468f02048b861fc827420608, type: 3}
-  characterFrameGood: {fileID: 21300000, guid: 08901d22468f02048b861fc827420608, type: 3}
-  characterFrameBad: {fileID: 21300000, guid: 763937ca76691ef4581230054b319e71, type: 3}
-  itemFrame: {fileID: 21300000, guid: 9c1aee7661078c24791499a71dae5eca, type: 3}
-  placeFrame: {fileID: 21300000, guid: c9f3459758fe16147a48e456350c87d2, type: 3}
-  characterFrameMask: {fileID: 21300000, guid: 88bbb6fe7e620dc489fe0b7af2cff661, type: 3}
-  itemFrameMask: {fileID: 21300000, guid: acdd5e9b8730f6846bd9f6280db92bbf, type: 3}
-  placeFrameMask: {fileID: 21300000, guid: 43df9370501a64146ad2f0ad56fbbc95, type: 3}
-  curseCharacterFrameNeutral: {fileID: 21300000, guid: 88bbb6fe7e620dc489fe0b7af2cff661, type: 3}
-  curseCharacterFrameGood: {fileID: 21300000, guid: 96843d58f675d4d4c8bd4efea62140fa, type: 3}
-  curseCharacterFrameBad: {fileID: 21300000, guid: 8c7b3cbb843013a4aa73ce97475e6b71, type: 3}
-  curseItemFrame: {fileID: 21300000, guid: d1dee6d0235a35d4894cea60bf50a0eb, type: 3}
-  cursePlaceFrame: {fileID: 21300000, guid: c497849213443f24498c9fa83951416e, type: 3}
-  curseCharacterFrameMask: {fileID: 21300000, guid: 6a8702c3a03d69f4793fdd48b8bc7c79, type: 3}
-  curseItemFrameMask: {fileID: 21300000, guid: 8ed9fb3eb86435e49b18010261a3472d, type: 3}
-  cursePlaceFrameMask: {fileID: 21300000, guid: f4dd63e9939ef2841b6ff086a95af64e, type: 3}
   cardIllustration: {fileID: 92385677108554547}
   cardFlag: {fileID: 1839220390365912186}
-  ideaFlag: {fileID: 21300000, guid: 6b895ebd2fce1c04f8b984ec9c2f459e, type: 3}
-  plotFlag: {fileID: 21300000, guid: e151acf8a3317904794886d145edd5f9, type: 3}
-  curseFlag: {fileID: 21300000, guid: 44c23eb074a88db4f9c0d36c426c6fe2, type: 3}
   cardIcon: {fileID: 5823494308997801707}
-  characterIcon: {fileID: 21300000, guid: d5c3811320505f14ba80a2259016ce69, type: 3}
-  itemIcon: {fileID: 21300000, guid: 2c1b950d218a4364daa345312b2f7943, type: 3}
-  placeIcon: {fileID: 21300000, guid: 4d05d7a3af4dbe146a6e8c31898d3d87, type: 3}
   cardRarity: {fileID: 4511412966671409044}
-  commonRarity: {fileID: 21300000, guid: b2bb3caeb6e99114b867ce8cd8fd8851, type: 3}
-  uncommonRarity: {fileID: 21300000, guid: ef21c74fb06ebe54196a67210df733bb, type: 3}
-  rareRarity: {fileID: 21300000, guid: b788a4da506120043968617fa95ba87d, type: 3}
-  epicRarity: {fileID: 21300000, guid: acc435699fa47244a8419595c7e2e392, type: 3}
-  legendaryRarity: {fileID: 21300000, guid: d8e082d08b03c524cb37c81e0e3727a2, type: 3}
   characterHealthFrame: {fileID: 8740806929726916253}
   characterAttackFrame: {fileID: 9068295378753468122}
-  normalCharacterHealth: {fileID: 21300000, guid: 8d6265a3cf5eaf641962d35da11c0b28, type: 3}
-  curseCharacterHealth: {fileID: 21300000, guid: e8109729ed1521249b82ac65ac58c591, type: 3}
-  normalCharacterAttack: {fileID: 21300000, guid: 1d152d9fc2163884190d742a982d8bf2, type: 3}
-  curseCharacterAttack: {fileID: 21300000, guid: 0f6272a941f2f2e4fa85e6b0441960ef, type: 3}
   cardManaFrame: {fileID: 9186072141657383887}
   cardTimerFrame: {fileID: 3416431841830082399}
   underManaFlag: {fileID: 3059756005361249220}
-  normalManaFrame: {fileID: 21300000, guid: 4f989d3159bd36a45aec260d3e394780, type: 3}
-  curseManaFrame: {fileID: 21300000, guid: 23fbb3023c5f7cd4881ec038aa9bc565, type: 3}
   plotIcon: {fileID: 6009269146761104785}
   plotUnderFlag: {fileID: 5201744413604625143}
-  mainUnderFlag: {fileID: 21300000, guid: c7d549b4f64cf6149adb3665d7c235fb, type: 3}
-  secondaryUnderFlag: {fileID: 21300000, guid: 59e9723f1ab2aca44af2c3536db5da5d, type: 3}
   manaCostText: {fileID: 3067991425291460161}
   cardNameText: {fileID: 3067991424827466891}
   cardDescriptionText: {fileID: 3067991426233177122}
@@ -846,7 +808,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.8
+  m_fontSize: 22.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1281,7 +1243,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.45
+  m_fontSize: 20.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1898,7 +1860,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.8
+  m_fontSize: 26.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2183,7 +2145,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.1
+  m_fontSize: 24.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

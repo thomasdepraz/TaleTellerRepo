@@ -8,16 +8,25 @@ public class Deck : MonoBehaviour
     public List<CardData> discardPile;
 
     [Header("Data")]
+    public DeckData baseDeck;
     public int drawAmount;
     public int drawAmountFirstTurn;
 
 
     public void Start()
     {
+        baseDeck = Instantiate(baseDeck);
+
+        //Fill deck from base data
+        for (int i = 0; i < baseDeck.deck.Count; i++)
+        {
+            cardDeck.Add(baseDeck.deck[i]);
+        }
+
+        //Init card data
         for (int i = 0; i < cardDeck.Count; i++)
         {
             cardDeck[i] = cardDeck[i].InitializeData(cardDeck[i]);
-            
         }
 
         ShuffleCards(cardDeck);
