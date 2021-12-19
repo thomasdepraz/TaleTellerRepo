@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2953256766882409148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 15
+    baseAttackDamage: 3
+  behaviour: 1
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 1
+  useCount: 3
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: PI_LE_Astaroth
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: 'Astaroth '
+  rarity: 5
+  archetype: 0
+  manaCost: 3
+  cardGraph: {fileID: 21300000, guid: 09db9244e4da95a40be6ded585424be5, type: 3}
+  currentContainer: {fileID: 0}
+  description: Undying.
+  effectsReferences: []
+  effects: []
+  cardTypeReference: {fileID: -2953256766882409148}
+  cardType: {fileID: 0}

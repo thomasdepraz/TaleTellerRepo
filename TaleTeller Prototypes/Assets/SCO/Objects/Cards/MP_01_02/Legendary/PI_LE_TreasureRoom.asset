@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5720253064918245666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5b1c94cd704fa46b8e38ba3f28afd7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 'Full Left => Multiple the value of each key-word "GOLD" by 2. " '
+  trigger: 2
+  target: 2
+  range: 03000000
+  values: []
+  effectValueModification:
+    typeToTarget: 2
+    operatorToTarget: 1
+    modification:
+      value: 2
+      type: 2
+      op: 3
+  modifyTemporary: 0
+--- !u!114 &-341413726970448737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5b1c94cd704fa46b8e38ba3f28afd7, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 'Full Right => Multiple the value of each key-word "DRAW" by 2. " '
+  trigger: 2
+  target: 2
+  range: 04000000
+  values: []
+  effectValueModification:
+    typeToTarget: 5
+    operatorToTarget: 1
+    modification:
+      value: 2
+      type: 5
+      op: 3
+  modifyTemporary: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: PI_LE_TreasureRoom
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: 
+  rarity: 5
+  archetype: 0
+  manaCost: 3
+  cardGraph: {fileID: 21300000, guid: 43c7256fa740b754ea113ad918640f4b, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -5720253064918245666}
+  - {fileID: -341413726970448737}
+  effects: []
+  cardTypeReference: {fileID: 5629656108018683741}
+  cardType: {fileID: 0}
+--- !u!114 &5629656108018683741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f33840752c2ec438be3f9e8461a5a7, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}

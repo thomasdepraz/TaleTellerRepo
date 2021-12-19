@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4262885581356164829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: PI_LE_MidasDigit
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Mida's Cristal
+  rarity: 5
+  archetype: 0
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: 0a4bfc10ec054c3469a0201ff3ff44d5, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 419419414885615920}
+  effects: []
+  cardTypeReference: {fileID: -4262885581356164829}
+  cardType: {fileID: 0}
+--- !u!114 &419419414885615920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e06503ba69f9d1419cda620325150ce, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 'Left & Right => Nearby Character''s statistiques become X/X. (X =
+    Hero''s GOLD amount) '
+  trigger: 1
+  target: 2
+  range: 0500000009000000
+  values: []
+  behaviourTargeted: 0
+  changeAttackInto:
+    modifyThisStat: 1
+    howToImpact: 0
+    heroStatToTake: 4
+  changeHealthInto:
+    modifyThisStat: 1
+    howToImpact: 0
+    heroStatToTake: 4

@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4041745231996608153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 2
+  range: 0500000009000000
+  values: []
+  modifierValue:
+    value: 4
+    type: 1
+    op: 1
+  behaviourTargeted: 0
+  temporaryChange: 0
+--- !u!114 &-3810347494055933026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74ed66125fff484da8e3bfc2169aa1a, type: 3}
+  m_Name: Effect2
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: HAND => Choice $choiceValue$.
+  trigger: 1
+  target: 4
+  range: 
+  values: []
+  choiceValue:
+    value: 2
+    type: 9
+    op: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Artifact
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Artifact
+  rarity: 4
+  archetype: 3
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: 68e3a4f5f7ce7be448e26b6ace25da8e, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 504136269197484510}
+  - {fileID: -4041745231996608153}
+  - {fileID: -3810347494055933026}
+  effects: []
+  cardTypeReference: {fileID: 2213873534620985300}
+  cardType: {fileID: 0}
+--- !u!114 &504136269197484510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: LEFT RIGHT => Gives + $modifierValue$ HP / + $modifierValue$ ATK to
+    nearby characters.
+  trigger: 1
+  target: 2
+  range: 0500000009000000
+  values: []
+  modifierValue:
+    value: 4
+    type: 0
+    op: 1
+  behaviourTargeted: 0
+  temporaryChange: 0
+--- !u!114 &2213873534620985300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}

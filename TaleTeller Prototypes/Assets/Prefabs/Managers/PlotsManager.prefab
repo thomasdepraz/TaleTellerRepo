@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4449273303055044008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4449273303055044006}
+  - component: {fileID: 4449273303055044007}
+  m_Layer: 0
+  m_Name: PlotsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4449273303055044006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449273303055044008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4449273303055044007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449273303055044008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ff6f5ac4442e94486970e0721c2e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMainPlotScheme: {fileID: 0}
+  schemes:
+  - {fileID: 11400000, guid: 52ee8f02be29efc4bbb8e9eaffc7a20f, type: 2}
+  - {fileID: 11400000, guid: dbd06201fc0a9e044ab0215871c1d387, type: 2}
+  secondaryPlots:
+  - {fileID: 11400000, guid: 7aa82f276377ea44fa643c68bfb336a1, type: 2}
+  - {fileID: 11400000, guid: c41c6efca595671499f81ebfe9556c81, type: 2}
+  darkIdeas:
+  - {fileID: 11400000, guid: 9cfbc345ea606264eba4e74f20e4673a, type: 2}
+  - {fileID: 11400000, guid: 254890d673b79a04288ff5f996b26c5e, type: 2}
+  - {fileID: 11400000, guid: acd4ca70f8d43bd4b81d0a0bde6ea291, type: 2}
+  - {fileID: 11400000, guid: 511e06a8ca1ed944e9f7fcb775e501c9, type: 2}
+  - {fileID: 11400000, guid: a2134eca17ddaf4409e74cdae5cb8855, type: 2}
+  - {fileID: 11400000, guid: 646ee577c7d72a6418a0d243d87c5b3b, type: 2}
+  currentPickedCard: {fileID: 0}

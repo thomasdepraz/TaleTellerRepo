@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5475300481551742650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce902d37b1db9f469a08e9c948ef77d, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: HAND => Draw 2 for each characters aside.
+  trigger: 1
+  target: 2
+  range: 0500000009000000
+  values: []
+  xParameterMultiplier:
+    value: 2
+    type: 5
+    op: 1
+  xParameter:
+    value: 0
+    type: 0
+    op: 0
+  cardTypeParameter: 3
+--- !u!114 &-279494856332862322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Sacred Book
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Sacred Book
+  rarity: 2
+  archetype: 3
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: ad47c451c1b1fad40b0d3a25b2a09150, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -5475300481551742650}
+  effects: []
+  cardTypeReference: {fileID: -279494856332862322}
+  cardType: {fileID: 0}
