@@ -632,7 +632,7 @@ public class RewardManager : Singleton<RewardManager>
 
     void ResetSecondaryContainers()
     {
-        secondaryRewardCardContainer.ResetContainer();
+        secondaryRewardCardContainer.ResetContainer(true);
         actionRewardButton.gameObject.SetActive(false);
         statsRewardButton.gameObject.SetActive(false);
 

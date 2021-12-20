@@ -25,9 +25,6 @@ public class GoButton : MonoBehaviour
 
     LTDescr tween;
 
-
-
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         //do some tweening

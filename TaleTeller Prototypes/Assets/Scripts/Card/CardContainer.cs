@@ -83,9 +83,6 @@ public class CardContainer : MonoBehaviour
 
         //add random rotation 
         rectTransform.rotation = new Quaternion(0,0,Random.Range(-0.1f,0.1f),1);
-
-
-
     }
     public void ResetContainer(bool isPlaceholder = false)
     {
@@ -100,7 +97,6 @@ public class CardContainer : MonoBehaviour
         if(!isPlaceholder)
         {
             data.currentContainer = null;
-
         }
         data = null;
         currentSlot = null;

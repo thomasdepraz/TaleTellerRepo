@@ -26598,7 +26598,7 @@ MonoBehaviour:
   hoveredSprite: {fileID: 21300000, guid: 7aec3a475dbc9a841ac30a5fc77a40ec, type: 3}
   onPressColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
   rectTransform: {fileID: 3900416491857132447}
-  board: {fileID: 0}
+  board: {fileID: 3900416492384134890}
 --- !u!1 &3900416491878313701
 GameObject:
   m_ObjectHideFlags: 0
@@ -27884,7 +27884,7 @@ MonoBehaviour:
   - {fileID: 3900416492373772434}
   - {fileID: 3900416491155965585}
   - {fileID: 3900416492256849138}
-  storyLine: {fileID: 0}
+  storyLine: {fileID: 3900416492384134901}
   currentBoardState: 0
 --- !u!114 &3900416492384134901
 MonoBehaviour:

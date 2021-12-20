@@ -21,6 +21,7 @@ public class CardPicker : MonoBehaviour
     public float backgroundFadeSpeed;
 
     List<CardData> selectedCards;
+    CardContainer lastSelectedContainer;
     int numberToSelect;
     bool confirmed;
 
@@ -117,7 +118,7 @@ public class CardPicker : MonoBehaviour
                 {
                     cardPlaceholders[i].selfImage.color = Color.white;
                     cardPlaceholders[i].gameObject.SetActive(true);
-                    cardPlaceholders[i].InitializeContainer(targets[i], true);
+                    cardPlaceholders[i].InitializeContainer(targets[i],true);
                     break;
                 }
             }
@@ -137,35 +138,48 @@ public class CardPicker : MonoBehaviour
 
     public void SelectCard(CardContainer container)
     {
-        if(selectedCards.Contains(container.data))
+        if(!selectedCards.Contains(container.data))//Not selected
         {
-            //Hide selected shader
-            container.selfImage.color = Color.white;
+            if (selectedCards.Count == numberToSelect)
+                Deselect(lastSelectedContainer);
 
-            //Remove from list
-            selectedCards.Remove(container.data);
-
-
-            confirmButton.interactable = false;
-            return;
+            Select(container);
         }
-        
-        if (selectedCards.Count == numberToSelect)
+        else//already selected
         {
-            return;
-        }
-        else if(!selectedCards.Contains(container.data))
-        {
-            //show selected shader
-            container.selfImage.color = Color.green;
-
-            //add to list
-            selectedCards.Add(container.data);
-
-            if (selectedCards.Count == numberToSelect) confirmButton.interactable = true;
+            Deselect(container);
         }
     }
 
+    void Select(CardContainer container)
+    {
+        lastSelectedContainer = container;
+
+        //Show selected shader
+        container.selfImage.color = Color.green;
+
+        //Add to list 
+        selectedCards.Add(container.data);
+
+        //if valid show button
+        if (isValid()) confirmButton.interactable = true;
+    }
+    void Deselect(CardContainer container)
+    {
+        //Show selected shader
+        container.selfImage.color = Color.white;
+
+        //Add to list 
+        selectedCards.Remove(container.data);
+
+        //if valid show button
+        if (!isValid()) confirmButton.interactable = false;
+    }
+
+    bool isValid()
+    {
+        return selectedCards.Count == numberToSelect;
+    }
     public void OnButtonClick()
     {
         confirmed = true;
