@@ -38,31 +38,24 @@ public class PlotsManager : Singleton<PlotsManager>
     {
         queue.events.Add(ChooseMainPlotRoutine(queue, schemesToChooseFrom));
     }
-    IEnumerator ChooseMainPlotRoutine(EventQueue queue,List<MainPlotScheme> schemes)
+    IEnumerator ChooseMainPlotRoutine(EventQueue queue, List<MainPlotScheme> schemes)
     {
-        EventQueue pickQueue = new EventQueue();
-        List<CardData> pickTargets = new List<CardData>();
-        List<CardData> pickedCard = new List<CardData>();
-        for (int i = 0; i < schemes.Count; i++)
-        {
-            pickTargets.Add(schemes[i].schemeSteps[0].stepOptions[0]);
-        }
+        List<MainPlotScheme> chosenScheme = new List<MainPlotScheme>();
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, pickTargets, pickedCard, 1, false, "Choose the subject of your plot", null, descriptionSchemeChoice1, descriptionSchemeChoice2);
+        EventQueue pickQueue = new EventQueue();
+        CardManager.Instance.cardPicker.PickScheme(pickQueue, schemes, chosenScheme);
 
         pickQueue.StartQueue();
-        while(!pickQueue.resolved)
+        while (!pickQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
 
-        int index = pickTargets.IndexOf(pickedCard[0]);
-
         //Load MainScheme
         EventQueue loadQueue = new EventQueue();
 
-        schemes[index] = schemes[index].InitScheme(schemes[index]); //Note maybe leave the shemes list untouched and only instantiate a copy
-        currentMainPlotScheme = schemes[index];
+        currentMainPlotScheme = chosenScheme[0];
+        currentMainPlotScheme = currentMainPlotScheme.InitScheme(currentMainPlotScheme); //Note maybe leave the shemes list untouched and only instantiate a copy
 
         currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);
 

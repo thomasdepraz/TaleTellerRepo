@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
 {
     [Header("References")]
     public Hero currentHero;
+    public InstructionsData instructionsData;
     public StoryManager storyManager;
     public GameObject goButton;
     public Image fadePanel;
@@ -18,6 +19,7 @@ public class GameManager : Singleton<GameManager>
     public void Awake()
     {
         CreateSingleton(false);
+        instructionsData = Instantiate(instructionsData);
     }
 
     public void Fade(bool toBlack)
