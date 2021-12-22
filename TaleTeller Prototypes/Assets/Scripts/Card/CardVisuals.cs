@@ -10,6 +10,7 @@ public class CardVisuals : MonoBehaviour
     #region Variables
     public CardVisualsData profile;
 
+    
     [Header("Images")]
     public Image cardBackgound;
     public Image cardFrame;

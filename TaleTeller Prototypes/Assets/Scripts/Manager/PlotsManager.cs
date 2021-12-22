@@ -6,8 +6,6 @@ public class PlotsManager : Singleton<PlotsManager>
 {
     public MainPlotScheme currentMainPlotScheme;
     public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
-    public string descriptionSchemeChoice1;
-    public string descriptionSchemeChoice2;
     public List<CardData> secondaryPlots = new List<CardData>();
     public List<CardData> darkIdeas = new List<CardData>();
 

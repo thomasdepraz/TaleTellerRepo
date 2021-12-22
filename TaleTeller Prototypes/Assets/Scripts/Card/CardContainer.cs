@@ -45,22 +45,22 @@ public class CardContainer : MonoBehaviour
             rectTransform.rotation = Quaternion.Lerp(rectTransform.rotation, new Quaternion(CardManager.Instance.pointerRef.pointerDirection.y*0.3f, -CardManager.Instance.pointerRef.pointerDirection.x*0.3f, 0, 1), Time.deltaTime);
         }
 
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            visuals.ShakeCard(this, new EventQueue());
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            visuals.CardAttack(this, 0, new EventQueue());
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            visuals.EffectChangeFeedback(this, 1, new EventQueue());
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            visuals.EffectChangeFeedback(this, -1, new EventQueue());
-        }
+        //if(Input.GetKeyDown(KeyCode.S))
+        //{
+        //    visuals.ShakeCard(this, new EventQueue());
+        //}
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    visuals.CardAttack(this, 0, new EventQueue());
+        //}
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    visuals.EffectChangeFeedback(this, 1, new EventQueue());
+        //}
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    visuals.EffectChangeFeedback(this, -1, new EventQueue());
+        //}
 
     }
 
@@ -134,7 +134,7 @@ public class CardContainer : MonoBehaviour
             transform.SetAsLastSibling();
             shadowTransform.gameObject.SetActive(true);
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
-            //rectTransform.localScale = Vector3.one;
+            rectTransform.localScale = Vector3.one * visuals.profile.draggedScale;
 
             #endregion
 
@@ -365,7 +365,7 @@ public class CardContainer : MonoBehaviour
                 originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
 
                 rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
-                rectTransform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                rectTransform.localScale = Vector3.one * visuals.profile.hoveredScale;
 
                 //LeanTween.move(rectTransform, rectTransform.anchoredPosition + new Vector2(0, 10f), 0.5f).setEaseOutSine();
                 shadowTransform.gameObject.SetActive(true);
@@ -409,7 +409,6 @@ public class CardContainer : MonoBehaviour
     {
         visuals.UpdateCharacterElements(character);
     }
-
     public void UpdatePlotInfo(PlotCard card)
     {
         visuals.UpdatePlotElements(card);

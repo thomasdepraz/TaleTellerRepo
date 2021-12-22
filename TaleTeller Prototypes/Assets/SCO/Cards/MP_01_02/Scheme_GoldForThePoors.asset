@@ -47,3 +47,7 @@ MonoBehaviour:
     descriptionChapterChoice1: 
     descriptionChapterChoice2: 
   currentStep: 0
+  plotDescription: In this Main Plot, the Hero will begin his journey by visiting
+    an extremely poor town. A Cult is collecting money for the inhabitants, but things
+    might be very different...
+  plotIllustration: {fileID: 0}

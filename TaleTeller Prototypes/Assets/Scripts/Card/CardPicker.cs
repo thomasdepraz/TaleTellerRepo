@@ -299,7 +299,7 @@ public class CardPicker : MonoBehaviour
     {
         if(selectedSchemeDescription != null)
         {
-            if(selectedSchemeDescription != schemeDescription.linkedScheme)
+            if(schemeDescription != selectedSchemeDescription)
             {
                 DeselectIllu(selectedSchemeDescription);
                 SelectIllu(schemeDescription);

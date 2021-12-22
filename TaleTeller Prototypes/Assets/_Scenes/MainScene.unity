@@ -2281,7 +2281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &709543264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2299,8 +2299,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 319.88025, y: -50}
-  m_SizeDelta: {x: 539.7605, y: 100}
+  m_AnchoredPosition: {x: 959.65454, y: -50}
+  m_SizeDelta: {x: 539.7697, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &709543265
 MonoBehaviour:
@@ -2426,7 +2426,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: 100
   m_MinHeight: 100
-  m_PreferredWidth: -1
+  m_PreferredWidth: 300
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -3493,7 +3493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1062753716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3511,8 +3511,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 319.88025, y: -50}
-  m_SizeDelta: {x: 539.7605, y: 100}
+  m_AnchoredPosition: {x: 319.88486, y: -50}
+  m_SizeDelta: {x: 539.7697, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062753717
 MonoBehaviour:
@@ -3631,7 +3631,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: 100
   m_MinHeight: 100
-  m_PreferredWidth: -1
+  m_PreferredWidth: 300
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -5594,7 +5594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1599992004
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5662,7 +5662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1600130989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5680,8 +5680,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 319.88025, y: -50}
-  m_SizeDelta: {x: 539.7605, y: 100}
+  m_AnchoredPosition: {x: 1599.4243, y: -50}
+  m_SizeDelta: {x: 539.7697, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600130990
 MonoBehaviour:
@@ -5807,7 +5807,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: 100
   m_MinHeight: 100
-  m_PreferredWidth: -1
+  m_PreferredWidth: 300
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -6183,8 +6183,8 @@ MonoBehaviour:
   - {fileID: 893740665}
   schemeDescriptions:
   - {fileID: 1062753720}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 709543265}
+  - {fileID: 1600130990}
   backgroundPanel: {fileID: 1092545327}
   confirmButton: {fileID: 335667938}
   canvasGroup: {fileID: 1092545329}

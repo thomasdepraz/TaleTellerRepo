@@ -1,63 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 [CreateAssetMenu(fileName = "New Card Visual Profile", menuName = "Visuals / Card Visuals Profile")]
 public class CardVisualsData : ScriptableObject
 {
+    
     [Header("CardBackgrounds")]
-    public Sprite ideaBackground;
-    public Sprite curseBackground;
-    public Sprite plotBackground;
-    public Sprite junkBackground;
+    [Foldout("Sprites")] public Sprite ideaBackground;
+    [Foldout("Sprites")] public Sprite curseBackground;
+    [Foldout("Sprites")] public Sprite plotBackground;
+    [Foldout("Sprites")] public Sprite junkBackground;
 
     [Header("Card Frames")]
-    public Sprite characterFrameNeutral;
-    public Sprite characterFrameGood;
-    public Sprite characterFrameBad;
-    public Sprite itemFrame;
-    public Sprite placeFrame;
-    public Sprite characterFrameMask;
-    public Sprite itemFrameMask;
-    public Sprite placeFrameMask;
+    [Foldout("Sprites")] public Sprite characterFrameNeutral;
+    [Foldout("Sprites")] public Sprite characterFrameGood;
+    [Foldout("Sprites")] public Sprite characterFrameBad;
+    [Foldout("Sprites")] public Sprite itemFrame;
+    [Foldout("Sprites")] public Sprite placeFrame;
+    [Foldout("Sprites")] public Sprite characterFrameMask;
+    [Foldout("Sprites")] public Sprite itemFrameMask;
+    [Foldout("Sprites")] public Sprite placeFrameMask;
     [Space]
-    public Sprite curseCharacterFrameNeutral;
-    public Sprite curseCharacterFrameGood;
-    public Sprite curseCharacterFrameBad;
-    public Sprite curseItemFrame;
-    public Sprite cursePlaceFrame;
-    public Sprite curseCharacterFrameMask;
-    public Sprite curseItemFrameMask;
-    public Sprite cursePlaceFrameMask;
+    [Foldout("Sprites")] public Sprite curseCharacterFrameNeutral;
+    [Foldout("Sprites")] public Sprite curseCharacterFrameGood;
+    [Foldout("Sprites")] public Sprite curseCharacterFrameBad;
+    [Foldout("Sprites")] public Sprite curseItemFrame;
+    [Foldout("Sprites")] public Sprite cursePlaceFrame;
+    [Foldout("Sprites")] public Sprite curseCharacterFrameMask;
+    [Foldout("Sprites")] public Sprite curseItemFrameMask;
+    [Foldout("Sprites")] public Sprite cursePlaceFrameMask;
 
     [Header("Card Flags")]
-    public Sprite ideaFlag;
-    public Sprite plotFlag;
-    public Sprite curseFlag;
+    [Foldout("Sprites")] public Sprite ideaFlag;
+    [Foldout("Sprites")] public Sprite plotFlag;
+    [Foldout("Sprites")] public Sprite curseFlag;
 
     [Header("Card Icons")]
-    public Sprite characterIcon;
-    public Sprite itemIcon;
-    public Sprite placeIcon;
+    [Foldout("Sprites")] public Sprite characterIcon;
+    [Foldout("Sprites")] public Sprite itemIcon;
+    [Foldout("Sprites")] public Sprite placeIcon;
 
     [Header("Card Rarity")]
-    public Sprite commonRarity;
-    public Sprite uncommonRarity;
-    public Sprite rareRarity;
-    public Sprite epicRarity;
-    public Sprite legendaryRarity;
+    [Foldout("Sprites")] public Sprite commonRarity;
+    [Foldout("Sprites")] public Sprite uncommonRarity;
+    [Foldout("Sprites")] public Sprite rareRarity;
+    [Foldout("Sprites")] public Sprite epicRarity;
+    [Foldout("Sprites")] public Sprite legendaryRarity;
 
     [Header("Character Elements")]
-    public Sprite normalCharacterHealth;
-    public Sprite curseCharacterHealth;
-    public Sprite normalCharacterAttack;
-    public Sprite curseCharacterAttack;
+    [Foldout("Sprites")] public Sprite normalCharacterHealth;
+    [Foldout("Sprites")] public Sprite curseCharacterHealth;
+    [Foldout("Sprites")] public Sprite normalCharacterAttack;
+    [Foldout("Sprites")] public Sprite curseCharacterAttack;
 
     [Header("Misc")]
-    public Sprite normalManaFrame;
-    public Sprite curseManaFrame;
+    [Foldout("Sprites")] public Sprite normalManaFrame;
+    [Foldout("Sprites")] public Sprite curseManaFrame;
 
     [Header("Plot Elements")]
-    public Sprite mainUnderFlag;
-    public Sprite secondaryUnderFlag;
+    [Foldout("Sprites")] public Sprite mainUnderFlag;
+    [Foldout("Sprites")] public Sprite secondaryUnderFlag;
+
+    [Header("Tweening data")]
+    public float draggedScale;
+    public float hoveredScale;
 }
