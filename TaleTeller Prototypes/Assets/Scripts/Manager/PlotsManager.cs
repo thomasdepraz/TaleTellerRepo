@@ -195,7 +195,7 @@ public class PlotsManager : Singleton<PlotsManager>
         card.currentContainer.rectTransform.localPosition = CardManager.Instance.plotAppearTransform.localPosition;
 
         EventQueue appearFeedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.plotAppearTransform.localPosition, true, true, appearFeedback);
+        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.plotAppearTransform.localPosition, true, true, appearFeedback);
         while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 
@@ -210,7 +210,7 @@ public class PlotsManager : Singleton<PlotsManager>
     {
 
         EventQueue toDeckFeedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, false, toDeckFeedback);
+        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, false, toDeckFeedback);
         while (!toDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         card.currentContainer.ResetContainer();

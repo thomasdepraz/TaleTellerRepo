@@ -80,7 +80,7 @@ public class CharacterType : CardTypes
 
         #region Damage feedback
         EventQueue characterDamageQueue = new EventQueue();
-        data.currentContainer.visuals.ShakeCard(data.currentContainer, characterDamageQueue);
+        CardManager.Instance.cardTweening.ShakeCard(data.currentContainer, characterDamageQueue);
         while(!characterDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
 
@@ -111,7 +111,7 @@ public class CharacterType : CardTypes
             for (int i = 0; i < hitCount; i++)
             {
                 #region Attack Feedback
-                data.currentContainer.visuals.CardAttack(data.currentContainer, 0);
+                CardManager.Instance.cardTweening.CardAttack(data.currentContainer, 0);
                 yield return new WaitForSeconds(0.7f);
                 #endregion
 
@@ -175,12 +175,12 @@ public class CharacterType : CardTypes
             for (int i = 0; i < hitCount; i++)//NOTE MAYBE IMPLEMENT THIS INTO THE QUEUE
             {
                 #region Attack Feedback
-                data.currentContainer.visuals.CardAttack(data.currentContainer, direction);
+                CardManager.Instance.cardTweening.CardAttack(data.currentContainer, direction);
                 yield return new WaitForSeconds(0.7f);
                 #endregion
                 #region Damage feedback
                 EventQueue characterDamageQueue = new EventQueue();
-                data.currentContainer.visuals.ShakeCard(character.data.currentContainer, characterDamageQueue);
+                CardManager.Instance.cardTweening.ShakeCard(character.data.currentContainer, characterDamageQueue);
                 while (!characterDamageQueue.resolved) { yield return new WaitForEndOfFrame(); }
                 #endregion
 

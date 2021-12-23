@@ -168,7 +168,7 @@ public class Board : MonoBehaviour
     {
         //Add feedback
         EventQueue feedback = new EventQueue();
-        card.visuals.MoveCard(card, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        CardManager.Instance.cardTweening.MoveCard(card, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 
@@ -260,9 +260,10 @@ public class Board : MonoBehaviour
 
 
         //use method from deck to move cardBack to hand
-        CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
+        EventQueue feedback = new EventQueue();
+        CardManager.Instance.cardTweening.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform));
         CardManager.Instance.cardHand.currentHand.Add(card);
-        yield return new WaitForSeconds(0.5f);
+        while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         queue.UpdateQueue();
     }

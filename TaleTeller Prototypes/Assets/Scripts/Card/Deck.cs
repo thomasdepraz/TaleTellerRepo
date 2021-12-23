@@ -271,7 +271,7 @@ public class Deck : MonoBehaviour
 
         //Add feedback
         EventQueue feedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 
@@ -306,7 +306,7 @@ public class Deck : MonoBehaviour
         #endregion
 
         EventQueue appearFeedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, true, appearFeedback );
+        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, true, appearFeedback );
         while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         queue.UpdateQueue();

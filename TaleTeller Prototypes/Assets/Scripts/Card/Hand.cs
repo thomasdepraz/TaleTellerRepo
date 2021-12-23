@@ -29,7 +29,7 @@ public class Hand : MonoBehaviour
                     //Set parent and move
                     if (deal)
                     {
-                        hiddenHand[i].visuals.MoveCard(hiddenHand[i], RandomPositionInRect(handTransform), true, true, queue);
+                        CardManager.Instance.cardTweening.MoveCard(hiddenHand[i], RandomPositionInRect(handTransform), true, true, queue);
                         yield return new WaitForSeconds(0.2f);
                     }
                     break;
@@ -41,21 +41,11 @@ public class Hand : MonoBehaviour
             if (deal)
             {
                 data.currentContainer.rectTransform.SetParent(handTransform);
-                data.currentContainer.visuals.MoveCard(data.currentContainer, RandomPositionInRect(handTransform), false, false, queue);
+                CardManager.Instance.cardTweening.MoveCard(data.currentContainer, RandomPositionInRect(handTransform), false, false, queue);
                 yield return new WaitForSeconds(0.2f);
             }
         }
         queue.UpdateQueue();
-    }
-
-    public void DiscardAllHand()//TODO Implement queuing system
-    {
-        int cachedCount = currentHand.Count;
-        for (int i = 0; i < cachedCount; i++)
-        {
-            CardManager.Instance.cardDeck.discardPile.Add(currentHand[0].data);
-            currentHand[0].ResetContainer();
-        }
     }
 
     public void DiscardCardFromHand(CardContainer card, EventQueue queue)
@@ -88,7 +78,7 @@ public class Hand : MonoBehaviour
 
         //Add feedback
         EventQueue feedback = new EventQueue();
-        card.visuals.MoveCard(card,CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        CardManager.Instance.cardTweening.MoveCard(card,CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         card.data = card.data.ResetData(card.data);
@@ -111,23 +101,6 @@ public class Hand : MonoBehaviour
     }
 
     #region Visuals
-    public void MoveCard(CardContainer card, Vector3 target, bool appear)
-    {
-        //if appear also make card scale go from small to normal and color from black to white
-        if(appear)
-        {
-            card.rectTransform.localScale = Vector3.zero;
-            card.selfImage.color = Color.black;
-
-            LeanTween.value(gameObject, card.selfImage.color, Color.white, 0.3f).setOnUpdate((Color val) => {card.selfImage.color = val;});
-            LeanTween.scale(card.rectTransform, Vector3.one, 0.5f).setEaseOutQuint();
-            LeanTween.move(card.rectTransform, target, 0.8f).setEaseOutQuint();
-        }
-        else
-        {
-            LeanTween.move(card.rectTransform, target, 0.8f).setEaseOutQuint();
-        }
-    }
 
     public Vector3 RandomPositionInRect(RectTransform transform)
     {

@@ -11,6 +11,7 @@ public class CardManager : Singleton<CardManager>
     public Deck cardDeck;
     public Hand cardHand;
     public Board board;
+    public CardTweening cardTweening;
     public RectTransform discardPileTransform;
     public RectTransform deckTransform;
     public RectTransform plotAppearTransform;
@@ -28,4 +29,26 @@ public class CardManager : Singleton<CardManager>
 
     public Pointer pointerRef;
     public GameObject pointer;
+
+
+    //Card Appear
+
+
+    //Appear and send to hand
+
+
+    //Appear and send to deck
+
+
+    //Deck to Hand
+
+    
+    //Board to Hand 
+
+
+    //Board to Discard
+
+
+    //Hand to Discard
+
 }
