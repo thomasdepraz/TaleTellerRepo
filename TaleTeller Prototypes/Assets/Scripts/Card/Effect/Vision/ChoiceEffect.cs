@@ -70,7 +70,8 @@ public class ChoiceEffect : Effect
                 //Discard all cards but the picked one
                 for (int x = 0; x < cardsForChoice.Count; x++)
                 {
-                    CardManager.Instance.cardHand.DiscardCardFromHand(cardsForChoice[x].currentContainer, discardQueue);
+                    CardManager.Instance.CardHandToDiscard(pickedCards[i].currentContainer, discardQueue);
+
                 }
 
                 discardQueue.StartQueue();

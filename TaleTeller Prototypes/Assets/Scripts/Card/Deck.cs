@@ -174,7 +174,9 @@ public class Deck : MonoBehaviour
         //TODO make the following logic in the queue so it can be animated-----------------
         
         EventQueue initQueue = new EventQueue();
-        CardManager.Instance.cardHand.InitCard(initQueue, dealtCard);
+
+        CardManager.Instance.CardDeckToHand(initQueue, dealtCard, dealtCard.currentContainer != null);
+
         initQueue.StartQueue();
         while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -218,8 +220,8 @@ public class Deck : MonoBehaviour
             dealtCard = cardDeck[0];
         }
         //Appear(overDrawQueue)//TODO
-        if(dealtCard.currentContainer == null)
-            Appear(overdrawQueue, dealtCard);
+        if (dealtCard.currentContainer == null)
+            CardManager.Instance.CardAppear(overdrawQueue, dealtCard, CardManager.Instance.deckTransform.localPosition);
 
         //the card can be burn or push another card from the board
         if (dealtCard.GetType() == typeof(PlotCard)) //if its a plot card it pushes cards from the board
@@ -239,7 +241,8 @@ public class Deck : MonoBehaviour
             //Discard the pickedCards and deal the new one
             for (int i = 0; i < pickedCards.Count; i++)
             {
-                CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, overdrawQueue);
+                CardManager.Instance.CardHandToDiscard(pickedCards[i].currentContainer, overdrawQueue);
+
             }
             Deal(overdrawQueue, dealtCard);
         }
@@ -289,28 +292,5 @@ public class Deck : MonoBehaviour
 
         queue.UpdateQueue();
     }
-
-    void Appear(EventQueue queue, CardData card)
-    {
-        queue.events.Add(AppearRoutine(queue, card));
-    }
-    IEnumerator AppearRoutine(EventQueue queue, CardData card)
-    {
-        yield return null;
-
-        #region Init Container
-        EventQueue initQueue = new EventQueue();
-        CardManager.Instance.cardHand.InitCard(initQueue, card, false);
-        initQueue.StartQueue();
-        while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
-        #endregion
-
-        EventQueue appearFeedback = new EventQueue();
-        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, true, appearFeedback );
-        while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
-
-        queue.UpdateQueue();
-    }
-
     #endregion
 }

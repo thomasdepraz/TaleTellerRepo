@@ -360,7 +360,7 @@ public class CharacterType : CardTypes
             // Manage character death card discard, card reset, events deletion
             if (!isCurrentCharacter)
             {
-                CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+                CardManager.Instance.CardBoardToDiscard(data.currentContainer, discardQueue);
             }
             else//If Im currently resolving this card event, the have to be cleared to prevent errors
             {
@@ -368,7 +368,7 @@ public class CharacterType : CardTypes
 
                 if(data.GetType() != typeof(PlotCard))//Only discard on death if not plot card
                 {
-                    CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);
+                    CardManager.Instance.CardBoardToDiscard(data.currentContainer, discardQueue);
                 }
                 else//Maybe do something else
                 {
@@ -459,12 +459,12 @@ public class CharacterType : CardTypes
 
         if(useCount > 0)
         {
-            CardManager.Instance.board.ReturnCardToHand(data.currentContainer, false, discardQueue);//TODO implement the add to eventqueue part
+            CardManager.Instance.CardBoardToHand(data.currentContainer, false, discardQueue);
         }
         else//No more uses so its discarded
         {
             useCount = maxUseCount;
-            CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);//TODO implement the add to eventqueue part
+            CardManager.Instance.CardBoardToDiscard(data.currentContainer, discardQueue);
         }
 
         discardQueue.StartQueue();//<-- The actual discard happens here

@@ -73,7 +73,7 @@ public class PlotCard : CardData
         {
             EventQueue toHandQueue = new EventQueue();
 
-            PlotsManager.Instance.SendPlotToHand(toHandQueue, PlotsManager.Instance.currentPickedCard);
+            CardManager.Instance.CardAppearToHand(PlotsManager.Instance.currentPickedCard, toHandQueue, CardManager.Instance.plotAppearTransform.localPosition);
 
             toHandQueue.StartQueue();
             while(!toHandQueue.resolved)
@@ -92,7 +92,7 @@ public class PlotCard : CardData
                     CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
                     
                     EventQueue endDeckfeedback = new EventQueue();
-                    PlotsManager.Instance.SendPlotToDeck(endDeckfeedback, objective.linkedJunkedCards[i]);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], endDeckfeedback, CardManager.Instance.plotAppearTransform.localPosition, false);
                     endDeckfeedback.StartQueue();
                     while(!endDeckfeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -102,7 +102,8 @@ public class PlotCard : CardData
                     CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count),objective.linkedJunkedCards[i]);
 
                     EventQueue deckRandomFeedback = new EventQueue();
-                    PlotsManager.Instance.SendPlotToDeck(deckRandomFeedback, objective.linkedJunkedCards[i]);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], deckRandomFeedback, CardManager.Instance.plotAppearTransform.localPosition, false);
+
                     deckRandomFeedback.StartQueue();
                     while (!deckRandomFeedback.resolved) { yield return new WaitForEndOfFrame();}
 
@@ -115,7 +116,7 @@ public class PlotCard : CardData
                         CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
 
                     EventQueue xInDeckFeedback = new EventQueue();
-                    PlotsManager.Instance.SendPlotToDeck(xInDeckFeedback, objective.linkedJunkedCards[i]);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], xInDeckFeedback, CardManager.Instance.plotAppearTransform.localPosition, false);
                     xInDeckFeedback.StartQueue();
                     while (!xInDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -124,7 +125,9 @@ public class PlotCard : CardData
                 case PlotObjective.JunkSpawnLocation.Hand:
 
                     EventQueue drawQueue = new EventQueue();
-                    PlotsManager.Instance.SendPlotToHand(drawQueue, objective.linkedJunkedCards[i]);
+
+                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.plotAppearTransform.localPosition);
+
                     drawQueue.StartQueue();//Actual draw
                     while (!drawQueue.resolved)
                     {
@@ -147,7 +150,7 @@ public class PlotCard : CardData
         yield return null;
         EventQueue updateCardStatusQueue = new EventQueue();
 
-        CardManager.Instance.board.ReturnCardToHand(currentContainer, true, updateCardStatusQueue);
+        CardManager.Instance.CardBoardToHand(currentContainer, true, updateCardStatusQueue);
 
         updateCardStatusQueue.StartQueue();
         while(!updateCardStatusQueue.resolved)
@@ -287,7 +290,7 @@ public class PlotCard : CardData
             //TEMP pick a random card within the list and add it to the deck
             CardData darkIdea = PlotsManager.Instance.darkIdeas[Random.Range(0, PlotsManager.Instance.darkIdeas.Count-1)];
             EventQueue sendToDeckQueue = new EventQueue();
-            PlotsManager.Instance.SendPlotToDeck(sendToDeckQueue, darkIdea);
+            CardManager.Instance.CardAppearToDeck(darkIdea, sendToDeckQueue, CardManager.Instance.plotAppearTransform.localPosition);
             sendToDeckQueue.StartQueue();
             while (!sendToDeckQueue.resolved) { yield return new WaitForEndOfFrame(); }
             

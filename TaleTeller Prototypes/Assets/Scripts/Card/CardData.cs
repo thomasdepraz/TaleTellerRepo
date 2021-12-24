@@ -108,8 +108,7 @@ public class CardData : ScriptableObject
     {
         EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(currentContainer, discardQueue);
-
+        CardManager.Instance.CardBoardToDiscard(currentContainer, discardQueue);
         discardQueue.StartQueue();
 
         while (!discardQueue.resolved)

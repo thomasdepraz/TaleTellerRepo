@@ -110,7 +110,7 @@ public class DiscardXEffect : Effect
             //discard all of the picked cards
             for (int i = 0; i < pickedCards.Count; i++)
             {
-                CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, discardQueue);
+                CardManager.Instance.CardHandToDiscard(pickedCards[i].currentContainer, discardQueue);
             }
 
         }

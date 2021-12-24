@@ -60,8 +60,4 @@ public class CardTweening : MonoBehaviour
             LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
         }
     }
-
-
-
-
 }

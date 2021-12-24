@@ -83,6 +83,9 @@ public class CardContainer : MonoBehaviour
 
         //add random rotation 
         rectTransform.rotation = new Quaternion(0,0,Random.Range(-0.1f,0.1f),1);
+
+        //set scale to zero
+        //rectTransform.localScale = Vector3.zero; NOTE NOT SUPPOSED TO BE COMMENTED
     }
     public void ResetContainer(bool isPlaceholder = false)
     {
