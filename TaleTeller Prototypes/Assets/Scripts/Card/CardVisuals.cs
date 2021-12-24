@@ -8,87 +8,24 @@ using UnityEngine.UI;
 public class CardVisuals : MonoBehaviour
 {
     #region Variables
-    [Header("CardBackgrounds")]
-    public Image cardBackgound;
-    [Space]
-    public Sprite ideaBackground;
-    public Sprite curseBackground;
-    public Sprite plotBackground;
-    public Sprite junkBackground;
+    public CardVisualsData profile;
 
-    [Header("Card Frames")]
+    
+    [Header("Images")]
+    public Image cardBackgound;
     public Image cardFrame;
     public Image cardFrameMask;
-    [Space]
-    public Sprite characterFrameNeutral;
-    public Sprite characterFrameGood;
-    public Sprite characterFrameBad;
-    public Sprite itemFrame;
-    public Sprite placeFrame;
-    public Sprite characterFrameMask;
-    public Sprite itemFrameMask;
-    public Sprite placeFrameMask;
-    [Space]
-    public Sprite curseCharacterFrameNeutral;
-    public Sprite curseCharacterFrameGood;
-    public Sprite curseCharacterFrameBad;
-    public Sprite curseItemFrame;
-    public Sprite cursePlaceFrame;
-    public Sprite curseCharacterFrameMask;
-    public Sprite curseItemFrameMask;
-    public Sprite cursePlaceFrameMask;
-
-    [Header("Illustration")]
     public Image cardIllustration;
-
-
-    [Header("Card Flags")]
     public Image cardFlag;
-    [Space]
-    public Sprite ideaFlag;
-    public Sprite plotFlag;
-    public Sprite curseFlag;
-
-    [Header("Card Icons")]
     public Image cardIcon;
-    [Space]
-    public Sprite characterIcon;
-    public Sprite itemIcon;
-    public Sprite placeIcon;
-
-    [Header("Card Rarity")]
     public Image cardRarity;
-    [Space]
-    public Sprite commonRarity;
-    public Sprite uncommonRarity;
-    public Sprite rareRarity;
-    public Sprite epicRarity;
-    public Sprite legendaryRarity;
-
-    [Header("Character Elements")]
     public Image characterHealthFrame;
     public Image characterAttackFrame;
-
-    [Space]
-    public Sprite normalCharacterHealth;
-    public Sprite curseCharacterHealth;
-    public Sprite normalCharacterAttack;
-    public Sprite curseCharacterAttack;
-
-    [Header("Misc")]
     public Image cardManaFrame;
     public Image cardTimerFrame;
     public Image underManaFlag;
-    [Space]
-    public Sprite normalManaFrame;
-    public Sprite curseManaFrame;
-
-    [Header("Plot Elements")]
     public Image plotIcon;
     public Image plotUnderFlag;
-
-    public Sprite mainUnderFlag;
-    public Sprite secondaryUnderFlag;
 
     [Header("Texts")]
     public TextMeshProUGUI manaCostText;
@@ -110,10 +47,10 @@ public class CardVisuals : MonoBehaviour
         Type dataType = data.GetType();
         if(dataType == typeof(IdeaCard))
         {
-            cardBackgound.sprite = ideaBackground;
-            cardFlag.sprite = ideaFlag;
+            cardBackgound.sprite = profile.ideaBackground;
+            cardFlag.sprite = profile.ideaFlag;
 
-            cardManaFrame.sprite = normalManaFrame;
+            cardManaFrame.sprite = profile.normalManaFrame;
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
@@ -122,9 +59,9 @@ public class CardVisuals : MonoBehaviour
         }
         else if (dataType == typeof(PlotCard))
         {
-            cardBackgound.sprite = plotBackground;
-            cardFlag.sprite = plotFlag;
-            cardManaFrame.sprite = normalManaFrame;
+            cardBackgound.sprite = profile.plotBackground;
+            cardFlag.sprite = profile.plotFlag;
+            cardManaFrame.sprite = profile.normalManaFrame;
 
             plotIcon.gameObject.SetActive(true);
             plotUnderFlag.gameObject.SetActive(true);
@@ -132,17 +69,17 @@ public class CardVisuals : MonoBehaviour
 
 
             PlotCard card = data as PlotCard;
-            if (card.isMainPlot) plotUnderFlag.sprite = mainUnderFlag;
-            else plotUnderFlag.sprite = secondaryUnderFlag;
+            if (card.isMainPlot) plotUnderFlag.sprite = profile.mainUnderFlag;
+            else plotUnderFlag.sprite = profile.secondaryUnderFlag;
 
             UpdatePlotElements(card);
 
         }
         else if(dataType == typeof(DarkIdeaCard))
         {
-            cardBackgound.sprite = curseBackground;
-            cardFlag.sprite = curseFlag;
-            cardManaFrame.sprite = curseManaFrame;
+            cardBackgound.sprite = profile.curseBackground;
+            cardFlag.sprite = profile.curseFlag;
+            cardManaFrame.sprite = profile.curseManaFrame;
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
@@ -151,9 +88,9 @@ public class CardVisuals : MonoBehaviour
         }
         else if(dataType == typeof(JunkCard))
         {
-            cardBackgound.sprite = junkBackground;
-            cardFlag.sprite = plotFlag;
-            cardManaFrame.sprite = normalManaFrame;
+            cardBackgound.sprite = profile.junkBackground;
+            cardFlag.sprite = profile.plotFlag;
+            cardManaFrame.sprite = profile.normalManaFrame;
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
@@ -166,19 +103,19 @@ public class CardVisuals : MonoBehaviour
             switch (data.rarity)
             {
                 case CardRarity.Common:
-                    cardRarity.sprite = commonRarity;
+                    cardRarity.sprite = profile.commonRarity;
                     break;
                 case CardRarity.Uncommon:
-                    cardRarity.sprite = uncommonRarity;
+                    cardRarity.sprite = profile.uncommonRarity;
                     break;
                 case CardRarity.Rare:
-                    cardRarity.sprite = rareRarity;
+                    cardRarity.sprite = profile.rareRarity;
                     break;
                 case CardRarity.Epic:
-                    cardRarity.sprite = epicRarity;
+                    cardRarity.sprite = profile.epicRarity;
                     break;
                 case CardRarity.Legendary:
-                    cardRarity.sprite = legendaryRarity;
+                    cardRarity.sprite = profile.legendaryRarity;
                     break;
             }
         }
@@ -196,19 +133,19 @@ public class CardVisuals : MonoBehaviour
             Type cardType = data.cardType.GetType();
             if(cardType == typeof(CharacterType))
             {
-                cardIcon.sprite = characterIcon;
+                cardIcon.sprite = profile.characterIcon;
                 CharacterType chara = data.cardType as CharacterType;
                 if(chara.behaviour == CharacterBehaviour.Agressive)
                 {
                     if(data.GetType() == typeof(DarkIdeaCard))
                     {
-                        cardFrame.sprite = curseCharacterFrameBad;
-                        cardFrameMask.sprite = curseCharacterFrameMask;
+                        cardFrame.sprite = profile.curseCharacterFrameBad;
+                        cardFrameMask.sprite = profile.curseCharacterFrameMask;
                     }
                     else
                     {
-                        cardFrame.sprite = characterFrameBad;
-                        cardFrameMask.sprite = characterFrameMask;
+                        cardFrame.sprite = profile.characterFrameBad;
+                        cardFrameMask.sprite = profile.characterFrameMask;
                     }
 
                 }
@@ -216,26 +153,26 @@ public class CardVisuals : MonoBehaviour
                 {
                     if (data.GetType() == typeof(DarkIdeaCard))
                     {
-                        cardFrame.sprite = curseCharacterFrameGood;
-                        cardFrameMask.sprite = curseCharacterFrameMask;
+                        cardFrame.sprite = profile.curseCharacterFrameGood;
+                        cardFrameMask.sprite = profile.curseCharacterFrameMask;
                     }
                     else
                     {
-                        cardFrame.sprite = characterFrameGood;
-                        cardFrameMask.sprite = characterFrameMask;
+                        cardFrame.sprite = profile.characterFrameGood;
+                        cardFrameMask.sprite = profile.characterFrameMask;
                     }
                 }
                 else
                 {
                     if (data.GetType() == typeof(DarkIdeaCard))
                     {
-                        cardFrame.sprite = curseCharacterFrameNeutral;
-                        cardFrameMask.sprite = curseCharacterFrameMask;
+                        cardFrame.sprite = profile.curseCharacterFrameNeutral;
+                        cardFrameMask.sprite = profile.curseCharacterFrameMask;
                     }
                     else
                     {
-                        cardFrame.sprite = characterFrameNeutral;
-                        cardFrameMask.sprite = characterFrameMask;
+                        cardFrame.sprite = profile.characterFrameNeutral;
+                        cardFrameMask.sprite = profile.characterFrameMask;
                     }
                 }
 
@@ -249,13 +186,13 @@ public class CardVisuals : MonoBehaviour
 
                 if (dataType == typeof(DarkIdeaCard))
                 {
-                    characterAttackFrame.sprite = curseCharacterAttack;
-                    characterHealthFrame.sprite = curseCharacterHealth;
+                    characterAttackFrame.sprite = profile.curseCharacterAttack;
+                    characterHealthFrame.sprite = profile.curseCharacterHealth;
                 }
                 else
                 {
-                    characterAttackFrame.sprite = normalCharacterAttack;
-                    characterHealthFrame.sprite = normalCharacterHealth;
+                    characterAttackFrame.sprite = profile.normalCharacterAttack;
+                    characterHealthFrame.sprite = profile.normalCharacterHealth;
                 }
 
                 CharacterType character = data.cardType as CharacterType;
@@ -269,33 +206,33 @@ public class CardVisuals : MonoBehaviour
 
             if(cardType == typeof(ObjectType))
             {
-                cardIcon.sprite = itemIcon;
+                cardIcon.sprite = profile.itemIcon;
 
                 if(data.GetType() == typeof(DarkIdeaCard))
                 {
-                    cardFrame.sprite = curseItemFrame;
-                    cardFrameMask.sprite = curseItemFrameMask;
+                    cardFrame.sprite = profile.curseItemFrame;
+                    cardFrameMask.sprite = profile.curseItemFrameMask;
                 }
                 else
                 {
-                    cardFrame.sprite = itemFrame;
-                    cardFrameMask.sprite = itemFrameMask;
+                    cardFrame.sprite = profile.itemFrame;
+                    cardFrameMask.sprite = profile.itemFrameMask;
                 }
 
             }
 
             if(cardType == typeof(LocationType))
             {
-                cardIcon.sprite = placeIcon;
+                cardIcon.sprite = profile.placeIcon;
                 if (data.GetType() == typeof(DarkIdeaCard))
                 {
-                    cardFrame.sprite = cursePlaceFrame;
-                    cardFrameMask.sprite = cursePlaceFrameMask;
+                    cardFrame.sprite = profile.cursePlaceFrame;
+                    cardFrameMask.sprite = profile.cursePlaceFrameMask;
                 }
                 else
                 {
-                    cardFrame.sprite = placeFrame;
-                    cardFrameMask.sprite = placeFrameMask;
+                    cardFrame.sprite = profile.placeFrame;
+                    cardFrameMask.sprite = profile.placeFrameMask;
                 }
             }
         }
@@ -407,61 +344,10 @@ public class CardVisuals : MonoBehaviour
     }
 
     #region Tweening
-    public void ShakeCard(CardContainer container, EventQueue queue)
-    {
-        LeanTween.rotateZ(container.gameObject, -3, 0.025f).setEaseOutCubic().setOnComplete(
-            value => LeanTween.rotateZ(container.gameObject, 3, 0.05f).setEaseInOutCubic().setLoopPingPong(2).setOnComplete(
-                val => LeanTween.rotateZ(container.gameObject, 0, 0.025f).setEaseOutCubic().setOnComplete(end => queue.resolved = true)));
-    }
-
-    public void CardAttack(CardContainer container, int direction, EventQueue queue = null)
-    {
-        if(Mathf.Abs(direction)> 0)
-        {
-            float originX = container.rectTransform.anchoredPosition.x;
-            LeanTween.moveLocalX(container.gameObject, originX + direction * -2f, 0.5f).setEaseOutQuint().setOnComplete(
-                value=> LeanTween.moveLocalX(container.gameObject, originX + direction * 50, 0.2f).setEaseInQuint().setOnComplete(
-                    val=> LeanTween.moveLocalX(container.gameObject, originX, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
-        }
-        else
-        {
-            float originY = container.rectTransform.anchoredPosition.y;
-            LeanTween.moveLocalY(container.gameObject, originY - 2f, 0.5f).setEaseOutQuint().setOnComplete(
-               value => LeanTween.moveLocalY(container.gameObject, originY + 50, 0.2f).setEaseInQuint().setOnComplete(
-                   val => LeanTween.moveLocalY(container.gameObject, originY, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
-        }
-    }
-
     public void EffectChangeFeedback(CardContainer container, int direction, EventQueue queue)
     {
         Vector3 scale = direction > 0 ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(0.8f, 0.8f, 0.8f);
         LeanTween.scale(container.gameObject, scale, 0.1f ).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value=> { if (queue != null) queue.resolved = true; });
-    }
-
-    public void MoveCard(CardContainer container, Vector3 target,bool useScale ,bool appear, EventQueue queue = null)
-    {
-        if(useScale)
-        {
-            if(appear)
-            {
-                container.rectTransform.localScale = Vector3.zero;
-                container.selfImage.color = Color.black;
-
-                LeanTween.value(gameObject, container.selfImage.color, Color.white, 0.3f).setOnUpdate((Color val) => { container.selfImage.color = val; });
-                LeanTween.scale(container.rectTransform, Vector3.one, 0.5f).setEaseInOutQuint();
-                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
-            }
-            else
-            {
-                LeanTween.value(gameObject, container.selfImage.color, Color.black, 0.8f).setOnUpdate((Color val) => { container.selfImage.color = val; });
-                LeanTween.scale(container.rectTransform, Vector3.zero, 0.8f).setEaseInOutQuint();
-                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
-            }
-        }
-        else
-        {
-            LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
-        }
     }
 
     #endregion

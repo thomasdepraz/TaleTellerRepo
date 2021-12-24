@@ -40,3 +40,6 @@ MonoBehaviour:
     descriptionChapterChoice1: 
     descriptionChapterChoice2: 
   currentStep: 0
+  plotDescription: In this Main Plot, the Hero is going to save a strange priest.
+    But be careful, the habit does not make the monk...
+  plotIllustration: {fileID: 0}

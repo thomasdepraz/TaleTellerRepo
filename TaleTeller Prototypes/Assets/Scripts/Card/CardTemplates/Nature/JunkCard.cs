@@ -57,7 +57,7 @@ public class JunkCard : CardData
         {
             EventQueue returnToHand = new EventQueue();
 
-            CardManager.Instance.board.ReturnCardToHand(currentContainer, false, returnToHand);
+            CardManager.Instance.CardBoardToHand(currentContainer, false, returnToHand);
 
             returnToHand.StartQueue();
             while(!returnToHand.resolved)
@@ -69,7 +69,7 @@ public class JunkCard : CardData
         {
             EventQueue discardQueue = new EventQueue();
 
-            CardManager.Instance.board.DiscardCardFromBoard(currentContainer, discardQueue);
+            CardManager.Instance.CardBoardToDiscard(currentContainer, discardQueue);
 
             discardQueue.StartQueue();
             while (!discardQueue.resolved)
@@ -85,7 +85,6 @@ public class JunkCard : CardData
     {
         queue.events.Add(DestroyJunkCardRoutine(queue));
     }
-
     IEnumerator DestroyJunkCardRoutine(EventQueue currentQueue) //LATER probably have this method in the card manager as DestroyCard(CardData data) {}
     {
         EventQueue destroyQueue = new EventQueue();

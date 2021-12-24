@@ -6,8 +6,6 @@ public class PlotsManager : Singleton<PlotsManager>
 {
     public MainPlotScheme currentMainPlotScheme;
     public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
-    public string descriptionSchemeChoice1;
-    public string descriptionSchemeChoice2;
     public List<CardData> secondaryPlots = new List<CardData>();
     public List<CardData> darkIdeas = new List<CardData>();
 
@@ -38,31 +36,24 @@ public class PlotsManager : Singleton<PlotsManager>
     {
         queue.events.Add(ChooseMainPlotRoutine(queue, schemesToChooseFrom));
     }
-    IEnumerator ChooseMainPlotRoutine(EventQueue queue,List<MainPlotScheme> schemes)
+    IEnumerator ChooseMainPlotRoutine(EventQueue queue, List<MainPlotScheme> schemes)
     {
-        EventQueue pickQueue = new EventQueue();
-        List<CardData> pickTargets = new List<CardData>();
-        List<CardData> pickedCard = new List<CardData>();
-        for (int i = 0; i < schemes.Count; i++)
-        {
-            pickTargets.Add(schemes[i].schemeSteps[0].stepOptions[0]);
-        }
+        List<MainPlotScheme> chosenScheme = new List<MainPlotScheme>();
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, pickTargets, pickedCard, 1, false, "Choose the subject of your plot", null, descriptionSchemeChoice1, descriptionSchemeChoice2);
+        EventQueue pickQueue = new EventQueue();
+        CardManager.Instance.cardPicker.PickScheme(pickQueue, schemes, chosenScheme);
 
         pickQueue.StartQueue();
-        while(!pickQueue.resolved)
+        while (!pickQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
 
-        int index = pickTargets.IndexOf(pickedCard[0]);
-
         //Load MainScheme
         EventQueue loadQueue = new EventQueue();
 
-        schemes[index] = schemes[index].InitScheme(schemes[index]); //Note maybe leave the shemes list untouched and only instantiate a copy
-        currentMainPlotScheme = schemes[index];
+        currentMainPlotScheme = chosenScheme[0];
+        currentMainPlotScheme = currentMainPlotScheme.InitScheme(currentMainPlotScheme); //Note maybe leave the shemes list untouched and only instantiate a copy
 
         currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);
 
@@ -121,7 +112,8 @@ public class PlotsManager : Singleton<PlotsManager>
 
             //animate card to deck
             //for now only add it to deck list
-            SendPlotToDeck(appearQueue, card);
+            //SendPlotToDeck(appearQueue, card);
+            CardManager.Instance.CardAppearToDeck(card, appearQueue, CardManager.Instance.plotAppearTransform.localPosition);
         }
 
 
@@ -134,98 +126,4 @@ public class PlotsManager : Singleton<PlotsManager>
 
         queue.UpdateQueue();
     }
-
-
-    #region Utility
-    public void SendPlotToHand(EventQueue queue, CardData card)
-    {
-        queue.events.Add(SendPlotToHandRoutine(queue, card));
-    }
-    IEnumerator SendPlotToHandRoutine(EventQueue queue, CardData card)
-    {
-        yield return null;
-
-        EventQueue toHandQueue = new EventQueue();
-        //Make the card appear
-        PlotAppear(toHandQueue, card);
-
-        if(CardManager.Instance.cardHand.currentHand.Count + 1 > CardManager.Instance.cardHand.maxHandSize)
-        {
-            //Overdraw
-            CardManager.Instance.cardDeck.OverDraw(toHandQueue, card);
-        }
-        else
-        {
-            //Deal
-            CardManager.Instance.cardDeck.Deal(toHandQueue, card);
-        }
-
-        toHandQueue.StartQueue();
-        while(!toHandQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
-        queue.UpdateQueue();
-    }
-
-    public void SendPlotToDeck(EventQueue queue, CardData card)
-    {
-        queue.events.Add(SendPlotToDeckRoutine(queue, card));
-    }
-    IEnumerator SendPlotToDeckRoutine(EventQueue queue, CardData card)
-    {
-        yield return null;
-
-        //Make the card appear and send it to the deck
-        EventQueue appearQueue = new EventQueue();
-        PlotAppear(appearQueue, card);
-        PlotToDeck(appearQueue, card);
-        appearQueue.StartQueue();
-        while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
-
-        if(!CardManager.Instance.cardDeck.cardDeck.Contains(card)) CardManager.Instance.cardDeck.cardDeck.Add(card);
-
-        queue.UpdateQueue();
-    }
-
-    public void PlotAppear(EventQueue queue, CardData card)
-    {
-        queue.events.Add(PlotAppearRoutine(queue, card));
-    }
-    IEnumerator PlotAppearRoutine(EventQueue queue, CardData card)
-    {
-        #region Init Container
-        EventQueue initQueue = new EventQueue();
-        CardManager.Instance.cardHand.InitCard(initQueue, card, false);
-        initQueue.StartQueue();
-        while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
-        #endregion
-        card.currentContainer.rectTransform.localPosition = CardManager.Instance.plotAppearTransform.localPosition;
-
-        EventQueue appearFeedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.plotAppearTransform.localPosition, true, true, appearFeedback);
-        while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
-
-
-        queue.UpdateQueue();
-    }
-
-    public void PlotToDeck(EventQueue queue, CardData card)
-    {
-        queue.events.Add(PlotToDeckRoutine(queue, card));
-    }
-    IEnumerator PlotToDeckRoutine(EventQueue queue, CardData card)
-    {
-
-        EventQueue toDeckFeedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, false, toDeckFeedback);
-        while (!toDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
-
-        card.currentContainer.ResetContainer();
-        queue.UpdateQueue();
-    }
-
-    #endregion
-
 }

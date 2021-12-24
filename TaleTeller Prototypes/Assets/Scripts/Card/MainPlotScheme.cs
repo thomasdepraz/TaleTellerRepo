@@ -17,6 +17,10 @@ public class MainPlotScheme : ScriptableObject
     public List<SchemeStep> schemeSteps = new List<SchemeStep>();
     [HideInInspector]public int currentStep;
 
+    [TextArea(2,5)]
+    public string plotDescription;
+    public Sprite plotIllustration;
+ 
     public MainPlotScheme InitScheme(MainPlotScheme _scheme)
     {
         MainPlotScheme scheme = Instantiate(_scheme);

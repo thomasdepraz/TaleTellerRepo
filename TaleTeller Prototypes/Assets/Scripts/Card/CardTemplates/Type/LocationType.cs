@@ -22,7 +22,7 @@ public class LocationType : CardTypes
     {
         EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);//<--TODO implement add to event queue parameter
+        CardManager.Instance.CardBoardToDiscard(data.currentContainer, discardQueue);
 
         discardQueue.StartQueue();
 
