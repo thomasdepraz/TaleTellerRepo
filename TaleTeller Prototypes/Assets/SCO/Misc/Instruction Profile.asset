@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526b365268aaa254bb434db9a1c676db, type: 3}
   m_Name: Instruction Profile
   m_EditorClassIdentifier: 
-  chooseSchemeInstruction: 'Choose how you plot goes :'
+  chooseSchemeInstruction: 'Choose the subject of your plot:'
+  chooseSchemeStepInstruction: 
   chooseCardInstruction: Choose a card
   choiceEffectInstruction: Choose $value$ card(s)
