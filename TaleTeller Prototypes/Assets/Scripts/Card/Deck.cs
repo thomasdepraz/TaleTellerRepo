@@ -60,7 +60,6 @@ public class Deck : MonoBehaviour
         {
             if (cardsInDeck > 0)//Deal card while deck is not empty
             {
-                //TODO deal or burn
                 #region DEAL/BURN
                 if(numberOfCardsInHand + i + 1 > CardManager.Instance.cardHand.maxHandSize)
                 {
@@ -168,10 +167,6 @@ public class Deck : MonoBehaviour
         while(!illuminationQueue.resolved)
         { yield return new WaitForEndOfFrame(); }
         #endregion
-
-        EventQueue dealQueue = new EventQueue();
-
-        //TODO make the following logic in the queue so it can be animated-----------------
         
         EventQueue initQueue = new EventQueue();
 
@@ -187,14 +182,6 @@ public class Deck : MonoBehaviour
         else
         {
             if (cardDeck.Contains(card)) cardDeck.Remove(card);
-        }
-        //----------------------------------------------------
-
-        dealQueue.StartQueue();
-
-        while(!dealQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
         }
 
         queue.UpdateQueue();
@@ -219,7 +206,7 @@ public class Deck : MonoBehaviour
         {
             dealtCard = cardDeck[0];
         }
-        //Appear(overDrawQueue)//TODO
+
         if (dealtCard.currentContainer == null)
             CardManager.Instance.CardAppear(overdrawQueue, dealtCard, CardManager.Instance.deckTransform.localPosition);
 
@@ -270,8 +257,6 @@ public class Deck : MonoBehaviour
 
         EventQueue burnQueue = new EventQueue();
 
-        //TODO implement this to queue so it can be animated --- 
-
         //Add feedback
         EventQueue feedback = new EventQueue();
         CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
@@ -281,8 +266,6 @@ public class Deck : MonoBehaviour
         discardPile.Add(card);
         if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer)) CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
         if(cardDeck.Contains(card))cardDeck.Remove(card);
-
-        //------------------------------------------------------
 
         burnQueue.StartQueue();
         while(!burnQueue.resolved)

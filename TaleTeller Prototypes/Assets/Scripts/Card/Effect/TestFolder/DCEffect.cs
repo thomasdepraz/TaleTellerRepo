@@ -28,7 +28,7 @@ public class DCEffect : MalusEffect
 
         //----
 
-        //Discard random cards //TODO add logic to queue events
+        //Discard random cards 
 
             if (targets.Count > 0)
             {

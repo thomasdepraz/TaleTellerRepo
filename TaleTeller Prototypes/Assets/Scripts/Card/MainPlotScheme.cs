@@ -40,7 +40,7 @@ public class MainPlotScheme : ScriptableObject
     {
         queue.events.Add(LoadStepRoutine(queue, scheme));
     }
-    IEnumerator LoadStepRoutine(EventQueue queue, MainPlotScheme scheme)//TODO
+    IEnumerator LoadStepRoutine(EventQueue queue, MainPlotScheme scheme)
     {
         yield return null;
         var optionList = scheme.schemeSteps[scheme.currentStep].stepOptions;
@@ -59,7 +59,6 @@ public class MainPlotScheme : ScriptableObject
         EventQueue toHandQueue = new EventQueue();
 
         //send card to hand
-        //PlotsManager.Instance.SendPlotToHand(toHandQueue, pickedCard[0]);
         PlotsManager.Instance.currentPickedCard = pickedCard[0];
         pickedCard[0].onCardAppear(toHandQueue, pickedCard[0]);
 

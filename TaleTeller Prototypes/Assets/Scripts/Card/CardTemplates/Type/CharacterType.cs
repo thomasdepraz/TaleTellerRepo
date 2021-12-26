@@ -36,7 +36,7 @@ public class CharacterType : CardTypes
     /// <summary>
     /// Fight logic between characters /with players. 
     /// </summary>
-    public void InitFightEvents(EventQueue queue) //All the fights gets added as an event in the board //TODO Add multiple strke support
+    public void InitFightEvents(EventQueue queue) //All the fights gets added as an event in the board
     {
         List <CharacterType> characters = GetFightingTargets();
 

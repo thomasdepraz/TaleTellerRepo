@@ -83,7 +83,7 @@ public class PlotCard : CardData
         }
 
 
-        //add all junk cards to deck for now -- TODO later call the appropriate method on plotObjective so it chooses where to send the cards TODO 
+        //add all junk cards to deck for now
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
             switch(objective.junkSpawnLocations[i])
@@ -173,7 +173,7 @@ public class PlotCard : CardData
         currentContainer.ResetContainer();
         StoryManager.Instance.cardsToDestroy.Add(this);
 
-        //Choose next card choose next card if not last //TODO
+        //Choose next card if not last
         if(PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
         {
             EventQueue updateQueue = new EventQueue();
@@ -215,7 +215,6 @@ public class PlotCard : CardData
         }
 
         //Reward
-        //TODO IMPLEMENT QUEUEING IN HERE
         EventQueue rewardQueue = new EventQueue();
 
         if (isMainPlot)
@@ -264,14 +263,14 @@ public class PlotCard : CardData
 
     public void FailPlot(EventQueue queue)
     {
-        queue.events.Add(FailPilotRoutine(queue));
+        queue.events.Add(FailPlotRoutine(queue));
     }
-    public IEnumerator FailPilotRoutine(EventQueue currentQueue)//TODO
+    public IEnumerator FailPlotRoutine(EventQueue currentQueue)
     {
         yield return null;
         if (isMainPlot)
         {
-            //Show the card + why the player lost
+            //Show the card + why the player lost TODO
 
 
             //GameOver

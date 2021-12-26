@@ -92,7 +92,7 @@ public class DiscardXEffect : Effect
 
         //----
 
-        //Discard random cards //TODO add logic to queue events
+        //Discard random cards
 
         if (targetsToDiscard.Count > 0)
         {

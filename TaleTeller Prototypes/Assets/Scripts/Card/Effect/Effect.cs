@@ -160,12 +160,12 @@ public class Effect : ScriptableObject
         }
     }
 
-    public virtual void OnTriggerEffect(EventQueue queue) //TODO REMOVE VIRTUAL
+    public void OnTriggerEffect(EventQueue queue)
     {
         //ajouter la coroutine � la queue
         queue.events.Add(EffectLogic(queue));
     }
-    public virtual void OnTriggerEffect(EventQueue queue, CardData data = null) //TODO REMOVE VIRTUAL
+    public void OnTriggerEffect(EventQueue queue, CardData data = null)
     {
         //ajouter la coroutine � la queue
         queue.events.Add(EffectLogic(queue, data));
