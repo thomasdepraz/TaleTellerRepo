@@ -70,15 +70,6 @@ public class CardPicker : MonoBehaviour
         instructionText.gameObject.SetActive(true);
         instructionText.text = instruction;
 
-        //descriptionPickText.gameObject.SetActive(true);
-        //descriptionPickText.text = description;
-
-        //descriptionChoice1Text.gameObject.SetActive(true);
-        //descriptionChoice1Text.text = description1;
-
-        //descriptionChoice2Text.gameObject.SetActive(true);
-        //descriptionChoice2Text.text = description2;
-
         //TODO fade in cards
 
 
@@ -97,12 +88,6 @@ public class CardPicker : MonoBehaviour
         ResetPlaceHolders();
         instructionText.gameObject.SetActive(false);
 
-        //descriptionPickText.gameObject.SetActive(false);
-
-        //descriptionChoice1Text.gameObject.SetActive(false);
-
-        //descriptionChoice2Text.gameObject.SetActive(false);
-
         Color transparent = new Color(0, 0, 0, 0);
         LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 
             onEnd => { canvasGroup.blocksRaycasts = false; queue.UpdateQueue(); });
@@ -120,6 +105,8 @@ public class CardPicker : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
         confirmButton.interactable = false;
         confirmed = false;
+
+        selectedCards.Clear();
 
         //Appear background
         backgroundPanel.rectTransform.anchorMax = new Vector2(1,0);
@@ -195,7 +182,8 @@ public class CardPicker : MonoBehaviour
             schemeDescriptions[i].description.text = string.Empty;
             schemeDescriptions[i].illustration.sprite = null;
             schemeDescriptions[i].linkedScheme = null;
-
+            schemeDescriptions[i].cardContainer.ResetContainer(true);
+            Deselect(schemeDescriptions[i].cardContainer);
             schemeDescriptions[i].gameObject.SetActive(false);
         }
        

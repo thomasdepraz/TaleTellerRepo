@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Instruction Profile
   m_EditorClassIdentifier: 
   chooseSchemeInstruction: 'Choose the subject of your plot:'
-  chooseSchemeStepInstruction: 
+  chooseSchemeStepInstruction: 'Choose how your plot unravels : '
   chooseCardInstruction: Choose a card
   choiceEffectInstruction: Choose $value$ card(s)
