@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5114050863913606493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 3
+    baseAttackDamage: 2
+  behaviour: 1
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 3
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Idea_Companion_Base
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Companion
+  rarity: 1
+  archetype: 1
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: 2743a1bef5e6d6a4980e69671fbc425e, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences: []
+  effects: []
+  cardTypeReference: {fileID: -5114050863913606493}
+  cardType: {fileID: 0}
