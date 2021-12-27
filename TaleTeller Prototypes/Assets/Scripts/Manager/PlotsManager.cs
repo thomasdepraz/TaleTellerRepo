@@ -31,7 +31,7 @@ public class PlotsManager : Singleton<PlotsManager>
 
     }
 
-    //Link this method to the act beggining TODO
+    //Link this method to the act beggining
     public void ChooseMainPlot(EventQueue queue, List<MainPlotScheme> schemesToChooseFrom)
     {
         queue.events.Add(ChooseMainPlotRoutine(queue, schemesToChooseFrom));
@@ -96,7 +96,6 @@ public class PlotsManager : Singleton<PlotsManager>
             {
                 currentPickedCard = pickedCards[i]; //<-- This doesn't work if more than one pickedCard TODO fix this
                 pickedCards[i].onCardAppear(appearQueue, pickedCards[i]); //This manages the appear animation + all the junk apparition
-
                 secondaryPlots.Remove(pickedCards[i]); //TEMP  
             }
 

@@ -118,7 +118,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    IEnumerator Move(int index)//Temp coroutine to test movement
+    IEnumerator Move(int index)
     {
         EventQueue moveQueue = new EventQueue();
         storyLine.MovePlayer(moveQueue, index);

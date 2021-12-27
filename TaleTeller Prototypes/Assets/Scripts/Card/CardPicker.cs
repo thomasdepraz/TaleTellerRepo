@@ -21,7 +21,7 @@ public class CardPicker : MonoBehaviour
     [Header("Data")]
     public float backgroundFadeSpeed;
 
-    List<CardData> selectedCards;
+    List<CardData> selectedCards = new List<CardData>();
     CardContainer lastSelectedContainer;
     int numberToSelect;
     bool confirmed;
@@ -30,14 +30,21 @@ public class CardPicker : MonoBehaviour
 
     public void Start()
     {
-        InitEventCallbacks();
+        InitEventCallbacks(cardPlaceholders);
+
+        List<CardContainer> schemeDescriptionContainers = new List<CardContainer>();
+        for (int i = 0; i < schemeDescriptions.Count; i++)
+        {
+            schemeDescriptionContainers.Add(schemeDescriptions[i].cardContainer);
+        }
+        InitEventCallbacks(schemeDescriptionContainers);
     }
 
-    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction, string description = null, string description1 = null, string description2 = null)
+    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
     {
-        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, isInstantaneous, instruction, description, description1, description2)) ;
+        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, isInstantaneous, instruction)) ;
     }
-    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction, string description = null, string description1 = null, string description2 = null)
+    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
     {
         canvasGroup.blocksRaycasts = true;
         selectedCards = pickedCards;
@@ -63,15 +70,6 @@ public class CardPicker : MonoBehaviour
         instructionText.gameObject.SetActive(true);
         instructionText.text = instruction;
 
-        //descriptionPickText.gameObject.SetActive(true);
-        //descriptionPickText.text = description;
-
-        //descriptionChoice1Text.gameObject.SetActive(true);
-        //descriptionChoice1Text.text = description1;
-
-        //descriptionChoice2Text.gameObject.SetActive(true);
-        //descriptionChoice2Text.text = description2;
-
         //TODO fade in cards
 
 
@@ -90,12 +88,6 @@ public class CardPicker : MonoBehaviour
         ResetPlaceHolders();
         instructionText.gameObject.SetActive(false);
 
-        //descriptionPickText.gameObject.SetActive(false);
-
-        //descriptionChoice1Text.gameObject.SetActive(false);
-
-        //descriptionChoice2Text.gameObject.SetActive(false);
-
         Color transparent = new Color(0, 0, 0, 0);
         LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 
             onEnd => { canvasGroup.blocksRaycasts = false; queue.UpdateQueue(); });
@@ -103,15 +95,18 @@ public class CardPicker : MonoBehaviour
         
     }
 
-    public void PickScheme(EventQueue queue, List<MainPlotScheme> schemes, List<MainPlotScheme> chosenScheme)
+    public void PickScheme(EventQueue queue, List<MainPlotScheme> schemes, List<MainPlotScheme> chosenScheme, bool cardVersion = false)
     {
-        queue.events.Add(PickSchemeRoutine(queue, schemes, chosenScheme));
+        queue.events.Add(PickSchemeRoutine(queue, schemes, chosenScheme, cardVersion));
     }
-    IEnumerator PickSchemeRoutine(EventQueue queue, List<MainPlotScheme> schemes, List<MainPlotScheme> chosenScheme)
+    IEnumerator PickSchemeRoutine(EventQueue queue, List<MainPlotScheme> schemes, List<MainPlotScheme> chosenScheme, bool cardVersion)
     {
         yield return null;
         canvasGroup.blocksRaycasts = true;
         confirmButton.interactable = false;
+        confirmed = false;
+
+        selectedCards.Clear();
 
         //Appear background
         backgroundPanel.rectTransform.anchorMax = new Vector2(1,0);
@@ -124,22 +119,42 @@ public class CardPicker : MonoBehaviour
         ended = false;
 
         //Load Instruction
-        string instruction = GameManager.Instance.instructionsData.chooseSchemeInstruction;
-        instruction = BuildInstruction(instruction);
+        string instruction = string.Empty; 
+        if(cardVersion)
+            instruction = GameManager.Instance.instructionsData.chooseSchemeStepInstruction;
+        else
+            instruction = GameManager.Instance.instructionsData.chooseSchemeInstruction;
+
         instructionText.text = instruction;
         instructionText.gameObject.SetActive(true); //TODO Tween the text;
 
-        //Load image and description
-        for (int i = 0; i < schemes.Count; i++)//TODO Tween these objects
+        //Load image and description or cards
+        if(cardVersion)
         {
-            schemeDescriptions[i].description.text = schemes[i].plotDescription;
-            schemeDescriptions[i].illustration.sprite = schemes[i].plotIllustration;
-            schemeDescriptions[i].linkedScheme = schemes[i];
+            numberToSelect = 1;
+            int step = PlotsManager.Instance.currentMainPlotScheme.currentStep;
+            List<CardData> stepOptions =  PlotsManager.Instance.currentMainPlotScheme.schemeSteps[step].stepOptions;
 
-            schemeDescriptions[i].gameObject.SetActive(true);
+            for (int i = 0; i < stepOptions.Count; i++)//Load containers TODO implement queueing for twening feedback
+            {
+                schemeDescriptions[i].cardContainer.InitializeContainer(stepOptions[i], true);
+                schemeDescriptions[i].description.text = stepOptions[i].description;//Temp
+
+                schemeDescriptions[i].LoadCardContainer();
+            }
+
         }
+        else
+        {
+            for (int i = 0; i < schemes.Count; i++)//TODO Tween these objects
+            {
+                schemeDescriptions[i].description.text = schemes[i].plotDescription;
+                schemeDescriptions[i].illustration.sprite = schemes[i].plotIllustration;
+                schemeDescriptions[i].linkedScheme = schemes[i];
 
-        //Appear instruction image and description
+                schemeDescriptions[i].LoadIllustration();
+            }
+        }
 
         //Appear button
         confirmButton.gameObject.SetActive(true);
@@ -150,7 +165,14 @@ public class CardPicker : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        chosenScheme.Add(selectedSchemeDescription.linkedScheme);
+        if(cardVersion)
+        {
+            PlotsManager.Instance.currentPickedCard = selectedCards[0];
+        }
+        else
+        {
+            chosenScheme.Add(selectedSchemeDescription.linkedScheme);
+        }
 
         //Deactivate placeholders
         confirmButton.gameObject.SetActive(false);
@@ -160,12 +182,13 @@ public class CardPicker : MonoBehaviour
             schemeDescriptions[i].description.text = string.Empty;
             schemeDescriptions[i].illustration.sprite = null;
             schemeDescriptions[i].linkedScheme = null;
-
+            schemeDescriptions[i].cardContainer.ResetContainer(true);
+            Deselect(schemeDescriptions[i].cardContainer);
             schemeDescriptions[i].gameObject.SetActive(false);
         }
        
         LeanTween.value(backgroundPanel.gameObject, 1, 0, 0.5f).setOnUpdate(value => { backgroundPanel.rectTransform.anchorMax = new Vector2(1,value); }).setOnComplete(
-            onEnd => {backgroundPanel.rectTransform.anchorMax =  Vector2.one ; canvasGroup.blocksRaycasts = false; queue.UpdateQueue(); });
+            onEnd => {backgroundPanel.rectTransform.anchorMax =  Vector2.one ; canvasGroup.blocksRaycasts = false; backgroundPanel.color = Color.clear; queue.UpdateQueue(); });
     }
 
 
@@ -198,26 +221,26 @@ public class CardPicker : MonoBehaviour
         }
     }
 
-    void InitEventCallbacks()
+    void InitEventCallbacks(List<CardContainer> container)
     {
-        for (int i = 0; i < cardPlaceholders.Count; i++)
+        for (int i = 0; i < container.Count; i++)
         {
-            EventTrigger trigger = cardPlaceholders[i].gameObject.GetComponent<EventTrigger>();
+            EventTrigger trigger = container[i].gameObject.GetComponent<EventTrigger>();
 
             int j = i;
             EventTrigger.Entry clickEvent = new EventTrigger.Entry();
             clickEvent.eventID = EventTriggerType.PointerClick;
-            clickEvent.callback.AddListener(data => { SelectCard(cardPlaceholders[j]); });
+            clickEvent.callback.AddListener(data => { SelectCard(container[j]); });
             trigger.triggers.Add(clickEvent);
 
             EventTrigger.Entry enterEvent = new EventTrigger.Entry();
             enterEvent.eventID = EventTriggerType.PointerEnter;
-            enterEvent.callback.AddListener(data => { PointerEnter(cardPlaceholders[j]); });
+            enterEvent.callback.AddListener(data => { PointerEnter(container[j]); });
             trigger.triggers.Add(enterEvent);
 
             EventTrigger.Entry exitEvent = new EventTrigger.Entry();
             exitEvent.eventID = EventTriggerType.PointerExit;
-            exitEvent.callback.AddListener(data => { PointerExit(cardPlaceholders[j]); });
+            exitEvent.callback.AddListener(data => { PointerExit(container[j]); });
             trigger.triggers.Add(exitEvent);
         }
     }

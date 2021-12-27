@@ -40,15 +40,13 @@ public class MainPlotScheme : ScriptableObject
     {
         queue.events.Add(LoadStepRoutine(queue, scheme));
     }
-    IEnumerator LoadStepRoutine(EventQueue queue, MainPlotScheme scheme)//TODO
+    IEnumerator LoadStepRoutine(EventQueue queue, MainPlotScheme scheme)
     {
-        yield return null;
         var optionList = scheme.schemeSteps[scheme.currentStep].stepOptions;
 
-        List<CardData> pickedCard = new List<CardData>();
         EventQueue pickQueue = new EventQueue();
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, optionList, pickedCard, 1, false, "Choose how your plot goes on", scheme.schemeSteps[scheme.currentStep].descriptionChapterChoice, scheme.schemeSteps[scheme.currentStep].descriptionChapterChoice1, scheme.schemeSteps[scheme.currentStep].descriptionChapterChoice2);
+        CardManager.Instance.cardPicker.PickScheme(pickQueue, null, null, true);
 
         pickQueue.StartQueue();
         while (!pickQueue.resolved)
@@ -59,9 +57,8 @@ public class MainPlotScheme : ScriptableObject
         EventQueue toHandQueue = new EventQueue();
 
         //send card to hand
-        //PlotsManager.Instance.SendPlotToHand(toHandQueue, pickedCard[0]);
-        PlotsManager.Instance.currentPickedCard = pickedCard[0];
-        pickedCard[0].onCardAppear(toHandQueue, pickedCard[0]);
+        CardData card = PlotsManager.Instance.currentPickedCard;
+        card.onCardAppear(toHandQueue, card);
 
         toHandQueue.StartQueue();
         while (!toHandQueue.resolved)
