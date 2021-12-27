@@ -1255,6 +1255,8 @@ MonoBehaviour:
   statsButtonDescription: {fileID: 7050452981567024548}
   actionButtonDescription: {fileID: 7050452981120326591}
   fadeSpeed: 1
+  batchOne: 2
+  batchTwo: 1
   secondaryRewardCards:
   - {fileID: 11400000, guid: a44f407a27210ae40bcf1691ad89f6bc, type: 2}
   - {fileID: 11400000, guid: c0cba069c2b611f4995151c2118dc6cd, type: 2}

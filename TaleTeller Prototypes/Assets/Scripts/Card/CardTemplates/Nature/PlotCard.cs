@@ -11,6 +11,7 @@ public class PlotCard : CardData
     public int completionTimer;
     public bool isMainPlot;
     public bool isFinal;
+    [TextArea(2, 3)] public string plotChoiceDescription;
     public List<CardData> legendaryCardRewards = new List<CardData>();
 
     //Eventually CardData malusCardToSpawn 

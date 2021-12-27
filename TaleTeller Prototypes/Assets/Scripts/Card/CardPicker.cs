@@ -14,9 +14,8 @@ public class CardPicker : MonoBehaviour
     public Button confirmButton;
     public CanvasGroup canvasGroup;
     public TextMeshProUGUI instructionText;
-    public TextMeshProUGUI descriptionPickText;
-    public TextMeshProUGUI descriptionChoice1Text;
-    public TextMeshProUGUI descriptionChoice2Text;
+    public TextMeshProUGUI descriptionText;
+
 
     [Header("Data")]
     public float backgroundFadeSpeed;
@@ -70,15 +69,6 @@ public class CardPicker : MonoBehaviour
         instructionText.gameObject.SetActive(true);
         instructionText.text = instruction;
 
-        //descriptionPickText.gameObject.SetActive(true);
-        //descriptionPickText.text = description;
-
-        //descriptionChoice1Text.gameObject.SetActive(true);
-        //descriptionChoice1Text.text = description1;
-
-        //descriptionChoice2Text.gameObject.SetActive(true);
-        //descriptionChoice2Text.text = description2;
-
         //TODO fade in cards
 
 
@@ -96,12 +86,7 @@ public class CardPicker : MonoBehaviour
 
         ResetPlaceHolders();
         instructionText.gameObject.SetActive(false);
-
-        //descriptionPickText.gameObject.SetActive(false);
-
-        //descriptionChoice1Text.gameObject.SetActive(false);
-
-        //descriptionChoice2Text.gameObject.SetActive(false);
+        descriptionText.gameObject.SetActive(false);
 
         Color transparent = new Color(0, 0, 0, 0);
         LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 
@@ -120,6 +105,8 @@ public class CardPicker : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
         confirmButton.interactable = false;
         confirmed = false;
+
+        selectedCards.Clear();
 
         //Appear background
         backgroundPanel.rectTransform.anchorMax = new Vector2(1,0);
@@ -148,10 +135,16 @@ public class CardPicker : MonoBehaviour
             int step = PlotsManager.Instance.currentMainPlotScheme.currentStep;
             List<CardData> stepOptions =  PlotsManager.Instance.currentMainPlotScheme.schemeSteps[step].stepOptions;
 
+            //Appear previous completion text
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = PlotsManager.Instance.currentMainPlotScheme.schemeSteps[step].descriptionChapterChoice;
+
+
             for (int i = 0; i < stepOptions.Count; i++)//Load containers TODO implement queueing for twening feedback
             {
+                PlotCard card = stepOptions[i] as PlotCard;
                 schemeDescriptions[i].cardContainer.InitializeContainer(stepOptions[i], true);
-                schemeDescriptions[i].description.text = stepOptions[i].description;//Temp
+                schemeDescriptions[i].description.text = card.plotChoiceDescription;//Temp
 
                 schemeDescriptions[i].LoadCardContainer();
             }
@@ -195,7 +188,8 @@ public class CardPicker : MonoBehaviour
             schemeDescriptions[i].description.text = string.Empty;
             schemeDescriptions[i].illustration.sprite = null;
             schemeDescriptions[i].linkedScheme = null;
-
+            schemeDescriptions[i].cardContainer.ResetContainer(true);
+            Deselect(schemeDescriptions[i].cardContainer);
             schemeDescriptions[i].gameObject.SetActive(false);
         }
        

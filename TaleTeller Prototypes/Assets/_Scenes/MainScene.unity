@@ -5609,9 +5609,7 @@ MonoBehaviour:
   confirmButton: {fileID: 335667938}
   canvasGroup: {fileID: 1092545329}
   instructionText: {fileID: 350853668}
-  descriptionPickText: {fileID: 589594362}
-  descriptionChoice1Text: {fileID: 0}
-  descriptionChoice2Text: {fileID: 0}
+  descriptionText: {fileID: 589594362}
   backgroundFadeSpeed: 0.5
 --- !u!1 &1813171452
 GameObject:

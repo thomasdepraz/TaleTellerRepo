@@ -104,12 +104,12 @@ public class CardContainer : MonoBehaviour
         data = null;
         currentSlot = null;
 
-        rectTransform.position = basePosition;
 
         //Reset to hidden hand
 
         if(!isPlaceholder)
         {
+            rectTransform.position = basePosition;
             CardManager.Instance.cardHand.currentHand.Remove(this);
             transform.SetParent(CardManager.Instance.cardHandContainer.transform);
         }

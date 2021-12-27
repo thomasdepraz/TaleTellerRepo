@@ -358,40 +358,34 @@ public class CharacterType : CardTypes
             EventQueue discardQueue = new EventQueue();
 
             // Manage character death card discard, card reset, events deletion
-            if (!isCurrentCharacter)
+            if (data.GetType() != typeof(PlotCard))//Only discard on death if not plot card
             {
                 CardManager.Instance.CardBoardToDiscard(data.currentContainer, discardQueue);
             }
-            else//If Im currently resolving this card event, the have to be cleared to prevent errors
+            else//Maybe do something else
             {
-                ClearCharacterEvents(discardQueue); 
-
-                if(data.GetType() != typeof(PlotCard))//Only discard on death if not plot card
+                PlotCard plot = data as PlotCard;
+                if (plot.isMainPlot) //if main hide the card
                 {
-                    CardManager.Instance.CardBoardToDiscard(data.currentContainer, discardQueue);
+                    if (behaviour == CharacterBehaviour.Agressive)
+                    {
+                        //TEMP do next choice for now later hide the card
+                        plot.OnEndPlotComplete(discardQueue);
+                    }
+                    else if (behaviour == CharacterBehaviour.Peaceful)
+                    {
+                        plot.FailPlot(discardQueue);//if kill peacful then plot is lost 
+                    }
                 }
-                else//Maybe do something else
+                else //if secondary send to oblivion
                 {
-                    PlotCard plot = data as PlotCard;
-                    if(plot.isMainPlot) //if main hide the card
-                    {
-                        if(behaviour == CharacterBehaviour.Agressive)
-                        {
-                            //TEMP do next choice for now later hide the card
-                            plot.OnEndPlotComplete(discardQueue);
-                        }
-                        else if(behaviour == CharacterBehaviour.Peaceful)
-                        {
-                            plot.FailPlot(discardQueue);//if kill peacful then plot is lost 
-                        }
-                    }
-                    else //if secondary send to oblivion
-                    {
-                        data.currentContainer.ResetContainer();
-                        StoryManager.Instance.cardsToDestroy.Add(data);
-                    }
+                    data.currentContainer.ResetContainer();
+                    StoryManager.Instance.cardsToDestroy.Add(data);
                 }
             }
+            
+            if(isCurrentCharacter)
+                ClearCharacterEvents(discardQueue); 
 
             discardQueue.StartQueue();
 
