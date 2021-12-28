@@ -1,33 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
-  m_Name: Junk_CultTreasure
-  m_EditorClassIdentifier: 
-  dataReference: {fileID: 11400000}
-  cardName: 'Cult''s Treasure '
-  rarity: 0
-  archetype: 0
-  manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 67243c5294a7af544b96c460ce7a58e7, type: 3}
-  currentContainer: {fileID: 0}
-  description: The Hero gains +7 Gold.
-  effectsReferences:
-  - {fileID: 7478413283614928564}
-  effects: []
-  cardTypeReference: {fileID: 4748216559491426219}
-  cardType: {fileID: 0}
-  objective: {fileID: 0}
-  objectiveIndex: 0
---- !u!114 &4748216559491426219
+--- !u!114 &-5097454471940254334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +13,7 @@ MonoBehaviour:
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
---- !u!114 &7478413283614928564
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,17 +22,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
+  m_Name: Junk_ArtifactTop
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Piece of Vase (Bottom)
+  rarity: 0
+  archetype: 0
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: 19b133b1ada49b34f8dd66b3170b3069, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 8555768497061235281}
+  effects: []
+  cardTypeReference: {fileID: -5097454471940254334}
+  cardType: {fileID: 0}
+  objective: {fileID: 0}
+  objectiveIndex: 0
+--- !u!114 &8555768497061235281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
   m_Name: Effect0
-  m_EditorClassIdentifier: Assembly-CSharp::HeroSmallChangeEffect
+  m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: HERO => The Hero gains + $gainValue$ GOLD.
+  description: The Hero takes $gainValue$ Damages.
   trigger: 1
   target: 1
   range: 
   values: []
   gainValue:
-    value: 7
-    type: 2
-    op: 1
+    value: 4
+    type: 0
+    op: 2
   temporaryChange: 0

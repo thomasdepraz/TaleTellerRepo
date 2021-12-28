@@ -91,4 +91,4 @@ MonoBehaviour:
   drawValue:
     value: 1
     type: 5
-    op: 0
+    op: 1

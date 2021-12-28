@@ -28,10 +28,10 @@ MonoBehaviour:
   linkedPlotData: {fileID: 0}
   objectiveName: 'Place all the Pieces of Artifact on the Track. '
   linkedJunkedCards:
-  - {fileID: 11400000, guid: 9045d4be0e3a8944fa9e02f0b0095f59, type: 2}
+  - {fileID: 11400000, guid: 07554f7bf77103f46968291ef3f59201, type: 2}
   - {fileID: 11400000, guid: ac87816fddd2e3141818f090b951b809, type: 2}
-  - {fileID: 11400000, guid: 97a7210a2e2596d4c804a26a264392f2, type: 2}
-  - {fileID: 11400000, guid: f502345eaec116944b8f1eb91c94dae3, type: 2}
+  - {fileID: 11400000, guid: 9f9cd619967992043928b62961fb1fe6, type: 2}
+  - {fileID: 11400000, guid: 1f9033745e3026e4d9b51b383da3b8dd, type: 2}
   junkSpawnLocations: 02000000020000000200000002000000
   junksPositionsInDeck: 
   mustPlaceAll: 1

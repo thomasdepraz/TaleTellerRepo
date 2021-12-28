@@ -13,20 +13,16 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: HAND => Draw 2 for each characters aside.
+  description: HAND => Draw $drawValue$ for each characters aside.
   trigger: 1
   target: 2
   range: 0500000009000000
   values: []
-  xParameterMultiplier:
+  cardTypeTarget: 2
+  drawValue:
     value: 2
     type: 5
     op: 1
-  xParameter:
-    value: 0
-    type: 0
-    op: 0
-  cardTypeParameter: 3
 --- !u!114 &-279494856332862322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,7 +46,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Sacred Book
+  m_Name: Idea_Sacred Book_Vision
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Sacred Book

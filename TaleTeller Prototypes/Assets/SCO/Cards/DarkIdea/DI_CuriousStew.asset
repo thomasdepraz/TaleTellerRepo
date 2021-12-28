@@ -19,7 +19,7 @@ MonoBehaviour:
   range: 
   values: []
   manaModificationValue:
-    value: -1
+    value: 1
     type: 10
     op: 2
   turnToLast: 1

@@ -17,7 +17,32 @@ public class ManaMaxModificationEffect: ManaEffect
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
         var manaSystem = CardManager.Instance.manaSystem;
-        var manaModifier = manaSystem.CreateManaPoolModifier(manaModificationValue.value, turnToLast, this);
+
+        int modifierValue = 0;
+
+        switch (manaModificationValue.op)
+        {
+            case EffectValueOperator.Addition:
+                modifierValue = manaModificationValue.value;
+                break;
+
+            case EffectValueOperator.Division:
+                modifierValue = -((manaSystem.maxManaBase / manaModificationValue.value) * (manaModificationValue.value - 1));
+                break;
+
+            case EffectValueOperator.Product:
+                modifierValue = manaSystem.maxManaBase * (manaModificationValue.value - 1);
+                break;
+
+            case EffectValueOperator.Substraction:
+                modifierValue = -manaModificationValue.value;
+                break;
+
+            default:
+                break;
+        }
+
+        var manaModifier = manaSystem.CreateManaPoolModifier(modifierValue, turnToLast, this);
         CardManager.Instance.manaSystem.AddManaPoolModifier(manaModifier, triggerNextTurn);
         
         yield return null;

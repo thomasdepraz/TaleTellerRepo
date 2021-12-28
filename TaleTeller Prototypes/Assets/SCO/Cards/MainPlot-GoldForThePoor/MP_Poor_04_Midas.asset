@@ -161,7 +161,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 66b80b5a5bbe52f44bc7fa34f2b754dc, type: 2}
   - {fileID: 11400000, guid: 66b80b5a5bbe52f44bc7fa34f2b754dc, type: 2}
   - {fileID: 11400000, guid: 66b80b5a5bbe52f44bc7fa34f2b754dc, type: 2}
-  - {fileID: 11400000, guid: 3ab90b80baa4e174d8f224a40920ad58, type: 2}
+  - {fileID: 11400000, guid: 65754dc7e1db1bd4eba8738792002e04, type: 2}
   junkSpawnLocations: 020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
   junksPositionsInDeck: 
   boardRestriction: 0
