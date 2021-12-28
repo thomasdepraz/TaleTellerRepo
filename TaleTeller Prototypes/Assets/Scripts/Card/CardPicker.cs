@@ -183,6 +183,7 @@ public class CardPicker : MonoBehaviour
         //Deactivate placeholders
         confirmButton.gameObject.SetActive(false);
         instructionText.gameObject.SetActive(false);
+        descriptionText.gameObject.SetActive(false);
         for (int i = 0; i < schemeDescriptions.Count; i++)
         {
             schemeDescriptions[i].description.text = string.Empty;
