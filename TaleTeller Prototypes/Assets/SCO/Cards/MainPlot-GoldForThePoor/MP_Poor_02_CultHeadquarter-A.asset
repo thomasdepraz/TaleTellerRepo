@@ -87,6 +87,8 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
+  plotChoiceDescription: The Hero decides to ask to the inhabitants of the slums
+    where is located the headquarter of the Cult.
   legendaryCardRewards: []
 --- !u!114 &901133846932835416
 MonoBehaviour:

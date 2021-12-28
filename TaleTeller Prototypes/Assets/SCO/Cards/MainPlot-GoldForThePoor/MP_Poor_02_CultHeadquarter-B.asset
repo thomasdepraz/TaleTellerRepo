@@ -52,6 +52,7 @@ MonoBehaviour:
   completionTimer: 3
   isMainPlot: 1
   isFinal: 0
+  plotChoiceDescription: The Hero decides chase the Cultist.
   legendaryCardRewards: []
 --- !u!114 &49987609378645259
 MonoBehaviour:

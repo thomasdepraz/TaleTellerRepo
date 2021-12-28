@@ -67,6 +67,7 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 0
+  plotChoiceDescription: He decides to force the entrance of the Temple.
   legendaryCardRewards: []
 --- !u!114 &2453019222845983156
 MonoBehaviour:

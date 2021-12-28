@@ -68,6 +68,7 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
+  plotChoiceDescription: The Hero creates a tall statue.
   legendaryCardRewards: []
 --- !u!114 &7673065295867403149
 MonoBehaviour:

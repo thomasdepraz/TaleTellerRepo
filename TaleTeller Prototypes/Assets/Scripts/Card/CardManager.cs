@@ -186,7 +186,7 @@ public class CardManager : Singleton<CardManager>
         }
         else
         {
-            if (cardHand.currentHand.Count == cardHand.maxHandSize + 1)//if max cards in hand discard
+            if (cardHand.currentHand.Count == cardHand.maxHandSize)//if max cards in hand discard
             {
                 CardBoardToDiscard(card, returnQueue);
             }
