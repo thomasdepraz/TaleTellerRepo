@@ -44,7 +44,6 @@ public class CardData : ScriptableObject
     [TextArea(2, 3)]
     public string description;
 
-    //TEMP
     [Expandable]
     public List<Effect> effectsReferences = new List<Effect>();
     public List<Effect> effects = new List<Effect>();
@@ -52,7 +51,6 @@ public class CardData : ScriptableObject
     [Expandable]
     public CardTypes cardTypeReference;
     public CardTypes cardType;
-
 
     //Events
     public delegate void BoardEvent(EventQueue queue);

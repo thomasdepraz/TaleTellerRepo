@@ -27,6 +27,9 @@ public class RewardManager : Singleton<RewardManager>
 
     [Header("Data")]
     public float fadeSpeed;
+    [Space]
+    public int batchOne;
+    public int batchTwo;
 
     [Space]
 
@@ -119,8 +122,8 @@ public class RewardManager : Singleton<RewardManager>
 
         confirmed = false;
         canvasGroup.blocksRaycasts = true;
-        batchOneNumberToSelect = 2;
-        batchTwoNumberToSelect = 1;//NOTE PROBABLY NEED TO EXPOSE THOSE VARIABLES
+        batchOneNumberToSelect = batchOne;
+        batchTwoNumberToSelect = batchTwo;
 
         //Fade in background
         #region FadeInBackground
@@ -169,6 +172,8 @@ public class RewardManager : Singleton<RewardManager>
         {
             yield return new WaitForEndOfFrame();
         }
+        batchOneSelectedCards.Clear();
+        batchTwoSelectedCards.Clear();
 
         queue.UpdateQueue();
     }
@@ -280,6 +285,8 @@ public class RewardManager : Singleton<RewardManager>
         {
             yield return new WaitForEndOfFrame();
         }
+
+        secondaryPlotSelectedCard = null;
 
         queue.UpdateQueue();
     }

@@ -88,7 +88,7 @@ public class JunkCard : CardData
     IEnumerator DestroyJunkCardRoutine(EventQueue currentQueue) //LATER probably have this method in the card manager as DestroyCard(CardData data) {}
     {
         EventQueue destroyQueue = new EventQueue();
-        //TODO implement add to queue event list in function that take time;
+
         //Discard the card based on where it is 
         if (currentContainer != null) //means it's in the hand or board
         {
@@ -126,7 +126,6 @@ public class JunkCard : CardData
             yield return new WaitForEndOfFrame();
         }
 
-        //TODO CALL RESUME
         currentQueue.UpdateQueue();
     }
 }

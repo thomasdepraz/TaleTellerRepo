@@ -53,7 +53,6 @@ public class CharaStatModifierEffect : CharacterStatsEffect
 
         EventQueue feedbackQueue = new EventQueue();
 
-        //TODO: Inset queue for feedback
         foreach (CharacterType t in targets.ToList())
         {
             switch (modifierValue.type)
