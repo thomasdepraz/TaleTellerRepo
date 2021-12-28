@@ -1,30 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8029139657430624933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 056f46d3945187c4684672eca36839ee, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: <b>Obsessing</b>
-  trigger: 7
-  target: 0
-  range: 
-  values: []
-  manaModificationValue:
-    value: 1
-    type: 10
-    op: 2
-  turnToLast: 1
-  triggerNextTurn: 0
---- !u!114 &-6968927246892907630
+--- !u!114 &-8938817969714161448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
-  m_Name: Effect2
+  m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <color=white>The Hero loses - $gainValue$ ATK.
+  description: Restore + $gainValue$ HP.
   trigger: 0
   target: 1
   range: 
   values: []
   gainValue:
-    value: 1
-    type: 1
-    op: 2
+    value: 4
+    type: 0
+    op: 1
   temporaryChange: 0
---- !u!114 &-5717779811218502836
+--- !u!114 &-6833076309367214480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,20 +33,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afdd823048dfc3a4394a5bf04ad3e20a, type: 3}
-  m_Name: Effect1
+  m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<color=white>HERO => <b>Buy ($buyValue$)</b> : '
+  description: 'HERO => <b>Buy ($buyValue$)</b> : '
   trigger: 1
-  target: 1
+  target: 0
   range: 
   values: []
   buyValue:
-    value: 8
+    value: 2
     type: 3
-    op: 2
-  effectTriggerIfCanPay: {fileID: 0}
---- !u!114 &-4353397734383623284
+    op: 0
+  effectTriggerIfCanPay: {fileID: -8938817969714161448}
+--- !u!114 &-6052187146958320643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,23 +68,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2da51b505a97244a37f6280d9bc249, type: 3}
-  m_Name: DI_CuriousStew
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Idea_ChefsBeef_Base
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: '<color=white>Curious Stew '
-  rarity: 0
-  archetype: 0
-  manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 6f7ae2f9e17ae334f86ff157c348196f, type: 3}
+  cardName: Chef's Beef
+  rarity: 1
+  archetype: 1
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: a5f758e10462cec43a306ccafbdc65ca, type: 3}
   currentContainer: {fileID: 0}
-  description: '"Faut avouer que c''est plutot une boisson d''homme"
-
-'
+  description: 
   effectsReferences:
-  - {fileID: -8029139657430624933}
-  - {fileID: -5717779811218502836}
-  - {fileID: -6968927246892907630}
+  - {fileID: -6833076309367214480}
+  - {fileID: -8938817969714161448}
   effects: []
-  cardTypeReference: {fileID: -4353397734383623284}
+  cardTypeReference: {fileID: -6052187146958320643}
   cardType: {fileID: 0}
