@@ -5503,6 +5503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1734118968}
   - component: {fileID: 1734118969}
+  - component: {fileID: 1734118970}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5544,6 +5545,20 @@ MonoBehaviour:
   fadePanel: {fileID: 906085806}
   pointer: {fileID: 710431144}
   returnToMenuButton: {fileID: 2024166352}
+--- !u!114 &1734118970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734118967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e795cae54d403c49906ba20780b0ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructionDataBase: {fileID: 11400000, guid: 8184ef70420f2db4aaec5ea983579207, type: 2}
+  schemesDatabase: {fileID: 4900000, guid: 2901662f0868464439592a06ed181b50, type: 3}
 --- !u!1 &1762743179
 GameObject:
   m_ObjectHideFlags: 0

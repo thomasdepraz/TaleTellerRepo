@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec22b74c4230114fafe8742d2d02695, type: 3}
+  m_Name: SchemeText Database
+  m_EditorClassIdentifier: 
+  dataFile: {fileID: 4900000, guid: 2901662f0868464439592a06ed181b50, type: 3}
+  database:
+  - key: $GoldForThePoors_Description
+    text: "\r"
+  - key: $GoldForThePoors_Step01_Objective
+    text: "\r"
+  - key: $GoldForThePoors_Step01_CompletionDescription
+    text: "\r"
+  - key: $GoldForThePoors_Step02A_Objective
+    text: "\r"
+  - key: $GoldForThePoors_Step02A_ChooseStepDescription
+    text: "\r"
+  - key: '$GoldForThePoors_Step02A_CompletionDescription                         '
+    text: "\r"
+  - key: $GoldForThePoors_Step02B_Objective
+    text: "\r"
+  - key: $GoldForThePoors_Step02B_ChooseStepDescription
+    text: "\r"
+  - key: '$GoldForThePoors_Step02B_CompletionDescription                         '
+    text: "\r"
+  - key: $GoldForThePoors_Step03A_Objective
+    text: "\r"
+  - key: $GoldForThePoors_Step03A_ChooseStepDescription
+    text: "\r"
+  - key: $GoldForThePoors_Step03A_CompletionDescription
+    text: "\r"
+  - key: $GoldForThePoors_Step03B_Objective
+    text: "\r"
+  - key: $GoldForThePoors_Step03B_ChooseStepDescription
+    text: "\r"
+  - key: $GoldForThePoors_Step03B_CompletionDescription
+    text: "\r"
+  - key: $GoldForThePoors_Step04_Objective
+    text: 

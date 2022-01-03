@@ -216,7 +216,8 @@ public class Deck : MonoBehaviour
             EventQueue pickQueue = new EventQueue();
             List<CardData> pickedCards = new List<CardData>();
 
-            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, true, "Choose a card to discard");
+            string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
+            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, true, instruction);
 
             pickQueue.StartQueue();
             while(!pickQueue.resolved)

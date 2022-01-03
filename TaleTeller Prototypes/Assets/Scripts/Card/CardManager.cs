@@ -162,7 +162,8 @@ public class CardManager : Singleton<CardManager>
                 EventQueue pickQueue = new EventQueue();
                 List<CardData> pickedCards = new List<CardData>();
 
-                cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, false, "Choose a card to discard");
+                string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
+                cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, false, instruction);
 
                 pickQueue.StartQueue();
                 while (!pickQueue.resolved)

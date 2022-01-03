@@ -121,9 +121,9 @@ public class CardPicker : MonoBehaviour
         //Load Instruction
         string instruction = string.Empty; 
         if(cardVersion)
-            instruction = GameManager.Instance.instructionsData.chooseSchemeStepInstruction;
+            instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeStepInstruction);
         else
-            instruction = GameManager.Instance.instructionsData.chooseSchemeInstruction;
+            instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeInstruction);
 
         instructionText.text = instruction;
         instructionText.gameObject.SetActive(true); //TODO Tween the text;

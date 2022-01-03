@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct KeyStringPair
 {
-    public int key;
-    public int text;
+    public string key;
+    public string text;
 }
 
-[CreateAssetMenu(fileName = "New Instructions Database", menuName = "Instruction Database", order = 100)]
+[CreateAssetMenu(fileName = "New Instructions Database", menuName = "Database/Instructions Database", order = 2)]
 public class InstructionsTextData : ScriptableObject
 {
 #if UNITY_EDITOR
     public TextAsset dataFile;
 #endif
 
-    public KeyStringPair instructions;
+    public KeyStringPair[] instructions;
 
 }

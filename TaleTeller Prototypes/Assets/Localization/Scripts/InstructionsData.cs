@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Instructions Profile", menuName ="Data/Instructions Profile")]
 public class InstructionsData : ScriptableObject
 {
-    [TextArea(2,5)]
     public string chooseSchemeInstruction;
     public string chooseSchemeStepInstruction;
+    public string chooseSecondayPlotInstruction;
     public string chooseCardInstruction;
+    public string chooseXCardToDiscardInstruction;
     public string choiceEffectInstruction;
-
 }

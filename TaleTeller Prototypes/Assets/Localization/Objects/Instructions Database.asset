@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7877ac5653b3454a9e0a17f9449f194, type: 3}
+  m_Name: Instructions Database
+  m_EditorClassIdentifier: 
+  dataFile: {fileID: 4900000, guid: ad3cbe16ce37b1c469d4a1ea00e1b7c8, type: 3}
+  instructions:
+  - key: $Scheme
+    text: "Choose the subject of your plot:\r"
+  - key: $SchemeStep
+    text: "Choose how your plot unravels : \r"
+  - key: $ChooseSecondaryPlot
+    text: "Choose a secondary plot : \r"
+  - key: $ChooseCard
+    text: "Choose a card :\r"
+  - key: $ChooseXToDiscard
+    text: "Choose $value$ card(s) to discard :\r"
+  - key: $ChoiceEffect
+    text: 'Choose $value$ card(s) :'

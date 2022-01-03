@@ -78,7 +78,8 @@ public class PlotsManager : Singleton<PlotsManager>
         EventQueue pickQueue = new EventQueue();
         List<CardData> pickedCards = new List<CardData>();
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, "Choose a secondary plot");
+        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSecondayPlotInstruction);
+        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, instruction);
 
         pickQueue.StartQueue();
 

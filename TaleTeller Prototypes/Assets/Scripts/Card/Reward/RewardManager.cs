@@ -189,7 +189,8 @@ public class RewardManager : Singleton<RewardManager>
         //use card picker
         EventQueue pickerQueue = new EventQueue();
 
-        CardManager.Instance.cardPicker.Pick(pickerQueue, card.legendaryCardRewards ,pickedCard, 1, false, "Choose one of these cards");
+        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
+        CardManager.Instance.cardPicker.Pick(pickerQueue, card.legendaryCardRewards ,pickedCard, 1, false, instruction);
 
         pickerQueue.StartQueue();
         while(!pickerQueue.resolved)
