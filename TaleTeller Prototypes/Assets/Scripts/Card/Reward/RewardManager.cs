@@ -292,7 +292,7 @@ public class RewardManager : Singleton<RewardManager>
     }
 
 
-    #region Utility
+    #region MainUtility
     CardData GetSecondaryPlotCardReward(List<CardData> list)
     {
         int r = Random.Range(0, list.Count - 1);
@@ -493,6 +493,7 @@ public class RewardManager : Singleton<RewardManager>
         confirmed = true;
         confirmButton.gameObject.SetActive(false);
     }
+    #endregion
 
 
     #region Secondary Rewards Utility
@@ -506,7 +507,7 @@ public class RewardManager : Singleton<RewardManager>
     public void InitStatButton()
     {
         currentStatRewardAction = null;
-        currentStatRewardAction = GetRandomStatUpgrade();
+        currentStatRewardAction = StatsUpgrade.GetRandomStatUpgrade(ref statsButtonDescription);
 
         statsRewardButton.gameObject.SetActive(true);
     }
@@ -565,70 +566,6 @@ public class RewardManager : Singleton<RewardManager>
         secondaryPlotSelectedCard = container.data;
     }
 
-    public Action<EventQueue> GetRandomStatUpgrade()
-    {
-        Action<EventQueue> result = null;
-        int r = Random.Range(0, 3);
-        switch (r)
-        {
-            case 0:
-                result = HealthUpdgrade;
-                statsButtonDescription.text = "Heal 1 HP";
-                break;
-
-            case 1:
-                result = AttackUpgrade;
-                statsButtonDescription.text = "Gain 1 Attack Damage";
-                break;
-
-            case 2:
-                result = GoldUpgrade;
-                statsButtonDescription.text = "Gain 1 Max Gold";
-                break;
-        }
-
-        return result;
-    }
-
-    void HealthUpdgrade(EventQueue queue)
-    {
-        queue.events.Add(StatsUpgrade(queue, "health"));
-    }
-    void AttackUpgrade(EventQueue queue)
-    {
-        queue.events.Add(StatsUpgrade(queue, "attack"));
-    }
-    void GoldUpgrade(EventQueue queue)
-    {
-        queue.events.Add(StatsUpgrade(queue, "gold"));
-    }
-
-    IEnumerator StatsUpgrade(EventQueue queue, string param)
-    {
-
-        switch (param)//TODO implement value calculus so its no always one
-        {
-            case "health":
-                GameManager.Instance.currentHero.maxLifePoints += 1;
-                break;
-
-            case "attack":
-                GameManager.Instance.currentHero.attackDamage += 1;
-                break;
-
-            case "gold":
-                GameManager.Instance.currentHero.maxGoldPoints += 1;
-                break;
-
-            default:
-                Debug.LogError("Param Error");
-                break;
-        }
-        yield return null;
-
-        queue.UpdateQueue();
-    }
-
     public Action<EventQueue> GetRandomAction()
     {
         Action<EventQueue> result = null;
@@ -648,5 +585,4 @@ public class RewardManager : Singleton<RewardManager>
     #endregion
 
 
-    #endregion
 }
