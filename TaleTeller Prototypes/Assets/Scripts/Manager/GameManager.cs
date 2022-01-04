@@ -22,6 +22,17 @@ public class GameManager : Singleton<GameManager>
         instructionsData = Instantiate(instructionsData);
     }
 
+    public void Update()
+    {
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+        {
+            if (Time.timeScale > 1)
+                Time.timeScale = 1;
+            else
+                Time.timeScale = 3;
+        }
+    }
+
     public void Fade(bool toBlack)
     {
         Color transparent = new Color(0,0,0,0);
