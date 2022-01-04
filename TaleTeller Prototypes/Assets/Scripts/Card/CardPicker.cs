@@ -137,7 +137,7 @@ public class CardPicker : MonoBehaviour
 
             //Appear previous completion text
             descriptionText.gameObject.SetActive(true);
-            descriptionText.text = PlotsManager.Instance.currentMainPlotScheme.schemeSteps[step].descriptionChapterChoice;
+            descriptionText.text = PlotsManager.Instance.currentMainPlotScheme.schemeSteps[step].chapterDescription;
 
 
             for (int i = 0; i < stepOptions.Count; i++)//Load containers TODO implement queueing for twening feedback

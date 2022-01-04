@@ -80,6 +80,7 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 0
+  plotChoiceDescription: $GoldForThePoors_Step03A_Objective
   legendaryCardRewards: []
 --- !u!114 &5906962210092711337
 MonoBehaviour:

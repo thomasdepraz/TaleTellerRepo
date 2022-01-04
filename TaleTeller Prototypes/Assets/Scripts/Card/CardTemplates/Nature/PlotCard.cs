@@ -24,6 +24,10 @@ public class PlotCard : CardData
 
         data.currentContainer = null;
 
+        //load text 
+        if(plotChoiceDescription!=string.Empty)
+            plot.plotChoiceDescription = LocalizationManager.Instance.GetString(LocalizationManager.Instance.schemesDescriptionsDictionary, plot.plotChoiceDescription);
+
         plot.archetype = (Archetype)Random.Range(2, (int)Archetype.NumberOfArchetypes );
         
         //Write logic to determine how the card subscribe to the events

@@ -76,6 +76,7 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 1
+  plotChoiceDescription: $Priest_Step04_Objective
   legendaryCardRewards:
   - {fileID: 11400000, guid: ab4a696bbb3b46144b140ce6d512da6d, type: 2}
   - {fileID: 11400000, guid: f7db9ae87536e644b90efea5872b31fb, type: 2}

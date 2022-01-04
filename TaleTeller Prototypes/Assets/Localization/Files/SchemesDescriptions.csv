@@ -1,0 +1,22 @@
+Key	Text
+$GoldForThePoors_Description	In this Main Plot, the Hero will begin his journey by visiting an extremely poor town. A Cult is collecting money for the inhabitants, but things might be very different...
+$GoldForThePoors_Step01_Description	A Hero in need of rest notice a small town close to his position. When he arrives, he discovers a town plunged into diseases and poverty. While he is looking around him, a priest from an unknown cult approaches and ask for money to help the people.
+$GoldForThePoors_Step02_Description	The cultist kindly thanks you the Hero for his generosity. But a lurk in the eye of the mendicant makes the Hero realize it was a trickery.
+$GoldForThePoors_Step02A_Objective	The Hero decides chase the Cultist.
+$GoldForThePoors_Step02B_Objective	The Hero decides to ask to the inhabitants of the slums where is located the headquarter of the Cult.
+$GoldForThePoors_Step03_Description	The Hero finally breaks into the headquarter. There is no sign of the mendicant.
+$GoldForThePoors_Step03A_Objective	The Hero decides to sneak through the building to find him.
+$GoldForThePoors_Step03B_Objective	The Hero chooses to fight all the guards of the cult to find his goods.
+$GoldForThePoors_Step04_Description	Instead of finding the mendicant, the Hero enters the treasure room of the cult. While he is going to take some Gold, a stranger makes his appearance. He presents himself as one of the Theophilus' apprentice, Midas the Prophet of Mendicity.
+$GoldForThePoors_Step04_Objective	The hero engages a fierce battle against Midas.
+	
+$Priest_Description	In this Main Plot, the Hero is going to save a strange priest. But be careful, the habit does not make the monk...
+$Priest_Step01_Description	The Hero continues his travel. Suddenly, a scream breaks the ambient silence. A priest is about to die by the hand of a monster !
+$Priest_Step02_Description	Theophilus is saved. He shows you a temple and ask the Hero to collect the parts of an old artifact. 
+$Priest_Step02A_Objective	He decides to force the entrance of the Temple.
+$Priest_Step02B_Objective	He sneaks into the Temple to rob the parts.
+$Priest_Step03_Description	The Hero has collected all the parts and brought them to the Altar.He can assemble them.
+$Priest_Step03A_Objective	The Hero create a tall statue.
+$Priest_Step03B_Objective	The Hero create a small statue.
+$Priest_Step04_Description	???
+$Priest_Step04_Objective	Kill Theophilus.

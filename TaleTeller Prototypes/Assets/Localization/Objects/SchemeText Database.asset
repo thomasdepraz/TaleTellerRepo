@@ -12,37 +12,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec22b74c4230114fafe8742d2d02695, type: 3}
   m_Name: SchemeText Database
   m_EditorClassIdentifier: 
-  dataFile: {fileID: 4900000, guid: 2901662f0868464439592a06ed181b50, type: 3}
+  dataFile: {fileID: 4900000, guid: b9a4bfce33a8bbb459bcc8dbf98758f7, type: 3}
   database:
   - key: $GoldForThePoors_Description
-    text: "\r"
-  - key: $GoldForThePoors_Step01_Objective
-    text: "\r"
-  - key: $GoldForThePoors_Step01_CompletionDescription
-    text: "\r"
+    text: "In this Main Plot, the Hero will begin his journey by visiting an extremely
+      poor town. A Cult is collecting money for the inhabitants, but things might
+      be very different...\r"
+  - key: $GoldForThePoors_Step01_Description
+    text: "A Hero in need of rest notice a small town close to his position. When
+      he arrives, he discovers a town plunged into diseases and poverty. While he
+      is looking around him, a priest from an unknown cult approaches and ask for
+      money to help the people.\r"
+  - key: $GoldForThePoors_Step02_Description
+    text: "The cultist kindly thanks you the Hero for his generosity. But a lurk
+      in the eye of the mendicant makes the Hero realize it was a trickery.\r"
   - key: $GoldForThePoors_Step02A_Objective
-    text: "\r"
-  - key: $GoldForThePoors_Step02A_ChooseStepDescription
-    text: "\r"
-  - key: '$GoldForThePoors_Step02A_CompletionDescription                         '
-    text: "\r"
+    text: "The Hero decides chase the Cultist.\r"
   - key: $GoldForThePoors_Step02B_Objective
-    text: "\r"
-  - key: $GoldForThePoors_Step02B_ChooseStepDescription
-    text: "\r"
-  - key: '$GoldForThePoors_Step02B_CompletionDescription                         '
-    text: "\r"
+    text: "The Hero decides to ask to the inhabitants of the slums where is located
+      the headquarter of the Cult.\r"
+  - key: '$GoldForThePoors_Step03_Description                                                                                                                                                                                                        '
+    text: "The Hero finally breaks into the headquarter. There is no sign of the
+      mendicant.\r"
   - key: $GoldForThePoors_Step03A_Objective
-    text: "\r"
-  - key: $GoldForThePoors_Step03A_ChooseStepDescription
-    text: "\r"
-  - key: $GoldForThePoors_Step03A_CompletionDescription
-    text: "\r"
+    text: "The Hero decides to sneak through the building to find him.\r"
   - key: $GoldForThePoors_Step03B_Objective
-    text: "\r"
-  - key: $GoldForThePoors_Step03B_ChooseStepDescription
-    text: "\r"
-  - key: $GoldForThePoors_Step03B_CompletionDescription
-    text: "\r"
+    text: "The Hero chooses to fight all the guards of the cult to find his goods.\r"
+  - key: $GoldForThePoors_Step04_CompletionDescription
+    text: "Instead of finding the mendicant, the Hero enters the treasure room of
+      the cult. While he is going to take some Gold, a stranger makes his appearance.
+      He presents himself as one of the Theophilus' apprentice, Midas the Prophet
+      of Mendicity.\r"
   - key: $GoldForThePoors_Step04_Objective
-    text: 
+    text: "The hero engages a fierce battle against Midas.\r"
+  - key: 
+    text: "\r"
+  - key: $Priest_Description
+    text: "In this Main Plot, the Hero is going to save a strange priest. But be
+      careful, the habit does not make the monk...\r"
+  - key: $Priest_Step01_Description
+    text: "The Hero continues his travel. Suddenly, a scream breaks the ambient silence.
+      A priest is about to die by the hand of a monster !\r"
+  - key: $Priest_Step02_Description
+    text: "Theophilus is saved. He shows you a temple and ask the Hero to collect
+      the parts of an old artifact. \r"
+  - key: $Priest_Step02A_Objective
+    text: "He decides to force the entrance of the Temple.\r"
+  - key: $Priest_Step02B_Objective
+    text: "He sneaks into the Temple to rob the parts.\r"
+  - key: '$Priest_Step03_Description                                                                                                                                                                                                        '
+    text: "The Hero has collected all the parts and brought them to the Altar.He
+      can assemble them.\r"
+  - key: $Priest_Step03A_Objective
+    text: "The Hero create a tall statue.\r"
+  - key: $Priest_Step03B_Objective
+    text: "The Hero create a small statue.\r"
+  - key: $Priest_Step04_Description
+    text: "???\r"
+  - key: $Priest_Step04_Objective
+    text: Kill Theophilus.

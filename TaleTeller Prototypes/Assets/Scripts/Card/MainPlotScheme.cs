@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct SchemeStep
+public class SchemeStep
 {
     public List<CardData> stepOptions;
-    public string descriptionChapterChoice;
-    public string descriptionChapterChoice1;
-    public string descriptionChapterChoice2;
+    public string chapterDescription;
 }
 
 [CreateAssetMenu(fileName = "New Plot Scheme", menuName = "Data/Plot Scheme")]
@@ -24,10 +22,15 @@ public class MainPlotScheme : ScriptableObject
     public MainPlotScheme InitScheme(MainPlotScheme _scheme)
     {
         MainPlotScheme scheme = Instantiate(_scheme);
+        scheme.plotDescription = LocalizationManager.Instance.GetString(LocalizationManager.Instance.schemesDescriptionsDictionary, scheme.plotDescription);
+
         scheme.currentStep = 0;
 
         for (int i = 0; i < scheme.schemeSteps.Count; i++)
         {
+            //Init description
+            scheme.schemeSteps[i].chapterDescription = LocalizationManager.Instance.GetString(LocalizationManager.Instance.schemesDescriptionsDictionary, scheme.schemeSteps[i].chapterDescription);
+
             for (int j = 0; j < scheme.schemeSteps[i].stepOptions.Count; j++)
             {
                 scheme.schemeSteps[i].stepOptions[j] = scheme.schemeSteps[i].stepOptions[j].InitializeData(scheme.schemeSteps[i].stepOptions[j]);

@@ -10,7 +10,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     [Header("Databases")]
-    [SerializeField] private InstructionsTextData instructionDataBase;
+    [SerializeField] private TextDataBase instructionDataBase;
     [SerializeField] private TextAsset schemesDatabase;
 
     public Dictionary<string, string> instructionsDictionary;
@@ -20,7 +20,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
 
     private void Start()
     {
-        instructionsDictionary = InitDictionary(instructionDataBase.instructions);
+        instructionsDictionary = InitDictionary(instructionDataBase.database);
         schemesDescriptionsDictionary = InitDictionary(schemesDatabase);
     }
 
@@ -51,7 +51,15 @@ public class LocalizationManager : Singleton<LocalizationManager>
 
     public string GetString(Dictionary<string , string> dictionary, string key)
     {
-        string result = dictionary[key];
-        return result;
+        if (dictionary.ContainsKey(key))
+        {
+            string result = dictionary[key];
+            return result;
+        }
+        else
+        {
+            Debug.LogWarning(key + " is not a valid key");
+            return key;
+        }
     }
 }

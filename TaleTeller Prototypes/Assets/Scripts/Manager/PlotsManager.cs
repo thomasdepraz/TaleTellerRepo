@@ -18,6 +18,12 @@ public class PlotsManager : Singleton<PlotsManager>
 
     public void Start()
     {
+        //Init schemes
+        for (int i = 0; i < schemes.Count; i++)
+        {
+            schemes[i] = schemes[i].InitScheme(schemes[i]);
+        }
+
         //InitData
         for (int i = 0; i < secondaryPlots.Count; i++)
         {
@@ -53,7 +59,6 @@ public class PlotsManager : Singleton<PlotsManager>
         EventQueue loadQueue = new EventQueue();
 
         currentMainPlotScheme = chosenScheme[0];
-        currentMainPlotScheme = currentMainPlotScheme.InitScheme(currentMainPlotScheme); //Note maybe leave the shemes list untouched and only instantiate a copy
 
         currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);
 

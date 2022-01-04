@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7877ac5653b3454a9e0a17f9449f194, type: 3}
+  m_Script: {fileID: 11500000, guid: bec22b74c4230114fafe8742d2d02695, type: 3}
   m_Name: Instructions Database
   m_EditorClassIdentifier: 
   dataFile: {fileID: 4900000, guid: ad3cbe16ce37b1c469d4a1ea00e1b7c8, type: 3}
-  instructions:
+  database:
   - key: $Scheme
     text: "Choose the subject of your plot:\r"
   - key: $SchemeStep

@@ -15,39 +15,18 @@ MonoBehaviour:
   schemeSteps:
   - stepOptions:
     - {fileID: 11400000, guid: 31f914135e464414bb540500e81c7d8f, type: 2}
-    descriptionChapterChoice: A Hero in need of rest notice a small town close to
-      his position. When he arrives, he discovers a town plunged into diseases and
-      poverty. While he is looking around him, a priest from an unknown cult approaches
-      and ask for money to help the people.
-    descriptionChapterChoice1: 
-    descriptionChapterChoice2: 
+    chapterDescription: $GoldForThePoors_Step01_Description
   - stepOptions:
     - {fileID: 11400000, guid: e1b878ef71355c642ae0d2169bbe40f1, type: 2}
     - {fileID: 11400000, guid: 6918cce607703904bbc95a574e88709a, type: 2}
-    descriptionChapterChoice: 'The cultist kindly thanks you the Hero for his generosity.
-      But a lurk in the eye of the mendicant makes the Hero realize it was a trickery. '
-    descriptionChapterChoice1: The Hero decides chase the Cultist.
-    descriptionChapterChoice2: The Hero decides to ask to the inhabitants of the
-      slums where is located the headquarter of the Cult.
+    chapterDescription: $GoldForThePoors_Step02_Description
   - stepOptions:
     - {fileID: 11400000, guid: 590a0b5c85f201e47bf45c7cc1908c73, type: 2}
     - {fileID: 11400000, guid: ba994a8aae70c3f4cb3e9ac78161a631, type: 2}
-    descriptionChapterChoice: 'The Hero finally breaks into the headquarter. There
-      is no sign of the mendicant. '
-    descriptionChapterChoice1: The Hero decides to sneak through the building to
-      find him.
-    descriptionChapterChoice2: The Hero chooses to fight all the guards of the cult
-      to find his goods.
+    chapterDescription: $GoldForThePoors_Step03_Description
   - stepOptions:
     - {fileID: 11400000, guid: 97c6d0b27a5ffeb4fbe1fa709ea1ad74, type: 2}
-    descriptionChapterChoice: Instead of finding the mendicant, the Hero enters the
-      treasure room of the cult. While he is going to take some Gold, a stranger
-      makes his appearance. He presents himself as one of the Theophilus' apprentice,
-      Midas the Prophet of Mendicity.
-    descriptionChapterChoice1: 
-    descriptionChapterChoice2: 
+    chapterDescription: $GoldForThePoors_Step04_Description
   currentStep: 0
-  plotDescription: In this Main Plot, the Hero will begin his journey by visiting
-    an extremely poor town. A Cult is collecting money for the inhabitants, but things
-    might be very different...
+  plotDescription: $GoldForThePoors_Description
   plotIllustration: {fileID: 0}
