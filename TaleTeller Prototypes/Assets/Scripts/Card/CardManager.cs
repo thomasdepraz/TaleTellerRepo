@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -114,7 +115,16 @@ public class CardManager : Singleton<CardManager>
         cardTweening.MoveCard(card.currentContainer, deckTransform.localPosition, true, false, toDeckFeedback);
         while (!toDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
-        if(addToDeck) cardDeck.cardDeck.Add(card);
+        if (addToDeck)
+        {
+            cardDeck.cardDeck.Add(card);
+
+            Type cardType = card.GetType();
+            if(cardType != typeof(PlotCard) && cardType != typeof(JunkCard))
+            {
+                cardDeck.cachedDeck.Add(card.dataReference);
+            }
+        }
 
         card.currentContainer.ResetContainer();
         queue.UpdateQueue();

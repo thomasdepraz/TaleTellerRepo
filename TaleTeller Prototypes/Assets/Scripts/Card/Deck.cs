@@ -5,6 +5,7 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     public List<CardData> cardDeck;
+    public List<CardData> cachedDeck;
     public List<CardData> discardPile;
 
     [Header("Data")]
@@ -21,6 +22,12 @@ public class Deck : MonoBehaviour
         for (int i = 0; i < baseDeck.deck.Count; i++)
         {
             cardDeck.Add(baseDeck.deck[i]);
+        }
+
+        //Copy Cards to cachedDeck
+        for (int i = 0; i < cardDeck.Count; i++)
+        {
+            cachedDeck.Add(cardDeck[i]);
         }
 
         //Init card data
