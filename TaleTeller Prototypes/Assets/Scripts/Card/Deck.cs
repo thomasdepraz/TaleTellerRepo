@@ -218,7 +218,7 @@ public class Deck : MonoBehaviour
             CardManager.Instance.CardAppear(overdrawQueue, dealtCard, CardManager.Instance.deckTransform.localPosition);
 
         //the card can be burn or push another card from the board
-        if (dealtCard.GetType() == typeof(PlotCard)) //if its a plot card it pushes cards from the board
+        if (dealtCard.GetType() == typeof(PlotCard) || dealtCard.GetType() == typeof(JunkCard)) //if its a plot card it pushes cards from the board
         {
             EventQueue pickQueue = new EventQueue();
             List<CardData> pickedCards = new List<CardData>();
@@ -255,7 +255,7 @@ public class Deck : MonoBehaviour
         queue.UpdateQueue();
     }
 
-    void Burn(EventQueue queue, CardData card)
+    public void Burn(EventQueue queue, CardData card)
     {
         queue.events.Add(BurnRoutine(queue, card));
     } 
@@ -274,6 +274,10 @@ public class Deck : MonoBehaviour
         discardPile.Add(card);
         if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer)) CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
         if(cardDeck.Contains(card))cardDeck.Remove(card);
+
+        card.currentContainer.ResetContainer();
+        card= card.ResetData(card);
+
 
         burnQueue.StartQueue();
         while(!burnQueue.resolved)

@@ -152,7 +152,7 @@ public class StoryManager : Singleton<StoryManager>
             cardsToDestroy.RemoveAt(0);
         }
 
-        GameManager.Instance.currentHero.bonusDamage = 0;
+        GameManager.Instance.currentHero.bonusDamage = (int)Mathf.Ceil(GameManager.Instance.currentHero.bonusDamage / 2f);
 
         CardManager.Instance.board.storyLine.ResetPlayerPosition();
 
