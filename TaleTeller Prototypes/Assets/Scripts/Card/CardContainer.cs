@@ -420,5 +420,21 @@ public class CardContainer : MonoBehaviour
     {
         visuals.UpdateBaseElements(data);
     }
+
+    public void ShowTooltip()
+    {
+        for (int i = 0; i < data.effects.Count; i++)
+        {
+            //if effect contains keyword appear tooltip
+
+           
+
+        }
+    }
+    public void HideTooltip()
+    {
+        //hide all active tooltip
+        
+    }
     #endregion
 }
