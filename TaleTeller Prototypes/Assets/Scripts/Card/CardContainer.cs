@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static System.Collections.Generic.Dictionary<string, string>;
 
 public class CardContainer : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class CardContainer : MonoBehaviour
     public BoardSlot currentSlot;
     public CardData data;
     public CardVisuals visuals;
+    public List<CardTooltip> tooltips = new List<CardTooltip>();
 
     public RectTransform shadowTransform;
 
@@ -138,8 +140,9 @@ public class CardContainer : MonoBehaviour
             shadowTransform.gameObject.SetActive(true);
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.localScale = Vector3.one * visuals.profile.draggedScale;
-
             #endregion
+
+            HideTooltip();
 
             CardManager.Instance.holdingCard = true;
             CardManager.Instance.currentCard = this;
@@ -372,6 +375,8 @@ public class CardContainer : MonoBehaviour
 
                 //LeanTween.move(rectTransform, rectTransform.anchoredPosition + new Vector2(0, 10f), 0.5f).setEaseOutSine();
                 shadowTransform.gameObject.SetActive(true);
+
+                ShowTooltip();
             }
             #endregion
         }
@@ -395,6 +400,9 @@ public class CardContainer : MonoBehaviour
                 LeanTween.cancel(gameObject);
                 rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0.5f);
                 rectTransform.localScale = Vector3.one;
+
+                print("hidetooltip");
+                HideTooltip();
 
                 //LeanTween.move(rectTransform, originPosition, 0.5f).setEaseOutSine();
                 //rectTransform.anchoredPosition = originPosition;
@@ -423,18 +431,33 @@ public class CardContainer : MonoBehaviour
 
     public void ShowTooltip()
     {
-        for (int i = 0; i < data.effects.Count; i++)
+        List<string> keywords = new List<string>(LocalizationManager.Instance.tooltipDictionary.Keys);
+        int count = 0;
+
+        //if effect contains keyword appear tooltip
+        string effectDescription = visuals.cardDescriptionText.text;
+        for (int j = 0; j < keywords.Count; j++)
         {
-            //if effect contains keyword appear tooltip
-
-           
-
+            if(effectDescription.Contains(keywords[j]))
+            {
+                tooltips[count].AppearTooltip(keywords[j], 1, (count + 1) * 0.1f); 
+                count++;
+            }
         }
+        
     }
     public void HideTooltip()
     {
+        int count = 0;
         //hide all active tooltip
-        
+        for (int i = 0; i < tooltips.Count; i++)
+        {
+            if(tooltips[i].gameObject.activeSelf)
+            {
+                tooltips[i].HideTooltip(count * 0.1f);
+                count++;
+            }
+        }
     }
     #endregion
 }
