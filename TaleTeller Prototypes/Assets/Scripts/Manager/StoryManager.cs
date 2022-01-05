@@ -162,6 +162,10 @@ public class StoryManager : Singleton<StoryManager>
         //reset of the hings needing a reset
         TransitionReset();
 
+        GameManager.Instance.currentHero.bonusDamage = (int)Mathf.Ceil(GameManager.Instance.currentHero.bonusDamage / 2f);
+
+        CardManager.Instance.board.storyLine.ResetPlayerPosition();
+
         yield return new WaitForSeconds(1);
 
         //fade out

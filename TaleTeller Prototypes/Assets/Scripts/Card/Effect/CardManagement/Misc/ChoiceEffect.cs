@@ -53,11 +53,11 @@ public class ChoiceEffect : CardManagementMiscEffects
                     yield return new WaitForEndOfFrame();
                 }
 
-                //Draw the 3 cards
-                for (int x = 0; x < cardsForChoice.Count; x++)
-                {
-                    CardManager.Instance.cardDeck.Deal(drawQueue, cardsForChoice[x]);
-                }
+                cardsForChoice.Remove(pickedCards[0]);
+
+                //Draw the picked card
+                CardManager.Instance.cardDeck.cardDeck.Remove(pickedCards[0]);
+                CardManager.Instance.CardAppearToHand(pickedCards[0], drawQueue, CardManager.Instance.deckTransform.localPosition);
 
                 drawQueue.StartQueue();
 
@@ -66,21 +66,20 @@ public class ChoiceEffect : CardManagementMiscEffects
                     yield return new WaitForEndOfFrame();
                 }
 
-                cardsForChoice.Remove(pickedCards[0]);
 
-                EventQueue discardQueue = new EventQueue();
-
-                //Discard all cards but the picked one
+                //Discard other cards
                 for (int x = 0; x < cardsForChoice.Count; x++)
                 {
-                    CardManager.Instance.CardHandToDiscard(pickedCards[i].currentContainer, discardQueue);
+                    EventQueue discardQueue = new EventQueue();
 
-                }
+                    CardManager.Instance.CardAppear(discardQueue,cardsForChoice[i],CardManager.Instance.deckTransform.localPosition);
+                    CardManager.Instance.cardDeck.Burn(discardQueue, cardsForChoice[i]);
 
-                discardQueue.StartQueue();
-                while(!discardQueue.resolved)
-                {
-                    yield return new WaitForEndOfFrame();
+                    discardQueue.StartQueue();
+                    while(!discardQueue.resolved)
+                    {
+                        yield return new WaitForEndOfFrame();
+                    }
                 }
             }
             else break;

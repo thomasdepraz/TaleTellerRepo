@@ -13,6 +13,7 @@ public class Hero : MonoBehaviour
     public Image goldFrame;
     [Space]
     public TextMeshProUGUI heroHpUI;
+    public TextMeshProUGUI heroOverHealPointsUI;
     public TextMeshProUGUI heroAttackUI;
     public TextMeshProUGUI heroGoldUI;
 
@@ -20,10 +21,12 @@ public class Hero : MonoBehaviour
     //Private hero variables
     private int _maxLifePoints;
     private int _lifePoints;
+    private int _overHealPoints;
     private int _attackDamage;
     private int _bonusDamage;
     private int _maxGoldPoints;
     private int _goldPoints;
+
     [HideInInspector]public int maxLifePoints
     { 
         get => _maxLifePoints ; 
@@ -34,26 +37,90 @@ public class Hero : MonoBehaviour
             FrameTweening(hpFrame.gameObject);
         }
     }
+
+    /*[HideInInspector] public int overHealPoints
+    {
+        get => _overHealPoints;
+        set
+        {
+            _overHealPoints = value;
+            heroHpUI.text = (lifePoints + _overHealPoints) + "/" + value.ToString();
+            
+            //Faire feedback spécial pour Overheal
+            //FrameTweening(hpFrame.gameObject);
+        }
+    }*/
+
     [HideInInspector]public int lifePoints 
     { 
         get => _lifePoints ;
         set
         {
             int diff = value - lifePoints;
+            int hPLeftToHeal = diff;
 
-            _lifePoints = value;
+            if(hPLeftToHeal > 0)
+            {
+                #region Overheal
+                if (_lifePoints < _maxLifePoints)
+                {
+                    if(hPLeftToHeal < _maxLifePoints - _lifePoints)
+                    {
+                        _lifePoints += hPLeftToHeal;
+                        hPLeftToHeal = 0;
+                    }
+                    else
+                    {
+                        hPLeftToHeal -= _maxLifePoints - _lifePoints;
+                        _lifePoints = _maxLifePoints;
 
-            if (_lifePoints > maxLifePoints)
-                _lifePoints = maxLifePoints;
-            else if (_lifePoints < 0)
+                    }
+                }
+
+                if(_lifePoints < (int)Mathf.Ceil(_maxLifePoints * 1.5f))
+                {
+                    if((int)Mathf.Ceil(hPLeftToHeal / 2f) < (int)Mathf.Ceil(_maxLifePoints * 1.5f) - _lifePoints)
+                    {
+                        _lifePoints += (int)Mathf.Ceil(hPLeftToHeal / 2f);
+                        hPLeftToHeal = 0;
+                    }
+                    else
+                    {
+                        hPLeftToHeal -= ((int)Mathf.Ceil(_maxLifePoints * 1.5f) - _lifePoints) * 2;
+                        _lifePoints = (int)Mathf.Ceil(_maxLifePoints * 1.5f);
+                    }
+                }
+
+                if (_lifePoints < (int)Mathf.Ceil(_maxLifePoints * 2f))
+                {
+                    if ((int)Mathf.Ceil(hPLeftToHeal / 4f) < (int)Mathf.Ceil(_maxLifePoints * 2f) - _lifePoints)
+                    {
+                        _lifePoints += (int)Mathf.Ceil(hPLeftToHeal / 4f);
+                        hPLeftToHeal = 0;
+                    }
+                    else
+                    {
+                        hPLeftToHeal -= ((int)Mathf.Ceil(_maxLifePoints * 2f) - _lifePoints) * 4;
+                        _lifePoints = (int)Mathf.Ceil(_maxLifePoints * 2f);
+                    }
+                }
+
+                hPLeftToHeal = 0;
+                #endregion
+            }
+            else
+            {
+                _lifePoints = value;
+            }
+
+            if (_lifePoints < 0)
                 _lifePoints = 0;
 
-
-            heroHpUI.text = lifePoints.ToString() + "/" + maxLifePoints;
+            heroHpUI.text = (lifePoints).ToString() + "/" + maxLifePoints;
 
             //Different feedack if damage taken or if healed
             if(diff != 0 && diff!= maxLifePoints)
-                GameManager.Instance.storyManager.HeroLifeFeedback(diff);
+                GameManager.Instance.storyManager.HeroLifeFeedback(hPLeftToHeal);
 
             FrameTweening(hpFrame.gameObject);
         }

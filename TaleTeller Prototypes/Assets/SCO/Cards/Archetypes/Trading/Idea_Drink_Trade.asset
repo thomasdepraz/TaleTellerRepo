@@ -84,7 +84,7 @@ MonoBehaviour:
   gainValue:
     value: 2
     type: 0
-    op: 0
+    op: 1
   temporaryChange: 0
 --- !u!114 &3788778139807712189
 MonoBehaviour:
