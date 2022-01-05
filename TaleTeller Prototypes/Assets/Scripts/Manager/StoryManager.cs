@@ -9,11 +9,14 @@ using UnityEngine.UI;
 public class StoryManager : Singleton<StoryManager>
 {
     [HideInInspector] public int turnCount;
+    [HideInInspector] public int actCount;
     public List<EventQueue> queueList = new List<EventQueue>();//THIS IS FOR DEBUG
     [HideInInspector] public List<CardData> cardsToDestroy = new List<CardData>();
 
     [Header("References")]
     public Image fadePanel;
+
+    private bool transitionToNextAct;
 
     private void Awake()
     {
@@ -42,7 +45,7 @@ public class StoryManager : Singleton<StoryManager>
         {
             EventQueue mainQueue = new EventQueue();
 
-            PlotsManager.Instance.ChooseMainPlot(mainQueue, PlotsManager.Instance.schemes);
+            PlotsManager.Instance.ChooseMainPlot(mainQueue, PlotsManager.Instance.schemePools[actCount].schemes);
 
             mainQueue.StartQueue();
             while(!mainQueue.resolved)
@@ -123,14 +126,25 @@ public class StoryManager : Singleton<StoryManager>
             yield return new WaitForEndOfFrame();
         }
 
-        TransitionToNextTurn();
+        if(transitionToNextAct)
+        {
+            transitionToNextAct = false;
+
+            //start transition to next act routine
+            TransitionToNextAct();
+        }
+        else
+        {
+            TransitionToNextAct();
+            //TransitionToNextTurn();
+        }
     }
 
     public void TransitionToNextTurn()
     {
-        StartCoroutine(TransitionToNexTurnRoutine());
+        StartCoroutine(TransitionToNextTurnRoutine());
     }
-    public IEnumerator TransitionToNexTurnRoutine()
+    public IEnumerator TransitionToNextTurnRoutine()
     {
         //fade in
         bool transtionEnded = false;
@@ -146,15 +160,7 @@ public class StoryManager : Singleton<StoryManager>
 
 
         //reset of the hings needing a reset
-        while(cardsToDestroy.Count > 0)
-        {
-            Destroy(cardsToDestroy[0]);
-            cardsToDestroy.RemoveAt(0);
-        }
-
-        GameManager.Instance.currentHero.bonusDamage = 0;
-
-        CardManager.Instance.board.storyLine.ResetPlayerPosition();
+        TransitionReset();
 
         yield return new WaitForSeconds(1);
 
@@ -171,6 +177,89 @@ public class StoryManager : Singleton<StoryManager>
          turnCount++;
 
         StartTurn();
+    }
+
+    public void TransitionToNextAct()
+    {
+        StartCoroutine(TransitionToNextActRoutine());
+    }
+    public IEnumerator TransitionToNextActRoutine()
+    {
+        yield return null;
+
+        //Fade to black 
+        #region fade to black
+        bool transtionEnded = false;
+        LeanTween.color(gameObject, Color.black, 1f).setOnUpdate(
+            (Color col) => { fadePanel.color = col; }
+            ).setOnComplete(onEnd => { transtionEnded = true; });
+
+        while (!transtionEnded)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        transtionEnded = false;
+        #endregion
+
+        //destroy
+        TransitionReset();
+
+        //clean hand deck and discard + reset all containers
+        CardManager.Instance.ClearCardLists();
+
+        //text ?
+
+        //init cacheddeckList + deck building phase
+        CardManager.Instance.cardDeck.InitCachedDeck();
+
+        EventQueue discardQueue = new EventQueue();
+        
+        List<CardData> pickedCards = new List<CardData>();
+        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
+        string newInstruction = instruction.Replace("$value$", "5");
+
+        CardManager.Instance.cardPicker.Pick(discardQueue,CardManager.Instance.cardDeck.cachedDeck,pickedCards,5, false, newInstruction);
+
+        discardQueue.StartQueue();
+        while (!discardQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+        for (int i = 0; i < pickedCards.Count; i++)
+        {
+            CardManager.Instance.cardDeck.cachedDeck.Remove(pickedCards[i]); //TODO Animate this with a card management method such as SendToOblivion
+        }
+
+        //refill deck + reinit cards
+        CardManager.Instance.cardDeck.ResetCachedDeck();
+
+        //text ?
+
+        //fade to transparent
+        LeanTween.value(gameObject, fadePanel.color.a, 0, 1f).setOnUpdate(
+            (float value) => { fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, value); }
+                ).setOnComplete(onEnd => { transtionEnded = true; });
+
+        while (!transtionEnded)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        actCount++;
+        StartTurn();
+    }
+
+    void TransitionReset()
+    {
+        while (cardsToDestroy.Count > 0)
+        {
+            Destroy(cardsToDestroy[0]);
+            cardsToDestroy.RemoveAt(0);
+        }
+
+        GameManager.Instance.currentHero.bonusDamage = 0;
+
+        CardManager.Instance.board.storyLine.ResetPlayerPosition();
+
     }
 
     public void CallGeneralEvent(string eventName, EventQueue queue)//Calls the events for all the cards in hand
@@ -193,8 +282,7 @@ public class StoryManager : Singleton<StoryManager>
 
     public void NextStoryArc()
     {
-        PlotsManager.Instance.schemes.Remove(PlotsManager.Instance.currentMainPlotScheme);
-        turnCount = -1;
+        transitionToNextAct = true;
     }
 
 

@@ -284,4 +284,24 @@ public class Deck : MonoBehaviour
         queue.UpdateQueue();
     }
     #endregion
+
+    public void InitCachedDeck()
+    {
+        for (int i = 0; i < cachedDeck.Count; i++)
+        {
+            cachedDeck[i] = cachedDeck[i].InitializeData(cachedDeck[i]);
+        }
+    }
+    public void ResetCachedDeck()
+    {
+        for (int i = 0; i < cachedDeck.Count; i++)
+        {
+            cachedDeck[i] = cachedDeck[i].dataReference;
+            cardDeck.Add(cachedDeck[i].dataReference);
+        }
+        for (int i = 0; i < cardDeck.Count; i++)
+        {
+            cardDeck[i] = cardDeck[i].InitializeData(cardDeck[i]);
+        }
+    }
 }

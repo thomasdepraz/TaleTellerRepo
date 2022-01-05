@@ -31,4 +31,12 @@ public class Hand : MonoBehaviour
 
         return randomPos;
     }
+
+    public void ResetAllHand()
+    {
+        for (int i = 0; i < currentHand.Count; i++)
+        {
+            currentHand[i].ResetContainer();
+        }
+    }
 }

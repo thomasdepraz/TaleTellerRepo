@@ -2,10 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class SchemePool
+{
+    public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
+    public void InitSchemes()
+    {
+        for (int i = 0; i < schemes.Count; i++)
+        {
+            schemes[i] = schemes[i].InitScheme(schemes[i]);
+        }
+    }
+}
 public class PlotsManager : Singleton<PlotsManager>
 {
     public MainPlotScheme currentMainPlotScheme;
-    public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
+    public List<SchemePool> schemePools = new List<SchemePool>();
     public List<CardData> secondaryPlots = new List<CardData>();
     public List<CardData> darkIdeas = new List<CardData>();
 
@@ -19,11 +31,10 @@ public class PlotsManager : Singleton<PlotsManager>
     public void Start()
     {
         //Init schemes
-        for (int i = 0; i < schemes.Count; i++)
+        for (int i = 0; i < schemePools.Count; i++)
         {
-            schemes[i] = schemes[i].InitScheme(schemes[i]);
+            schemePools[i].InitSchemes();
         }
-
         //InitData
         for (int i = 0; i < secondaryPlots.Count; i++)
         {
@@ -34,7 +45,6 @@ public class PlotsManager : Singleton<PlotsManager>
             darkIdeas[i] = darkIdeas[i].InitializeData(darkIdeas[i]);
 
         }
-
     }
 
     //Link this method to the act beggining

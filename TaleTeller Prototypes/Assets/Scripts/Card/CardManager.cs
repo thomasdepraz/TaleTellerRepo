@@ -47,6 +47,13 @@ public class CardManager : Singleton<CardManager>
         }
     }
 
+    public void ClearCardLists()
+    {
+        cardDeck.cardDeck.Clear();
+        cardDeck.discardPile.Clear();
+        cardHand.ResetAllHand();
+    }
+
     # region Card Appear
     public void CardAppear(EventQueue queue, CardData card, Vector3 position)
     {

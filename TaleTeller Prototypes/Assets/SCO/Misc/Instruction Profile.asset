@@ -16,5 +16,5 @@ MonoBehaviour:
   chooseSchemeStepInstruction: $SchemeStep
   chooseSecondayPlotInstruction: $ChooseSecondaryPlot
   chooseCardInstruction: $ChooseCard
-  chooseXCardToDiscardInstruction: $ChooseXCardToDiscard
+  chooseXCardToDiscardInstruction: $ChooseXToDiscard
   choiceEffectInstruction: $ChoiceEffect
