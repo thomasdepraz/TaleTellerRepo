@@ -162,10 +162,7 @@ public class StoryManager : Singleton<StoryManager>
         //reset of the hings needing a reset
         TransitionReset();
 
-        GameManager.Instance.currentHero.bonusDamage = (int)Mathf.Ceil(GameManager.Instance.currentHero.bonusDamage / 2f);
-
-        CardManager.Instance.board.storyLine.ResetPlayerPosition();
-
+       
         yield return new WaitForSeconds(1);
 
         //fade out
@@ -206,7 +203,9 @@ public class StoryManager : Singleton<StoryManager>
         #endregion
 
         //destroy
-        TransitionReset();
+        TransitionReset(false);
+
+        //reset player values
 
         //clean hand deck and discard + reset all containers
         CardManager.Instance.ClearCardLists();
@@ -252,7 +251,7 @@ public class StoryManager : Singleton<StoryManager>
         StartTurn();
     }
 
-    void TransitionReset()
+    void TransitionReset(bool turnReset = true)
     {
         while (cardsToDestroy.Count > 0)
         {
@@ -260,7 +259,10 @@ public class StoryManager : Singleton<StoryManager>
             cardsToDestroy.RemoveAt(0);
         }
 
-        GameManager.Instance.currentHero.bonusDamage = 0;
+        if(turnReset)
+            GameManager.Instance.currentHero.bonusDamage = (int)Mathf.Ceil(GameManager.Instance.currentHero.bonusDamage / 2f);
+        else
+            GameManager.Instance.currentHero.bonusDamage = 0;
 
         CardManager.Instance.board.storyLine.ResetPlayerPosition();
 

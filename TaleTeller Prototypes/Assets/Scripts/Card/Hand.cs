@@ -34,9 +34,9 @@ public class Hand : MonoBehaviour
 
     public void ResetAllHand()
     {
-        for (int i = 0; i < currentHand.Count; i++)
+        while(currentHand.Count > 0)
         {
-            currentHand[i].ResetContainer();
+            currentHand[0].ResetContainer();
         }
     }
 }
