@@ -5,6 +5,7 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     public List<CardData> cardDeck;
+    public List<CardData> cachedDeck;
     public List<CardData> discardPile;
 
     [Header("Data")]
@@ -21,6 +22,12 @@ public class Deck : MonoBehaviour
         for (int i = 0; i < baseDeck.deck.Count; i++)
         {
             cardDeck.Add(baseDeck.deck[i]);
+        }
+
+        //Copy Cards to cachedDeck
+        for (int i = 0; i < cardDeck.Count; i++)
+        {
+            cachedDeck.Add(cardDeck[i]);
         }
 
         //Init card data
@@ -216,7 +223,8 @@ public class Deck : MonoBehaviour
             EventQueue pickQueue = new EventQueue();
             List<CardData> pickedCards = new List<CardData>();
 
-            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, true, "Choose a card to discard");
+            string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
+            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, true, instruction);
 
             pickQueue.StartQueue();
             while(!pickQueue.resolved)
@@ -276,4 +284,24 @@ public class Deck : MonoBehaviour
         queue.UpdateQueue();
     }
     #endregion
+
+    public void InitCachedDeck()
+    {
+        for (int i = 0; i < cachedDeck.Count; i++)
+        {
+            cachedDeck[i] = cachedDeck[i].InitializeData(cachedDeck[i]);
+        }
+    }
+    public void ResetCachedDeck()
+    {
+        for (int i = 0; i < cachedDeck.Count; i++)
+        {
+            cachedDeck[i] = cachedDeck[i].dataReference;
+            cardDeck.Add(cachedDeck[i].dataReference);
+        }
+        for (int i = 0; i < cardDeck.Count; i++)
+        {
+            cardDeck[i] = cardDeck[i].InitializeData(cardDeck[i]);
+        }
+    }
 }

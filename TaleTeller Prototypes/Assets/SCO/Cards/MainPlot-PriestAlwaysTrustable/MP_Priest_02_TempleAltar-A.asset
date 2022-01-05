@@ -88,5 +88,5 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: He sneaks into the Temple to rob the parts.
+  plotChoiceDescription: $Priest_Step02B_Objective
   legendaryCardRewards: []

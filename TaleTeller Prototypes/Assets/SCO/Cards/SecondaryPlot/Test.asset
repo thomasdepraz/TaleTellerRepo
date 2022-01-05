@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6300102082774821803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 
+  linkedJunkedCards: []
+  junkSpawnLocations: 
+  junksPositionsInDeck: 
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []
+--- !u!114 &-6116506693948920266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 1
+    baseAttackDamage: 1
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: TestPlot
+  rarity: 1
+  archetype: 1
+  manaCost: 0
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences: []
+  effects: []
+  cardTypeReference: {fileID: -6116506693948920266}
+  cardType: {fileID: 0}
+  objective: {fileID: -6300102082774821803}
+  completionTimer: 2
+  isMainPlot: 0
+  isFinal: 0
+  plotChoiceDescription: 
+  legendaryCardRewards: []

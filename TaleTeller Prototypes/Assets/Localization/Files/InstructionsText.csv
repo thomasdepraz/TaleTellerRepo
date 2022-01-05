@@ -1,0 +1,7 @@
+Key	Instruction
+$Scheme	Choose the subject of your plot:
+$SchemeStep	Choose how your plot unravels : 
+$ChooseSecondaryPlot	Choose a secondary plot : 
+$ChooseCard	Choose a card :
+$ChooseXToDiscard	Choose $value$ card(s) to discard :
+$ChoiceEffect	Choose $value$ card(s) :

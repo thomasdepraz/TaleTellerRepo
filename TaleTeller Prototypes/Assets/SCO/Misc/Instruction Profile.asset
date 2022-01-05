@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526b365268aaa254bb434db9a1c676db, type: 3}
   m_Name: Instruction Profile
   m_EditorClassIdentifier: 
-  chooseSchemeInstruction: 'Choose the subject of your plot:'
-  chooseSchemeStepInstruction: 'Choose how your plot unravels : '
-  chooseCardInstruction: Choose a card
-  choiceEffectInstruction: Choose $value$ card(s)
+  chooseSchemeInstruction: $Scheme
+  chooseSchemeStepInstruction: $SchemeStep
+  chooseSecondayPlotInstruction: $ChooseSecondaryPlot
+  chooseCardInstruction: $ChooseCard
+  chooseXCardToDiscardInstruction: $ChooseXToDiscard
+  choiceEffectInstruction: $ChoiceEffect

@@ -42,7 +42,10 @@ public class ChoiceEffect : CardManagementMiscEffects
                 EventQueue pickQueue = new EventQueue();
                 List<CardData> pickedCards = new List<CardData>();
 
-                CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, false, "Choose one of these cards");
+                string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.choiceEffectInstruction);
+                string newInstruction = instruction.Replace("$value", choiceValue.value.ToString());
+
+                CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, false, newInstruction);
 
                 pickQueue.StartQueue();
                 while (!pickQueue.resolved)

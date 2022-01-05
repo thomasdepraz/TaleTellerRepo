@@ -15,10 +15,12 @@ public class CardPicker : MonoBehaviour
     public CanvasGroup canvasGroup;
     public TextMeshProUGUI instructionText;
     public TextMeshProUGUI descriptionText;
+    public Transform gridLayoutTransform;
 
 
     [Header("Data")]
     public float backgroundFadeSpeed;
+    public GameObject cardPlaceholderPrefab;
 
     List<CardData> selectedCards = new List<CardData>();
     CardContainer lastSelectedContainer;
@@ -121,9 +123,9 @@ public class CardPicker : MonoBehaviour
         //Load Instruction
         string instruction = string.Empty; 
         if(cardVersion)
-            instruction = GameManager.Instance.instructionsData.chooseSchemeStepInstruction;
+            instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeStepInstruction);
         else
-            instruction = GameManager.Instance.instructionsData.chooseSchemeInstruction;
+            instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeInstruction);
 
         instructionText.text = instruction;
         instructionText.gameObject.SetActive(true); //TODO Tween the text;
@@ -137,7 +139,7 @@ public class CardPicker : MonoBehaviour
 
             //Appear previous completion text
             descriptionText.gameObject.SetActive(true);
-            descriptionText.text = PlotsManager.Instance.currentMainPlotScheme.schemeSteps[step].descriptionChapterChoice;
+            descriptionText.text = PlotsManager.Instance.currentMainPlotScheme.schemeSteps[step].chapterDescription;
 
 
             for (int i = 0; i < stepOptions.Count; i++)//Load containers TODO implement queueing for twening feedback
@@ -202,15 +204,41 @@ public class CardPicker : MonoBehaviour
     #region Card Picking Utility
     void InitializePlaceholders(List<CardData> targets)
     {
+        int difference = targets.Count - cardPlaceholders.Count;
+        if(difference > 0)//Not Enough placeholders, instantiate more
+        {
+            List<CardContainer> newPlaceHolders = new List<CardContainer>();
+            for (int i = 0; i < difference; i++)
+            {
+                //Instantiate prefab in grid layout
+                GameObject go =  Instantiate(cardPlaceholderPrefab, gridLayoutTransform);
+                go.transform.SetAsLastSibling();
+
+                //add to new placeholders list
+                newPlaceHolders.Add(go.GetComponent<CardContainer>());
+            }
+            //init event callbacks
+            InitEventCallbacks(newPlaceHolders);
+
+            ///add all element from list to placeholders list
+            for (int i = 0; i < newPlaceHolders.Count; i++)
+            {
+                cardPlaceholders.Add(newPlaceHolders[i]);
+            }
+        }
+
+            
         for (int i = 0; i < targets.Count; i++)
         {
+            int check = 0;
             for (int j = 0; j < cardPlaceholders.Count; j++)
             {
-                if(cardPlaceholders[i].data == null)
+                check++;
+                if (cardPlaceholders[i].data == null)
                 {
                     cardPlaceholders[i].selfImage.color = Color.white;
                     cardPlaceholders[i].gameObject.SetActive(true);
-                    cardPlaceholders[i].InitializeContainer(targets[i],true);
+                    cardPlaceholders[i].InitializeContainer(targets[i], true);
                     break;
                 }
             }

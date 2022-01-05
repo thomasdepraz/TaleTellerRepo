@@ -2,10 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class SchemePool
+{
+    public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
+    public void InitSchemes()
+    {
+        for (int i = 0; i < schemes.Count; i++)
+        {
+            schemes[i] = schemes[i].InitScheme(schemes[i]);
+        }
+    }
+}
 public class PlotsManager : Singleton<PlotsManager>
 {
     public MainPlotScheme currentMainPlotScheme;
-    public List<MainPlotScheme> schemes = new List<MainPlotScheme>();
+    public List<SchemePool> schemePools = new List<SchemePool>();
     public List<CardData> secondaryPlots = new List<CardData>();
     public List<CardData> darkIdeas = new List<CardData>();
 
@@ -18,6 +30,11 @@ public class PlotsManager : Singleton<PlotsManager>
 
     public void Start()
     {
+        //Init schemes
+        for (int i = 0; i < schemePools.Count; i++)
+        {
+            schemePools[i].InitSchemes();
+        }
         //InitData
         for (int i = 0; i < secondaryPlots.Count; i++)
         {
@@ -28,7 +45,6 @@ public class PlotsManager : Singleton<PlotsManager>
             darkIdeas[i] = darkIdeas[i].InitializeData(darkIdeas[i]);
 
         }
-
     }
 
     //Link this method to the act beggining
@@ -53,7 +69,6 @@ public class PlotsManager : Singleton<PlotsManager>
         EventQueue loadQueue = new EventQueue();
 
         currentMainPlotScheme = chosenScheme[0];
-        currentMainPlotScheme = currentMainPlotScheme.InitScheme(currentMainPlotScheme); //Note maybe leave the shemes list untouched and only instantiate a copy
 
         currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);
 
@@ -78,7 +93,8 @@ public class PlotsManager : Singleton<PlotsManager>
         EventQueue pickQueue = new EventQueue();
         List<CardData> pickedCards = new List<CardData>();
 
-        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, "Choose a secondary plot");
+        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSecondayPlotInstruction);
+        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, instruction);
 
         pickQueue.StartQueue();
 

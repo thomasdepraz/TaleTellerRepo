@@ -28,13 +28,16 @@ public class DiscardTypeEffects : Effect
             EventQueue pickQueue = new EventQueue();
             List<CardData> pickedCards = new List<CardData>();
 
+            string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
+            string newInstruction = instruction.Replace("$value$", numberOfCardsToDiscard.ToString());
+
             CardManager.Instance.cardPicker.Pick(
                 pickQueue,
                 targetsToDiscard,
                 pickedCards,
                 numberOfCardsToDiscard,
                 false,
-                "Choose " + numberOfCardsToDiscard.ToString() + " card(s) to discard"
+                newInstruction
                 );
 
             pickQueue.StartQueue();
