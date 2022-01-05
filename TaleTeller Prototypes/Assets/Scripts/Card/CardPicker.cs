@@ -146,6 +146,7 @@ public class CardPicker : MonoBehaviour
             {
                 PlotCard card = stepOptions[i] as PlotCard;
                 schemeDescriptions[i].cardContainer.InitializeContainer(stepOptions[i], true);
+                Deselect(schemeDescriptions[i].cardContainer);
                 schemeDescriptions[i].description.text = card.plotChoiceDescription;//Temp
 
                 schemeDescriptions[i].LoadCardContainer();
@@ -161,6 +162,7 @@ public class CardPicker : MonoBehaviour
                 schemeDescriptions[i].linkedScheme = schemes[i];
 
                 schemeDescriptions[i].LoadIllustration();
+                DeselectIllu(schemeDescriptions[i]);
             }
         }
 
@@ -239,6 +241,7 @@ public class CardPicker : MonoBehaviour
                     cardPlaceholders[i].selfImage.color = Color.white;
                     cardPlaceholders[i].gameObject.SetActive(true);
                     cardPlaceholders[i].InitializeContainer(targets[i], true);
+                    Deselect(cardPlaceholders[i]);
                     break;
                 }
             }
