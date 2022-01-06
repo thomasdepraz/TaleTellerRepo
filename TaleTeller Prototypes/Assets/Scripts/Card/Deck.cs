@@ -224,7 +224,7 @@ public class Deck : MonoBehaviour
             List<CardData> pickedCards = new List<CardData>();
 
             string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, true, instruction);
+            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, instruction);
 
             pickQueue.StartQueue();
             while(!pickQueue.resolved)

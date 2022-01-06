@@ -34,4 +34,9 @@ public static class UtilityClass
         }
         return false;
     }
+
+    public static string ToBold(string text)
+    {
+        return "<b>" + text + "</b>";
+    }
 }

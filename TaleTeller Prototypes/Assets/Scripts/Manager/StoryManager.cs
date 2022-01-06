@@ -221,7 +221,7 @@ public class StoryManager : Singleton<StoryManager>
         string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
         string newInstruction = instruction.Replace("$value$", "5");
 
-        CardManager.Instance.cardPicker.Pick(discardQueue,CardManager.Instance.cardDeck.cachedDeck,pickedCards,5, false, newInstruction);
+        CardManager.Instance.cardPicker.Pick(discardQueue,CardManager.Instance.cardDeck.cachedDeck,pickedCards,5, newInstruction);
 
         discardQueue.StartQueue();
         while (!discardQueue.resolved) { yield return new WaitForEndOfFrame(); }

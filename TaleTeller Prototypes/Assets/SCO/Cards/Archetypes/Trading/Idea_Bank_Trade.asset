@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'ALL => Reduce the value of each key-word BANKRUPT by $effectValueModification.modification$. '
+  description: 'ALL => Reduce the value of each key-word BANKRUPT by X. '
   trigger: 2
   target: 2
   range: 02000000

@@ -41,11 +41,11 @@ public class CardPicker : MonoBehaviour
         InitEventCallbacks(schemeDescriptionContainers);
     }
 
-    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
+    public void Pick(EventQueue queue, List<CardData> targetCards,List<CardData> pickedCards, int numberToPick, string instruction)
     {
-        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, isInstantaneous, instruction)) ;
+        queue.events.Add(PickRoutine(queue, targetCards, pickedCards, numberToPick, instruction)) ;
     }
-    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, bool isInstantaneous, string instruction)
+    IEnumerator PickRoutine(EventQueue queue, List<CardData> targetCards, List<CardData> pickedCards, int numberToPick, string instruction)
     {
         canvasGroup.blocksRaycasts = true;
         selectedCards = pickedCards;
@@ -55,8 +55,8 @@ public class CardPicker : MonoBehaviour
 
         confirmButton.interactable = false;
 
-        if (!isInstantaneous) confirmed = false;
-        else confirmed = true;
+         confirmed = false;
+
 
         //Fade in background
         bool fadeEnded = false;
@@ -76,10 +76,8 @@ public class CardPicker : MonoBehaviour
 
 
         //If necessary show button
-        if (!isInstantaneous)
-        {
-            confirmButton.gameObject.SetActive(true);
-        }
+        confirmButton.gameObject.SetActive(true);
+
         //Wait for ending conditions
         while(selectedCards.Count != numberToPick || !confirmed)
         {

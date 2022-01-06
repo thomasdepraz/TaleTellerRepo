@@ -180,7 +180,7 @@ public class CardManager : Singleton<CardManager>
                 List<CardData> pickedCards = new List<CardData>();
 
                 string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-                cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, false, instruction);
+                cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, instruction);
 
                 pickQueue.StartQueue();
                 while (!pickQueue.resolved)

@@ -94,7 +94,7 @@ public class PlotsManager : Singleton<PlotsManager>
         List<CardData> pickedCards = new List<CardData>();
 
         string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSecondayPlotInstruction);
-        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, false, instruction);
+        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, instruction);
 
         pickQueue.StartQueue();
 

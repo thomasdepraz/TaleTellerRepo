@@ -12,9 +12,11 @@ public class LocalizationManager : Singleton<LocalizationManager>
     [Header("Databases")]
     [SerializeField] private TextDataBase instructionDataBase;
     [SerializeField] private TextAsset schemesDatabase;
+    [SerializeField] private TextAsset tooltipDatabase;
 
     public Dictionary<string, string> instructionsDictionary;
     public Dictionary<string, string> schemesDescriptionsDictionary;
+    public Dictionary<string, string> tooltipDictionary;
     //Create as meany as needed
 
 
@@ -22,6 +24,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     {
         instructionsDictionary = InitDictionary(instructionDataBase.database);
         schemesDescriptionsDictionary = InitDictionary(schemesDatabase);
+        tooltipDictionary = InitDictionary(tooltipDatabase);
     }
 
     public Dictionary<string, string> InitDictionary(KeyStringPair[] pairs) ///Add methods overrides

@@ -1,0 +1,12 @@
+Key	Tooltip
+Double Strike	Attack successively twice.
+First Hit	Attack first.
+Range	Attack Characters located at 2 places from its location.
+Obsessing	If in the Hand, the Max Ink is decreased by -1.
+Undying	Its HP can’t be inferior than 1.
+Bankrupt	If the Hero has X GOLD or less when he crosses this Card position.
+Buy	If the Hero has X GOLD or more when he crosses this Card position.
+Death Rattle	Quand le Personnage meurt.
+Hand - End of Turn	If this Card is in the hand of the player at the end of the preparation phase.
+Illumination	If a Card is drawn.
+Overload	If a Card is discarded.
