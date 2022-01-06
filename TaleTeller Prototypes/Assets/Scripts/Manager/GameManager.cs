@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
     public Pointer pointer;
     public Button returnToMenuButton;
 
+    [HideInInspector]public bool pause;
+
     public void Awake()
     {
         CreateSingleton(false);
