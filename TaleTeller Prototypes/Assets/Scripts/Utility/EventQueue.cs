@@ -23,6 +23,16 @@ public class EventQueue
 
     public void UpdateQueue()
     {
+        EventManager.Instance.StartCoroutine(UpdateQueueRoutine());
+    }
+
+    public IEnumerator UpdateQueueRoutine()
+    {
+        while(GameManager.Instance.pause)
+        { 
+            yield return new WaitForEndOfFrame();
+        }
+
         //Unqueue
         if (events.Count > 0) events.RemoveAt(0);
 
