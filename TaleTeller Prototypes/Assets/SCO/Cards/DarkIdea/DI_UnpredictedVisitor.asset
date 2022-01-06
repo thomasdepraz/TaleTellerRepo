@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <color=white>HERO =>On hand at the end of turn, reduce HP by $gainValue$
+  description: <color=white> <b>End of Turn</b> -$gainValue$ HP.
   trigger: 6
   target: 1
   range: 
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Name: DI_UnpredictedVisitor
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: '<color=white>Unpredicted Visitor '
+  cardName: '<color=white> Unpredicted Visitor '
   rarity: 0
   archetype: 0
   manaCost: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<color=white>HAND => <b>Beginning</b> : Discard $discardValue$.'
+  description: <color=white> <b>Beginning</b> Discard $discardValue$.
   trigger: 1
   target: 3
   range: 

@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HERO => <b>Buy ($buyValue$)</b> : '
+  description: '<b>Buy ($buyValue$)</b> : '
   trigger: 1
   target: 0
   range: 

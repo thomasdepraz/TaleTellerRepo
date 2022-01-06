@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Illumination :<b> Your Hero gain +1 HPmax. (P) '
+  description: <b>Illumination :<b> +1 HP Max.
   trigger: 11
   target: 1
   range: 
@@ -75,8 +75,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Full Left & Full Right => Multiple the value of each key-word "DISCARD"
-    by 2.
+  description: <- <- -> -> Key-word Discard x2.
   trigger: 2
   target: 2
   range: 02000000

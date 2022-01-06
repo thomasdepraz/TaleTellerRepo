@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: HAND => Each time it get hit, draw $drawValue$.
+  description: Draw $drawValue$ each time it get hit, .
   trigger: 10
   target: 3
   range: 

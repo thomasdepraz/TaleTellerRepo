@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Full Left => Multiple the value of each key-word "GOLD" by 2. " '
+  description: '<- <- Each key-word GOLD x2. '
   trigger: 2
   target: 2
   range: 03000000
@@ -39,7 +39,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Full Right => Multiple the value of each key-word "DRAW" by 2. " '
+  description: -> -> Each key-word DRAW x2.
   trigger: 2
   target: 2
   range: 04000000

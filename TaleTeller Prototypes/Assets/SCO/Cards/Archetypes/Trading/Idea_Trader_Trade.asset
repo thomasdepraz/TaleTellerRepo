@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HAND => <b>Bankrupt ($bankruptValue$)</b> :'
+  description: '<b>Bankrupt ($bankruptValue$)</b> :'
   trigger: 1
   target: 0
   range: 

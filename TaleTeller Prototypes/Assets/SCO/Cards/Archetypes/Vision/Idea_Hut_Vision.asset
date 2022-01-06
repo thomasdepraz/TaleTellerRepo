@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: ALL => Restore + $modifierValue$ HP.
+  description: <- <- -> -> +$modifierValue$ HP.
   trigger: 2
   target: 2
   range: 0300000004000000
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HERO => <b>Overload</b> : Restore + $gainValue$ HP.'
+  description: '<b>Overload</b> : +$gainValue$ HP.'
   trigger: 12
   target: 1
   range: 

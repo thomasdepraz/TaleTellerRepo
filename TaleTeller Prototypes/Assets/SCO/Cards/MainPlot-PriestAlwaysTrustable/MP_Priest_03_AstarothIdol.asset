@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: LEFT RIGHT => Each nearb Evil character gains - $modifierValue$ ATK.
+  description: Enemies <- -> -$modifierValue$ ATK.
   trigger: 1
   target: 2
   range: 0500000009000000

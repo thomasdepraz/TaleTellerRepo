@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'ALL => Increase the value of each key-word BANKRUPT by 4 '
+  description: <- <- -> -> Each key-word BANKRUPT(X+4).
   trigger: 2
   target: 2
   range: 02000000
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'ALL => Increase the value of each key-word BUY by 4 '
+  description: '<- <- -> -> Each key-word BUY (X+4). '
   trigger: 2
   target: 2
   range: 02000000

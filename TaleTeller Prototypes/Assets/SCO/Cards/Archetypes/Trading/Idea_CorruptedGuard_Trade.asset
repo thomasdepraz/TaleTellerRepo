@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HERO => <b>Buy ($buyValue$)</b> :'
+  description: '<b>Buy ($buyValue$)</b> :'
   trigger: 1
   target: 0
   range: 
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HERO => <b>Bankrupt ($bankruptValue$)</b> :'
+  description: '<b>Bankrupt ($bankruptValue$)</b> :'
   trigger: 1
   target: 0
   range: 
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: Effect3
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Deal - $gainValue$ HP to the Hero.
+  description: -$gainValue$ HP.
   trigger: 0
   target: 1
   range: 
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: The Hero gains + $gainValue$ ATK.
+  description: +$gainValue$ ATK.
   trigger: 0
   target: 1
   range: 

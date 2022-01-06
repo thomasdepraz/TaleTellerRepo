@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '"Restore" is disabled until the end of the turn.'
+  description: <b>End of Turn</b> Key-word Restore disabled.
   trigger: 2
   target: 2
   range: 03000000

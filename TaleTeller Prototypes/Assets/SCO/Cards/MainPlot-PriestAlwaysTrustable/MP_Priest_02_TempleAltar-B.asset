@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: HAND => Draw $drawValue$ for each passed step.
+  description: Draw $drawValue$ for each passed step.
   trigger: 1
   target: 3
   range: 
