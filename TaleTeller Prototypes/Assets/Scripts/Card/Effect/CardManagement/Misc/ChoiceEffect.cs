@@ -45,7 +45,7 @@ public class ChoiceEffect : CardManagementMiscEffects
                 string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.choiceEffectInstruction);
                 string newInstruction = instruction.Replace("$value", choiceValue.value.ToString());
 
-                CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, false, newInstruction);
+                CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, newInstruction);
 
                 pickQueue.StartQueue();
                 while (!pickQueue.resolved)

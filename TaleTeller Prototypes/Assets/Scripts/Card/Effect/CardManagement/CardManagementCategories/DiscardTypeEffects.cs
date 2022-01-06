@@ -36,7 +36,6 @@ public class DiscardTypeEffects : Effect
                 targetsToDiscard,
                 pickedCards,
                 numberOfCardsToDiscard,
-                false,
                 newInstruction
                 );
 
