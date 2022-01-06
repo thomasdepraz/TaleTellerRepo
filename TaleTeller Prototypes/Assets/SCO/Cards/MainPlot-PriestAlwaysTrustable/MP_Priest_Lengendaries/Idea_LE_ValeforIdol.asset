@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Next turn, earn +2 MANAmax.
+  description: +2 Ink Max on the next turn.
   trigger: 6
   target: 1
   range: 

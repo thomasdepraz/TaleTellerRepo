@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Full Left & Full Right => Multiple the value of each key-word "DRAW"
-    by 2.
+  description: <- <- -> -> Key-word Draw x2.
   trigger: 2
   target: 2
   range: 02000000
@@ -79,7 +78,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Overload :<b> Your Hero gain +1 ATK. (P) '
+  description: <b>Overload :<b> +1 ATK Max.
   trigger: 12
   target: 1
   range: 

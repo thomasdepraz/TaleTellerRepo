@@ -54,6 +54,7 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
+  plotChoiceDescription: 
   legendaryCardRewards: []
 --- !u!114 &5556898286618832836
 MonoBehaviour:
@@ -89,7 +90,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: HERO => The Hero gains + $gainValue$ ATK.
+  description: +$gainValue$ ATK.
   trigger: 1
   target: 1
   range: 

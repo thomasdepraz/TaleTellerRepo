@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HAND => Discard $discardValue$ for each character present on the
-    left '
+  description: Discard $discardValue$ for each Character on left.
   trigger: 2
   target: 2
   range: 03000000
@@ -37,7 +36,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: ALL LEFT => Increase the value of each key-word DRAW by 3
+  description: <- <- Each key-word DRAW +3.
   trigger: 2
   target: 2
   range: 03000000

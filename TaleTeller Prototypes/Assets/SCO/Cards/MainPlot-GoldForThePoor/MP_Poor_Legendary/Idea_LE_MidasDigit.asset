@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Left & Right => Nearby Character''s statistiques become X/X. (X =
-    Hero''s GOLD amount) '
+  description: '<- -> Nearby Character''s statistiques are equal to Hero''s current
+    GOLD. '
   trigger: 1
   target: 2
   range: 0500000009000000

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: The Hero gains +$gainValue$ ATK.
+  description: +$gainValue$ ATK.
   trigger: 0
   target: 1
   range: 
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: ALL => Characters gain +$modifierValue$ ATK.
+  description: <- <- -> -> +$modifierValue$ ATK.
   trigger: 2
   target: 2
   range: 0300000004000000
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HERO => <b>Buy ($buyValue$)</b> :'
+  description: '<b>Buy ($buyValue$)</b> :'
   trigger: 1
   target: 0
   range: 

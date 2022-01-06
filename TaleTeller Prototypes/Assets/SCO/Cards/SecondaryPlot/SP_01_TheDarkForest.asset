@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: ALL => Give + $modifierValue$ ATK to nearby Evil characters.
+  description: Enemies <- <- -> -> +$modifierValue$ ATK.
   trigger: 2
   target: 2
   range: 02000000
@@ -87,6 +87,7 @@ MonoBehaviour:
   completionTimer: 2
   isMainPlot: 0
   isFinal: 0
+  plotChoiceDescription: 
   legendaryCardRewards: []
 --- !u!114 &33654365924650370
 MonoBehaviour:
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: ALL => Increase each keyword "Heal" by 5.
+  description: <- <- -> -> Key-word Heal x5.
   trigger: 2
   target: 2
   range: 02000000

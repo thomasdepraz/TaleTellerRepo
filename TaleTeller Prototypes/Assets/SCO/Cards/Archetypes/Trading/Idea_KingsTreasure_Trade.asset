@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: HERO => Earn + $gainValue$ GOLD.
+  description: +$gainValue$ GOLD.
   trigger: 1
   target: 1
   range: 
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'HAND => For each key-word "BUY" nearby, Draw $drawValue$ '
+  description: 'For each key-word "BUY" draw $drawValue$ '
   trigger: 1
   target: 3
   range: 

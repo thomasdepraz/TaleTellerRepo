@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: The Hero gives all his Gold.
+  description: The Hero gives all his GOLD.
   trigger: 1
   target: 1
   range: 
@@ -71,6 +71,7 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 0
+  plotChoiceDescription: 
   legendaryCardRewards: []
 --- !u!114 &2477744728477637892
 MonoBehaviour:
@@ -85,7 +86,7 @@ MonoBehaviour:
   m_Name: PlotObjective_DumpAmountObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Give 8 Gold to the Medicant Cultist. '
+  objectiveName: 'Give 8 GOLD to the Medicant Cultist. '
   linkedJunkedCards:
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
