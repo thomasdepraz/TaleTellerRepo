@@ -102,18 +102,17 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <- <- -> -> Key-word Heal x5.
+  description: <- <- -> -> Key-word Heal x$modification$.
   trigger: 2
   target: 2
   range: 02000000
   values: []
-  effectValueModification:
-    typeToTarget: 0
-    operatorToTarget: 1
-    modification:
-      value: 5
-      type: 0
-      op: 1
+  typeToTarget: 0
+  operatorToTarget: 1
+  modification:
+    value: 5
+    type: 0
+    op: 3
   modifyTemporary: 0
 --- !u!114 &7266538328612659625
 MonoBehaviour:

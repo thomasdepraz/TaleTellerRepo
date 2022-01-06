@@ -13,18 +13,17 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <- <- -> -> Each key-word BANKRUPT(X+4).
+  description: <- <- -> -> Each key-word Bankrupt (X+$modification).
   trigger: 2
   target: 2
   range: 02000000
   values: []
-  effectValueModification:
-    typeToTarget: 3
-    operatorToTarget: 0
-    modification:
-      value: 4
-      type: 3
-      op: 1
+  typeToTarget: 4
+  operatorToTarget: 0
+  modification:
+    value: 4
+    type: 4
+    op: 1
   modifyTemporary: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -65,18 +64,17 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<- <- -> -> Each key-word BUY (X+4). '
+  description: '<- <- -> -> Each key-word Buy (X+$modification$). '
   trigger: 2
   target: 2
   range: 02000000
   values: []
-  effectValueModification:
-    typeToTarget: 4
-    operatorToTarget: 0
-    modification:
-      value: 4
-      type: 4
-      op: 1
+  typeToTarget: 3
+  operatorToTarget: 0
+  modification:
+    value: 4
+    type: 3
+    op: 1
   modifyTemporary: 0
 --- !u!114 &3016714200515736602
 MonoBehaviour:

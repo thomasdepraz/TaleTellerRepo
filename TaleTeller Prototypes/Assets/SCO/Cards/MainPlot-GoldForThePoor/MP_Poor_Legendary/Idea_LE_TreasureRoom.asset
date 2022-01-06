@@ -13,18 +13,17 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<- <- Each key-word GOLD x2. '
+  description: '<- <- Each key-word GOLD x$modification$. '
   trigger: 2
   target: 2
   range: 03000000
   values: []
-  effectValueModification:
-    typeToTarget: 2
-    operatorToTarget: 1
-    modification:
-      value: 2
-      type: 2
-      op: 3
+  typeToTarget: 2
+  operatorToTarget: 3
+  modification:
+    value: 2
+    type: 2
+    op: 3
   modifyTemporary: 0
 --- !u!114 &-341413726970448737
 MonoBehaviour:
@@ -44,13 +43,12 @@ MonoBehaviour:
   target: 2
   range: 04000000
   values: []
-  effectValueModification:
-    typeToTarget: 5
-    operatorToTarget: 1
-    modification:
-      value: 2
-      type: 5
-      op: 3
+  typeToTarget: 0
+  operatorToTarget: 0
+  modification:
+    value: 0
+    type: 0
+    op: 0
   modifyTemporary: 0
 --- !u!114 &11400000
 MonoBehaviour:

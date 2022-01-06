@@ -18,19 +18,16 @@ public class ValueChangeEffect : ValueModifierEffect
         }
     }
 
-    [Serializable]
-    private struct TypeToTarget
-    {
-        [SerializeField]
-        internal EffectValueType typeToTarget;
-        [SerializeField]
-        internal EffectValueOperator operatorToTarget;
-        [SerializeField]
-        internal EffectValue modification;
-    }
+
+
 
     [Header("Modifier Param"), SerializeField]
-    private TypeToTarget effectValueModification;
+
+    private EffectValueType typeToTarget;
+    [SerializeField]
+    private EffectValueOperator operatorToTarget;
+    [SerializeField]
+    private EffectValue modification;
     [Tooltip("Check this to revert the modification on storyEnd")]
     public bool modifyTemporary;
 
@@ -40,7 +37,7 @@ public class ValueChangeEffect : ValueModifierEffect
     {
         base.InitEffect(card);
 
-            values.Add(effectValueModification.modification);
+            values.Add(modification);
 
         if (modifyTemporary)
             card.onStoryEnd += StartReverseModify;
@@ -59,38 +56,38 @@ public class ValueChangeEffect : ValueModifierEffect
         foreach (CardData card in targetedCards)
         {
             targetedEffect.AddRange(
-                card.effects.Where(e => e.values.Any(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget)));
+                card.effects.Where(e => e.values.Any(v => v.type == typeToTarget && v.op == operatorToTarget)));
         }
 
         EventQueue feedbackQueue = new EventQueue();
 
         foreach (Effect effect in targetedEffect)
         {
-            var targetedValues = effect.values.Where(v => v.type == effectValueModification.typeToTarget && v.op == effectValueModification.operatorToTarget) ;
+            var targetedValues = effect.values.Where(v => v.type == typeToTarget && v.op == operatorToTarget) ;
 
              foreach (EffectValue value in targetedValues)
              {
                  valuesInfos.Add(new ModifyValuesInfos(effect, value));
 
-                switch (effectValueModification.modification.op)
+                switch (modification.op)
                 {
                     case EffectValueOperator.Addition:
-                        value.value += effectValueModification.modification.value;
+                        value.value += modification.value;
                         effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, 1, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Division:
-                        value.value /= effectValueModification.modification.value;
+                        value.value /= modification.value;
                         effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, -1, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Product:
-                        value.value *= effectValueModification.modification.value;
+                        value.value *= modification.value;
                         effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, 1, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Substraction:
-                        value.value -= effectValueModification.modification.value;
+                        value.value -= modification.value;
                         effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, -1, feedbackQueue);
                         break;
 
@@ -128,22 +125,22 @@ public class ValueChangeEffect : ValueModifierEffect
         {
             if (infos.effect?.linkedData?.currentContainer)
             {
-                switch (effectValueModification.modification.op)
+                switch (modification.op)
                 {
                     case EffectValueOperator.Addition:
-                        infos.effect.values.Where(v => v == infos.value).First().value -= effectValueModification.modification.value;
+                        infos.effect.values.Where(v => v == infos.value).First().value -= modification.value;
                         break;
 
                     case EffectValueOperator.Division:
-                        infos.effect.values.Where(v => v == infos.value).First().value *= effectValueModification.modification.value;
+                        infos.effect.values.Where(v => v == infos.value).First().value *= modification.value;
                         break;
 
                     case EffectValueOperator.Product:
-                        infos.effect.values.Where(v => v == infos.value).First().value /= effectValueModification.modification.value;
+                        infos.effect.values.Where(v => v == infos.value).First().value /= modification.value;
                         break;
 
                     case EffectValueOperator.Substraction:
-                        infos.effect.values.Where(v => v == infos.value).First().value += effectValueModification.modification.value;
+                        infos.effect.values.Where(v => v == infos.value).First().value += modification.value;
                         break;
 
                     default:

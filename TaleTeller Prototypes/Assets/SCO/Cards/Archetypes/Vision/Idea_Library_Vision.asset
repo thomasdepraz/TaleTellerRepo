@@ -36,18 +36,17 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <- <- Each key-word DRAW +3.
+  description: <- <- Each key-word DRAW +$modification$.
   trigger: 2
   target: 2
   range: 03000000
   values: []
-  effectValueModification:
-    typeToTarget: 5
-    operatorToTarget: 1
-    modification:
-      value: 3
-      type: 5
-      op: 1
+  typeToTarget: 5
+  operatorToTarget: 1
+  modification:
+    value: 3
+    type: 5
+    op: 1
   modifyTemporary: 0
 --- !u!114 &11400000
 MonoBehaviour:
