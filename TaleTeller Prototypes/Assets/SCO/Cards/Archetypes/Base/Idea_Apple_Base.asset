@@ -48,29 +48,6 @@ MonoBehaviour:
     type: 0
     op: 1
   temporaryChange: 0
---- !u!114 &3530037240211539447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: 
-  trigger: 0
-  target: 0
-  range: 
-  values: []
-  gainValue:
-    value: 0
-    type: 0
-    op: 0
-  temporaryChange: 0
 --- !u!114 &5079544832870409150
 MonoBehaviour:
   m_ObjectHideFlags: 0
