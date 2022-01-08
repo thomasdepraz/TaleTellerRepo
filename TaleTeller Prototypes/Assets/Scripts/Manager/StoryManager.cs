@@ -135,8 +135,8 @@ public class StoryManager : Singleton<StoryManager>
         }
         else
         {
-            TransitionToNextAct();
-            //TransitionToNextTurn();
+            //TransitionToNextAct();
+            TransitionToNextTurn();
         }
     }
 
