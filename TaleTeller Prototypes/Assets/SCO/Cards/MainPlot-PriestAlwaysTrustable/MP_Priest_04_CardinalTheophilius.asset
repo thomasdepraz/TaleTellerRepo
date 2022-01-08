@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Self +$modifierValue$ ATK Max.
+  description: $MP_Priest_04_CardianalThophilius_Effect0
   trigger: 1
   target: 2
   range: 01000000

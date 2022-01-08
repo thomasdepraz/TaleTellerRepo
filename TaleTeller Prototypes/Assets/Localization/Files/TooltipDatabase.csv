@@ -15,3 +15,5 @@ $ATTACK_STAT	<b>Attack</b> : {0}<br>Amount of damage the player inflicts during 
 $GOLD_STAT	<b>Gold</b>: {0}<br>Game currency.
 $DECK	Regroups all of your available cards. <br>It contains {0} cards.
 $DISCARD	Regroups all your used cards. <br>It contains {0} cards.
+$INK	Used to a play card.<br>Recharges at maximum at the beginning of each turn.
+$GOBUTTON	Start reading your chapter.

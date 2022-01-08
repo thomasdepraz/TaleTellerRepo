@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Draw until the Hand is full. '
+  description: $Idea_LE_AstarothIdol_Effect0
   trigger: 1
   target: 3
   range: 

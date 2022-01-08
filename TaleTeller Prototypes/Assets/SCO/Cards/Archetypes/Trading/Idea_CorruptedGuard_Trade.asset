@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Buy ($buyValue$)</b> :'
+  description: $Idea_CorruptedGuard_Trade_Effect0
   trigger: 1
   target: 0
   range: 
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Bankrupt ($bankruptValue$)</b> :'
+  description: $Idea_CorruptedGuard_Trade_Effect2
   trigger: 1
   target: 0
   range: 
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: Effect3
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: -$gainValue$ HP.
+  description: $Idea_CorruptedGuard_Trade_Effect3
   trigger: 0
   target: 1
   range: 
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: +$gainValue$ ATK.
+  description: $Idea_CorruptedGuard_Trade_Effect1
   trigger: 0
   target: 1
   range: 

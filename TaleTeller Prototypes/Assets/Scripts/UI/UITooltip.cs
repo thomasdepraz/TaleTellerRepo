@@ -8,7 +8,9 @@ public enum UITooltipTarget
     ATTACK_STAT, 
     GOLD_STAT,
     DECK, 
-    DISCARD
+    DISCARD,
+    INK,
+    GOBUTTON
 }
 public class UITooltip : MonoBehaviour
 {
@@ -60,6 +62,14 @@ public class UITooltip : MonoBehaviour
                 break;
             case UITooltipTarget.DISCARD:
                 result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$DISCARD");
+                result = string.Format(result, CardManager.Instance.cardDeck.discardPile.Count);
+                break;
+            case UITooltipTarget.INK:
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$INK");
+                result = string.Format(result, CardManager.Instance.cardDeck.discardPile.Count);
+                break;
+            case UITooltipTarget.GOBUTTON:
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$GOBUTTON");
                 result = string.Format(result, CardManager.Instance.cardDeck.discardPile.Count);
                 break;
             default:

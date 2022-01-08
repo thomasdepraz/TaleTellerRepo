@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Enemies <- <- -> -> +$modifierValue$ ATK.
+  description: $SP_01_TheDarkForest_Effect0
   trigger: 2
   target: 2
   range: 02000000
@@ -24,26 +24,6 @@ MonoBehaviour:
     op: 1
   behaviourTargeted: 2
   temporaryChange: 0
---- !u!114 &-1975450839185781411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07819e3126eeb2041b49d44ab9484ec1, type: 3}
-  m_Name: PlotObjective_PlaceObj
-  m_EditorClassIdentifier: 
-  linkedPlotData: {fileID: 0}
-  objectiveName: 
-  linkedJunkedCards: []
-  junkSpawnLocations: 
-  junksPositionsInDeck: 
-  plotOnBoard: 0
-  restriction: 0
-  typeRestrictions: []
 --- !u!114 &-79476425369138332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +82,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <- <- -> -> Key-word Heal x$modification$.
+  description: $SP_01_TheDarkForest_Effect1
   trigger: 2
   target: 2
   range: 02000000

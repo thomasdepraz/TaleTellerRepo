@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <- <- +$modifierValue$ HP.
+  description: $Idea_Campfire_Base_Effect0
   trigger: 2
   target: 2
   range: 03000000

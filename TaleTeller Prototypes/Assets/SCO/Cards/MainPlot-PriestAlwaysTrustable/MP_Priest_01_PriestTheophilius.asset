@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: +$gainValue$ ATK.
+  description: $MP_Priest_01_PriestTheophilius_Effect0
   trigger: 1
   target: 1
   range: 
