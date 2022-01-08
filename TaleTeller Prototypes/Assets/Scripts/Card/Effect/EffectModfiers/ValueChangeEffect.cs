@@ -26,8 +26,7 @@ public class ValueChangeEffect : ValueModifierEffect
     private EffectValueType typeToTarget;
     [SerializeField]
     private EffectValueOperator operatorToTarget;
-    [SerializeField]
-    private EffectValue modification;
+    public  EffectValue modification;
     [Tooltip("Check this to revert the modification on storyEnd")]
     public bool modifyTemporary;
 
