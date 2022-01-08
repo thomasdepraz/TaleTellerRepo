@@ -1,12 +1,19 @@
 Key	Tooltip
-Double Strike	Attack successively twice.
-First Hit	Attack first.
-Range	Attack Characters located at 2 places from its location.
-Obsessing	If in the Hand, the Max Ink is decreased by -1.
+Double Strike	It attacks twice.
+First Hit	It attacks first.
+Range	It attacks characters a slot further.
+Obsessing	Max Ink is decreased by -1 while in hand.
 Undying	Its HP can’t be inferior than 1.
-Bankrupt	If the Hero has X GOLD or less when he crosses this Card position.
-Buy	If the Hero has X GOLD or more when he crosses this Card position.
-Death Rattle	Quand le Personnage meurt.
-Hand - End of Turn	If this Card is in the hand of the player at the end of the preparation phase.
-Illumination	If a Card is drawn.
-Overload	If a Card is discarded.
+Bankrupt	Does something when the Hero has not enough gold.
+Buy	Does something when the Hero has enough gold. Gold is used.
+Last Wish	Does something when it dies.
+Aphoteosis	Does something when it is in hand at the of the turn.
+Illumination	Does something when a card is drawn while on board.
+Overload	Does something when a card is discarded while on board.
+$HEALTH_STAT	<b>Health</b>: {0}  <br>Hero’s health points.  <br><b>If there are no more, the Hero dies, it’s the end of the game</b>
+$ATTACK_STAT	<b>Attack</b> : {0}<br>Amount of damage the player inflicts during an attack.
+$GOLD_STAT	<b>Gold</b>: {0}<br>Game currency.
+$DECK	Regroups all of your available cards. <br>It contains {0} cards.
+$DISCARD	Regroups all your used cards. <br>It contains {0} cards.
+$INK	Used to a play card.<br>Recharges at maximum at the beginning of each turn.
+$GOBUTTON	Start reading your chapter.

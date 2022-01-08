@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <b>Illumination :<b> +1 HP Max.
+  description: $Idea_LE_SacredTemple_Effect0
   trigger: 11
   target: 1
   range: 
@@ -75,16 +75,15 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <- <- -> -> Key-word Discard x2.
+  description: $Idea_LE_SacredTemple_Effect1
   trigger: 2
   target: 2
   range: 02000000
   values: []
-  effectValueModification:
-    typeToTarget: 5
-    operatorToTarget: 2
-    modification:
-      value: 2
-      type: 5
-      op: 3
+  typeToTarget: 0
+  operatorToTarget: 0
+  modification:
+    value: 0
+    type: 0
+    op: 0
   modifyTemporary: 0

@@ -153,7 +153,7 @@ public class CardManager : Singleton<CardManager>
         cardHand.currentHand.Add(data.currentContainer);
 
         data.currentContainer.rectTransform.SetParent(cardHand.handTransform);
-        cardTweening.MoveCard(data.currentContainer, cardHand.RandomPositionInRect(cardHand.handTransform), !alreadyAppeared, !alreadyAppeared, queue);
+        cardTweening.MoveCard(data.currentContainer, cardHand.GetPositionInHand(data), !alreadyAppeared, !alreadyAppeared, queue);
         yield return new WaitForSeconds(0.2f);
 
         queue.UpdateQueue();
@@ -238,7 +238,7 @@ public class CardManager : Singleton<CardManager>
 
         //use method from deck to move cardBack to hand
         EventQueue feedback = new EventQueue();
-        cardTweening.MoveCard(card, cardHand.RandomPositionInRect(cardHand.handTransform), false, false, feedback);
+        cardTweening.MoveCard(card, cardHand.GetPositionInHand(card.data), false, false, feedback);
         cardHand.currentHand.Add(card);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 

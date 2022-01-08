@@ -129,7 +129,7 @@ public class CardContainer : MonoBehaviour
 
     public void OnBeginDrag()
     {
-        if(CardManager.Instance.board.currentBoardState == BoardState.Idle)//Can only interact with cards if story isnt reading
+        if (CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
             #region Tweening + Graphics
             LeanTween.cancel(gameObject);
@@ -138,7 +138,6 @@ public class CardContainer : MonoBehaviour
             targetTransform = CardManager.Instance.pointer.transform;
             transform.SetAsLastSibling();
             shadowTransform.gameObject.SetActive(true);
-            rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.localScale = Vector3.one * visuals.profile.draggedScale;
             #endregion
 
@@ -298,8 +297,6 @@ public class CardContainer : MonoBehaviour
                     currentSlot = CardManager.Instance.currentHoveredSlot;
                     currentSlot.canvasGroup.blocksRaycasts = false;
                     rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
-
-
                 }
                 else
                 {
@@ -331,7 +328,11 @@ public class CardContainer : MonoBehaviour
                     CardManager.Instance.cardHand.currentHand.Add(this);
                 }
 
-
+                //if not in hand move to hand
+                if(!CardManager.Instance.cardHand.IsInHand(this))
+                {
+                    CardManager.Instance.cardTweening.MoveCard(this, CardManager.Instance.cardHand.GetPositionInHand(data));
+                }
             }
             #endregion
         }
@@ -344,16 +345,16 @@ public class CardContainer : MonoBehaviour
 
     public void OnPointerEnter()
     {
-        if(CardManager.Instance.board.currentBoardState == BoardState.Idle)
+        if(CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
             if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
             {
                 CardManager.Instance.hoveredCard = this;
             }
 
-            #region Tweening
-            if (!LeanTween.isTweening(gameObject))
-                originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
+
+
+            originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
 
             if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard && canTween)//Check if in hand
             {
@@ -370,7 +371,6 @@ public class CardContainer : MonoBehaviour
                 rectTransform.anchoredPosition = originPosition;
                 originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
 
-                rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0);
                 rectTransform.localScale = Vector3.one * visuals.profile.hoveredScale;
 
                 //LeanTween.move(rectTransform, rectTransform.anchoredPosition + new Vector2(0, 10f), 0.5f).setEaseOutSine();
@@ -378,13 +378,12 @@ public class CardContainer : MonoBehaviour
 
                 ShowTooltip();
             }
-            #endregion
         }
     }
 
     public void OnPointerExit()
     {
-        if (CardManager.Instance.board.currentBoardState == BoardState.Idle)
+        if (CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
             if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
             {
@@ -397,15 +396,9 @@ public class CardContainer : MonoBehaviour
             {
                 //Scale down 
                 shadowTransform.gameObject.SetActive(false);
-                LeanTween.cancel(gameObject);
-                rectTransform.pivot = new Vector2(rectTransform.pivot.x, 0.5f);
                 rectTransform.localScale = Vector3.one;
 
-                print("hidetooltip");
                 HideTooltip();
-
-                //LeanTween.move(rectTransform, originPosition, 0.5f).setEaseOutSine();
-                //rectTransform.anchoredPosition = originPosition;
 
                 if (!isDragging)
                     transform.SetSiblingIndex(siblingIndex);

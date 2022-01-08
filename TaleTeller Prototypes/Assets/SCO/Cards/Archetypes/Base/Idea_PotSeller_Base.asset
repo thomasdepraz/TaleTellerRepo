@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Draw +$drawValue$.
+  description: $Idea_PotSeller_Base_Effect1
   trigger: 0
   target: 3
   range: 
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<b>Buy ($buyValue$)</b> : '
+  description: $Idea_PotSeller_Base_Effect0
   trigger: 1
   target: 0
   range: 

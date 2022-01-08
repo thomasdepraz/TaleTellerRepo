@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Draw $drawValue$ each time it get hit, .
+  description: $Junk_FleeingMedicant_Effect0
   trigger: 10
   target: 3
   range: 

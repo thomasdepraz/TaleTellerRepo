@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <color=white> <- -> <b>Beginning</b> -$modifierValue$ ATK for each
-    Good Characters.
+  description: $DI_ThrillingSmoke_Effect1
   trigger: 1
   target: 2
   range: 0500000009000000
@@ -64,7 +63,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: <color=white> <b>Obsessing</b>
+  description: $DI_ThrillingSmoke_Effect0
   trigger: 7
   target: 0
   range: 

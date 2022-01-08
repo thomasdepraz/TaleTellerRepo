@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Self <b>Illumination</b> : +$modifierValue$ HP / +3 ATK.'
+  description: $Idea_OldSage_Vision_Effect0
   trigger: 11
   target: 2
   range: 01000000
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: Effect2
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 'Self <b>Overload</b> : -$modifierValue$ HP / -1 ATK.'
+  description: $Idea_OldSage_Vision_Effect2
   trigger: 12
   target: 2
   range: 01000000

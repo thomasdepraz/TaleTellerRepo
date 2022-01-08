@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: '<- <- -> -> +10 ATK to each Allies. '
+  description: $Idea_LE_HeadQuarter_Effect0
   trigger: 2
   target: 2
   range: 02000000

@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: Choice $choiceValue$.
+  description: $Idea_Fairy_Vision_Effect0
   trigger: 1
   target: 4
   range: 

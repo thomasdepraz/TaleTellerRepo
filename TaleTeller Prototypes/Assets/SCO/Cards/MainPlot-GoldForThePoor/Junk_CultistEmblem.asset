@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: ' Discard the top Card of the Deck.'
+  description: $Junk_CultistEmblem_Effect0
   trigger: 1
   target: 4
   range: 

@@ -101,6 +101,9 @@ public class Effect : ScriptableObject
     public virtual void InitEffect(CardData card) // <-- Extend this base each time you want to support a new event
     {
         linkedData = card;
+        if(description!=string.Empty)
+            description = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardEffectsDescriptionsDictionary, description);
+
         //switch case that subscribes OnTriggerEffect() to the right delegate based on the effect trigger
         switch (trigger)
         {
