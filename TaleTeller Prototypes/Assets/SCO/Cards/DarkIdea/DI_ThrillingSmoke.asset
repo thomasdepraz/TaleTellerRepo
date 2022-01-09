@@ -41,7 +41,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 19bde433adf37a5478dfaee650de375f, type: 3}
+  cardGraph: {fileID: 21300000, guid: 194437ad3eda25c4b9435cc825daf759, type: 3}
   currentContainer: {fileID: 0}
   description: "Fum\xE9e rose avec des paillettes\r\n"
   effectsReferences:

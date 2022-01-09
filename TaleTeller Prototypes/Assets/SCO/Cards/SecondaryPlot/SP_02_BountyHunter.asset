@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 21300000, guid: 358c098385325d640869c227d2d8bc6c, type: 3}
+  cardGraph: {fileID: 21300000, guid: 9d14f0e953460ee41893df4e14eacee2, type: 3}
   currentContainer: {fileID: 0}
   description: "Un NPC avec deux \xE9p\xE9es.\r\n"
   effectsReferences: []
@@ -28,6 +28,7 @@ MonoBehaviour:
   completionTimer: 2
   isMainPlot: 0
   isFinal: 0
+  plotChoiceDescription: 
   legendaryCardRewards: []
 --- !u!114 &844368311689511782
 MonoBehaviour:

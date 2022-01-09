@@ -42,7 +42,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 78d43010e0f49e542847eb3dedc01be9, type: 3}
+  cardGraph: {fileID: 21300000, guid: 20c999a9afd17b94b8e6e3c28b5bf6e5, type: 3}
   currentContainer: {fileID: 0}
   description: Defeat the Demon while Theophilus is on the next step.
   effectsReferences:

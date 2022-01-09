@@ -39,7 +39,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 21300000, guid: 2cc687093bde4ea41af1265748a5dc32, type: 3}
+  cardGraph: {fileID: 21300000, guid: c9cced77726bc60438fc631e5287b24d, type: 3}
   currentContainer: {fileID: 0}
   description: "Tasse de caf\xE9 renvers\xE9e sur du papier\r\n"
   effectsReferences:

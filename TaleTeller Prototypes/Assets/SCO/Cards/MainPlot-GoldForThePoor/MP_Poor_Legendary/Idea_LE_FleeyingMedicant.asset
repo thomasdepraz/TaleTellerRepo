@@ -40,7 +40,7 @@ MonoBehaviour:
   rarity: 5
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 21300000, guid: fe9db798047e0e04583d9844228f6591, type: 3}
+  cardGraph: {fileID: 21300000, guid: 5bab7c4c88e5a8345a15544433a49918, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
