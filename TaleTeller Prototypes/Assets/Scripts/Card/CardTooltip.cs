@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardTooltip : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class CardTooltip : MonoBehaviour
             }
         }).setEaseInOutQuint().setOnStart(() => 
         {
+            gameObject.SetActive(false);
             gameObject.SetActive(true);
         });
     }
