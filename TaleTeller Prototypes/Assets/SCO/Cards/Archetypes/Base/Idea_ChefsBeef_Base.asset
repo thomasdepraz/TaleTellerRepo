@@ -19,7 +19,7 @@ MonoBehaviour:
   range: 
   values: []
   gainValue:
-    value: 4
+    value: 5
     type: 0
     op: 1
   temporaryChange: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
   range: 
   values: []
   buyValue:
-    value: 2
+    value: 3
     type: 3
     op: 0
   effectTriggerIfCanPay: {fileID: -8938817969714161448}
