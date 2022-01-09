@@ -10,9 +10,11 @@ public class Pointer : MonoBehaviour
     public Vector2 screenSize;
     public Transform self;
 
-    public RectTransform tooltipPanel;
+    public RectTransform targetTransform;
+    public RectTransform tooltipTransform;
     public TextMeshProUGUI tooltipText;
     private bool tooltipOpen;
+    private bool hovering;
 
     public List<RaycastResult> results = new List<RaycastResult>();
     public Vector3 pointerDirection;
@@ -30,31 +32,68 @@ public class Pointer : MonoBehaviour
 
         if(tooltipOpen)
         {
-            tooltipPanel.position = transform.position;
+            targetTransform.position = transform.position;
         }
     }
 
     public void ShowTooltip(string description)
     {
         tooltipOpen = true;
+        hovering = true;
         tooltipText.SetText(description);
 
+        //set pivot 
+        SetPivotFromScreenPos(tooltipTransform);
+
+
         LeanTween.cancel(gameObject);
-        LeanTween.value(gameObject, tooltipPanel.localScale.x, 1, 0.1f).setOnUpdate((float value) =>
+        LeanTween.value(gameObject, targetTransform.localScale.x, 1, 0.1f).setDelay(0.3f).setOnStart(()=> 
         {
-            tooltipPanel.localScale = new Vector3(value, value, 1);
+            if (!hovering)
+                LeanTween.cancel(gameObject);
+        
+        }).setOnUpdate((float value) =>
+        {
+            targetTransform.localScale = new Vector3(value, value, 1);
         }).setEaseInOutQuint();
     }
 
     public void HideTooltip()
     {
+        hovering = false;
         LeanTween.cancel(gameObject);
-        LeanTween.value(gameObject, tooltipPanel.localScale.x, 0, 0.1f).setOnUpdate((float value) =>
+        LeanTween.value(gameObject, targetTransform.localScale.x, 0, 0.1f).setOnUpdate((float value) =>
         {
-            tooltipPanel.localScale = new Vector3(value, value, 1);
+            targetTransform.localScale = new Vector3(value, value, 1);
         }).setEaseInOutQuint().setOnComplete(()=> 
         {
             tooltipOpen = false;
         });
+    }
+
+    void SetPivotFromScreenPos(RectTransform t)
+    {
+        if(transform.position.x < 0)
+        {
+            if(transform.position.y<0)
+            {
+                t.pivot = new Vector2(0,0);
+            }
+            else
+            {
+                t.pivot = new Vector2(0, 1);
+            }
+        }
+        else
+        {
+            if (transform.position.y < 0)
+            {
+                t.pivot = new Vector2(1, 0);
+            }
+            else
+            {
+                t.pivot = new Vector2(1, 1);
+            }
+        }
     }
 }
