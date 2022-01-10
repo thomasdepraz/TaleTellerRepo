@@ -87,7 +87,7 @@ public class ManaSystem : MonoBehaviour
         {
             var modifier = poolModifiers[i];
 
-            if (modifier.turnBeforeFade <= 0)
+            if (modifier.turnBeforeFade < 0)
                 poolModifiers.Remove(modifier);
             else
             {
