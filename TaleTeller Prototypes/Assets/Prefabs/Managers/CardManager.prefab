@@ -184,7 +184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.005489886, y: 0.99375045}
   m_AnchorMax: {x: 1, y: 1.5747217}
-  m_AnchoredPosition: {x: 0.00018310547, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0.00018310547, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3900416490949303103
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   cardDeck: []
   cachedDeck: []
   discardPile: []
-  baseDeck: {fileID: 11400000, guid: 01a63589661708e4a86da295846209fe, type: 2}
+  baseDeck: {fileID: 11400000, guid: 6c025bb0d54e692418fba0fe66593575, type: 2}
   drawAmount: 3
   drawAmountFirstTurn: 5
 --- !u!1 &3900416491978693814

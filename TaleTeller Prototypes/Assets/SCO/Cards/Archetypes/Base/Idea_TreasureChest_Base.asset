@@ -17,13 +17,13 @@ MonoBehaviour:
   rarity: 1
   archetype: 1
   manaCost: 2
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 6d5f51f79d81b2c45b033a9196663892, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
   - {fileID: 996648425123532430}
   effects: []
-  cardTypeReference: {fileID: 0}
+  cardTypeReference: {fileID: 7265544321236676357}
   cardType: {fileID: 0}
 --- !u!114 &996648425123532430
 MonoBehaviour:
@@ -38,7 +38,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: '<b>Last Wish</b>: +$drawValue$ cards'
   trigger: 8
   target: 3
   range: 
@@ -61,10 +61,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 0
-    baseAttackDamage: 0
-  behaviour: 0
-  fightingRange: 0
+    baseLifePoints: 3
+    baseAttackDamage: 1
+  behaviour: 2
+  fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 0
+  useCount: 2
