@@ -10,7 +10,10 @@ $Idea_PotSeller_Base_Effect1	Draw +$drawValue$.
 $Idea_RefinedSword_Base_Effect0	<b>Buy ($buyValue$)</b> : 
 $Idea_RefinedSword_Base_Effect1	+$gainValue$ ATK.
 $Idea_Sword_Base_Effect0	+$gainValue$ ATK.
+$Idea_Sword_Base_Effect1	Character -> +$modifierValue$ ATK.
 $Idea_Veteran_Base_Effect0	Character -> +$modifierValue$ ATK.
+$Idea_TreasureChest_Base_Effect0	<b>Last Wish</b> : Draw $drawValue$.
+$Idea_LittleGoblin_Base_Effect0	<b>Last Wish</b> : +$gainValue$ GOLD.
 $Idea_Bank_Trade_Effect0	<- <- -> -> Each key-word Buy (X-$modification$).
 $Idea_Bank_Trade_Effect1	<- <- -> -> Each key-word Bankrupt (X -$modification$). 
 $Idea_Bourgeois_Trade_Effect0	<b>Bankrupt ($bankruptValue$)</b> :

@@ -53,6 +53,9 @@ TagManager:
   - name: Cards
     uniqueID: 1326058057
     locked: 0
+  - name: CardsFront
+    uniqueID: 3374342811
+    locked: 0
   - name: StatsUI
     uniqueID: 3130763005
     locked: 0

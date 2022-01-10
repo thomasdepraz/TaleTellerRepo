@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_Sword_Base_Effect1
   trigger: 1
   target: 2
   range: 09000000

@@ -12,6 +12,7 @@ public class CardVisuals : MonoBehaviour
 
     
     [Header("Images")]
+    public Image cardBackgoundFitter;
     public Image cardBackgound;
     public Image cardFrame;
     public Image cardFrameMask;
@@ -47,7 +48,9 @@ public class CardVisuals : MonoBehaviour
         Type dataType = data.GetType();
         if(dataType == typeof(IdeaCard))
         {
+            cardBackgoundFitter.sprite = profile.ideaBackground;
             cardBackgound.sprite = profile.ideaBackground;
+
             cardFlag.sprite = profile.ideaFlag;
 
             cardManaFrame.sprite = profile.normalManaFrame;
@@ -59,7 +62,9 @@ public class CardVisuals : MonoBehaviour
         }
         else if (dataType == typeof(PlotCard))
         {
+            cardBackgoundFitter.sprite = profile.plotBackground;
             cardBackgound.sprite = profile.plotBackground;
+
             cardFlag.sprite = profile.plotFlag;
             cardManaFrame.sprite = profile.normalManaFrame;
 
@@ -77,7 +82,9 @@ public class CardVisuals : MonoBehaviour
         }
         else if(dataType == typeof(DarkIdeaCard))
         {
+            cardBackgoundFitter.sprite = profile.curseBackground;
             cardBackgound.sprite = profile.curseBackground;
+
             cardFlag.sprite = profile.curseFlag;
             cardManaFrame.sprite = profile.curseManaFrame;
 
@@ -88,7 +95,9 @@ public class CardVisuals : MonoBehaviour
         }
         else if(dataType == typeof(JunkCard))
         {
+            cardBackgoundFitter.sprite = profile.junkBackground;
             cardBackgound.sprite = profile.junkBackground;
+
             cardFlag.sprite = profile.plotFlag;
             cardManaFrame.sprite = profile.normalManaFrame;
 
