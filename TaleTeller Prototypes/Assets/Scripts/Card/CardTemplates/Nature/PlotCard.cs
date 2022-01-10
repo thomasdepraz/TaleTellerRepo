@@ -192,7 +192,6 @@ public class PlotCard : CardData
         }
         else //If last then go to next acte
         {
-            Debug.LogError("NORMALEMENT C'EST LA FIN DE l'ACTE");
             StoryManager.Instance.NextStoryArc();
         }
 
