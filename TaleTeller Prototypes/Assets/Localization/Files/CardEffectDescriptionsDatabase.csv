@@ -36,7 +36,7 @@ $Idea_Knife_Trade_Effect0	+$gainValue$ ATK.
 $Idea_Knife_Trade_Effect1	<- -> <b>Buy ($buyValue$)</b> :
 $Idea_Knife_Trade_Effect2	+$modifierValue$ ATK.
 $Idea_Shallows_Trade_Effect0	<- <- -> -> Each key-word Buy (X+$modification$). 
-$Idea_Shallows_Trade_Effect1	<- <- -> -> Each key-word Bankrupt (X+$modification).
+$Idea_Shallows_Trade_Effect1	<- <- -> -> Each key-word Bankrupt (X+$modification$).
 $Idea_StackOfCoins_Trade_Effect0	+$gainValue$ GOLD.
 $Idea_Tavern_Trade_Effect0	<- <- -> -> +$modifierValue$ HP.
 $Idea_Tavern_Trade_Effect1	<b>Buy ($buyValue$)</b> :

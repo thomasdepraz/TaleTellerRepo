@@ -87,27 +87,19 @@ public class RewardManager : Singleton<RewardManager>
         secondaryRewardCardContainer.gameObject.GetComponent<EventTrigger>().triggers.Add(_entry);
 
         #endregion
-
-
-        InitCards();
     }
 
     void InitCards()
     {
-        for (int i = 0; i < secondaryRewardCards.Count; i++)
-        {
-            secondaryRewardCards[i] = secondaryRewardCards[i].InitializeData(secondaryRewardCards[i]);
-        }
-
-        for (int i = 0; i < rewardPoolTrading.Count; i++)
-        {
-            rewardPoolTrading[i] =  rewardPoolTrading[i].InitializeData(rewardPoolTrading[i]);
-        }
-
-        for (int i = 0; i < rewardPoolVision.Count; i++)
-        {
-            rewardPoolVision[i] =  rewardPoolVision[i].InitializeData(rewardPoolVision[i]);
-        }
+        UtilityClass.InitCardList(secondaryRewardCards);
+        UtilityClass.InitCardList(rewardPoolTrading);
+        UtilityClass.InitCardList(rewardPoolVision);
+    }
+    void ResetCards()
+    {
+        UtilityClass.ResetCardList(secondaryRewardCards);
+        UtilityClass.ResetCardList(rewardPoolTrading);
+        UtilityClass.ResetCardList(rewardPoolVision);
     }
 
     public void ChooseMainPlotReward(EventQueue queue, PlotCard card)
@@ -116,7 +108,7 @@ public class RewardManager : Singleton<RewardManager>
     }
     IEnumerator ChooseMainPlotRewardRoutine(EventQueue queue, PlotCard card)//Pick between nine cards 
     {
-        yield return null;
+        InitCards();
         List<CardData> firstBatch = GetMainPlotRewardsFirstBatch(GetArchetypeList(card), 6);
         List<CardData> secondBatch = GetMainPlotRewardsSecondBatch(GetArchetypeList(card), 3, GetRandomRarity());
 
@@ -175,6 +167,7 @@ public class RewardManager : Singleton<RewardManager>
         batchOneSelectedCards.Clear();
         batchTwoSelectedCards.Clear();
 
+        ResetCards();
         queue.UpdateQueue();
     }
 

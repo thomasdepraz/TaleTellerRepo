@@ -39,4 +39,20 @@ public static class UtilityClass
     {
         return "<b>" + text + "</b>";
     }
+
+    public static void InitCardList(List<CardData> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i] = list[i].InitializeData(list[i]);
+        }
+    }
+
+    public static void ResetCardList(List<CardData> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i] = list[i].dataReference;
+        }
+    }
 }

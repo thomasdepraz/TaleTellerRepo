@@ -132,8 +132,6 @@ public class Deck : MonoBehaviour
 
         //All the discarded cards ar back in the deck now u can shuffle
         ShuffleCards(cardDeck);
-        Debug.LogError("Shuffling discard pile in deck");
-
         queue.UpdateQueue();
     }
 
