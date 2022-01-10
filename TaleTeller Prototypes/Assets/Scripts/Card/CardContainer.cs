@@ -53,7 +53,7 @@ public class CardContainer : MonoBehaviour
         //}
         //if (Input.GetKeyDown(KeyCode.A))
         //{
-        //    visuals.CardAttack(this, 0, new EventQueue());
+        //    CardManager.Instance.cardTweening.CardAttack(this, 0, new EventQueue());
         //}
         //if (Input.GetKeyDown(KeyCode.D))
         //{
