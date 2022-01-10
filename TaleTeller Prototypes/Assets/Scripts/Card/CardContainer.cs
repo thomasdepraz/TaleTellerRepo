@@ -164,6 +164,8 @@ public class CardContainer : MonoBehaviour
         shadowTransform.gameObject.SetActive(false);
         #endregion
 
+        CardManager.Instance.board.HideTargetSlots();
+
         //If hovers, swap card, else drop in or out of slot
         if(CardManager.Instance.hoveredCard != null)
         {

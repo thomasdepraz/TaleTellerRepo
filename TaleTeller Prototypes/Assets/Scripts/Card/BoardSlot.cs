@@ -16,14 +16,6 @@ public class BoardSlot : MonoBehaviour
         set
         {
             _currentPlacedCard = value;
-            if(value == null)
-            {
-                image.sprite = defaultSprite;
-            }
-            else
-            {
-                image.sprite = hoveredSprite;
-            }
         }        
     }
     public CanvasGroup canvasGroup;
@@ -38,19 +30,28 @@ public class BoardSlot : MonoBehaviour
         if (CardManager.Instance.holdingCard)
         {
             CardManager.Instance.currentHoveredSlot = this;
+            CardManager.Instance.board.ShowTargetSlots(CardManager.Instance.currentCard.data);
         }
-
-        image.sprite = hoveredSprite;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.sprite = defaultSprite;
-
         if (CardManager.Instance.holdingCard)
         {
             if (CardManager.Instance.currentHoveredSlot == this)
                 CardManager.Instance.currentHoveredSlot = null;
+
+            CardManager.Instance.board.HideTargetSlots();
         }
+    }
+
+    public void ShowHighlight()
+    {
+        image.color = Color.red;
+    }
+
+    public void HideHighlight()
+    {
+        image.color = Color.white;
     }
 }
