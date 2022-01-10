@@ -72,7 +72,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 9e7512d4367d67e40b31fcc50d546c73, type: 3}
+  cardGraph: {fileID: 21300000, guid: 74af055fbc2c3f44387154eea0e17034, type: 3}
   currentContainer: {fileID: 0}
   description: 'Place the Cult Headquarter''s Entrance on the Track while defeating
     the Gatekeeper.

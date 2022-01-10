@@ -63,7 +63,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 0c50d175e8026a94ea0331db048778fd, type: 3}
+  cardGraph: {fileID: 21300000, guid: 7cf1df8c9eebfbe449c9ef57fb144c92, type: 3}
   currentContainer: {fileID: 0}
   description: The Hero gains +1 Gold.
   effectsReferences:

@@ -56,7 +56,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: fb85e4de86ab5514eb0bd66f41a5ce05, type: 3}
+  cardGraph: {fileID: 21300000, guid: 1ec31547b6bf83d49868487743bbbee0, type: 3}
   currentContainer: {fileID: 0}
   description: 'Deathrattle : The Enemy attack the last NPC or Hero who fought it.
 
