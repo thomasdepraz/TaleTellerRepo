@@ -431,13 +431,17 @@ public class CardContainer : MonoBehaviour
         {
             if(effectDescription.Contains(keywords[j]))
             {
-                tooltips[count].AppearTooltip(keywords[j], 1, (count + 1) * 0.1f);
+                tooltips[count].AppearTooltip(keywords[j], 1, 0.3f + (count + 1) * 0.1f);
                 count++;
             }
         }
     }
     public void HideTooltip()
     {
+        for (int i = 0; i < tooltips.Count; i++)
+        {
+            tooltips[i].hovered = false;
+        }
         int count = 0;
         //hide all active tooltip
         for (int i = 0; i < tooltips.Count; i++)

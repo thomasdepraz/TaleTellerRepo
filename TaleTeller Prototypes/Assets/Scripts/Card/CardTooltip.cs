@@ -11,7 +11,7 @@ public class CardTooltip : MonoBehaviour
     public TextMeshProUGUI tooltipTextVisible;
     private string text;
     private float tweeningValue;
-    private bool hovered;
+    [HideInInspector] public bool hovered;
 
     public void AppearTooltip(string key, int direction, float delay)
     {
@@ -49,6 +49,7 @@ public class CardTooltip : MonoBehaviour
                 gameObject.SetActive(false);
                 gameObject.SetActive(true);
             }
+            
         });
     }
 
