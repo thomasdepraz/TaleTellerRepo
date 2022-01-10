@@ -38,9 +38,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
   - name: Foreground
     uniqueID: 1439386693
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Draft
+    uniqueID: 1966471979
+    locked: 0
+  - name: CardsShadow
+    uniqueID: 4281410943
+    locked: 0
+  - name: Cards
+    uniqueID: 1326058057
+    locked: 0
+  - name: StatsUI
+    uniqueID: 3130763005
+    locked: 0
+  - name: UITooltip
+    uniqueID: 3093879103
     locked: 0

@@ -53,7 +53,7 @@ public class CardContainer : MonoBehaviour
         //}
         //if (Input.GetKeyDown(KeyCode.A))
         //{
-        //    visuals.CardAttack(this, 0, new EventQueue());
+        //    CardManager.Instance.cardTweening.CardAttack(this, 0, new EventQueue());
         //}
         //if (Input.GetKeyDown(KeyCode.D))
         //{
@@ -352,8 +352,6 @@ public class CardContainer : MonoBehaviour
                 CardManager.Instance.hoveredCard = this;
             }
 
-
-
             originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
 
             if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard && canTween)//Check if in hand
@@ -433,11 +431,10 @@ public class CardContainer : MonoBehaviour
         {
             if(effectDescription.Contains(keywords[j]))
             {
-                tooltips[count].AppearTooltip(keywords[j], 1, (count + 1) * 0.1f); 
+                tooltips[count].AppearTooltip(keywords[j], 1, (count + 1) * 0.1f);
                 count++;
             }
         }
-        
     }
     public void HideTooltip()
     {

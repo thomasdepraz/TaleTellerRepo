@@ -15,14 +15,14 @@ public class CardTweening : MonoBehaviour
     {
         if (Mathf.Abs(direction) > 0)
         {
-            float originX = container.rectTransform.anchoredPosition.x;
+            float originX = container.rectTransform.localPosition.x;
             LeanTween.moveLocalX(container.gameObject, originX + direction * -2f, 0.5f).setEaseOutQuint().setOnComplete(
                 value => LeanTween.moveLocalX(container.gameObject, originX + direction * 50, 0.2f).setEaseInQuint().setOnComplete(
                     val => LeanTween.moveLocalX(container.gameObject, originX, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
         }
         else
         {
-            float originY = container.rectTransform.anchoredPosition.y;
+            float originY = container.rectTransform.localPosition.y;
             LeanTween.moveLocalY(container.gameObject, originY - 2f, 0.5f).setEaseOutQuint().setOnComplete(
                value => LeanTween.moveLocalY(container.gameObject, originY + 50, 0.2f).setEaseInQuint().setOnComplete(
                    val => LeanTween.moveLocalY(container.gameObject, originY, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
