@@ -36,7 +36,7 @@ public class Pointer : MonoBehaviour
         }
     }
 
-    public void ShowTooltip(string description)
+    public void ShowTooltip(string description, float delay = 0.3f)
     {
         tooltipOpen = true;
         hovering = true;
@@ -47,7 +47,7 @@ public class Pointer : MonoBehaviour
 
 
         LeanTween.cancel(gameObject);
-        LeanTween.value(gameObject, targetTransform.localScale.x, 1, 0.1f).setDelay(0.3f).setOnStart(()=> 
+        LeanTween.value(gameObject, targetTransform.localScale.x, 1, 0.1f).setDelay(delay).setOnStart(()=> 
         {
             if (!hovering)
                 LeanTween.cancel(gameObject);
@@ -62,13 +62,8 @@ public class Pointer : MonoBehaviour
     {
         hovering = false;
         LeanTween.cancel(gameObject);
-        LeanTween.value(gameObject, targetTransform.localScale.x, 0, 0.1f).setOnUpdate((float value) =>
-        {
-            targetTransform.localScale = new Vector3(value, value, 1);
-        }).setEaseInOutQuint().setOnComplete(()=> 
-        {
-            tooltipOpen = false;
-        });
+        targetTransform.localScale = Vector3.zero;
+        tooltipOpen = false;
     }
 
     void SetPivotFromScreenPos(RectTransform t)
