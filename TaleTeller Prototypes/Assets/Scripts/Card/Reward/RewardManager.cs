@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -63,30 +64,36 @@ public class RewardManager : Singleton<RewardManager>
 
     private void Start()
     {
-        #region onClick Init
-        for (int i = 0; i < batchOneContainers.Count; i++)
+        InitEvent(batchOneContainers, SelectCard, EventTriggerType.PointerClick);
+        InitEvent(batchOneContainers, PointerEnterContainer, EventTriggerType.PointerEnter);
+        InitEvent(batchOneContainers, PointerExitContainer, EventTriggerType.PointerExit);
+
+        InitEvent(batchTwoContainers, SelectCard, EventTriggerType.PointerClick);
+        InitEvent(batchTwoContainers, PointerEnterContainer, EventTriggerType.PointerEnter);
+        InitEvent(batchTwoContainers, PointerExitContainer, EventTriggerType.PointerExit);
+
+        InitEvent(secondaryRewardCardContainer, SelectCardSecondary, EventTriggerType.PointerClick);
+        InitEvent(secondaryRewardCardContainer, PointerEnterContainer, EventTriggerType.PointerEnter);
+        InitEvent(secondaryRewardCardContainer, PointerExitContainer, EventTriggerType.PointerExit);
+    }
+
+    public void InitEvent(List<CardContainer> containers, Action<CardContainer> action, EventTriggerType triggerType)
+    {
+        for (int i = 0; i < containers.Count; i++)
         {
             int j = i;
             EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerClick;
-            entry.callback.AddListener(data => { SelectCard(batchOneContainers[j]); });
-            batchOneContainers[i].gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
+            entry.eventID = triggerType;
+            entry.callback.AddListener(data => action(containers[j]));
+            containers[i].gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
         }
-        for (int i = 0; i < batchTwoContainers.Count; i++)
-        {
-            int j = i;
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerClick;
-            entry.callback.AddListener(data => { SelectCard(batchTwoContainers[j]); });
-            batchTwoContainers[i].gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
-        }
-
-        EventTrigger.Entry _entry = new EventTrigger.Entry();
-        _entry.eventID = EventTriggerType.PointerClick;
-        _entry.callback.AddListener(data => { SelectCardSecondary(secondaryRewardCardContainer); });
-        secondaryRewardCardContainer.gameObject.GetComponent<EventTrigger>().triggers.Add(_entry);
-
-        #endregion
+    }
+    public void InitEvent(CardContainer container, Action<CardContainer> action, EventTriggerType triggerType)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = triggerType;
+        entry.callback.AddListener(data => action(container));
+        container.gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
     }
 
     void InitCards()
@@ -214,7 +221,7 @@ public class RewardManager : Singleton<RewardManager>
     }
     IEnumerator ChooseSecondaryPlotRewardRoutine(EventQueue queue, PlotCard card)//Pick between one card / one action / one hero stats boost
     {
-
+        InitCards();
         canvasGroup.blocksRaycasts = true;
         confirmed = false;
 
@@ -282,6 +289,7 @@ public class RewardManager : Singleton<RewardManager>
 
         secondaryPlotSelectedCard = null;
 
+        ResetCards();
         queue.UpdateQueue();
     }
 
@@ -424,71 +432,46 @@ public class RewardManager : Singleton<RewardManager>
     {
         if(batchOneContainers.Contains(container))
         {
-            #region select for batch one
-            if (batchOneSelectedCards.Contains(container.data))
-            {
-                //Hide selected shader
-                container.selfImage.color = Color.white;
-
-                //Remove from list
-                batchOneSelectedCards.Remove(container.data);
-
-                return;
-            }
-
-            if (batchOneSelectedCards.Count == batchOneNumberToSelect)
-            {
-                return;
-            }
-
-            else if (!batchOneSelectedCards.Contains(container.data))
-            {
-                //show selected shader
-                container.selfImage.color = Color.green;
-
-                //add to list
-                batchOneSelectedCards.Add(container.data);
-            }
-            #endregion
+            SelectHelper(batchOneSelectedCards, container, batchOneNumberToSelect);
         }
         else if(batchTwoContainers.Contains(container))
         {
-            #region select for batch two
-            if (batchTwoSelectedCards.Contains(container.data))
-            {
-                //Hide selected shader
-                container.selfImage.color = Color.white;
-
-                //Remove from list
-                batchTwoSelectedCards.Remove(container.data);
-
-                return;
-            }
-
-            if (batchTwoSelectedCards.Count == batchTwoNumberToSelect)
-            {
-                return;
-            }
-
-            else if (!batchTwoSelectedCards.Contains(container.data))
-            {
-                //show selected shader
-                container.selfImage.color = Color.green;
-
-                //add to list
-                batchTwoSelectedCards.Add(container.data);
-            }
-            #endregion
+            SelectHelper(batchTwoSelectedCards, container, batchTwoNumberToSelect);
         }
     }
+    public void SelectHelper(List<CardData> list, CardContainer container, int numberToSelect)
+    {
+        if (list.Contains(container.data))
+        {
+            //Hide selected shader
+            PickerHelper.DeselectContainerFeedback(container);
 
+            //Remove from list
+            list.Remove(container.data);
+
+            return;
+        }
+
+        if (list.Count == numberToSelect)
+        {
+            return;
+        }
+
+        else if (!list.Contains(container.data))
+        {
+            //show selected shader
+            PickerHelper.SelectContainerFeedback(container);
+
+            //add to list
+            list.Add(container.data);
+        }
+    }
     public void OnButtonClick()
     {
         confirmed = true;
         confirmButton.gameObject.SetActive(false);
     }
     #endregion
-
 
     #region Secondary Rewards Utility
     public void InitSecondaryRewardPlaceholder()
@@ -578,5 +561,12 @@ public class RewardManager : Singleton<RewardManager>
     }
     #endregion
 
-
+    public void PointerEnterContainer(CardContainer container)
+    {
+        PickerHelper.PointerEnter(container.gameObject);
+    }
+    public void PointerExitContainer(CardContainer container)
+    {
+        PickerHelper.PointerExit(container.gameObject);
+    }
 }

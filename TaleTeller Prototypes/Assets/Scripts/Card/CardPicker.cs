@@ -297,22 +297,18 @@ public class CardPicker : MonoBehaviour
     }
     public void PointerEnter(CardContainer container)
     {
-        //Tween
-        LeanTween.rotate(container.gameObject, Vector3.zero, 0.2f).setEaseInOutCubic();
-        LeanTween.scale(container.gameObject, Vector3.one * 1.3f, 0.1f).setEaseInOutCubic(); 
+        PickerHelper.PointerEnter(container.gameObject);
     }
     public void PointerExit(CardContainer container)
     {
-        //Tween
-        LeanTween.scale(container.gameObject, Vector3.one, 0.1f).setEaseInOutCubic();
+        PickerHelper.PointerExit(container.gameObject);
     }
 
     void Select(CardContainer container)
     {
         lastSelectedContainer = container;
 
-        //Show selected shader
-        container.selfImage.color = Color.green;
+        PickerHelper.SelectContainerFeedback(container);
 
         //Add to list 
         selectedCards.Add(container.data);
@@ -322,13 +318,10 @@ public class CardPicker : MonoBehaviour
     }
     void Deselect(CardContainer container)
     {
-        //Show selected shader
-        container.selfImage.color = Color.white;
+        PickerHelper.DeselectContainerFeedback(container);
 
-        //Add to list 
         selectedCards.Remove(container.data);
 
-        //if valid show button
         if (!isValid()) confirmButton.interactable = false;
     }
 
@@ -381,12 +374,13 @@ public class CardPicker : MonoBehaviour
 
     public void PointerEnterIllustration(SchemeDescription schemeDescription)
     {
-        //Tweening shit happens
+        PickerHelper.PointerEnter(schemeDescription.illustration.gameObject);
     }
 
     public void PointerExitIllustration(SchemeDescription schemeDescription)
     {
         //Tweening shit happens again
+        PickerHelper.PointerExit(schemeDescription.illustration.gameObject);
     }
 
     void SelectIllu(SchemeDescription schemeDescription)
