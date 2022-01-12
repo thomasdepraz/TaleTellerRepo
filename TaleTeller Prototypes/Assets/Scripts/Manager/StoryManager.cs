@@ -289,6 +289,7 @@ public class StoryManager : Singleton<StoryManager>
     public void NextStoryArc()
     {
         transitionToNextAct = true;
+        turnCount = 0;
     }
 
 

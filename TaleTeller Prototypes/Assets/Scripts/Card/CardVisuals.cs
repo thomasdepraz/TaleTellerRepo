@@ -14,6 +14,7 @@ public class CardVisuals : MonoBehaviour
     [Header("Images")]
     public Image cardBackgoundFitter;
     public Image cardBackgound;
+    public Image cardHighlight;
     public Image cardFrame;
     public Image cardFrameMask;
     public Image cardIllustration;

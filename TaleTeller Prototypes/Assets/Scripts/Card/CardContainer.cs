@@ -142,6 +142,7 @@ public class CardContainer : MonoBehaviour
             #endregion
 
             HideTooltip();
+            HideLinkedCards();
 
             CardManager.Instance.holdingCard = true;
             CardManager.Instance.currentCard = this;
@@ -373,10 +374,18 @@ public class CardContainer : MonoBehaviour
 
                 rectTransform.localScale = Vector3.one * visuals.profile.hoveredScale;
 
-                //LeanTween.move(rectTransform, rectTransform.anchoredPosition + new Vector2(0, 10f), 0.5f).setEaseOutSine();
                 shadowTransform.gameObject.SetActive(true);
 
                 ShowTooltip();
+
+                if (data.GetType() == typeof(PlotCard))
+                {
+                    PlotCard plotCard = data as PlotCard;
+                    if(plotCard.isMainPlot)
+                    {
+                        ShowLinkedCards(plotCard);
+                    }
+                }
             }
         }
     }
@@ -399,6 +408,7 @@ public class CardContainer : MonoBehaviour
                 rectTransform.localScale = Vector3.one;
 
                 HideTooltip();
+                HideLinkedCards();
 
                 if (!isDragging)
                     transform.SetSiblingIndex(siblingIndex);
@@ -454,6 +464,42 @@ public class CardContainer : MonoBehaviour
                 count++;
             }
         }
+    }
+
+    public void ShowLinkedCards(PlotCard card)
+    {
+        for (int i = 0; i < card.objective.linkedJunkedCards.Count; i++)
+        {
+            //Show Feedback for each card
+            if(card.objective.linkedJunkedCards[i].currentContainer != null)
+            {
+                CardVisuals visuals = card.objective.linkedJunkedCards[i].currentContainer.visuals;
+                CardManager.Instance.cardTweening.ShowHighlight(visuals.cardHighlight, visuals.profile.highlightColor);
+            }
+            else if(CardManager.Instance.cardDeck.cardDeck.Contains(card.objective.linkedJunkedCards[i]))
+            {
+                CardManager.Instance.cardTweening.ShowHighlight(CardManager.Instance.cardDeck.deckHighlight, visuals.profile.highlightColor);
+            }
+            else if(CardManager.Instance.cardDeck.discardPile.Contains(card.objective.linkedJunkedCards[i]))
+            {
+                CardManager.Instance.cardTweening.ShowHighlight(CardManager.Instance.cardDeck.discardHighlight, visuals.profile.highlightColor);
+            }
+        }
+    }
+    public void HideLinkedCards()
+    {
+        //Hide for each container
+        for (int i = 0; i < CardManager.Instance.cardHand.hiddenHand.Count; i++)
+        {
+            CardVisuals visuals = CardManager.Instance.cardHand.hiddenHand[i].visuals;
+            CardManager.Instance.cardTweening.HideHighlight(visuals.cardHighlight);
+        }
+
+        //Hide for deck
+        CardManager.Instance.cardTweening.HideHighlight(CardManager.Instance.cardDeck.deckHighlight);
+
+        //Hide for discard
+        CardManager.Instance.cardTweening.HideHighlight(CardManager.Instance.cardDeck.discardHighlight);
     }
     #endregion
 }

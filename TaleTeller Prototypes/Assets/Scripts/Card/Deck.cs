@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Deck : MonoBehaviour
     public DeckData baseDeck;
     public int drawAmount;
     public int drawAmountFirstTurn;
+
+    [Header("Visuals")]
+    public Image deckHighlight;
+    public Image discardHighlight;
 
 
     public void Start()

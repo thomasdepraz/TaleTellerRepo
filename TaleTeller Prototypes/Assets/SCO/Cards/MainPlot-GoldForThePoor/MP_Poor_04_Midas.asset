@@ -101,7 +101,7 @@ MonoBehaviour:
   objective: {fileID: 6238341435773218929}
   completionTimer: 6
   isMainPlot: 1
-  isFinal: 0
+  isFinal: 1
   plotChoiceDescription: $GoldForThePoors_Step04_Objective
   legendaryCardRewards:
   - {fileID: 11400000, guid: 3dc0d704ba7443b4e84d649c08f14e4c, type: 2}

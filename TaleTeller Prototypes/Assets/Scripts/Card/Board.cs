@@ -24,6 +24,11 @@ public class Board : MonoBehaviour
     private int currentSlot = 0;
     [HideInInspector] public BoardState currentBoardState;
 
+    [Header("Highlight Color Profile")]
+    public Color baseColor;
+    public Color TwoEffectColor;
+    public Color ThreeEffectColor;
+
 
     #region StoryBegin
     public void InitBoard()
@@ -289,7 +294,7 @@ public class Board : MonoBehaviour
                 }
             }
 
-            slotsToHighlight = slotsToHighlight.Distinct().ToList();
+            //slotsToHighlight = slotsToHighlight.Distinct().ToList();
 
             for (int i = 0; i < slotsToHighlight.Count; i++)
             {

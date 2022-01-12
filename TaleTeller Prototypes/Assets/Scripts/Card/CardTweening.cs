@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardTweening : MonoBehaviour
 {
@@ -60,4 +61,19 @@ public class CardTweening : MonoBehaviour
             LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
         }
     }
+
+    public void ShowHighlight(Image image, Color highlightColor)
+    {
+        LeanTween.cancel(image.gameObject);
+        LeanTween.value(image.gameObject, 0, 1, 0.3f).setOnUpdate((float value) =>
+        {
+            image.color = new Color(highlightColor.r, highlightColor.g, highlightColor.b, value);
+        }).setEaseInOutQuint();
+    }
+    public void HideHighlight(Image image)
+    {
+        LeanTween.cancel(image.gameObject);
+        image.color = Color.clear;
+    }
+
 }
