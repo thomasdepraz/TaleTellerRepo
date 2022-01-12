@@ -80,4 +80,32 @@ public class CardTweening : MonoBehaviour
         image.color = Color.clear;
     }
 
+    public void ScaleBounce(GameObject gameObject, float scaleFactor)
+    {
+        LeanTween.cancel(gameObject);
+        LeanTween.scale(gameObject, scaleFactor * Vector3.one, 0.2f).setLoopPingPong(1).setEaseInOutQuint();
+    }
+
+    public void ScaleBounce(GameObject gameObject, float scaleFactor, EventQueue queue)
+    {
+        LeanTween.cancel(gameObject);
+        LeanTween.scale(gameObject, scaleFactor * Vector3.one, 0.2f).setLoopPingPong(1).setEaseInOutQuint().setOnComplete(()=> 
+        {
+            queue.resolved = true;
+        });
+    }
+
+    public void ScaleBounceLoop(GameObject gameObject, float scaleFactor)
+    {
+        LeanTween.scale(gameObject, scaleFactor * Vector3.one, 0.2f).setLoopPingPong(1).setEaseInOutQuint().setOnComplete(()=> 
+        {
+            ScaleBounceLoop(gameObject, scaleFactor);
+        });
+    }
+
+    public void Cancel(GameObject gameObject)
+    {
+        LeanTween.cancel(gameObject);
+    }
+
 }

@@ -300,15 +300,18 @@ public class CardContainer : MonoBehaviour
                     currentSlot = CardManager.Instance.currentHoveredSlot;
                     currentSlot.canvasGroup.blocksRaycasts = false;
                     rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
+
+                    if(data.GetType()==typeof(PlotCard))
+                    {
+                        PlotCard card = data as PlotCard;
+                        UpdateTimerTweening(card, false);
+                    }
                 }
                 else
                 {
                     //reset card position
                     rectTransform.anchoredPosition = originPosition;
                     canTween = true; //temp ?
-
-                    if (CardManager.Instance.currentHoveredSlot == currentSlot) Debug.Log("SameSlot");
-                    else Debug.Log("Not enough mana");
                 }
             }
             else //Drop Out Slot
@@ -335,6 +338,12 @@ public class CardContainer : MonoBehaviour
                 if(!CardManager.Instance.cardHand.IsInHand(this))
                 {
                     CardManager.Instance.cardTweening.MoveCard(this, CardManager.Instance.cardHand.GetPositionInHand(data));
+                }
+
+                if (data.GetType() == typeof(PlotCard))
+                {
+                    PlotCard card = data as PlotCard;
+                    UpdateTimerTweening(card, true);
                 }
             }
             #endregion
@@ -500,6 +509,22 @@ public class CardContainer : MonoBehaviour
 
         //Hide for discard
         CardManager.Instance.cardTweening.HideHighlight(CardManager.Instance.cardDeck.discardHighlight);
+    }
+
+    public void UpdateTimerTweening(PlotCard card,bool enable)
+    {
+        if(enable)
+        {
+            if(card.completionTimer == 1)
+            {
+                CardManager.Instance.cardTweening.ScaleBounceLoop(card.currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
+            }
+        }
+        else
+        {
+            LeanTween.cancel(card.currentContainer.visuals.cardTimerFrame.gameObject);
+            card.currentContainer.visuals.cardTimerFrame.gameObject.transform.localScale = Vector3.one;
+        }
     }
     #endregion
 }

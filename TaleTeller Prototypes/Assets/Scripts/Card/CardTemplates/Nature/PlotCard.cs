@@ -310,11 +310,21 @@ public class PlotCard : CardData
     {
         queue.events.Add(UpdateTimerRoutine(queue));
     }
-    IEnumerator UpdateTimerRoutine(EventQueue currentQueue)
+    IEnumerator UpdateTimerRoutine(EventQueue currentQueue) 
     {
         yield return null;
         completionTimer--;
+
+        if(completionTimer == 1)
+        {
+            CardManager.Instance.cardTweening.ScaleBounceLoop(currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
+        }
+        else
+        {
+            CardManager.Instance.cardTweening.ScaleBounce(currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
+        }
         currentContainer.UpdatePlotInfo(this);
+        yield return new WaitForSeconds(0.4f);
         if(completionTimer <= 0)
         {
             EventQueue failQueue = new EventQueue();
