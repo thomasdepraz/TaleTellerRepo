@@ -71,7 +71,7 @@ public class CardManager : Singleton<CardManager>
         card.currentContainer.rectTransform.localPosition = position;
 
         EventQueue appearFeedback = new EventQueue();
-        cardTweening.MoveCard(card.currentContainer, position, true, true, appearFeedback);
+        cardTweening.MoveCard(card.currentContainer, position, true, true, appearFeedback,1.75f);
         while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 

@@ -410,8 +410,8 @@ public class CardContainer : MonoBehaviour
                 HideTooltip();
                 HideLinkedCards();
 
-                if (!isDragging)
-                    transform.SetSiblingIndex(siblingIndex);
+                //if (!isDragging)
+                //    transform.SetSiblingIndex(siblingIndex);
             }
             #endregion
         }

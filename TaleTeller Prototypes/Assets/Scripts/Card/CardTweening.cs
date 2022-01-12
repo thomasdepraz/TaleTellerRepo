@@ -36,8 +36,9 @@ public class CardTweening : MonoBehaviour
         LeanTween.scale(container.gameObject, scale, 0.1f).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value => { if (queue != null) queue.resolved = true; });
     }
 
-    public void MoveCard(CardContainer container, Vector3 target, bool useScale = false, bool appear = false, EventQueue queue = null)
+    public void MoveCard(CardContainer container, Vector3 target, bool useScale = false, bool appear = false, EventQueue queue = null, float scaleMultiplier = 1)
     {
+        container.transform.SetAsLastSibling();
         if (useScale)
         {
             if (appear)
@@ -46,7 +47,7 @@ public class CardTweening : MonoBehaviour
                 container.selfImage.color = Color.black;
 
                 LeanTween.value(gameObject, container.selfImage.color, Color.white, 0.3f).setOnUpdate((Color val) => { container.selfImage.color = val; });
-                LeanTween.scale(container.rectTransform, Vector3.one, 0.5f).setEaseInOutQuint();
+                LeanTween.scale(container.rectTransform, Vector3.one * scaleMultiplier, 0.5f).setEaseInOutQuint();
                 LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
             }
             else
@@ -58,6 +59,8 @@ public class CardTweening : MonoBehaviour
         }
         else
         {
+            if(container.rectTransform.localScale != Vector3.one)
+                LeanTween.scale(container.rectTransform, Vector3.one, 0.5f).setEaseInOutQuint();
             LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
         }
     }
@@ -70,6 +73,7 @@ public class CardTweening : MonoBehaviour
             image.color = new Color(highlightColor.r, highlightColor.g, highlightColor.b, value);
         }).setEaseInOutQuint();
     }
+
     public void HideHighlight(Image image)
     {
         LeanTween.cancel(image.gameObject);
