@@ -517,6 +517,9 @@ public class CardContainer : MonoBehaviour
         {
             if(card.completionTimer == 1)
             {
+                visuals.timerText.color = Color.red;
+                LeanTween.cancel(card.currentContainer.visuals.cardTimerFrame.gameObject);
+                card.currentContainer.visuals.cardTimerFrame.gameObject.transform.localScale = Vector3.one;
                 CardManager.Instance.cardTweening.ScaleBounceLoop(card.currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
             }
         }

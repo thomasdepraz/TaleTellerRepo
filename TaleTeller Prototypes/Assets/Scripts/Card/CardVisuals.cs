@@ -321,7 +321,7 @@ public class CardVisuals : MonoBehaviour
     public void UpdatePlotElements(PlotCard card)
     {
         timerText.text = card.completionTimer.ToString();
-        
+        timerText.color = Color.black;
         //cardFlagText.text
     }
 

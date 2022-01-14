@@ -99,6 +99,7 @@ public class CardTweening : MonoBehaviour
     {
         LeanTween.scale(gameObject, scaleFactor * Vector3.one, 0.2f).setLoopPingPong(1).setEaseInOutQuint().setOnComplete(()=> 
         {
+            gameObject.transform.localScale = Vector3.one;
             ScaleBounceLoop(gameObject, scaleFactor);
         });
     }

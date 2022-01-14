@@ -315,15 +315,15 @@ public class PlotCard : CardData
         yield return null;
         completionTimer--;
 
+        currentContainer.UpdatePlotInfo(this);
         if(completionTimer == 1)
         {
-            CardManager.Instance.cardTweening.ScaleBounceLoop(currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
+            currentContainer.UpdateTimerTweening(this, true);
         }
         else
         {
             CardManager.Instance.cardTweening.ScaleBounce(currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
         }
-        currentContainer.UpdatePlotInfo(this);
         yield return new WaitForSeconds(0.4f);
         if(completionTimer <= 0)
         {
