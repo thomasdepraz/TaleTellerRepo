@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,10 +31,23 @@ public class CardTweening : MonoBehaviour
         }
     }
 
-    public void EffectChangeFeedback(CardContainer container, int direction, EventQueue queue)
+    public void EffectChangeFeedback(CardContainer container, int direction, int value ,EventQueue queue, bool popup = true)
     {
         Vector3 scale = direction > 0 ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(0.8f, 0.8f, 0.8f);
         LeanTween.scale(container.gameObject, scale, 0.1f).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value => { if (queue != null) queue.resolved = true; });
+
+        //Popoup feedback
+        if(popup)
+        {
+            if (direction > 0)
+            {
+                container.visuals.PopupTextFeedback("$BUFF", Mathf.Abs(value), 0);
+            }
+            else if (direction < 0)
+            {
+                container.visuals.PopupTextFeedback("$DEBUFF", Mathf.Abs(value), 0);
+            }
+        }
     }
 
     public void MoveCard(CardContainer container, Vector3 target, bool useScale = false, bool appear = false, EventQueue queue = null, float scaleMultiplier = 1)
@@ -107,6 +121,27 @@ public class CardTweening : MonoBehaviour
     public void Cancel(GameObject gameObject)
     {
         LeanTween.cancel(gameObject);
+    }
+
+    public void FloatAndFade(TextMeshProUGUI text, float yDir, float xDir, float delay)
+    {
+        GameObject gameObject = text.gameObject;
+        Vector3 origin = gameObject.transform.localPosition;
+
+        LeanTween.moveLocalY(gameObject, gameObject.transform.localPosition.y + 1 * yDir, 0.6f).setEaseOutCirc().setDelay(delay);
+        LeanTween.moveLocalX(gameObject, gameObject.transform.localPosition.x + 1 * xDir, 0.6f).setEaseOutCirc().setDelay(delay);
+        LeanTween.value(1, 0, 1f).setDelay(0.4f + delay).setEaseOutQuint().setOnUpdate((float value)=> 
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, value);
+
+        }).setOnComplete(()=> 
+        {
+            text.gameObject.transform.localPosition = origin;
+            text.color = Color.black;
+            text.gameObject.SetActive(false);
+        });
+
+
     }
 
 }

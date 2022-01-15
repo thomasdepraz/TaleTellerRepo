@@ -1,0 +1,13 @@
+KEY	TEXT
+$BUFF	+ $value$ buff effect
+$DEBUFF	- $value$ buff effect
+$HEALTHUP	+ $value$ HP
+$HEALTHDOWN	- $value$ HP
+$ATKUP	+ $value$ ATK
+$ATKDOWN	- $value$ ATK
+$USEUP	+ $value$ card use
+$USEDOWN	- $value$ card use
+$TIMERUP	+ $value$ timer
+$TIMERDOWN	- $value$ timer
+$MANAUP	+ $value$ mana cost
+$MANADOWN	- $value$ mana cost

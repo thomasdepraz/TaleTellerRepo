@@ -14,11 +14,13 @@ public class LocalizationManager : Singleton<LocalizationManager>
     [SerializeField] private TextAsset schemesDatabase;
     [SerializeField] private TextAsset tooltipDatabase;
     [SerializeField] private TextAsset cardEffectsDescriptionsDatabase;
+    [SerializeField] private TextAsset popupDatabase;
 
     public Dictionary<string, string> instructionsDictionary;
     public Dictionary<string, string> schemesDescriptionsDictionary;
     public Dictionary<string, string> tooltipDictionary;
     public Dictionary<string, string> cardEffectsDescriptionsDictionary;
+    public Dictionary<string, string> popupDictionary;
     //Create as meany as needed
 
 
@@ -28,6 +30,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
         schemesDescriptionsDictionary = InitDictionary(schemesDatabase);
         tooltipDictionary = InitDictionary(tooltipDatabase);
         cardEffectsDescriptionsDictionary = InitDictionary(cardEffectsDescriptionsDatabase);
+        popupDictionary = InitDictionary(popupDatabase);
     }
 
     public Dictionary<string, string> InitDictionary(KeyStringPair[] pairs) ///Add methods overrides

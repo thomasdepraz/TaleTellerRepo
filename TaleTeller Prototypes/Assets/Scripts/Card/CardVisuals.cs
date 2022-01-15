@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CardVisuals : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class CardVisuals : MonoBehaviour
     public TextMeshProUGUI characterAttackText;
     public TextMeshProUGUI characterHealthText;
     public TextMeshProUGUI timerText;
+
+    [Header("Other")]
+    public List<TextMeshProUGUI> popupTexts = new List<TextMeshProUGUI>();
     #endregion
 
     public void InitializeVisuals(CardData data)
@@ -263,8 +267,11 @@ public class CardVisuals : MonoBehaviour
         UpdateBaseElements(data);
     }
 
-    public void UpdateBaseElements(CardData data)
+    public void UpdateBaseElements(CardData data, bool checkPopup = false)
     {
+        if (checkPopup)
+            CheckForPopup(data);
+
         if(data is DarkIdeaCard)
         {
             manaCostText.text = data.manaCost.ToString();
@@ -289,8 +296,11 @@ public class CardVisuals : MonoBehaviour
         }
     }
 
-    public void UpdateCharacterElements(CharacterType character)
+    public void UpdateCharacterElements(CharacterType character, bool checkPopup = false)
     {
+        if(checkPopup == true)
+            CheckForPopup(character);
+
         if (character.data is DarkIdeaCard)
         {
             characterAttackText.text = character.stats.baseAttackDamage.ToString();
@@ -313,16 +323,16 @@ public class CardVisuals : MonoBehaviour
                 timerText.text = character.useCount.ToString();
                 timerText.color = Color.black;
             }
-        }
-        
-        
+        }  
     }
 
-    public void UpdatePlotElements(PlotCard card)
+    public void UpdatePlotElements(PlotCard card, bool checkPopup = false)
     {
+        if (checkPopup)
+            CheckForPopup(card);
+
         timerText.text = card.completionTimer.ToString();
         timerText.color = Color.black;
-        //cardFlagText.text
     }
 
     public string BuildDescription(CardData data)
@@ -339,7 +349,7 @@ public class CardVisuals : MonoBehaviour
         }
         for (int i = 0; i < data.effects.Count; i++)
         {
-            result += data.effects[i].GetDescription(data.effects[i]);
+            result += data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
             result += "\n";   
         }
 
@@ -354,10 +364,100 @@ public class CardVisuals : MonoBehaviour
     }
 
     #region Tweening
-    public void EffectChangeFeedback(CardContainer container, int direction, EventQueue queue)
+    public void PopupTextFeedback(string popupText, int value, float delay)
     {
-        Vector3 scale = direction > 0 ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(0.8f, 0.8f, 0.8f);
-        LeanTween.scale(container.gameObject, scale, 0.1f ).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value=> { if (queue != null) queue.resolved = true; });
+        string text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.popupDictionary, popupText).Replace("$value$", value.ToString());
+
+        for (int i = 0; i < popupTexts.Count; i++)
+        {
+            if (!popupTexts[i].gameObject.activeSelf)
+            {
+                popupTexts[i].gameObject.SetActive(true);
+                popupTexts[i].text = text;
+
+                //launch tweening
+                CardManager.Instance.cardTweening.FloatAndFade(popupTexts[i],Random.Range(-70,-80), Random.Range(-20,20), delay);
+                break;
+            }
+        }
+    }
+
+    public void CheckForPopup(CharacterType character)
+    {
+        int currentHp = Int16.Parse(characterHealthText.text);
+        int characterHp = character.stats.baseLifePoints;
+        int currentDamage = Int16.Parse(characterAttackText.text);
+        int characterDamage = character.stats.baseAttackDamage;
+        int currentTimer = Int16.Parse(timerText.text);
+        int characterTimer = character.useCount; 
+
+        int count = 0;
+
+        if (characterHp > currentHp)
+        {
+            PopupTextFeedback("$HEALTHUP",characterHp - currentHp, 0.3f * count);
+            count++;
+        }
+        else if(characterHp < currentHp)
+        {
+            PopupTextFeedback("$HEALTHDOWN", currentHp - characterHp, 0.3f * count);
+            count++;
+        }
+
+        if (characterDamage > currentDamage)
+        {
+            PopupTextFeedback("$ATKUP", characterDamage - currentDamage, 0.3f * count);
+            count++;
+        }
+        else if (characterDamage < currentDamage)
+        {
+            PopupTextFeedback("$ATKDOWN", currentDamage - characterDamage, 0.3f * count);
+            count++;
+        }
+
+        if(character.data.GetType() != typeof(PlotCard))
+        {
+            if (characterTimer > currentTimer)
+            {
+                PopupTextFeedback("$USEUP", characterTimer - currentTimer, 0.3f * count);
+            }
+            else if (characterTimer < currentTimer)
+            {
+                PopupTextFeedback("$USEDOWN", currentTimer - characterTimer, 0.3f * count);
+            }
+        }
+    }
+
+    public void CheckForPopup(PlotCard data)
+    {
+        int currentTimer = Int16.Parse(timerText.text);
+        int plotTimer = data.completionTimer;
+
+        int count = 0;
+        if (plotTimer > currentTimer)
+        {
+            PopupTextFeedback("$TIMERUP", plotTimer - currentTimer, 0.3f * count);
+        }
+        else if (plotTimer < currentTimer)
+        {
+            PopupTextFeedback("$TIMERDOWN", currentTimer - plotTimer, 0.3f * count);
+        }
+    }
+
+    public void CheckForPopup(CardData data)
+    {
+        int currentMana = Int16.Parse(manaCostText.text);
+        int cardMana = data.manaCost;
+
+        int count = 0;
+        if (cardMana > currentMana)
+        {
+            PopupTextFeedback("$MANAUP", cardMana - currentMana, 0.3f * count);
+        }
+        else if (cardMana < currentMana)
+        {
+            PopupTextFeedback("$MANADOWN", currentMana - cardMana, 0.3f * count);
+        }
     }
 
     #endregion

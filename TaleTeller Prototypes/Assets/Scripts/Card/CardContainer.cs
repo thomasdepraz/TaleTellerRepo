@@ -61,7 +61,7 @@ public class CardContainer : MonoBehaviour
         //}
         //if (Input.GetKeyDown(KeyCode.H))
         //{
-        //    visuals.EffectChangeFeedback(this, -1, new EventQueue());
+        //   visuals.PopupTextFeedback("$BUFF", 1);
         //}
 
     }
@@ -430,15 +430,15 @@ public class CardContainer : MonoBehaviour
     #region Utility
     public void UpdateCharacterInfo(CharacterType character)
     {
-        visuals.UpdateCharacterElements(character);
+        visuals.UpdateCharacterElements(character, true);
     }
     public void UpdatePlotInfo(PlotCard card)
     {
-        visuals.UpdatePlotElements(card);
+        visuals.UpdatePlotElements(card, true);
     }
     public void UpdateBaseInfo()
     {
-        visuals.UpdateBaseElements(data);
+        visuals.UpdateBaseElements(data, true);
     }
 
     public void ShowTooltip()
