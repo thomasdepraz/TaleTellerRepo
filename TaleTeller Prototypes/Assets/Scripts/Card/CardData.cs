@@ -25,6 +25,7 @@ public enum Archetype
     Base,
     Trading, 
     Vision,
+    Berserk,
 
     NumberOfArchetypes//Always last Archetype
 }
