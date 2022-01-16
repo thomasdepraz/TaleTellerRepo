@@ -97,7 +97,7 @@ $MP_Poor_03_TreasureAntichamber_A_Effect0	<- <- -> -> Key-words Draw and Discard
 $MP_Poor_03_TreasureAntichamber_A_Objective	Place the Treasure Antechamber, the Cultist's Hood, the Cultist's Toga and the Cultist's Emblem on the Track. 
 $MP_Poor_03_TreasureAntichamber_B_Effect0	<- <- -> -> Enemies +$modifierValue$ ATK.
 $MP_Poor_03_TreasureAntichamber_B_Effect1	+$gainValue$ ATK.
-$MP_Poor_03_TreasureAntichamber_B_Objective	Defeat the 3 Armored Cultists. 
+$MP_Poor_03_TreasureAntichamber_B_Objective	Defeat $value$ Armored Cultists. 
 $MP_Poor_04_Midas_Effect0	SELF => <b>Bankrupt (3)</b> :
 $MP_Poor_04_Midas_Effect1	Self +$modifierValue$ ATK.
 $MP_Poor_04_Midas_Effect2	<b>Buy (1)</b> :
@@ -126,7 +126,7 @@ $MP_Priest_02_TempleAltar_B_Objective	Defeat the Guardian of the Temple while th
 $MP_Priest_03_AstarothIdol_Effect0	Enemies <- -> -$modifierValue$ ATK.
 $MP_Priest_03_AstarothIdol_Objective	Defeat Astaroth the Mighty. 
 $MP_Priest_04_ValeforIdol_Effect0	Enemies <- -> -$modifierValue$ ATK.
-$MP_Priest_04_ValeforIdol_Objective	Defeat the 3 Valefor's replicas. 
+$MP_Priest_04_ValeforIdol_Objective	Defeat $value$ Valefor's replicas. 
 $MP_Priest_04_CardianalThophilius_Effect0	Self +$modifierValue$ ATK Max.
 $MP_Priest_04_CardianalThophilius_Objective	Defeat Theophilus. 
 $SP_01_TheDarkForest_Effect0	Enemies <- <- -> -> +$modifierValue$ ATK.
