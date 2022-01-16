@@ -88,15 +88,21 @@ $Junk_LostCoin_Effect0	+$gainValue$ GOLD.
 $Junk_SlumHabitant_Effect0	Discard $discardValue$.
 $Junk_StolenPurse	+$gainValue$ GOLD.
 $MP_Poor_01_MedicantCultist_Effect0	The Hero gives all his GOLD.
+$MP_Poor_01_MedicantCultist_Objective	Give $value$ Gold to the Medicant Cultist.
 $MP_Poor_02_CultHeadquarter_A_Effect0	<b>End of Turn</b> Key-word Restore disabled.
+$MP_Poor_02_CultHeadquarter_A_Objective	Place the Cult Headquarter's Entrance on the Track while defeating the Gatekeeper.
 $MP_Poor_02_CultHeadquarter_B_Effect0	Key-word Restore disabled if placed.
-$MP_Poor_03_CultHeadquarter_A_Effect0	<- <- -> -> Key-words Draw and Discard increased by $modification$.
-$MP_Poor_03_CultHeadquarter_B_Effect0	<- <- -> -> Enemies +$modifierValue$ ATK.
-$MP_Poor_03_CultHeadquarter_B_Effect1	+$gainValue$ ATK.
+$MP_Poor_02_CultHeadquarter_B_Objective	Place the Fleeing Medicant Cultist on the Track.
+$MP_Poor_03_TreasureAntichamber_A_Effect0	<- <- -> -> Key-words Draw and Discard increased by $modification$.
+$MP_Poor_03_TreasureAntichamber_A_Objective	Place the Treasure Antechamber, the Cultist's Hood, the Cultist's Toga and the Cultist's Emblem on the Track. 
+$MP_Poor_03_TreasureAntichamber_B_Effect0	<- <- -> -> Enemies +$modifierValue$ ATK.
+$MP_Poor_03_TreasureAntichamber_B_Effect1	+$gainValue$ ATK.
+$MP_Poor_03_TreasureAntichamber_B_Objective	Defeat the 3 Armored Cultists. 
 $MP_Poor_04_Midas_Effect0	SELF => <b>Bankrupt (3)</b> :
 $MP_Poor_04_Midas_Effect1	Self +$modifierValue$ ATK.
 $MP_Poor_04_Midas_Effect2	<b>Buy (1)</b> :
 $MP_Poor_04_Midas_Effect3	Self -$modifierValue$ ATK.
+$MP_Poor_04_Midas_Objective	Defeat Midas the Prophet of Mendicity. 
 $Idea_LE_AstarothIdol_Effect0	Draw until the Hand is full. 
 $Idea_LE_BrokenTemple_Effect0	<b>Overload :<b> +1 ATK Max.
 $Idea_LE_BrokenTemple_Effect1	<- <- -> -> Key-word Draw x2.
@@ -112,10 +118,18 @@ $Junk_GuardianArtifact_Effect0	Self + $modifierValue$ ATK for each received atta
 $Junk_MightyAstaroth_Effect0	Self +$modifierValue$ HP.
 $Junk_ValeforReplica_Effect0	Self +$modifierValue$ ATK.
 $MP_Priest_01_PriestTheophilius_Effect0	+$gainValue$ ATK.
+$MP_Priest_01_PriestTheophilius_Objective	Defeat the Demon while Theophilus is on the next step. 
 $MP_Priest_02_TempleAltar_A_Effect0	Draw $drawValue$ for each passed step.
+$MP_Priest_02_TempleAltar_A_Objective	Place all the Pieces of Artifact on the Track. 
 $MP_Priest_02_TempleAltar_B_Effect0	Draw $drawValue$ for each passed step.
+$MP_Priest_02_TempleAltar_B_Objective	Defeat the Guardian of the Temple while this card is on the Track. 
 $MP_Priest_03_AstarothIdol_Effect0	Enemies <- -> -$modifierValue$ ATK.
+$MP_Priest_03_AstarothIdol_Objective	Defeat Astaroth the Mighty. 
 $MP_Priest_04_ValeforIdol_Effect0	Enemies <- -> -$modifierValue$ ATK.
+$MP_Priest_04_ValeforIdol_Objective	Defeat the 3 Valefor's replicas. 
 $MP_Priest_04_CardianalThophilius_Effect0	Self +$modifierValue$ ATK Max.
+$MP_Priest_04_CardianalThophilius_Objective	Defeat Theophilus. 
 $SP_01_TheDarkForest_Effect0	Enemies <- <- -> -> +$modifierValue$ ATK.
+$SP_01_TheDarkForest_Objective	Place this card, 2 Good characters and 1 Object on the Track.
 $SP_01_TheDarkForest_Effect1	<- <- -> -> Key-word Heal x$modification$.
+$SP_02_BountyHunter_Objective	Defeat the Bounty Hunter without other Evil Characters on the Track.

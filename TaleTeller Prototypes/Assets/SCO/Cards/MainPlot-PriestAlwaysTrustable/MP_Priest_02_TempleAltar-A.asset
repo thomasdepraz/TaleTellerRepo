@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Place all the Pieces of Artifact on the Track. '
+  objectiveName: $MP_Priest_02_TempleAltar_A_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 07554f7bf77103f46968291ef3f59201, type: 2}
   - {fileID: 11400000, guid: ac87816fddd2e3141818f090b951b809, type: 2}

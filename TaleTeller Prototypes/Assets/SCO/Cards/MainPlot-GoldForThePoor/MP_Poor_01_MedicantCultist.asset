@@ -59,7 +59,7 @@ MonoBehaviour:
   manaCost: 2
   cardGraph: {fileID: 21300000, guid: 16c0ede2a5853ef4f87a5868e205f11f, type: 3}
   currentContainer: {fileID: 0}
-  description: 'Give 8 Gold to the Medicant Cultist.
+  description: '
 
 '
   effectsReferences:
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: PlotObjective_DumpAmountObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Give 8 GOLD to the Medicant Cultist. '
+  objectiveName: $MP_Poor_01_MedicantCultist_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}

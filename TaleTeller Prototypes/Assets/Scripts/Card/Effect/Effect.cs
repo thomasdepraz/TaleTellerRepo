@@ -102,7 +102,7 @@ public class Effect : ScriptableObject
     {
         linkedData = card;
         if(description!=string.Empty)
-            description = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardEffectsDescriptionsDictionary, description);
+            description = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardsDictionary, description);
 
         //switch case that subscribes OnTriggerEffect() to the right delegate based on the effect trigger
         switch (trigger)

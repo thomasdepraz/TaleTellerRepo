@@ -353,11 +353,11 @@ public class CardVisuals : MonoBehaviour
             result += "\n";   
         }
 
-        //Add objective description ? NOTE
+        //Add objective description
         if(data.GetType() == typeof(PlotCard))
         {
             PlotCard plot = data as PlotCard;
-            result += "Objective : " + plot.objective.objectiveName;
+            result += plot.objective.GetDescription();
         }
        
         return result;

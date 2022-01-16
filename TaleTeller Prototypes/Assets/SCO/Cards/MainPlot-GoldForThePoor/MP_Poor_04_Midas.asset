@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat Midas the Prophet of Mendicity. '
+  objectiveName: $MP_Poor_04_Midas_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}

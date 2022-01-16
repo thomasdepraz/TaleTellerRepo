@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat Astaroth the Mighty. '
+  objectiveName: $MP_Priest_03_AstarothIdol_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 972fec6b2d75d8a4a92a593aeae0e978, type: 2}
   junkSpawnLocations: 00000000

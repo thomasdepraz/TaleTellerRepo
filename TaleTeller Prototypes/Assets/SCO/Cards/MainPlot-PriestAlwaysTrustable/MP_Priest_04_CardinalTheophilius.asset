@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat Theophilus. '
+  objectiveName: $MP_Priest_04_CardianalThophilius_Objective
   linkedJunkedCards: []
   junkSpawnLocations: 
   junksPositionsInDeck: 

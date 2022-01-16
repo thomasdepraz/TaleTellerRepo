@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: Place this card, 2 Good characters and 1 Object on the Track.
+  objectiveName: $SP_01_TheDarkForest_Objective
   linkedJunkedCards: []
   junkSpawnLocations: 
   junksPositionsInDeck: 

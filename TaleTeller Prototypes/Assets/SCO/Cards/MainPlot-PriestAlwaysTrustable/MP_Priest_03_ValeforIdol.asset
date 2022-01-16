@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat the 3 Valefor''s replicas. '
+  objectiveName: $MP_Priest_04_ValeforIdol_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}
   - {fileID: 11400000, guid: f2fbaf9a31524444db3c1fc55d0a4406, type: 2}

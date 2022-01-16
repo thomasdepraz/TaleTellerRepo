@@ -38,8 +38,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Place the Treasure Antechamber, the Cultist''s Hood, the Cultist''s
-    Toga and the Cultist''s Emblem on the Track. '
+  objectiveName: $MP_Poor_03_TreasureAntichamber_A_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 199453589cc939044ae0a1c97fc82203, type: 2}
   - {fileID: 11400000, guid: 0d34774b50cf4fe4aa1154d3c3be5c4b, type: 2}
@@ -94,7 +93,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $MP_Poor_03_CultHeadquarter_A_Effect0
+  description: $MP_Poor_03_TreasureAntichamber_A_Effect0
   trigger: 2
   target: 2
   range: 02000000
