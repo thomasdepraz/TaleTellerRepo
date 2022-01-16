@@ -357,6 +357,7 @@ public class CardContainer : MonoBehaviour
 
     public void OnPointerEnter()
     {
+        print(GetInfos());
         if(CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
             if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
@@ -528,6 +529,16 @@ public class CardContainer : MonoBehaviour
             LeanTween.cancel(card.currentContainer.visuals.cardTimerFrame.gameObject);
             card.currentContainer.visuals.cardTimerFrame.gameObject.transform.localScale = Vector3.one;
         }
+    }
+
+    public string GetInfos()
+    {
+        string cardInfo = $" slot : {currentSlot}\n cardName : {data.cardName}\n cardType : {data.cardType}\n cardEffects :\n";
+        for (int i = 0; i < data.effects.Count; i++)
+        {
+            cardInfo += $"{data.effects[i].description}";
+        }
+        return cardInfo;
     }
     #endregion
 }
