@@ -10,6 +10,8 @@ public class Hand : MonoBehaviour
     public RectTransform handTransformPlot;
     public List<CardContainer> hiddenHand = new List<CardContainer>();
     public List<CardContainer> currentHand = new List<CardContainer>();
+
+    public List<HandSlot> handSlots = new List<HandSlot>();
     public int maxHandSize;
 
     public List<CardData> GetHandDataList()
@@ -78,6 +80,26 @@ public class Hand : MonoBehaviour
         }
 
         return position;
+    }
+
+    public Vector3 GetPosInHand(CardContainer container)
+    {
+        Type cardType =  container.data.GetType();
+        if(cardType != typeof(PlotCard))
+        {
+            for (int i = 0; i < handSlots.Count; i++)
+            {
+                if(handSlots[i].currentPlacedCard == null)
+                {
+                    return handSlots[i].transform.localPosition;
+                }
+            }
+        }
+        else
+        {
+            return RandomPositionInRect(handTransformPlot);
+        }
+        return Vector3.zero;
     }
 
     public void ResetAllHand()

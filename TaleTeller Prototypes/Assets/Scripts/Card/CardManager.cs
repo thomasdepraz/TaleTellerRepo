@@ -23,6 +23,7 @@ public class CardManager : Singleton<CardManager>
     public CardPicker cardPicker;
 
     [HideInInspector] public BoardSlot currentHoveredSlot;
+    [HideInInspector] public HandSlot currentHoveredHandSlot;
     [HideInInspector] public bool holdingCard;
     [HideInInspector] public CardContainer currentCard;
     [HideInInspector] public CardContainer hoveredCard;
