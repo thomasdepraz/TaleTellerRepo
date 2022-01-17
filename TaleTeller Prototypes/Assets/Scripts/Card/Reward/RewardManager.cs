@@ -159,11 +159,11 @@ public class RewardManager : Singleton<RewardManager>
         //Do something with the picked cards
         for (int i = 0; i < batchOneSelectedCards.Count; i++)
         {
-            CardManager.Instance.CardAppearToDeck(batchOneSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.localPosition);
+            CardManager.Instance.CardAppearToDeck(batchOneSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
         }
         for (int i = 0; i < batchTwoSelectedCards.Count; i++)
         {
-            CardManager.Instance.CardAppearToDeck(batchTwoSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.localPosition);
+            CardManager.Instance.CardAppearToDeck(batchTwoSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
         }
 
         toDeckQueue.StartQueue();
@@ -202,7 +202,7 @@ public class RewardManager : Singleton<RewardManager>
         {
             EventQueue toDeckQueue = new EventQueue();
 
-            CardManager.Instance.CardAppearToDeck(pickedCard[0], toDeckQueue, CardManager.Instance.plotAppearTransform.localPosition);
+            CardManager.Instance.CardAppearToDeck(pickedCard[0], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
 
             toDeckQueue.StartQueue();
             while(!toDeckQueue.resolved)
@@ -265,7 +265,7 @@ public class RewardManager : Singleton<RewardManager>
         if(secondaryPlotSelectedCard != null)
         {
             //send card to hand
-            CardManager.Instance.CardAppearToDeck(secondaryPlotSelectedCard, rewardQueue, CardManager.Instance.plotAppearTransform.localPosition);
+            CardManager.Instance.CardAppearToDeck(secondaryPlotSelectedCard, rewardQueue, CardManager.Instance.plotAppearTransform.position);
         }
         else if(selectedActionReward)//TODO
         {

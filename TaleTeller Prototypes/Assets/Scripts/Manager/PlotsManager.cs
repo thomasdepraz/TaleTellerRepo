@@ -128,7 +128,7 @@ public class PlotsManager : Singleton<PlotsManager>
             //animate card to deck
             //for now only add it to deck list
             //SendPlotToDeck(appearQueue, card);
-            CardManager.Instance.CardAppearToDeck(card, appearQueue, CardManager.Instance.plotAppearTransform.localPosition);
+            CardManager.Instance.CardAppearToDeck(card, appearQueue, CardManager.Instance.plotAppearTransform.position);
         }
 
 

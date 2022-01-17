@@ -78,7 +78,7 @@ public class PlotCard : CardData
         {
             EventQueue toHandQueue = new EventQueue();
 
-            CardManager.Instance.CardAppearToHand(PlotsManager.Instance.currentPickedCard, toHandQueue, CardManager.Instance.plotAppearTransform.localPosition);
+            CardManager.Instance.CardAppearToHand(PlotsManager.Instance.currentPickedCard, toHandQueue, CardManager.Instance.plotAppearTransform.position);
 
             toHandQueue.StartQueue();
             while(!toHandQueue.resolved)
@@ -97,7 +97,7 @@ public class PlotCard : CardData
                     CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
                     
                     EventQueue endDeckfeedback = new EventQueue();
-                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], endDeckfeedback, CardManager.Instance.plotAppearTransform.localPosition, false);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], endDeckfeedback, CardManager.Instance.plotAppearTransform.position, false);
                     endDeckfeedback.StartQueue();
                     while(!endDeckfeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -107,7 +107,7 @@ public class PlotCard : CardData
                     CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count),objective.linkedJunkedCards[i]);
 
                     EventQueue deckRandomFeedback = new EventQueue();
-                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], deckRandomFeedback, CardManager.Instance.plotAppearTransform.localPosition, false);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], deckRandomFeedback, CardManager.Instance.plotAppearTransform.position, false);
 
                     deckRandomFeedback.StartQueue();
                     while (!deckRandomFeedback.resolved) { yield return new WaitForEndOfFrame();}
@@ -121,7 +121,7 @@ public class PlotCard : CardData
                         CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
 
                     EventQueue xInDeckFeedback = new EventQueue();
-                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], xInDeckFeedback, CardManager.Instance.plotAppearTransform.localPosition, false);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], xInDeckFeedback, CardManager.Instance.plotAppearTransform.position, false);
                     xInDeckFeedback.StartQueue();
                     while (!xInDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -131,7 +131,7 @@ public class PlotCard : CardData
 
                     EventQueue drawQueue = new EventQueue();
 
-                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.cardHand.GetPositionInHand(objective.linkedJunkedCards[i]));
+                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.plotAppearTransform.position);
 
                     drawQueue.StartQueue();//Actual draw
                     while (!drawQueue.resolved)
@@ -293,7 +293,7 @@ public class PlotCard : CardData
             //TEMP pick a random card within the list and add it to the deck
             CardData darkIdea = PlotsManager.Instance.darkIdeas[Random.Range(0, PlotsManager.Instance.darkIdeas.Count-1)];
             EventQueue sendToDeckQueue = new EventQueue();
-            CardManager.Instance.CardAppearToDeck(darkIdea, sendToDeckQueue, CardManager.Instance.plotAppearTransform.localPosition);
+            CardManager.Instance.CardAppearToDeck(darkIdea, sendToDeckQueue, CardManager.Instance.plotAppearTransform.position);
             sendToDeckQueue.StartQueue();
             while (!sendToDeckQueue.resolved) { yield return new WaitForEndOfFrame(); }
             

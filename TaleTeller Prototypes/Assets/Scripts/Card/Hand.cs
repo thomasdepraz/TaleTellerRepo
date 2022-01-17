@@ -12,6 +12,7 @@ public class Hand : MonoBehaviour
     public List<CardContainer> currentHand = new List<CardContainer>();
 
     public List<HandSlot> handSlots = new List<HandSlot>();
+    public HandSlot plotHandSlot;
     public int maxHandSize;
 
     public List<CardData> GetHandDataList()
@@ -60,7 +61,7 @@ public class Hand : MonoBehaviour
         float height = transform.rect.height;
         float width = transform.rect.width;
 
-        randomPos = transform.localPosition + new Vector3(UnityEngine.Random.Range(-width/2.3f, width/2.3f), UnityEngine.Random.Range(-height/5, height/5), 0);
+        randomPos = transform.position + new Vector3(UnityEngine.Random.Range(-width/2.3f, width/2.3f), UnityEngine.Random.Range(-height/5, height/5), 0);
         //randomPos = transform.localPosition;
 
         return randomPos;
@@ -72,11 +73,11 @@ public class Hand : MonoBehaviour
         Type cardType =  data.GetType();
         if(cardType != typeof(PlotCard))
         {
-            position = RandomPositionInRect(handTransformIdea);
+            position = handTransformIdea.position;
         }
         else
         {
-            position = RandomPositionInRect(handTransformPlot);
+            position = handTransformPlot.position;
         }
 
         return position;
@@ -87,17 +88,33 @@ public class Hand : MonoBehaviour
         Type cardType =  container.data.GetType();
         if(cardType != typeof(PlotCard))
         {
+            if(container.currentHandSlot != null)
+            {
+                if (container.currentHandSlot.currentPlacedCard == container || container.currentHandSlot.currentPlacedCard == null)
+                {
+                    container.currentHandSlot.currentPlacedCard = container;
+                    container.currentHandSlot.canvasGroup.blocksRaycasts = false;
+                    return container.currentHandSlot.self.position;
+                }
+            }
+
             for (int i = 0; i < handSlots.Count; i++)
             {
                 if(handSlots[i].currentPlacedCard == null)
                 {
-                    return handSlots[i].transform.localPosition;
+                    container.currentHandSlot = handSlots[i];
+                    handSlots[i].currentPlacedCard = container;
+                    handSlots[i].canvasGroup.blocksRaycasts = false;
+                    return handSlots[i].self.position;
                 }
             }
         }
         else
         {
-            return RandomPositionInRect(handTransformPlot);
+            container.currentHandSlot = plotHandSlot;
+            plotHandSlot.currentPlacedCard = container;
+            plotHandSlot.canvasGroup.blocksRaycasts = false;
+            return plotHandSlot.self.position;
         }
         return Vector3.zero;
     }

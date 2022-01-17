@@ -218,7 +218,7 @@ public class Deck : MonoBehaviour
         }
 
         if (dealtCard.currentContainer == null)
-            CardManager.Instance.CardAppear(overdrawQueue, dealtCard, CardManager.Instance.deckTransform.localPosition);
+            CardManager.Instance.CardAppear(overdrawQueue, dealtCard, CardManager.Instance.deckTransform.position);
 
         //the card can be burn or push another card from the board
         if (dealtCard.GetType() == typeof(PlotCard) || dealtCard.GetType() == typeof(JunkCard)) //if its a plot card it pushes cards from the board
@@ -270,7 +270,7 @@ public class Deck : MonoBehaviour
 
         //Add feedback
         EventQueue feedback = new EventQueue();
-        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.position, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 

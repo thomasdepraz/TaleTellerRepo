@@ -61,21 +61,21 @@ public class CardTweening : MonoBehaviour
                 container.selfImage.color = Color.black;
 
                 LeanTween.value(gameObject, container.selfImage.color, Color.white, 0.3f).setOnUpdate((Color val) => { container.selfImage.color = val; });
-                LeanTween.scale(container.rectTransform, Vector3.one * scaleMultiplier, 0.5f).setEaseInOutQuint();
-                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+                LeanTween.scale(container.gameObject, Vector3.one * scaleMultiplier, 0.5f).setEaseInOutQuint();
+                LeanTween.move(container.gameObject, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
             }
             else
             {
                 LeanTween.value(gameObject, container.selfImage.color, Color.black, 0.8f).setOnUpdate((Color val) => { container.selfImage.color = val; });
-                LeanTween.scale(container.rectTransform, Vector3.zero, 0.8f).setEaseInOutQuint();
-                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+                LeanTween.scale(container.gameObject, Vector3.zero, 0.8f).setEaseInOutQuint();
+                LeanTween.move(container.gameObject, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
             }
         }
         else
         {
             if(container.rectTransform.localScale != Vector3.one)
-                LeanTween.scale(container.rectTransform, Vector3.one, 0.5f).setEaseInOutQuint();
-            LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+                LeanTween.scale(container.gameObject, Vector3.one, 0.5f).setEaseInOutQuint();
+            LeanTween.move(container.gameObject, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
         }
     }
 

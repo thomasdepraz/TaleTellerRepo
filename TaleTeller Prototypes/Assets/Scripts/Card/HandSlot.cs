@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HandSlot : MonoBehaviour
-{ 
+{
+    public RectTransform self;
     public CardContainer currentPlacedCard;
     public CanvasGroup canvasGroup;
 
