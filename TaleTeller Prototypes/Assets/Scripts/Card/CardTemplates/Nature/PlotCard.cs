@@ -131,7 +131,7 @@ public class PlotCard : CardData
 
                     EventQueue drawQueue = new EventQueue();
 
-                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.plotAppearTransform.localPosition);
+                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.cardHand.GetPositionInHand(objective.linkedJunkedCards[i]));
 
                     drawQueue.StartQueue();//Actual draw
                     while (!drawQueue.resolved)

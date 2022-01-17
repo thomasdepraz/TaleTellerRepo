@@ -64,7 +64,7 @@ public class Deck : MonoBehaviour
     IEnumerator DrawCardsRoutine(int count, EventQueue queue)
     {
         int cardsInDeck = cardDeck.Count;
-        int numberOfCardsInHand = CardManager.Instance.cardHand.currentHand.Count;
+        int numberOfCardsInHand = CardManager.Instance.cardHand.GetHandCount();
 
         EventQueue dealQueue = new EventQueue();
 

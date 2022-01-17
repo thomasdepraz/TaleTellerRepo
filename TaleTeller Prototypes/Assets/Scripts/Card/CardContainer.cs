@@ -263,14 +263,6 @@ public class CardContainer : MonoBehaviour
                         Debug.Log("Not enough mana");
                     }
                 }
-                else //if other card in hand
-                {
-                    Vector3 position = CardManager.Instance.hoveredCard.rectTransform.anchoredPosition;
-
-                    CardManager.Instance.hoveredCard.rectTransform.anchoredPosition = originPosition;
-                    rectTransform.anchoredPosition = position;
-                }
-                    
                 CardManager.Instance.hoveredCard = null;
             }
             #endregion
@@ -348,7 +340,6 @@ public class CardContainer : MonoBehaviour
             }
             #endregion
         }
-
 
         CardManager.Instance.currentHoveredSlot = null;
         CardManager.Instance.holdingCard = false;

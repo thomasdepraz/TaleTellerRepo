@@ -7,7 +7,7 @@ public class DrawFullHandEffect : DrawTypeEffects
     protected override int GetAmountToDraw()
     {
         var cardHand = CardManager.Instance.cardHand;
-        int roomInHand = cardHand.maxHandSize - cardHand.currentHand.Count;
+        int roomInHand = cardHand.maxHandSize - cardHand.GetHandCount();
 
         return roomInHand;
     }

@@ -90,7 +90,7 @@ public class CardManager : Singleton<CardManager>
 
         EventQueue toHandQueue = new EventQueue();
 
-        if (cardHand.currentHand.Count + 1 > cardHand.maxHandSize)
+        if (cardHand.GetHandCount() + 1 > cardHand.maxHandSize)
         {
             //Overdraw
             cardDeck.OverDraw(toHandQueue, card);
@@ -173,7 +173,7 @@ public class CardManager : Singleton<CardManager>
 
         if (canPushOverCard)
         {
-            if (cardHand.currentHand.Count == cardHand.maxHandSize)//if max cards in hand make the player select a card
+            if (cardHand.GetHandCount() == cardHand.maxHandSize)//if max cards in hand make the player select a card
             {
                 //MAKE the player pick a card and discard it
                 EventQueue pickQueue = new EventQueue();
@@ -204,7 +204,7 @@ public class CardManager : Singleton<CardManager>
         }
         else
         {
-            if (cardHand.currentHand.Count == cardHand.maxHandSize)//if max cards in hand discard
+            if (cardHand.GetHandCount() == cardHand.maxHandSize)//if max cards in hand discard
             {
                 CardBoardToDiscard(card, returnQueue);
             }
