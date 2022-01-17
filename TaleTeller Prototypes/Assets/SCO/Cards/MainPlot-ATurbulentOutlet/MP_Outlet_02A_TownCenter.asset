@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4024003443142846845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 2
+  target: 2
+  range: 03000000
+  values: []
+  modifierValue:
+    value: 2
+    type: 1
+    op: 2
+  behaviourTargeted: 2
+  temporaryChange: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_Outlet_02A_TownCenter
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Town Center
+  rarity: 0
+  archetype: 0
+  manaCost: 2
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -4024003443142846845}
+  effects: []
+  cardTypeReference: {fileID: 1360424415077956641}
+  cardType: {fileID: 0}
+  objective: {fileID: 2050959531900371962}
+  completionTimer: 4
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: 
+  legendaryCardRewards: []
+--- !u!114 &1360424415077956641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f33840752c2ec438be3f9e8461a5a7, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+--- !u!114 &2050959531900371962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a66b3620127b87429c041df2483d626, type: 3}
+  m_Name: PlotObjective_PlaceJunkObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
+  - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
+  - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
+  - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
+  - {fileID: 11400000, guid: 59f44e689562a4846aaa70806f725c59, type: 2}
+  junkSpawnLocations: 0300000003000000030000000300000003000000
+  junksPositionsInDeck: 0000000001000000020000000300000005000000
+  mustPlaceAll: 0
+  specificJunkToPlace:
+  - {fileID: 11400000, guid: 59f44e689562a4846aaa70806f725c59, type: 2}
+  plotOnBoard: 1
