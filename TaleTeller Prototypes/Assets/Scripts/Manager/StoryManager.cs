@@ -259,9 +259,10 @@ public class StoryManager : Singleton<StoryManager>
             cardsToDestroy.RemoveAt(0);
         }
 
-        if(turnReset)
+        //DEPRECATED méca de Damage bonus entre les tours
+        /*if(turnReset)
             GameManager.Instance.currentHero.bonusDamage = (int)Mathf.Ceil(GameManager.Instance.currentHero.bonusDamage / 2f);
-        else
+        else*/
             GameManager.Instance.currentHero.bonusDamage = 0;
 
         CardManager.Instance.board.storyLine.ResetPlayerPosition();

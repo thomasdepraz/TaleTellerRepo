@@ -57,8 +57,9 @@ public class Hero : MonoBehaviour
         set
         {
             int diff = value - lifePoints;
-            int hPLeftToHeal = diff;
 
+            //DEPRECATED
+            /*int hPLeftToHeal = diff;
             if(hPLeftToHeal > 0)
             {
                 #region Overheal
@@ -111,16 +112,20 @@ public class Hero : MonoBehaviour
             else
             {
                 _lifePoints = value;
-            }
+            }*/
+
+            _lifePoints = value;
 
             if (_lifePoints < 0)
                 _lifePoints = 0;
+            else if (_lifePoints > maxLifePoints)
+                _lifePoints = maxLifePoints;
 
             heroHpUI.text = (lifePoints).ToString() + "/" + maxLifePoints;
 
             //Different feedack if damage taken or if healed
             if(diff != 0 && diff!= maxLifePoints)
-                GameManager.Instance.storyManager.HeroLifeFeedback(hPLeftToHeal);
+                GameManager.Instance.storyManager.HeroLifeFeedback(diff);
 
             FrameTweening(hpFrame.gameObject);
         }
@@ -131,7 +136,11 @@ public class Hero : MonoBehaviour
         set
         {
             _attackDamage = value;
-            heroAttackUI.text = value.ToString();
+
+            if (_bonusDamage != 0)
+                heroAttackUI.text = value.ToString() + " + " + _bonusDamage.ToString();
+            else
+                heroAttackUI.text = value.ToString();
             FrameTweening(attackFrame.gameObject);
         }
     }

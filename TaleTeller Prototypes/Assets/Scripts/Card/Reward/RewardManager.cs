@@ -38,6 +38,8 @@ public class RewardManager : Singleton<RewardManager>
     public List<CardData> secondaryRewardCards = new List<CardData>();
     public List<CardData> rewardPoolTrading = new List<CardData>();
     public List<CardData> rewardPoolVision = new List<CardData>();
+    public List<CardData> rewardPoolBerserk = new List<CardData>();
+    public List<CardData> rewardPoolAllIdeas = new List<CardData>();
 
     //
     bool confirmed;
@@ -375,6 +377,8 @@ public class RewardManager : Singleton<RewardManager>
 
     List<CardData> GetArchetypeList(CardData data)
     {
+        //DEPRECATED
+        /*
         switch (data.archetype)
         {
             case Archetype.None:
@@ -387,8 +391,9 @@ public class RewardManager : Singleton<RewardManager>
             case Archetype.Vision:
                 return rewardPoolVision;
         }
-        Debug.LogError("Archetype List wasn't found");
-        return null;
+        Debug.LogError("Archetype List wasn't found");*/
+
+        return rewardPoolAllIdeas;
     }
 
     void InitializePlaceholder(List<CardData> targets , int batch)
