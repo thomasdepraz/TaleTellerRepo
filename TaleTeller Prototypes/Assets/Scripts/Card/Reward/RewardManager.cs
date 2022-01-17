@@ -36,9 +36,6 @@ public class RewardManager : Singleton<RewardManager>
 
     //Different Pools based on each archetype -- ALL OF THESE CARDS MUST BE INSTANTIATED
     public List<CardData> secondaryRewardCards = new List<CardData>();
-    public List<CardData> rewardPoolTrading = new List<CardData>();
-    public List<CardData> rewardPoolVision = new List<CardData>();
-    public List<CardData> rewardPoolBerserk = new List<CardData>();
     public List<CardData> rewardPoolAllIdeas = new List<CardData>();
 
     //
@@ -101,14 +98,12 @@ public class RewardManager : Singleton<RewardManager>
     void InitCards()
     {
         UtilityClass.InitCardList(secondaryRewardCards);
-        UtilityClass.InitCardList(rewardPoolTrading);
-        UtilityClass.InitCardList(rewardPoolVision);
+        UtilityClass.InitCardList(rewardPoolAllIdeas);
     }
     void ResetCards()
     {
         UtilityClass.ResetCardList(secondaryRewardCards);
-        UtilityClass.ResetCardList(rewardPoolTrading);
-        UtilityClass.ResetCardList(rewardPoolVision);
+        UtilityClass.ResetCardList(rewardPoolAllIdeas);
     }
 
     public void ChooseMainPlotReward(EventQueue queue, PlotCard card)
