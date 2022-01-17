@@ -26,7 +26,6 @@ public class CardVisuals : MonoBehaviour
     public Image characterAttackFrame;
     public Image cardManaFrame;
     public Image cardTimerFrame;
-    public Image underManaFlag;
     public Image plotIcon;
     public Image plotUnderFlag;
 
@@ -34,7 +33,6 @@ public class CardVisuals : MonoBehaviour
     public TextMeshProUGUI manaCostText;
     public TextMeshProUGUI cardNameText;
     public TextMeshProUGUI cardDescriptionText;
-    public TextMeshProUGUI cardFlagText;
     [Space]
     public TextMeshProUGUI characterAttackText;
     public TextMeshProUGUI characterHealthText;
