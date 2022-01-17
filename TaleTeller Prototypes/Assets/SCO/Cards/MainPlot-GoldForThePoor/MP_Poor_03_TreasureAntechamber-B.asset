@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $MP_Poor_03_CultHeadquarter_B_Effect0
+  description: $MP_Poor_03_TreasureAntichamber_B_Effect0
   trigger: 2
   target: 2
   range: 02000000
@@ -37,7 +37,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat the 3 Armored Cultists. '
+  objectiveName: $MP_Poor_03_TreasureAntichamber_B_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 7e54607fb735e5c468b43f3a350a3277, type: 2}
   - {fileID: 11400000, guid: 7e54607fb735e5c468b43f3a350a3277, type: 2}
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $MP_Poor_03_CultHeadquarter_B_Effect1
+  description: $MP_Poor_03_TreasureAntichamber_B_Effect1
   trigger: 2
   target: 1
   range: 

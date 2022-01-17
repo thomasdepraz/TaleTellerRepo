@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Place the Fleeing Medicant Cultist on the Track. '
+  objectiveName: $MP_Poor_02_CultHeadquarter_B_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 567b89d34fe502241ab38edbe11aec7e, type: 2}
   junkSpawnLocations: 03000000

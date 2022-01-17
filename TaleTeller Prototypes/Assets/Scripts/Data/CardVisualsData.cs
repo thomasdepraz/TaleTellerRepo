@@ -66,4 +66,5 @@ public class CardVisualsData : ScriptableObject
     [Header("Tweening data")]
     public float draggedScale;
     public float hoveredScale;
+    public Color highlightColor;
 }

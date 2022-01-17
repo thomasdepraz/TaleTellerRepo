@@ -17,3 +17,5 @@ $DECK	Regroups all of your available cards. <br>It contains {0} cards.
 $DISCARD	Regroups all your used cards. <br>It contains {0} cards.
 $INK	Used to a play card.<br>Recharges at maximum at the beginning of each turn.
 $GOBUTTON	Start reading your chapter.
+$BOARDSLOT	You can place a card on this slot.
+$HERO	This is the main character of your story.It triggers most of the cards effects.

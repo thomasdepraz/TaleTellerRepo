@@ -31,7 +31,7 @@ public class StoryManager : Singleton<StoryManager>
 
     private void Update()
     {
-        Debug.Log("");
+        //Debug.Log("");
     }
 
     public void StartTurn()
@@ -56,17 +56,17 @@ public class StoryManager : Singleton<StoryManager>
 
 
         //TEMP secondary plot deal --it ll probably be elswhere later
-        if (turnCount > 0 && turnCount % 2 == 0 && PlotsManager.Instance.secondaryPlots.Count > 0)
-        {
-            EventQueue secondaryPlotsQueue = new EventQueue();
-            PlotsManager.Instance.ChooseSecondaryPlots(secondaryPlotsQueue);
-            secondaryPlotsQueue.StartQueue();
+        //if (turnCount > 0 && turnCount % 2 == 0 && PlotsManager.Instance.secondaryPlots.Count > 0)
+        //{
+        //    EventQueue secondaryPlotsQueue = new EventQueue();
+        //    PlotsManager.Instance.ChooseSecondaryPlots(secondaryPlotsQueue);
+        //    secondaryPlotsQueue.StartQueue();
 
-            while (!secondaryPlotsQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-        }
+        //    while (!secondaryPlotsQueue.resolved)
+        //    {
+        //        yield return new WaitForEndOfFrame();
+        //    }
+        //}
 
 
         //Deal Cards
@@ -289,6 +289,7 @@ public class StoryManager : Singleton<StoryManager>
     public void NextStoryArc()
     {
         transitionToNextAct = true;
+        turnCount = 0;
     }
 
 

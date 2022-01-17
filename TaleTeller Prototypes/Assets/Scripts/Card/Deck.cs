@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Deck : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Deck : MonoBehaviour
     public DeckData baseDeck;
     public int drawAmount;
     public int drawAmountFirstTurn;
+
+    [Header("Visuals")]
+    public Image deckHighlight;
+    public Image discardHighlight;
 
 
     public void Start()
@@ -59,7 +64,7 @@ public class Deck : MonoBehaviour
     IEnumerator DrawCardsRoutine(int count, EventQueue queue)
     {
         int cardsInDeck = cardDeck.Count;
-        int numberOfCardsInHand = CardManager.Instance.cardHand.currentHand.Count;
+        int numberOfCardsInHand = CardManager.Instance.cardHand.GetHandCount();
 
         EventQueue dealQueue = new EventQueue();
 
@@ -132,8 +137,6 @@ public class Deck : MonoBehaviour
 
         //All the discarded cards ar back in the deck now u can shuffle
         ShuffleCards(cardDeck);
-        Debug.LogError("Shuffling discard pile in deck");
-
         queue.UpdateQueue();
     }
 

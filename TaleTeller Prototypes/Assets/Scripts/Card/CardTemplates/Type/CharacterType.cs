@@ -419,6 +419,7 @@ public class CharacterType : CardTypes
     public void UpdateUseCount()
     {
         useCount--;
+        CardManager.Instance.cardTweening.ScaleBounce(data.currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
         data.currentContainer.UpdateCharacterInfo(this);
     }
 
@@ -448,6 +449,7 @@ public class CharacterType : CardTypes
         //Return to hand but cannot push cards out of the hand
 
         UpdateUseCount();//Maybe move this to onStartEvent 
+        yield return new WaitForSeconds(0.4f);
 
         EventQueue discardQueue = new EventQueue();
 

@@ -26,7 +26,7 @@ public class Hand : MonoBehaviour
     public bool IsInHand(CardContainer container)
     {
         Type cardType = container.data.GetType();
-        if (cardType == typeof(IdeaCard) || cardType == typeof(DarkIdeaCard))
+        if (cardType != typeof(PlotCard))
         {
             if (Contains(handTransformIdea, container.rectTransform.localPosition))
             {
@@ -68,7 +68,7 @@ public class Hand : MonoBehaviour
     {
         Vector3 position = Vector3.zero;
         Type cardType =  data.GetType();
-        if(cardType == typeof(IdeaCard) || cardType == typeof(DarkIdeaCard))
+        if(cardType != typeof(PlotCard))
         {
             position = RandomPositionInRect(handTransformIdea);
         }
@@ -86,5 +86,16 @@ public class Hand : MonoBehaviour
         {
             currentHand[0].ResetContainer();
         }
+    }
+
+    public int GetHandCount()
+    {
+        int count = 0;
+        for (int i = 0; i < currentHand.Count; i++)
+        {
+            if (currentHand[i].data.GetType() != typeof(PlotCard))
+                count++;
+        }
+        return count;
     }
 }

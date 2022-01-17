@@ -37,7 +37,7 @@ MonoBehaviour:
   description: $Junk_CommonDemon_Effect0
   trigger: 8
   target: 0
-  range: 02000000
+  range: 00000000
   values: []
 --- !u!114 &11400000
 MonoBehaviour:

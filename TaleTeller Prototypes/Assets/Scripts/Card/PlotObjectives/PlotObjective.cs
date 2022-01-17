@@ -17,6 +17,8 @@ public class PlotObjective : ScriptableObject
     {
         linkedPlotData = data;
 
+        objectiveName = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardsDictionary, objectiveName);
+
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
             objective.linkedJunkedCards[i] = objective.linkedJunkedCards[i].InitializeData(objective.linkedJunkedCards[i]) as JunkCard;
@@ -84,5 +86,10 @@ public class PlotObjective : ScriptableObject
         }
 
         currentQueue.UpdateQueue();
+    }
+
+    public virtual string GetDescription()
+    {
+        return objectiveName;
     }
 }

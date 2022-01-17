@@ -102,7 +102,7 @@ public class Effect : ScriptableObject
     {
         linkedData = card;
         if(description!=string.Empty)
-            description = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardEffectsDescriptionsDictionary, description);
+            description = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardsDictionary, description);
 
         //switch case that subscribes OnTriggerEffect() to the right delegate based on the effect trigger
         switch (trigger)
@@ -317,10 +317,11 @@ public class Effect : ScriptableObject
         return targets;
     }
 
-    public virtual string GetDescription(Effect effect)
+    public virtual string GetDescription(Effect effect, Effect reference)
     {
         string result = string.Empty;
         string[] temp = effect.description.Split('$');
+        string[] referenceTemp = effect.description.Split('$');
 
         for (int i = 0; i < temp.Length; i++)
         {
@@ -335,7 +336,14 @@ public class Effect : ScriptableObject
                 FieldInfo prop = type.GetField(temp[i]);
                 EffectValue val = prop.GetValue(effect) as EffectValue;
 
-                value = val.value.ToString();
+                Type refType = reference.GetType();
+                FieldInfo refProp = refType.GetField(referenceTemp[i]);
+                EffectValue refVal = refProp.GetValue(reference) as EffectValue;
+
+                if (val.value != refVal.value)
+                    value = $"*{val.value}*";
+                else
+                    value = $"{val.value}";
             }
             result += value;
         }

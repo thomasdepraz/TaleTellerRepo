@@ -24,6 +24,11 @@ public class Board : MonoBehaviour
     private int currentSlot = 0;
     [HideInInspector] public BoardState currentBoardState;
 
+    [Header("Highlight Color Profile")]
+    public Color baseColor;
+    public Color TwoEffectColor;
+    public Color ThreeEffectColor;
+
 
     #region StoryBegin
     public void InitBoard()
@@ -222,6 +227,92 @@ public class Board : MonoBehaviour
     #endregion
 
     #region Utility
+
+    public void ShowTargetSlots(CardData card)
+    {
+        if (card.effects.Count == 0) return;
+        else
+        {
+            List<int> slotsToHighlight = new List<int>();
+            int currentSlotIndex = CardManager.Instance.currentHoveredSlot.slotIndex;
+
+            for (int i = 0; i < card.effects.Count; i++)
+            {
+                for (int j = 0; j < card.effects[i].range.Length; j++)
+                {
+                    BoardRange effectRange = card.effects[i].range[j];
+                    switch (effectRange)
+                    {
+                        case BoardRange.Self:
+                            slotsToHighlight.Add(currentSlotIndex);
+                            break;
+                        case BoardRange.All:
+                            for (int x = 0; x < slots.Count; x++)
+                            {
+                                slotsToHighlight.Add(x);
+                            }
+                            break;
+                        case BoardRange.AllLeft:
+                            for (int x = currentSlotIndex - 1; x >= 0; x--)
+                            {
+                                slotsToHighlight.Add(x);
+                            }
+                            break;
+                        case BoardRange.AllRight:
+                            for (int x = currentSlotIndex + 1; x < slots.Count; x++)
+                            {
+                                slotsToHighlight.Add(x);
+                            }
+                            break;
+                        case BoardRange.FirstLeft:
+                            if (currentSlotIndex - 1 >= 0) slotsToHighlight.Add(currentSlotIndex - 1);
+                            break;
+                        case BoardRange.SecondLeft:
+                            if (currentSlotIndex - 2 >= 0) slotsToHighlight.Add(currentSlotIndex - 2);
+                            break;
+                        case BoardRange.ThirdLeft:
+                            if (currentSlotIndex - 3 >= 0) slotsToHighlight.Add(currentSlotIndex - 3);
+                            break;
+                        case BoardRange.FourthLeft:
+                            if (currentSlotIndex - 4 >= 0) slotsToHighlight.Add(currentSlotIndex - 4);
+                            break;
+                        case BoardRange.FirstRight:
+                            if (currentSlotIndex + 1 <slots.Count) slotsToHighlight.Add(currentSlotIndex + 1);
+                            break;
+                        case BoardRange.SecondRight:
+                            if (currentSlotIndex + 2 < slots.Count) slotsToHighlight.Add(currentSlotIndex + 2);
+                            break;
+                        case BoardRange.ThirdRight:
+                            if (currentSlotIndex + 3 < slots.Count) slotsToHighlight.Add(currentSlotIndex + 3);
+                            break;
+                        case BoardRange.FourthRight:
+                            if (currentSlotIndex + 4 < slots.Count) slotsToHighlight.Add(currentSlotIndex + 4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            //slotsToHighlight = slotsToHighlight.Distinct().ToList();
+
+            for (int i = 0; i < slotsToHighlight.Count; i++)
+            {
+                //HighlightSlot
+                slots[slotsToHighlight[i]].ShowHighlight();
+            }
+        }
+    }
+
+    public void HideTargetSlots()
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            //Stophighlightslot
+            slots[i].HideHighlight();
+        }
+    }
+
     public bool IsEmpty()
     {
         for (int i = 0; i < slots.Count; i++)

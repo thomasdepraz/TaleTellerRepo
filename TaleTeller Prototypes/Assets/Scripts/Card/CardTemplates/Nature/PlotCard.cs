@@ -131,7 +131,7 @@ public class PlotCard : CardData
 
                     EventQueue drawQueue = new EventQueue();
 
-                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.plotAppearTransform.localPosition);
+                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.cardHand.GetPositionInHand(objective.linkedJunkedCards[i]));
 
                     drawQueue.StartQueue();//Actual draw
                     while (!drawQueue.resolved)
@@ -192,7 +192,6 @@ public class PlotCard : CardData
         }
         else //If last then go to next acte
         {
-            Debug.LogError("NORMALEMENT C'EST LA FIN DE l'ACTE");
             StoryManager.Instance.NextStoryArc();
         }
 
@@ -311,11 +310,21 @@ public class PlotCard : CardData
     {
         queue.events.Add(UpdateTimerRoutine(queue));
     }
-    IEnumerator UpdateTimerRoutine(EventQueue currentQueue)
+    IEnumerator UpdateTimerRoutine(EventQueue currentQueue) 
     {
         yield return null;
         completionTimer--;
+
         currentContainer.UpdatePlotInfo(this);
+        if(completionTimer == 1)
+        {
+            currentContainer.UpdateTimerTweening(this, true);
+        }
+        else
+        {
+            CardManager.Instance.cardTweening.ScaleBounce(currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
+        }
+        yield return new WaitForSeconds(0.4f);
         if(completionTimer <= 0)
         {
             EventQueue failQueue = new EventQueue();

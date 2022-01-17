@@ -34,6 +34,12 @@ public class DumpAmountObj : PlotObjective
     {
         DumpProgression();
 
+        EventQueue feedback = new EventQueue();
+        CardManager.Instance.cardTweening.EffectChangeFeedback(linkedPlotData.currentContainer, 1, 0, feedback, false);
+        linkedPlotData.currentContainer.UpdateBaseInfo();
+        while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+
         if (PlotCompletionTest())
         {
             //If so, complet plot
@@ -63,5 +69,17 @@ public class DumpAmountObj : PlotObjective
             return true;
         else 
             return false;
+    }
+
+    public override string GetDescription()
+    {
+        string description;
+        int newValue = amountToDump - dumpAmount;
+        if (newValue < 0) newValue = 0;
+        if(newValue != amountToDump) description = objectiveName.Replace("$value$", $"*{newValue}*");
+        else description = objectiveName.Replace("$value$", newValue.ToString());
+
+
+        return description;
     }
 }

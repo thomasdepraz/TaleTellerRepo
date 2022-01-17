@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat the Demon while Theophilus is on the next step. '
+  objectiveName: $MP_Priest_01_PriestTheophilius_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: d62fbd32af1194a4ba300dbc8377c052, type: 2}
   junkSpawnLocations: 00000000

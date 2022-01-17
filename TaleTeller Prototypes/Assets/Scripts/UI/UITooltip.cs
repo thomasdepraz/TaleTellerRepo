@@ -10,11 +10,15 @@ public enum UITooltipTarget
     DECK, 
     DISCARD,
     INK,
-    GOBUTTON
+    GOBUTTON,
+    BOARDSLOT, 
+    HERO, 
+
 }
 public class UITooltip : MonoBehaviour
 {
     public UITooltipTarget tooltipTarget;
+    public float delay;
     bool open;
     public void Update()
     {
@@ -27,7 +31,8 @@ public class UITooltip : MonoBehaviour
     public void ShowTooltip()
     {
         string description = GetTooltipDescription();
-        GameManager.Instance.pointer.ShowTooltip(description);
+        GameManager.Instance.pointer.ShowTooltip(description, delay);
+        print("tooltip");
         open = true;
     }
 
@@ -71,6 +76,12 @@ public class UITooltip : MonoBehaviour
             case UITooltipTarget.GOBUTTON:
                 result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$GOBUTTON");
                 result = string.Format(result, CardManager.Instance.cardDeck.discardPile.Count);
+                break;
+            case UITooltipTarget.BOARDSLOT:
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$BOARDSLOT");
+                break;
+            case UITooltipTarget.HERO:
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$HERO");
                 break;
             default:
                 break;

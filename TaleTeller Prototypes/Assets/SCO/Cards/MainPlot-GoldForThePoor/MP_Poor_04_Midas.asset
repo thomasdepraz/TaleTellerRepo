@@ -101,7 +101,7 @@ MonoBehaviour:
   objective: {fileID: 6238341435773218929}
   completionTimer: 6
   isMainPlot: 1
-  isFinal: 0
+  isFinal: 1
   plotChoiceDescription: $GoldForThePoors_Step04_Objective
   legendaryCardRewards:
   - {fileID: 11400000, guid: 3dc0d704ba7443b4e84d649c08f14e4c, type: 2}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Defeat Midas the Prophet of Mendicity. '
+  objectiveName: $MP_Poor_04_Midas_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}
   - {fileID: 11400000, guid: 646572e28c1ce7b41a57b39b413b8eda, type: 2}

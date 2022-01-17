@@ -60,6 +60,11 @@ public class KillJunkObj : JunkDrivenObj
     {
         KillCompletionTest(data);
 
+        EventQueue feedback = new EventQueue();
+        CardManager.Instance.cardTweening.EffectChangeFeedback(linkedPlotData.currentContainer, 1, 0, feedback, false);
+        linkedPlotData.currentContainer.UpdateBaseInfo();
+        while(!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+
         if (PlotCompletionTest())
         {
             //If so, complet plot
@@ -130,5 +135,20 @@ public class KillJunkObj : JunkDrivenObj
 
         if (increaseCount)
             killCount++;
+    }
+
+    public override string GetDescription()
+    {
+        if (objectiveName.Contains("$value$"))
+        {
+            string description;
+            int newValue = numberToKill - killCount;
+            if (newValue < 0) newValue = 0;
+            
+            if(newValue != numberToKill) description = objectiveName.Replace("$value$", $"*{newValue}*");
+            else description = objectiveName.Replace("$value$", newValue.ToString());
+            return description;
+        }
+        else return objectiveName;
     }
 }

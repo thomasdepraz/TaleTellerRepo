@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: Defeat the Bounty Hunter without other Evil Characters on the Track.
+  objectiveName: $SP_02_BountyHunter_Objective
   linkedJunkedCards: []
   junkSpawnLocations: 
   junksPositionsInDeck: 

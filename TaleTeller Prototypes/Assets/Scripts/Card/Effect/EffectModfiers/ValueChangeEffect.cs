@@ -72,22 +72,22 @@ public class ValueChangeEffect : ValueModifierEffect
                 {
                     case EffectValueOperator.Addition:
                         value.value += modification.value;
-                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, 1, feedbackQueue);
+                        CardManager.Instance.cardTweening.EffectChangeFeedback(effect.linkedData.currentContainer, 1, modification.value,feedbackQueue);
                         break;
 
                     case EffectValueOperator.Division:
                         value.value /= modification.value;
-                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, -1, feedbackQueue);
+                        CardManager.Instance.cardTweening.EffectChangeFeedback(effect.linkedData.currentContainer, -1, modification.value, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Product:
                         value.value *= modification.value;
-                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, 1, feedbackQueue);
+                        CardManager.Instance.cardTweening.EffectChangeFeedback(effect.linkedData.currentContainer, 1, modification.value, feedbackQueue);
                         break;
 
                     case EffectValueOperator.Substraction:
                         value.value -= modification.value;
-                        effect.linkedData.currentContainer.visuals.EffectChangeFeedback(effect.linkedData.currentContainer, -1, feedbackQueue);
+                        CardManager.Instance.cardTweening.EffectChangeFeedback(effect.linkedData.currentContainer, -1, modification.value, feedbackQueue);
                         break;
 
                     default:
@@ -95,7 +95,7 @@ public class ValueChangeEffect : ValueModifierEffect
                         break;
                 }
 
-                effect.linkedData.currentContainer.visuals.UpdateBaseElements(effect.linkedData);
+                effect.linkedData.currentContainer.UpdateBaseInfo();
              }
 
             if (targetedValues.Count() == 0)

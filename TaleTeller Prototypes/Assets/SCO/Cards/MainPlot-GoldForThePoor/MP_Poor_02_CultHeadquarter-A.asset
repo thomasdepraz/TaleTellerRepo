@@ -102,8 +102,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 'Place the Cult Headquarter''s Entrance on the Track while defeating
-    the Gatekeeper. '
+  objectiveName: $MP_Poor_02_CultHeadquarter_A_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: b6880c478d6e7a741b8d1d57e910bd58, type: 2}
   - {fileID: 11400000, guid: b6880c478d6e7a741b8d1d57e910bd58, type: 2}

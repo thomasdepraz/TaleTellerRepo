@@ -61,7 +61,7 @@ public class CardContainer : MonoBehaviour
         //}
         //if (Input.GetKeyDown(KeyCode.H))
         //{
-        //    visuals.EffectChangeFeedback(this, -1, new EventQueue());
+        //   visuals.PopupTextFeedback("$BUFF", 1);
         //}
 
     }
@@ -142,6 +142,7 @@ public class CardContainer : MonoBehaviour
             #endregion
 
             HideTooltip();
+            HideLinkedCards();
 
             CardManager.Instance.holdingCard = true;
             CardManager.Instance.currentCard = this;
@@ -163,6 +164,8 @@ public class CardContainer : MonoBehaviour
         rectTransform.localScale = Vector3.one;
         shadowTransform.gameObject.SetActive(false);
         #endregion
+
+        CardManager.Instance.board.HideTargetSlots();
 
         //If hovers, swap card, else drop in or out of slot
         if(CardManager.Instance.hoveredCard != null)
@@ -260,14 +263,6 @@ public class CardContainer : MonoBehaviour
                         Debug.Log("Not enough mana");
                     }
                 }
-                else //if other card in hand
-                {
-                    Vector3 position = CardManager.Instance.hoveredCard.rectTransform.anchoredPosition;
-
-                    CardManager.Instance.hoveredCard.rectTransform.anchoredPosition = originPosition;
-                    rectTransform.anchoredPosition = position;
-                }
-                    
                 CardManager.Instance.hoveredCard = null;
             }
             #endregion
@@ -297,15 +292,18 @@ public class CardContainer : MonoBehaviour
                     currentSlot = CardManager.Instance.currentHoveredSlot;
                     currentSlot.canvasGroup.blocksRaycasts = false;
                     rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
+
+                    if(data.GetType()==typeof(PlotCard))
+                    {
+                        PlotCard card = data as PlotCard;
+                        UpdateTimerTweening(card, false);
+                    }
                 }
                 else
                 {
                     //reset card position
                     rectTransform.anchoredPosition = originPosition;
                     canTween = true; //temp ?
-
-                    if (CardManager.Instance.currentHoveredSlot == currentSlot) Debug.Log("SameSlot");
-                    else Debug.Log("Not enough mana");
                 }
             }
             else //Drop Out Slot
@@ -333,10 +331,15 @@ public class CardContainer : MonoBehaviour
                 {
                     CardManager.Instance.cardTweening.MoveCard(this, CardManager.Instance.cardHand.GetPositionInHand(data));
                 }
+
+                if (data.GetType() == typeof(PlotCard))
+                {
+                    PlotCard card = data as PlotCard;
+                    UpdateTimerTweening(card, true);
+                }
             }
             #endregion
         }
-
 
         CardManager.Instance.currentHoveredSlot = null;
         CardManager.Instance.holdingCard = false;
@@ -345,6 +348,7 @@ public class CardContainer : MonoBehaviour
 
     public void OnPointerEnter()
     {
+        print(GetInfos());
         if(CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
             if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
@@ -371,10 +375,18 @@ public class CardContainer : MonoBehaviour
 
                 rectTransform.localScale = Vector3.one * visuals.profile.hoveredScale;
 
-                //LeanTween.move(rectTransform, rectTransform.anchoredPosition + new Vector2(0, 10f), 0.5f).setEaseOutSine();
                 shadowTransform.gameObject.SetActive(true);
 
                 ShowTooltip();
+
+                if (data.GetType() == typeof(PlotCard))
+                {
+                    PlotCard plotCard = data as PlotCard;
+                    if(plotCard.isMainPlot)
+                    {
+                        ShowLinkedCards(plotCard);
+                    }
+                }
             }
         }
     }
@@ -397,9 +409,10 @@ public class CardContainer : MonoBehaviour
                 rectTransform.localScale = Vector3.one;
 
                 HideTooltip();
+                HideLinkedCards();
 
-                if (!isDragging)
-                    transform.SetSiblingIndex(siblingIndex);
+                //if (!isDragging)
+                //    transform.SetSiblingIndex(siblingIndex);
             }
             #endregion
         }
@@ -409,15 +422,15 @@ public class CardContainer : MonoBehaviour
     #region Utility
     public void UpdateCharacterInfo(CharacterType character)
     {
-        visuals.UpdateCharacterElements(character);
+        visuals.UpdateCharacterElements(character, true);
     }
     public void UpdatePlotInfo(PlotCard card)
     {
-        visuals.UpdatePlotElements(card);
+        visuals.UpdatePlotElements(card, true);
     }
     public void UpdateBaseInfo()
     {
-        visuals.UpdateBaseElements(data);
+        visuals.UpdateBaseElements(data, true);
     }
 
     public void ShowTooltip()
@@ -431,13 +444,17 @@ public class CardContainer : MonoBehaviour
         {
             if(effectDescription.Contains(keywords[j]))
             {
-                tooltips[count].AppearTooltip(keywords[j], 1, (count + 1) * 0.1f);
+                tooltips[count].AppearTooltip(keywords[j], 1, 0.3f + (count + 1) * 0.1f);
                 count++;
             }
         }
     }
     public void HideTooltip()
     {
+        for (int i = 0; i < tooltips.Count; i++)
+        {
+            tooltips[i].hovered = false;
+        }
         int count = 0;
         //hide all active tooltip
         for (int i = 0; i < tooltips.Count; i++)
@@ -448,6 +465,71 @@ public class CardContainer : MonoBehaviour
                 count++;
             }
         }
+    }
+
+    public void ShowLinkedCards(PlotCard card)
+    {
+        for (int i = 0; i < card.objective.linkedJunkedCards.Count; i++)
+        {
+            //Show Feedback for each card
+            if(card.objective.linkedJunkedCards[i].currentContainer != null)
+            {
+                CardVisuals visuals = card.objective.linkedJunkedCards[i].currentContainer.visuals;
+                CardManager.Instance.cardTweening.ShowHighlight(visuals.cardHighlight, visuals.profile.highlightColor);
+            }
+            else if(CardManager.Instance.cardDeck.cardDeck.Contains(card.objective.linkedJunkedCards[i]))
+            {
+                CardManager.Instance.cardTweening.ShowHighlight(CardManager.Instance.cardDeck.deckHighlight, visuals.profile.highlightColor);
+            }
+            else if(CardManager.Instance.cardDeck.discardPile.Contains(card.objective.linkedJunkedCards[i]))
+            {
+                CardManager.Instance.cardTweening.ShowHighlight(CardManager.Instance.cardDeck.discardHighlight, visuals.profile.highlightColor);
+            }
+        }
+    }
+    public void HideLinkedCards()
+    {
+        //Hide for each container
+        for (int i = 0; i < CardManager.Instance.cardHand.hiddenHand.Count; i++)
+        {
+            CardVisuals visuals = CardManager.Instance.cardHand.hiddenHand[i].visuals;
+            CardManager.Instance.cardTweening.HideHighlight(visuals.cardHighlight);
+        }
+
+        //Hide for deck
+        CardManager.Instance.cardTweening.HideHighlight(CardManager.Instance.cardDeck.deckHighlight);
+
+        //Hide for discard
+        CardManager.Instance.cardTweening.HideHighlight(CardManager.Instance.cardDeck.discardHighlight);
+    }
+
+    public void UpdateTimerTweening(PlotCard card,bool enable)
+    {
+        if(enable)
+        {
+            if(card.completionTimer == 1)
+            {
+                visuals.timerText.color = Color.red;
+                LeanTween.cancel(card.currentContainer.visuals.cardTimerFrame.gameObject);
+                card.currentContainer.visuals.cardTimerFrame.gameObject.transform.localScale = Vector3.one;
+                CardManager.Instance.cardTweening.ScaleBounceLoop(card.currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
+            }
+        }
+        else
+        {
+            LeanTween.cancel(card.currentContainer.visuals.cardTimerFrame.gameObject);
+            card.currentContainer.visuals.cardTimerFrame.gameObject.transform.localScale = Vector3.one;
+        }
+    }
+
+    public string GetInfos()
+    {
+        string cardInfo = $" slot : {currentSlot}\n cardName : {data.cardName}\n cardType : {data.cardType}\n cardEffects :\n";
+        for (int i = 0; i < data.effects.Count; i++)
+        {
+            cardInfo += $"{data.effects[i].description}";
+        }
+        return cardInfo;
     }
     #endregion
 }
