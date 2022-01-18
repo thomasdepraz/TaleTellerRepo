@@ -50,49 +50,55 @@ public class CardPicker : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
         selectedCards = pickedCards;
 
-        if (numberToPick <= targetCards.Count) numberToSelect = numberToPick;
-        else numberToSelect = targetCards.Count;
+        if (numberToPick > targetCards.Count) numberToPick = targetCards.Count;
 
-        confirmButton.interactable = false;
-
-         confirmed = false;
-
-
-        //Fade in background
-        bool fadeEnded = false;
-        LeanTween.color(gameObject, Color.black, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; }) ;
-        while(!fadeEnded)
+        numberToSelect = numberToPick;
+        if(numberToSelect != 0)
         {
-            yield return new WaitForEndOfFrame();
+            confirmButton.interactable = false;
+
+            confirmed = false;
+
+
+            //Fade in background
+            bool fadeEnded = false;
+            LeanTween.color(gameObject, Color.black, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
+            while (!fadeEnded)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            fadeEnded = false;
+
+            InitializePlaceholders(targetCards);
+            instructionText.gameObject.SetActive(true);
+            instructionText.text = instruction;
+
+            //TODO fade in cards
+
+
+
+            //If necessary show button
+            confirmButton.gameObject.SetActive(true);
+
+            //Wait for ending conditions
+            while (selectedCards.Count != numberToPick || !confirmed)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            ResetPlaceHolders();
+            instructionText.gameObject.SetActive(false);
+            descriptionText.gameObject.SetActive(false);
+
+            Color transparent = new Color(0, 0, 0, 0);
+            LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
+                onEnd => { canvasGroup.blocksRaycasts = false; queue.UpdateQueue(); });
         }
-        fadeEnded = false;
-
-        InitializePlaceholders(targetCards);
-        instructionText.gameObject.SetActive(true);
-        instructionText.text = instruction;
-
-        //TODO fade in cards
-
-
-
-        //If necessary show button
-        confirmButton.gameObject.SetActive(true);
-
-        //Wait for ending conditions
-        while(selectedCards.Count != numberToPick || !confirmed)
+        else
         {
-            yield return new WaitForEndOfFrame();
+            canvasGroup.blocksRaycasts = false;
+            queue.UpdateQueue();
         }
-
-        ResetPlaceHolders();
-        instructionText.gameObject.SetActive(false);
-        descriptionText.gameObject.SetActive(false);
-
-        Color transparent = new Color(0, 0, 0, 0);
-        LeanTween.color(gameObject, transparent, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete( 
-            onEnd => { canvasGroup.blocksRaycasts = false; queue.UpdateQueue(); });
-
-        
     }
 
     public void PickScheme(EventQueue queue, List<MainPlotScheme> schemes, List<MainPlotScheme> chosenScheme, bool cardVersion = false)

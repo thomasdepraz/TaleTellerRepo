@@ -19,12 +19,17 @@ public class DiscardTypeEffects : Effect
 
         //----
 
+
+
         //Discard cards through picker
         //TODO: [GD] Rework if we choose to keep only discard based on random
         //If we choose to keep only discard based on picker let it this way
 
         if (targetsToDiscard.Count > 0)
         {
+            //Clamp numberToDiscard to prevent softlock
+            if (numberOfCardsToDiscard > targetsToDiscard.Count) numberOfCardsToDiscard = targetsToDiscard.Count;
+
             EventQueue pickQueue = new EventQueue();
             List<CardData> pickedCards = new List<CardData>();
 
