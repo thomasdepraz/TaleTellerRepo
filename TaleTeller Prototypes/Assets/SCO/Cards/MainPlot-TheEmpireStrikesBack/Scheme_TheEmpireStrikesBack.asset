@@ -15,7 +15,7 @@ MonoBehaviour:
   schemeSteps:
   - stepOptions:
     - {fileID: 11400000, guid: bacba99c34ab8b049bbe3c8fe9d252fc, type: 2}
-    chapterDescription: 
+    chapterDescription: $Empire_Step01_Description
   currentStep: 0
-  plotDescription: 
+  plotDescription: $Empire_Description
   plotIllustration: {fileID: 0}

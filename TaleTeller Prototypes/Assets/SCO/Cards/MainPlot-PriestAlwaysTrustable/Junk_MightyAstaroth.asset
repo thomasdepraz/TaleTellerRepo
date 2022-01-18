@@ -65,8 +65,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 18
-    baseAttackDamage: 6
+    baseLifePoints: 21
+    baseAttackDamage: 5
   behaviour: 2
   fightingRange: 3
   doubleStrike: 1

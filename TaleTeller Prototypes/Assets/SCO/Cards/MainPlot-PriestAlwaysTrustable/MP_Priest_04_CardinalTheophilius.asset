@@ -20,7 +20,7 @@ MonoBehaviour:
   values: []
   modifierValue:
     value: 1
-    type: 1
+    type: 7
     op: 1
   behaviourTargeted: 0
   temporaryChange: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 1
+    baseLifePoints: 32
     baseAttackDamage: 4
   behaviour: 2
   fightingRange: 3

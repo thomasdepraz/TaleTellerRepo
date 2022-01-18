@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Junk_CrumblingHouse_Effect0
   trigger: 1
   target: 1
   range: 
@@ -35,7 +35,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
   m_Name: Junk_CrumblingHouse
   m_EditorClassIdentifier: 
-  dataReference: {fileID: 11400000, guid: 183197bef8b86db4b9b0381835473440, type: 2}
+  dataReference: {fileID: 11400000}
   cardName: Crumbling House
   rarity: 0
   archetype: 0

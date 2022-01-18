@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Junk_EmpireSoldier_Effect0
   trigger: 8
   target: 4
   range: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $MP_TurbulentOutset_04_GeneralOton_Effect0
   trigger: 10
   target: 2
   range: 01000000
@@ -37,7 +37,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_TurbulentOutset_04_GeneralOton_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 6a0c5c5c1d84a8a4a92df8ad49d197bf, type: 2}
   - {fileID: 11400000, guid: 6a0c5c5c1d84a8a4a92df8ad49d197bf, type: 2}

@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7915361420730407242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 8
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 1
+    type: 0
+    op: 2
+  temporaryChange: 0
 --- !u!114 &-405446109891639393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,31 +37,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 16
-    baseAttackDamage: 6
+    baseLifePoints: 6
+    baseAttackDamage: 2
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
   undying: 0
   useCount: 2
---- !u!114 &-33065891949352848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3a916b3ae6c1ba4ba17090506b039e0, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $Junk_CommonDemon_Effect0
-  trigger: 8
-  target: 0
-  range: 00000000
-  values: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,11 +63,11 @@ MonoBehaviour:
   manaCost: 0
   cardGraph: {fileID: 21300000, guid: 1ec31547b6bf83d49868487743bbbee0, type: 3}
   currentContainer: {fileID: 0}
-  description: 'Deathrattle : The Enemy attack the last NPC or Hero who fought it.
+  description: '
 
 '
   effectsReferences:
-  - {fileID: -33065891949352848}
+  - {fileID: -7915361420730407242}
   effects: []
   cardTypeReference: {fileID: -405446109891639393}
   cardType: {fileID: 0}
