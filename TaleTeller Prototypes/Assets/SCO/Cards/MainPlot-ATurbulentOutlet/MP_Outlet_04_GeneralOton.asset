@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5102391805029046078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 10
+  target: 2
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 1
+    type: 1
+    op: 1
+  behaviourTargeted: 0
+  temporaryChange: 0
+--- !u!114 &-4114461054861734226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 6a0c5c5c1d84a8a4a92df8ad49d197bf, type: 2}
+  - {fileID: 11400000, guid: 6a0c5c5c1d84a8a4a92df8ad49d197bf, type: 2}
+  - {fileID: 11400000, guid: 6a0c5c5c1d84a8a4a92df8ad49d197bf, type: 2}
+  - {fileID: 11400000, guid: 6a0c5c5c1d84a8a4a92df8ad49d197bf, type: 2}
+  junkSpawnLocations: 03000000030000000300000003000000
+  junksPositionsInDeck: 02000000040000000600000007000000
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_Outlet_04_GeneralOton
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: General Oton
+  rarity: 0
+  archetype: 0
+  manaCost: 1
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -5102391805029046078}
+  effects: []
+  cardTypeReference: {fileID: 6977866281880404926}
+  cardType: {fileID: 0}
+  objective: {fileID: -4114461054861734226}
+  completionTimer: 6
+  isMainPlot: 1
+  isFinal: 1
+  plotChoiceDescription: 
+  legendaryCardRewards:
+  - {fileID: 11400000, guid: 3dc0d704ba7443b4e84d649c08f14e4c, type: 2}
+  - {fileID: 11400000, guid: 7303c6fd77582ee4f871cee5f9d27196, type: 2}
+  - {fileID: 11400000, guid: b0d8b7a5814ac704ba0326f97af5893c, type: 2}
+  - {fileID: 11400000, guid: 48206bddb9fce104eaece2a1ff10a84a, type: 2}
+  - {fileID: 11400000, guid: 30b64b5c2aedcc84291cb51e146e4558, type: 2}
+  - {fileID: 11400000, guid: ab4a696bbb3b46144b140ce6d512da6d, type: 2}
+  - {fileID: 11400000, guid: f7db9ae87536e644b90efea5872b31fb, type: 2}
+  - {fileID: 11400000, guid: 7f63fd38e43a5cf4a834841807857245, type: 2}
+  - {fileID: 11400000, guid: 989a7ada45ba2c14e934bcec8b37314a, type: 2}
+  - {fileID: 11400000, guid: 0af0d36edc0686148ab49c88632576bd, type: 2}
+  - {fileID: 11400000, guid: 289f3a48fe380e041a879e11b5eefdb1, type: 2}
+--- !u!114 &6977866281880404926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 12
+    baseAttackDamage: 1
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 5

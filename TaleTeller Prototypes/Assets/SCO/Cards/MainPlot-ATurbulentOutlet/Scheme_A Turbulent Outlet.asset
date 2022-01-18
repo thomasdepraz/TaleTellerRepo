@@ -16,6 +16,17 @@ MonoBehaviour:
   - stepOptions:
     - {fileID: 11400000, guid: f2dc2e611278a56438b876e291beb016, type: 2}
     chapterDescription: 
+  - stepOptions:
+    - {fileID: 11400000, guid: baf859f449c048b4fa2ec743b7a568e7, type: 2}
+    - {fileID: 11400000, guid: 0f7dba716d7b42f40ac9d04a61b44fb8, type: 2}
+    chapterDescription: 
+  - stepOptions:
+    - {fileID: 11400000, guid: c8a376ebaf0703146ac0c5f5d3c24686, type: 2}
+    - {fileID: 11400000, guid: b3e704dbf5c1691498cbb64d558997bc, type: 2}
+    chapterDescription: 
+  - stepOptions:
+    - {fileID: 11400000, guid: 6f207422d9bba6842a9480034edc7727, type: 2}
+    chapterDescription: 
   currentStep: 0
   plotDescription: 
   plotIllustration: {fileID: 0}

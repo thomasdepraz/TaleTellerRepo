@@ -30,7 +30,7 @@ public class PlaceObj : BoardDrivenObj
     public override void SubscribeUpdateStatus(PlotCard data)
     {
         data.onCardEnter += UpdateStatus;
-        data.onStoryStart += UpdateStatus;
+        //data.onStoryStart += UpdateStatus;
     }
 
     [SerializeField]

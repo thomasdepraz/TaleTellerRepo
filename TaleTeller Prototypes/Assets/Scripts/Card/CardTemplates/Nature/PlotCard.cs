@@ -140,6 +140,27 @@ public class PlotCard : CardData
                     }
 
                     break;
+                case PlotObjective.JunkSpawnLocation.FromCard:
+
+                    for(int x = i; x >= 0; x--)
+                    {
+                        if(objective.junkSpawnLocations[x] != PlotObjective.JunkSpawnLocation.FromCard)
+                        {
+                            for(int z = 0; z < objective.linkedJunkedCards[x].effects.Count; z++)
+                            {
+                                if(objective.linkedJunkedCards[x].effects[z].GetType() == typeof(AddJunkToHandEffect))
+                                {
+                                    AddJunkToHandEffect junkToHandEffect = objective.linkedJunkedCards[x].effects[z] as AddJunkToHandEffect;
+
+                                    junkToHandEffect.junkCardsToSpawn.Add(objective.linkedJunkedCards[i]);
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+
+                    break;
             }
             
         }
@@ -173,13 +194,24 @@ public class PlotCard : CardData
     }
     IEnumerator OnEndPlotCompleteRoutine(EventQueue currentQueue)
     {
-        
         //Destroy
         currentContainer.ResetContainer();
         StoryManager.Instance.cardsToDestroy.Add(this);
 
+        //destroy all linked junk cards
+        EventQueue destroyQueue = new EventQueue();
+
+        objective.DestroyJunk(destroyQueue);
+
+        destroyQueue.StartQueue();
+
+        while (!destroyQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
         //Choose next card if not last
-        if(PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
+        if (PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
         {
             EventQueue updateQueue = new EventQueue();
             PlotsManager.Instance.currentMainPlotScheme.UpdateScheme(updateQueue, PlotsManager.Instance.currentMainPlotScheme);
@@ -205,18 +237,6 @@ public class PlotCard : CardData
     IEnumerator CompletePlotRoutine(EventQueue currentQueue)
     {
         yield return null;
-
-        //destroy all linked junk cards
-        EventQueue destroyQueue = new EventQueue();
-
-        objective.DestroyJunk(destroyQueue);
-
-        destroyQueue.StartQueue();
-
-        while(!destroyQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
 
         //Reward
         EventQueue rewardQueue = new EventQueue();

@@ -124,12 +124,14 @@ public class CardManager : Singleton<CardManager>
 
         if (addToDeck)
         {
-            cardDeck.cardDeck.Add(card);
+            int r = UnityEngine.Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count);
+
+            cardDeck.cardDeck.Insert(r, card);
 
             Type cardType = card.GetType();
             if(cardType != typeof(PlotCard) && cardType != typeof(JunkCard))
             {
-                cardDeck.cachedDeck.Add(card.dataReference);
+                cardDeck.cachedDeck.Insert(r, card.dataReference);
             }
         }
 

@@ -78,6 +78,19 @@ public class CharacterType : CardTypes
         if (undying) stats.baseLifePoints = (int) Mathf.Clamp(stats.baseLifePoints, 1, Mathf.Infinity);
         data.currentContainer.UpdateCharacterInfo(this);
 
+        #region OnCharHit Event
+        //Starting the hit Queue
+        EventQueue characterHitQueue = new EventQueue();
+        if (data.onCharHit != null) data.onCharHit(characterHitQueue, data);
+        characterHitQueue.StartQueue();
+
+        while (!characterHitQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //---
+        #endregion
+
         #region Damage feedback
         EventQueue characterDamageQueue = new EventQueue();
         CardManager.Instance.cardTweening.ShakeCard(data.currentContainer, characterDamageQueue);
@@ -367,14 +380,14 @@ public class CharacterType : CardTypes
                 PlotCard plot = data as PlotCard;
                 if (plot.isMainPlot) //if main hide the card
                 {
-                    if (behaviour == CharacterBehaviour.Agressive)
+                    if (plot.objective.GetType() == typeof(KillPlotObj))
                     {
                         //TEMP do next choice for now later hide the card
                         plot.OnEndPlotComplete(discardQueue);
                     }
-                    else if (behaviour == CharacterBehaviour.Peaceful)
+                    else
                     {
-                        plot.FailPlot(discardQueue);//if kill peacful then plot is lost 
+                        plot.FailPlot(discardQueue);//if kill when not objective lose 
                     }
                 }
                 else //if secondary send to oblivion
