@@ -266,6 +266,26 @@ public class Deck : MonoBehaviour
     {
         yield return null;
 
+        #region Event OnCardDiscard
+        EventQueue onCardDiscardQueue = new EventQueue();
+
+        if (card.onCardDiscard != null)
+            card.onCardDiscard(onCardDiscardQueue, card);
+
+        onCardDiscardQueue.StartQueue();
+        while (!onCardDiscardQueue.resolved)
+        { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        #region Event OnAnyCardDiscard (Overload)
+        EventQueue overloadQueue = new EventQueue();
+        CardManager.Instance.board.CallBoardEvents("overload", overloadQueue);
+
+        overloadQueue.StartQueue();
+        while (!overloadQueue.resolved)
+        { yield return new WaitForEndOfFrame(); }
+        #endregion
+
         EventQueue burnQueue = new EventQueue();
 
         //Add feedback
