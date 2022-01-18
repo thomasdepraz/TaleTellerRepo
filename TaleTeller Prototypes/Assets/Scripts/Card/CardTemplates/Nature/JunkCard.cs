@@ -52,6 +52,12 @@ public class JunkCard : CardData
     }
     IEnumerator OnEndJunkRoutine(EventQueue currentQueue)
     {
+        if(currentContainer == null)
+        {
+            currentQueue.UpdateQueue();
+
+            yield break;
+        }
 
         if(cardType!=null && cardType.GetType()== typeof(CharacterType))
         {
