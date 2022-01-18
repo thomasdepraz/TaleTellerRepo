@@ -16,10 +16,10 @@ MonoBehaviour:
   objectiveName: 
   linkedJunkedCards:
   - {fileID: 11400000, guid: 6c484f7f5b98dce40ae32b05d838ed53, type: 2}
+  - {fileID: 11400000, guid: 903fde02d00408d44afab867525fbe9c, type: 2}
   - {fileID: 11400000, guid: 6c484f7f5b98dce40ae32b05d838ed53, type: 2}
   - {fileID: 11400000, guid: 903fde02d00408d44afab867525fbe9c, type: 2}
-  - {fileID: 11400000, guid: 903fde02d00408d44afab867525fbe9c, type: 2}
-  junkSpawnLocations: 00000000000000000400000004000000
+  junkSpawnLocations: 00000000040000000000000004000000
   junksPositionsInDeck: 00000000000000000000000000000000
   mustPlaceAll: 0
   specificJunkToPlace:

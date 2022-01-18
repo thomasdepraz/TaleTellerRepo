@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   schemeSteps:
   - stepOptions:
+    - {fileID: 11400000, guid: f2dc2e611278a56438b876e291beb016, type: 2}
+    chapterDescription: 
+  - stepOptions:
     - {fileID: 11400000, guid: baf859f449c048b4fa2ec743b7a568e7, type: 2}
     - {fileID: 11400000, guid: 0f7dba716d7b42f40ac9d04a61b44fb8, type: 2}
     chapterDescription: 

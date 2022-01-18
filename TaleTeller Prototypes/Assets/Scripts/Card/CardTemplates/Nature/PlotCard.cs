@@ -142,6 +142,24 @@ public class PlotCard : CardData
                     break;
                 case PlotObjective.JunkSpawnLocation.FromCard:
 
+                    for(int x = i; x >= 0; x--)
+                    {
+                        if(objective.junkSpawnLocations[x] != PlotObjective.JunkSpawnLocation.FromCard)
+                        {
+                            for(int z = 0; z < objective.linkedJunkedCards[x].effects.Count; z++)
+                            {
+                                if(objective.linkedJunkedCards[x].effects[z].GetType() == typeof(AddJunkToHandEffect))
+                                {
+                                    AddJunkToHandEffect junkToHandEffect = objective.linkedJunkedCards[x].effects[z] as AddJunkToHandEffect;
+
+                                    junkToHandEffect.junkCardsToSpawn.Add(objective.linkedJunkedCards[i]);
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+
                     break;
             }
             

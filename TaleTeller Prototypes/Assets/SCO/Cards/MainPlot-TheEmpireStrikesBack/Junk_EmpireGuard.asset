@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5542979153878867350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f69fc1bcfcd204b9c20fc638020978, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 2
+  target: 4
+  range: 
+  values: []
+  plotObjective: {fileID: 0}
+  junkInLinkedList: 0
+  junkCardsToSpawn:
+  - {fileID: 11400000}
+  junkSpawnLocations: 02000000
 --- !u!114 &-5420477598455258908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,7 +64,8 @@ MonoBehaviour:
   cardGraph: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
-  effectsReferences: []
+  effectsReferences:
+  - {fileID: -5542979153878867350}
   effects: []
   cardTypeReference: {fileID: -5420477598455258908}
   cardType: {fileID: 0}
