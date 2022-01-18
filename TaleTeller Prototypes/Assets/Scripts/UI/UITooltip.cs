@@ -32,7 +32,6 @@ public class UITooltip : MonoBehaviour
     {
         string description = GetTooltipDescription();
         GameManager.Instance.pointer.ShowTooltip(description, delay);
-        print("tooltip");
         open = true;
     }
 

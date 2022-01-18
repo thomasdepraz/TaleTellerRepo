@@ -103,8 +103,12 @@ public class CardContainer : MonoBehaviour
 
         if(currentHandSlot != null)
         {
-            currentHandSlot.currentPlacedCard = null;
-            currentHandSlot.canvasGroup.blocksRaycasts = true;
+            if(currentHandSlot.currentPlacedCard == this)
+            {
+                currentHandSlot.currentPlacedCard = null;
+                currentHandSlot.canvasGroup.blocksRaycasts = true;
+            }
+
             currentHandSlot = null;
         }
 

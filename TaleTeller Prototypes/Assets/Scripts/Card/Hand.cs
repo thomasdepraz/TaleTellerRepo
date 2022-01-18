@@ -102,12 +102,15 @@ public class Hand : MonoBehaviour
             {
                 if(handSlots[i].currentPlacedCard == null)
                 {
+                    print($"Slot_{i} : {handSlots[i].currentPlacedCard}");
                     container.currentHandSlot = handSlots[i];
                     handSlots[i].currentPlacedCard = container;
                     handSlots[i].canvasGroup.blocksRaycasts = false;
                     return handSlots[i].self.position;
                 }
             }
+
+            return Vector3.zero;
         }
         else
         {
@@ -116,7 +119,6 @@ public class Hand : MonoBehaviour
             plotHandSlot.canvasGroup.blocksRaycasts = false;
             return plotHandSlot.self.position;
         }
-        return Vector3.zero;
     }
 
     public void ResetAllHand()
