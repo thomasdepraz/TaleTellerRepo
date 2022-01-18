@@ -275,7 +275,11 @@ public class Deck : MonoBehaviour
 
 
         discardPile.Add(card);
-        if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer)) CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
+        if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer))
+        {
+            CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
+            CardManager.Instance.UpdateHandCount();
+        }
         if(cardDeck.Contains(card))cardDeck.Remove(card);
 
         card.currentContainer.ResetContainer();

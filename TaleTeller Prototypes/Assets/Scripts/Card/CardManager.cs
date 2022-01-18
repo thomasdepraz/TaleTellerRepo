@@ -154,6 +154,7 @@ public class CardManager : Singleton<CardManager>
             CardInitialize(data);
 
         cardHand.currentHand.Add(data.currentContainer);
+        UpdateHandCount();
 
         data.currentContainer.rectTransform.SetParent(cardHand.handTransform);
         cardTweening.MoveCard(data.currentContainer, cardHand.GetPosInHand(data.currentContainer), !alreadyAppeared, !alreadyAppeared, queue);
@@ -243,6 +244,7 @@ public class CardManager : Singleton<CardManager>
         EventQueue feedback = new EventQueue();
         cardTweening.MoveCard(card, cardHand.GetPosInHand(card), false, false, feedback);
         cardHand.currentHand.Add(card);
+        UpdateHandCount();
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         queue.UpdateQueue();
@@ -311,6 +313,7 @@ public class CardManager : Singleton<CardManager>
 
         card.data = card.data.ResetData(card.data);
         cardHand.currentHand.Remove(card);
+        UpdateHandCount();
         cardDeck.discardPile.Add(card.data);
         card.ResetContainer();
 
@@ -347,4 +350,9 @@ public class CardManager : Singleton<CardManager>
         queue.UpdateQueue();
     }
     #endregion
+
+    public void UpdateHandCount()
+    {
+        cardHand.handCountText.text = $"{cardHand.GetHandCount()}/{cardHand.maxHandSize}";
+    }
 }
