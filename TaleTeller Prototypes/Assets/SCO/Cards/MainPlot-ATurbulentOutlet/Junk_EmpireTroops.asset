@@ -22,10 +22,31 @@ MonoBehaviour:
   description: 
   effectsReferences: []
   effects: []
-  cardTypeReference: {fileID: 0}
+  cardTypeReference: {fileID: 2970233489597085055}
   cardType: {fileID: 0}
   objective: {fileID: 0}
   objectiveIndex: 0
+--- !u!114 &2970233489597085055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 30
+    baseAttackDamage: 2
+  behaviour: 1
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 5
 --- !u!114 &6112920676499931694
 MonoBehaviour:
   m_ObjectHideFlags: 0

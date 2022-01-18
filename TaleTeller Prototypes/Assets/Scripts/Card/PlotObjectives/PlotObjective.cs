@@ -8,7 +8,7 @@ public class PlotObjective : ScriptableObject
     [HideInInspector] public PlotCard linkedPlotData;
     public string objectiveName;
     public List<JunkCard> linkedJunkedCards = new List<JunkCard>();
-    public enum JunkSpawnLocation { Hand, EndDeck, DeckRandom, XInDeck }
+    public enum JunkSpawnLocation { Hand, EndDeck, DeckRandom, XInDeck, FromCard }
     public List<JunkSpawnLocation> junkSpawnLocations = new List<JunkSpawnLocation>();
     public List<int> junksPositionsInDeck;
 

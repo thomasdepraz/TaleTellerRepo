@@ -19,7 +19,8 @@ public class PlaceJunkObj : JunkDrivenObj
     public override void SubscribeUpdateStatus(PlotCard data)
     {
         data.onCardEnter += UpdateStatus;
-        data.onStoryStart += UpdateStatus;
+        if(!plotOnBoard)
+            data.onStoryStart += UpdateStatus;
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)

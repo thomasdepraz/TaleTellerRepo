@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Idea_RitualKnife_Berserk_Effect1
+  description: 
   trigger: 1
   target: 1
   range: 
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Idea_RitualKnife_Berserk_Effect0
+  description: 
   trigger: 1
   target: 1
   range: 

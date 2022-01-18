@@ -117,6 +117,7 @@ public class StoryManager : Singleton<StoryManager>
 
         EventQueue onEndQueue = new EventQueue();
 
+        //TODO Ajouter une phase avant onTurnEnd pour faire la discard de l'IP actuelle + la transition avec la nouvelle IP si l'actuelle est finis
         CallGeneralEvent("onTurnEnd", onEndQueue);
         
         onEndQueue.StartQueue();
