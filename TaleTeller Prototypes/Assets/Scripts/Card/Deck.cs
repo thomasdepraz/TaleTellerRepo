@@ -274,7 +274,6 @@ public class Deck : MonoBehaviour
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 
-        discardPile.Add(card);
         if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer))
         {
             CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
@@ -284,9 +283,8 @@ public class Deck : MonoBehaviour
 
         card.currentContainer.ResetContainer();
 
-        print("Reset Number 3");
-        card= card.ResetData(card);
-
+        card = card.ResetData(card);
+        discardPile.Add(card);
 
 
         burnQueue.StartQueue();
