@@ -283,7 +283,10 @@ public class Deck : MonoBehaviour
         if(cardDeck.Contains(card))cardDeck.Remove(card);
 
         card.currentContainer.ResetContainer();
+
+        print("Reset Number 3");
         card= card.ResetData(card);
+
 
 
         burnQueue.StartQueue();

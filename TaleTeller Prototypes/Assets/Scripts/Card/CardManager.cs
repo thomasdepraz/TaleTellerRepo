@@ -264,7 +264,7 @@ public class CardManager : Singleton<CardManager>
         cardTweening.MoveCard(card, discardPileTransform.position, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
-
+        print("Reset Number 2");
         card.data = card.data.ResetData(card.data);
 
         cardDeck.discardPile.Add(card.data);
@@ -311,6 +311,7 @@ public class CardManager : Singleton<CardManager>
         cardTweening.MoveCard(card, discardPileTransform.position, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
+        print("Reset Number 1");
         card.data = card.data.ResetData(card.data);
         cardHand.currentHand.Remove(card);
         UpdateHandCount();

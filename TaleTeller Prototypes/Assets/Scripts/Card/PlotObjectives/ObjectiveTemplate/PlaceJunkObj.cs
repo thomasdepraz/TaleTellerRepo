@@ -12,15 +12,9 @@ public class PlaceJunkObj : JunkDrivenObj
     [HideIf("mustPlaceAll")]
     public List<JunkCard> specificJunkToPlace = new List<JunkCard>();
 
-    [Header("Plot Restriction")]
-    [Tooltip("Check this if the plot need to be on board aswell")]
-    public bool plotOnBoard;
-
     public override void SubscribeUpdateStatus(PlotCard data)
     {
         data.onCardEnter += UpdateStatus;
-        if(!plotOnBoard)
-            data.onStoryStart += UpdateStatus;
     }
 
     public override IEnumerator UpdateStatusRoutine(EventQueue currentQueue, CardData data)
@@ -67,13 +61,13 @@ public class PlaceJunkObj : JunkDrivenObj
             }
         }
 
-        if(plotOnBoard && (complete == true))
-        {
-            if (linkedPlotData.currentContainer == null)
-                complete = false;
-            else if (!CardManager.Instance.board.IsCardOnBoard(linkedPlotData))
-                complete = false;
-        }
+        //if(plotOnBoard && (complete == true))
+        //{
+        //    if (linkedPlotData.currentContainer == null)
+        //        complete = false;
+        //    else if (!CardManager.Instance.board.IsCardOnBoard(linkedPlotData))
+        //        complete = false;
+        //}
             
         return complete;
     }

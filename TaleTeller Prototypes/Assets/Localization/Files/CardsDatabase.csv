@@ -126,7 +126,7 @@ $Junk_ArtifactBottom_Effect0	-$gainValue$ HP.
 $Junk_ArtifactLeft_Effect0	-$gainValue$ HP.
 $Junk_ArtifactRight_Effect0	-$gainValue$ HP.
 $Junk_ArtifactTop_Effect0	-$gainValue$ HP.
-$Junk_CommonDemon_Effect0	← → <b>Last Wish</b> : -$modifierValue$ HP for each Ally on the Track.
+$Junk_CommonDemon_Effect0	<b>Last Wish</b> : Strikes back his last opponent.
 $Junk_GuardianArtifact_Effect0	Self + $modifierValue$ ATK for each received attack.
 $Junk_MightyAstaroth_Effect0	Self +$modifierValue$ HP.
 $Junk_ValeforReplica_Effect0	Self +$modifierValue$ ATK.

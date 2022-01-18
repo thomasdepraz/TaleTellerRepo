@@ -625,6 +625,7 @@ public class CardContainer : MonoBehaviour
         {
             cardInfo += $"{data.effects[i].description}";
         }
+        cardInfo += $"\ncardEnter Event :{data.onCardEnter}\nstoryEndEvent :{data.onStoryEnd}";
         return cardInfo;
     }
     #endregion

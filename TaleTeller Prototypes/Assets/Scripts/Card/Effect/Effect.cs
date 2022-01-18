@@ -350,7 +350,6 @@ public class Effect : ScriptableObject
         
         return result;
     }
-
 }
 
 
