@@ -23,6 +23,7 @@ public class CardManager : Singleton<CardManager>
     public CardPicker cardPicker;
 
     [HideInInspector] public BoardSlot currentHoveredSlot;
+    [HideInInspector] public HandSlot currentHoveredHandSlot;
     [HideInInspector] public bool holdingCard;
     [HideInInspector] public CardContainer currentCard;
     [HideInInspector] public CardContainer hoveredCard;
@@ -68,7 +69,7 @@ public class CardManager : Singleton<CardManager>
         while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
 
-        card.currentContainer.rectTransform.localPosition = position;
+        card.currentContainer.rectTransform.position = position;
 
         EventQueue appearFeedback = new EventQueue();
         cardTweening.MoveCard(card.currentContainer, position, true, true, appearFeedback,1.75f);
@@ -119,7 +120,7 @@ public class CardManager : Singleton<CardManager>
     IEnumerator CardToDeckRoutine(EventQueue queue, CardData card, bool addToDeck = true)
     {
         EventQueue toDeckFeedback = new EventQueue();
-        cardTweening.MoveCard(card.currentContainer, deckTransform.localPosition, true, false, toDeckFeedback);
+        cardTweening.MoveCard(card.currentContainer, deckTransform.position, true, false, toDeckFeedback);
         while (!toDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         if (addToDeck)
@@ -155,7 +156,7 @@ public class CardManager : Singleton<CardManager>
         cardHand.currentHand.Add(data.currentContainer);
 
         data.currentContainer.rectTransform.SetParent(cardHand.handTransform);
-        cardTweening.MoveCard(data.currentContainer, cardHand.GetPositionInHand(data), !alreadyAppeared, !alreadyAppeared, queue);
+        cardTweening.MoveCard(data.currentContainer, cardHand.GetPosInHand(data.currentContainer), !alreadyAppeared, !alreadyAppeared, queue);
         yield return new WaitForSeconds(0.2f);
 
         queue.UpdateQueue();
@@ -240,7 +241,7 @@ public class CardManager : Singleton<CardManager>
 
         //use method from deck to move cardBack to hand
         EventQueue feedback = new EventQueue();
-        cardTweening.MoveCard(card, cardHand.GetPositionInHand(card.data), false, false, feedback);
+        cardTweening.MoveCard(card, cardHand.GetPosInHand(card), false, false, feedback);
         cardHand.currentHand.Add(card);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -258,7 +259,7 @@ public class CardManager : Singleton<CardManager>
     {
         //Add feedback
         EventQueue feedback = new EventQueue();
-        cardTweening.MoveCard(card, discardPileTransform.localPosition, true, false, feedback);
+        cardTweening.MoveCard(card, discardPileTransform.position, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 
@@ -305,7 +306,7 @@ public class CardManager : Singleton<CardManager>
 
         //Add feedback
         EventQueue feedback = new EventQueue();
-        cardTweening.MoveCard(card, discardPileTransform.localPosition, true, false, feedback);
+        cardTweening.MoveCard(card, discardPileTransform.position, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
         card.data = card.data.ResetData(card.data);

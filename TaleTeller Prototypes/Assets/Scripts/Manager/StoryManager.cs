@@ -31,7 +31,7 @@ public class StoryManager : Singleton<StoryManager>
 
     private void Update()
     {
-        Debug.Log("");
+        //Debug.Log("");
     }
 
     public void StartTurn()

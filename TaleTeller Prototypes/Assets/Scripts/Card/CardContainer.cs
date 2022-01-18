@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,7 @@ public class CardContainer : MonoBehaviour
     private Vector3 basePosition;
 
     public BoardSlot currentSlot;
+    public HandSlot currentHandSlot;
     public CardData data;
     public CardVisuals visuals;
     public List<CardTooltip> tooltips = new List<CardTooltip>();
@@ -84,7 +86,7 @@ public class CardContainer : MonoBehaviour
         originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
 
         //add random rotation 
-        rectTransform.rotation = new Quaternion(0,0,Random.Range(-0.1f,0.1f),1);
+        rectTransform.rotation = new Quaternion(0,0,UnityEngine.Random.Range(-0.1f,0.1f),1);
 
         //set scale to zero
         //rectTransform.localScale = Vector3.zero; NOTE NOT SUPPOSED TO BE COMMENTED
@@ -99,12 +101,22 @@ public class CardContainer : MonoBehaviour
             currentSlot = null;
         }
 
+        if(currentHandSlot != null)
+        {
+            if(currentHandSlot.currentPlacedCard == this)
+            {
+                currentHandSlot.currentPlacedCard = null;
+                currentHandSlot.canvasGroup.blocksRaycasts = true;
+            }
+
+            currentHandSlot = null;
+        }
+
         if(!isPlaceholder)
         {
             data.currentContainer = null;
         }
         data = null;
-        currentSlot = null;
 
 
         //Reset to hidden hand
@@ -131,6 +143,7 @@ public class CardContainer : MonoBehaviour
     {
         if (CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
+            CardManager.Instance.currentHoveredHandSlot = null;
             #region Tweening + Graphics
             LeanTween.cancel(gameObject);
 
@@ -153,6 +166,9 @@ public class CardContainer : MonoBehaviour
 
             if (currentSlot != null)
                 currentSlot.canvasGroup.blocksRaycasts = true;
+
+            if (currentHandSlot != null)
+                currentHandSlot.canvasGroup.blocksRaycasts = true;
         }
     }
 
@@ -189,39 +205,30 @@ public class CardContainer : MonoBehaviour
                 }
                 else //if other card in hand
                 {
-                    //If you have enough mana to swap cards
-                    int manaDifference = CardManager.Instance.hoveredCard.data.manaCost - data.manaCost;
-                    if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
+                    if(IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
                     {
-                        BoardSlot tempSlot = currentSlot;
-                        tempSlot.currentPlacedCard = CardManager.Instance.hoveredCard;
-                        CardManager.Instance.hoveredCard.currentSlot = tempSlot;
+                        //If you have enough mana to swap cards
+                        int manaDifference = CardManager.Instance.hoveredCard.data.manaCost - data.manaCost;
+                        if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
+                        {
+                            CardContainer hoveredCard = CardManager.Instance.hoveredCard;
+                            HandSlot hoveredCardHandSlot = hoveredCard.currentHandSlot;
+                            BoardSlot tempSlot = currentSlot;
 
-                        currentSlot = null;
-
-
-                        rectTransform.anchoredPosition = CardManager.Instance.hoveredCard.originPosition;
-
-                        CardManager.Instance.hoveredCard.rectTransform.position = tempSlot.transform.position;
-                        transform.SetParent(CardManager.Instance.cardHandContainer.transform);
-
-                        //ApplyManaDiff
-                        if (manaDifference > 0) CardManager.Instance.manaSystem.LoseMana(manaDifference);
-                        else if (manaDifference < 0) CardManager.Instance.manaSystem.GainMana(Mathf.Abs(manaDifference));
-
-                        //Manage hand list
-                        CardManager.Instance.cardHand.currentHand.Remove(CardManager.Instance.hoveredCard);
-                        CardManager.Instance.cardHand.currentHand.Add(this);
-
+                            PlaceOnBoardSlot(hoveredCard, tempSlot);
+                            RemoveFromBoard(this);
+                            PlaceOnHandSlot(this, hoveredCardHandSlot);
+                        }
+                        else
+                        {
+                            ReturnToOriginHandSlot(this);
+                            canTween = true; //temp ?
+                        }
                     }
                     else
                     {
-                        //reset card position
-                        rectTransform.anchoredPosition = originPosition;
-                        canTween = true; //temp ?
-                        Debug.Log("Not enough mana");
+                        rectTransform.position = currentSlot.transform.position;
                     }
-
                 }
 
                 CardManager.Instance.hoveredCard = null;
@@ -230,37 +237,46 @@ public class CardContainer : MonoBehaviour
             {
                 if (CardManager.Instance.hoveredCard.currentSlot != null)//If card other card in board
                 {
-                    //If you have enough mana to swap cards
-                    int manaDifference = data.manaCost - CardManager.Instance.hoveredCard.data.manaCost;
-
-                    if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
+                    if(IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
                     {
-                        BoardSlot tempSlot = CardManager.Instance.hoveredCard.currentSlot;
-                        tempSlot.currentPlacedCard = this;
-                        currentSlot = tempSlot;
+                        //If you have enough mana to swap cards
+                        int manaDifference = data.manaCost - CardManager.Instance.hoveredCard.data.manaCost;
 
-                        CardManager.Instance.hoveredCard.currentSlot = null;
+                        if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
+                        {
+                            CardContainer hoveredCard = CardManager.Instance.hoveredCard;
+                            BoardSlot hoveredCardSlot = hoveredCard.currentSlot;
 
-                        CardManager.Instance.hoveredCard.rectTransform.anchoredPosition = originPosition;
-                        CardManager.Instance.hoveredCard.transform.SetParent(CardManager.Instance.cardHandContainer.transform); //set back to hand
-
-                        rectTransform.position = tempSlot.transform.position;
-
-                        //ApplyManaDiff
-                        if (manaDifference > 0) CardManager.Instance.manaSystem.LoseMana(manaDifference);
-                        else if (manaDifference < 0) CardManager.Instance.manaSystem.GainMana(Mathf.Abs(manaDifference));
-
-                        //Manage hand list
-                        CardManager.Instance.cardHand.currentHand.Add(CardManager.Instance.hoveredCard);
-                        CardManager.Instance.cardHand.currentHand.Remove(this);
-
+                            RemoveFromBoard(hoveredCard);
+                            PlaceOnHandSlot(hoveredCard, currentHandSlot);
+                            PlaceOnBoardSlot(this, hoveredCardSlot);
+                        }
+                        else
+                        {
+                            ReturnToOriginHandSlot(this);
+                            canTween = true; //temp ?
+                            Debug.Log("Not enough mana");
+                        }
                     }
                     else
                     {
-                        //reset card position
-                        rectTransform.anchoredPosition = originPosition;
-                        canTween = true; //temp ?
-                        Debug.Log("Not enough mana");
+                        ReturnToOriginHandSlot(this);
+                    }
+                }
+                else
+                {
+                    if(IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
+                    {
+                        HandSlot originSlot = currentHandSlot;
+                        CardContainer hoveredCard = CardManager.Instance.hoveredCard;
+
+                        PlaceOnHandSlot(this, hoveredCard.currentHandSlot);
+
+                        PlaceOnHandSlot(hoveredCard, originSlot);
+                    }
+                    else
+                    {
+                        ReturnToOriginHandSlot(this);
                     }
                 }
                 CardManager.Instance.hoveredCard = null;
@@ -276,22 +292,10 @@ public class CardContainer : MonoBehaviour
                 //if you have enough man else abort and reset card
                 if (CardManager.Instance.manaSystem.CanUseCard(data.manaCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
                 {
-                    if(currentSlot == null)
-                    {
-                        CardManager.Instance.manaSystem.LoseMana(data.manaCost);
-                        CardManager.Instance.cardHand.currentHand.Remove(this);
-                    }
 
-                    if (currentSlot != null)
-                    {
-                        currentSlot.currentPlacedCard = null;
-                        currentSlot = null;
-                    }
+                    PlaceOnBoardSlot(this, CardManager.Instance.currentHoveredSlot);
 
-                    CardManager.Instance.currentHoveredSlot.currentPlacedCard = this;
-                    currentSlot = CardManager.Instance.currentHoveredSlot;
-                    currentSlot.canvasGroup.blocksRaycasts = false;
-                    rectTransform.position = CardManager.Instance.currentHoveredSlot.transform.position;
+                    currentHandSlot.currentPlacedCard = null;
 
                     if(data.GetType()==typeof(PlotCard))
                     {
@@ -302,7 +306,7 @@ public class CardContainer : MonoBehaviour
                 else
                 {
                     //reset card position
-                    rectTransform.anchoredPosition = originPosition;
+                    ReturnToOriginHandSlot(this);
                     canTween = true; //temp ?
                 }
             }
@@ -310,26 +314,26 @@ public class CardContainer : MonoBehaviour
             {
                 targetTransform = null;
                 CardManager.Instance.holdingCard = false;
-                originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
-                rectTransform.anchoredPosition = originPosition;
+
+                if(CardManager.Instance.currentHoveredHandSlot != null)
+                {
+                    if(IsCorrectPlacement(this, CardManager.Instance.currentHoveredHandSlot))
+                    {
+                        PlaceOnHandSlot(this, CardManager.Instance.currentHoveredHandSlot);
+                    }
+                    else
+                    {
+                        ReturnToOriginHandSlot(this);
+                    }
+                }
+                else
+                {
+                    ReturnToOriginHandSlot(this);
+                }
 
                 if (currentSlot != null)//Remove card from board
                 {
-                    currentSlot.currentPlacedCard = null;
-                    currentSlot.canvasGroup.blocksRaycasts = true;
-                    currentSlot = null;
-
-                    //Refill Mana
-                    CardManager.Instance.manaSystem.GainMana(data.manaCost);
-
-                    //Add back to hand list 
-                    CardManager.Instance.cardHand.currentHand.Add(this);
-                }
-
-                //if not in hand move to hand
-                if(!CardManager.Instance.cardHand.IsInHand(this))
-                {
-                    CardManager.Instance.cardTweening.MoveCard(this, CardManager.Instance.cardHand.GetPositionInHand(data));
+                    RemoveFromBoard(this);
                 }
 
                 if (data.GetType() == typeof(PlotCard))
@@ -420,6 +424,94 @@ public class CardContainer : MonoBehaviour
     #endregion
 
     #region Utility
+    void PlaceOnBoardSlot(CardContainer container, BoardSlot targetSlot)
+    {
+        if (container.currentSlot == null)
+        {
+            CardManager.Instance.manaSystem.LoseMana(container.data.manaCost);
+            CardManager.Instance.cardHand.currentHand.Remove(container);
+        }
+
+        if (container.currentSlot != null)
+        {
+            container.currentSlot.currentPlacedCard = null;
+            container.currentSlot = null;
+        }
+
+        targetSlot.currentPlacedCard = container;
+        container.currentSlot = targetSlot;
+        container.currentSlot.canvasGroup.blocksRaycasts = false;
+        container.rectTransform.position = targetSlot.transform.position;
+    }
+
+    void PlaceOnHandSlot(CardContainer container, HandSlot targetSlot)
+    {
+        if (container.currentHandSlot != null && container.currentHandSlot.currentPlacedCard == container)
+        {
+            container.currentHandSlot.currentPlacedCard = null;
+            container.currentHandSlot.canvasGroup.blocksRaycasts = true;
+        }
+
+        container.rectTransform.position = targetSlot.self.position;
+        container.currentHandSlot = targetSlot;
+        container.currentHandSlot.currentPlacedCard = container;
+        container.currentHandSlot.canvasGroup.blocksRaycasts = false;
+    }
+
+    void ReturnToOriginHandSlot(CardContainer container)
+    {
+        if (currentSlot != null)
+        {
+            currentSlot = null;
+            CardManager.Instance.manaSystem.GainMana(container.data.manaCost);
+        }
+        container.rectTransform.position = CardManager.Instance.cardHand.GetPosInHand(this);
+    }
+
+    void RemoveFromBoard(CardContainer container)
+    {
+        container.currentSlot.currentPlacedCard = null;
+        container.currentSlot.canvasGroup.blocksRaycasts = true;
+        container.currentSlot = null;
+
+        //Refill Mana
+        CardManager.Instance.manaSystem.GainMana(container.data.manaCost);
+
+        //Add back to hand list 
+        CardManager.Instance.cardHand.currentHand.Add(container);
+    }
+
+    bool IsCorrectPlacement(CardContainer container, HandSlot hoveredHandSlot)
+    {
+        Type cardType = container.data.GetType();
+        if (cardType != typeof(PlotCard) && hoveredHandSlot == CardManager.Instance.cardHand.plotHandSlot)
+        {
+            return false;
+        }
+        else if(cardType == typeof(PlotCard) && hoveredHandSlot != CardManager.Instance.cardHand.plotHandSlot)
+        {
+            return false;
+        }
+        return true;
+
+    }
+    bool IsCorrectPlacement(CardContainer currentContainer, CardContainer hoveredContainer)
+    {
+        Type currentCardType = currentContainer.data.GetType();
+        Type hoveredCardType = hoveredContainer.data.GetType();
+
+        if (currentCardType == typeof(PlotCard) && hoveredCardType != typeof(PlotCard))
+        {
+            return false;
+        }
+        if (currentCardType != typeof(PlotCard) && hoveredCardType == typeof(PlotCard))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public void UpdateCharacterInfo(CharacterType character)
     {
         visuals.UpdateCharacterElements(character, true);
@@ -432,7 +524,6 @@ public class CardContainer : MonoBehaviour
     {
         visuals.UpdateBaseElements(data, true);
     }
-
     public void ShowTooltip()
     {
         List<string> keywords = new List<string>(LocalizationManager.Instance.tooltipDictionary.Keys);
