@@ -1,0 +1,63 @@
+Key	Text
+$GoldForThePoors_Description	In this Main Plot, the Hero will continue his journey by visiting an impoverished town. While he is walking through the streets, he is approached by a cult which collects money for the inhabitants, but that does not make the cultists look honest.
+$GoldForThePoors_Step01_Description	A Hero in need of rest notice a small town close to his position. When he arrives, he discovers a town plunged into diseases and poverty. While he is looking around him, a priest from an unknown cult approaches and asks for money to help the people of city.
+$GoldForThePoors_Step02_Description	The cultist kindly thanks you the Hero for his generosity. But a lurk in the eye of the mendicant makes the Hero realize it was a trickery.
+$GoldForThePoors_Step02A_Objective	The Hero decides chase the Cultist.
+$GoldForThePoors_Step02B_Objective	The Hero decides to ask to the inhabitants of the slums where is located the headquarter of the Cult.
+$GoldForThePoors_Step03_Description	The Hero finally breaks into the headquarter. There is no sign of the mendicant.
+$GoldForThePoors_Step03A_Objective	The Hero decides to sneak through the building to find him.
+$GoldForThePoors_Step03B_Objective	The Hero chooses to fight all the guards of the cult to find his goods.
+$GoldForThePoors_Step04_Description	Instead of finding the mendicant, the Hero enters the treasure room of the cult. While he is going to take some Gold, a stranger makes his appearance. He presents himself as one of the Theophilus' apprentice, Midas the Prophet of Mendicity.
+$GoldForThePoors_Step04_Objective	The hero engages a fierce battle against Midas.
+$Priest_Description	In this Main Plot, the Hero is going to save a strange priest. But be careful, the habit does not make the monk...
+$Priest_Step01_Description	The Hero continues his travel. Suddenly, a scream breaks the ambient silence. A priest is about to die by the hand of a monster !
+$Priest_Step02_Description	Theophilus is saved. He shows you a temple and ask the Hero to collect the parts of an old artifact. 
+$Priest_Step02A_Objective	He decides to force the entrance of the Temple.
+$Priest_Step02B_Objective	He sneaks into the Temple to rob the parts.
+$Priest_Step03_Description	The Hero has collected all the parts and brought them to the Altar.He can assemble them.
+$Priest_Step03A_Objective	The Hero create a tall statue.
+$Priest_Step03B_Objective	The Hero create a small statue.
+$Priest_Step04_Description	The demons have been pushed back. The Hero brings them back into the idol. But it seems that he has been tricked by Theophilus...
+$Priest_Step04_Objective	Kill Theophilus.
+$TurbulentOutset_Description	In this Main Plot, the Protagonist is going to start his journey in a small town. While he is doing farm labour, an unexpected event occures and will change his destiny.
+$TurbulentOutset_Step01_Description	The Protagonist is asked to work on a field by his mentor. He needs to clean the area.
+$TurbulentOutset_Step02_Description	The Protagonist finally restored the field. Suddenly, he hears an explosion towards his town. 
+$TurbulentOutset_Step02A_Objective	He goes to the point of origin of the sound.
+$TurbulentOutset_Step02B_Objective	He decides to fetch his mentor before going to the hamlet.
+$TurbulentOutset_Step03_Description	The Empire has attacked the town, and the place in now is flames.
+$TurbulentOutset_Step03A_Objective	He decides to run away through the ruins.
+$TurbulentOutset_Step03B_Objective	He stays with his mentor to push back the Empire Troops.
+$TurbulentOutset_Step04_Description	Despite the sacrifices he did, the Hero is now out of the town and safe. However, a last troop arrives. The group of soldiers is led by a General, who wants to defeat the only survivor.
+$TurbulentOutset_Step04_Objective	Defeat General Oton.
+$Empire_Description	In this Main Plot, the Hero is goign to take his revenge on the Empire. After surviving the attack of his native town, he is planning to enter the Empire Fortress to stop them forever.
+$Empire_Step01_Description	Before entering the fortress, the Hero needs to find an Empire Soldier outfit. The only place that it can be found is the Black Market, a den of scoundrels, where scams are rife
+$Empire_Step02_Description	The Hero has collected an entire soldier outfit of the Empire. He decides to report to the main entrance of the Empire Fortress. However, a guard spots the deception.
+$Empire_Step02A_Objective	The Hero fights against the guard, but he needs to stop the alarm to enter.
+$Empire_Step02B_Objective	The Hero decides to corrupt the guard.
+$Empire_Step03_Description	The Hero finally enters the fortress. He is not spotted by the numerous guards. While he reaches the throne hall, the General Oton appears and recognizes him. He is clearly stronger than before and a fight starts.
+$Empire_Step04_Description	The Hero has defeated the General again. Suddenly, a mechanical sound catch his attention : a massive machine is chasing the Hero !
+$Empire_Step04A_Objective	The Hero runs away to find a way to stop it.
+$Empire_Step04B_Objective	The Hero decides to destroy the machine by using the weapons around him.
+$Empire_Step05_Description	The Hero finally broke free from the machine. He can easily join the Emperor throne hall. When he enters the massive room, the Empire's leader is already waiting him.
+$Empire_Step05_Objective	Kill the Emperor and put an end to the Empire.
+$PeacefulTown_Description	In this Main Plot, the Hero will begin his journey while living as an ordinary inhabitant of a small town. But a shadow hangs over this idyllic setting.
+$PeacefulTown_Step01_Description	The Protagonist is asked to do some shopping for a villager . He has to take his money and then buy a delivery from a merchant before night falls.
+$PeacefulTown_Step02_Description	Night has finally fallen. Suddenly, a cry pierces the night silence.
+$PeacefulTown_Step02A_Objective	The Hero decides to go and check to see if anyone has wandered in the forest near the town.
+$PeacefulTown_Step02B_Objective	The Hero runs to the town, and discover that monsters are attacking the villagers. He tries to hide them.
+$PeacefulTown_Step03_Description	Just as the threat seems to be over, a new cry is heard. A Witch appears in the air, invoking more monsters in the town center. 
+$PeacefulTown_Step03A_Objective	The Hero decides to push them back to protect the inhabitants.
+$PeacefulTown_Step03B_Objective	The Hero decide to chase the Witch to stop her plan.
+$PeacefulTown_Step04_Description	Before fleeing for good, the Witch summons a giant spider. As it comes dangerously close to the village, the Hero engages in a confrontation with this dark creature.
+$PeacefulTown_Step04_Objective	Kill the Giant Spider.
+$DarkMagic_Description	In this Main Plot, the Hero is looking for a solution to free a village from the grip of dark magic. He heard some rumors about a magical item that can counter any spell of the Dark Mage who has taken over the town.
+$DarkMagic_Step01_Description	The Hero enters a new city. He needs to find a Witchcraft Vending Machine to buy a Royal Elderberry Scepter to counter dark magic.
+$DarkMagic_Step02_Description	The Hero finally get the Royal Elderberry Scepter. While he was going to live Kaehgan, a Lone Wizard approaches and threatens him with magic to get the item.
+$DarkMagic_Step02A_Objective	The Hero responds to his provocation and a confrontation breaks out on the central plaza.
+$DarkMagic_Step02B_Objective	Cowardly, the Hero calls for help. Few Magic Guards arrive and start attacking him and the Lone Wizard.
+$DarkMagic_Step03_Description	After this rambunctious event, the Hero decides to go to the village to free the inhabitants. When he arrives in town, he realizes that all the inhabitants has vanished. He must then try to find a person still alive in this ghost village.
+$DarkMagic_Step04_Description	After searching every nook and cranny of the town, a cry is heard from the sky. A Witch appears. 
+$DarkMagic_Step04A_Objective	The Hero decides to fight her, thinking that she's responsible of this situation.
+$DarkMagic_Step04B_Objective	The Hero tries to use the Royal Elderberry Scepter on her. She is now transformed in a monster with tentacles.
+$DarkMagic_Step05_Description	Once the hero is rid of this enemy, a mysterious figure appears. It is the Necromancer who has taken possession of the place. The Hero draws the Scepter and a fight begins between the two characters.
+$DarkMagic_Step05_Objective	Kill the Necromancer.
