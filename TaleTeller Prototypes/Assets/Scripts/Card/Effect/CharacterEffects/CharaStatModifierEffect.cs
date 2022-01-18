@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using NaughtyAttributes;
 
 /// <summary>
 /// Remi Secher - 12/10/2021 01:56 - Creation
@@ -14,6 +15,10 @@ public class CharaStatModifierEffect : CharacterStatsEffect
 
     public EffectValue modifierValue;
     public TargetBehaviour behaviourTargeted;
+
+    public bool forSpecificCard;
+    [ShowIf("forSpecificCard")]
+    public CardData specificCard;
 
     public bool temporaryChange;
 
@@ -55,6 +60,14 @@ public class CharaStatModifierEffect : CharacterStatsEffect
 
         foreach (CharacterType t in targets.ToList())
         {
+            if (forSpecificCard)
+                if (t.data.cardName != specificCard.cardName)
+                {
+                    feedbackQueue.resolved = true;
+                    break;
+                }
+                    
+
             switch (modifierValue.type)
             {
                 case EffectValueType.Attack:

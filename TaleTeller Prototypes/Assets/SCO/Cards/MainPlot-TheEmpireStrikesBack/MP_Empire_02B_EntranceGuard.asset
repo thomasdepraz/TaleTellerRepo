@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_Empire_02B_EntranceGuard
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Entrance Guard
+  rarity: 0
+  archetype: 0
+  manaCost: 1
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 6045683124051397249}
+  effects: []
+  cardTypeReference: {fileID: 1990118692312808562}
+  cardType: {fileID: 0}
+  objective: {fileID: 8357324338789331285}
+  completionTimer: 6
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: 
+  legendaryCardRewards: []
+--- !u!114 &1990118692312808562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 16
+    baseAttackDamage: 4
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 5
+--- !u!114 &6045683124051397249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 617c8813c0f19e1409f2a10c56deae56, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 1
+  target: 1
+  range: 
+  values: []
+  typeToDump: 2
+--- !u!114 &8357324338789331285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b189683468030439fdc53c9cc91e47, type: 3}
+  m_Name: PlotObjective_DumpAmountObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 8a793bea61877f44ca78fcfe6021bad1, type: 2}
+  - {fileID: 11400000, guid: 8a793bea61877f44ca78fcfe6021bad1, type: 2}
+  junkSpawnLocations: 0000000000000000
+  junksPositionsInDeck: 0000000000000000
+  typeToDump: 2
+  amountToDump: 15

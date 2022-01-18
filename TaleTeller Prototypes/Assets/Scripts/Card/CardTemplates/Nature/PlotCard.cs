@@ -115,10 +115,14 @@ public class PlotCard : CardData
 
                     break;
                 case PlotObjective.JunkSpawnLocation.XInDeck:
-                    if (!(objective.junksPositionsInDeck[i] > CardManager.Instance.cardDeck.cardDeck.Count))
-                        CardManager.Instance.cardDeck.cardDeck.Insert(objective.junksPositionsInDeck[i], objective.linkedJunkedCards[i]);
-                    else
+                    int r = Random.Range(objective.junksPositionsInDeck[i] - 2, objective.junksPositionsInDeck[i] + 2);
+                    
+                    if(r < 0)
+                        CardManager.Instance.cardDeck.cardDeck.Insert(0, objective.linkedJunkedCards[i]);
+                    else if (r > CardManager.Instance.cardDeck.cardDeck.Count)
                         CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+                    else
+                        CardManager.Instance.cardDeck.cardDeck.Insert(r, objective.linkedJunkedCards[i]);
 
                     EventQueue xInDeckFeedback = new EventQueue();
                     CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], xInDeckFeedback, CardManager.Instance.plotAppearTransform.position, false);
