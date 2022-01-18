@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
@@ -10,6 +11,7 @@ public class Hand : MonoBehaviour
     public RectTransform handTransformPlot;
     public List<CardContainer> hiddenHand = new List<CardContainer>();
     public List<CardContainer> currentHand = new List<CardContainer>();
+    public TextMeshProUGUI handCountText;
 
     public List<HandSlot> handSlots = new List<HandSlot>();
     public HandSlot plotHandSlot;

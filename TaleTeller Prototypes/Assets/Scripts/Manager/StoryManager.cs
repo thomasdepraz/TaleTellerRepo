@@ -25,6 +25,7 @@ public class StoryManager : Singleton<StoryManager>
 
     public IEnumerator Start()
     {
+        CardManager.Instance.UpdateHandCount();
         yield return new WaitForSeconds(1);
         StartTurn();
     }

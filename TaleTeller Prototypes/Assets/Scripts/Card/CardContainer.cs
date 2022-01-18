@@ -125,6 +125,7 @@ public class CardContainer : MonoBehaviour
         {
             rectTransform.position = basePosition;
             CardManager.Instance.cardHand.currentHand.Remove(this);
+            CardManager.Instance.UpdateHandCount();
             transform.SetParent(CardManager.Instance.cardHandContainer.transform);
         }
         
@@ -430,6 +431,7 @@ public class CardContainer : MonoBehaviour
         {
             CardManager.Instance.manaSystem.LoseMana(container.data.manaCost);
             CardManager.Instance.cardHand.currentHand.Remove(container);
+            CardManager.Instance.UpdateHandCount();
         }
 
         if (container.currentSlot != null)
@@ -464,6 +466,8 @@ public class CardContainer : MonoBehaviour
         {
             currentSlot = null;
             CardManager.Instance.manaSystem.GainMana(container.data.manaCost);
+            CardManager.Instance.cardHand.currentHand.Add(this);
+            CardManager.Instance.UpdateHandCount();
         }
         container.rectTransform.position = CardManager.Instance.cardHand.GetPosInHand(this);
     }
@@ -479,6 +483,7 @@ public class CardContainer : MonoBehaviour
 
         //Add back to hand list 
         CardManager.Instance.cardHand.currentHand.Add(container);
+        CardManager.Instance.UpdateHandCount();
     }
 
     bool IsCorrectPlacement(CardContainer container, HandSlot hoveredHandSlot)
