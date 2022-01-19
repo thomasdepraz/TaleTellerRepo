@@ -466,6 +466,7 @@ public class CardContainer : MonoBehaviour
     {
         if (currentSlot != null)
         {
+            currentSlot.currentPlacedCard = null;
             currentSlot = null;
             CardManager.Instance.manaSystem.GainMana(container.data.manaCost);
             CardManager.Instance.cardHand.currentHand.Add(this);
