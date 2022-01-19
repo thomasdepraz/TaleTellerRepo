@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7981203053247291134
+--- !u!114 &-4857744093080538389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,19 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Script: {fileID: 11500000, guid: 17f33840752c2ec438be3f9e8461a5a7, type: 3}
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
-  stats:
-    baseLifePoints: 2
-    baseAttackDamage: 2
-  behaviour: 1
-  fightingRange: 3
-  doubleStrike: 0
-  undying: 0
-  useCount: 5
---- !u!114 &-6766485790942035680
+--- !u!114 &-818442384151503068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,42 +22,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac4521055933afb45a20612d3ef89615, type: 3}
-  m_Name: Effect1
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $Junk_ShadySalesman_Effect0
-  trigger: 0
-  target: 3
-  range: 
-  values: []
-  drawValue:
-    value: 2
-    type: 5
-    op: 1
---- !u!114 &-6223260727357819150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afdd823048dfc3a4394a5bf04ad3e20a, type: 3}
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
-  trigger: 1
-  target: 0
-  range: 
+  trigger: 2
+  target: 2
+  range: 03000000
   values: []
-  buyValue:
-    value: 4
-    type: 3
-    op: 0
-  effectTriggerIfCanPay: {fileID: 0}
+  modifierValue:
+    value: 2
+    type: 0
+    op: 2
+  behaviourTargeted: 2
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
+  temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,21 +49,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
-  m_Name: Junk_ShadySalesman
+  m_Name: Junk_Church
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: Shady Salesman
+  cardName: Church
   rarity: 0
   archetype: 0
-  manaCost: 2
+  manaCost: 1
   cardGraph: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: -6223260727357819150}
-  - {fileID: -6766485790942035680}
+  - {fileID: -818442384151503068}
   effects: []
-  cardTypeReference: {fileID: -7981203053247291134}
+  cardTypeReference: {fileID: -4857744093080538389}
   cardType: {fileID: 0}
   objective: {fileID: 0}
   objectiveIndex: 0

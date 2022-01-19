@@ -20,7 +20,7 @@ MonoBehaviour:
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 2
+  useCount: 3
 --- !u!114 &-1680510468582324227
 MonoBehaviour:
   m_ObjectHideFlags: 0

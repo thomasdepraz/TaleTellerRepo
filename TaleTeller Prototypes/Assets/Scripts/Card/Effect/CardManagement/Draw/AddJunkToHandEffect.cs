@@ -15,34 +15,47 @@ public class AddJunkToHandEffect : Effect
     {
         EventQueue drawQueue = new EventQueue();
 
+        List<JunkCard> cards = new List<JunkCard>();
         if (!junkInLinkedList)
+        {
             for (int i = 0; i < junkCardsToSpawn.Count; i++)
             { 
+                JunkCard card = junkCardsToSpawn[i].InitializeData(junkCardsToSpawn[i]) as JunkCard;
+                cards.Add(card);
                 if(linkedData.GetType() == typeof(JunkCard))
-                    (linkedData as JunkCard).objective.linkedJunkedCards.Add(junkCardsToSpawn[i].InitializeData(junkCardsToSpawn[i]) as JunkCard); 
+                {
+                    (linkedData as JunkCard).objective.linkedJunkedCards.Add(card); 
+                }
                 else
-                    (linkedData as PlotCard).objective.linkedJunkedCards.Add(junkCardsToSpawn[i].InitializeData(junkCardsToSpawn[i]) as JunkCard);
+                {
+                    (linkedData as PlotCard).objective.linkedJunkedCards.Add(card);
+                }
             }
+        }
 
         for (int i = 0; i < junkCardsToSpawn.Count; i++)
         {
+            JunkCard cardToInit;
+            if (!junkInLinkedList) cardToInit = cards[i];
+            else cardToInit = junkCardsToSpawn[i];
+
             switch (junkSpawnLocations[i])
             {
                 case JunkSpawnLocation.EndDeck:
-                    CardManager.Instance.cardDeck.cardDeck.Add(junkCardsToSpawn[i]);
+                    CardManager.Instance.cardDeck.cardDeck.Add(cardToInit);
 
                     EventQueue endDeckfeedback = new EventQueue();
-                    CardManager.Instance.CardAppearToDeck(junkCardsToSpawn[i], endDeckfeedback, CardManager.Instance.plotAppearTransform.position, false);
+                    CardManager.Instance.CardAppearToDeck(cardToInit, endDeckfeedback, CardManager.Instance.plotAppearTransform.position, false);
                     endDeckfeedback.StartQueue();
                     while (!endDeckfeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 
                     break;
                 case JunkSpawnLocation.DeckRandom:
-                    CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count), junkCardsToSpawn[i]);
+                    CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count), cardToInit);
 
                     EventQueue deckRandomFeedback = new EventQueue();
-                    CardManager.Instance.CardAppearToDeck(junkCardsToSpawn[i], deckRandomFeedback, CardManager.Instance.plotAppearTransform.position, false);
+                    CardManager.Instance.CardAppearToDeck(cardToInit, deckRandomFeedback, CardManager.Instance.plotAppearTransform.position, false);
 
                     deckRandomFeedback.StartQueue();
                     while (!deckRandomFeedback.resolved) { yield return new WaitForEndOfFrame(); }
@@ -54,7 +67,7 @@ public class AddJunkToHandEffect : Effect
 
                     EventQueue drawToHandQueue = new EventQueue();
 
-                    CardManager.Instance.CardAppearToHand(junkCardsToSpawn[i], drawToHandQueue, CardManager.Instance.plotAppearTransform.position);
+                    CardManager.Instance.CardAppearToHand(cardToInit, drawToHandQueue, CardManager.Instance.plotAppearTransform.position);
 
                     drawToHandQueue.StartQueue();//Actual draw
                     while (!drawToHandQueue.resolved)

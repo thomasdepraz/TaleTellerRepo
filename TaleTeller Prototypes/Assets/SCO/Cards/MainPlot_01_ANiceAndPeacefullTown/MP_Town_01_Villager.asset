@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7357148306835399227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 2
+    baseAttackDamage: 1
+  behaviour: 1
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 4
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_Town_01_Villager
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Villager
+  rarity: 0
+  archetype: 0
+  manaCost: 3
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 1280873788186665922}
+  effects: []
+  cardTypeReference: {fileID: -7357148306835399227}
+  cardType: {fileID: 0}
+  objective: {fileID: 1055613166009445963}
+  completionTimer: 4
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: 
+  legendaryCardRewards: []
+--- !u!114 &1055613166009445963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a66b3620127b87429c041df2483d626, type: 3}
+  m_Name: PlotObjective_PlaceJunkObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: $MP_PeacefulTown_01_Villager_Objective
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: c33f11df509b41741bbd72559a1a6fb2, type: 2}
+  - {fileID: 11400000, guid: 6362bae145c60d1429d635b6ae77a52f, type: 2}
+  junkSpawnLocations: 0300000004000000
+  junksPositionsInDeck: 0100000000000000
+  mustPlaceAll: 0
+  specificJunkToPlace:
+  - {fileID: 11400000, guid: 6362bae145c60d1429d635b6ae77a52f, type: 2}
+  specifyNumbers: 0
+  numberToPlace: 
+--- !u!114 &1280873788186665922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $MP_PeacefulTown_01_Villager_Effect0
+  trigger: 1
+  target: 0
+  range: 
+  values: []
+  gainValue:
+    value: 5
+    type: 2
+    op: 1
+  temporaryChange: 0

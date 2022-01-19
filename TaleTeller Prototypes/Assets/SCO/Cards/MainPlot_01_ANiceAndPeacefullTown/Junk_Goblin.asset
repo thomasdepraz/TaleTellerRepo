@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5114050863913606493
+--- !u!114 &-5218425721139093585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 2
-    baseAttackDamage: 2
-  behaviour: 1
+    baseLifePoints: 3
+    baseAttackDamage: 1
+  behaviour: 2
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 3
+  useCount: 5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,18 +30,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Idea_Companion_Base
+  m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
+  m_Name: Junk_Goblin
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: Companion
-  rarity: 1
-  archetype: 1
-  manaCost: 1
-  cardGraph: {fileID: 21300000, guid: 059ac3b26137b844ca9d0e54d8e39923, type: 3}
+  cardName: Goblin
+  rarity: 0
+  archetype: 0
+  manaCost: 0
+  cardGraph: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences: []
   effects: []
-  cardTypeReference: {fileID: -5114050863913606493}
+  cardTypeReference: {fileID: -5218425721139093585}
   cardType: {fileID: 0}
+  objective: {fileID: 0}
+  objectiveIndex: 0
