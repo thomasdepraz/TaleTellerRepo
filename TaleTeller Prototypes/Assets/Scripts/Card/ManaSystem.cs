@@ -120,18 +120,48 @@ public class ManaSystem : MonoBehaviour
     {
         if (currentMana + amount >= ActualMaxMana) currentMana = ActualMaxMana;
         else currentMana += amount;
+
+        ScaleFrame();
+        
     }
 
     public void LoseMana(int amount)
     {
         if (currentMana - amount <= 0) currentMana = 0;
         else currentMana -= amount;
+
+        ScaleFrame();
     }
 
     public bool CanUseCard(int cardCost)
     {
-        if (currentMana - cardCost < 0) return false;
-        else return true;
+        if (currentMana - cardCost < 0)
+        {
+            ShakeFrame();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void ScaleFrame()
+    {
+        LeanTween.cancel(manaFrame.gameObject);
+        manaFrame.gameObject.transform.localScale = Vector3.one;
+        manaFrame.gameObject.transform.rotation = Quaternion.identity;
+        LeanTween.scale(manaFrame.gameObject, Vector3.one * 1.2f, 0.2f).setEaseInOutQuint().setLoopPingPong(1);
+    }
+
+    public void ShakeFrame()
+    {
+        LeanTween.cancel(manaFrame.gameObject);
+        manaFrame.gameObject.transform.localScale = Vector3.one;
+        manaFrame.gameObject.transform.rotation = Quaternion.identity;
+        LeanTween.rotateZ(manaFrame.gameObject, -3, 0.02f).setEaseInOutCubic().setOnComplete(
+           value => LeanTween.rotateZ(manaFrame.gameObject, 3, 0.04f).setEaseInOutCubic().setLoopPingPong(2).setOnComplete(
+               val => LeanTween.rotateZ(manaFrame.gameObject, 0, 0.02f).setEaseInOutCubic()));
     }
 
     void UpdateManaText()
