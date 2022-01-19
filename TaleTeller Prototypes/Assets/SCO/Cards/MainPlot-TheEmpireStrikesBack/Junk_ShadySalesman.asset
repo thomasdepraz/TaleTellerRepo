@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Junk_ShadySalesman_Effect0
+  description: $Junk_ShadySalesman_Effect1
   trigger: 0
   target: 3
   range: 
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Junk_ShadySalesman_Effect0
   trigger: 1
   target: 0
   range: 
