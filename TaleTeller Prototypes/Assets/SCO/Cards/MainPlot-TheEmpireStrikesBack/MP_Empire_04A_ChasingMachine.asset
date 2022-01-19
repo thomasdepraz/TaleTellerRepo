@@ -32,7 +32,7 @@ MonoBehaviour:
   range: 
   values: []
   gainValue:
-    value: 12
+    value: 4
     type: 0
     op: 2
   temporaryChange: 0
@@ -84,13 +84,13 @@ MonoBehaviour:
   description: 
   trigger: 2
   target: 2
-  range: 03000000
+  range: 04000000
   values: []
   modifierValue:
-    value: 6
-    type: 1
-    op: 1
-  behaviourTargeted: 2
+    value: 4
+    type: 0
+    op: 2
+  behaviourTargeted: 0
   forSpecificCard: 0
   specificCard: {fileID: 0}
   temporaryChange: 0
@@ -120,6 +120,6 @@ MonoBehaviour:
   mustPlaceAll: 0
   specificJunkToPlace:
   - {fileID: 11400000, guid: 166317bffd806314d99f737b6a15847f, type: 2}
-  - {fileID: 11400000, guid: 166317bffd806314d99f737b6a15847f, type: 2}
   - {fileID: 11400000, guid: 94507ef806cddcc48b9a2d4eda975aa1, type: 2}
-  plotOnBoard: 1
+  specifyNumbers: 1
+  numberToPlace: 0200000001000000

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5114050863913606493
+--- !u!114 &-7809668928599285782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,12 +15,35 @@ MonoBehaviour:
   data: {fileID: 0}
   stats:
     baseLifePoints: 2
-    baseAttackDamage: 2
-  behaviour: 1
+    baseAttackDamage: 1
+  behaviour: 2
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 3
+  useCount: 2
+--- !u!114 &-1680510468582324227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $Idea_LittleGoblin_Base_Effect0
+  trigger: 8
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 2
+    type: 2
+    op: 1
+  temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,17 +54,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Idea_Companion_Base
+  m_Name: Idea_LittleGoblin_Base
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: Companion
+  cardName: Little Goblin
   rarity: 1
   archetype: 1
   manaCost: 1
-  cardGraph: {fileID: 21300000, guid: 059ac3b26137b844ca9d0e54d8e39923, type: 3}
+  cardGraph: {fileID: 21300000, guid: 72a4ea3c70e7c39499622d676c5e9a9a, type: 3}
   currentContainer: {fileID: 0}
   description: 
-  effectsReferences: []
+  effectsReferences:
+  - {fileID: -1680510468582324227}
   effects: []
-  cardTypeReference: {fileID: -5114050863913606493}
+  cardTypeReference: {fileID: -7809668928599285782}
   cardType: {fileID: 0}

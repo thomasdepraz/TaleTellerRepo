@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Idea_TreasureChest_Base
+  m_Name: Idea_RusticSword
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
-  cardName: Treasure
+  cardName: Rustic Sword
   rarity: 1
   archetype: 1
-  manaCost: 2
-  cardGraph: {fileID: 21300000, guid: 6d5f51f79d81b2c45b033a9196663892, type: 3}
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: 7e4af537856978c4fa7aa3fbe200cb0c, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: 996648425123532430}
+  - {fileID: 7174467870802054375}
   effects: []
-  cardTypeReference: {fileID: 7265544321236676357}
+  cardTypeReference: {fileID: 9031949279085554545}
   cardType: {fileID: 0}
---- !u!114 &996648425123532430
+--- !u!114 &7174467870802054375
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,20 +34,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac4521055933afb45a20612d3ef89615, type: 3}
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Idea_TreasureChest_Base_Effect0
-  trigger: 8
-  target: 3
+  description: $Idea_Sword_Base_Effect0
+  trigger: 1
+  target: 1
   range: 
   values: []
-  drawValue:
-    value: 3
-    type: 5
+  gainValue:
+    value: 1
+    type: 1
     op: 1
---- !u!114 &7265544321236676357
+  temporaryChange: 0
+--- !u!114 &9031949279085554545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,15 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
-  stats:
-    baseLifePoints: 3
-    baseAttackDamage: 1
-  behaviour: 2
-  fightingRange: 3
-  doubleStrike: 0
-  undying: 0
-  useCount: 2

@@ -23,30 +23,6 @@ MonoBehaviour:
     type: 1
     op: 1
   temporaryChange: 0
---- !u!114 &-6029024664228391133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
-  m_Name: Effect1
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $Idea_Sword_Base_Effect1
-  trigger: 1
-  target: 2
-  range: 09000000
-  values: []
-  modifierValue:
-    value: 2
-    type: 1
-    op: 1
-  behaviourTargeted: 0
-  temporaryChange: 0
 --- !u!114 &-4821803556280145319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +81,6 @@ MonoBehaviour:
   description: 
   effectsReferences:
   - {fileID: -4821803556280145319}
-  - {fileID: -6029024664228391133}
   effects: []
   cardTypeReference: {fileID: -224248250864466265}
   cardType: {fileID: 0}
