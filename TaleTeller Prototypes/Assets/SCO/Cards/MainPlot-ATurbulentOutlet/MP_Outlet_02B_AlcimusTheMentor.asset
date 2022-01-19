@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_TurbulentOutset_02_AlcimusTheMentor_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 29f0e968dcd549c40b735ea7b87f7be6, type: 2}
   - {fileID: 11400000, guid: 29f0e968dcd549c40b735ea7b87f7be6, type: 2}

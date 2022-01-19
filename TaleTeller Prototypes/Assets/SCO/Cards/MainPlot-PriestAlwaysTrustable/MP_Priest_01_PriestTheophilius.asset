@@ -70,8 +70,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 10
-    baseAttackDamage: 2
+    baseLifePoints: 11
+    baseAttackDamage: 5
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   range: 
   values: []
   gainValue:
-    value: 3
-    type: 1
+    value: 1
+    type: 7
     op: 1
   temporaryChange: 0

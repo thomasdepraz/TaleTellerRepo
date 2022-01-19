@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
-  trigger: 6
+  description: $Junk_EmpireGuard_Effect0
+  trigger: 2
   target: 4
   range: 
   values: []

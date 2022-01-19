@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $MP_TurbulentOutset_03_GatesOfTown_Effect0
   trigger: 1
   target: 0
   range: 
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_TurbulentOutset_03_GatesOfTown_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 183197bef8b86db4b9b0381835473440, type: 2}
   - {fileID: 11400000, guid: bcfd4bc3a13e42744a99fe2d6bcc6203, type: 2}

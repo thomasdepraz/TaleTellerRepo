@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_Empire_01_BlackMarket_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: b841f62359ecd64479423e30dbbc2f4a, type: 2}
   - {fileID: 11400000, guid: c24948efafa92c74383b941fcd93ee97, type: 2}
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $MP_Empire_01_BlackMarket_Effect0
   trigger: 2
   target: 2
   range: 04000000
