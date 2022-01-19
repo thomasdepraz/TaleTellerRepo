@@ -11,6 +11,10 @@ public class PlaceJunkObj : JunkDrivenObj
     public bool mustPlaceAll;
     [HideIf("mustPlaceAll")]
     public List<JunkCard> specificJunkToPlace = new List<JunkCard>();
+    [HideIf("mustPlaceAll")]
+    public bool specifyNumbers;
+    [ShowIf("specifyNumbers")]
+    public List<int> numberToPlace = new List<int>();
 
     public override void SubscribeUpdateStatus(PlotCard data)
     {
@@ -41,23 +45,58 @@ public class PlaceJunkObj : JunkDrivenObj
 
         var junkToPlaceData = specificJunkToPlace.Select(j => j.dataReference);
 
-        var junkToTest = mustPlaceAll ?
-            linkedJunkedCards
-            : linkedJunkedCards.Where(j => junkToPlaceData.Contains(j.dataReference));
+        var junkToTest = mustPlaceAll ? 
+            linkedJunkedCards :
+            linkedJunkedCards.Where(j => junkToPlaceData.Contains(j.dataReference));
 
         var junkContainer = junkToTest.Select(j => j.currentContainer);
 
-        foreach(CardContainer container in junkContainer)
+
+        if(specifyNumbers)
         {
-            if(container == null)
+            List<int> numsToPlace = numberToPlace;
+
+            foreach (CardContainer container in junkContainer)
             {
-                complete = false;
-                break;
+                if (container != null)
+                    for (int i = 0; i < specificJunkToPlace.Count; i++)
+                    {
+                        if (specificJunkToPlace[i].cardName == container.data.cardName)
+                        {
+                            numsToPlace[i]--;
+                        }
+
+                        if (!CardManager.Instance.board.IsCardOnBoard(container.data))
+                        {
+                            numsToPlace[i]++;
+                            break;
+                        }
+                    }
+                
             }
-            else if (!CardManager.Instance.board.IsCardOnBoard(container.data))
+
+            for (int i = 0; i < numsToPlace.Count; i++)
             {
-                complete = false;
-                break;
+                if (numsToPlace[i] > 0)
+                {
+                    complete = false;
+                }
+            }
+        }
+        else
+        {
+            foreach (CardContainer container in junkContainer)
+            {
+                if (container == null)
+                {
+                    complete = false;
+                    break;
+                }
+                else if (!CardManager.Instance.board.IsCardOnBoard(container.data))
+                {
+                    complete = false;
+                    break;
+                }
             }
         }
 
