@@ -56,26 +56,26 @@ public class InternalCardTooltip : UITooltip
                 switch (dataType)
                 {
                     case CardType.PeacefullCharacter:
-                        result = "This Card is an Ally.\nIt will attack nerby ennemies.\nIt comes back in your hand while it has stacks.";
+                        result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_TYPE_ALLY");
                         break;
                     case CardType.EnemyCharacter:
-                        result = "This Card is an Enemy.\nIt will attack you and your allies nerby.\nIt comes back to your hands while it has stacks.";
+                        result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_TYPE_ENEMY");
                         break;
                     case CardType.Location:
-                        result = "This Card is a Location.\nThey trigger most of they effect right when the turn starts.";
+                        result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_TYPE_LOCATION");
                         break;
                     case CardType.Object:
-                        result = "This Card is an Object.\nHis effects apply when your hero walks on it.\nIt will be destroyed after usage.";
+                        result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_TYPE_OBJECT");
                         break;
                 }
 
                 switch (dataNature)
                 {
                     case CardNature.Junk:
-                        result += "\nIt is also a Junk, it disapears when the plot it is linked to gets resolved.";
+                        result += LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_NATURE_JUNK");
                         break;
                     case CardNature.Plot:
-                        result += "\nIt is also a Plot, you need to achieve his objective before timer reach 0!.";
+                        result += LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_NATURE_PLOT");
                         break;
                     default:
                         break;
@@ -88,10 +88,10 @@ public class InternalCardTooltip : UITooltip
                 switch (dataNature)
                 {
                     case CardNature.Plot:
-                        result = "Timer of the Plot.\nIf it reaches 0, you loose.";
+                        result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_TIMER_PLOT");
                         break;
                     default:
-                        result = "Character stacks.\nWhen it reaches 0, character stops coming back to your hand.";
+                        result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_TIMER_CHARA");
                         break;
                 }
 
@@ -99,19 +99,19 @@ public class InternalCardTooltip : UITooltip
 
             case UITooltipTarget.CARD_INK:
 
-                result = "Amount of Ink requiered to place this card on the track.";
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_INK");
 
                 break;
 
             case UITooltipTarget.CARD_ATTACK:
 
-                result = "Amount of damages dealt by this character when he hits.";
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_ATK");
 
                 break;
 
             case UITooltipTarget.CARD_HP:
 
-                result = "Amount of life point of this character.\nHe is destroyed if it reaches 0";
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_HP");
 
                 break;
         }
