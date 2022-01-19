@@ -291,7 +291,9 @@ public class CardContainer : MonoBehaviour
             if (CardManager.Instance.currentHoveredSlot != null)
             {
                 //if you have enough man else abort and reset card
-                if (CardManager.Instance.manaSystem.CanUseCard(data.manaCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
+                int manaCost = currentSlot != null ? 0 : data.manaCost;
+
+                if (CardManager.Instance.manaSystem.CanUseCard(manaCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
                 {
 
                     PlaceOnBoardSlot(this, CardManager.Instance.currentHoveredSlot);
