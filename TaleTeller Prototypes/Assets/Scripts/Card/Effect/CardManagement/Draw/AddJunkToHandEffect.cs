@@ -18,7 +18,10 @@ public class AddJunkToHandEffect : Effect
         if (!junkInLinkedList)
             for (int i = 0; i < junkCardsToSpawn.Count; i++)
             { 
-                (linkedData as JunkCard).objective.linkedJunkedCards.Add(junkCardsToSpawn[i].InitializeData(junkCardsToSpawn[i]) as JunkCard); 
+                if(linkedData.GetType() == typeof(JunkCard))
+                    (linkedData as JunkCard).objective.linkedJunkedCards.Add(junkCardsToSpawn[i].InitializeData(junkCardsToSpawn[i]) as JunkCard); 
+                else
+                    (linkedData as PlotCard).objective.linkedJunkedCards.Add(junkCardsToSpawn[i].InitializeData(junkCardsToSpawn[i]) as JunkCard);
             }
 
         for (int i = 0; i < junkCardsToSpawn.Count; i++)

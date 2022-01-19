@@ -149,7 +149,7 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                 default:
                     break;
             }
-            t.data.currentContainer.UpdateCharacterInfo(t);
+            //t.data.currentContainer.UpdateCharacterInfo(t);
         }
 
         if(targets.ToArray().Length == 0)

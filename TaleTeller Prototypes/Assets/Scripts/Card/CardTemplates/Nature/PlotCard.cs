@@ -64,7 +64,6 @@ public class PlotCard : CardData
         return plot;
     }
 
-
     public void OnPlotAppear(EventQueue queue, CardData data)
     {
         queue.events.Add(OnPlotAppearRoutine(queue, data));
