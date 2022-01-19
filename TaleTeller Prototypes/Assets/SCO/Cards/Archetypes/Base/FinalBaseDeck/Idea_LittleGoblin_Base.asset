@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 2
+    baseLifePoints: 4
     baseAttackDamage: 1
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 2
+  useCount: 3
 --- !u!114 &-1680510468582324227
 MonoBehaviour:
   m_ObjectHideFlags: 0
