@@ -40,11 +40,11 @@ public class PlotsManager : Singleton<PlotsManager>
         {
             secondaryPlots[i] = secondaryPlots[i].InitializeData(secondaryPlots[i]); 
         }
-        for (int i = 0; i < darkIdeas.Count; i++)
-        {
-            darkIdeas[i] = darkIdeas[i].InitializeData(darkIdeas[i]);
+        //for (int i = 0; i < darkIdeas.Count; i++)
+        //{
+        //    darkIdeas[i] = darkIdeas[i].InitializeData(darkIdeas[i]);
 
-        }
+        //}
     }
 
     //Link this method to the act beggining
