@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class Inspire : MonoBehaviour
 {
     public List<GameObject> stacks = new List<GameObject>();
     public Image frame;
+    public Image content;
+    public TextMeshProUGUI text;
     public RectTransform root;
 
     [Header("Data")]
@@ -31,32 +34,38 @@ public class Inspire : MonoBehaviour
 
     public void ClickButton()
     {
-        if (useCount == 0) ShakeFrame();
+        //if (useCount == 0) ShakeFrame();
 
-        if(useCount > 0 && CardManager.Instance.manaSystem.CanUseCard(manaCost))
+        if(CardManager.Instance.manaSystem.CanUseCard(manaCost))
         {
             StartCoroutine(InspireRoutine());
         }
     }
     IEnumerator InspireRoutine()
     {
-        CardManager.Instance.manaSystem.LoseMana(manaCost);
+        int use = useCount;
+
         UpdateStacks(-1);
+        CardManager.Instance.manaSystem.LoseMana(manaCost);
 
         EventQueue drawQueue = new EventQueue();
         CardManager.Instance.cardDeck.DrawCards(drawCardsCount, drawQueue);
         drawQueue.StartQueue();
         while (!drawQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-        EventQueue appearQueue = new EventQueue();
-        int random = Random.Range(0, PlotsManager.Instance.darkIdeas.Count);
-        CardData cardToAppear = PlotsManager.Instance.darkIdeas[random];
-        cardToAppear = cardToAppear.InitializeData(cardToAppear);
 
-        CardManager.Instance.CardAppearToDeck(cardToAppear, appearQueue, CardManager.Instance.plotAppearTransform.position);
+        if(use == 0)
+        {
+            EventQueue appearQueue = new EventQueue();
+            int random = Random.Range(0, PlotsManager.Instance.darkIdeas.Count);
+            CardData cardToAppear = PlotsManager.Instance.darkIdeas[random];
+            cardToAppear = cardToAppear.InitializeData(cardToAppear);
 
-        appearQueue.StartQueue();
-        while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
+            CardManager.Instance.CardAppearToDeck(cardToAppear, appearQueue, CardManager.Instance.plotAppearTransform.position);
+
+            appearQueue.StartQueue();
+            while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        }
     }
 
 
@@ -79,7 +88,15 @@ public class Inspire : MonoBehaviour
         BounceFrame();
 
         useCount += amount;
-        if (useCount < 0) useCount = 0;
+
+        if (useCount < 0)
+        {
+            useCount = 0;
+            amount = 0;
+        }
+
+        if (useCount == 0) InvertColors(true);
+        else InvertColors(false);
 
         if(amount>0)
         {
@@ -123,5 +140,19 @@ public class Inspire : MonoBehaviour
         LeanTween.rotateZ(frame.gameObject, -3, 0.02f).setEaseInOutCubic().setOnComplete(
             value => LeanTween.rotateZ(frame.gameObject, 3, 0.04f).setEaseInOutCubic().setLoopPingPong(2).setOnComplete(
                 val => LeanTween.rotateZ(frame.gameObject, 0, 0.02f).setEaseInOutCubic()));
+    }
+
+    public void InvertColors(bool toBlack)
+    {
+        if(toBlack)
+        {
+            text.color = Color.white;
+            content.color = Color.black;
+        }
+        else
+        {
+            text.color = Color.black;
+            content.color = Color.white;
+        }
     }
 }
