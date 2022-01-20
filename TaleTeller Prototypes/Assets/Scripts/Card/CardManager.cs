@@ -13,6 +13,7 @@ public class CardManager : Singleton<CardManager>
     public Deck cardDeck;
     public Hand cardHand;
     public Board board;
+    public Inspire inspire;
     public CardTweening cardTweening;
     public RectTransform discardPileTransform;
     public RectTransform deckTransform;
@@ -348,6 +349,38 @@ public class CardManager : Singleton<CardManager>
         CardToDeck(appearAndSendQueue, card, addToDeck);
         appearAndSendQueue.StartQueue();
         while (!appearAndSendQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        queue.UpdateQueue();
+    }
+    #endregion
+
+    #region DiscardFromDeck
+    public void DiscardFromDeck(int countToDiscard, EventQueue queue)
+    {
+        queue.events.Add(DiscardFromDeckRoutine(countToDiscard, queue));
+    }
+    IEnumerator DiscardFromDeckRoutine(int countToDiscard, EventQueue queue)
+    {
+        Instance.cardDeck.InitCachedDeck();
+
+        EventQueue discardQueue = new EventQueue();
+
+        List<CardData> pickedCards = new List<CardData>();
+        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
+        string newInstruction = instruction.Replace("$value$", countToDiscard.ToString());
+
+        cardPicker.Pick(discardQueue, Instance.cardDeck.cachedDeck, pickedCards, countToDiscard, newInstruction);
+
+        discardQueue.StartQueue();
+        while (!discardQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+        for (int i = 0; i < pickedCards.Count; i++)
+        {
+            cardDeck.cachedDeck.Remove(pickedCards[i]); //TODO Animate this with a card management method such as SendToOblivion
+        }
+
+        //refill deck + reinit cards
+        cardDeck.ResetCachedDeck();
+
         queue.UpdateQueue();
     }
     #endregion
