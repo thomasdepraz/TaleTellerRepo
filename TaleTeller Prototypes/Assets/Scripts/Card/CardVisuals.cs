@@ -71,6 +71,8 @@ public class CardVisuals : MonoBehaviour
             cardFlag.sprite = profile.plotFlag;
             cardManaFrame.sprite = profile.normalManaFrame;
 
+            cardTimerFrame.sprite = profile.timer;
+
             plotIcon.gameObject.SetActive(true);
             plotUnderFlag.gameObject.SetActive(true);
             cardTimerFrame.gameObject.SetActive(true);
@@ -145,24 +147,26 @@ public class CardVisuals : MonoBehaviour
             Type cardType = data.cardType.GetType();
             if(cardType == typeof(CharacterType))
             {
-                cardIcon.sprite = profile.characterIcon;
+                
                 CharacterType chara = data.cardType as CharacterType;
                 if(chara.behaviour == CharacterBehaviour.Agressive)
                 {
-                    if(data.GetType() == typeof(DarkIdeaCard))
+                    cardIcon.sprite = profile.characterBadIcon;
+                    if (data.GetType() == typeof(DarkIdeaCard))
                     {
                         cardFrame.sprite = profile.curseCharacterFrameBad;
-                        cardFrameMask.sprite = profile.curseCharacterFrameMask;
+                        cardFrameMask.sprite = profile.curseCharacterBadFrameMask;
                     }
                     else
                     {
                         cardFrame.sprite = profile.characterFrameBad;
-                        cardFrameMask.sprite = profile.characterFrameMask;
+                        cardFrameMask.sprite = profile.characterBadFrameMask;
                     }
 
                 }
                 else if(chara.behaviour == CharacterBehaviour.Peaceful)
                 {
+                    cardIcon.sprite = profile.characterIcon;
                     if (data.GetType() == typeof(DarkIdeaCard))
                     {
                         cardFrame.sprite = profile.curseCharacterFrameGood;
@@ -174,19 +178,19 @@ public class CardVisuals : MonoBehaviour
                         cardFrameMask.sprite = profile.characterFrameMask;
                     }
                 }
-                else
-                {
-                    if (data.GetType() == typeof(DarkIdeaCard))
-                    {
-                        cardFrame.sprite = profile.curseCharacterFrameNeutral;
-                        cardFrameMask.sprite = profile.curseCharacterFrameMask;
-                    }
-                    else
-                    {
-                        cardFrame.sprite = profile.characterFrameNeutral;
-                        cardFrameMask.sprite = profile.characterFrameMask;
-                    }
-                }
+                //else
+                //{
+                //    if (data.GetType() == typeof(DarkIdeaCard))
+                //    {
+                //        cardFrame.sprite = profile.curseCharacterFrameNeutral;
+                //        cardFrameMask.sprite = profile.curseCharacterFrameMask;
+                //    }
+                //    else
+                //    {
+                //        cardFrame.sprite = profile.characterFrameNeutral;
+                //        cardFrameMask.sprite = profile.characterFrameMask;
+                //    }
+                //}
 
                 characterAttackFrame.gameObject.SetActive(true);
                 characterHealthFrame.gameObject.SetActive(true);
@@ -198,11 +202,13 @@ public class CardVisuals : MonoBehaviour
 
                 if (dataType == typeof(DarkIdeaCard))
                 {
+                    cardTimerFrame.sprite = profile.curseHourglass;
                     characterAttackFrame.sprite = profile.curseCharacterAttack;
                     characterHealthFrame.sprite = profile.curseCharacterHealth;
                 }
                 else
                 {
+                    if(dataType != typeof(PlotCard)) cardTimerFrame.sprite = profile.normalHourglass;
                     characterAttackFrame.sprite = profile.normalCharacterAttack;
                     characterHealthFrame.sprite = profile.normalCharacterHealth;
                 }
@@ -250,7 +256,6 @@ public class CardVisuals : MonoBehaviour
         }
         else
         {
-            //
             characterAttackFrame.gameObject.SetActive(false);
             characterHealthFrame.gameObject.SetActive(false);
 
