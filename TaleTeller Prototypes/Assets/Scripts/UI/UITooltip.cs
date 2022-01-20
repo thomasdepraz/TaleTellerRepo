@@ -12,8 +12,12 @@ public enum UITooltipTarget
     INK,
     GOBUTTON,
     BOARDSLOT, 
-    HERO, 
-
+    HERO,
+    CARD_TYPE,
+    CARD_INK,
+    CARD_TIMER,
+    CARD_ATTACK,
+    CARD_HP
 }
 public class UITooltip : MonoBehaviour
 {
@@ -42,7 +46,7 @@ public class UITooltip : MonoBehaviour
         open = false;
     }
 
-    public string GetTooltipDescription()
+    public virtual string GetTooltipDescription()
     {
         string result  = string.Empty;
 
