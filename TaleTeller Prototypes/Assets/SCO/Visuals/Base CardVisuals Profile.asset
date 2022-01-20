@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025ffa5fee34e7b41b377b095231476a, type: 3}
   m_Name: Base CardVisuals Profile
   m_EditorClassIdentifier: 
-  ideaBackground: {fileID: 21300000, guid: cf7a31a642746a745bbcb80eb3dc4e67, type: 3}
-  curseBackground: {fileID: 21300000, guid: 4bd387f8df14e7746b8142d2b89588ae, type: 3}
-  plotBackground: {fileID: 21300000, guid: 3aa93ec26372f33429e87486f0917fa1, type: 3}
-  junkBackground: {fileID: 21300000, guid: 4958e4ccf02ebb64f83502dfbe823bb6, type: 3}
+  ideaBackground: {fileID: 21300000, guid: 7762a443fa86d0449a7db8805a6784b7, type: 3}
+  curseBackground: {fileID: 21300000, guid: deb5678392866d2418889fc2087bd661, type: 3}
+  plotBackground: {fileID: 21300000, guid: 720ae71f488300a41b88c0a74b45f781, type: 3}
+  junkBackground: {fileID: 21300000, guid: 1c22483804c4554479ccf2d3e0312386, type: 3}
   characterFrameNeutral: {fileID: 21300000, guid: 08901d22468f02048b861fc827420608, type: 3}
   characterFrameGood: {fileID: 21300000, guid: 08901d22468f02048b861fc827420608, type: 3}
   characterFrameBad: {fileID: 21300000, guid: 763937ca76691ef4581230054b319e71, type: 3}

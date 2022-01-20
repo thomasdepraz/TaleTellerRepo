@@ -11,6 +11,8 @@ $Idea_RefinedSword_Base_Effect0	<b>Buy ($buyValue$)</b> :
 $Idea_RefinedSword_Base_Effect1	+$gainValue$ ATK.
 $Idea_Sword_Base_Effect0	+$gainValue$ ATK.
 $Idea_Sword_Base_Effect1	Character → +$modifierValue$ ATK.
+$Idea_RusticSword_Base_Effect0	<b>Buy ($buyValue$)</b> : 
+$Idea_RusticSword_Base_Effect1	+$gainValue$ ATK.
 $Idea_Veteran_Base_Effect0	Character → +$modifierValue$ ATK.
 $Idea_TreasureChest_Base_Effect0	<b>Last Wish</b> : Draw $drawValue$.
 $Idea_LittleGoblin_Base_Effect0	<b>Last Wish</b> : +$gainValue$ GOLD.
@@ -73,7 +75,7 @@ $Idea_Tundra_Berserk_Effect1	↞ ↠ +$modifierValue$ ATK.
 $Idea_Bomb_Berserk_Effect0	← → -$gainValue$ HP.
 $Idea_Yeti_Berserk_Effect0	<b>Last Wish</b> : Draw $drawValue$.
 $Idea_Yeti_Berserk_Effect1	← → <b>Last Wish</b> : +$gainValue$ ATK.
-$Idea_Battlefield_Berserk_Effect0	
+$Idea_Battlefield_Berserk_Effect0	/
 $DI_CuriousStew_Effect0	<b>Obsessing</b>
 $DI_CuriousStew_Effect1	<color=white>HERO => <b>Buy ($buyValue$)</b> : 
 $DI_CuriousStew_Effect2	<color=white>The Hero loses - $gainValue$ ATK.
@@ -126,7 +128,7 @@ $Junk_ArtifactBottom_Effect0	-$gainValue$ HP.
 $Junk_ArtifactLeft_Effect0	-$gainValue$ HP.
 $Junk_ArtifactRight_Effect0	-$gainValue$ HP.
 $Junk_ArtifactTop_Effect0	-$gainValue$ HP.
-$Junk_CommonDemon_Effect0	<b>Last Wish</b> : Strikes back his last opponent.
+$Junk_CommonDemon_Effect0	<b>Last Wish</b> : -$gainValue$ HP for each Ally on the Track.
 $Junk_GuardianArtifact_Effect0	Self + $modifierValue$ ATK for each received attack.
 $Junk_MightyAstaroth_Effect0	Self +$modifierValue$ HP.
 $Junk_ValeforReplica_Effect0	Self +$modifierValue$ ATK.
@@ -158,12 +160,13 @@ $MP_TurbulentOutset_03_AlcimusTheWizard_Effect0	/
 $MP_TurbulentOutset_03_AlcimusTheWizard_Objective	Let Alcimus the Wizard die.
 $MP_TurbulentOutset_04_GeneralOton_Effect0	+$modifierValue$ ATK for each received hit.
 $MP_TurbulentOutset_04_GeneralOton_Objective	Defeat General Oton.
-$Junk_Mandrake_Effect0	Draw 1 Seedling.
+$Junk_Mandrake_Effect0	<b>Last Wish :</b> Draw 1 Seedling.
 $Junk_Seedling_Effect0	+$gainValue$ HP.
 $Junk_EmpireSoldier_Effect0	<b> Last Wish : </b> Choice $choiceValue$.
 $Junk_EmpireTroop_Effect0	/
 $Junk_BurningTown_Effect0	↞ ↠ -$modifierValue$ HP to Characters and Hero.
-$Junk_Horse_Effect0	<b> Buy(1) : </b> Draw $drawValue$.
+$Junk_Horse_Effect0	<b>Buy($buyValue$) :</b> 
+$Junk_Horse_Effect1	Draw $drawValue$.
 $Junk_BurningDebris_Effect0	-$gainValue$ HP.
 $Junk_CrumblingHouse_Effect0	-$gainValue$ HP.
 $Junk_EmpireBarricade_Effect0	-$gainValue$ HP.
@@ -186,7 +189,8 @@ $MP_Empire_05_Emperor_Objective	Defeat Malivatius the Emperor.
 $Junk_EmpireHelmet_Effect0	-$gainValue$ HP.
 $Junk_EmpireBreastplate_Effect0	Discard $discardValue$.
 $Junk_EmpireSword_Effect0	-$gainValue$ ATK.
-$Junk_ShadySalesman_Effect0	<b>Buy(4) :</b> Draw $drawValue$.
+$Junk_ShadySalesman_Effect0	<b>Buy($buyValue$) :</b> 
+$Junk_ShadySalesman_Effect1	Draw $drawValue$.
 $Junk_EmpireGuard_Effect0	<b>End of Turn</b> If in Hand, +1 Empire Guard in the Deck.
 $Junk_HiddenDoor_Effect0	Draw $drawValue$.
 $Junk_Alarm_Effect0	<b>End of Turn</b> If in Hand, +1 Empire Guard in the Deck.
@@ -211,7 +215,8 @@ $MP_PeacefulTown_03_Witch_Effect0	/
 $MP_PeacefulTown_03_Witch_Objective	Place the Witch, 2 Characters and the Town Exit.
 $MP_PeacefulTown_04_GiantSpider_Effect0	/
 $MP_PeacefulTown_04_GiantSpider_Objective	Defeat the Giant Spider.
-$Junk_Salesman_Effect0	<b>Buy(8) :</b> Draw 1 Delivery Package.
+$Junk_Salesman_Effect0	<b>Buy($buyValue$) :</b> 
+$Junk_Salesman_Effect1	Draw 1 Delivery Package.
 $Junk_DeliveryPackage_Effect0	Draw $drawValue$.
 $Junk_WanderingSkeleton_Effect0	/
 $Junk_GreenMushroom_Effect0	+$gainValue$ HP.
