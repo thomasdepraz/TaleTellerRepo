@@ -72,7 +72,8 @@ public class MainPlotScheme : ScriptableObject
         //send card to hand
         EventQueue toHandQueue = new EventQueue();
 
-        CardData card = chapterScreen.chosenCard.data;
+        PlotCard card = new PlotCard(); 
+        card = card.InitializeData(chapterScreen.chosenCard.data.dataReference) as PlotCard;
         card.onCardAppear(toHandQueue, card);
 
         toHandQueue.StartQueue();

@@ -9,7 +9,8 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     public Action onClick;
     public Image buttonImage;
-
+    public Color baseColor = new Color(0.3f, 0.3f, 0.3f, 1);
+    public Color diabledColor = new Color(1,1,1,0.5f);
     bool _selected;
     public bool selected 
     {
@@ -69,10 +70,11 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if(interactable)
         {
-
+            buttonImage.color = baseColor;
         }
         else
         {
+            buttonImage.color = diabledColor;
             buttonImage.gameObject.transform.localScale = Vector3.one;
         }
     }

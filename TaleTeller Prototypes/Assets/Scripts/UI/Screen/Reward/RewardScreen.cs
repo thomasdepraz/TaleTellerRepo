@@ -6,14 +6,6 @@ using UnityEngine.UI;
 
 public class RewardScreen : GameScreen
 {
-    public string questEndingText;
-    public string accomplishementText;
-    public string chooseInstruction;
-    public string upgradeInstruction;
-    public string confirmText;
-
-    public Sprite accomplishementIllustration;
-
     public List<Reward> chosenRewards;
     public List<Reward> heroRewards;
 
@@ -24,13 +16,14 @@ public class RewardScreen : GameScreen
 
     public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme)
     {
-        questEndingText = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$QUEST_ENDING");
-        chooseInstruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$CHOOSE_INSTRUCTION");
-        upgradeInstruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$UPGRADE_INSTRUCTION");
-        confirmText = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$CONFIRM");
+        visuals = ScreenManager.Instance.rewardScreenVisuals; ;
+        visuals.completeText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$QUEST_ENDING");
+        visuals.chooseInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$CHOOSE_INSTRUCTION"); 
+        visuals.upgradeInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$UPGRADE_INSTRUCTION");
+        //visuals.confirmButton. = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$CONFIRM");
 
-        accomplishementText = currentScheme.schemeSteps[currentScheme.currentStep].chapterDescription;
-        accomplishementIllustration = null;//TODO
+        visuals.questText.text = currentScheme.schemeSteps[currentScheme.currentStep].chapterDescription;
+        visuals.illustration = null;//TODO
 
         addCardReward = new AddCardReward(2);
         removeCardReward = new RemoveCardReward(3);//TODO EXPOSE MAGIC NUMBERS
@@ -38,8 +31,16 @@ public class RewardScreen : GameScreen
         chosenRewards = new List<Reward>();
 
         heroRewards = GenerateRewards(currentRewardInfo.type);
+        for (int i = 0; i < heroRewards.Count; i++)
+        {
+            visuals.heroRewardsButton[i].gameObject.SetActive(true);
+            visuals.heroRewardsButton[i].onClick += () => SelectReward(heroRewards[i], visuals.heroRewardsButton[i]);
+        }
 
-        visuals = ScreenManager.Instance.rewardScreenVisuals; ;
+        visuals.addButton.onClick += ()=> SelectReward(addCardReward, visuals.addButton);
+        visuals.removeButton.onClick += () => SelectReward(removeCardReward, visuals.removeButton);
+
+        visuals.confirmButton.onClick += Confirm;
     }
     public List<Reward> GenerateRewards(RewardType type)
     {
@@ -85,5 +86,55 @@ public class RewardScreen : GameScreen
     public override void InitializeContent(Action onComplete)
     {
         onComplete?.Invoke();
+    }
+
+    public void Confirm()
+    {
+        open = false;
+    }
+
+    public void SelectReward(Reward reward, ScreenButton button)
+    {
+        if(!button.selected)
+        {
+            chosenRewards.Add(reward);
+            if (reward == addCardReward)
+            {
+                if (chosenRewards.Contains(removeCardReward))
+                {
+                    chosenRewards.Remove(removeCardReward);
+                    visuals.addButton.selected = false;
+                }
+            }
+            if(reward == removeCardReward)
+            {
+                if (chosenRewards.Contains(removeCardReward))
+                {
+                    chosenRewards.Remove(removeCardReward);
+                    visuals.removeButton.selected = false;
+                }
+            }
+
+            if(heroRewards.Contains(reward))
+            {
+                for (int i = 0; i < heroRewards.Count; i++)
+                {
+                    if(reward != heroRewards[i] && chosenRewards.Contains(heroRewards[i]))
+                    {
+                        chosenRewards.Remove(heroRewards[i]);
+                        visuals.heroRewardsButton[i].selected = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            chosenRewards.Remove(reward);
+        }
+    }
+
+    ~RewardScreen()
+    {
+        visuals.confirmButton.onClick -= Confirm;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlaceholderCard : MonoBehaviour
 {
+    public CardContainer container;
     public Action onClick;
     bool _selected;
     public bool selected
@@ -14,18 +15,23 @@ public class PlaceholderCard : MonoBehaviour
         {
             _selected = value;
 
-            //TODO add selectFeedback
+            SelectFeedback(_selected);
         }
     }
 
     public void OnPointerEnter()
     {
-
+        LeanTween.cancel(gameObject);
+        gameObject.transform.localScale = Vector3.one;
+        LeanTween.rotate(gameObject, Vector3.zero, 0.1f).setEaseOutQuint();
+        LeanTween.scale(gameObject, Vector3.one * 1.5f, 0.2f).setEaseOutQuint();
     }
 
     public void OnPointerExit()
     {
-
+        LeanTween.cancel(gameObject);
+        gameObject.transform.rotation = Quaternion.identity;
+        LeanTween.scale(gameObject, Vector3.one, 0.2f).setEaseOutQuint();
     }
 
     public void OnPointerClick()
@@ -35,6 +41,18 @@ public class PlaceholderCard : MonoBehaviour
         else selected = true;
 
         onClick?.Invoke();
+    }
+
+    public void SelectFeedback(bool selected)
+    {
+        if(selected)
+        {
+            CardManager.Instance.cardTweening.ShowHighlight(container.visuals.cardHighlight, container.visuals.profile.highlightColor);
+        }
+        else
+        {
+            CardManager.Instance.cardTweening.HideHighlight(container.visuals.cardHighlight);
+        }
     }
 
 

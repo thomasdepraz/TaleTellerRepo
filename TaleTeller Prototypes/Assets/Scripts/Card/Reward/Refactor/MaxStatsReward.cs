@@ -9,6 +9,7 @@ public class MaxStatsReward : Reward
 
     public MaxStatsReward(MaxHeroStats statType)
     {
+        info = RewardManager.Instance.currentRewardInfo;
         this.statType = statType;
         buffValue = GetBuffValue(statType, info.rarity);
     }

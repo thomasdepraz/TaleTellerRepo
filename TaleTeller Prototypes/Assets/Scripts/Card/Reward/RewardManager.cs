@@ -117,62 +117,82 @@ public class RewardManager : Singleton<RewardManager>
         List<CardData> firstBatch = GetMainPlotRewardsFirstBatch(GetArchetypeList(card), 6);
         List<CardData> secondBatch = GetMainPlotRewardsSecondBatch(GetArchetypeList(card), 3, GetRandomRarity());
 
-        confirmed = false;
-        canvasGroup.blocksRaycasts = true;
-        batchOneNumberToSelect = batchOne;
-        batchTwoNumberToSelect = batchTwo;
+        //confirmed = false;
+        //canvasGroup.blocksRaycasts = true;
+        //batchOneNumberToSelect = batchOne;
+        //batchTwoNumberToSelect = batchTwo;
 
-        //Fade in background
-        #region FadeInBackground
-        bool fadeEnded = false;
-        LeanTween.color(gameObject, Color.black, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
-        while (!fadeEnded)
+        ////Fade in background
+        //#region FadeInBackground
+        //bool fadeEnded = false;
+        //LeanTween.color(gameObject, Color.black, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
+        //while (!fadeEnded)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+        //fadeEnded = false;
+        //#endregion
+
+        //confirmButton.gameObject.SetActive(true);
+        //InitializePlaceholder(firstBatch, 1);
+        //InitializePlaceholder(secondBatch, 2);
+
+        //while(!confirmed)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+
+        //ResetPlaceholders();
+
+        //#region FadeOutBackground
+        //Color transparent = new Color(0, 0, 0, 0);
+        //LeanTween.color(gameObject, transparent, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
+        //    onEnd => { canvasGroup.blocksRaycasts = false;});
+
+
+        //yield return new WaitForSeconds(fadeSpeed);
+        //#endregion
+
+        //EventQueue toDeckQueue = new EventQueue();
+        ////Do something with the picked cards
+        //for (int i = 0; i < batchOneSelectedCards.Count; i++)
+        //{
+        //    CardManager.Instance.CardAppearToDeck(batchOneSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
+        //}
+        //for (int i = 0; i < batchTwoSelectedCards.Count; i++)
+        //{
+        //    CardManager.Instance.CardAppearToDeck(batchTwoSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
+        //}
+
+        //toDeckQueue.StartQueue();
+        //while(!toDeckQueue.resolved)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+        //batchOneSelectedCards.Clear();
+        //batchTwoSelectedCards.Clear();
+
+        //ResetCards();
+
+        RewardScreen rewardScreen = new RewardScreen(currentRewardInfo, PlotsManager.Instance.currentMainPlotScheme);
+        bool wait = true;
+        rewardScreen.Open((() => { wait = false; }));
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        while (rewardScreen.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        rewardScreen.Close(() => { wait = false; });
+        while(wait) { yield return new WaitForEndOfFrame(); }
+
+        EventQueue rewardQueue = new EventQueue();
+        for (int i = 0; i < rewardScreen.chosenRewards.Count; i++)
         {
-            yield return new WaitForEndOfFrame();
-        }
-        fadeEnded = false;
-        #endregion
-
-        confirmButton.gameObject.SetActive(true);
-        InitializePlaceholder(firstBatch, 1);
-        InitializePlaceholder(secondBatch, 2);
-
-        while(!confirmed)
-        {
-            yield return new WaitForEndOfFrame();
+            rewardScreen.chosenRewards[i].ApplyReward(rewardQueue);
         }
 
-        ResetPlaceholders();
+        rewardQueue.StartQueue();
+        while(!rewardQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-        #region FadeOutBackground
-        Color transparent = new Color(0, 0, 0, 0);
-        LeanTween.color(gameObject, transparent, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
-            onEnd => { canvasGroup.blocksRaycasts = false;});
-
-
-        yield return new WaitForSeconds(fadeSpeed);
-        #endregion
-
-        EventQueue toDeckQueue = new EventQueue();
-        //Do something with the picked cards
-        for (int i = 0; i < batchOneSelectedCards.Count; i++)
-        {
-            CardManager.Instance.CardAppearToDeck(batchOneSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
-        }
-        for (int i = 0; i < batchTwoSelectedCards.Count; i++)
-        {
-            CardManager.Instance.CardAppearToDeck(batchTwoSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
-        }
-
-        toDeckQueue.StartQueue();
-        while(!toDeckQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        batchOneSelectedCards.Clear();
-        batchTwoSelectedCards.Clear();
-
-        ResetCards();
         queue.UpdateQueue();
     }
 

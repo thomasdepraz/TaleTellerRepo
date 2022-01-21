@@ -73,11 +73,11 @@ public class PlotCard : CardData
         yield return null;
 
         //if deck dont contains this card then animate to hand
-        if(!CardManager.Instance.cardDeck.cardDeck.Contains(PlotsManager.Instance.currentPickedCard))
+        if(!CardManager.Instance.cardDeck.cardDeck.Contains(data))
         {
             EventQueue toHandQueue = new EventQueue();
 
-            CardManager.Instance.CardAppearToHand(PlotsManager.Instance.currentPickedCard, toHandQueue, CardManager.Instance.plotAppearTransform.position);
+            CardManager.Instance.CardAppearToHand(data, toHandQueue, CardManager.Instance.plotAppearTransform.position);
 
             toHandQueue.StartQueue();
             while(!toHandQueue.resolved)
@@ -249,20 +249,17 @@ public class PlotCard : CardData
             if (isFinal)
             {
                 //Final Step of main plot reward
-                Debug.Log("Complete Final main plot");
                 RewardManager.Instance.ChooseMainPlotRewardFinal(rewardQueue, this);
             }
             else
             {
                 //Main Plot reward
-                Debug.Log("Complete main plot");
                 RewardManager.Instance.ChooseMainPlotReward(rewardQueue, this);
             }
         }
         else
         {
             //Secondary plot reward
-            Debug.Log("Secondary Plot");
             RewardManager.Instance.ChooseSecondaryPlotReward(rewardQueue, this);
         }
         rewardQueue.StartQueue();

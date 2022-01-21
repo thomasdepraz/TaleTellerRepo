@@ -54,21 +54,6 @@ public class PlotsManager : Singleton<PlotsManager>
     }
     IEnumerator ChooseMainPlotRoutine(EventQueue queue, List<MainPlotScheme> schemes)
     {
-        //List<MainPlotScheme> chosenScheme = new List<MainPlotScheme>();
-
-        //EventQueue pickQueue = new EventQueue();
-        //CardManager.Instance.cardPicker.PickScheme(pickQueue, schemes, chosenScheme);
-
-        //pickQueue.StartQueue();
-        //while (!pickQueue.resolved)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
-
-        
-
-        //queue.UpdateQueue();
-        yield return new WaitForEndOfFrame();
         ChapterScreen chapterScreen = new ChapterScreen(schemes);
 
         bool wait = true;
