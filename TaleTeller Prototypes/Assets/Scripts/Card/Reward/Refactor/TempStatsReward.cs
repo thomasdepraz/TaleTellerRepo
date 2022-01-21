@@ -9,6 +9,7 @@ public class TempStatsReward : Reward
 
     public TempStatsReward(TempHeroStats statType)
     {
+        info = RewardManager.Instance.currentRewardInfo;
         this.statType = statType;
         buffValue = GetBuffValue(statType, info.rarity);
     }

@@ -15,7 +15,7 @@ public class RewardScreenVisuals
     public RectTransform questTextTransform;
     public RectTransform chooseInstructionTransform;
     public RectTransform upgradeInstructionTransform;
-    public List<ScreenButton> heroRewardsButton;
+    public List<ScreenButton> heroRewardsButton = new List<ScreenButton>();
     public RectTransform layoutRoot;
     public ScreenButton addButton;
     public ScreenButton removeButton;

@@ -180,15 +180,15 @@ public class RewardManager : Singleton<RewardManager>
         while (wait) { yield return new WaitForEndOfFrame(); }
 
         while (rewardScreen.open) { yield return new WaitForEndOfFrame(); }
+
         wait = true;
         rewardScreen.Close(() => { wait = false; });
         while(wait) { yield return new WaitForEndOfFrame(); }
 
         EventQueue rewardQueue = new EventQueue();
-        for (int i = 0; i < rewardScreen.chosenRewards.Count; i++)
-        {
-            rewardScreen.chosenRewards[i].ApplyReward(rewardQueue);
-        }
+
+        rewardScreen.chosenHeroReward.ApplyReward(rewardQueue);
+        rewardScreen.chosenCardReward.ApplyReward(rewardQueue);
 
         rewardQueue.StartQueue();
         while(!rewardQueue.resolved) { yield return new WaitForEndOfFrame(); }

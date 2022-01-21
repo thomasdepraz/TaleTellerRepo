@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class RewardScreen : GameScreen
 {
-    public List<Reward> chosenRewards;
+    public Reward chosenHeroReward;
+    public Reward chosenCardReward;
     public List<Reward> heroRewards;
 
     public AddCardReward addCardReward;
@@ -28,17 +29,15 @@ public class RewardScreen : GameScreen
         addCardReward = new AddCardReward(2);
         removeCardReward = new RemoveCardReward(3);//TODO EXPOSE MAGIC NUMBERS
 
-        chosenRewards = new List<Reward>();
-
         heroRewards = GenerateRewards(currentRewardInfo.type);
         for (int i = 0; i < heroRewards.Count; i++)
         {
             visuals.heroRewardsButton[i].gameObject.SetActive(true);
-            visuals.heroRewardsButton[i].onClick += () => SelectReward(heroRewards[i], visuals.heroRewardsButton[i]);
+            visuals.heroRewardsButton[i].onClick += () => SelectHeroReward(heroRewards[i], visuals.heroRewardsButton[i]);
         }
 
-        visuals.addButton.onClick += ()=> SelectReward(addCardReward, visuals.addButton);
-        visuals.removeButton.onClick += () => SelectReward(removeCardReward, visuals.removeButton);
+        visuals.addButton.onClick += ()=> SelectCardReward(addCardReward, visuals.addButton);
+        visuals.removeButton.onClick += () => SelectCardReward(removeCardReward, visuals.removeButton);
 
         visuals.confirmButton.onClick += Confirm;
     }
@@ -74,6 +73,7 @@ public class RewardScreen : GameScreen
 
     public override void Open(Action onComplete)
     {
+        open = true;
         visuals.canvas.gameObject.SetActive(true);
         onComplete?.Invoke();
     }
@@ -93,45 +93,60 @@ public class RewardScreen : GameScreen
         open = false;
     }
 
-    public void SelectReward(Reward reward, ScreenButton button)
+    public void SelectCardReward(Reward reward, ScreenButton button)
     {
-        if(!button.selected)
+        if(button.selected)
         {
-            chosenRewards.Add(reward);
-            if (reward == addCardReward)
+            if(chosenCardReward != null)
             {
-                if (chosenRewards.Contains(removeCardReward))
+                if(button == visuals.addButton)
                 {
-                    chosenRewards.Remove(removeCardReward);
+                    visuals.removeButton.selected = false;
+                }
+                else
+                {
                     visuals.addButton.selected = false;
                 }
             }
-            if(reward == removeCardReward)
-            {
-                if (chosenRewards.Contains(removeCardReward))
-                {
-                    chosenRewards.Remove(removeCardReward);
-                    visuals.removeButton.selected = false;
-                }
-            }
 
-            if(heroRewards.Contains(reward))
-            {
-                for (int i = 0; i < heroRewards.Count; i++)
-                {
-                    if(reward != heroRewards[i] && chosenRewards.Contains(heroRewards[i]))
-                    {
-                        chosenRewards.Remove(heroRewards[i]);
-                        visuals.heroRewardsButton[i].selected = false;
-                    }
-                }
-            }
+            chosenCardReward = reward;
         }
         else
         {
-            chosenRewards.Remove(reward);
+            chosenCardReward = null;
         }
+
     }
+    public void SelectHeroReward(Reward reward, ScreenButton button)
+    {
+        if(button.selected)
+        {
+            if(chosenHeroReward != null)
+            {
+                for (int i = 0; i < heroRewards.Count; i++)
+                {
+                    if (visuals.heroRewardsButton[i] != button)
+                        visuals.heroRewardsButton[i].selected = false;
+                }
+            }
+
+            chosenHeroReward = reward;
+        }
+        else
+        {
+
+            chosenCardReward = null;
+        }
+
+        visuals.confirmButton.interactable = CheckValid();
+    }
+
+    public bool CheckValid()
+    {
+        return chosenHeroReward != null && chosenCardReward!= null;
+    }
+
+  
 
     ~RewardScreen()
     {
