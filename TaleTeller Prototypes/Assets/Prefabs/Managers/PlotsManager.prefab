@@ -46,10 +46,11 @@ MonoBehaviour:
   currentMainPlotScheme: {fileID: 0}
   schemePools:
   - schemes:
-    - {fileID: 11400000, guid: 5a11afdb4dc123d4395e5cb19e650846, type: 2}
     - {fileID: 11400000, guid: c9aaf34615842e449a6f1d8792876ea5, type: 2}
+    - {fileID: 11400000, guid: 5a11afdb4dc123d4395e5cb19e650846, type: 2}
   - schemes:
     - {fileID: 11400000, guid: 52ee8f02be29efc4bbb8e9eaffc7a20f, type: 2}
+    - {fileID: 11400000, guid: b861d406a94e5a041b477c6d86502ab5, type: 2}
   - schemes:
     - {fileID: 11400000, guid: cac3daf5ae3b4f74290b2beba74cf0d5, type: 2}
     - {fileID: 11400000, guid: dbd06201fc0a9e044ab0215871c1d387, type: 2}

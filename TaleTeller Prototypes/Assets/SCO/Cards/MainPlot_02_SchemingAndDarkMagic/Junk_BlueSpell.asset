@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Junk_BlueSpell_Effect0
   trigger: 8
   target: 0
   range: 
   values: []
   gainValue:
-    value: 3
+    value: 1
     type: 1
     op: 1
   temporaryChange: 0
+  handCardsDependant: 1
+  typeDependants:
+  - typeToHave: 0
+    characterType: 0
 --- !u!114 &-3716540282042573866
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $SM_DarkMagic_04_SuperiorWitch_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 755a4e99f96b5714983d9685d448d95d, type: 2}
   - {fileID: 11400000, guid: 755a4e99f96b5714983d9685d448d95d, type: 2}
@@ -26,6 +26,7 @@ MonoBehaviour:
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
+  junkPosRestrictions: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Junk_Cocoon_Effect0
   trigger: 8
   target: 0
   range: 
@@ -70,3 +70,5 @@ MonoBehaviour:
   junkCardsToSpawn:
   - {fileID: 11400000, guid: d7563260dba09bc48845dc9873051dc9, type: 2}
   junkSpawnLocations: 00000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}

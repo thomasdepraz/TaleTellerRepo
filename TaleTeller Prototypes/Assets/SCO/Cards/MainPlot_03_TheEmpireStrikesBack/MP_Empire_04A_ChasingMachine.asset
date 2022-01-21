@@ -36,6 +36,8 @@ MonoBehaviour:
     type: 0
     op: 2
   temporaryChange: 0
+  handCardsDependant: 0
+  typeDependants: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +68,7 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $Empire_Step04A_Objective
   legendaryCardRewards: []
 --- !u!114 &820324127127420445
 MonoBehaviour:
@@ -123,3 +125,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94507ef806cddcc48b9a2d4eda975aa1, type: 2}
   specifyNumbers: 1
   numberToPlace: 0200000001000000
+  mustPlaceTypeCards: 0
+  typeRestrictions: []

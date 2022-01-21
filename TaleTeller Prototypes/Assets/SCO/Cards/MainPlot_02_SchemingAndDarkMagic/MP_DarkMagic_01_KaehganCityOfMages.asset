@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $SM_DarkMagic_01_Kaeghan_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 0de8a663017d530488d36513fd4e845a, type: 2}
   - {fileID: 11400000, guid: 54f5543a2905d304581afa779fc7ff61, type: 2}
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $SM_DarkMagic_01_Kaeghan_Effect0
   trigger: 2
   target: 2
   range: 0300000004000000

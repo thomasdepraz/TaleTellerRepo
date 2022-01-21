@@ -23,6 +23,7 @@ MonoBehaviour:
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
+  junkPosRestrictions: []
 --- !u!114 &-2076279775505097583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ MonoBehaviour:
   completionTimer: 7
   isMainPlot: 1
   isFinal: 1
-  plotChoiceDescription: 
+  plotChoiceDescription: $Empire_Step05_Objective
   legendaryCardRewards:
   - {fileID: 11400000, guid: 3dc0d704ba7443b4e84d649c08f14e4c, type: 2}
   - {fileID: 11400000, guid: 7303c6fd77582ee4f871cee5f9d27196, type: 2}

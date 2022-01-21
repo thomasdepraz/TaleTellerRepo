@@ -61,13 +61,17 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Junk_GreenSpell_Effect0
   trigger: 1
   target: 1
   range: 
   values: []
   gainValue:
-    value: 3
+    value: 1
     type: 0
     op: 1
   temporaryChange: 0
+  handCardsDependant: 1
+  typeDependants:
+  - typeToHave: 0
+    characterType: 0

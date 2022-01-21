@@ -27,10 +27,10 @@ MonoBehaviour:
   mustKillSpecific: 1
   specificJunkToKill:
   - {fileID: 11400000, guid: 0d82131c64b55e14a9f21ad4d492faf9, type: 2}
-  mustBeKilledBySpecific: 1
+  mustBeKilledBySpecific: 0
   mustBeKilledBySpecificJunk: 0
   specificJunkThatKill: {fileID: 0}
-  mustBeKilledBySpecificPlot: 1
+  mustBeKilledBySpecificPlot: 0
   plotOnBoard: 0
   positionToValidate: 0
   otherJunkOnBoard: 0

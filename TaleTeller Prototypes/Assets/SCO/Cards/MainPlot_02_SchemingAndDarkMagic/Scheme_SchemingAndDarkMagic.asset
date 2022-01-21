@@ -15,8 +15,20 @@ MonoBehaviour:
   schemeSteps:
   - stepOptions:
     - {fileID: 11400000, guid: f0f95f71beaff63408cca621085bf938, type: 2}
+    chapterDescription: 
+  - stepOptions:
     - {fileID: 11400000, guid: 120a56977e25ed64dbefd249636177c6, type: 2}
+    - {fileID: 11400000, guid: 186c47fc2c551974c8fff216479f4ee4, type: 2}
+    chapterDescription: 
+  - stepOptions:
+    - {fileID: 11400000, guid: 6ac7bf19079ebaf44beb0ef57e902ec6, type: 2}
+    chapterDescription: 
+  - stepOptions:
     - {fileID: 11400000, guid: 64a81cc1628020a4591b0c6ecb2f0676, type: 2}
+    - {fileID: 11400000, guid: 2ef120d05c2fe1e429c9a4ba2f25d408, type: 2}
+    chapterDescription: 
+  - stepOptions:
+    - {fileID: 11400000, guid: ba968b05791ac7b4fa09a2c3102aa5ec, type: 2}
     chapterDescription: 
   currentStep: 0
   plotDescription: $TurbulentOutset_Description

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $SM_DarkMagic_04_KrakenHead_Effect0
   trigger: 1
   target: 3
   range: 
@@ -87,10 +87,17 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
-  linkedJunkedCards: []
-  junkSpawnLocations: 
-  junksPositionsInDeck: 
-  boardRestriction: 0
-  restriction: 0
+  objectiveName: $SM_DarkMagic_04_KrakenHead_Objective
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: a65c9090a3d906b40ad71aacd9d9a3e0, type: 2}
+  - {fileID: 11400000, guid: a65c9090a3d906b40ad71aacd9d9a3e0, type: 2}
+  - {fileID: 11400000, guid: e13985c702e4e8840b8ebdb405fd12aa, type: 2}
+  junkSpawnLocations: 000000000000000000000000
+  junksPositionsInDeck: 000000000000000000000000
+  boardRestriction: 1
+  restriction: 1
   typeRestrictions: []
+  junkPosRestrictions:
+  - junkPossiblePos: 1
+    junkToHaveOnBoard: {fileID: 11400000, guid: a65c9090a3d906b40ad71aacd9d9a3e0, type: 2}
+    count: 2
