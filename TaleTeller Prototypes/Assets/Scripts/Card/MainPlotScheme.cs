@@ -45,22 +45,34 @@ public class MainPlotScheme : ScriptableObject
     }
     IEnumerator LoadStepRoutine(EventQueue queue, MainPlotScheme scheme)
     {
-        var optionList = scheme.schemeSteps[scheme.currentStep].stepOptions;
+        SchemeStep schemeStep = scheme.schemeSteps[scheme.currentStep];
 
-        EventQueue pickQueue = new EventQueue();
+        //EventQueue pickQueue = new EventQueue();
 
-        CardManager.Instance.cardPicker.PickScheme(pickQueue, null, null, true);
+        //CardManager.Instance.cardPicker.PickScheme(pickQueue, null, null, true);
 
-        pickQueue.StartQueue();
-        while (!pickQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        //pickQueue.StartQueue();
+        //while (!pickQueue.resolved)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
 
-        EventQueue toHandQueue = new EventQueue();
+       
+
+        ChapterScreen chapterScreen = new ChapterScreen(schemeStep);
+        bool wait = true;
+        chapterScreen.Open(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        while(chapterScreen.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        chapterScreen.Close(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
         //send card to hand
-        CardData card = PlotsManager.Instance.currentPickedCard;
+        EventQueue toHandQueue = new EventQueue();
+
+        CardData card = chapterScreen.chosenCard.data;
         card.onCardAppear(toHandQueue, card);
 
         toHandQueue.StartQueue();

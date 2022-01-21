@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class RewardManager : Singleton<RewardManager>
 {
+    public RewardInfo currentRewardInfo;
     [Header("References")]
     public Image backgroundPanel;
     public CanvasGroup canvasGroup;

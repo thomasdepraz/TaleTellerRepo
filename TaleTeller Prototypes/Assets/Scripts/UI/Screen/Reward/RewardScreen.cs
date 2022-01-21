@@ -22,7 +22,7 @@ public class RewardScreen : GameScreen
 
     public RewardScreenVisuals visuals;
 
-    public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme, RewardScreenVisuals visuals)
+    public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme)
     {
         questEndingText = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$QUEST_ENDING");
         chooseInstruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$CHOOSE_INSTRUCTION");
@@ -38,6 +38,8 @@ public class RewardScreen : GameScreen
         chosenRewards = new List<Reward>();
 
         heroRewards = GenerateRewards(currentRewardInfo.type);
+
+        visuals = ScreenManager.Instance.rewardScreenVisuals; ;
     }
     public List<Reward> GenerateRewards(RewardType type)
     {
@@ -71,16 +73,17 @@ public class RewardScreen : GameScreen
 
     public override void Open(Action onComplete)
     {
-        
-
+        visuals.canvas.gameObject.SetActive(true);
+        onComplete?.Invoke();
     }
     public override void Close(Action onComplete)
     {
-
+        visuals.canvas.gameObject.SetActive(true);
+        onComplete?.Invoke();
     }
 
     public override void InitializeContent(Action onComplete)
     {
-
+        onComplete?.Invoke();
     }
 }

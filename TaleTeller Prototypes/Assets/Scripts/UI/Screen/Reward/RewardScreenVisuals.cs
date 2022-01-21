@@ -4,8 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RewardScreenVisuals : MonoBehaviour
+[System.Serializable]
+public class RewardScreenVisuals
 {
+    public Canvas canvas;
     public Image backgroundImage;
     public Image bookImage;
     public RectTransform completeTextTransform;
@@ -13,10 +15,11 @@ public class RewardScreenVisuals : MonoBehaviour
     public RectTransform questTextTransform;
     public RectTransform chooseInstructionTransform;
     public RectTransform upgradeInstructionTransform;
-    public List<GameObject> heroRewardsButton;
+    public List<ScreenButton> heroRewardsButton;
     public RectTransform layoutRoot;
-    public RectTransform addButtonTransform;
-    public RectTransform confirmButtonTransform;
+    public ScreenButton addButton;
+    public ScreenButton removeButton;
+    public ScreenButton confirmButton;
     public TextMeshProUGUI completeText;
     public TextMeshProUGUI questText;
     public TextMeshProUGUI chooseInstruction;

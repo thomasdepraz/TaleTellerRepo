@@ -54,27 +54,42 @@ public class PlotsManager : Singleton<PlotsManager>
     }
     IEnumerator ChooseMainPlotRoutine(EventQueue queue, List<MainPlotScheme> schemes)
     {
-        List<MainPlotScheme> chosenScheme = new List<MainPlotScheme>();
+        //List<MainPlotScheme> chosenScheme = new List<MainPlotScheme>();
 
-        EventQueue pickQueue = new EventQueue();
-        CardManager.Instance.cardPicker.PickScheme(pickQueue, schemes, chosenScheme);
+        //EventQueue pickQueue = new EventQueue();
+        //CardManager.Instance.cardPicker.PickScheme(pickQueue, schemes, chosenScheme);
 
-        pickQueue.StartQueue();
-        while (!pickQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        //pickQueue.StartQueue();
+        //while (!pickQueue.resolved)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+
+        
+
+        //queue.UpdateQueue();
+        yield return new WaitForEndOfFrame();
+        ChapterScreen chapterScreen = new ChapterScreen(schemes);
+
+        bool wait = true;
+        chapterScreen.Open(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        while (chapterScreen.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        chapterScreen.Close(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
         //Load MainScheme
         EventQueue loadQueue = new EventQueue();
 
-        currentMainPlotScheme = chosenScheme[0];
+        currentMainPlotScheme = chapterScreen.chosenScheme;
 
         currentMainPlotScheme.LoadStep(loadQueue, currentMainPlotScheme);
 
         loadQueue.StartQueue();
-        
-        while(!loadQueue.resolved)
+
+        while (!loadQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
