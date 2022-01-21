@@ -63,6 +63,16 @@ public class CardVisualsData : ScriptableObject
     [Foldout("Sprites")] public Sprite mainUnderFlag;
     [Foldout("Sprites")] public Sprite secondaryUnderFlag;
 
+    [Header("Range Icons")]
+    public Sprite rangeIconSelf;
+    public Sprite rangeIconRight;
+    public Sprite rangeIconLeft;
+    public Sprite rangeIconAllRight;
+    public Sprite rangeIconAllLeft;
+    public Sprite rangeIconHero;
+    public Sprite rangeIconRightAndLeft;
+    public Sprite rangeIconAll;
+
     [Header("Tweening data")]
     public float draggedScale;
     public float hoveredScale;

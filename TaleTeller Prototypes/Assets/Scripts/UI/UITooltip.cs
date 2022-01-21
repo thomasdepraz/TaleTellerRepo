@@ -17,7 +17,14 @@ public enum UITooltipTarget
     CARD_INK,
     CARD_TIMER,
     CARD_ATTACK,
-    CARD_HP
+    CARD_HP,
+    CARD_RANGE_RIGHT,
+    CARD_RANGE_LEFT,
+    CARD_RANGE_ALLRIGHT,
+    CARD_RANGE_ALLLEFT,
+    CARD_RANGE_HERO,
+    CARD_RANGE_RIGHTANDLEFT,
+    CARD_RANGE_ALL
 }
 public class UITooltip : MonoBehaviour
 {

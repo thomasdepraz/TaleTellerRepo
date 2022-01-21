@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public class CardVisuals : MonoBehaviour
 {
@@ -38,12 +39,25 @@ public class CardVisuals : MonoBehaviour
     public TextMeshProUGUI characterHealthText;
     public TextMeshProUGUI timerText;
 
+    [Header("Description Blocks")]
+    public EffectDescriptionBlock descriptionBlockTemplate;
+    private List<EffectDescriptionBlock> descriptionBlocks;
+
     [Header("Other")]
     public List<TextMeshProUGUI> popupTexts = new List<TextMeshProUGUI>();
     #endregion
 
     public void InitializeVisuals(CardData data)
     {
+        if(descriptionBlocks.Count > 0)
+            foreach(EffectDescriptionBlock block in descriptionBlocks.ToList())
+            {
+                descriptionBlocks.Remove(block);
+                Destroy(block.gameObject);
+            }
+
+        BuildingDescriptionBlocks(data);
+
         //Init basics
         #region Basics
         cardIllustration.sprite = data.cardGraph;
@@ -359,6 +373,12 @@ public class CardVisuals : MonoBehaviour
         }
        
         return result;
+    }
+
+    public void BuildingDescriptionBlocks(CardData data)
+    {
+        int numberOfBlocks = data.effects.Where(e => e.appendWithNext).Count(); 
+
     }
 
     #region Tweening
