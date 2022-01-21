@@ -121,32 +121,39 @@ public class KillJunkObj : JunkDrivenObj
 
         if(mustBeKilledBySpecific)
         {
-            List<CardData> cardDataBoard = new List<CardData>();
+            List<CardData> cardDataDiscard = new List<CardData>();
 
-            for (int i = 0; i <CardManager.Instance.board.slots.Count; i++)
+            for (int i = 0; i <2; i++)
             {
-                if(CardManager.Instance.board.slots[i].currentPlacedCard != null)
+                bool dontIncreaseCount = true;
+
+                for (int x = 0; x < specificJunkToKill.Count; x++)
                 {
-                    cardDataBoard.Add(CardManager.Instance.board.slots[i].currentPlacedCard.data);
+                    if(CardManager.Instance.cardDeck.discardPile.Count >= 2)
+                    {
+                        Debug.Log(CardManager.Instance.cardDeck.discardPile[i].dataReference);
+                        Debug.Log(specificJunkToKill[x].dataReference);
+                        if (CardManager.Instance.cardDeck.discardPile[i].name == specificJunkToKill[x].name)
+                        {
+                            dontIncreaseCount = false;
+                            Debug.Log(dontIncreaseCount);
+                            break;
+                        }
+                    }
+                    
                 }
-            }
 
-            var searchedJunkData = specificJunkToKill.Select(j => j.dataReference).ToList();
-
-            bool dontIncreaseCount = true;
-
-            foreach (CardData boardData in cardDataBoard)
-            {
-                if (searchedJunkData.Contains(boardData.dataReference))
+                if (dontIncreaseCount == true)
                 {
-                    if ((boardData.cardType as CharacterType).stats.baseLifePoints <= 0)
-                        dontIncreaseCount = false;
+                    increaseCount = false;
                 }
-            }
 
-            if(dontIncreaseCount == true)
-            {
-                increaseCount = false;
+                if (increaseCount)
+                {
+                    killCount++;
+                    Debug.Log("killCount : " + killCount);
+                }
+                    
             }
         }
         else
@@ -185,11 +192,13 @@ public class KillJunkObj : JunkDrivenObj
                 if (searchedJunkData.Count > 0)
                     increaseCount = false;
             }
-        }
-        
 
-        if (increaseCount)
-            killCount++;
+            if (increaseCount)
+                killCount++;
+        }
+
+        GetDescription();
+        
     }
 
     public override string GetDescription()

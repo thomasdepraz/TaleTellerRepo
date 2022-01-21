@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $SM_DarkMagic_02_TroubledWizard_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 0d82131c64b55e14a9f21ad4d492faf9, type: 2}
   - {fileID: 11400000, guid: 0d82131c64b55e14a9f21ad4d492faf9, type: 2}
