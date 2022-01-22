@@ -59,7 +59,6 @@ public class CardPicker : MonoBehaviour
 
             confirmed = false;
 
-
             //Fade in background
             bool fadeEnded = false;
             LeanTween.color(gameObject, Color.black, backgroundFadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
