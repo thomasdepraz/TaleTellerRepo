@@ -485,11 +485,17 @@ public class CardVisuals : MonoBehaviour
             var currentEffect = data.effects[i];
 
             if (storedDescription != string.Empty)
-                storedDescription += " " + currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
+            {
+                storedDescription += currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
+                storedDescription = storedDescription.Replace("\r", "");
+                storedDescription = storedDescription.Replace("<CR>", "");
+            }
+
             else
                 storedDescription = currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
 
-            if (currentEffect.appendWithNext) continue;
+            string[] appendKey  = storedDescription.Split('£');
+            if (appendKey.Contains("append")) continue;
 
             switch (currentEffect.target)
             {
