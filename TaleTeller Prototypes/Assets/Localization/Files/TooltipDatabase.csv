@@ -30,3 +30,12 @@ $CARD_ATK	Amount of damages dealt by this character when he hits.
 $CARD_HP	Amount of life point of this character.\nHe is destroyed if it reaches 0
 $CARD_TIMER_PLOT	Timer of the Plot.<br>If it reaches 0, you loose.
 $CARD_TIMER_CHARA	Character stacks.<br>When it reaches 0, character stops coming back to your hand.
+$EFFECT_RANGE_ALL	This effect targets card over the whole track
+$EFFECT_RANGE_ALL-LEFT	This effect targets all the cards on his left
+$EFFECT_RANGE_ALL-RIGHT	This effect targets all the cards on his right
+$EFFECT_RANGE_HERO	This effect targets the Hero
+$EFFECT_RANGE_LEFT	This effect targets the card on his left
+$EFFECT_RANGE_PLOT	This is the objective of the Plot.<br>Finish it to end the Plot.
+$EFFECT_RANGE_RIGHT	This effect targets the card on his right
+$EFFECT_RANGE_RIGHT-LEFT	This effect targets cards next to him
+$EFFECT_RANGE_SELF	This effect targets the card itself.
