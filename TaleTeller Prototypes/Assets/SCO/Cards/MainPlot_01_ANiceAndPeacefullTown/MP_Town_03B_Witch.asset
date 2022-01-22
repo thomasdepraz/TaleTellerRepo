@@ -28,7 +28,7 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $PeacefulTown_Step03B_Objective
   legendaryCardRewards: []
 --- !u!114 &6041129301302419377
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_PeacefulTown_03_Witch_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 835f0beaadd19974fa66fe510899ce6c, type: 2}
   junkSpawnLocations: 00000000

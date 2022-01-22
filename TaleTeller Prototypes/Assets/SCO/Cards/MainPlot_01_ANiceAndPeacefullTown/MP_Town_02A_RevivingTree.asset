@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_PeacefulTown_02_RevivingTree_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: cbb9bacb18ac76341842dbb923178110, type: 2}
   - {fileID: 11400000, guid: cbb9bacb18ac76341842dbb923178110, type: 2}
@@ -26,6 +26,10 @@ MonoBehaviour:
   mustKillSpecific: 0
   specificJunkToKill:
   - {fileID: 0}
+  mustBeKilledBySpecific: 0
+  mustBeKilledBySpecificJunk: 0
+  specificJunkThatKill: {fileID: 0}
+  mustBeKilledBySpecificPlot: 0
   plotOnBoard: 0
   positionToValidate: 0
   otherJunkOnBoard: 0
@@ -59,7 +63,7 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $PeacefulTown_Step02A_Objective
   legendaryCardRewards: []
 --- !u!114 &5741351276230460147
 MonoBehaviour:
@@ -74,7 +78,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $MP_PeacefulTown_02_RevivingTree_Effect0
   trigger: 6
   target: 3
   range: 

@@ -28,7 +28,7 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 1
-  plotChoiceDescription: 
+  plotChoiceDescription: $PeacefulTown_Step04_Objective
   legendaryCardRewards:
   - {fileID: 11400000, guid: 30b64b5c2aedcc84291cb51e146e4558, type: 2}
   - {fileID: 11400000, guid: 3dc0d704ba7443b4e84d649c08f14e4c, type: 2}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_PeacefulTown_04_GiantSpider_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: d7563260dba09bc48845dc9873051dc9, type: 2}
   - {fileID: 11400000, guid: ba2cb5fd8ca0e884c94b8eb170ada8aa, type: 2}
@@ -87,3 +87,4 @@ MonoBehaviour:
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
+  junkPosRestrictions: []

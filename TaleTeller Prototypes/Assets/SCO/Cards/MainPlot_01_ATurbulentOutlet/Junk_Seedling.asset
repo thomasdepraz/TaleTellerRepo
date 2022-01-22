@@ -19,10 +19,12 @@ MonoBehaviour:
   range: 
   values: []
   gainValue:
-    value: 2
+    value: 1
     type: 0
     op: 1
   temporaryChange: 0
+  handCardsDependant: 0
+  typeDependants: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

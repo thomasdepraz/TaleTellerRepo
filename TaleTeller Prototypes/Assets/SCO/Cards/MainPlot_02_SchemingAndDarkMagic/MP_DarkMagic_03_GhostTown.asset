@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5841964621456784013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a66b3620127b87429c041df2483d626, type: 3}
+  m_Name: PlotObjective_PlaceJunkObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: $SM_DarkMagic_03_GhostTown_Objective
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: d67e7753768055140be2c7cfd1d8de0b, type: 2}
+  - {fileID: 11400000, guid: d67e7753768055140be2c7cfd1d8de0b, type: 2}
+  - {fileID: 11400000, guid: d67e7753768055140be2c7cfd1d8de0b, type: 2}
+  - {fileID: 11400000, guid: 93473dbdcbfbba045aacbd2153f0e643, type: 2}
+  - {fileID: 11400000, guid: 590777c3f6641c04783854cf133a2baf, type: 2}
+  - {fileID: 11400000, guid: 3ea1a169c61f4d14c86774a630c5e20a, type: 2}
+  - {fileID: 11400000, guid: 398472d990beb79408d20f029b538723, type: 2}
+  junkSpawnLocations: 03000000030000000300000003000000030000000300000003000000
+  junksPositionsInDeck: 01000000030000000500000001000000030000000500000006000000
+  mustPlaceAll: 0
+  specificJunkToPlace:
+  - {fileID: 11400000, guid: 590777c3f6641c04783854cf133a2baf, type: 2}
+  - {fileID: 11400000, guid: 398472d990beb79408d20f029b538723, type: 2}
+  - {fileID: 11400000, guid: 3ea1a169c61f4d14c86774a630c5e20a, type: 2}
+  - {fileID: 11400000, guid: 93473dbdcbfbba045aacbd2153f0e643, type: 2}
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_DarkMagic_03_GhostTown
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Ghost Town
+  rarity: 0
+  archetype: 0
+  manaCost: 1
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 8628730490406473316}
+  effects: []
+  cardTypeReference: {fileID: 8754417885808805968}
+  cardType: {fileID: 0}
+  objective: {fileID: -5841964621456784013}
+  completionTimer: 5
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: 
+  legendaryCardRewards: []
+--- !u!114 &8628730490406473316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5b1c94cd704fa46b8e38ba3f28afd7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $SM_DarkMagic_03_GhostTown_Effect0
+  trigger: 1
+  target: 2
+  range: 03000000
+  values: []
+  typeToTarget: 5
+  operatorToTarget: 1
+  modification:
+    value: 1
+    type: 5
+    op: 1
+  modifyTemporary: 0
+--- !u!114 &8754417885808805968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f33840752c2ec438be3f9e8461a5a7, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}

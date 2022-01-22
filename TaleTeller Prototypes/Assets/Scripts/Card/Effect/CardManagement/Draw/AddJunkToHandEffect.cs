@@ -11,8 +11,36 @@ public class AddJunkToHandEffect : Effect
     public enum JunkSpawnLocation { Hand, EndDeck, DeckRandom, }
     public List<JunkSpawnLocation> junkSpawnLocations = new List<JunkSpawnLocation>();
 
+    public bool restrictionOnBoard;
+    [ShowIf("restrictionOnBoard")]
+    public CardData junkToPlaceOnBoard;
+
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
+        if(restrictionOnBoard)
+        {
+            bool canProceed = false;
+
+            List<CardData> targets = GetTargets();
+
+            foreach(CardData cardData in targets)
+            {
+                if(cardData.dataReference == junkToPlaceOnBoard.dataReference)
+                {
+                    canProceed = true;
+                }
+            }
+
+            if (canProceed == false)
+            {
+
+
+                currentQueue.UpdateQueue();
+
+                yield break ;
+            }
+        }
+
         EventQueue drawQueue = new EventQueue();
 
         List<JunkCard> cards = new List<JunkCard>();

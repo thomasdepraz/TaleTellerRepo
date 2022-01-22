@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class RewardManager : Singleton<RewardManager>
 {
+    public RewardInfo currentRewardInfo;
     [Header("References")]
     public Image backgroundPanel;
     public CanvasGroup canvasGroup;
@@ -116,62 +117,82 @@ public class RewardManager : Singleton<RewardManager>
         List<CardData> firstBatch = GetMainPlotRewardsFirstBatch(GetArchetypeList(card), 6);
         List<CardData> secondBatch = GetMainPlotRewardsSecondBatch(GetArchetypeList(card), 3, GetRandomRarity());
 
-        confirmed = false;
-        canvasGroup.blocksRaycasts = true;
-        batchOneNumberToSelect = batchOne;
-        batchTwoNumberToSelect = batchTwo;
+        //confirmed = false;
+        //canvasGroup.blocksRaycasts = true;
+        //batchOneNumberToSelect = batchOne;
+        //batchTwoNumberToSelect = batchTwo;
 
-        //Fade in background
-        #region FadeInBackground
-        bool fadeEnded = false;
-        LeanTween.color(gameObject, Color.black, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
-        while (!fadeEnded)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        fadeEnded = false;
-        #endregion
+        ////Fade in background
+        //#region FadeInBackground
+        //bool fadeEnded = false;
+        //LeanTween.color(gameObject, Color.black, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
+        //while (!fadeEnded)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+        //fadeEnded = false;
+        //#endregion
 
-        confirmButton.gameObject.SetActive(true);
-        InitializePlaceholder(firstBatch, 1);
-        InitializePlaceholder(secondBatch, 2);
+        //confirmButton.gameObject.SetActive(true);
+        //InitializePlaceholder(firstBatch, 1);
+        //InitializePlaceholder(secondBatch, 2);
 
-        while(!confirmed)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        //while(!confirmed)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
 
-        ResetPlaceholders();
+        //ResetPlaceholders();
 
-        #region FadeOutBackground
-        Color transparent = new Color(0, 0, 0, 0);
-        LeanTween.color(gameObject, transparent, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
-            onEnd => { canvasGroup.blocksRaycasts = false;});
+        //#region FadeOutBackground
+        //Color transparent = new Color(0, 0, 0, 0);
+        //LeanTween.color(gameObject, transparent, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
+        //    onEnd => { canvasGroup.blocksRaycasts = false;});
 
 
-        yield return new WaitForSeconds(fadeSpeed);
-        #endregion
+        //yield return new WaitForSeconds(fadeSpeed);
+        //#endregion
 
-        EventQueue toDeckQueue = new EventQueue();
-        //Do something with the picked cards
-        for (int i = 0; i < batchOneSelectedCards.Count; i++)
-        {
-            CardManager.Instance.CardAppearToDeck(batchOneSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
-        }
-        for (int i = 0; i < batchTwoSelectedCards.Count; i++)
-        {
-            CardManager.Instance.CardAppearToDeck(batchTwoSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
-        }
+        //EventQueue toDeckQueue = new EventQueue();
+        ////Do something with the picked cards
+        //for (int i = 0; i < batchOneSelectedCards.Count; i++)
+        //{
+        //    CardManager.Instance.CardAppearToDeck(batchOneSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
+        //}
+        //for (int i = 0; i < batchTwoSelectedCards.Count; i++)
+        //{
+        //    CardManager.Instance.CardAppearToDeck(batchTwoSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
+        //}
 
-        toDeckQueue.StartQueue();
-        while(!toDeckQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        batchOneSelectedCards.Clear();
-        batchTwoSelectedCards.Clear();
+        //toDeckQueue.StartQueue();
+        //while(!toDeckQueue.resolved)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //}
+        //batchOneSelectedCards.Clear();
+        //batchTwoSelectedCards.Clear();
 
-        ResetCards();
+        //ResetCards();
+
+        RewardScreen rewardScreen = new RewardScreen(currentRewardInfo, PlotsManager.Instance.currentMainPlotScheme);
+        bool wait = true;
+        rewardScreen.Open((() => { wait = false; }));
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        while (rewardScreen.open) { yield return new WaitForEndOfFrame(); }
+
+        wait = true;
+        rewardScreen.Close(() => { wait = false; });
+        while(wait) { yield return new WaitForEndOfFrame(); }
+
+        EventQueue rewardQueue = new EventQueue();
+
+        rewardScreen.chosenHeroReward.ApplyReward(rewardQueue);
+        rewardScreen.chosenCardReward.ApplyReward(rewardQueue);
+
+        rewardQueue.StartQueue();
+        while(!rewardQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
         queue.UpdateQueue();
     }
 
@@ -325,7 +346,7 @@ public class RewardManager : Singleton<RewardManager>
         return result;
     }
 
-    List<CardData> GetMainPlotRewardsSecondBatch(List<CardData> list, int count, CardRarity targetRarity)
+    public List<CardData> GetMainPlotRewardsSecondBatch(List<CardData> list, int count, CardRarity targetRarity)
     {
         List<CardData> filteredList = new List<CardData>();
         for (int i = 0; i < list.Count; i++)

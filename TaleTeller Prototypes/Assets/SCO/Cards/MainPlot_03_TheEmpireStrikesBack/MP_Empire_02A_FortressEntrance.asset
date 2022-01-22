@@ -42,7 +42,7 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $Empire_Step02A_Objective
   legendaryCardRewards: []
 --- !u!114 &3630147888726731195
 MonoBehaviour:
@@ -72,6 +72,10 @@ MonoBehaviour:
   mustKillSpecific: 1
   specificJunkToKill:
   - {fileID: 11400000, guid: 4f53f5e915c37244788326806296e2ce, type: 2}
+  mustBeKilledBySpecific: 0
+  mustBeKilledBySpecificJunk: 0
+  specificJunkThatKill: {fileID: 0}
+  mustBeKilledBySpecificPlot: 0
   plotOnBoard: 0
   positionToValidate: 0
   otherJunkOnBoard: 0

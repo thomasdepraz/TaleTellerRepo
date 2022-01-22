@@ -31,7 +31,7 @@ $Idea_Drink_Trade_Effect1	← → <b>Buy ($buyValue$)</b> :
 $Idea_Drink_Trade_Effect2	+$modifierValue$ HP.
 $Idea_Forge_Trade_Effect0	↞ ↠ +$modifierValue$ ATK.
 $Idea_Forge_Trade_Effect1	<b>Buy ($buyValue$)</b> :
-$Idea_Forge_Trade_Effect2	+$gainValue$ ATK.
+$Idea_Forge_Trade_Effect2	+$gainValue$ ATK Max.
 $Idea_KingsTreasure_Trade_Effect0	For each Buy, draw $drawValue$ 
 $Idea_KingsTreasure_Trade_Effect1	+$gainValue$ GOLD.
 $Idea_Knife_Trade_Effect0	+$gainValue$ ATK.
@@ -235,7 +235,7 @@ $SM_DarkMagic_01_Kaeghan_Objective	Place Kaeghan, 1 Witchcraft Vending Machine, 
 $SM_DarkMagic_02_MenacingWizard_Effect0	Discard $discardValue$ randomly.
 $SM_DarkMagic_02_MenacingWizard_Objective	Defeat the Menacing Lone Wizard.
 $SM_DarkMagic_02_TroubledWizard_Effect0	/
-$SM_DarkMagic_02_TroubledWizard_Objective	Let the Troubled Lone Wizard defeat 5 Armored Warlocks.
+$SM_DarkMagic_02_TroubledWizard_Objective	Let the Troubled Lone Wizard defeat $value$ Armored Warlocks.
 $SM_DarkMagic_03_GhostTown_Effect0	↞ Keyword Draw + $modification$.
 $SM_DarkMagic_03_GhostTown_Objective	Place 1 Suspicious Barrel, 1 Dark Candel, 1 Mortuary Machete, 1 Divinatory Skull and the Ghost Town.
 $SM_DarkMagic_04_SuperiorWitch_Effect0	/
