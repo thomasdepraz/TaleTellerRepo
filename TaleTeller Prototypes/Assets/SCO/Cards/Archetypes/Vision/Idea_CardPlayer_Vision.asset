@@ -15,7 +15,7 @@ MonoBehaviour:
   data: {fileID: 0}
   stats:
     baseLifePoints: 2
-    baseAttackDamage: 2
+    baseAttackDamage: 1
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
@@ -42,11 +42,11 @@ MonoBehaviour:
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: 5967792801577831515}
+  - {fileID: 908874420063303208}
   effects: []
   cardTypeReference: {fileID: -6583320515068806364}
   cardType: {fileID: 0}
---- !u!114 &5967792801577831515
+--- !u!114 &908874420063303208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,16 +55,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac4521055933afb45a20612d3ef89615, type: 3}
+  m_Script: {fileID: 11500000, guid: e74ed66125fff484da8e3bfc2169aa1a, type: 3}
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Idea_CardPlayer_Vision_Effect0
+  description: 
+  appendWithNext: 0
   trigger: 1
-  target: 3
+  target: 4
   range: 
   values: []
-  drawValue:
-    value: 2
-    type: 5
+  choiceValue:
+    value: 1
+    type: 9
     op: 1

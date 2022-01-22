@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 5
-    baseAttackDamage: 5
+    baseLifePoints: 4
+    baseAttackDamage: 4
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 4
+  useCount: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Arcanist_Vision_Effect2
+  appendWithNext: 0
   trigger: 12
   target: 2
   range: 01000000
@@ -72,6 +73,8 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &4082053552018000532
 MonoBehaviour:
@@ -87,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 11
   target: 2
   range: 01000000
@@ -96,6 +100,8 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &6894459802345861279
 MonoBehaviour:
@@ -111,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Arcanist_Vision_Effect0
+  appendWithNext: 0
   trigger: 11
   target: 2
   range: 01000000
@@ -120,6 +127,8 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &9088414402563406305
 MonoBehaviour:
@@ -135,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 12
   target: 2
   range: 01000000
@@ -144,4 +154,6 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0

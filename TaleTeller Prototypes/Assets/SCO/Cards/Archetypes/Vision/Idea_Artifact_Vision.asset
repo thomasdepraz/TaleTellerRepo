@@ -14,38 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 0500000009000000
   values: []
   modifierValue:
-    value: 4
+    value: 5
     type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
---- !u!114 &-3810347494055933026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74ed66125fff484da8e3bfc2169aa1a, type: 3}
-  m_Name: Effect2
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $Idea_Artifact_Vision_Effect2
-  trigger: 1
-  target: 4
-  range: 
-  values: []
-  choiceValue:
-    value: 2
-    type: 9
-    op: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,14 +43,13 @@ MonoBehaviour:
   cardName: Artifact
   rarity: 4
   archetype: 3
-  manaCost: 1
+  manaCost: 2
   cardGraph: {fileID: 21300000, guid: ac9abd19042d2a84aab80f954e5b4e7a, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
   - {fileID: 504136269197484510}
   - {fileID: -4041745231996608153}
-  - {fileID: -3810347494055933026}
   effects: []
   cardTypeReference: {fileID: 2213873534620985300}
   cardType: {fileID: 0}
@@ -87,15 +67,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Artifact_Vision_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 0500000009000000
   values: []
   modifierValue:
-    value: 4
+    value: 5
     type: 0
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &2213873534620985300
 MonoBehaviour:

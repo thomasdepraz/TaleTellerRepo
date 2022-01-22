@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Shallows_Trade_Effect1
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 02000000
@@ -41,7 +42,7 @@ MonoBehaviour:
   cardName: Shallows
   rarity: 3
   archetype: 2
-  manaCost: 2
+  manaCost: 1
   cardGraph: {fileID: 21300000, guid: dbf09f247576d34419b252bad161f771, type: 3}
   currentContainer: {fileID: 0}
   description: 
@@ -65,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Shallows_Trade_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 02000000

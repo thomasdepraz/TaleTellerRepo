@@ -74,12 +74,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_StackOfCoins_Trade_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 0
   range: 
   values: []
   gainValue:
-    value: 4
+    value: 5
     type: 2
     op: 1
   temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []

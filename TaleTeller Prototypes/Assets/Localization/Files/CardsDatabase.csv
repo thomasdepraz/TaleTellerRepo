@@ -1,5 +1,5 @@
 Key	Data
-$Idea_Apple_Base_Effect0	+$gainValue$ HP.
+$Idea_Apple_Base_Effect0	 +$gainValue$ HP.
 $Idea_Campfire_Base_Effect0	↞ +$modifierValue$ HP.
 $Idea_ChefsBeef_Base_Effect0	<b>Buy ($buyValue$)</b> : 
 $Idea_ChefsBeef_Base_Effect1	+$gainValue$ HP.
@@ -8,8 +8,8 @@ $Idea_Pot_Base_Effect0	Draw $drawValue$.
 $Idea_PotSeller_Base_Effect0	<b>Buy ($buyValue$)</b> : 
 $Idea_PotSeller_Base_Effect1	Draw +$drawValue$.
 $Idea_RefinedSword_Base_Effect0	<b>Buy ($buyValue$)</b> : 
-$Idea_RefinedSword_Base_Effect1	+$gainValue$ ATK.
-$Idea_Sword_Base_Effect0	+$gainValue$ ATK.
+$Idea_RefinedSword_Base_Effect1	 +$gainValue$ ATK.
+$Idea_Sword_Base_Effect0	 +$gainValue$ ATK.
 $Idea_Sword_Base_Effect1	Character → +$modifierValue$ ATK.
 $Idea_RusticSword_Base_Effect0	<b>Buy ($buyValue$)</b> : 
 $Idea_RusticSword_Base_Effect1	+$gainValue$ ATK.
@@ -87,6 +87,10 @@ $DI_ThrillingSmoke_Effect0	<color=white> <b>Obsessing</b>
 $DI_ThrillingSmoke_Effect1	<color=white> ← → <b>Beginning</b> -$modifierValue$ ATK for each Good Characters.
 $DI_UnpredictedVisitor_Effect0	<color=white> <b>Beginning</b> Discard $discardValue$.
 $DI_UnpredictedVisitor_Effect1	<color=white> <b>End of Turn</b> -$gainValue$ HP.
+$SP_01_TheDarkForest_Effect0	Enemies ↞ ↠ +$modifierValue$ ATK.
+$SP_01_TheDarkForest_Objective	Place this card, 2 Good characters and 1 Object on the Track.
+$SP_01_TheDarkForest_Effect1	↞ ↠ Key-word Heal x$modification$.
+$SP_02_BountyHunter_Objective	Defeat the Bounty Hunter without other Evil Characters on the Track.
 $Idea_LE_FleeyingMedicant_Effect0	+$gainValue$ GOLD Max.  
 $Idea_LE_FleeyingMedicant_Effect1	+4 GOLD for each given attack.
 $Idea_LE_GateKeeper_Effect0	Copies Hero's ATK and HP.
@@ -94,14 +98,12 @@ $Idea_LE_HeadQuarter_Effect0	↞ ↠ +10 ATK to each Allies.
 $Idea_LE_MidasDigit_Effect0	← → Nearby Character's statistiques are equal to Hero's current GOLD. 
 $Idea_LE_TreasureRoom_Effect0	↞ Increase Gold by x$modification$. 
 $Idea_LE_TreasureRoom_Effect1	↠ Increase Draw by x2.
-$Junk_CultistArmor_Effect0	Discard the top Card of the Deck.
-$Junk_CultistEmblem_Effect0	Discard the top Card of the Deck.
-$Junk_CultistGloves_Effect0	Discard the top Card of the Deck.
-$Junk_CultsTreasure_Effect0	+$gainValue$ GOLD.
-$Junk_FleeingMedicant_Effect0	Draw $drawValue$ for each received hit.
-$Junk_LostCoin_Effect0	+$gainValue$ GOLD.
-$Junk_SlumHabitant_Effect0	Discard $discardValue$.
-$Junk_StolenPurse	+$gainValue$ GOLD.
+$Idea_LE_AstarothIdol_Effect0	Draw until the Hand is full. 
+$Idea_LE_BrokenTemple_Effect0	<b>Overload :<b> +1 ATK Max.
+$Idea_LE_BrokenTemple_Effect1	↞ ↠ Key-word Draw x2.
+$Idea_LE_SacredTemple_Effect0	<b>Illumination :<b> +1 HP Max.
+$Idea_LE_SacredTemple_Effect1	↞ ↠ Key-word Discard x2.
+$Idea_LE_ValeforIdol_Effect0	+2 Ink Max on the next turn.
 $MP_Poor_01_MedicantCultist_Effect0	The Hero gives all his GOLD.
 $MP_Poor_01_MedicantCultist_Objective	Give $value$ GOLD to the Medicant Cultist.
 $MP_Poor_02_CultHeadquarter_A_Effect0	<b>End of Turn</b> Heal effects are disabled.
@@ -118,20 +120,14 @@ $MP_Poor_04_Midas_Effect1	Himself +$modifierValue$ ATK.
 $MP_Poor_04_Midas_Effect2	<b>Buy (1)</b> :
 $MP_Poor_04_Midas_Effect3	Himself -$modifierValue$ ATK.
 $MP_Poor_04_Midas_Objective	Defeat Midas the Prophet of Mendicity. 
-$Idea_LE_AstarothIdol_Effect0	Draw until the Hand is full. 
-$Idea_LE_BrokenTemple_Effect0	<b>Overload :<b> +1 ATK Max.
-$Idea_LE_BrokenTemple_Effect1	↞ ↠ Key-word Draw x2.
-$Idea_LE_SacredTemple_Effect0	<b>Illumination :<b> +1 HP Max.
-$Idea_LE_SacredTemple_Effect1	↞ ↠ Key-word Discard x2.
-$Idea_LE_ValeforIdol_Effect0	+2 Ink Max on the next turn.
-$Junk_ArtifactBottom_Effect0	-$gainValue$ HP.
-$Junk_ArtifactLeft_Effect0	-$gainValue$ HP.
-$Junk_ArtifactRight_Effect0	-$gainValue$ HP.
-$Junk_ArtifactTop_Effect0	-$gainValue$ HP.
-$Junk_CommonDemon_Effect0	<b>Last Wish</b> : -$gainValue$ HP for each Ally on the Track.
-$Junk_GuardianArtifact_Effect0	Self + $modifierValue$ ATK for each received attack.
-$Junk_MightyAstaroth_Effect0	Self +$modifierValue$ HP.
-$Junk_ValeforReplica_Effect0	Self +$modifierValue$ ATK.
+$Junk_CultistArmor_Effect0	Discard the top Card of the Deck.
+$Junk_CultistEmblem_Effect0	Discard the top Card of the Deck.
+$Junk_CultistGloves_Effect0	Discard the top Card of the Deck.
+$Junk_CultsTreasure_Effect0	+$gainValue$ GOLD.
+$Junk_FleeingMedicant_Effect0	Draw $drawValue$ for each received hit.
+$Junk_LostCoin_Effect0	+$gainValue$ GOLD.
+$Junk_SlumHabitant_Effect0	Discard $discardValue$.
+$Junk_StolenPurse	+$gainValue$ GOLD.
 $MP_Priest_01_PriestTheophilius_Effect0	+$gainValue$ ATK.
 $MP_Priest_01_PriestTheophilius_Objective	Defeat the Demon while Theophilus is on the next step. 
 $MP_Priest_02_TempleAltar_A_Effect0	Draw $drawValue$ for each passed step.
@@ -144,11 +140,15 @@ $MP_Priest_04_ValeforIdol_Effect0	Enemies ← → -$modifierValue$ ATK.
 $MP_Priest_04_ValeforIdol_Objective	Defeat $value$ Valefor's replicas. 
 $MP_Priest_04_CardianalThophilius_Effect0	Self +$modifierValue$ ATK Max.
 $MP_Priest_04_CardianalThophilius_Objective	Defeat Theophilus. 
-$SP_01_TheDarkForest_Effect0	Enemies ↞ ↠ +$modifierValue$ ATK.
-$SP_01_TheDarkForest_Objective	Place this card, 2 Good characters and 1 Object on the Track.
-$SP_01_TheDarkForest_Effect1	↞ ↠ Key-word Heal x$modification$.
-$SP_02_BountyHunter_Objective	Defeat the Bounty Hunter without other Evil Characters on the Track.
-$MP_TurbulentOutset_01_MentorField_Effect0	↞ ↠ +$modifierValue$ ATK for each Enemies on the Track. 
+$Junk_ArtifactBottom_Effect0	-$gainValue$ HP.
+$Junk_ArtifactLeft_Effect0	-$gainValue$ HP.
+$Junk_ArtifactRight_Effect0	-$gainValue$ HP.
+$Junk_ArtifactTop_Effect0	-$gainValue$ HP.
+$Junk_CommonDemon_Effect0	<b>Last Wish</b> : -$gainValue$ HP for each Ally on the Track.
+$Junk_GuardianArtifact_Effect0	Self + $modifierValue$ ATK for each received attack.
+$Junk_MightyAstaroth_Effect0	Self +$modifierValue$ HP.
+$Junk_ValeforReplica_Effect0	Self +$modifierValue$ ATK.
+$MP_TurbulentOutset_01_MentorField_Effect0	Increase HP Gain by $modification$. 
 $MP_TurbulentOutset_01_MentorField_Objective	Place 2 Seedlings and the Mentor's Field on the Track.
 $MP_TurbulentOutset_02_TownCenter_Effect0	↞ -$modifierValue$ ATK to Enemies.
 $MP_TurbulentOutset_02_TownCenter_Objective	Find and place the Empire Troop with the Town Center.
@@ -203,7 +203,7 @@ $Junk_TroopsHeadquarter_Effect0	↞ ↠ +$modifierValue$ to Enemies.
 $Junk_Bomb_Effect0	← → -$modifierValue$ HP.
 $Junk_Shelter_Effect0	+$gainValue$ HP.
 $Junk_MentorAura_Effect0	+$gainValue$ BASE ATK.
-$MP_PeacefulTown_01_Villager_Effect0	+$gainValue$ GOLD.
+$MP_PeacefulTown_01_Villager_Effect0	+$gainValue$ GOLD for each Object next to him.
 $MP_PeacefulTown_01_Villager_Objective	Place the Villager and the Delivery Package (purchasable via the Salesman).
 $MP_PeacefulTown_02_RevivingTree_Effect0	<b>End of Turn</b> +$modifierValue$ to Enemies if in Hand.
 $MP_PeacefulTown_02_RevivingTree_Objective	Defeat the 5 Wandering Skeletons.

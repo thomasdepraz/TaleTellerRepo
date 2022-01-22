@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_OldSage_Vision_Effect0
+  appendWithNext: 0
   trigger: 11
   target: 2
   range: 01000000
   values: []
   modifierValue:
-    value: 6
-    type: 0
+    value: 1
+    type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &-8201480308475489576
 MonoBehaviour:
@@ -38,63 +41,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 11
   target: 2
   range: 01000000
   values: []
   modifierValue:
-    value: 3
-    type: 1
+    value: 2
+    type: 0
     op: 1
   behaviourTargeted: 0
-  temporaryChange: 0
---- !u!114 &-5485318600038900049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
-  m_Name: Effect3
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: 
-  trigger: 12
-  target: 2
-  range: 01000000
-  values: []
-  modifierValue:
-    value: 1
-    type: 1
-    op: 2
-  behaviourTargeted: 0
-  temporaryChange: 0
---- !u!114 &-2473154341330226124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
-  m_Name: Effect2
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $Idea_OldSage_Vision_Effect2
-  trigger: 12
-  target: 2
-  range: 01000000
-  values: []
-  modifierValue:
-    value: 1
-    type: 0
-    op: 2
-  behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -119,8 +77,6 @@ MonoBehaviour:
   effectsReferences:
   - {fileID: -9207299857787731969}
   - {fileID: -8201480308475489576}
-  - {fileID: -2473154341330226124}
-  - {fileID: -5485318600038900049}
   effects: []
   cardTypeReference: {fileID: 2561184032536904974}
   cardType: {fileID: 0}
@@ -138,10 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 4
-    baseAttackDamage: 4
+    baseLifePoints: 3
+    baseAttackDamage: 5
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 3
+  useCount: 2

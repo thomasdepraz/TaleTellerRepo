@@ -61,8 +61,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 4
-    baseAttackDamage: 2
+    baseLifePoints: 2
+    baseAttackDamage: 1
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
@@ -82,11 +82,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Fairy_Vision_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 4
   range: 
   values: []
   choiceValue:
-    value: 2
+    value: 1
     type: 9
-    op: 0
+    op: 1
