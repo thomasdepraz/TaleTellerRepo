@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $MP_PeacefulTown_03_CreatureSpawner_Effect0
   trigger: 6
   target: 3
   range: 
@@ -44,6 +44,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1b37d0883ea497458277a27ed9ca381, type: 2}
   - {fileID: 11400000, guid: d1b37d0883ea497458277a27ed9ca381, type: 2}
   junkSpawnLocations: 0000000000000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +75,7 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $PeacefulTown_Step03A_Objective
   legendaryCardRewards: []
 --- !u!114 &4541343099129513922
 MonoBehaviour:
@@ -88,7 +90,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_PeacefulTown_03_CreatureSpawner_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: c1368b6726505244682613793e6b3643, type: 2}
   - {fileID: 11400000, guid: c1368b6726505244682613793e6b3643, type: 2}
@@ -99,3 +101,4 @@ MonoBehaviour:
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
+  junkPosRestrictions: []

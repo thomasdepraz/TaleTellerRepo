@@ -46,6 +46,7 @@ MonoBehaviour:
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
+  junkPosRestrictions: []
 --- !u!114 &-955802853607338760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +69,8 @@ MonoBehaviour:
   junkCardsToSpawn:
   - {fileID: 11400000, guid: 99dbda1e3d2c3c347b1f7a51e4896da9, type: 2}
   junkSpawnLocations: 00000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,5 +100,5 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $Empire_Step04B_Objective
   legendaryCardRewards: []

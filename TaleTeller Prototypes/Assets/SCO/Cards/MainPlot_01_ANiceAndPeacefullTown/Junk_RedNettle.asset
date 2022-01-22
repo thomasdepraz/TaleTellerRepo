@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Junk_RedNettle_Effect0
   trigger: 1
   target: 1
   range: 
@@ -50,6 +50,8 @@ MonoBehaviour:
     type: 1
     op: 1
   temporaryChange: 0
+  handCardsDependant: 0
+  typeDependants: []
 --- !u!114 &8787408704128417508
 MonoBehaviour:
   m_ObjectHideFlags: 0

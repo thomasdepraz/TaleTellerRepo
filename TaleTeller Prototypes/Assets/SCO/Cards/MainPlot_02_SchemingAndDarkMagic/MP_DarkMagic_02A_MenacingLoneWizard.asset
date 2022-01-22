@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7241368936051313923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 20
+    baseAttackDamage: 5
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 5
+--- !u!114 &-5467320745168792250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8534bb334c7f8d45867ae5392bd8f7f, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $SM_DarkMagic_02_MenacingWizard_Effect0
+  trigger: 1
+  target: 3
+  range: 
+  values: []
+  discardValue:
+    value: 1
+    type: 5
+    op: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_DarkMagic_02A_MenacingLoneWizard
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Menacing Lone Wizard
+  rarity: 0
+  archetype: 0
+  manaCost: 1
+  cardGraph: {fileID: 0}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -5467320745168792250}
+  effects: []
+  cardTypeReference: {fileID: -7241368936051313923}
+  cardType: {fileID: 0}
+  objective: {fileID: 506527183330372905}
+  completionTimer: 5
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: 
+  legendaryCardRewards: []
+--- !u!114 &506527183330372905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: $SM_DarkMagic_02_MenacingWizard_Objective
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 6938b7798b4dca1458bcb81ce3d93586, type: 2}
+  - {fileID: 11400000, guid: 162eb29c97e17c44a97d3ba6855774a9, type: 2}
+  junkSpawnLocations: 0000000000000000
+  junksPositionsInDeck: 0000000000000000
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []
+  junkPosRestrictions: []

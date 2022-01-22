@@ -7,12 +7,12 @@ using UnityEngine;
 
 public class KillPlotObj : PlotDrivenObj
 {
-    private enum RestrctionType { TypeAmount }
+    private enum RestrctionType { TypeAmount, JunkPos }
 
     [Serializable]
     struct TypeAmountRestrictionInfos
     {
-        internal enum CardType {Character, Location, Object }
+        internal enum CardType { Character, Location, Object }
         internal enum CharacterType { Peacefull, Agressive, Both }
         internal enum RestrictionMethod { Maximum, Minimum}
         bool ShowCharacterType => typeToHave == CardType.Character; 
@@ -27,7 +27,21 @@ public class KillPlotObj : PlotDrivenObj
         internal int count;
     }
 
-    bool ShowRestrictionList => restriction == RestrctionType.TypeAmount;
+    [Serializable]
+    struct JunkPosRestrictionInfos
+    {
+        internal enum PlotPos { Anywhere, NextToJunk }
+
+        public PlotPos junkPossiblePos;
+
+        public CardData junkToHaveOnBoard;
+
+        [SerializeField]
+        internal int count;
+    }
+
+    bool ShowTypeAmountRestrictionList => restriction == RestrctionType.TypeAmount;
+    bool ShowJunkPosRestrictionList => restriction == RestrctionType.JunkPos;
 
     [Header("Restriction")]
     [Tooltip("Check this if you want to apply board restriction to the kill objective")]
@@ -35,9 +49,12 @@ public class KillPlotObj : PlotDrivenObj
     [ShowIf("boardRestriction"), SerializeField]
     private RestrctionType restriction;
     [Header("Type Amount Restriction")]
-    [SerializeField, ShowIf("ShowRestrictionList")]
+    [SerializeField, ShowIf("ShowTypeAmountRestrictionList")]
     List<TypeAmountRestrictionInfos> typeRestrictions = new List<TypeAmountRestrictionInfos>();
 
+    [Header("Junk Pos Restriction")]
+    [SerializeField, ShowIf("ShowJunkPosRestrictionList")]
+    List<JunkPosRestrictionInfos> junkPosRestrictions = new List<JunkPosRestrictionInfos>();
 
     public override void SubscribeUpdateStatus(PlotCard data)
     {
@@ -171,6 +188,46 @@ public class KillPlotObj : PlotDrivenObj
                                 break;
                         }
                     }
+                    break;
+
+                case RestrctionType.JunkPos:
+                    foreach( JunkPosRestrictionInfos restriction in junkPosRestrictions)
+                    {
+                        int junksCount = 0;
+
+                        switch (restriction.junkPossiblePos)
+                        {
+                            case JunkPosRestrictionInfos.PlotPos.NextToJunk:
+                                if(CardManager.Instance.board.slots[linkedPlotData.currentContainer.currentSlot.slotIndex - 1].currentPlacedCard.data!= null)
+                                    if (CardManager.Instance.board.slots[linkedPlotData.currentContainer.currentSlot.slotIndex - 1].currentPlacedCard.data.dataReference == restriction.junkToHaveOnBoard)
+                                    {
+                                        junksCount++;
+                                    }
+                                if (CardManager.Instance.board.slots[linkedPlotData.currentContainer.currentSlot.slotIndex + 1].currentPlacedCard.data != null)
+                                    if (CardManager.Instance.board.slots[linkedPlotData.currentContainer.currentSlot.slotIndex + 1].currentPlacedCard.data.dataReference == restriction.junkToHaveOnBoard)
+                                    {
+                                        junksCount++;
+                                    }
+                                break;
+                            case JunkPosRestrictionInfos.PlotPos.Anywhere:
+                                for(int i = 0; i < CardManager.Instance.board.slots.Count; i++)
+                                {
+                                    if (CardManager.Instance.board.slots[i].currentPlacedCard.data != null)
+                                        if (CardManager.Instance.board.slots[i].currentPlacedCard.data.dataReference == restriction.junkToHaveOnBoard)
+                                        {
+                                            junksCount++;
+                                        }
+                                }
+                                break;
+                        }
+
+                        if(junksCount < restriction.count)
+                        {
+                            return false;
+                        }
+                    }
+                   
+                
                     break;
 
                 default:

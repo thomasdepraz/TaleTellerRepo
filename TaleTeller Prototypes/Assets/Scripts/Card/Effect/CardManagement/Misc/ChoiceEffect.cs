@@ -43,7 +43,7 @@ public class ChoiceEffect : CardManagementMiscEffects
                 List<CardData> pickedCards = new List<CardData>();
 
                 string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.choiceEffectInstruction);
-                string newInstruction = instruction.Replace("$value", choiceValue.value.ToString());
+                string newInstruction = instruction.Replace("$value$", choiceValue.value.ToString());
 
                 CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, newInstruction);
 

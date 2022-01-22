@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $MP_PeacefulTown_02_TownSquare_Effect0
   trigger: 2
   target: 2
   range: 04000000
@@ -55,7 +55,7 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $PeacefulTown_Step02B_Objective
   legendaryCardRewards: []
 --- !u!114 &1948392438400435131
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: PlotObjective_PlaceJunkObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_PeacefulTown_02_TownSquare_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 2777654d5c6a8f4489c89909dc01b4ec, type: 2}
   - {fileID: 11400000, guid: f77f25bd1b7057147802bf261e5deb56, type: 2}
