@@ -396,7 +396,7 @@ public class CardVisuals : MonoBehaviour
         for (int i = 0; i < data.effects.Count; i++)
         {
             string txt = data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
-            if (txt != string.Empty && !data.effects[i].appendWithNext) numberOfBlocks++;
+            if (txt != string.Empty && !txt.Split('£').Contains("append")) numberOfBlocks++;
         }
 
         if (data.GetType() == typeof(PlotCard))
@@ -495,7 +495,12 @@ public class CardVisuals : MonoBehaviour
                 storedDescription = currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
 
             string[] appendKey  = storedDescription.Split('£');
-            if (appendKey.Contains("append")) continue;
+            if (appendKey.Contains("append")) 
+            {
+                storedDescription = storedDescription.Replace("£append£", "");
+                continue;
+            }
+
 
             switch (currentEffect.target)
             {

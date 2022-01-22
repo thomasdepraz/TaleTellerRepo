@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_OldSage_Vision_Effect0
+  appendWithNext: 0
   trigger: 11
   target: 2
   range: 01000000
@@ -23,6 +24,8 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &-8201480308475489576
 MonoBehaviour:
@@ -37,7 +40,8 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_OldSage_Vision_Effect1
+  appendWithNext: 0
   trigger: 11
   target: 2
   range: 01000000
@@ -47,6 +51,8 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &-5485318600038900049
 MonoBehaviour:
@@ -61,7 +67,8 @@ MonoBehaviour:
   m_Name: Effect3
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_OldSage_Vision_Effect3
+  appendWithNext: 0
   trigger: 12
   target: 2
   range: 01000000
@@ -71,6 +78,8 @@ MonoBehaviour:
     type: 1
     op: 2
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &-2473154341330226124
 MonoBehaviour:
@@ -86,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_OldSage_Vision_Effect2
+  appendWithNext: 0
   trigger: 12
   target: 2
   range: 01000000
@@ -95,6 +105,8 @@ MonoBehaviour:
     type: 0
     op: 2
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
