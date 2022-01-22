@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 public class Deck : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Deck : MonoBehaviour
     public DeckData baseDeck;
     public int drawAmount;
     public int drawAmountFirstTurn;
+
+    [Header("Debug")]
+    public bool enableDebugDeck;
+    [ShowIf("enableDebugDeck")]
+    [Range(1,3)] public int acteToTest = 1;
 
     [Header("Visuals")]
     public Image deckHighlight;
@@ -27,6 +33,98 @@ public class Deck : MonoBehaviour
         for (int i = 0; i < baseDeck.deck.Count; i++)
         {
             cardDeck.Add(baseDeck.deck[i]);
+        }
+
+        if(enableDebugDeck)
+        {
+            if(acteToTest >= 2)
+            {
+                int numCardsToRemove = Random.Range(0, 3);
+
+                for (int i = 0; i < numCardsToRemove; i++)
+                {
+                    cardDeck.RemoveAt(Random.Range(0, cardDeck.Count));
+                }
+
+                if(acteToTest >= 3)
+                {
+                    for (int i = 0; i < numCardsToRemove; i++)
+                    {
+                        cardDeck.RemoveAt(Random.Range(0, cardDeck.Count));
+                    }
+                }
+
+                int numCardsToAdd = Random.Range(6, 8);
+
+                int numCommonCards = Mathf.RoundToInt(numCardsToAdd * 0.55f);
+
+                List<CardData> commonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
+
+                for(int i = 0; i < commonCards.Count; i++)
+                {
+                    cardDeck.Add(commonCards[i]);
+                }
+
+                int numUncommonCards = Mathf.RoundToInt(numCardsToAdd * 0.30f);
+
+                List<CardData> uncommonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
+
+                for (int i = 0; i < uncommonCards.Count; i++)
+                {
+                    cardDeck.Add(uncommonCards[i]);
+                }
+
+                int numRareCards = Mathf.RoundToInt(numCardsToAdd * 0.15f);
+
+                List<CardData> rareCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
+
+                for (int i = 0; i < rareCards.Count; i++)
+                {
+                    cardDeck.Add(rareCards[i]);
+                }
+
+                if(acteToTest >= 3)
+                {
+                    numCardsToAdd = Random.Range(6, 8);
+
+                    numCommonCards = Mathf.RoundToInt(numCardsToAdd * 0.30f);
+
+                    commonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
+
+                    for (int i = 0; i < commonCards.Count; i++)
+                    {
+                        cardDeck.Add(commonCards[i]);
+                    }
+
+                    numUncommonCards = Mathf.RoundToInt(numCardsToAdd * 0.40f);
+
+                    uncommonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
+
+                    for (int i = 0; i < uncommonCards.Count; i++)
+                    {
+                        cardDeck.Add(uncommonCards[i]);
+                    }
+
+                    numRareCards = Mathf.RoundToInt(numCardsToAdd * 0.20f);
+
+                    rareCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
+
+                    for (int i = 0; i < rareCards.Count; i++)
+                    {
+                        cardDeck.Add(rareCards[i]);
+                    }
+
+                    int numEpicCards = Mathf.RoundToInt(numCardsToAdd * 0.10f);
+
+                    List<CardData> epicCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Epic);
+
+                    for (int i = 0; i < epicCards.Count; i++)
+                    {
+                        cardDeck.Add(epicCards[i]);
+                    }
+                }
+
+            }
         }
 
         //Copy Cards to cachedDeck

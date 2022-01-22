@@ -1283,17 +1283,13 @@ MonoBehaviour:
   rewardPoolAllIdeas:
   - {fileID: 11400000, guid: e55569a6cd4a0bc41a37c9564af440dd, type: 2}
   - {fileID: 11400000, guid: 7a0ee1ac1216b4a4783934b63f6f60ac, type: 2}
-  - {fileID: 11400000, guid: 8d274d9a746f8d34cb75c6f36cc6572c, type: 2}
-  - {fileID: 11400000, guid: 5e00d49528fcb3141b52373475909cb1, type: 2}
+  - {fileID: 11400000, guid: d142b415c19a14340b9ffb41f5e5151d, type: 2}
   - {fileID: 11400000, guid: e9dfce6dd4becbe4198afa88ca996392, type: 2}
-  - {fileID: 11400000, guid: 17d2782d3d38d88449fd7eb168c61851, type: 2}
   - {fileID: 11400000, guid: 16fd94ca1944e2b43a3156020a0b11c4, type: 2}
   - {fileID: 11400000, guid: e7a61fcebb3e9f34db9803ac0bf267dc, type: 2}
   - {fileID: 11400000, guid: 25439e01db2c24b48a19f963595dc0cb, type: 2}
   - {fileID: 11400000, guid: fce0a78ed800efb4298f0e5fde1de25e, type: 2}
-  - {fileID: 11400000, guid: 76a12fd83ce81ba488d8ea31d1f306d3, type: 2}
   - {fileID: 11400000, guid: 6be3023763b94b64e91c54f87dc03b1d, type: 2}
-  - {fileID: 11400000, guid: 9940d94cf9bb60243ac9842d5aab9146, type: 2}
   - {fileID: 11400000, guid: a44f407a27210ae40bcf1691ad89f6bc, type: 2}
   - {fileID: 11400000, guid: c0cba069c2b611f4995151c2118dc6cd, type: 2}
   - {fileID: 11400000, guid: 8e5375c62087da048a16d1c0c97d6691, type: 2}
