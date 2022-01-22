@@ -21,6 +21,31 @@ MonoBehaviour:
   doubleStrike: 0
   undying: 0
   useCount: 4
+--- !u!114 &-3051154947687624570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 0
+  target: 0
+  range: 
+  values: []
+  gainValue:
+    value: 0
+    type: 0
+    op: 0
+  temporaryChange: 0
+  handCardsDependant: 0
+  typeDependants: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,13 +66,12 @@ MonoBehaviour:
   cardGraph: {fileID: 0}
   currentContainer: {fileID: 0}
   description: 
-  effectsReferences:
-  - {fileID: 1280873788186665922}
+  effectsReferences: []
   effects: []
   cardTypeReference: {fileID: -7357148306835399227}
   cardType: {fileID: 0}
   objective: {fileID: 1055613166009445963}
-  completionTimer: 4
+  completionTimer: 3
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: 
@@ -76,26 +100,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6362bae145c60d1429d635b6ae77a52f, type: 2}
   specifyNumbers: 0
   numberToPlace: 
---- !u!114 &1280873788186665922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $MP_PeacefulTown_01_Villager_Effect0
-  trigger: 1
-  target: 0
-  range: 
-  values: []
-  gainValue:
-    value: 5
-    type: 2
-    op: 1
-  temporaryChange: 0
+  mustPlaceTypeCards: 0
+  typeRestrictions: []

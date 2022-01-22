@@ -25,7 +25,10 @@ MonoBehaviour:
   specificJunkToPlace:
   - {fileID: 11400000, guid: 903fde02d00408d44afab867525fbe9c, type: 2}
   - {fileID: 11400000, guid: 903fde02d00408d44afab867525fbe9c, type: 2}
-  plotOnBoard: 1
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,16 +50,41 @@ MonoBehaviour:
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: 6486095688008609495}
+  - {fileID: 1952050231884971662}
   effects: []
   cardTypeReference: {fileID: 3020139332154673912}
   cardType: {fileID: 0}
   objective: {fileID: -2040187732016620431}
-  completionTimer: 5
+  completionTimer: 4
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: 
   legendaryCardRewards: []
+--- !u!114 &1952050231884971662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5b1c94cd704fa46b8e38ba3f28afd7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  trigger: 2
+  target: 2
+  range: 03000000
+  values: []
+  typeToTarget: 0
+  operatorToTarget: 1
+  modification:
+    value: 1
+    type: 0
+    op: 1
+  modifyTemporary: 0
 --- !u!114 &3020139332154673912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,27 +98,3 @@ MonoBehaviour:
   m_Name: Card Type
   m_EditorClassIdentifier: 
   data: {fileID: 0}
---- !u!114 &6486095688008609495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $MP_TurbulentOutset_01_MentorField_Effect0
-  trigger: 2
-  target: 2
-  range: 0300000004000000
-  values: []
-  modifierValue:
-    value: 1
-    type: 1
-    op: 1
-  behaviourTargeted: 2
-  temporaryChange: 0

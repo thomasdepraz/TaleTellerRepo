@@ -18,12 +18,19 @@ public class Deck : MonoBehaviour
     [Header("Debug")]
     public bool enableDebugDeck;
     [ShowIf("enableDebugDeck")]
-    [Range(1,3)] public int acteToTest = 1;
+    [Range(1,3)] public int actToTest = 1;
 
     [Header("Visuals")]
     public Image deckHighlight;
     public Image discardHighlight;
 
+    public void Awake()
+    {
+        if(enableDebugDeck)
+        {
+            
+        }
+    }
 
     public void Start()
     {
@@ -35,9 +42,12 @@ public class Deck : MonoBehaviour
             cardDeck.Add(baseDeck.deck[i]);
         }
 
-        if(enableDebugDeck)
+        #region DebugDeck
+        if (enableDebugDeck)
         {
-            if(acteToTest >= 2)
+            StoryManager.Instance.actCount = actToTest - 1;
+
+            if (actToTest >= 2)
             {
                 int numCardsToRemove = Random.Range(0, 3);
 
@@ -46,7 +56,7 @@ public class Deck : MonoBehaviour
                     cardDeck.RemoveAt(Random.Range(0, cardDeck.Count));
                 }
 
-                if(acteToTest >= 3)
+                if(actToTest >= 3)
                 {
                     for (int i = 0; i < numCardsToRemove; i++)
                     {
@@ -83,7 +93,7 @@ public class Deck : MonoBehaviour
                     cardDeck.Add(rareCards[i]);
                 }
 
-                if(acteToTest >= 3)
+                if(actToTest >= 3)
                 {
                     numCardsToAdd = Random.Range(6, 8);
 
@@ -126,6 +136,7 @@ public class Deck : MonoBehaviour
 
             }
         }
+        #endregion
 
         //Copy Cards to cachedDeck
         for (int i = 0; i < cardDeck.Count; i++)

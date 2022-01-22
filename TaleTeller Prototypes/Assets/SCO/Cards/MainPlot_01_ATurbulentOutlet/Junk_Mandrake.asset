@@ -18,10 +18,11 @@ MonoBehaviour:
   target: 3
   range: 
   values: []
-  plotObjective: {fileID: 0}
   junkInLinkedList: 1
   junkCardsToSpawn: []
   junkSpawnLocations: 00000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,7 +33,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
-  m_Name: Junk_Rat
+  m_Name: Junk_Mandrake
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Mandrake
@@ -64,7 +65,7 @@ MonoBehaviour:
   data: {fileID: 0}
   stats:
     baseLifePoints: 2
-    baseAttackDamage: 1
+    baseAttackDamage: 2
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
