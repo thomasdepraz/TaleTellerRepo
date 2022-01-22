@@ -15,18 +15,16 @@ public class RewardScreen : GameScreen
 
     public RewardScreenVisuals visuals;
 
-    public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme)
+    public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme, List<CardData> addRewardData = null)
     {
         visuals = ScreenManager.Instance.rewardScreenVisuals; ;
-        visuals.completeText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$QUEST_ENDING");
-        visuals.chooseInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CHOOSE_INSTRUCTION"); 
-        visuals.upgradeInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$UPGRADE_INSTRUCTION");
-        visuals.confirmButton.SetText(LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CONFIRM"));
+        visuals.InitText(currentScheme);
 
-        visuals.questText.text = currentScheme.schemeSteps[currentScheme.currentStep].chapterDescription;
         visuals.illustration = null;//TODO
 
-        addCardReward = new AddCardReward(2);
+        if (addRewardData == null) addCardReward = new AddCardReward(2);
+        else addCardReward = new AddCardReward(addRewardData, 2);
+
         removeCardReward = new RemoveCardReward(3);//TODO EXPOSE MAGIC NUMBERS
 
         heroRewards = GenerateRewards(currentRewardInfo.type);
@@ -36,25 +34,17 @@ public class RewardScreen : GameScreen
             visuals.heroRewardsButton[i].gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < heroRewards.Count; i++)
-        {
-            int index = i;
+        visuals.InitButton(SelectCardReward, SelectHeroReward, addCardReward, removeCardReward, heroRewards);
 
-            visuals.heroRewardsButton[index].gameObject.SetActive(true);
-            visuals.heroRewardsButton[index].onClick = () => SelectHeroReward(heroRewards[index], visuals.heroRewardsButton[index]);
-            visuals.heroRewardsButton[index].SetText(heroRewards[index].GetString());
-        }
-
-        visuals.addButton.onClick = () => SelectCardReward(addCardReward, visuals.addButton);
-        visuals.addButton.SetText(addCardReward.GetString());
-        visuals.removeButton.onClick = () => SelectCardReward(removeCardReward, visuals.removeButton);
-        visuals.removeButton.SetText(removeCardReward.GetString());
+        if (CardManager.Instance.cardDeck.cachedDeck.Count <= 10 || addRewardData!=null) visuals.removeButton.gameObject.SetActive(false);
+        else visuals.removeButton.gameObject.SetActive(true);
 
         visuals.confirmButton.onClick = Confirm;
         visuals.confirmButton.interactable = false;
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(visuals.layoutRoot);
     }
+
     public List<Reward> GenerateRewards(RewardType type)
     {
         List<Reward> result = new List<Reward>();

@@ -356,7 +356,7 @@ public class Deck : MonoBehaviour
             //Discard the pickedCards and deal the new one
             for (int i = 0; i < screen.pickedCards.Count; i++)
             {
-                CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container, overdrawQueue);
+                CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, overdrawQueue);
 
             }
             Deal(overdrawQueue, dealtCard);

@@ -150,28 +150,24 @@ public class RewardManager : Singleton<RewardManager>
         //use card picker
         EventQueue pickerQueue = new EventQueue();
 
-        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-        CardManager.Instance.cardPicker.Pick(pickerQueue, card.legendaryCardRewards ,pickedCard, 1, instruction);
+        RewardScreen rewardScreen = new RewardScreen(currentRewardInfo, PlotsManager.Instance.currentMainPlotScheme, card.legendaryCardRewards);
+        bool wait = true;
+        rewardScreen.Open((() => { wait = false; }));
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-        pickerQueue.StartQueue();
-        while(!pickerQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        while (rewardScreen.open) { yield return new WaitForEndOfFrame(); }
 
-        if(pickedCard.Count>0)
-        {
-            EventQueue toDeckQueue = new EventQueue();
+        wait = true;
+        rewardScreen.Close(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-            CardManager.Instance.CardAppearToDeck(pickedCard[0], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
+        EventQueue rewardQueue = new EventQueue();
 
-            toDeckQueue.StartQueue();
-            while(!toDeckQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-        }
+        rewardScreen.chosenHeroReward.ApplyReward(rewardQueue);
+        rewardScreen.chosenCardReward.ApplyReward(rewardQueue);
 
+        rewardQueue.StartQueue();
+        while (!rewardQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
         queue.UpdateQueue();
     }

@@ -186,10 +186,6 @@ public class CardManager : Singleton<CardManager>
                 //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
                 //cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, instruction);
 
-
-
-
-
                 //pickQueue.StartQueue();
                 //while (!pickQueue.resolved)
                 //{
@@ -211,7 +207,7 @@ public class CardManager : Singleton<CardManager>
                 //discard all of the picked cards
                 for (int i = 0; i < screen.pickedCards.Count; i++)
                 {
-                    CardHandToDiscard(screen.pickedCards[i].container, returnQueue);
+                    CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, returnQueue);
                 }
 
                 //return card to hand

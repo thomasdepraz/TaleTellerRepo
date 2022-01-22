@@ -31,6 +31,7 @@ public class CardPickerScreen : GameScreen
         {
             int j = i;
             visuals.cardPlaceholders[j].onClick = () => SelectCard(visuals.cardPlaceholders[j]);
+            visuals.cardPlaceholders[j].selected = false;
         }
 
         visuals.confirmButton.onClick = Confirm;

@@ -214,23 +214,23 @@ public class StoryManager : Singleton<StoryManager>
         //text ?
 
         //init cacheddeckList + deck building phase
-        CardManager.Instance.cardDeck.InitCachedDeck();
+        //CardManager.Instance.cardDeck.InitCachedDeck();
 
-        EventQueue discardQueue = new EventQueue();
+        //EventQueue discardQueue = new EventQueue();
         
-        List<CardData> pickedCards = new List<CardData>();
-        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
-        string newInstruction = instruction.Replace("$value$", "5");
+        //List<CardData> pickedCards = new List<CardData>();
+        //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
+        //string newInstruction = instruction.Replace("$value$", "5");
 
-        CardManager.Instance.cardPicker.Pick(discardQueue,CardManager.Instance.cardDeck.cachedDeck,pickedCards,5, newInstruction);
+        //CardManager.Instance.cardPicker.Pick(discardQueue,CardManager.Instance.cardDeck.cachedDeck,pickedCards,5, newInstruction);
 
-        discardQueue.StartQueue();
-        while (!discardQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        //discardQueue.StartQueue();
+        //while (!discardQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-        for (int i = 0; i < pickedCards.Count; i++)
-        {
-            CardManager.Instance.cardDeck.cachedDeck.Remove(pickedCards[i]); //TODO Animate this with a card management method such as SendToOblivion
-        }
+        //for (int i = 0; i < pickedCards.Count; i++)
+        //{
+        //    CardManager.Instance.cardDeck.cachedDeck.Remove(pickedCards[i]); //TODO Animate this with a card management method such as SendToOblivion
+        //}
 
         //refill deck + reinit cards
         CardManager.Instance.cardDeck.ResetCachedDeck();
