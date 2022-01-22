@@ -19,6 +19,8 @@ public class CardPickerScreen : GameScreen
     bool skippable;
     public CardPickerScreen(PickScreenMode mode, int numberToPick, List<CardData> targetCards, bool skippable)
     {
+        if (targetCards.Count < numberToPick) numberToPick = targetCards.Count;
+
         visuals = ScreenManager.Instance.pickerScreenVisual;
         pickedCards = new List<PlaceholderCard>();
         this.numberToPick = numberToPick;

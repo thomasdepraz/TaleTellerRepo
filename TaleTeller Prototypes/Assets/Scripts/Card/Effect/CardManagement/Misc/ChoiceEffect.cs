@@ -39,20 +39,8 @@ public class ChoiceEffect : CardManagementMiscEffects
 
             if (targets.Count > 0)
             {
-                //EventQueue pickQueue = new EventQueue();
-                //List<CardData> pickedCards = new List<CardData>();
 
-                //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.choiceEffectInstruction);
-                //string newInstruction = instruction.Replace("$value$", choiceValue.value.ToString());
-
-                //CardManager.Instance.cardPicker.Pick(pickQueue, cardsForChoice, pickedCards, 1, newInstruction);
-
-                //pickQueue.StartQueue();
-                //while (!pickQueue.resolved)
-                //{
-                //    yield return new WaitForEndOfFrame();
-                //}
-                CardPickerScreen screen = new CardPickerScreen(PickScreenMode.CHOICE, 1, CardManager.Instance.cardHand.GetHandDataList(), true);
+                CardPickerScreen screen = new CardPickerScreen(PickScreenMode.CHOICE, 1, cardsForChoice, true);
                 bool wait = true;
                 screen.Open(() => wait = false);
                 while (wait) { yield return new WaitForEndOfFrame(); }
@@ -74,7 +62,6 @@ public class ChoiceEffect : CardManagementMiscEffects
                 {
                     yield return new WaitForEndOfFrame();
                 }
-
 
                 //Discard other cards
                 for (int x = 0; x < cardsForChoice.Count; x++)
