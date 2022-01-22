@@ -20,8 +20,8 @@ MonoBehaviour:
   range: 01000000
   values: []
   modifierValue:
-    value: 6
-    type: 0
+    value: 1
+    type: 1
     op: 1
   behaviourTargeted: 0
   forSpecificCard: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   range: 01000000
   values: []
   modifierValue:
-    value: 3
-    type: 1
+    value: 2
+    type: 0
     op: 1
   behaviourTargeted: 0
   forSpecificCard: 0
@@ -131,8 +131,6 @@ MonoBehaviour:
   effectsReferences:
   - {fileID: -9207299857787731969}
   - {fileID: -8201480308475489576}
-  - {fileID: -2473154341330226124}
-  - {fileID: -5485318600038900049}
   effects: []
   cardTypeReference: {fileID: 2561184032536904974}
   cardType: {fileID: 0}
@@ -150,10 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 4
-    baseAttackDamage: 4
+    baseLifePoints: 3
+    baseAttackDamage: 5
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 3
+  useCount: 2

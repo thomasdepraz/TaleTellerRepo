@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Library_Vision_Effect1
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 03000000
@@ -37,6 +38,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Library_Vision_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 03000000
@@ -44,8 +46,8 @@ MonoBehaviour:
   typeToTarget: 5
   operatorToTarget: 1
   modification:
-    value: 3
-    type: 5
+    value: 1
+    type: 9
     op: 1
   modifyTemporary: 0
 --- !u!114 &11400000
@@ -64,7 +66,7 @@ MonoBehaviour:
   cardName: Library
   rarity: 2
   archetype: 3
-  manaCost: 3
+  manaCost: 2
   cardGraph: {fileID: 21300000, guid: c32b493be18da7f4f9cf9eaad20df2f9, type: 3}
   currentContainer: {fileID: 0}
   description: 

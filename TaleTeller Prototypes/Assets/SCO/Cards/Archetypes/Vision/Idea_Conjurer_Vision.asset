@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7795545901990621282
+--- !u!114 &-7786865968329406815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21,8 +21,8 @@ MonoBehaviour:
   values: []
   modifierValue:
     value: 1
-    type: 1
-    op: 2
+    type: 0
+    op: 1
   behaviourTargeted: 0
   forSpecificCard: 0
   specificCard: {fileID: 0}
@@ -47,9 +47,9 @@ MonoBehaviour:
   range: 01000000
   values: []
   modifierValue:
-    value: 1
-    type: 0
-    op: 2
+    value: 2
+    type: 1
+    op: 1
   behaviourTargeted: 0
   forSpecificCard: 0
   specificCard: {fileID: 0}
@@ -76,9 +76,7 @@ MonoBehaviour:
   description: 
   effectsReferences:
   - {fileID: -603127733907315173}
-  - {fileID: -7795545901990621282}
-  - {fileID: 1212984328777861950}
-  - {fileID: 541559321432311043}
+  - {fileID: -7786865968329406815}
   effects: []
   cardTypeReference: {fileID: 2083461853720186675}
   cardType: {fileID: 0}
@@ -151,9 +149,9 @@ MonoBehaviour:
   data: {fileID: 0}
   stats:
     baseLifePoints: 4
-    baseAttackDamage: 4
+    baseAttackDamage: 2
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 3
+  useCount: 2

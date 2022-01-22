@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 3
+    baseLifePoints: 2
     baseAttackDamage: 3
   behaviour: 1
   fightingRange: 3
@@ -35,6 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Trader_Trade_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 0
   range: 
@@ -84,11 +85,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Trader_Trade_Effect1
+  appendWithNext: 0
   trigger: 0
   target: 3
   range: 
   values: []
   drawValue:
-    value: 1
+    value: 2
     type: 5
     op: 1

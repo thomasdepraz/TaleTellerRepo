@@ -20,7 +20,7 @@ MonoBehaviour:
   range: 0500000009000000
   values: []
   modifierValue:
-    value: 4
+    value: 5
     type: 1
     op: 1
   behaviourTargeted: 0
@@ -66,14 +66,13 @@ MonoBehaviour:
   cardName: Artifact
   rarity: 4
   archetype: 3
-  manaCost: 1
+  manaCost: 2
   cardGraph: {fileID: 21300000, guid: ac9abd19042d2a84aab80f954e5b4e7a, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
   - {fileID: 504136269197484510}
   - {fileID: -4041745231996608153}
-  - {fileID: -3810347494055933026}
   effects: []
   cardTypeReference: {fileID: 2213873534620985300}
   cardType: {fileID: 0}
@@ -97,7 +96,7 @@ MonoBehaviour:
   range: 0500000009000000
   values: []
   modifierValue:
-    value: 4
+    value: 5
     type: 0
     op: 1
   behaviourTargeted: 0

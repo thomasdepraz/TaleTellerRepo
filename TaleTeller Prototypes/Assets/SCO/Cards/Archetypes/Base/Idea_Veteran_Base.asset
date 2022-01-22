@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Veteran_Base_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 09000000
@@ -23,6 +24,8 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -69,4 +72,4 @@ MonoBehaviour:
   fightingRange: 3
   doubleStrike: 0
   undying: 0
-  useCount: 2
+  useCount: 1
