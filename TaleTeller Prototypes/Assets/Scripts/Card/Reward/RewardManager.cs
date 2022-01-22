@@ -325,7 +325,7 @@ public class RewardManager : Singleton<RewardManager>
         return result;
     }
 
-    List<CardData> GetMainPlotRewardsSecondBatch(List<CardData> list, int count, CardRarity targetRarity)
+    public List<CardData> GetMainPlotRewardsSecondBatch(List<CardData> list, int count, CardRarity targetRarity)
     {
         List<CardData> filteredList = new List<CardData>();
         for (int i = 0; i < list.Count; i++)
