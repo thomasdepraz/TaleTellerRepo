@@ -18,8 +18,8 @@ public enum RewardType
 }
 public class RewardInfo
 {
-    RewardType type;
-    RewardRarity rarity;
+    public RewardType type;
+    public RewardRarity rarity;
 
     public RewardInfo(int actNumber)
     {
