@@ -5,7 +5,7 @@ using UnityEngine;
 public class AddCardReward : Reward
 {
 
-    List<CardData> rewardCards = new List<CardData>();
+    public List<CardData> rewardCards = new List<CardData>();
     public int numberToPick;
 
     public AddCardReward(int numberToPick)
@@ -24,24 +24,40 @@ public class AddCardReward : Reward
     {
         UtilityClass.InitCardList(rewardCards);
 
-        List<CardData> pickedCards = new List<CardData>();
-        EventQueue pickCardsQueue = new EventQueue();
+        ChooseCardRewardScreen screen = new ChooseCardRewardScreen(numberToPick, rewardCards);
+        bool wait = true;
+        screen.Open(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.choiceEffectInstruction);
-        string newInstruction = instruction.Replace("$value$", numberToPick.ToString());
+        while(screen.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        screen.Close(()=> { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-        CardManager.Instance.cardPicker.Pick(pickCardsQueue, rewardCards, pickedCards, numberToPick, newInstruction);
-
-        pickCardsQueue.StartQueue();
-        while (!pickCardsQueue.resolved) { yield return new WaitForEndOfFrame(); }
-
-        EventQueue appearQueue = new EventQueue();
-        for (int i = 0; i < pickedCards.Count; i++)
+        List<CardData> cards = new List<CardData>();
+        for (int i = 0; i < screen.pickedCards.Count; i++)
         {
-            CardManager.Instance.CardAppearToDeck(pickedCards[i], appearQueue, CardManager.Instance.plotAppearTransform.position);
+            cards.Add(screen.pickedCards[i].container.data);
+        }
+        EventQueue appearQueue = new EventQueue();
+        for (int i = 0; i < cards.Count; i++)
+        {
+            CardManager.Instance.CardAppearToDeck(cards[i], appearQueue, CardManager.Instance.plotAppearTransform.position);
         }
         appearQueue.StartQueue();
         while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+        //List<CardData> pickedCards = new List<CardData>();
+        //EventQueue pickCardsQueue = new EventQueue();
+
+        //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.choiceEffectInstruction);
+        //string newInstruction = instruction.Replace("$value$", numberToPick.ToString());
+
+        //CardManager.Instance.cardPicker.Pick(pickCardsQueue, rewardCards, pickedCards, numberToPick, newInstruction);
+
+        //pickCardsQueue.StartQueue();
+        //while (!pickCardsQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
 
 
         queue.UpdateQueue();
@@ -113,6 +129,6 @@ public class AddCardReward : Reward
 
     public override string GetString()
     {
-        throw new System.NotImplementedException();
+        return $"Add {numberToPick} cards";
     }
 }

@@ -21,6 +21,6 @@ public class RemoveCardReward : Reward
 
     public override string GetString()
     {
-        throw new System.NotImplementedException();
+        return $"Remove {numberToDiscard} cards";
     }
 }

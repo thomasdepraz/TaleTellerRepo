@@ -19,6 +19,6 @@ public class InspireTokenReward : Reward
 
     public override string GetString()
     {
-        throw new System.NotImplementedException();
+        return $"+{stackCount} Inspire Token";
     }
 }

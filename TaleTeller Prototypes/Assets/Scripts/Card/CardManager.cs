@@ -362,25 +362,40 @@ public class CardManager : Singleton<CardManager>
     {
         Instance.cardDeck.InitCachedDeck();
 
-        EventQueue discardQueue = new EventQueue();
+        //EventQueue discardQueue = new EventQueue();
 
-        List<CardData> pickedCards = new List<CardData>();
-        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
-        string newInstruction = instruction.Replace("$value$", countToDiscard.ToString());
+        //List<CardData> pickedCards = new List<CardData>();
+        //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseXCardToDiscardInstruction);
+        //string newInstruction = instruction.Replace("$value$", countToDiscard.ToString());
 
-        cardPicker.Pick(discardQueue, Instance.cardDeck.cachedDeck, pickedCards, countToDiscard, newInstruction);
+        //cardPicker.Pick(discardQueue, Instance.cardDeck.cachedDeck, pickedCards, countToDiscard, newInstruction);
 
-        discardQueue.StartQueue();
-        while (!discardQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        //discardQueue.StartQueue();
+        //while (!discardQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-        for (int i = 0; i < pickedCards.Count; i++)
+        //for (int i = 0; i < pickedCards.Count; i++)
+        //{
+        //    cardDeck.cachedDeck.Remove(pickedCards[i]); //TODO Animate this with a card management method such as SendToOblivion
+        //}
+
+        ///
+        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.WITHDRAW, countToDiscard, cardDeck.cachedDeck, true);
+        bool wait = true;
+        screen.Open(()=> wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        while(screen.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        screen.Close(()=>wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        for (int i = 0; i < screen.pickedCards.Count; i++)
         {
-            cardDeck.cachedDeck.Remove(pickedCards[i]); //TODO Animate this with a card management method such as SendToOblivion
+            cardDeck.cachedDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
         }
 
-        //refill deck + reinit cards
+        ////refill deck + reinit cards
         cardDeck.ResetCachedDeck();
-
         queue.UpdateQueue();
     }
     #endregion

@@ -18,10 +18,10 @@ public class RewardScreen : GameScreen
     public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme)
     {
         visuals = ScreenManager.Instance.rewardScreenVisuals; ;
-        visuals.completeText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$QUEST_ENDING");
-        visuals.chooseInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$CHOOSE_INSTRUCTION"); 
-        visuals.upgradeInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$UPGRADE_INSTRUCTION");
-        //visuals.confirmButton. = LocalizationManager.Instance.GetString(LocalizationManager.Instance.rewardDictionary, "$CONFIRM");
+        visuals.completeText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$QUEST_ENDING");
+        visuals.chooseInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CHOOSE_INSTRUCTION"); 
+        visuals.upgradeInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$UPGRADE_INSTRUCTION");
+        visuals.confirmButton.SetText(LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CONFIRM"));
 
         visuals.questText.text = currentScheme.schemeSteps[currentScheme.currentStep].chapterDescription;
         visuals.illustration = null;//TODO
@@ -30,16 +30,30 @@ public class RewardScreen : GameScreen
         removeCardReward = new RemoveCardReward(3);//TODO EXPOSE MAGIC NUMBERS
 
         heroRewards = GenerateRewards(currentRewardInfo.type);
-        for (int i = 0; i < heroRewards.Count; i++)
+
+        for (int i = 0; i < visuals.heroRewardsButton.Count; i++)
         {
-            visuals.heroRewardsButton[i].gameObject.SetActive(true);
-            visuals.heroRewardsButton[i].onClick += () => SelectHeroReward(heroRewards[i], visuals.heroRewardsButton[i]);
+            visuals.heroRewardsButton[i].gameObject.SetActive(false);
         }
 
-        visuals.addButton.onClick += ()=> SelectCardReward(addCardReward, visuals.addButton);
-        visuals.removeButton.onClick += () => SelectCardReward(removeCardReward, visuals.removeButton);
+        for (int i = 0; i < heroRewards.Count; i++)
+        {
+            int index = i;
 
-        visuals.confirmButton.onClick += Confirm;
+            visuals.heroRewardsButton[index].gameObject.SetActive(true);
+            visuals.heroRewardsButton[index].onClick = () => SelectHeroReward(heroRewards[index], visuals.heroRewardsButton[index]);
+            visuals.heroRewardsButton[index].SetText(heroRewards[index].GetString());
+        }
+
+        visuals.addButton.onClick = () => SelectCardReward(addCardReward, visuals.addButton);
+        visuals.addButton.SetText(addCardReward.GetString());
+        visuals.removeButton.onClick = () => SelectCardReward(removeCardReward, visuals.removeButton);
+        visuals.removeButton.SetText(removeCardReward.GetString());
+
+        visuals.confirmButton.onClick = Confirm;
+        visuals.confirmButton.interactable = false;
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(visuals.layoutRoot);
     }
     public List<Reward> GenerateRewards(RewardType type)
     {
@@ -75,11 +89,12 @@ public class RewardScreen : GameScreen
     {
         open = true;
         visuals.canvas.gameObject.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(visuals.layoutRoot);
         onComplete?.Invoke();
     }
     public override void Close(Action onComplete)
     {
-        visuals.canvas.gameObject.SetActive(true);
+        visuals.canvas.gameObject.SetActive(false);
         onComplete?.Invoke();
     }
 
@@ -116,6 +131,8 @@ public class RewardScreen : GameScreen
             chosenCardReward = null;
         }
 
+        visuals.confirmButton.interactable = CheckValid();
+
     }
     public void SelectHeroReward(Reward reward, ScreenButton button)
     {
@@ -135,7 +152,7 @@ public class RewardScreen : GameScreen
         else
         {
 
-            chosenCardReward = null;
+            chosenHeroReward = null;
         }
 
         visuals.confirmButton.interactable = CheckValid();

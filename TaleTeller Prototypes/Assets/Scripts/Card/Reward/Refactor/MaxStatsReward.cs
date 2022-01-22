@@ -90,6 +90,6 @@ public class MaxStatsReward : Reward
 
     public override string GetString()
     {
-        throw new System.NotImplementedException();
+        return $"+ {buffValue} {statType}";
     }
 }

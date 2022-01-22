@@ -15,14 +15,14 @@ public class LocalizationManager : Singleton<LocalizationManager>
     [SerializeField] private TextAsset tooltipDatabase;
     [SerializeField] private TextAsset cardsDatabase;
     [SerializeField] private TextAsset popupDatabase;
-    [SerializeField] private TextAsset rewardDatabase;
+    [SerializeField] private TextAsset screenDatabase;
 
     public Dictionary<string, string> instructionsDictionary;
     public Dictionary<string, string> schemesDescriptionsDictionary;
     public Dictionary<string, string> tooltipDictionary;
     public Dictionary<string, string> cardsDictionary;
     public Dictionary<string, string> popupDictionary;
-    public Dictionary<string, string> rewardDictionary;
+    public Dictionary<string, string> screenDictionary;
     //Create as meany as needed
 
 
@@ -33,7 +33,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
         tooltipDictionary = InitDictionary(tooltipDatabase);
         cardsDictionary = InitDictionary(cardsDatabase);
         popupDictionary = InitDictionary(popupDatabase);
-        rewardDictionary = InitDictionary(rewardDatabase);
+        screenDictionary = InitDictionary(screenDatabase);
     }
 
     public Dictionary<string, string> InitDictionary(KeyStringPair[] pairs) ///Add methods overrides

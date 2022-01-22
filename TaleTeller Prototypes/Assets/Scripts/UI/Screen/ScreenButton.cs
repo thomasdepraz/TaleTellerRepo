@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     public Action onClick;
     public Image buttonImage;
+    public TextMeshProUGUI buttonText;
     public Color baseColor = new Color(0.3f, 0.3f, 0.3f, 1);
     public Color diabledColor = new Color(1,1,1,0.5f);
     bool _selected;
@@ -20,6 +22,7 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             _selected = value;
 
             //TODO add selectFeedback
+            SelectedFeedback(_selected);
         }
     }
 
@@ -77,5 +80,23 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             buttonImage.color = diabledColor;
             buttonImage.gameObject.transform.localScale = Vector3.one;
         }
+    }
+
+    public void SelectedFeedback(bool selected)
+    {
+        if(selected)
+        {
+            baseColor = buttonImage.color;//TEMP
+            buttonImage.color = Color.red;
+        }
+        else
+        {
+            buttonImage.color = baseColor;
+        }
+    }
+
+    public void SetText(string text)
+    {
+        buttonText.text = text;
     }
 }

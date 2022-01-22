@@ -90,6 +90,6 @@ public class TempStatsReward : Reward
 
     public override string GetString()
     {
-        throw new System.NotImplementedException();
+        return $"+ {buffValue} {statType}";
     }
 }
