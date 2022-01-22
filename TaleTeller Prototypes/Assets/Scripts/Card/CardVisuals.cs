@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 public class CardVisuals : MonoBehaviour
 {
@@ -38,12 +39,30 @@ public class CardVisuals : MonoBehaviour
     public TextMeshProUGUI characterHealthText;
     public TextMeshProUGUI timerText;
 
+    [Header("Description Blocks")]
+    public RectTransform blockParent;
+    public EffectDescriptionBlock descriptionBlockTemplate;
+    private List<EffectDescriptionBlock> descriptionBlocks;
+
     [Header("Other")]
     public List<TextMeshProUGUI> popupTexts = new List<TextMeshProUGUI>();
     #endregion
 
     public void InitializeVisuals(CardData data)
     {
+        #region DescriptionBlock
+        if (descriptionBlocks == null) descriptionBlocks = new List<EffectDescriptionBlock>();
+        if (descriptionBlocks.Count > 0)
+        {
+            foreach (EffectDescriptionBlock block in descriptionBlocks.ToList())
+            {
+                descriptionBlocks.Remove(block);
+                Destroy(block.gameObject);
+            }
+        }
+        BuildDescriptionBlocks(data);
+        #endregion
+
         //Init basics
         #region Basics
         cardIllustration.sprite = data.cardGraph;
@@ -285,6 +304,8 @@ public class CardVisuals : MonoBehaviour
             //GetDescription // Update Description
             cardDescriptionText.text = BuildDescription(data);
             cardDescriptionText.color = Color.white;
+
+            WriteDescriptionBlocks(data, Color.white);
         }
         else
         {
@@ -296,6 +317,8 @@ public class CardVisuals : MonoBehaviour
             //GetDescription // Update Description
             cardDescriptionText.text = BuildDescription(data);
             cardDescriptionText.color = Color.black;
+
+            WriteDescriptionBlocks(data, Color.black);
         }
     }
 
@@ -364,6 +387,156 @@ public class CardVisuals : MonoBehaviour
         }
        
         return result;
+    }
+
+    public void BuildDescriptionBlocks(CardData data)
+    {
+        int numberOfBlocks = 0;//data.effects.Where(e => !e.appendWithNext).Count();
+
+        for (int i = 0; i < data.effects.Count; i++)
+        {
+            string txt = data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
+            if (txt != string.Empty && !data.effects[i].appendWithNext) numberOfBlocks++;
+        }
+
+        if (data.GetType() == typeof(PlotCard))
+            numberOfBlocks++;
+
+        if (data.cardType?.GetType() == typeof(CharacterType))
+        {
+            CharacterType chara = data.cardType as CharacterType;
+
+            if (chara.doubleStrike) numberOfBlocks++;
+            if (chara.undying) numberOfBlocks++;
+
+        }
+
+        EffectDescriptionBlock block = null;
+
+        for (int i = 0; i < numberOfBlocks; i++)
+        {
+            block = Instantiate(descriptionBlockTemplate.gameObject, blockParent).GetComponent<EffectDescriptionBlock>();
+            block.gameObject.SetActive(true);
+            descriptionBlocks.Add(block);
+        }
+    }
+
+    public void WriteDescriptionBlocks(CardData data, Color color)
+    {
+        int processBlockIndex = 0;
+
+        void SetUpDescription(string description, EffectRangeType range)
+        {
+            if (description == string.Empty) return;
+            descriptionBlocks[processBlockIndex].SetDescription(description, color);
+
+            Sprite icon = null;
+
+            switch (range)
+            {
+                case EffectRangeType.AllLeft:
+                    icon = profile.rangeIconAllLeft;
+                    break;
+                case EffectRangeType.AllRight:
+                    icon = profile.rangeIconAllRight;
+                    break;
+                case EffectRangeType.Hero:
+                    icon = profile.rangeIconHero;
+                    break;
+                case EffectRangeType.Left:
+                    icon = profile.rangeIconLeft;
+                    break;
+                case EffectRangeType.Right:
+                    icon = profile.rangeIconRight;
+                    break;
+                case EffectRangeType.All:
+                    icon = profile.rangeIconAll;
+                    break;
+                case EffectRangeType.Other:
+                    icon = profile.rangeIconSelf;
+                    break;
+                case EffectRangeType.Self:
+                    icon = profile.rangeIconSelf;
+                    break;
+                case EffectRangeType.Plot:
+                    icon = profile.rangeIconPlot;
+                    break;
+                case EffectRangeType.RightAndLeft:
+                    icon = profile.rangeIconRightAndLeft;
+                    break;
+            }
+
+            descriptionBlocks[processBlockIndex].SetRangeType(range, icon);
+            processBlockIndex++;
+        }
+
+        if (data.cardType?.GetType() == typeof(CharacterType))
+        {
+            CharacterType chara = data.cardType as CharacterType;
+
+            if (chara.doubleStrike) SetUpDescription("<b>Double Strike</b>", EffectRangeType.Self);
+            if (chara.undying) SetUpDescription("<b>Undying</b>", EffectRangeType.Self);
+        }
+
+        string storedDescription = string.Empty;
+
+        for (int i = 0; i < data.effects.Count; i++)
+        {
+            var currentEffect = data.effects[i];
+
+            if (storedDescription != string.Empty)
+                storedDescription += " " + currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
+            else
+                storedDescription = currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
+
+            if (currentEffect.appendWithNext) continue;
+
+            switch (currentEffect.target)
+            {
+                case EffectTarget.Board:
+
+                    var ranges = currentEffect.range;
+
+                    if (ranges.Contains(BoardRange.All) || (ranges.Contains(BoardRange.AllLeft) && ranges.Contains(BoardRange.AllRight)))
+                        SetUpDescription(storedDescription, EffectRangeType.All);
+
+                    else if (ranges.Contains(BoardRange.FirstRight) && ranges.Contains(BoardRange.FirstLeft))
+                        SetUpDescription(storedDescription, EffectRangeType.RightAndLeft);
+
+                    else if (ranges.Contains(BoardRange.Self))
+                        SetUpDescription(storedDescription, EffectRangeType.Self);
+
+                    else if (ranges.Contains(BoardRange.FirstLeft))
+                        SetUpDescription(storedDescription, EffectRangeType.Left);
+
+                    else if (ranges.Contains(BoardRange.FirstRight))
+                        SetUpDescription(storedDescription, EffectRangeType.Right);
+
+                    else if (ranges.Contains(BoardRange.AllLeft))
+                        SetUpDescription(storedDescription, EffectRangeType.AllLeft);
+
+                    else if (ranges.Contains(BoardRange.AllRight))
+                        SetUpDescription(storedDescription, EffectRangeType.AllRight);
+
+                    break;
+
+                case EffectTarget.Hero:
+                    SetUpDescription(storedDescription, EffectRangeType.Hero);
+                    break;
+
+                default:
+                    SetUpDescription(storedDescription, EffectRangeType.Other);
+                    break;
+            }
+
+            storedDescription = string.Empty;
+        }
+
+        if (data.GetType() == typeof(PlotCard))
+        {
+            PlotCard plot = data as PlotCard;
+            SetUpDescription(plot.objective.GetDescription(), EffectRangeType.Plot);
+        }
     }
 
     #region Tweening

@@ -81,6 +81,7 @@ public class Effect : ScriptableObject
 {
     [HideInInspector] public CardData linkedData;
     public string description;
+    public bool appendWithNext;
     public Trigger trigger;
     public EffectTarget target;
 

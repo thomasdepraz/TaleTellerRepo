@@ -58,6 +58,15 @@ MonoBehaviour:
   curseTimer: {fileID: 0}
   mainUnderFlag: {fileID: 21300000, guid: c7d549b4f64cf6149adb3665d7c235fb, type: 3}
   secondaryUnderFlag: {fileID: 21300000, guid: 59e9723f1ab2aca44af2c3536db5da5d, type: 3}
+  rangeIconSelf: {fileID: 21591816480717847, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconRight: {fileID: 6362499923902635336, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconLeft: {fileID: 3629268804840947726, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconAllRight: {fileID: 5223461305758084474, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconAllLeft: {fileID: -5109177819046786902, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconHero: {fileID: 3414657202290878509, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconRightAndLeft: {fileID: 1563787634760702847, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconAll: {fileID: 2122501309460574069, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconPlot: {fileID: 618445554091180572, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
   draggedScale: 1.3
   hoveredScale: 2
   highlightColor: {r: 0.7409443, g: 1, b: 0.6745283, a: 1}
