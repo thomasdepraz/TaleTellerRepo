@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_Artifact_Vision_Effect1
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 0500000009000000
@@ -23,6 +24,8 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &-3810347494055933026
 MonoBehaviour:
@@ -38,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Artifact_Vision_Effect2
+  appendWithNext: 0
   trigger: 1
   target: 4
   range: 
@@ -87,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_Artifact_Vision_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 0500000009000000
@@ -96,6 +101,8 @@ MonoBehaviour:
     type: 0
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &2213873534620985300
 MonoBehaviour:
