@@ -180,23 +180,34 @@ public class CardManager : Singleton<CardManager>
         {
             if (cardHand.GetHandCount() == cardHand.maxHandSize)//if max cards in hand make the player select a card
             {
+                //EventQueue pickQueue = new EventQueue();
+                //List<CardData> pickedCards = new List<CardData>();
+
+                //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
+                //cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, instruction);
+
+                //pickQueue.StartQueue();
+                //while (!pickQueue.resolved)
+                //{
+                //    yield return new WaitForEndOfFrame();
+                //}
+
                 //MAKE the player pick a card and discard it
-                EventQueue pickQueue = new EventQueue();
-                List<CardData> pickedCards = new List<CardData>();
+                CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, cardHand.GetHandDataList(), true);
+                bool wait = true;
+                screen.Open(() => wait = false);
+                while (wait) { yield return new WaitForEndOfFrame(); }
 
-                string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-                cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, instruction);
+                while (screen.open) { yield return new WaitForEndOfFrame(); }
+                wait = true;
+                screen.Close(() => wait = false);
+                while (wait) { yield return new WaitForEndOfFrame(); }
 
-                pickQueue.StartQueue();
-                while (!pickQueue.resolved)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
 
                 //discard all of the picked cards
-                for (int i = 0; i < pickedCards.Count; i++)
+                for (int i = 0; i < screen.pickedCards.Count; i++)
                 {
-                    CardHandToDiscard(pickedCards[i].currentContainer, returnQueue);
+                    CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, returnQueue);
                 }
 
                 //return card to hand
@@ -312,11 +323,9 @@ public class CardManager : Singleton<CardManager>
         cardTweening.MoveCard(card, discardPileTransform.position, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
-        print("Reset Number 1");
-        card.data = card.data.ResetData(card.data);
-        cardHand.currentHand.Remove(card);
-        UpdateHandCount();
-        cardDeck.discardPile.Add(card.data);
+        CardData data = card.data.ResetData(card.data);
+        cardDeck.discardPile.Add(data);
+
         card.ResetContainer();
 
         queue.UpdateQueue();

@@ -332,23 +332,31 @@ public class Deck : MonoBehaviour
         //the card can be burn or push another card from the board
         if (dealtCard.GetType() == typeof(PlotCard) || dealtCard.GetType() == typeof(JunkCard)) //if its a plot card it pushes cards from the board
         {
-            EventQueue pickQueue = new EventQueue();
-            List<CardData> pickedCards = new List<CardData>();
+            //EventQueue pickQueue = new EventQueue();
+            //List<CardData> pickedCards = new List<CardData>();
 
-            string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, instruction);
+            //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
+            //CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, instruction);
 
-            pickQueue.StartQueue();
-            while(!pickQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
+            //pickQueue.StartQueue();
+            //while(!pickQueue.resolved)
+            //{
+            //    yield return new WaitForEndOfFrame();
+            //}
 
+            CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, CardManager.Instance.cardHand.GetHandDataList(), true);
+            bool wait = true;
+            screen.Open(() => wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
 
+            while (screen.open) { yield return new WaitForEndOfFrame(); }
+            wait = true;
+            screen.Close(() => wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
             //Discard the pickedCards and deal the new one
-            for (int i = 0; i < pickedCards.Count; i++)
+            for (int i = 0; i < screen.pickedCards.Count; i++)
             {
-                CardManager.Instance.CardHandToDiscard(pickedCards[i].currentContainer, overdrawQueue);
+                CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, overdrawQueue);
 
             }
             Deal(overdrawQueue, dealtCard);

@@ -90,55 +90,56 @@ public class PlotsManager : Singleton<PlotsManager>
     }
     IEnumerator ChooseSecondaryPlotsRoutine(EventQueue queue)
     {
-        EventQueue pickQueue = new EventQueue();
-        List<CardData> pickedCards = new List<CardData>();
+        yield return null;
+    //    EventQueue pickQueue = new EventQueue();
+    //    List<CardData> pickedCards = new List<CardData>();
 
-        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSecondayPlotInstruction);
-        CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, instruction);
+    //    string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSecondayPlotInstruction);
+    //    CardManager.Instance.cardPicker.Pick(pickQueue, secondaryPlots, pickedCards, 1, instruction);
 
-        pickQueue.StartQueue();
+    //    pickQueue.StartQueue();
 
-        while(!pickQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+    //    while(!pickQueue.resolved)
+    //    {
+    //        yield return new WaitForEndOfFrame();
+    //    }
 
-        EventQueue appearQueue = new EventQueue();
+    //    EventQueue appearQueue = new EventQueue();
 
-        //Send the picked card to hand and init 
-        if(pickedCards.Count != 0)
-        {
-            for (int i = 0; i < pickedCards.Count; i++)
-            {
-                currentPickedCard = pickedCards[i]; //<-- This doesn't work if more than one pickedCard TODO fix this
-                pickedCards[i].onCardAppear(appearQueue, pickedCards[i]); //This manages the appear animation + all the junk apparition
-                secondaryPlots.Remove(pickedCards[i]); //TEMP  
-            }
+    //    //Send the picked card to hand and init 
+    //    if(pickedCards.Count != 0)
+    //    {
+    //        for (int i = 0; i < pickedCards.Count; i++)
+    //        {
+    //            currentPickedCard = pickedCards[i]; //<-- This doesn't work if more than one pickedCard TODO fix this
+    //            pickedCards[i].onCardAppear(appearQueue, pickedCards[i]); //This manages the appear animation + all the junk apparition
+    //            secondaryPlots.Remove(pickedCards[i]); //TEMP  
+    //        }
 
-        }
-        else//If the picked card is null send a random plot card to deck
-        {
-            int r = Random.Range(0, secondaryPlots.Count - 1);
+    //    }
+    //    else//If the picked card is null send a random plot card to deck
+    //    {
+    //        int r = Random.Range(0, secondaryPlots.Count - 1);
 
-            PlotCard card = secondaryPlots[r] as PlotCard;
-            card.onCardAppear -= card.OnPlotAppear; //Unsubscribe from the onAppear event since it wont gbe useful later
+    //        PlotCard card = secondaryPlots[r] as PlotCard;
+    //        card.onCardAppear -= card.OnPlotAppear; //Unsubscribe from the onAppear event since it wont gbe useful later
 
-            card.onCardDraw += card.OnPlotAppear;//Subscribe to the onDraw event to spawn correctly the junk cards;
+    //        card.onCardDraw += card.OnPlotAppear;//Subscribe to the onDraw event to spawn correctly the junk cards;
 
-            //animate card to deck
-            //for now only add it to deck list
-            //SendPlotToDeck(appearQueue, card);
-            CardManager.Instance.CardAppearToDeck(card, appearQueue, CardManager.Instance.plotAppearTransform.position);
-        }
+    //        //animate card to deck
+    //        //for now only add it to deck list
+    //        //SendPlotToDeck(appearQueue, card);
+    //        CardManager.Instance.CardAppearToDeck(card, appearQueue, CardManager.Instance.plotAppearTransform.position);
+    //    }
 
 
-        appearQueue.StartQueue();
+    //    appearQueue.StartQueue();
 
-        while(!appearQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+    //    while(!appearQueue.resolved)
+    //    {
+    //        yield return new WaitForEndOfFrame();
+    //    }
 
-        queue.UpdateQueue();
+    //    queue.UpdateQueue();
     }
 }

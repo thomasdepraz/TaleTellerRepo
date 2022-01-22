@@ -117,63 +117,6 @@ public class RewardManager : Singleton<RewardManager>
         List<CardData> firstBatch = GetMainPlotRewardsFirstBatch(GetArchetypeList(card), 6);
         List<CardData> secondBatch = GetMainPlotRewardsSecondBatch(GetArchetypeList(card), 3, GetRandomRarity());
 
-        //confirmed = false;
-        //canvasGroup.blocksRaycasts = true;
-        //batchOneNumberToSelect = batchOne;
-        //batchTwoNumberToSelect = batchTwo;
-
-        ////Fade in background
-        //#region FadeInBackground
-        //bool fadeEnded = false;
-        //LeanTween.color(gameObject, Color.black, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
-        //while (!fadeEnded)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
-        //fadeEnded = false;
-        //#endregion
-
-        //confirmButton.gameObject.SetActive(true);
-        //InitializePlaceholder(firstBatch, 1);
-        //InitializePlaceholder(secondBatch, 2);
-
-        //while(!confirmed)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
-
-        //ResetPlaceholders();
-
-        //#region FadeOutBackground
-        //Color transparent = new Color(0, 0, 0, 0);
-        //LeanTween.color(gameObject, transparent, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
-        //    onEnd => { canvasGroup.blocksRaycasts = false;});
-
-
-        //yield return new WaitForSeconds(fadeSpeed);
-        //#endregion
-
-        //EventQueue toDeckQueue = new EventQueue();
-        ////Do something with the picked cards
-        //for (int i = 0; i < batchOneSelectedCards.Count; i++)
-        //{
-        //    CardManager.Instance.CardAppearToDeck(batchOneSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
-        //}
-        //for (int i = 0; i < batchTwoSelectedCards.Count; i++)
-        //{
-        //    CardManager.Instance.CardAppearToDeck(batchTwoSelectedCards[i], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
-        //}
-
-        //toDeckQueue.StartQueue();
-        //while(!toDeckQueue.resolved)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
-        //batchOneSelectedCards.Clear();
-        //batchTwoSelectedCards.Clear();
-
-        //ResetCards();
-
         RewardScreen rewardScreen = new RewardScreen(currentRewardInfo, PlotsManager.Instance.currentMainPlotScheme);
         bool wait = true;
         rewardScreen.Open((() => { wait = false; }));
@@ -207,28 +150,24 @@ public class RewardManager : Singleton<RewardManager>
         //use card picker
         EventQueue pickerQueue = new EventQueue();
 
-        string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-        CardManager.Instance.cardPicker.Pick(pickerQueue, card.legendaryCardRewards ,pickedCard, 1, instruction);
+        RewardScreen rewardScreen = new RewardScreen(currentRewardInfo, PlotsManager.Instance.currentMainPlotScheme, card.legendaryCardRewards);
+        bool wait = true;
+        rewardScreen.Open((() => { wait = false; }));
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-        pickerQueue.StartQueue();
-        while(!pickerQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        while (rewardScreen.open) { yield return new WaitForEndOfFrame(); }
 
-        if(pickedCard.Count>0)
-        {
-            EventQueue toDeckQueue = new EventQueue();
+        wait = true;
+        rewardScreen.Close(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-            CardManager.Instance.CardAppearToDeck(pickedCard[0], toDeckQueue, CardManager.Instance.plotAppearTransform.position);
+        EventQueue rewardQueue = new EventQueue();
 
-            toDeckQueue.StartQueue();
-            while(!toDeckQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-        }
+        rewardScreen.chosenHeroReward.ApplyReward(rewardQueue);
+        rewardScreen.chosenCardReward.ApplyReward(rewardQueue);
 
+        rewardQueue.StartQueue();
+        while (!rewardQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
         queue.UpdateQueue();
     }

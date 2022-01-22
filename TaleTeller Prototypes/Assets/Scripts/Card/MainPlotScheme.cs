@@ -47,18 +47,6 @@ public class MainPlotScheme : ScriptableObject
     {
         SchemeStep schemeStep = scheme.schemeSteps[scheme.currentStep];
 
-        //EventQueue pickQueue = new EventQueue();
-
-        //CardManager.Instance.cardPicker.PickScheme(pickQueue, null, null, true);
-
-        //pickQueue.StartQueue();
-        //while (!pickQueue.resolved)
-        //{
-        //    yield return new WaitForEndOfFrame();
-        //}
-
-       
-
         ChapterScreen chapterScreen = new ChapterScreen(schemeStep);
         bool wait = true;
         chapterScreen.Open(() => { wait = false; });
@@ -72,8 +60,7 @@ public class MainPlotScheme : ScriptableObject
         //send card to hand
         EventQueue toHandQueue = new EventQueue();
 
-        PlotCard card = new PlotCard(); 
-        card = card.InitializeData(chapterScreen.chosenCard.data.dataReference) as PlotCard;
+        CardData card = chapterScreen.chosenCard.data.InitializeData(chapterScreen.chosenCard.data.dataReference);
         card.onCardAppear(toHandQueue, card);
 
         toHandQueue.StartQueue();

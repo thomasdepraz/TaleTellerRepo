@@ -24,7 +24,7 @@ public class AddCardReward : Reward
     {
         UtilityClass.InitCardList(rewardCards);
 
-        ChooseCardRewardScreen screen = new ChooseCardRewardScreen(numberToPick, rewardCards);
+        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.ADD,numberToPick, rewardCards, true);
         bool wait = true;
         screen.Open(() => { wait = false; });
         while (wait) { yield return new WaitForEndOfFrame(); }
@@ -46,19 +46,6 @@ public class AddCardReward : Reward
         }
         appearQueue.StartQueue();
         while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
-
-        //List<CardData> pickedCards = new List<CardData>();
-        //EventQueue pickCardsQueue = new EventQueue();
-
-        //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.choiceEffectInstruction);
-        //string newInstruction = instruction.Replace("$value$", numberToPick.ToString());
-
-        //CardManager.Instance.cardPicker.Pick(pickCardsQueue, rewardCards, pickedCards, numberToPick, newInstruction);
-
-        //pickCardsQueue.StartQueue();
-        //while (!pickCardsQueue.resolved) { yield return new WaitForEndOfFrame(); }
-
-
 
         queue.UpdateQueue();
     }
