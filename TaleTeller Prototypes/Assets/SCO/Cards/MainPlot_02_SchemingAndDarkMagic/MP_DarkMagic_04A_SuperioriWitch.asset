@@ -55,7 +55,7 @@ MonoBehaviour:
   completionTimer: 6
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $DarkMagic_Step04A_Objective
   legendaryCardRewards: []
 --- !u!114 &7794991047189245668
 MonoBehaviour:

@@ -10,9 +10,9 @@ public class HeroStatsModifierEffect : HeroStatsEffects
     [Tooltip("Check this if you want to the modification to occure only until the end of the story")]
     public bool temporaryChange;
 
-    public bool handCardsDependant;
+    public bool cardsDependant;
 
-    [ShowIf("handCardsDependant")]
+    [ShowIf("cardsDependant")]
     [SerializeField] List<TypeDependantInfos> typeDependants = new List<TypeDependantInfos>();
 
     [Serializable]
@@ -117,16 +117,18 @@ public class HeroStatsModifierEffect : HeroStatsEffects
 
         int finalGainValue = 0;
 
-        if (handCardsDependant)
+        if (cardsDependant)
         {
-            for (int i = 0; i < CardManager.Instance.cardHand.currentHand.Count; i++)
+            List<CardData> targets = GetTargets();
+
+            for (int i = 0; i < targets.Count; i++)
             {
                 for(int x = 0; x < typeDependants.Count; x++)
                 {
                     switch(typeDependants[x].typeToHave)
                     {
                         case TypeDependantInfos.CardType.Character:
-                            if (CardManager.Instance.cardHand.currentHand[i].data.cardType.GetType() == typeof(CharacterType))
+                            if (targets[i].cardType.GetType() == typeof(CharacterType))
                             {
                                 switch(typeDependants[x].characterType)
                                 {
@@ -134,22 +136,22 @@ public class HeroStatsModifierEffect : HeroStatsEffects
                                         finalGainValue++;
                                         break;
                                     case TypeDependantInfos.CharacterType.Peacefull:
-                                        if((CardManager.Instance.cardHand.currentHand[i].data.cardType as CharacterType).behaviour == CharacterBehaviour.Peaceful)
+                                        if((targets[i].cardType as CharacterType).behaviour == CharacterBehaviour.Peaceful)
                                             finalGainValue++;
                                         break;
                                     case TypeDependantInfos.CharacterType.Agressive:
-                                        if ((CardManager.Instance.cardHand.currentHand[i].data.cardType as CharacterType).behaviour == CharacterBehaviour.Agressive)
+                                        if ((targets[i].cardType as CharacterType).behaviour == CharacterBehaviour.Agressive)
                                             finalGainValue++;
                                         break;
                                 }
                             }
                             break;
                         case TypeDependantInfos.CardType.Object:
-                            if (CardManager.Instance.cardHand.currentHand[i].data.cardType.GetType() == typeof(ObjectType))
+                            if (targets[i].cardType.GetType() == typeof(ObjectType))
                                 finalGainValue++;
                             break;
                         case TypeDependantInfos.CardType.Location:
-                            if (CardManager.Instance.cardHand.currentHand[i].data.cardType.GetType() == typeof(LocationType))
+                            if (targets[i].cardType.GetType() == typeof(LocationType))
                                 finalGainValue++;
                             break;
                     }
