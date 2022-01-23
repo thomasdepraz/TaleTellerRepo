@@ -16,7 +16,7 @@ MonoBehaviour:
   description: $Junk_Salesman_Effect1
   appendWithNext: 0
   trigger: 0
-  target: 0
+  target: 3
   range: 
   values: []
   junkInLinkedList: 1
@@ -90,8 +90,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 2
-    baseAttackDamage: 1
+    baseLifePoints: 1
+    baseAttackDamage: 0
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
