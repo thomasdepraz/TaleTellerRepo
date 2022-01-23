@@ -18,6 +18,8 @@ public class Inspire : MonoBehaviour
     public int drawCardsCount;
     public int darkIdeasCount;
 
+    bool inUse;
+
     void Start()
     {
         for (int i = 0; i < stacks.Count; i++)
@@ -36,8 +38,9 @@ public class Inspire : MonoBehaviour
     {
         //if (useCount == 0) ShakeFrame();
 
-        if(CardManager.Instance.manaSystem.CanUseCard(manaCost))
+        if(CardManager.Instance.manaSystem.CanUseCard(manaCost) && CardManager.Instance.board.currentBoardState == BoardState.Idle && !inUse && CardManager.Instance.board.IsEmpty())
         {
+            inUse = true;
             StartCoroutine(InspireRoutine());
         }
     }
@@ -66,6 +69,9 @@ public class Inspire : MonoBehaviour
             appearQueue.StartQueue();
             while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
         }
+
+        yield return new WaitForSeconds(0.5f);
+        inUse = false;
     }
 
 

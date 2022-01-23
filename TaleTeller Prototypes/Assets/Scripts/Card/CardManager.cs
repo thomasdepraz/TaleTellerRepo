@@ -18,6 +18,7 @@ public class CardManager : Singleton<CardManager>
     public RectTransform discardPileTransform;
     public RectTransform deckTransform;
     public RectTransform plotAppearTransform;
+    public RectTransform deckAppearTransform;
 
     public ManaSystem manaSystem;
 

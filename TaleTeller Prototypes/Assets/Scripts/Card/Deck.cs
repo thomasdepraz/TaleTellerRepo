@@ -327,39 +327,31 @@ public class Deck : MonoBehaviour
         }
 
         if (dealtCard.currentContainer == null)
-            CardManager.Instance.CardAppear(overdrawQueue, dealtCard, CardManager.Instance.deckTransform.position);
+        {
+            EventQueue appearQueue = new EventQueue();
 
-        //the card can be burn or push another card from the board
-        //if (dealtCard.GetType() == typeof(PlotCard) || dealtCard.GetType() == typeof(JunkCard)) //if its a plot card it pushes cards from the board
-        //{
-            //EventQueue pickQueue = new EventQueue();
-            //List<CardData> pickedCards = new List<CardData>();
+            CardManager.Instance.CardAppear(appearQueue, dealtCard, CardManager.Instance.deckAppearTransform.position);
+            appearQueue.StartQueue();
+            while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-            //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-            //CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, instruction);
+        }
 
-            //pickQueue.StartQueue();
-            //while(!pickQueue.resolved)
-            //{
-            //    yield return new WaitForEndOfFrame();
-            //}
+        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, CardManager.Instance.cardHand.GetHandDataList(), false);
+        bool wait = true;
+        screen.Open(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-            CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, CardManager.Instance.cardHand.GetHandDataList(), true);
-            bool wait = true;
-            screen.Open(() => wait = false);
-            while (wait) { yield return new WaitForEndOfFrame(); }
+        while (screen.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        screen.Close(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        //Discard the pickedCards and deal the new one
+        for (int i = 0; i < screen.pickedCards.Count; i++)
+        {
+            CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, overdrawQueue);
 
-            while (screen.open) { yield return new WaitForEndOfFrame(); }
-            wait = true;
-            screen.Close(() => wait = false);
-            while (wait) { yield return new WaitForEndOfFrame(); }
-            //Discard the pickedCards and deal the new one
-            for (int i = 0; i < screen.pickedCards.Count; i++)
-            {
-                CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, overdrawQueue);
-
-            }
-            Deal(overdrawQueue, dealtCard);
+        }
+        Deal(overdrawQueue, dealtCard);
         /*}
         else
         {

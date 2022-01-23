@@ -86,7 +86,7 @@ public class ChoiceEffect : CardManagementMiscEffects
 
                 //Draw the picked card
                 CardManager.Instance.cardDeck.cardDeck.Remove(screen.pickedCards[0].container.data);
-                CardManager.Instance.CardAppearToHand(screen.pickedCards[0].container.data, drawQueue, CardManager.Instance.deckTransform.position);
+                CardManager.Instance.CardAppearToHand(screen.pickedCards[0].container.data, drawQueue, CardManager.Instance.deckAppearTransform.position);
 
                 drawQueue.StartQueue();
 
@@ -100,7 +100,7 @@ public class ChoiceEffect : CardManagementMiscEffects
                 {
                     EventQueue discardQueue = new EventQueue();
 
-                    CardManager.Instance.CardAppear(discardQueue,cardsForChoice[i],CardManager.Instance.deckTransform.position);
+                    CardManager.Instance.CardAppear(discardQueue,cardsForChoice[i],CardManager.Instance.deckAppearTransform.position);
                     CardManager.Instance.cardDeck.Burn(discardQueue, cardsForChoice[i]);
 
                     discardQueue.StartQueue();
