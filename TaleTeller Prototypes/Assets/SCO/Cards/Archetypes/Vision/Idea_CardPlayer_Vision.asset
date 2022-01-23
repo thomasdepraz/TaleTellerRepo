@@ -59,12 +59,16 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_CardPlayer_Vision_Effect0
   appendWithNext: 0
   trigger: 1
   target: 4
   range: 
   values: []
+  boardEffectTypesDependant: 0
+  effectTypeToTarget:
+    type: 0
+    op: 0
   choiceValue:
     value: 1
     type: 9

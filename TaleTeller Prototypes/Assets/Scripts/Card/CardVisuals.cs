@@ -398,7 +398,7 @@ public class CardVisuals : MonoBehaviour
             for (int i = 0; i < data.effects.Count; i++)
             {
                 string txt = data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
-                if (txt != string.Empty && !txt.Split('£').Contains("append")) numberOfBlocks++;
+                if (txt != string.Empty && !txt.Split('ï¿½').Contains("append")) numberOfBlocks++;
             }
         }
 
@@ -497,10 +497,10 @@ public class CardVisuals : MonoBehaviour
             else
                 storedDescription = currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
 
-            string[] appendKey  = storedDescription.Split('£');
+            string[] appendKey  = storedDescription.Split('ï¿½');
             if (appendKey.Contains("append")) 
             {
-                storedDescription = storedDescription.Replace("£append£", "");
+                storedDescription = storedDescription.Replace("ï¿½appendï¿½", "");
                 continue;
             }
 
@@ -550,6 +550,22 @@ public class CardVisuals : MonoBehaviour
         {
             PlotCard plot = data as PlotCard;
             SetUpDescription(plot.objective.GetDescription(), EffectRangeType.Plot);
+        }
+
+        ////Count line in all description blocks
+        //int lineCount = 0;
+        //foreach(EffectDescriptionBlock block in descriptionBlocks)
+        //    lineCount += block.textField.GetTextInfo().lineCount;
+
+        if (descriptionBlocks.Count >= 2)
+        {
+            foreach (EffectDescriptionBlock block in descriptionBlocks)
+                block.textField.fontSizeMax = 12;
+        }
+        else
+        {
+            foreach (EffectDescriptionBlock block in descriptionBlocks)
+                block.textField.fontSizeMax = 20;
         }
     }
 

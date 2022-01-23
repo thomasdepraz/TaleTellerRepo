@@ -19,7 +19,9 @@ MonoBehaviour:
   target: 2
   range: 0500000009000000
   values: []
-  typeDependants: []
+  typeDependants:
+  - typeToHave: 1
+    characterType: 2
   drawValue:
     value: 2
     type: 5

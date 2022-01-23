@@ -1,9 +1,9 @@
 Key	Data
 $Idea_Apple_Base_Effect0	+ $gainValue$<sprite name="Heal">.
-$Idea_Campfire_Base_Effect0	All characters gain $modifierValue$<sprite name="Heal">.
+$Idea_Campfire_Base_Effect0	<b>Overload :</b> +$gainValue$<sprite name="Heal"> 
 $Idea_ChefsBeef_Base_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
 $Idea_ChefsBeef_Base_Effect1	 +$gainValue$<sprite name="Heal">.
-$Idea_GoldBag_Base_Effect0	+ $gainValue$<sprite name="Gold">.
+$Idea_GoldBag_Base_Effect0	+$gainValue$<sprite name="Gold">.
 $Idea_Pot_Base_Effect0	Draw $drawValue$.
 $Idea_PotSeller_Base_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
 $Idea_PotSeller_Base_Effect1	Draw +$drawValue$.
@@ -16,33 +16,21 @@ $Idea_RusticSword_Base_Effect1	+ $gainValue$<sprite name="AttackTemp">.
 $Idea_Veteran_Base_Effect0	Character gain $modifierValue$<sprite name="AttackBase">.
 $Idea_TreasureChest_Base_Effect0	<b>Last Wish</b> : Draw $drawValue$.
 $Idea_LittleGoblin_Base_Effect0	<b>Last Wish</b> : +$gainValue$<sprite name="Gold">.
-$Idea_Bank_Trade_Effect0	Increase <b>Buy</b> by $modification$.
-$Idea_Bank_Trade_Effect1	Increase <b>Bankrupt</b> by $modification$. 
-$Idea_Bourgeois_Trade_Effect0	£append£<b>Bankrupt ($bankruptValue$<sprite name="GoldHero">)</b> :
-$Idea_Bourgeois_Trade_Effect1	+ $gainValue$<sprite name="Gold">.
-$Idea_Bourgeois_Trade_Effect2	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
-$Idea_Bourgeois_Trade_Effect3	- $gainValue$<sprite name="AttackTemp">
-$Idea_CorruptedGuard_Trade_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
-$Idea_CorruptedGuard_Trade_Effect1	+ $gainValue$<sprite name="AttackTemp">.
-$Idea_CorruptedGuard_Trade_Effect2	£append£<b>Bankrupt ($bankruptValue$<sprite name="GoldHero">)</b> :
-$Idea_CorruptedGuard_Trade_Effect3	- $gainValue$<sprite name="Heal">.
-$Idea_Drink_Trade_Effect0	+ $gainValue$<sprite name="Heal">. 
-$Idea_Drink_Trade_Effect1	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
-$Idea_Drink_Trade_Effect2	+ $modifierValue$<sprite name="Heal">.
-$Idea_Forge_Trade_Effect0	+ $modifierValue$<sprite name="AttackTemp">.
-$Idea_Forge_Trade_Effect1	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
-$Idea_Forge_Trade_Effect2	+ $gainValue$<sprite name="AttackBase">.
-$Idea_KingsTreasure_Trade_Effect0	For each <b>Buy</b> on the track, draw $drawValue$ 
-$Idea_KingsTreasure_Trade_Effect1	+ $gainValue$<sprite name="Gold">.
+$Idea_Bank_Trade_Effect0	Decrease all <b>Buy</b> by $modification$.
+$Idea_Bourgeois_Trade_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_Bourgeois_Trade_Effect1	This card gain $modifierValue$<sprite name="AttackTemp"> for this turn.
+$Idea_CorruptedGuard_Trade_Effect0	£append£<b>Bankrupt ($bankruptValue$<sprite name="GoldHero">)</b> :
+$Idea_CorruptedGuard_Trade_Effect1	- $gainValue$<sprite name="Heal">.
+$Idea_Drink_Trade_Effect0	Characters +$modifierValue$<sprite name="Heal">. 
+$Idea_Forge_Trade_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_Forge_Trade_Effect1	Characters +$modifierValue$<sprite name="AttackTemp">.
+$Idea_KingsTreasure_Trade_Effect0	For each <b>Buy</b> next to this card, draw $drawValue$ 
 $Idea_Knife_Trade_Effect0	+ $gainValue$<sprite name="AttackTemp">.
-$Idea_Knife_Trade_Effect1	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
-$Idea_Knife_Trade_Effect2	+ $modifierValue$<sprite name="AttackTemp">.
-$Idea_Shallows_Trade_Effect0	+ Increase <b>Buy</b> by $modification$. 
-$Idea_Shallows_Trade_Effect1	Increase <b>Bankrupt</b> by $modification$.
+$Idea_Shallows_Trade_Effect0	Increase <b>Draw</b> by $modification$. 
+$Idea_Shallows_Trade_Effect1	Increase <b>Discard</b> by $modification$.
 $Idea_StackOfCoins_Trade_Effect0	+ $gainValue$<sprite name="Gold">.
-$Idea_Tavern_Trade_Effect0	+ $modifierValue$<sprite name="Heal">.
-$Idea_Tavern_Trade_Effect1	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
-$Idea_Tavern_Trade_Effect2	+ $gainValue$<sprite name="MaxHealth">.
+$Idea_Tavern_Trade_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_Tavern_Trade_Effect1	Characters gains $modifierValue$<sprite name="Heal">.
 $Idea_Trader_Trade_Effect0	£append£<b>Bankrupt ($bankruptValue$<sprite name="GoldHero">)</b> :
 $Idea_Trader_Trade_Effect1	Draw $drawValue$.
 $Idea_Arcanist_Vision_Effect0	£append£<b>Illumination</b> : +$modifierValue$<sprite name="Heal">
@@ -51,23 +39,17 @@ $Idea_Arcanist_Vision_Effect2	£append£<b>Overload</b> : +$modifierValue$<sprit
 $Idea_Arcanist_Vision_Effect3	& +$modifierValue$<sprite name="AttackBase">.
 $Idea_Artifact_Vision_Effect0	 £append£Characters gain + $modifierValue$<sprite name="Heal">
 $Idea_Artifact_Vision_Effect1	& + $modifierValue$<sprite name=AttackTemp">.
-$Idea_Artifact_Vision_Effect2	Choice $choiceValue$.
-$Idea_CardPlayer_Vision_Effect0	Draw $drawValue$.
+$Idea_CardPlayer_Vision_Effect0	Choice $choiceValue$
 $Idea_Compass_Vision_Effect0	Draw $drawValue$.
 $Idea_Compass_Vision_Effect1	Discard $discardValue$.
-$Idea_Conjurer_Vision_Effect0	£append£<b>Illumination</b> : - $modifierValue$<sprite name="Heal">
-$Idea_Conjurer_Vision_Effect1	& - $modifierValue$<sprite name="AttackBase">.
-$Idea_Conjurer_Vision_Effect2	£append£<b>Overload</b> : + $modifierValue$<sprite name="Heal">
-$Idea_Conjurer_Vision_Effect3	& + $modifierValue$<sprite name="AttackBase">.
+$Idea_Conjurer_Vision_Effect0	£append£<b>Overload</b> : + $modifierValue$<sprite name="Heal">
+$Idea_Conjurer_Vision_Effect1	& + $modifierValue$<sprite name="AttackBase">.
 $Idea_Fairy_Vision_Effect0	Choice $choiceValue$.
-$Idea_Hut_Vision_Effect0	+ $modifierValue$<sprite name="Heal">.
-$Idea_Hut_Vision_Effect1	<b>Overload</b> : + $gainValue$<sprite name="Heal">.
-$Idea_Library_Vision_Effect0	Increase <b>Draw</b> by $modification$.
+$Idea_Hut_Vision_Effect0	Characters +$modifierValue$<sprite name="Heal">. 
+$Idea_Library_Vision_Effect0	Increase <b>Choice</b> by $modification$.
 $Idea_Library_Vision_Effect1	Discard $discardValue$ for each Character on left.
 $Idea_OldSage_Vision_Effect0	£append£<b>Illumination</b> : + $modifierValue$<sprite name="Heal">
 $Idea_OldSage_Vision_Effect1	& +$modifierValue$<sprite name="AttackBase">
-$Idea_OldSage_Vision_Effect2	£append£<b>Overload</b> : -$modifierValue$<sprite name="Heal">
-$Idea_OldSage_Vision_Effect3	& -$modifierValue$<sprite name="Heal">
 $Idea_SacredBook_Vision_Effect0	Draw $drawValue$ for each Character aside.
 $Idea_Spirit_Vision_Effect0	Discard $discardValue$.
 $Idea_RitualKnife_Berserk_Effect0	-$gainValue$<sprite name="Heal">.
