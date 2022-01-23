@@ -35,7 +35,8 @@ public class RewardScreenVisuals
         chooseInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CHOOSE_INSTRUCTION");
         upgradeInstruction.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$UPGRADE_INSTRUCTION");
         confirmButton.SetText(LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CONFIRM"));
-        questText.text = currentScheme.schemeSteps[currentScheme.currentStep].chapterDescription;
+        if (currentScheme.currentStep < currentScheme.schemeSteps.Count) questText.text = currentScheme.schemeSteps[currentScheme.currentStep].chapterDescription;
+        else questText.text = currentScheme.plotEndDescription;
     }
 
     public void InitButton(Action<Reward, ScreenButton> selectCard, Action<Reward, ScreenButton> selectHero, AddCardReward addCardReward, RemoveCardReward removeCardReward ,List<Reward>heroRewards)

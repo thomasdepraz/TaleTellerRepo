@@ -16,8 +16,8 @@ public class MainPlotScheme : ScriptableObject
     [HideInInspector]public int currentStep;
 
     public string plotName;
-    [TextArea(2,5)]
     public string plotDescription;
+    public string plotEndDescription;
     public Sprite plotIllustration;
  
     public MainPlotScheme InitScheme(MainPlotScheme _scheme)
