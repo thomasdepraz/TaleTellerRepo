@@ -35,6 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_ValeforReplica_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 01000000
@@ -44,6 +45,8 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -62,7 +65,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: fb1096a2ab9042443a503ed80a79d91e, type: 3}
+  cardGraph: {fileID: 21300000, guid: 014d7057305272340b11f192e235cc36, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

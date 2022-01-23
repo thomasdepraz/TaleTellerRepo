@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 21300000, guid: 33af20a3de8c8d6428b9e198ad1515fa, type: 3}
+  cardGraph: {fileID: 21300000, guid: 91ce1e2210dcdf2419fc342824e62ef7, type: 3}
   currentContainer: {fileID: 0}
   description: Double Strike
   effectsReferences: []

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Priest_04_CardianalThophilius_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 01000000
@@ -23,6 +24,8 @@ MonoBehaviour:
     type: 7
     op: 1
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0
 --- !u!114 &-2171829827178654687
 MonoBehaviour:
@@ -62,7 +65,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: b7993f7537968b14485cfc4f0a4e7de9, type: 3}
+  cardGraph: {fileID: 21300000, guid: 151328d9a0d0b184db1ac57386084805, type: 3}
   currentContainer: {fileID: 0}
   description: 'Defeat Theophilus.
 
@@ -104,3 +107,4 @@ MonoBehaviour:
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
+  junkPosRestrictions: []
