@@ -37,9 +37,22 @@ public class CardTweening : MonoBehaviour
         else
         {
             float originY = container.rectTransform.localPosition.y;
-            LeanTween.moveLocalY(container.gameObject, originY - 2f, 0.5f).setEaseOutQuint().setOnComplete(
-               value => LeanTween.moveLocalY(container.gameObject, originY + 50, 0.2f).setEaseInQuint().setOnComplete(
-                   val => LeanTween.moveLocalY(container.gameObject, originY, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
+            LeanTween.moveLocalY(container.gameObject, originY - 2f, 0.5f).setEaseOutQuint().setOnComplete(() => {
+                if (container.audioSource == null) container.audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                Sound intervert = new Sound(container.audioSource, "SFX_ATKSWORD", SoundType.SFX, false, false);
+                intervert.Play();
+                LeanTween.moveLocalY(container.gameObject, originY + 50, 0.2f).setEaseInQuint().setOnComplete(() => { 
+                   LeanTween.moveLocalY(container.gameObject, originY, 1).setEaseOutQuint().setOnComplete(() => 
+                   { 
+                       if (queue != null) queue.resolved = true; 
+
+                   });
+                
+                });
+
+            });
+
+
         }
     }
 
