@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_EmpireGuard_Effect0
+  appendWithNext: 0
   trigger: 6
   target: 4
   range: 
@@ -22,6 +23,8 @@ MonoBehaviour:
   junkCardsToSpawn:
   - {fileID: 11400000}
   junkSpawnLocations: 02000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}
 --- !u!114 &-5420477598455258908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +63,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 61b5708d5c1526544896ccd3b4a256d1, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

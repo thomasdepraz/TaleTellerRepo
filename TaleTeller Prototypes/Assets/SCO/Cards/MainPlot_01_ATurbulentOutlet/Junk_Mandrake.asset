@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_Mandrake_Effect0
+  appendWithNext: 0
   trigger: 8
   target: 3
   range: 
@@ -40,7 +41,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 8db122c8246d6144bac6dbc7e89fbf85, type: 3}
+  cardGraph: {fileID: 21300000, guid: 1ab73c07b90b77f4a8580be204b6a802, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

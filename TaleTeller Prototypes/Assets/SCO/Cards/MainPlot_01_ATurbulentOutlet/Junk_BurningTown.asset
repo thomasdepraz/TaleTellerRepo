@@ -30,7 +30,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: b2b49d3118f95f142ac34196a81b5cf8, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_BurningTown_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 0300000004000000
@@ -63,4 +64,6 @@ MonoBehaviour:
     type: 0
     op: 2
   behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0

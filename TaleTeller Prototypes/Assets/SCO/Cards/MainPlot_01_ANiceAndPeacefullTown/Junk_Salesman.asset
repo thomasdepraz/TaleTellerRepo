@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_Salesman_Effect1
+  appendWithNext: 0
   trigger: 0
   target: 0
   range: 
@@ -21,6 +22,8 @@ MonoBehaviour:
   junkInLinkedList: 1
   junkCardsToSpawn: []
   junkSpawnLocations: 00000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}
 --- !u!114 &-4563348484966753318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,6 +38,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_Salesman_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 0
   range: 
@@ -61,7 +65,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: d8678b0dc55ad3547bd2a665e3d8b940, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

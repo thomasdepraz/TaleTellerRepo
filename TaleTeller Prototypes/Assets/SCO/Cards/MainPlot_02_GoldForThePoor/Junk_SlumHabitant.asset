@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 21300000, guid: 701bb8c9186a42c4a8d30dfabc577079, type: 3}
+  cardGraph: {fileID: 21300000, guid: 1c184eb6aa2042840a4e87c2db716317, type: 3}
   currentContainer: {fileID: 0}
   description: The Player discard 2 Cards.
   effectsReferences:
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_SlumHabitant_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 3
   range: 

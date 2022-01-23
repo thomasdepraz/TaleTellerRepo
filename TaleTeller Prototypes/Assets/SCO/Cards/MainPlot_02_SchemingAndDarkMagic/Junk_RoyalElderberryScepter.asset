@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_ScepterA_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 09000000
@@ -43,7 +44,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 83927a4eb8cfe7845b0954c9d25ffbf9, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

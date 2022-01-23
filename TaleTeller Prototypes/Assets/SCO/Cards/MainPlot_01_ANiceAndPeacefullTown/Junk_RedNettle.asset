@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: badc6a809fea5344e93603ccae9015b1, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_RedNettle_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 1
   range: 
@@ -50,7 +51,7 @@ MonoBehaviour:
     type: 1
     op: 1
   temporaryChange: 0
-  handCardsDependant: 0
+  cardsDependant: 0
   typeDependants: []
 --- !u!114 &8787408704128417508
 MonoBehaviour:

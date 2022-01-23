@@ -35,6 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $SM_DarkMagic_02_MenacingWizard_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 3
   range: 
@@ -60,7 +61,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: cecc8f7575af03c4e91d550a985501c7, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

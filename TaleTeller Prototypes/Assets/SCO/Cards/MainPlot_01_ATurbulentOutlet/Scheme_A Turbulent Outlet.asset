@@ -30,4 +30,5 @@ MonoBehaviour:
   currentStep: 0
   plotName: A turbulent outlet
   plotDescription: $TurbulentOutset_Description
-  plotIllustration: {fileID: 0}
+  plotEndDescription: 
+  plotIllustration: {fileID: 21300000, guid: 2a8d2d724b0ee5246a4aea0fb4165dae, type: 3}

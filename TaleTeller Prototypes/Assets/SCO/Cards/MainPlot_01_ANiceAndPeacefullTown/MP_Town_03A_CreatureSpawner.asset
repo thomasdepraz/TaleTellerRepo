@@ -35,6 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_PeacefulTown_03_CreatureSpawner_Effect0
+  appendWithNext: 0
   trigger: 6
   target: 3
   range: 
@@ -63,7 +64,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: ed47e7de6a32791489e0c85cf2b79387, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

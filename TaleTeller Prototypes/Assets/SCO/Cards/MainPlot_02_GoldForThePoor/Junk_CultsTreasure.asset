@@ -30,7 +30,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 67243c5294a7af544b96c460ce7a58e7, type: 3}
+  cardGraph: {fileID: 21300000, guid: b101f2cbd469adb43ab836e45ef480c7, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_CultsTreasure_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 1
   range: 
@@ -63,3 +64,5 @@ MonoBehaviour:
     type: 2
     op: 1
   temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []

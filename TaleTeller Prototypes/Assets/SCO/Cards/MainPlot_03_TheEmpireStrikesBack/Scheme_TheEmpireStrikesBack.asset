@@ -33,4 +33,5 @@ MonoBehaviour:
   currentStep: 0
   plotName: The empire strikes back
   plotDescription: $Empire_Description
-  plotIllustration: {fileID: 0}
+  plotEndDescription: 
+  plotIllustration: {fileID: 21300000, guid: c7cd3c705ead7fd4985257c9589b46a4, type: 3}

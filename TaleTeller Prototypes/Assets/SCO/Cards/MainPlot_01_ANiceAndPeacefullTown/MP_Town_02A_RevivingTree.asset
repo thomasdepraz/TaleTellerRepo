@@ -51,7 +51,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: f3cfd066bb8857341b81d06bf6b6d1be, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_PeacefulTown_02_RevivingTree_Effect0
+  appendWithNext: 0
   trigger: 6
   target: 3
   range: 

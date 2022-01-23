@@ -35,6 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $SM_DarkMagic_01_Necromancer_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 1
   range: 
@@ -44,7 +45,7 @@ MonoBehaviour:
     type: 0
     op: 2
   temporaryChange: 0
-  handCardsDependant: 1
+  cardsDependant: 0
   typeDependants:
   - typeToHave: 0
     characterType: 1
@@ -65,7 +66,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: ea170b62c304ddc4abb99f01cc603625, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

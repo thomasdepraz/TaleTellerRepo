@@ -30,4 +30,5 @@ MonoBehaviour:
   currentStep: 0
   plotName: A nice and peaceful town
   plotDescription: $PeacefulTown_Description
-  plotIllustration: {fileID: 0}
+  plotEndDescription: 
+  plotIllustration: {fileID: 21300000, guid: 7c8f2429d672da349b4455ecf3c9e736, type: 3}

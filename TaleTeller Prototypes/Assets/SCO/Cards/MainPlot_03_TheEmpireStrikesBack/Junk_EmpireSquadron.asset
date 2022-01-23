@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 40ceee05780e9a84d9fda37a951b4e3e, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -41,6 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 7
   target: 0
   range: 
