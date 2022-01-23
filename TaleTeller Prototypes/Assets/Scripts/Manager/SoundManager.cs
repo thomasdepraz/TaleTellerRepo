@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -14,6 +15,9 @@ public class SoundManager : Singleton<SoundManager>
     public SoundBank musicBank;
     public Dictionary<string, AudioClip> soundsDictionary;
     public Dictionary<string, AudioClip> musicDictionary;
+
+    public AudioMixerGroup sfxGroup;
+    public AudioMixerGroup musicGroup;
 
     public void Start()
     {
@@ -122,6 +126,12 @@ public class SoundManager : Singleton<SoundManager>
             if (onCompleteAction != null) onCompleteAction.Invoke();
         });
     }
+
+    public AudioSource GenerateAudioSource(GameObject go)
+    {
+        AudioSource source =  go.AddComponent<AudioSource>();
+        return source;
+    }
 }
 
 public enum SoundType
@@ -146,9 +156,11 @@ public class Sound
         {
             case SoundType.MUSIC:
                 clip = SoundManager.Instance.GetMusicClip(id);
+                currentSource.outputAudioMixerGroup = SoundManager.Instance.musicGroup;
                 break;
             case SoundType.SFX:
                 clip = SoundManager.Instance.GetSoundClip(id);
+                currentSource.outputAudioMixerGroup = SoundManager.Instance.sfxGroup;
                 break;
             default:
                 clip = null;

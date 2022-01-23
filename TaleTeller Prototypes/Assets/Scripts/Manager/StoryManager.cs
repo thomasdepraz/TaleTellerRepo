@@ -295,27 +295,4 @@ public class StoryManager : Singleton<StoryManager>
     }
 
 
-    #region Feedbacks
-    public void HeroLifeFeedback(float value)
-    {
-        print(value);
-        
-        if(value<0)
-        {
-            //Damage
-            StartCoroutine(HitFeedback());
-        }
-        else
-        {
-            //Heal
-
-        }
-    }
-    IEnumerator HitFeedback()
-    { 
-        //heroGraph.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        //heroGraph.color = Color.white;
-    }
-    #endregion
 }
