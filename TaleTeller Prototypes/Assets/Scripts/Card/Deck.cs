@@ -1,23 +1,153 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using NaughtyAttributes;
 
 public class Deck : MonoBehaviour
 {
     public List<CardData> cardDeck;
+    public List<CardData> cachedDeck;
     public List<CardData> discardPile;
 
     [Header("Data")]
+    public DeckData baseDeck;
     public int drawAmount;
     public int drawAmountFirstTurn;
 
+    [Header("Debug")]
+    public bool enableDebugDeck;
+    [ShowIf("enableDebugDeck")]
+    [Range(1,3)] public int actToTest = 1;
+
+    [Header("Visuals")]
+    public Image deckHighlight;
+    public Image discardHighlight;
+
+    public void Awake()
+    {
+        if(enableDebugDeck)
+        {
+            
+        }
+    }
 
     public void Start()
     {
+        baseDeck = Instantiate(baseDeck);
+
+        //Fill deck from base data
+        for (int i = 0; i < baseDeck.deck.Count; i++)
+        {
+            cardDeck.Add(baseDeck.deck[i]);
+        }
+
+        #region DebugDeck
+        if (enableDebugDeck)
+        {
+            StoryManager.Instance.actCount = actToTest - 1;
+
+            if (actToTest >= 2)
+            {
+                int numCardsToRemove = Random.Range(0, 3);
+
+                for (int i = 0; i < numCardsToRemove; i++)
+                {
+                    cardDeck.RemoveAt(Random.Range(0, cardDeck.Count));
+                }
+
+                if(actToTest >= 3)
+                {
+                    for (int i = 0; i < numCardsToRemove; i++)
+                    {
+                        cardDeck.RemoveAt(Random.Range(0, cardDeck.Count));
+                    }
+                }
+
+                int numCardsToAdd = Random.Range(6, 8);
+
+                int numCommonCards = Mathf.RoundToInt(numCardsToAdd * 0.55f);
+
+                List<CardData> commonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
+
+                for(int i = 0; i < commonCards.Count; i++)
+                {
+                    cardDeck.Add(commonCards[i]);
+                }
+
+                int numUncommonCards = Mathf.RoundToInt(numCardsToAdd * 0.30f);
+
+                List<CardData> uncommonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
+
+                for (int i = 0; i < uncommonCards.Count; i++)
+                {
+                    cardDeck.Add(uncommonCards[i]);
+                }
+
+                int numRareCards = Mathf.RoundToInt(numCardsToAdd * 0.15f);
+
+                List<CardData> rareCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
+
+                for (int i = 0; i < rareCards.Count; i++)
+                {
+                    cardDeck.Add(rareCards[i]);
+                }
+
+                if(actToTest >= 3)
+                {
+                    numCardsToAdd = Random.Range(6, 8);
+
+                    numCommonCards = Mathf.RoundToInt(numCardsToAdd * 0.30f);
+
+                    commonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
+
+                    for (int i = 0; i < commonCards.Count; i++)
+                    {
+                        cardDeck.Add(commonCards[i]);
+                    }
+
+                    numUncommonCards = Mathf.RoundToInt(numCardsToAdd * 0.40f);
+
+                    uncommonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
+
+                    for (int i = 0; i < uncommonCards.Count; i++)
+                    {
+                        cardDeck.Add(uncommonCards[i]);
+                    }
+
+                    numRareCards = Mathf.RoundToInt(numCardsToAdd * 0.20f);
+
+                    rareCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
+
+                    for (int i = 0; i < rareCards.Count; i++)
+                    {
+                        cardDeck.Add(rareCards[i]);
+                    }
+
+                    int numEpicCards = Mathf.RoundToInt(numCardsToAdd * 0.10f);
+
+                    List<CardData> epicCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Epic);
+
+                    for (int i = 0; i < epicCards.Count; i++)
+                    {
+                        cardDeck.Add(epicCards[i]);
+                    }
+                }
+
+            }
+        }
+        #endregion
+
+        //Copy Cards to cachedDeck
+        for (int i = 0; i < cardDeck.Count; i++)
+        {
+            cachedDeck.Add(cardDeck[i]);
+        }
+
+        //Init card data
         for (int i = 0; i < cardDeck.Count; i++)
         {
             cardDeck[i] = cardDeck[i].InitializeData(cardDeck[i]);
-            
         }
 
         ShuffleCards(cardDeck);
@@ -43,7 +173,7 @@ public class Deck : MonoBehaviour
     IEnumerator DrawCardsRoutine(int count, EventQueue queue)
     {
         int cardsInDeck = cardDeck.Count;
-        int numberOfCardsInHand = CardManager.Instance.cardHand.currentHand.Count;
+        int numberOfCardsInHand = CardManager.Instance.cardHand.GetHandCount();
 
         EventQueue dealQueue = new EventQueue();
 
@@ -51,7 +181,6 @@ public class Deck : MonoBehaviour
         {
             if (cardsInDeck > 0)//Deal card while deck is not empty
             {
-                //TODO deal or burn
                 #region DEAL/BURN
                 if(numberOfCardsInHand + i + 1 > CardManager.Instance.cardHand.maxHandSize)
                 {
@@ -92,7 +221,7 @@ public class Deck : MonoBehaviour
     }
 
     #region Utility
-    void Refill(EventQueue queue)
+    public void Refill(EventQueue queue)
     {
         queue.events.Add(RefillDeck(queue));
     }
@@ -117,8 +246,6 @@ public class Deck : MonoBehaviour
 
         //All the discarded cards ar back in the deck now u can shuffle
         ShuffleCards(cardDeck);
-        Debug.LogError("Shuffling discard pile in deck");
-
         queue.UpdateQueue();
     }
 
@@ -159,13 +286,11 @@ public class Deck : MonoBehaviour
         while(!illuminationQueue.resolved)
         { yield return new WaitForEndOfFrame(); }
         #endregion
-
-        EventQueue dealQueue = new EventQueue();
-
-        //TODO make the following logic in the queue so it can be animated-----------------
         
         EventQueue initQueue = new EventQueue();
-        CardManager.Instance.cardHand.InitCard(initQueue, dealtCard);
+
+        CardManager.Instance.CardDeckToHand(initQueue, dealtCard, dealtCard.currentContainer != null);
+
         initQueue.StartQueue();
         while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -176,14 +301,6 @@ public class Deck : MonoBehaviour
         else
         {
             if (cardDeck.Contains(card)) cardDeck.Remove(card);
-        }
-        //----------------------------------------------------
-
-        dealQueue.StartQueue();
-
-        while(!dealQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
         }
 
         queue.UpdateQueue();
@@ -208,36 +325,38 @@ public class Deck : MonoBehaviour
         {
             dealtCard = cardDeck[0];
         }
-        //Appear(overDrawQueue)//TODO
-        if(dealtCard.currentContainer == null)
-            Appear(overdrawQueue, dealtCard);
 
-        //the card can be burn or push another card from the board
-        if (dealtCard.GetType() == typeof(PlotCard)) //if its a plot card it pushes cards from the board
+        if (dealtCard.currentContainer == null)
         {
-            EventQueue pickQueue = new EventQueue();
-            List<CardData> pickedCards = new List<CardData>();
+            EventQueue appearQueue = new EventQueue();
 
-            CardManager.Instance.cardPicker.Pick(pickQueue,CardManager.Instance.cardHand.GetHandDataList(),pickedCards, 1, true, "Choose a card to discard");
+            CardManager.Instance.CardAppear(appearQueue, dealtCard, CardManager.Instance.deckAppearTransform.position);
+            appearQueue.StartQueue();
+            while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-            pickQueue.StartQueue();
-            while(!pickQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-
-
-            //Discard the pickedCards and deal the new one
-            for (int i = 0; i < pickedCards.Count; i++)
-            {
-                CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, overdrawQueue);
-            }
-            Deal(overdrawQueue, dealtCard);
         }
+
+        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, CardManager.Instance.cardHand.GetHandDataList(), false);
+        bool wait = true;
+        screen.Open(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        while (screen.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        screen.Close(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        //Discard the pickedCards and deal the new one
+        for (int i = 0; i < screen.pickedCards.Count; i++)
+        {
+            CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, overdrawQueue);
+
+        }
+        Deal(overdrawQueue, dealtCard);
+        /*}
         else
         {
             Burn(overdrawQueue, dealtCard);
-        }
+        }*/
 
         overdrawQueue.StartQueue();
         while(!overdrawQueue.resolved)
@@ -248,7 +367,7 @@ public class Deck : MonoBehaviour
         queue.UpdateQueue();
     }
 
-    void Burn(EventQueue queue, CardData card)
+    public void Burn(EventQueue queue, CardData card)
     {
         queue.events.Add(BurnRoutine(queue, card));
     } 
@@ -256,21 +375,46 @@ public class Deck : MonoBehaviour
     {
         yield return null;
 
-        EventQueue burnQueue = new EventQueue();
+        #region Event OnCardDiscard
+        EventQueue onCardDiscardQueue = new EventQueue();
 
-        //TODO implement this to queue so it can be animated --- 
+        if (card.onCardDiscard != null)
+            card.onCardDiscard(onCardDiscardQueue, card);
+
+        onCardDiscardQueue.StartQueue();
+        while (!onCardDiscardQueue.resolved)
+        { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        #region Event OnAnyCardDiscard (Overload)
+        EventQueue overloadQueue = new EventQueue();
+        CardManager.Instance.board.CallBoardEvents("overload", overloadQueue);
+
+        overloadQueue.StartQueue();
+        while (!overloadQueue.resolved)
+        { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        EventQueue burnQueue = new EventQueue();
 
         //Add feedback
         EventQueue feedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
+        CardManager.Instance.cardTweening.MoveCard(card.currentContainer, CardManager.Instance.discardPileTransform.position, true, false, feedback);
         while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
 
 
-        discardPile.Add(card);
-        if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer)) CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
+        if (CardManager.Instance.cardHand.currentHand.Contains(card.currentContainer))
+        {
+            CardManager.Instance.cardHand.currentHand.Remove(card.currentContainer);
+            CardManager.Instance.UpdateHandCount();
+        }
         if(cardDeck.Contains(card))cardDeck.Remove(card);
 
-        //------------------------------------------------------
+        card.currentContainer.ResetContainer();
+
+        card = card.ResetData(card);
+        discardPile.Add(card);
+
 
         burnQueue.StartQueue();
         while(!burnQueue.resolved)
@@ -280,28 +424,25 @@ public class Deck : MonoBehaviour
 
         queue.UpdateQueue();
     }
-
-    void Appear(EventQueue queue, CardData card)
-    {
-        queue.events.Add(AppearRoutine(queue, card));
-    }
-    IEnumerator AppearRoutine(EventQueue queue, CardData card)
-    {
-        yield return null;
-
-        #region Init Container
-        EventQueue initQueue = new EventQueue();
-        CardManager.Instance.cardHand.InitCard(initQueue, card, false);
-        initQueue.StartQueue();
-        while (!initQueue.resolved) { yield return new WaitForEndOfFrame(); }
-        #endregion
-
-        EventQueue appearFeedback = new EventQueue();
-        card.currentContainer.visuals.MoveCard(card.currentContainer, CardManager.Instance.deckTransform.localPosition, true, true, appearFeedback );
-        while (!appearFeedback.resolved) { yield return new WaitForEndOfFrame(); }
-
-        queue.UpdateQueue();
-    }
-
     #endregion
+
+    public void InitCachedDeck()
+    {
+        for (int i = 0; i < cachedDeck.Count; i++)
+        {
+            cachedDeck[i] = cachedDeck[i].InitializeData(cachedDeck[i]);
+        }
+    }
+    public void ResetCachedDeck()
+    {
+        for (int i = 0; i < cachedDeck.Count; i++)
+        {
+            cachedDeck[i] = cachedDeck[i].dataReference;
+            cardDeck.Add(cachedDeck[i].dataReference);
+        }
+        for (int i = 0; i < cardDeck.Count; i++)
+        {
+            cardDeck[i] = cardDeck[i].InitializeData(cardDeck[i]);
+        }
+    }
 }

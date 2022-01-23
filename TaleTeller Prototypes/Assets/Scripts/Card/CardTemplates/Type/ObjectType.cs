@@ -22,7 +22,7 @@ public class ObjectType : CardTypes
     {
         EventQueue discardQueue = new EventQueue();
 
-        CardManager.Instance.board.DiscardCardFromBoard(data.currentContainer, discardQueue);//<TODO Implement add to queue
+        CardManager.Instance.CardBoardToDiscard(data.currentContainer, discardQueue);
 
         discardQueue.StartQueue();
 

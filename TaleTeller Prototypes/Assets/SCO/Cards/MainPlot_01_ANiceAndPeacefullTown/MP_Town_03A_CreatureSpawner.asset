@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8549004677504087409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 13
+    baseAttackDamage: 0
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 6
+--- !u!114 &-3270431839393852622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f69fc1bcfcd204b9c20fc638020978, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $MP_PeacefulTown_03_CreatureSpawner_Effect0
+  appendWithNext: 0
+  trigger: 6
+  target: 3
+  range: 
+  values: []
+  junkInLinkedList: 0
+  junkCardsToSpawn:
+  - {fileID: 11400000, guid: d1b37d0883ea497458277a27ed9ca381, type: 2}
+  - {fileID: 11400000, guid: d1b37d0883ea497458277a27ed9ca381, type: 2}
+  junkSpawnLocations: 0000000000000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_Town_03A_CreatureSpawner
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Creature Spawner
+  rarity: 0
+  archetype: 0
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: ed47e7de6a32791489e0c85cf2b79387, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -3270431839393852622}
+  effects: []
+  cardTypeReference: {fileID: -8549004677504087409}
+  cardType: {fileID: 0}
+  objective: {fileID: 4541343099129513922}
+  completionTimer: 6
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: $PeacefulTown_Step03A_Objective
+  legendaryCardRewards: []
+--- !u!114 &4541343099129513922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: $MP_PeacefulTown_03_CreatureSpawner_Objective
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: c1368b6726505244682613793e6b3643, type: 2}
+  - {fileID: 11400000, guid: c1368b6726505244682613793e6b3643, type: 2}
+  - {fileID: 11400000, guid: 8ceb5ff991e764f4cbe4e69c8afa2eff, type: 2}
+  - {fileID: 11400000, guid: 8ceb5ff991e764f4cbe4e69c8afa2eff, type: 2}
+  junkSpawnLocations: 03000000030000000300000003000000
+  junksPositionsInDeck: 01000000030000000400000006000000
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []
+  junkPosRestrictions: []

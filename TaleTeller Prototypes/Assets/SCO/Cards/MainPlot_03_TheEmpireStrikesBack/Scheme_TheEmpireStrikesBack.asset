@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ee393ba15f1f34a92c1ee1a2a0f5ee, type: 3}
+  m_Name: Scheme_TheEmpireStrikesBack
+  m_EditorClassIdentifier: 
+  schemeSteps:
+  - stepOptions:
+    - {fileID: 11400000, guid: bacba99c34ab8b049bbe3c8fe9d252fc, type: 2}
+    chapterDescription: $Empire_Step01_Description
+  - stepOptions:
+    - {fileID: 11400000, guid: 7728e2d74d898d049a7e975d7fbb00be, type: 2}
+    - {fileID: 11400000, guid: 50188669ad95df847ab28f11db62b15c, type: 2}
+    chapterDescription: $Empire_Step02_Description
+  - stepOptions:
+    - {fileID: 11400000, guid: 5c989cbdcbd65104f93772c2f61787f0, type: 2}
+    chapterDescription: $Empire_Step03_Description
+  - stepOptions:
+    - {fileID: 11400000, guid: 4c367b33303249e4bb757c6d36e39b5f, type: 2}
+    - {fileID: 11400000, guid: 6d310e9ea64f6324f8c83a6eed4edc55, type: 2}
+    chapterDescription: $Empire_Step04_Description
+  - stepOptions:
+    - {fileID: 11400000, guid: 62e82081e3175b14783eac2ff6425841, type: 2}
+    chapterDescription: $Empire_Step05_Description
+  currentStep: 0
+  plotName: The empire strikes back
+  plotDescription: $Empire_Description
+  plotEndDescription: 
+  plotIllustration: {fileID: 21300000, guid: c7cd3c705ead7fd4985257c9589b46a4, type: 3}

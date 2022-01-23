@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5547673673126201353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 30
+    baseAttackDamage: 6
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 6
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_Empire_03_BoostedGeneralOton
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Boosted General Oton
+  rarity: 0
+  archetype: 0
+  manaCost: 2
+  cardGraph: {fileID: 21300000, guid: c8061a69e7a50c04b9f1d3343aba2103, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences: []
+  effects: []
+  cardTypeReference: {fileID: -5547673673126201353}
+  cardType: {fileID: 0}
+  objective: {fileID: 2692288266747796300}
+  completionTimer: 7
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: 
+  legendaryCardRewards: []
+--- !u!114 &2692288266747796300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: 24a7290d6394dfa4eb5f94cea05853af, type: 2}
+  - {fileID: 11400000, guid: 24a7290d6394dfa4eb5f94cea05853af, type: 2}
+  - {fileID: 11400000, guid: 8b049d6896dffda4e98e60a30fa1e257, type: 2}
+  - {fileID: 11400000, guid: 8b049d6896dffda4e98e60a30fa1e257, type: 2}
+  - {fileID: 11400000, guid: 8b049d6896dffda4e98e60a30fa1e257, type: 2}
+  - {fileID: 11400000, guid: b0079de4e89b1b54186304114677567e, type: 2}
+  - {fileID: 11400000, guid: b0079de4e89b1b54186304114677567e, type: 2}
+  junkSpawnLocations: 03000000030000000000000000000000000000000300000003000000
+  junksPositionsInDeck: 05000000070000000000000000000000000000000300000006000000
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []
+  junkPosRestrictions: []

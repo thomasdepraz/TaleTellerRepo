@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1522476433829291630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $Idea_Veteran_Base_Effect0
+  appendWithNext: 0
+  trigger: 1
+  target: 2
+  range: 09000000
+  values: []
+  modifierValue:
+    value: 2
+    type: 1
+    op: 1
+  behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
+  temporaryChange: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Idea_Veteran_Base
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Veteran
+  rarity: 1
+  archetype: 1
+  manaCost: 2
+  cardGraph: {fileID: 21300000, guid: 2674ce42eb5019e478a9dd60fd399155, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -1522476433829291630}
+  effects: []
+  cardTypeReference: {fileID: 8981549946518256153}
+  cardType: {fileID: 0}
+--- !u!114 &8981549946518256153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 2
+    baseAttackDamage: 1
+  behaviour: 1
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 1

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public static class UtilityClass
+public class UtilityClass
 {
     public static List<Type> GetSubClasses(Type type)
     {
@@ -33,5 +33,31 @@ public static class UtilityClass
             }
         }
         return false;
+    }
+
+    public static string ToBold(string text)
+    {
+        return $"<b>{text}</b>";
+    }
+
+    public static string ToColor(string text, string color)
+    {
+        return $"<Color={color}>{text}";
+    }
+
+    public static void InitCardList(List<CardData> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i] = list[i].InitializeData(list[i]);
+        }
+    }
+
+    public static void ResetCardList(List<CardData> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i] = list[i].dataReference;
+        }
     }
 }

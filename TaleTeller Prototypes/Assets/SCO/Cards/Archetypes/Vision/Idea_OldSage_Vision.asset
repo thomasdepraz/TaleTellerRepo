@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9207299857787731969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $Idea_OldSage_Vision_Effect0
+  appendWithNext: 0
+  trigger: 11
+  target: 2
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 1
+    type: 1
+    op: 1
+  behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
+  temporaryChange: 0
+--- !u!114 &-8201480308475489576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $Idea_OldSage_Vision_Effect1
+  appendWithNext: 0
+  trigger: 11
+  target: 2
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 2
+    type: 0
+    op: 1
+  behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
+  temporaryChange: 0
+--- !u!114 &-5485318600038900049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect3
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $Idea_OldSage_Vision_Effect3
+  appendWithNext: 0
+  trigger: 12
+  target: 2
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 1
+    type: 1
+    op: 2
+  behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
+  temporaryChange: 0
+--- !u!114 &-2473154341330226124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect2
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $Idea_OldSage_Vision_Effect2
+  appendWithNext: 0
+  trigger: 12
+  target: 2
+  range: 01000000
+  values: []
+  modifierValue:
+    value: 1
+    type: 0
+    op: 2
+  behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
+  temporaryChange: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Idea_OldSage_Vision
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Old Sage
+  rarity: 3
+  archetype: 3
+  manaCost: 2
+  cardGraph: {fileID: 21300000, guid: 1b993987c51768d489bf67a666804e6b, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -9207299857787731969}
+  - {fileID: -8201480308475489576}
+  effects: []
+  cardTypeReference: {fileID: 2561184032536904974}
+  cardType: {fileID: 0}
+--- !u!114 &2561184032536904974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 3
+    baseAttackDamage: 5
+  behaviour: 1
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 2

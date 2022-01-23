@@ -52,12 +52,18 @@ public class JunkCard : CardData
     }
     IEnumerator OnEndJunkRoutine(EventQueue currentQueue)
     {
+        if(currentContainer == null)
+        {
+            currentQueue.UpdateQueue();
+
+            yield break;
+        }
 
         if(cardType!=null && cardType.GetType()== typeof(CharacterType))
         {
             EventQueue returnToHand = new EventQueue();
 
-            CardManager.Instance.board.ReturnCardToHand(currentContainer, false, returnToHand);
+            CardManager.Instance.CardBoardToHand(currentContainer, false, returnToHand);
 
             returnToHand.StartQueue();
             while(!returnToHand.resolved)
@@ -69,7 +75,7 @@ public class JunkCard : CardData
         {
             EventQueue discardQueue = new EventQueue();
 
-            CardManager.Instance.board.DiscardCardFromBoard(currentContainer, discardQueue);
+            CardManager.Instance.CardBoardToDiscard(currentContainer, discardQueue);
 
             discardQueue.StartQueue();
             while (!discardQueue.resolved)
@@ -85,11 +91,10 @@ public class JunkCard : CardData
     {
         queue.events.Add(DestroyJunkCardRoutine(queue));
     }
-
     IEnumerator DestroyJunkCardRoutine(EventQueue currentQueue) //LATER probably have this method in the card manager as DestroyCard(CardData data) {}
     {
         EventQueue destroyQueue = new EventQueue();
-        //TODO implement add to queue event list in function that take time;
+
         //Discard the card based on where it is 
         if (currentContainer != null) //means it's in the hand or board
         {
@@ -127,7 +132,6 @@ public class JunkCard : CardData
             yield return new WaitForEndOfFrame();
         }
 
-        //TODO CALL RESUME
         currentQueue.UpdateQueue();
     }
 }

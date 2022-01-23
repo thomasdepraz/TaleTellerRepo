@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class RewardManager : Singleton<RewardManager>
 {
+    public RewardInfo currentRewardInfo;
     [Header("References")]
     public Image backgroundPanel;
     public CanvasGroup canvasGroup;
@@ -27,13 +29,15 @@ public class RewardManager : Singleton<RewardManager>
 
     [Header("Data")]
     public float fadeSpeed;
+    [Space]
+    public int batchOne;
+    public int batchTwo;
 
     [Space]
 
     //Different Pools based on each archetype -- ALL OF THESE CARDS MUST BE INSTANTIATED
     public List<CardData> secondaryRewardCards = new List<CardData>();
-    public List<CardData> rewardPoolTrading = new List<CardData>();
-    public List<CardData> rewardPoolVision = new List<CardData>();
+    public List<CardData> rewardPoolAllIdeas = new List<CardData>();
 
     //
     bool confirmed;
@@ -60,51 +64,47 @@ public class RewardManager : Singleton<RewardManager>
 
     private void Start()
     {
-        #region onClick Init
-        for (int i = 0; i < batchOneContainers.Count; i++)
+        InitEvent(batchOneContainers, SelectCard, EventTriggerType.PointerClick);
+        InitEvent(batchOneContainers, PointerEnterContainer, EventTriggerType.PointerEnter);
+        InitEvent(batchOneContainers, PointerExitContainer, EventTriggerType.PointerExit);
+
+        InitEvent(batchTwoContainers, SelectCard, EventTriggerType.PointerClick);
+        InitEvent(batchTwoContainers, PointerEnterContainer, EventTriggerType.PointerEnter);
+        InitEvent(batchTwoContainers, PointerExitContainer, EventTriggerType.PointerExit);
+
+        InitEvent(secondaryRewardCardContainer, SelectCardSecondary, EventTriggerType.PointerClick);
+        InitEvent(secondaryRewardCardContainer, PointerEnterContainer, EventTriggerType.PointerEnter);
+        InitEvent(secondaryRewardCardContainer, PointerExitContainer, EventTriggerType.PointerExit);
+    }
+
+    public void InitEvent(List<CardContainer> containers, Action<CardContainer> action, EventTriggerType triggerType)
+    {
+        for (int i = 0; i < containers.Count; i++)
         {
             int j = i;
             EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerClick;
-            entry.callback.AddListener(data => { SelectCard(batchOneContainers[j]); });
-            batchOneContainers[i].gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
+            entry.eventID = triggerType;
+            entry.callback.AddListener(data => action(containers[j]));
+            containers[i].gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
         }
-        for (int i = 0; i < batchTwoContainers.Count; i++)
-        {
-            int j = i;
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerClick;
-            entry.callback.AddListener(data => { SelectCard(batchTwoContainers[j]); });
-            batchTwoContainers[i].gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
-        }
-
-        EventTrigger.Entry _entry = new EventTrigger.Entry();
-        _entry.eventID = EventTriggerType.PointerClick;
-        _entry.callback.AddListener(data => { SelectCardSecondary(secondaryRewardCardContainer); });
-        secondaryRewardCardContainer.gameObject.GetComponent<EventTrigger>().triggers.Add(_entry);
-
-        #endregion
-
-
-        InitCards();
+    }
+    public void InitEvent(CardContainer container, Action<CardContainer> action, EventTriggerType triggerType)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = triggerType;
+        entry.callback.AddListener(data => action(container));
+        container.gameObject.GetComponent<EventTrigger>().triggers.Add(entry);
     }
 
     void InitCards()
     {
-        for (int i = 0; i < secondaryRewardCards.Count; i++)
-        {
-            secondaryRewardCards[i] = secondaryRewardCards[i].InitializeData(secondaryRewardCards[i]);
-        }
-
-        for (int i = 0; i < rewardPoolTrading.Count; i++)
-        {
-            rewardPoolTrading[i] =  rewardPoolTrading[i].InitializeData(rewardPoolTrading[i]);
-        }
-
-        for (int i = 0; i < rewardPoolVision.Count; i++)
-        {
-            rewardPoolVision[i] =  rewardPoolVision[i].InitializeData(rewardPoolVision[i]);
-        }
+        UtilityClass.InitCardList(secondaryRewardCards);
+        UtilityClass.InitCardList(rewardPoolAllIdeas);
+    }
+    void ResetCards()
+    {
+        UtilityClass.ResetCardList(secondaryRewardCards);
+        UtilityClass.ResetCardList(rewardPoolAllIdeas);
     }
 
     public void ChooseMainPlotReward(EventQueue queue, PlotCard card)
@@ -113,62 +113,28 @@ public class RewardManager : Singleton<RewardManager>
     }
     IEnumerator ChooseMainPlotRewardRoutine(EventQueue queue, PlotCard card)//Pick between nine cards 
     {
-        yield return null;
+        InitCards();
         List<CardData> firstBatch = GetMainPlotRewardsFirstBatch(GetArchetypeList(card), 6);
         List<CardData> secondBatch = GetMainPlotRewardsSecondBatch(GetArchetypeList(card), 3, GetRandomRarity());
 
-        confirmed = false;
-        canvasGroup.blocksRaycasts = true;
-        batchOneNumberToSelect = 2;
-        batchTwoNumberToSelect = 1;//NOTE PROBABLY NEED TO EXPOSE THOSE VARIABLES
+        RewardScreen rewardScreen = new RewardScreen(currentRewardInfo, PlotsManager.Instance.currentMainPlotScheme);
+        bool wait = true;
+        rewardScreen.Open((() => { wait = false; }));
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-        //Fade in background
-        #region FadeInBackground
-        bool fadeEnded = false;
-        LeanTween.color(gameObject, Color.black, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(onEnd => { fadeEnded = true; });
-        while (!fadeEnded)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        fadeEnded = false;
-        #endregion
+        while (rewardScreen.open) { yield return new WaitForEndOfFrame(); }
 
-        confirmButton.gameObject.SetActive(true);
-        InitializePlaceholder(firstBatch, 1);
-        InitializePlaceholder(secondBatch, 2);
+        wait = true;
+        rewardScreen.Close(() => { wait = false; });
+        while(wait) { yield return new WaitForEndOfFrame(); }
 
-        while(!confirmed)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        EventQueue rewardQueue = new EventQueue();
 
-        ResetPlaceholders();
+        rewardScreen.chosenHeroReward.ApplyReward(rewardQueue);
+        rewardScreen.chosenCardReward.ApplyReward(rewardQueue);
 
-        #region FadeOutBackground
-        Color transparent = new Color(0, 0, 0, 0);
-        LeanTween.color(gameObject, transparent, fadeSpeed).setOnUpdate((Color col) => { backgroundPanel.color = col; }).setOnComplete(
-            onEnd => { canvasGroup.blocksRaycasts = false;});
-
-
-        yield return new WaitForSeconds(fadeSpeed);
-        #endregion
-
-        EventQueue toDeckQueue = new EventQueue();
-        //Do something with the picked cards
-        for (int i = 0; i < batchOneSelectedCards.Count; i++)
-        {
-            PlotsManager.Instance.SendPlotToDeck(toDeckQueue, batchOneSelectedCards[i]);//NOTE : MAYBE USE A DIFFERENT METHOD LATER
-        }
-        for (int i = 0; i < batchTwoSelectedCards.Count; i++)
-        {
-            PlotsManager.Instance.SendPlotToDeck(toDeckQueue, batchTwoSelectedCards[i]);//NOTE : MAYBE USE A DIFFERENT METHOD LATER
-        }
-
-        toDeckQueue.StartQueue();
-        while(!toDeckQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        rewardQueue.StartQueue();
+        while(!rewardQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
         queue.UpdateQueue();
     }
@@ -184,27 +150,24 @@ public class RewardManager : Singleton<RewardManager>
         //use card picker
         EventQueue pickerQueue = new EventQueue();
 
-        CardManager.Instance.cardPicker.Pick(pickerQueue, card.legendaryCardRewards ,pickedCard, 1, false, "Choose one of these cards");
+        RewardScreen rewardScreen = new RewardScreen(currentRewardInfo, PlotsManager.Instance.currentMainPlotScheme, card.legendaryCardRewards);
+        bool wait = true;
+        rewardScreen.Open((() => { wait = false; }));
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-        pickerQueue.StartQueue();
-        while(!pickerQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        while (rewardScreen.open) { yield return new WaitForEndOfFrame(); }
 
-        if(pickedCard.Count>0)
-        {
-            EventQueue toDeckQueue = new EventQueue();
+        wait = true;
+        rewardScreen.Close(() => { wait = false; });
+        while (wait) { yield return new WaitForEndOfFrame(); }
 
-            PlotsManager.Instance.SendPlotToDeck(toDeckQueue, pickedCard[0]);
+        EventQueue rewardQueue = new EventQueue();
 
-            toDeckQueue.StartQueue();
-            while(!toDeckQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-        }
+        rewardScreen.chosenHeroReward.ApplyReward(rewardQueue);
+        rewardScreen.chosenCardReward.ApplyReward(rewardQueue);
 
+        rewardQueue.StartQueue();
+        while (!rewardQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
         queue.UpdateQueue();
     }
@@ -215,7 +178,7 @@ public class RewardManager : Singleton<RewardManager>
     }
     IEnumerator ChooseSecondaryPlotRewardRoutine(EventQueue queue, PlotCard card)//Pick between one card / one action / one hero stats boost
     {
-
+        InitCards();
         canvasGroup.blocksRaycasts = true;
         confirmed = false;
 
@@ -259,7 +222,7 @@ public class RewardManager : Singleton<RewardManager>
         if(secondaryPlotSelectedCard != null)
         {
             //send card to hand
-            PlotsManager.Instance.SendPlotToDeck(rewardQueue, secondaryPlotSelectedCard);
+            CardManager.Instance.CardAppearToDeck(secondaryPlotSelectedCard, rewardQueue, CardManager.Instance.plotAppearTransform.position);
         }
         else if(selectedActionReward)//TODO
         {
@@ -281,11 +244,14 @@ public class RewardManager : Singleton<RewardManager>
             yield return new WaitForEndOfFrame();
         }
 
+        secondaryPlotSelectedCard = null;
+
+        ResetCards();
         queue.UpdateQueue();
     }
 
 
-    #region Utility
+    #region MainUtility
     CardData GetSecondaryPlotCardReward(List<CardData> list)
     {
         int r = Random.Range(0, list.Count - 1);
@@ -319,7 +285,7 @@ public class RewardManager : Singleton<RewardManager>
         return result;
     }
 
-    List<CardData> GetMainPlotRewardsSecondBatch(List<CardData> list, int count, CardRarity targetRarity)
+    public List<CardData> GetMainPlotRewardsSecondBatch(List<CardData> list, int count, CardRarity targetRarity)
     {
         List<CardData> filteredList = new List<CardData>();
         for (int i = 0; i < list.Count; i++)
@@ -366,6 +332,8 @@ public class RewardManager : Singleton<RewardManager>
 
     List<CardData> GetArchetypeList(CardData data)
     {
+        //DEPRECATED
+        /*
         switch (data.archetype)
         {
             case Archetype.None:
@@ -378,8 +346,9 @@ public class RewardManager : Singleton<RewardManager>
             case Archetype.Vision:
                 return rewardPoolVision;
         }
-        Debug.LogError("Archetype List wasn't found");
-        return null;
+        Debug.LogError("Archetype List wasn't found");*/
+
+        return rewardPoolAllIdeas;
     }
 
     void InitializePlaceholder(List<CardData> targets , int batch)
@@ -423,70 +392,46 @@ public class RewardManager : Singleton<RewardManager>
     {
         if(batchOneContainers.Contains(container))
         {
-            #region select for batch one
-            if (batchOneSelectedCards.Contains(container.data))
-            {
-                //Hide selected shader
-                container.selfImage.color = Color.white;
-
-                //Remove from list
-                batchOneSelectedCards.Remove(container.data);
-
-                return;
-            }
-
-            if (batchOneSelectedCards.Count == batchOneNumberToSelect)
-            {
-                return;
-            }
-
-            else if (!batchOneSelectedCards.Contains(container.data))
-            {
-                //show selected shader
-                container.selfImage.color = Color.green;
-
-                //add to list
-                batchOneSelectedCards.Add(container.data);
-            }
-            #endregion
+            SelectHelper(batchOneSelectedCards, container, batchOneNumberToSelect);
         }
         else if(batchTwoContainers.Contains(container))
         {
-            #region select for batch two
-            if (batchTwoSelectedCards.Contains(container.data))
-            {
-                //Hide selected shader
-                container.selfImage.color = Color.white;
-
-                //Remove from list
-                batchTwoSelectedCards.Remove(container.data);
-
-                return;
-            }
-
-            if (batchTwoSelectedCards.Count == batchTwoNumberToSelect)
-            {
-                return;
-            }
-
-            else if (!batchTwoSelectedCards.Contains(container.data))
-            {
-                //show selected shader
-                container.selfImage.color = Color.green;
-
-                //add to list
-                batchTwoSelectedCards.Add(container.data);
-            }
-            #endregion
+            SelectHelper(batchTwoSelectedCards, container, batchTwoNumberToSelect);
         }
     }
+    public void SelectHelper(List<CardData> list, CardContainer container, int numberToSelect)
+    {
+        if (list.Contains(container.data))
+        {
+            //Hide selected shader
+            PickerHelper.DeselectContainerFeedback(container);
 
+            //Remove from list
+            list.Remove(container.data);
+
+            return;
+        }
+
+        if (list.Count == numberToSelect)
+        {
+            return;
+        }
+
+        else if (!list.Contains(container.data))
+        {
+            //show selected shader
+            PickerHelper.SelectContainerFeedback(container);
+
+            //add to list
+            list.Add(container.data);
+        }
+    }
     public void OnButtonClick()
     {
         confirmed = true;
         confirmButton.gameObject.SetActive(false);
     }
-
+    #endregion
 
     #region Secondary Rewards Utility
     public void InitSecondaryRewardPlaceholder()
@@ -499,7 +444,7 @@ public class RewardManager : Singleton<RewardManager>
     public void InitStatButton()
     {
         currentStatRewardAction = null;
-        currentStatRewardAction = GetRandomStatUpgrade();
+        currentStatRewardAction = StatsUpgrade.GetRandomStatUpgrade(ref statsButtonDescription);
 
         statsRewardButton.gameObject.SetActive(true);
     }
@@ -558,70 +503,6 @@ public class RewardManager : Singleton<RewardManager>
         secondaryPlotSelectedCard = container.data;
     }
 
-    public Action<EventQueue> GetRandomStatUpgrade()
-    {
-        Action<EventQueue> result = null;
-        int r = Random.Range(0, 3);
-        switch (r)
-        {
-            case 0:
-                result = HealthUpdgrade;
-                statsButtonDescription.text = "Heal 1 HP";
-                break;
-
-            case 1:
-                result = AttackUpgrade;
-                statsButtonDescription.text = "Gain 1 Attack Damage";
-                break;
-
-            case 2:
-                result = GoldUpgrade;
-                statsButtonDescription.text = "Gain 1 Max Gold";
-                break;
-        }
-
-        return result;
-    }
-
-    void HealthUpdgrade(EventQueue queue)
-    {
-        queue.events.Add(StatsUpgrade(queue, "health"));
-    }
-    void AttackUpgrade(EventQueue queue)
-    {
-        queue.events.Add(StatsUpgrade(queue, "attack"));
-    }
-    void GoldUpgrade(EventQueue queue)
-    {
-        queue.events.Add(StatsUpgrade(queue, "gold"));
-    }
-
-    IEnumerator StatsUpgrade(EventQueue queue, string param)
-    {
-
-        switch (param)//TODO implement value calculus so its no always one
-        {
-            case "health":
-                GameManager.Instance.currentHero.maxLifePoints += 1;
-                break;
-
-            case "attack":
-                GameManager.Instance.currentHero.attackDamage += 1;
-                break;
-
-            case "gold":
-                GameManager.Instance.currentHero.maxGoldPoints += 1;
-                break;
-
-            default:
-                Debug.LogError("Param Error");
-                break;
-        }
-        yield return null;
-
-        queue.UpdateQueue();
-    }
-
     public Action<EventQueue> GetRandomAction()
     {
         Action<EventQueue> result = null;
@@ -632,7 +513,7 @@ public class RewardManager : Singleton<RewardManager>
 
     void ResetSecondaryContainers()
     {
-        secondaryRewardCardContainer.ResetContainer();
+        secondaryRewardCardContainer.ResetContainer(true);
         actionRewardButton.gameObject.SetActive(false);
         statsRewardButton.gameObject.SetActive(false);
 
@@ -640,6 +521,12 @@ public class RewardManager : Singleton<RewardManager>
     }
     #endregion
 
-
-    #endregion
+    public void PointerEnterContainer(CardContainer container)
+    {
+        PickerHelper.PointerEnter(container.gameObject);
+    }
+    public void PointerExitContainer(CardContainer container)
+    {
+        PickerHelper.PointerExit(container.gameObject);
+    }
 }

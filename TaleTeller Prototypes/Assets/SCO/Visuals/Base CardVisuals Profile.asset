@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025ffa5fee34e7b41b377b095231476a, type: 3}
+  m_Name: Base CardVisuals Profile
+  m_EditorClassIdentifier: 
+  ideaBackground: {fileID: 21300000, guid: 7762a443fa86d0449a7db8805a6784b7, type: 3}
+  curseBackground: {fileID: 21300000, guid: deb5678392866d2418889fc2087bd661, type: 3}
+  plotBackground: {fileID: 21300000, guid: 720ae71f488300a41b88c0a74b45f781, type: 3}
+  junkBackground: {fileID: 21300000, guid: 1c22483804c4554479ccf2d3e0312386, type: 3}
+  characterFrameNeutral: {fileID: 21300000, guid: 674c03f246abe4c42af601b6955ef9d6, type: 3}
+  characterFrameGood: {fileID: 21300000, guid: 674c03f246abe4c42af601b6955ef9d6, type: 3}
+  characterFrameBad: {fileID: 21300000, guid: d85cc1d803a3ca64ea36321fb20dc95d, type: 3}
+  itemFrame: {fileID: 21300000, guid: 7d76a8aef013ccd4d80004e827c6e372, type: 3}
+  placeFrame: {fileID: 21300000, guid: ac11ae70f257bee4894df66bdfac6f1f, type: 3}
+  characterFrameMask: {fileID: 21300000, guid: f68decd81052ff349a23ed4c46bc3e05, type: 3}
+  characterBadFrameMask: {fileID: 21300000, guid: a697be00f708d7647908092a7507654c, type: 3}
+  itemFrameMask: {fileID: 21300000, guid: cfa3cad57c82054439c5bcf9124ab980, type: 3}
+  placeFrameMask: {fileID: 21300000, guid: 1e40f8635710af64cbd5f49fb9fe7c78, type: 3}
+  curseCharacterFrameNeutral: {fileID: 21300000, guid: 435d731426f1d29419fc92b36fd5827c, type: 3}
+  curseCharacterFrameGood: {fileID: 21300000, guid: 435d731426f1d29419fc92b36fd5827c, type: 3}
+  curseCharacterFrameBad: {fileID: 21300000, guid: d85cc1d803a3ca64ea36321fb20dc95d, type: 3}
+  curseItemFrame: {fileID: 21300000, guid: 1ea2ce7b4b359324987ad57c669cf29c, type: 3}
+  cursePlaceFrame: {fileID: 21300000, guid: 5e277bacad2759746a9b84749b464cf4, type: 3}
+  curseCharacterFrameMask: {fileID: 21300000, guid: 3f4b49c3f9139034895b4f8a4427f643, type: 3}
+  curseCharacterBadFrameMask: {fileID: 21300000, guid: 1da093db484c6404f8fd0c5d617d6585, type: 3}
+  curseItemFrameMask: {fileID: 21300000, guid: 655aa3a78aec8b54cbcc45bfbe647b9f, type: 3}
+  cursePlaceFrameMask: {fileID: 21300000, guid: 764b6ee6bdb4ca24c84f59747522eed1, type: 3}
+  ideaFlag: {fileID: 21300000, guid: 16edf07b1a6d7204ea3c012d8c6938ff, type: 3}
+  plotFlag: {fileID: 21300000, guid: 1c8603f51a3c41b4084c21115393c3be, type: 3}
+  curseFlag: {fileID: 21300000, guid: 6a2542fd1886bf043bc165691a050913, type: 3}
+  characterIcon: {fileID: 21300000, guid: 14f0d1d228a290d4e95a6450e5f6de91, type: 3}
+  characterBadIcon: {fileID: 21300000, guid: 92b4409c79ceecd4788cb5f325ab985f, type: 3}
+  itemIcon: {fileID: 21300000, guid: ccd4e5c12ec9f774196554818f2e81ab, type: 3}
+  placeIcon: {fileID: 21300000, guid: 3dd61f649b85e934db4c5821c92eca66, type: 3}
+  commonRarity: {fileID: 21300000, guid: b2bb3caeb6e99114b867ce8cd8fd8851, type: 3}
+  uncommonRarity: {fileID: 21300000, guid: ef21c74fb06ebe54196a67210df733bb, type: 3}
+  rareRarity: {fileID: 21300000, guid: b788a4da506120043968617fa95ba87d, type: 3}
+  epicRarity: {fileID: 21300000, guid: acc435699fa47244a8419595c7e2e392, type: 3}
+  legendaryRarity: {fileID: 21300000, guid: d8e082d08b03c524cb37c81e0e3727a2, type: 3}
+  normalCharacterHealth: {fileID: 21300000, guid: e53e9e6212bac5943bfcbb22bce9c4cd, type: 3}
+  curseCharacterHealth: {fileID: 21300000, guid: 47e8e129b36b39b4387bddd52401493f, type: 3}
+  normalCharacterAttack: {fileID: 21300000, guid: 8f49ee65ac365814f822a92c4d37273a, type: 3}
+  curseCharacterAttack: {fileID: 21300000, guid: 1d562f7f22496e7468d26e993eaad27d, type: 3}
+  normalHourglass: {fileID: 21300000, guid: 255d78dbfe45a7f44b9d4893d28bf85e, type: 3}
+  curseHourglass: {fileID: 21300000, guid: 60b70e2a1d1888d4fb5ab4fdc59f5f65, type: 3}
+  normalManaFrame: {fileID: 21300000, guid: 7ec1726ebdf52674cac57a1e2a5eeb64, type: 3}
+  curseManaFrame: {fileID: 21300000, guid: d61b5546b4c3c90418b07c54b79becdb, type: 3}
+  timer: {fileID: 21300000, guid: 318e6b8e755f62a44afb01412ea3ffcf, type: 3}
+  curseTimer: {fileID: 0}
+  mainUnderFlag: {fileID: 21300000, guid: c7d549b4f64cf6149adb3665d7c235fb, type: 3}
+  secondaryUnderFlag: {fileID: 21300000, guid: 59e9723f1ab2aca44af2c3536db5da5d, type: 3}
+  rangeIconSelf: {fileID: 21591816480717847, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconRight: {fileID: 6362499923902635336, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconLeft: {fileID: 3629268804840947726, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconAllRight: {fileID: 5223461305758084474, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconAllLeft: {fileID: -5109177819046786902, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconHero: {fileID: 3414657202290878509, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconRightAndLeft: {fileID: 1563787634760702847, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconAll: {fileID: 2122501309460574069, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  rangeIconPlot: {fileID: 618445554091180572, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  draggedScale: 1.3
+  hoveredScale: 2
+  highlightColor: {r: 0.7409443, g: 1, b: 0.6745283, a: 1}

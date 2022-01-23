@@ -1,0 +1,11 @@
+Key	Value
+$CONFIRM	Confirm
+$ADD	Add $value$ cards to your deck.
+$WITHDRAW	Remove $value$ cards form your deck.
+$CHOICE	Choose $value$ cards from your deck.
+$REPLACE	Replace $value$ cards from your hand.
+$QUEST_ENDING	Your Hero ended the quest.
+$CHOOSE_INSTRUCTION	Choose a reward !
+$UPGRADE_INSTRUCTION	Upgrade your deck !
+$CHAPTER_CHOICE	Choose how the adventure unravels
+$PLOT_CHOICE	Choose the subject of your plot

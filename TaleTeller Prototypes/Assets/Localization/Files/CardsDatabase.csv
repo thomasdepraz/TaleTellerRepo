@@ -1,0 +1,255 @@
+Key	Data
+$Idea_Apple_Base_Effect0	+ $gainValue$<sprite name="Heal">.
+$Idea_Campfire_Base_Effect0	<b>Overload :</b> +$gainValue$<sprite name="Heal"> 
+$Idea_ChefsBeef_Base_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_ChefsBeef_Base_Effect1	 +$gainValue$<sprite name="Heal">.
+$Idea_GoldBag_Base_Effect0	+$gainValue$<sprite name="Gold">.
+$Idea_Pot_Base_Effect0	Draw $drawValue$.
+$Idea_PotSeller_Base_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_PotSeller_Base_Effect1	Draw +$drawValue$.
+$Idea_RefinedSword_Base_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_RefinedSword_Base_Effect1	+ $gainValue$<sprite name="AttackTemp">.
+$Idea_Sword_Base_Effect0	 +$gainValue$<sprite name="AttackTemp">.
+$Idea_Sword_Base_Effect1	Character gains $modifierValue$<sprite name="AttackBase">.
+$Idea_RusticSword_Base_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_RusticSword_Base_Effect1	+ $gainValue$<sprite name="AttackTemp">.
+$Idea_Veteran_Base_Effect0	Character gain $modifierValue$<sprite name="AttackBase">.
+$Idea_TreasureChest_Base_Effect0	<b>Last Wish</b> : Draw $drawValue$.
+$Idea_LittleGoblin_Base_Effect0	<b>Last Wish</b> : +$gainValue$<sprite name="Gold">.
+$Idea_Bank_Trade_Effect0	Decrease all <b>Buy</b> by $modification$.
+$Idea_Bourgeois_Trade_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_Bourgeois_Trade_Effect1	This card gain $modifierValue$<sprite name="AttackTemp"> for this turn.
+$Idea_CorruptedGuard_Trade_Effect0	£append£<b>Bankrupt ($bankruptValue$<sprite name="GoldHero">)</b> :
+$Idea_CorruptedGuard_Trade_Effect1	- $gainValue$<sprite name="Heal">.
+$Idea_Drink_Trade_Effect0	Characters +$modifierValue$<sprite name="Heal">. 
+$Idea_Forge_Trade_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_Forge_Trade_Effect1	Characters +$modifierValue$<sprite name="AttackTemp">.
+$Idea_KingsTreasure_Trade_Effect0	For each <b>Buy</b> next to this card, draw $drawValue$ 
+$Idea_Knife_Trade_Effect0	+ $gainValue$<sprite name="AttackTemp">.
+$Idea_Shallows_Trade_Effect0	Increase <b>Draw</b> by $modification$. 
+$Idea_Shallows_Trade_Effect1	Increase <b>Discard</b> by $modification$.
+$Idea_StackOfCoins_Trade_Effect0	+ $gainValue$<sprite name="Gold">.
+$Idea_Tavern_Trade_Effect0	£append£<b>Buy ($buyValue$<sprite name="Gold">)</b>:
+$Idea_Tavern_Trade_Effect1	Characters gains $modifierValue$<sprite name="Heal">.
+$Idea_Trader_Trade_Effect0	£append£<b>Bankrupt ($bankruptValue$<sprite name="GoldHero">)</b> :
+$Idea_Trader_Trade_Effect1	Draw $drawValue$.
+$Idea_Arcanist_Vision_Effect0	£append£<b>Illumination</b> : +$modifierValue$<sprite name="Heal">
+$Idea_Arcanist_Vision_Effect1	& +$modifierValue$<sprite name="AttackBase">.
+$Idea_Arcanist_Vision_Effect2	£append£<b>Overload</b> : +$modifierValue$<sprite name="Heal">
+$Idea_Arcanist_Vision_Effect3	& +$modifierValue$<sprite name="AttackBase">.
+$Idea_Artifact_Vision_Effect0	 £append£Characters gain + $modifierValue$<sprite name="Heal">
+$Idea_Artifact_Vision_Effect1	& + $modifierValue$<sprite name=AttackTemp">.
+$Idea_CardPlayer_Vision_Effect0	Choice $choiceValue$
+$Idea_Compass_Vision_Effect0	Draw $drawValue$.
+$Idea_Compass_Vision_Effect1	Discard $discardValue$.
+$Idea_Conjurer_Vision_Effect0	£append£<b>Overload</b> : + $modifierValue$<sprite name="AttackBase">
+$Idea_Conjurer_Vision_Effect1	& + $modifierValue$<sprite name="Heal">.
+$Idea_Fairy_Vision_Effect0	Choice $choiceValue$.
+$Idea_Hut_Vision_Effect0	Characters +$modifierValue$<sprite name="Heal">. 
+$Idea_Library_Vision_Effect0	Increase <b>Choice</b> by $modification$.
+$Idea_Library_Vision_Effect1	Discard $discardValue$ for each Character on left.
+$Idea_OldSage_Vision_Effect0	£append£<b>Illumination</b> : + $modifierValue$<sprite name="AttackBase">
+$Idea_OldSage_Vision_Effect1	& +$modifierValue$<sprite name="Heal">
+$Idea_SacredBook_Vision_Effect0	Draw $drawValue$ for each Character aside.
+$Idea_Spirit_Vision_Effect0	Discard $discardValue$.
+$Idea_RitualKnife_Berserk_Effect0	-$gainValue$<sprite name="Heal">.
+$Idea_RitualKnife_Berserk_Effect1	+$gainValue$<sprite name="AttackTemp">.
+$Idea_DarkShaman_Berserk_Effect0	-$modifierValue$<sprite name="Heal">.
+$Idea_DarkShaman_Berserk_Effect1	+$modifierValue$<sprite name="AttackTemp">.
+$Idea_FlyAgaric_Berserk_Effect0	-$gainValue$<sprite name="Heal">.
+$Idea_FlyAgaric_Berserk_Effect1	+$gainValue$<sprite name="AttackTemp">
+$Idea_Werewolf_Berserk_Effect0	<b>Last Wish</b> : +$gainValue$<sprite name="Heal">.
+$Idea_Tundra_Berserk_Effect0	-$modifierValue$<sprite name="Heal">.
+$Idea_Tundra_Berserk_Effect1	+$modifierValue$<sprite name="AttackTemp">.
+$Idea_Bomb_Berserk_Effect0	-$gainValue$<sprite name="Heal">.
+$Idea_Yeti_Berserk_Effect0	<b>Last Wish</b> : Draw $drawValue$.
+$Idea_Yeti_Berserk_Effect1	<b>Last Wish</b> : +$gainValue$ ATK.
+$Idea_Battlefield_Berserk_Effect0	/
+$DI_CuriousStew_Effect0	<b>Obsessing</b>
+$DI_CuriousStew_Effect1	£append£<b>Buy ($buyValue$)</b> : 
+$DI_CuriousStew_Effect2	The Hero loses -$gainValue$<sprite name="AttackTemp">.
+$DI_DarkFantasyForum_Effect0	<b>End of Turn</b>: -$gainValue$<sprite name="Heal">
+$DI_DarkFantasyForum_Effect1	+$modifierValue$<sprite name="AttackBase"> to Evil characters.
+$DI_OverdemandingReviewer_Effect0	<b>End of Turn</b> Random Card in your hand get +1 Ink cost.
+$DI_SpilledCoffee_Effect0	<b>End of Turn</b> Discard the top Card of the Deck.
+$DI_ThrillingSmoke_Effect0	<b>Obsessing</b>
+$DI_ThrillingSmoke_Effect1	-$modifierValue$<sprite name="AttackBase"> for Good Characters.
+$DI_UnpredictedVisitor_Effect0	Discard $discardValue$.
+$DI_UnpredictedVisitor_Effect1	<b>End of Turn</b> -$gainValue$<sprite name="Heal">.
+$SP_01_TheDarkForest_Effect0	Enemies ↞ ↠ +$modifierValue$ ATK.
+$SP_01_TheDarkForest_Objective	Place this card, 2 Good characters and 1 Object on the Track.
+$SP_01_TheDarkForest_Effect1	↞ ↠ Key-word Heal x$modification$.
+$SP_02_BountyHunter_Objective	Defeat the Bounty Hunter without other Evil Characters on the Track.
+$Idea_LE_FleeyingMedicant_Effect0	+$gainValue$<sprite name="Purse">.  
+$Idea_LE_FleeyingMedicant_Effect1	+4<sprite name="Gold"> for each given attack.
+$Idea_LE_GateKeeper_Effect0	Copies Hero's <sprite name="AttackBase"> and <sprite name="Heal">.
+$Idea_LE_HeadQuarter_Effect0	+10<sprite name="AttackBase"> to each Allies. 
+$Idea_LE_MidasDigit_Effect0	Character's statistics are equal to Hero's current <sprite name="Gold">. 
+$Idea_LE_TreasureRoom_Effect0	Increase <sprite name="Gold"> source by x$modification$. 
+$Idea_LE_TreasureRoom_Effect1	Increase Draw by x2.
+$Idea_LE_AstarothIdol_Effect0	Draw until the Hand is full. 
+$Idea_LE_BrokenTemple_Effect0	<b>Overload :<b> $gainValue$<sprite name="AttackBase">.
+$Idea_LE_BrokenTemple_Effect1	Increase Draw x2.
+$Idea_LE_SacredTemple_Effect0	<b>Illumination :<b> +1<sprite name="MaxHealth">.
+$Idea_LE_SacredTemple_Effect1	Increase Discard x2.
+$Idea_LE_ValeforIdol_Effect0	+2 Ink Max on the next turn.
+$MP_Poor_01_MedicantCultist_Effect0	The Hero gives all his <sprite name="Gold">.
+$MP_Poor_01_MedicantCultist_Objective	Give $value$<sprite name="Gold"> to the Medicant Cultist.
+$MP_Poor_02_CultHeadquarter_A_Effect0	<b>End of Turn</b> <sprite name="Heal"> gains are nullified
+$MP_Poor_02_CultHeadquarter_A_Objective	Place the Cult Headquarter's Entrance on the Track while defeating the Gatekeeper.
+$MP_Poor_02_CultHeadquarter_B_Effect0	<b>End of Turn</b>  <sprite name="Heal"> gains are nullified
+$MP_Poor_02_CultHeadquarter_B_Objective	Place the Fleeing Medicant Cultist with the Cult Headquarter's Secondary Entry on the Track.
+$MP_Poor_03_TreasureAntichamber_A_Effect0	Draw and Discard increased by $modification$.
+$MP_Poor_03_TreasureAntichamber_A_Objective	Place the Secret Way, the Cultist's Hood, the Cultist's Toga and the Cultist's Emblem on the Track. 
+$MP_Poor_03_TreasureAntichamber_B_Effect0	Enemies +$modifierValue$ <sprite name="AttackBase">.
+$MP_Poor_03_TreasureAntichamber_B_Effect1	+$gainValue$ <sprite name="AttackTemp">.
+$MP_Poor_03_TreasureAntichamber_B_Objective	Defeat $value$ Armored Cultists while the Treasure Antechamber is on the Track.
+$MP_Poor_04_Midas_Effect0	£append£<b>Bankrupt ($bankruptValue$<sprite name="GoldHero">)</b> :
+$MP_Poor_04_Midas_Effect1	This card +$modifierValue$ <sprite name="AttackBase">.
+$MP_Poor_04_Midas_Effect2	£append£<b>Buy ($buyValue$ <sprite name="Gold">)</b> :
+$MP_Poor_04_Midas_Effect3	This card -$modifierValue$ <sprite name="AttackBase">.
+$MP_Poor_04_Midas_Objective	Defeat Midas the Prophet of Mendicity. 
+$Junk_CultistArmor_Effect0	Discard the top Card of the Deck.
+$Junk_CultistEmblem_Effect0	Discard the top Card of the Deck.
+$Junk_CultistGloves_Effect0	Discard the top Card of the Deck.
+$Junk_CultsTreasure_Effect0	+$gainValue$ <sprite name="Gold">.
+$Junk_FleeingMedicant_Effect0	Draw $drawValue$ for each received hit.
+$Junk_LostCoin_Effect0	+$gainValue$ <sprite name="Gold">.
+$Junk_SlumHabitant_Effect0	Discard $discardValue$.
+$Junk_StolenPurse	+$gainValue$ <sprite name="Gold">.
+$MP_Priest_01_PriestTheophilius_Effect0	+$gainValue$ <sprite name="AttackTemp">.
+$MP_Priest_01_PriestTheophilius_Objective	Defeat the Demon while Theophilus is on the next step. 
+$MP_Priest_02_TempleAltar_A_Effect0	Draw $drawValue$ for each passed step.
+$MP_Priest_02_TempleAltar_A_Objective	Place all the Pieces of Artifact with this card on the Track. 
+$MP_Priest_02_TempleAltar_B_Effect0	Draw $drawValue$ for each passed step.
+$MP_Priest_02_TempleAltar_B_Objective	Defeat the Guardian of the Temple while this card is on the Track. 
+$MP_Priest_03_AstarothIdol_Effect0	Enemies -$modifierValue$ <sprite name="AttackBase">.
+$MP_Priest_03_AstarothIdol_Objective	Defeat Astaroth the Mighty. 
+$MP_Priest_04_ValeforIdol_Effect0	Enemies -$modifierValue$ <sprite name="AttackTemp">.
+$MP_Priest_04_ValeforIdol_Objective	Defeat $value$ Valefor's replicas. 
+$MP_Priest_04_CardianalThophilius_Effect0	+$modifierValue$ <sprite name="AttackBase">.
+$MP_Priest_04_CardianalThophilius_Objective	Defeat Theophilus. 
+$Junk_ArtifactBottom_Effect0	-$gainValue$ <sprite name="Heal">.
+$Junk_ArtifactLeft_Effect0	-$gainValue$ <sprite name="Heal">.
+$Junk_ArtifactRight_Effect0	-$gainValue$ <sprite name="Heal">.
+$Junk_ArtifactTop_Effect0	-$gainValue$ <sprite name="Heal">.
+$Junk_CommonDemon_Effect0	<b>Last Wish</b> : -$gainValue$ <sprite name="Heal"> for each Ally on the Track.
+$Junk_GuardianArtifact_Effect0	This card +$modifierValue$<sprite name="AttackBase"> for each received attack.
+$Junk_MightyAstaroth_Effect0	This card +$modifierValue$ <sprite name="Heal">.
+$Junk_ValeforReplica_Effect0	This card +$modifierValue$ <sprite name="AttackBase">.
+$MP_TurbulentOutset_01_MentorField_Effect0	Increase  <sprite name="Heal"> gain source by $modification$. 
+$MP_TurbulentOutset_01_MentorField_Objective	Place 2 Seedlings and the Mentor's Field on the Track.
+$MP_TurbulentOutset_02_TownCenter_Effect0	 +$modifierValue$ <sprite name="AttackBase"> to Characters.
+$MP_TurbulentOutset_02_TownCenter_Objective	Find and place the Empire Troop with the Town Center.
+$MP_TurbulentOutset_02_AlcimusTheMentor_Effect0	/
+$MP_TurbulentOutset_02_AlcimusTheMentor_Objective	Find and place the Burning Town with the Mentor.
+$MP_TurbulentOutset_03_GatesOfTown_Effect0	+$gainValue$ <sprite name="Heal">.
+$MP_TurbulentOutset_03_GatesOfTown_Objective	Place 1 Burning Alley, 1 Crumbling House, 1 Empire Barricade and the Gates of the Town.
+$MP_TurbulentOutset_03_AlcimusTheWizard_Effect0	/
+$MP_TurbulentOutset_03_AlcimusTheWizard_Objective	Let Alcimus the Wizard die.
+$MP_TurbulentOutset_04_GeneralOton_Effect0	This Card +$modifierValue$<sprite name="AttackBase"> for each received hit.
+$MP_TurbulentOutset_04_GeneralOton_Objective	Defeat General Oton.
+$Junk_Mandrake_Effect0	<b>Last Wish :</b> Draw 1 Seedling.
+$Junk_Seedling_Effect0	+$gainValue$ <sprite name="Heal">.
+$Junk_EmpireSoldier_Effect0	<b>Last Wish : </b> Choice $choiceValue$.
+$Junk_EmpireTroop_Effect0	/
+$Junk_BurningTown_Effect0	-$modifierValue$ <sprite name="Heal"> to Characters and Hero.
+$Junk_Horse_Effect0	£append£<b>Buy($buyValue$ <sprite name="Gold">) :</b> 
+$Junk_Horse_Effect1	Draw $drawValue$.
+$Junk_BurningDebris_Effect0	-$gainValue$ <sprite name="Heal">.
+$Junk_CrumblingHouse_Effect0	-$gainValue$ <sprite name="Heal">.
+$Junk_EmpireBarricade_Effect0	-$gainValue$ <sprite name="Heal">.
+$Junk_EmpireEliteSoldier_Effect0	/
+$Junk_EmpireSurvivor_Effect0	<b>Last Wish : </b> +$gainValue$ <sprite name="Heal">.
+$MP_Empire_01_BlackMarket_Effect0	Increase Draw by $modification$.
+$MP_Empire_01_BlackMarket_Objective	Find and place 1 Empire Helmet, 1 Empire Breastplate, 1 Empire Sowrd and the Black Market.
+$MP_Empire_02_Fortress Entrance_Effect0	Increase Draw by $modification$.
+$MP_Empire_02_Fortress Entrance_Objective	Find and destroy the Alarm.
+$MP_Empire_02_EntranceGuard_Effect0	The Hero gives all his <sprite name="Gold">.
+$MP_Empire_02_EntranceGuard_Objective	Give $value$  <sprite name="Gold"> to the Entrance Guard.
+$MP_Empire_03_GeneralOton_Effect0	/
+$MP_Empire_03_GeneralOton_Objective	Defeat Oton.
+$MP_Empire_04_ArmoredMachineA_Effect0	-$modifierValue$<sprite name="Heal"> to Characters and Hero.
+$MP_Empire_04_ArmoredMachineA_Objective	Put the Armored Machine with 2 Empure Troopers and the Troops Headquarter.
+$MP_Empire_04_ArmoredMachineB_Effect0	<b>End of Turn: </b> Draw a Bomb.
+$MP_Empire_04_ArmoredMachineB_Objective	Defeat the Armored Machine.
+$MP_Empire_05_Emperor_Effect0	<b>End of Turn: </b> Discard $discardValue$.
+$MP_Empire_05_Emperor_Objective	Defeat Malivatius the Emperor.
+$Junk_EmpireHelmet_Effect0	-$gainValue$<sprite name="Heal">.
+$Junk_EmpireBreastplate_Effect0	Discard $discardValue$.
+$Junk_EmpireSword_Effect0	-$gainValue$<sprite name="AttackTemp">.
+$Junk_ShadySalesman_Effect0	£append£<b>Buy($buyValue$ <sprite name="Gold">) :</b> 
+$Junk_ShadySalesman_Effect1	Draw $drawValue$.
+$Junk_EmpireGuard_Effect0	<b>End of Turn :</b> +1 Empire Guard in the Deck.
+$Junk_HiddenDoor_Effect0	Draw $drawValue$.
+$Junk_Alarm_Effect0	<b>End of Turn :</b> + 1 Empire Guard in the Deck.
+$Junk_Thief_Effect0	<b>Last Wish :</b> +$gainValue$ <sprite name="Gold">.
+$Junk_Battery_Effect0	+$modifierValue$<sprite name="AttackBase"> to Canon Prototype.
+$Junk_CanonPrototype_Effect0	/
+$Junk_EmpireSquadron_Effect0	<b>Obsessing</b>
+$Junk_EmpireTrooper_Effect0	$modifierValue$ to Characters and Hero.
+$Junk_TroopsHeadquarter_Effect0	+$modifierValue$<sprite name="AttackBase"> to Enemies.
+$Junk_Bomb_Effect0	-$modifierValue$<sprite name="Heal">.
+$Junk_Shelter_Effect0	+$gainValue$<sprite name="Heal">.
+$Junk_MentorAura_Effect0	+$gainValue$<sprite name="AttackBase">.
+$MP_PeacefulTown_01_Villager_Effect0	+$gainValue$<sprite name="Gold"> for each Ennemies next to him.
+$MP_PeacefulTown_01_Villager_Objective	Place the Villager and the Delivery Package (purchasable via the Salesman).
+$MP_PeacefulTown_02_RevivingTree_Effect0	<b>End of Turn :</b> +$modifierValue$<sprite name="Heal"> to Enemies if in Hand.
+$MP_PeacefulTown_02_RevivingTree_Objective	Defeat the $value$ Wandering Skeletons.
+$MP_PeacefulTown_02_TownSquare_Effect0	+$modifierValue$<sprite name="AttackBase"> to Characters.
+$MP_PeacefulTown_02_TownSquare_Objective	Place 1 Neighbourhood, 1 Church, 2 Enemies and the Town Square.
+$MP_PeacefulTown_03_CreatureSpawner_Effect0	<b>End of Turn :</b> Draw 2 Gobelins.
+$MP_PeacefulTown_03_CreatureSpawner_Objective	Destroy the Creature Spawner.
+$MP_PeacefulTown_03_Witch_Effect0	/
+$MP_PeacefulTown_03_Witch_Objective	Place the Witch, 2 Characters and the Town Exit.
+$MP_PeacefulTown_04_GiantSpider_Effect0	/
+$MP_PeacefulTown_04_GiantSpider_Objective	Defeat the Giant Spider.
+$Junk_Salesman_Effect0	£append£<b>Buy($buyValue$<sprite name="Gold">) :</b> 
+$Junk_Salesman_Effect1	Draw 1 Delivery Package.
+$Junk_DeliveryPackage_Effect0	Draw $drawValue$.
+$Junk_WanderingSkeleton_Effect0	/
+$Junk_GreenMushroom_Effect0	 +$modifierValue$<sprite name="Heal"> to Characters.
+$Junk_RedNettle_Effect0	+$gainValue$<sprite name="AttackTemp">.
+$Junk_Neighbourhood_Effect0	/
+$Junk_Church_Effect0	-$modifierValue$<sprite name="Heal"> to Enemies.
+$Junk_ArmedSkeleton_Effect0	/
+$Junk_Gobelin_Effect0	/
+$Junk_Pitchfork_Effect0	+$gainValue$<sprite name="AttackBase">.
+$Junk_ArmedVillager_Effect0	/
+$Junk_TownExit_Effect0	+$modifierValue$<sprite name="Heal"> to Characters.
+$Junk_Cocoon_Effect0	<b>Last Wish :</b> Draw 1 Small Spider.
+$Junk_SmallSpider_Effect0	<b>Last Wish :</b> +$gainValue$<sprite name="Heal">.
+$SM_DarkMagic_01_Kaeghan_Effect0	Increase Draw by $modification$.
+$SM_DarkMagic_01_Kaeghan_Objective	Place Kaeghan, 1 Witchcraft Vending Machine, 2 Characters and 1 Item.
+$SM_DarkMagic_02_MenacingWizard_Effect0	Discard $discardValue$ randomly.
+$SM_DarkMagic_02_MenacingWizard_Objective	Defeat the Menacing Lone Wizard.
+$SM_DarkMagic_02_TroubledWizard_Effect0	/
+$SM_DarkMagic_02_TroubledWizard_Objective	Let the Troubled Lone Wizard defeat $value$ Armored Warlocks.
+$SM_DarkMagic_03_GhostTown_Effect0	Increase Draw by $modification$.
+$SM_DarkMagic_03_GhostTown_Objective	Place 1 Suspicious Barrel, 1 Dark Candel, 1 Mortuary Machete, 1 Divinatory Skull and the Ghost Town.
+$SM_DarkMagic_04_SuperiorWitch_Effect0	/
+$SM_DarkMagic_04_SuperiorWitch_Objective	Defeat the Superior Witch.
+$SM_DarkMagic_04_KrakenHead_Effect0	Discard $discardValue$.
+$SM_DarkMagic_04_KrakenHead_Objective	Defeat the Kraken's Head while the Left Tentacle and the Right Tentacle are on the Track.
+$SM_DarkMagic_01_Necromancer_Effect0	-$gainValue$<sprite name="Heal"> for each Enemy in Hand.
+$SM_DarkMagic_01_Necromancer_Objective	Defeat Seilos the Necromancer.
+$Junk_VendingMachine_Effect0	The Hero gives all his <sprite name="Gold">.
+$Junk_MagicGuard_Effect0	Discard $discardValue$.
+$Junk_MagicOrb_Effect0	Draw $drawValue$.
+$Junk_ScepterA_Effect0	-$modifierValue$<sprite name="AttackTemp">.
+$Junk_CentralPlaza_Effect0	+$modifierValue$<sprite name="AttackBase"> to Allies.
+$Junk_ArmoredWarlock_Effect0	/
+$Junk_ResidualMagic_Effect0	+$modifierValue$<sprite name="AttackBase"> to Allies.
+$Junk_Zombie_Effect0	<b>Last Wish :</b> Draw $drawValue$.
+$Junk_SuspiciousBarrel_Effect0	-$modifierValue$<sprite name="Heal"> to Characters.
+$Junk_DarkCandel_Effect0	-$gainValue$<sprite name="Heal"> for each Enemy in Hand.
+$Junk_MortuaryMachete_Effect0	+$gainValue$<sprite name="AttackTemp">.
+$Junk_DivinatorySkull_Effect0	Discard $discardValue$.
+$Junk_BlueSpell_Effect0	<b>Last Wish :</b> +$gainValue$<sprite name="AttackTemp"> for each Ally in Hand.
+$Junk_RedSpell_Effect0	<b>Last Wish :</b> Draw $drawValue$ for each Ally in Hand.
+$Junk_GreenSpell_Effect0	<b>Last Wish :</b> +$gainValue$<sprite name="Heal"> for each Ally in Hand.
+$Junk_LeftTentacle_Effect0	Discard $discardValue$.
+$Junk_RightTentacle_Effect0	Discard $discardValue$.
+$Junk_ScepterB_Effect0	Draw $drawValue$.
+$Junk_ZombifiedVillager_Effect0	/
+$Junk_ScepterC_Effect0	Turn an Enemy into an Ally.

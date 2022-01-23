@@ -8,7 +8,7 @@ public class PlotObjective : ScriptableObject
     [HideInInspector] public PlotCard linkedPlotData;
     public string objectiveName;
     public List<JunkCard> linkedJunkedCards = new List<JunkCard>();
-    public enum JunkSpawnLocation { Hand, EndDeck, DeckRandom, XInDeck }
+    public enum JunkSpawnLocation { Hand, EndDeck, DeckRandom, XInDeck, FromCard }
     public List<JunkSpawnLocation> junkSpawnLocations = new List<JunkSpawnLocation>();
     public List<int> junksPositionsInDeck;
 
@@ -16,6 +16,8 @@ public class PlotObjective : ScriptableObject
     public virtual void InitObjective(PlotCard data, PlotObjective objective)
     {
         linkedPlotData = data;
+
+        objectiveName = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardsDictionary, objectiveName);
 
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
@@ -33,13 +35,13 @@ public class PlotObjective : ScriptableObject
     public virtual void SubscribeUpdateStatus(PlotCard data) 
         => data.onCardEnter += UpdateStatus;
 
-    public void UpdateStatus(EventQueue queue)//TODO REMOVE VIRTUAL
+    public void UpdateStatus(EventQueue queue)
     {
         //Here is the logic that checks the objective winning condition
         queue.events.Add(UpdateStatusRoutine(queue, null));
     }
 
-    public void UpdateStatus(EventQueue queue, CardData data)//TODO REMOVE VIRTUAL
+    public void UpdateStatus(EventQueue queue, CardData data)
     {
         //Here is the logic that checks the objective winning condition
         queue.events.Add(UpdateStatusRoutine(queue, data));
@@ -84,5 +86,10 @@ public class PlotObjective : ScriptableObject
         }
 
         currentQueue.UpdateQueue();
+    }
+
+    public virtual string GetDescription()
+    {
+        return objectiveName;
     }
 }

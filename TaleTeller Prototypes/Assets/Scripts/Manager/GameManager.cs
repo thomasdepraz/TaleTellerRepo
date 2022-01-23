@@ -9,15 +9,30 @@ public class GameManager : Singleton<GameManager>
 {
     [Header("References")]
     public Hero currentHero;
+    public InstructionsData instructionsData;
     public StoryManager storyManager;
     public GameObject goButton;
     public Image fadePanel;
     public Pointer pointer;
     public Button returnToMenuButton;
 
+    [HideInInspector]public bool pause;
+
     public void Awake()
     {
         CreateSingleton(false);
+        instructionsData = Instantiate(instructionsData);
+    }
+
+    public void Update()
+    {
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+        {
+            if (Time.timeScale > 1)
+                Time.timeScale = 1;
+            else
+                Time.timeScale = 3;
+        }
     }
 
     public void Fade(bool toBlack)

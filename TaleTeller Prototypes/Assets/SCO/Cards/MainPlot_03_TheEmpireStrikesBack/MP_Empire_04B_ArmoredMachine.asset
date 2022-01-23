@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6493219380876393345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 100
+    baseAttackDamage: 10
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 6
+--- !u!114 &-2722188398471558153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16905c9689d23d345a4e1f89cdb9d7b8, type: 3}
+  m_Name: PlotObjective_KillPlotObj
+  m_EditorClassIdentifier: 
+  linkedPlotData: {fileID: 0}
+  objectiveName: 
+  linkedJunkedCards:
+  - {fileID: 11400000, guid: def9c965835c6434cab0b6c007e085e1, type: 2}
+  - {fileID: 11400000, guid: def9c965835c6434cab0b6c007e085e1, type: 2}
+  - {fileID: 11400000, guid: def9c965835c6434cab0b6c007e085e1, type: 2}
+  - {fileID: 11400000, guid: def9c965835c6434cab0b6c007e085e1, type: 2}
+  - {fileID: 11400000, guid: def9c965835c6434cab0b6c007e085e1, type: 2}
+  junkSpawnLocations: 0300000003000000030000000300000003000000
+  junksPositionsInDeck: 020000000400000006000000080000000a000000
+  boardRestriction: 0
+  restriction: 0
+  typeRestrictions: []
+  junkPosRestrictions: []
+--- !u!114 &-955802853607338760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f69fc1bcfcd204b9c20fc638020978, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 6
+  target: 3
+  range: 
+  values: []
+  junkInLinkedList: 0
+  junkCardsToSpawn:
+  - {fileID: 11400000, guid: 99dbda1e3d2c3c347b1f7a51e4896da9, type: 2}
+  junkSpawnLocations: 00000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200327fdec51ba944ab391fe53a6a63b, type: 3}
+  m_Name: MP_Empire_04B_ArmoredMachine
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Armored Machine
+  rarity: 0
+  archetype: 0
+  manaCost: 2
+  cardGraph: {fileID: 21300000, guid: 2bdbc754eb4694d43b666b1ea47c7aed, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -955802853607338760}
+  effects: []
+  cardTypeReference: {fileID: -6493219380876393345}
+  cardType: {fileID: 0}
+  objective: {fileID: -2722188398471558153}
+  completionTimer: 6
+  isMainPlot: 1
+  isFinal: 0
+  plotChoiceDescription: $Empire_Step04B_Objective
+  legendaryCardRewards: []

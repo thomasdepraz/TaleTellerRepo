@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6685243988790351477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 2
+    baseAttackDamage: 1
+  behaviour: 2
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 6
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc80e9b514bdbb40a3f17d1df8457ae, type: 3}
+  m_Name: Junk_SmallSpider
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Small Spider
+  rarity: 0
+  archetype: 0
+  manaCost: 0
+  cardGraph: {fileID: 21300000, guid: 3c21c1f08f484b24e835aae622540bfe, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 1313917246952042871}
+  effects: []
+  cardTypeReference: {fileID: -6685243988790351477}
+  cardType: {fileID: 0}
+  objective: {fileID: 0}
+  objectiveIndex: 0
+--- !u!114 &1313917246952042871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: $Junk_SmallSpider_Effect0
+  appendWithNext: 0
+  trigger: 8
+  target: 1
+  range: 
+  values: []
+  gainValue:
+    value: 5
+    type: 0
+    op: 1
+  temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []

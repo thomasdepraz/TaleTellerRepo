@@ -4,105 +4,65 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+using System.Linq;
 
 public class CardVisuals : MonoBehaviour
 {
     #region Variables
-    [Header("CardBackgrounds")]
-    public Image cardBackgound;
-    [Space]
-    public Sprite ideaBackground;
-    public Sprite curseBackground;
-    public Sprite plotBackground;
-    public Sprite junkBackground;
+    public CardVisualsData profile;
 
-    [Header("Card Frames")]
+    
+    [Header("Images")]
+    public Image cardBackgoundFitter;
+    public Image cardBackgound;
+    public Image cardHighlight;
     public Image cardFrame;
     public Image cardFrameMask;
-    [Space]
-    public Sprite characterFrameNeutral;
-    public Sprite characterFrameGood;
-    public Sprite characterFrameBad;
-    public Sprite itemFrame;
-    public Sprite placeFrame;
-    public Sprite characterFrameMask;
-    public Sprite itemFrameMask;
-    public Sprite placeFrameMask;
-    [Space]
-    public Sprite curseCharacterFrameNeutral;
-    public Sprite curseCharacterFrameGood;
-    public Sprite curseCharacterFrameBad;
-    public Sprite curseItemFrame;
-    public Sprite cursePlaceFrame;
-    public Sprite curseCharacterFrameMask;
-    public Sprite curseItemFrameMask;
-    public Sprite cursePlaceFrameMask;
-
-    [Header("Illustration")]
     public Image cardIllustration;
-
-
-    [Header("Card Flags")]
     public Image cardFlag;
-    [Space]
-    public Sprite ideaFlag;
-    public Sprite plotFlag;
-    public Sprite curseFlag;
-
-    [Header("Card Icons")]
     public Image cardIcon;
-    [Space]
-    public Sprite characterIcon;
-    public Sprite itemIcon;
-    public Sprite placeIcon;
-
-    [Header("Card Rarity")]
     public Image cardRarity;
-    [Space]
-    public Sprite commonRarity;
-    public Sprite uncommonRarity;
-    public Sprite rareRarity;
-    public Sprite epicRarity;
-    public Sprite legendaryRarity;
-
-    [Header("Character Elements")]
     public Image characterHealthFrame;
     public Image characterAttackFrame;
-
-    [Space]
-    public Sprite normalCharacterHealth;
-    public Sprite curseCharacterHealth;
-    public Sprite normalCharacterAttack;
-    public Sprite curseCharacterAttack;
-
-    [Header("Misc")]
     public Image cardManaFrame;
     public Image cardTimerFrame;
-    public Image underManaFlag;
-    [Space]
-    public Sprite normalManaFrame;
-    public Sprite curseManaFrame;
-
-    [Header("Plot Elements")]
     public Image plotIcon;
     public Image plotUnderFlag;
-
-    public Sprite mainUnderFlag;
-    public Sprite secondaryUnderFlag;
 
     [Header("Texts")]
     public TextMeshProUGUI manaCostText;
     public TextMeshProUGUI cardNameText;
     public TextMeshProUGUI cardDescriptionText;
-    public TextMeshProUGUI cardFlagText;
     [Space]
     public TextMeshProUGUI characterAttackText;
     public TextMeshProUGUI characterHealthText;
     public TextMeshProUGUI timerText;
+
+    [Header("Description Blocks")]
+    public RectTransform blockParent;
+    public EffectDescriptionBlock descriptionBlockTemplate;
+    private List<EffectDescriptionBlock> descriptionBlocks;
+
+    [Header("Other")]
+    public List<TextMeshProUGUI> popupTexts = new List<TextMeshProUGUI>();
     #endregion
 
     public void InitializeVisuals(CardData data)
     {
+        #region DescriptionBlock
+        if (descriptionBlocks == null) descriptionBlocks = new List<EffectDescriptionBlock>();
+        if (descriptionBlocks.Count > 0)
+        {
+            foreach (EffectDescriptionBlock block in descriptionBlocks.ToList())
+            {
+                descriptionBlocks.Remove(block);
+                Destroy(block.gameObject);
+            }
+        }
+        BuildDescriptionBlocks(data);
+        #endregion
+
         //Init basics
         #region Basics
         cardIllustration.sprite = data.cardGraph;
@@ -110,10 +70,12 @@ public class CardVisuals : MonoBehaviour
         Type dataType = data.GetType();
         if(dataType == typeof(IdeaCard))
         {
-            cardBackgound.sprite = ideaBackground;
-            cardFlag.sprite = ideaFlag;
+            cardBackgoundFitter.sprite = profile.ideaBackground;
+            cardBackgound.sprite = profile.ideaBackground;
 
-            cardManaFrame.sprite = normalManaFrame;
+            cardFlag.sprite = profile.ideaFlag;
+
+            cardManaFrame.sprite = profile.normalManaFrame;
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
@@ -122,9 +84,13 @@ public class CardVisuals : MonoBehaviour
         }
         else if (dataType == typeof(PlotCard))
         {
-            cardBackgound.sprite = plotBackground;
-            cardFlag.sprite = plotFlag;
-            cardManaFrame.sprite = normalManaFrame;
+            cardBackgoundFitter.sprite = profile.plotBackground;
+            cardBackgound.sprite = profile.plotBackground;
+
+            cardFlag.sprite = profile.plotFlag;
+            cardManaFrame.sprite = profile.normalManaFrame;
+
+            cardTimerFrame.sprite = profile.timer;
 
             plotIcon.gameObject.SetActive(true);
             plotUnderFlag.gameObject.SetActive(true);
@@ -132,17 +98,19 @@ public class CardVisuals : MonoBehaviour
 
 
             PlotCard card = data as PlotCard;
-            if (card.isMainPlot) plotUnderFlag.sprite = mainUnderFlag;
-            else plotUnderFlag.sprite = secondaryUnderFlag;
+            if (card.isMainPlot) plotUnderFlag.sprite = profile.mainUnderFlag;
+            else plotUnderFlag.sprite = profile.secondaryUnderFlag;
 
             UpdatePlotElements(card);
 
         }
         else if(dataType == typeof(DarkIdeaCard))
         {
-            cardBackgound.sprite = curseBackground;
-            cardFlag.sprite = curseFlag;
-            cardManaFrame.sprite = curseManaFrame;
+            cardBackgoundFitter.sprite = profile.curseBackground;
+            cardBackgound.sprite = profile.curseBackground;
+
+            cardFlag.sprite = profile.curseFlag;
+            cardManaFrame.sprite = profile.curseManaFrame;
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
@@ -151,9 +119,11 @@ public class CardVisuals : MonoBehaviour
         }
         else if(dataType == typeof(JunkCard))
         {
-            cardBackgound.sprite = junkBackground;
-            cardFlag.sprite = plotFlag;
-            cardManaFrame.sprite = normalManaFrame;
+            cardBackgoundFitter.sprite = profile.junkBackground;
+            cardBackgound.sprite = profile.junkBackground;
+
+            cardFlag.sprite = profile.plotFlag;
+            cardManaFrame.sprite = profile.normalManaFrame;
 
             plotIcon.gameObject.SetActive(false);
             plotUnderFlag.gameObject.SetActive(false);
@@ -166,19 +136,19 @@ public class CardVisuals : MonoBehaviour
             switch (data.rarity)
             {
                 case CardRarity.Common:
-                    cardRarity.sprite = commonRarity;
+                    cardRarity.sprite = profile.commonRarity;
                     break;
                 case CardRarity.Uncommon:
-                    cardRarity.sprite = uncommonRarity;
+                    cardRarity.sprite = profile.uncommonRarity;
                     break;
                 case CardRarity.Rare:
-                    cardRarity.sprite = rareRarity;
+                    cardRarity.sprite = profile.rareRarity;
                     break;
                 case CardRarity.Epic:
-                    cardRarity.sprite = epicRarity;
+                    cardRarity.sprite = profile.epicRarity;
                     break;
                 case CardRarity.Legendary:
-                    cardRarity.sprite = legendaryRarity;
+                    cardRarity.sprite = profile.legendaryRarity;
                     break;
             }
         }
@@ -196,48 +166,50 @@ public class CardVisuals : MonoBehaviour
             Type cardType = data.cardType.GetType();
             if(cardType == typeof(CharacterType))
             {
-                cardIcon.sprite = characterIcon;
+                
                 CharacterType chara = data.cardType as CharacterType;
                 if(chara.behaviour == CharacterBehaviour.Agressive)
                 {
-                    if(data.GetType() == typeof(DarkIdeaCard))
+                    cardIcon.sprite = profile.characterBadIcon;
+                    if (data.GetType() == typeof(DarkIdeaCard))
                     {
-                        cardFrame.sprite = curseCharacterFrameBad;
-                        cardFrameMask.sprite = curseCharacterFrameMask;
+                        cardFrame.sprite = profile.curseCharacterFrameBad;
+                        cardFrameMask.sprite = profile.curseCharacterBadFrameMask;
                     }
                     else
                     {
-                        cardFrame.sprite = characterFrameBad;
-                        cardFrameMask.sprite = characterFrameMask;
+                        cardFrame.sprite = profile.characterFrameBad;
+                        cardFrameMask.sprite = profile.characterBadFrameMask;
                     }
 
                 }
                 else if(chara.behaviour == CharacterBehaviour.Peaceful)
                 {
+                    cardIcon.sprite = profile.characterIcon;
                     if (data.GetType() == typeof(DarkIdeaCard))
                     {
-                        cardFrame.sprite = curseCharacterFrameGood;
-                        cardFrameMask.sprite = curseCharacterFrameMask;
+                        cardFrame.sprite = profile.curseCharacterFrameGood;
+                        cardFrameMask.sprite = profile.curseCharacterFrameMask;
                     }
                     else
                     {
-                        cardFrame.sprite = characterFrameGood;
-                        cardFrameMask.sprite = characterFrameMask;
+                        cardFrame.sprite = profile.characterFrameGood;
+                        cardFrameMask.sprite = profile.characterFrameMask;
                     }
                 }
-                else
-                {
-                    if (data.GetType() == typeof(DarkIdeaCard))
-                    {
-                        cardFrame.sprite = curseCharacterFrameNeutral;
-                        cardFrameMask.sprite = curseCharacterFrameMask;
-                    }
-                    else
-                    {
-                        cardFrame.sprite = characterFrameNeutral;
-                        cardFrameMask.sprite = characterFrameMask;
-                    }
-                }
+                //else
+                //{
+                //    if (data.GetType() == typeof(DarkIdeaCard))
+                //    {
+                //        cardFrame.sprite = profile.curseCharacterFrameNeutral;
+                //        cardFrameMask.sprite = profile.curseCharacterFrameMask;
+                //    }
+                //    else
+                //    {
+                //        cardFrame.sprite = profile.characterFrameNeutral;
+                //        cardFrameMask.sprite = profile.characterFrameMask;
+                //    }
+                //}
 
                 characterAttackFrame.gameObject.SetActive(true);
                 characterHealthFrame.gameObject.SetActive(true);
@@ -249,13 +221,15 @@ public class CardVisuals : MonoBehaviour
 
                 if (dataType == typeof(DarkIdeaCard))
                 {
-                    characterAttackFrame.sprite = curseCharacterAttack;
-                    characterHealthFrame.sprite = curseCharacterHealth;
+                    cardTimerFrame.sprite = profile.curseHourglass;
+                    characterAttackFrame.sprite = profile.curseCharacterAttack;
+                    characterHealthFrame.sprite = profile.curseCharacterHealth;
                 }
                 else
                 {
-                    characterAttackFrame.sprite = normalCharacterAttack;
-                    characterHealthFrame.sprite = normalCharacterHealth;
+                    if(dataType != typeof(PlotCard)) cardTimerFrame.sprite = profile.normalHourglass;
+                    characterAttackFrame.sprite = profile.normalCharacterAttack;
+                    characterHealthFrame.sprite = profile.normalCharacterHealth;
                 }
 
                 CharacterType character = data.cardType as CharacterType;
@@ -269,39 +243,38 @@ public class CardVisuals : MonoBehaviour
 
             if(cardType == typeof(ObjectType))
             {
-                cardIcon.sprite = itemIcon;
+                cardIcon.sprite = profile.itemIcon;
 
                 if(data.GetType() == typeof(DarkIdeaCard))
                 {
-                    cardFrame.sprite = curseItemFrame;
-                    cardFrameMask.sprite = curseItemFrameMask;
+                    cardFrame.sprite = profile.curseItemFrame;
+                    cardFrameMask.sprite = profile.curseItemFrameMask;
                 }
                 else
                 {
-                    cardFrame.sprite = itemFrame;
-                    cardFrameMask.sprite = itemFrameMask;
+                    cardFrame.sprite = profile.itemFrame;
+                    cardFrameMask.sprite = profile.itemFrameMask;
                 }
 
             }
 
             if(cardType == typeof(LocationType))
             {
-                cardIcon.sprite = placeIcon;
+                cardIcon.sprite = profile.placeIcon;
                 if (data.GetType() == typeof(DarkIdeaCard))
                 {
-                    cardFrame.sprite = cursePlaceFrame;
-                    cardFrameMask.sprite = cursePlaceFrameMask;
+                    cardFrame.sprite = profile.cursePlaceFrame;
+                    cardFrameMask.sprite = profile.cursePlaceFrameMask;
                 }
                 else
                 {
-                    cardFrame.sprite = placeFrame;
-                    cardFrameMask.sprite = placeFrameMask;
+                    cardFrame.sprite = profile.placeFrame;
+                    cardFrameMask.sprite = profile.placeFrameMask;
                 }
             }
         }
         else
         {
-            //
             characterAttackFrame.gameObject.SetActive(false);
             characterHealthFrame.gameObject.SetActive(false);
 
@@ -316,8 +289,11 @@ public class CardVisuals : MonoBehaviour
         UpdateBaseElements(data);
     }
 
-    public void UpdateBaseElements(CardData data)
+    public void UpdateBaseElements(CardData data, bool checkPopup = false)
     {
+        if (checkPopup)
+            CheckForPopup(data);
+
         if(data is DarkIdeaCard)
         {
             manaCostText.text = data.manaCost.ToString();
@@ -328,6 +304,8 @@ public class CardVisuals : MonoBehaviour
             //GetDescription // Update Description
             cardDescriptionText.text = BuildDescription(data);
             cardDescriptionText.color = Color.white;
+
+            WriteDescriptionBlocks(data, Color.white);
         }
         else
         {
@@ -339,11 +317,16 @@ public class CardVisuals : MonoBehaviour
             //GetDescription // Update Description
             cardDescriptionText.text = BuildDescription(data);
             cardDescriptionText.color = Color.black;
+
+            WriteDescriptionBlocks(data, Color.black);
         }
     }
 
-    public void UpdateCharacterElements(CharacterType character)
+    public void UpdateCharacterElements(CharacterType character, bool checkPopup = false)
     {
+        if(checkPopup == true)
+            CheckForPopup(character);
+
         if (character.data is DarkIdeaCard)
         {
             characterAttackText.text = character.stats.baseAttackDamage.ToString();
@@ -366,16 +349,16 @@ public class CardVisuals : MonoBehaviour
                 timerText.text = character.useCount.ToString();
                 timerText.color = Color.black;
             }
-        }
-        
-        
+        }  
     }
 
-    public void UpdatePlotElements(PlotCard card)
+    public void UpdatePlotElements(PlotCard card, bool checkPopup = false)
     {
+        if (checkPopup)
+            CheckForPopup(card);
+
         timerText.text = card.completionTimer.ToString();
-        
-        //cardFlagText.text
+        timerText.color = Color.black;
     }
 
     public string BuildDescription(CardData data)
@@ -392,75 +375,315 @@ public class CardVisuals : MonoBehaviour
         }
         for (int i = 0; i < data.effects.Count; i++)
         {
-            result += data.effects[i].GetDescription(data.effects[i]);
+            result += data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
             result += "\n";   
         }
 
-        //Add objective description ? NOTE
+        //Add objective description
         if(data.GetType() == typeof(PlotCard))
         {
             PlotCard plot = data as PlotCard;
-            result += "Objective : " + plot.objective.objectiveName;
+            result += plot.objective.GetDescription();
         }
        
         return result;
     }
 
-    #region Tweening
-    public void ShakeCard(CardContainer container, EventQueue queue)
+    public void BuildDescriptionBlocks(CardData data)
     {
-        LeanTween.rotateZ(container.gameObject, -3, 0.025f).setEaseOutCubic().setOnComplete(
-            value => LeanTween.rotateZ(container.gameObject, 3, 0.05f).setEaseInOutCubic().setLoopPingPong(2).setOnComplete(
-                val => LeanTween.rotateZ(container.gameObject, 0, 0.025f).setEaseOutCubic().setOnComplete(end => queue.resolved = true)));
-    }
+        int numberOfBlocks = 0;//data.effects.Where(e => !e.appendWithNext).Count();
 
-    public void CardAttack(CardContainer container, int direction, EventQueue queue = null)
-    {
-        if(Mathf.Abs(direction)> 0)
-        {
-            float originX = container.rectTransform.anchoredPosition.x;
-            LeanTween.moveLocalX(container.gameObject, originX + direction * -2f, 0.5f).setEaseOutQuint().setOnComplete(
-                value=> LeanTween.moveLocalX(container.gameObject, originX + direction * 50, 0.2f).setEaseInQuint().setOnComplete(
-                    val=> LeanTween.moveLocalX(container.gameObject, originX, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
-        }
-        else
-        {
-            float originY = container.rectTransform.anchoredPosition.y;
-            LeanTween.moveLocalY(container.gameObject, originY - 2f, 0.5f).setEaseOutQuint().setOnComplete(
-               value => LeanTween.moveLocalY(container.gameObject, originY + 50, 0.2f).setEaseInQuint().setOnComplete(
-                   val => LeanTween.moveLocalY(container.gameObject, originY, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
-        }
-    }
+        if(data == null) return;
 
-    public void EffectChangeFeedback(CardContainer container, int direction, EventQueue queue)
-    {
-        Vector3 scale = direction > 0 ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(0.8f, 0.8f, 0.8f);
-        LeanTween.scale(container.gameObject, scale, 0.1f ).setEaseInOutCubic().setLoopPingPong(1).setOnComplete(value=> { if (queue != null) queue.resolved = true; });
-    }
-
-    public void MoveCard(CardContainer container, Vector3 target,bool useScale ,bool appear, EventQueue queue = null)
-    {
-        if(useScale)
+        if(data.effects != null)
         {
-            if(appear)
+            for (int i = 0; i < data.effects.Count; i++)
             {
-                container.rectTransform.localScale = Vector3.zero;
-                container.selfImage.color = Color.black;
+                string txt = data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
+                if (txt != string.Empty && !txt.Split('£').Contains("append")) numberOfBlocks++;
+            }
+        }
 
-                LeanTween.value(gameObject, container.selfImage.color, Color.white, 0.3f).setOnUpdate((Color val) => { container.selfImage.color = val; });
-                LeanTween.scale(container.rectTransform, Vector3.one, 0.5f).setEaseInOutQuint();
-                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+        if (data.GetType() == typeof(PlotCard))
+            numberOfBlocks++;
+
+        if (data.cardType?.GetType() == typeof(CharacterType))
+        {
+            CharacterType chara = data.cardType as CharacterType;
+
+            if (chara.doubleStrike) numberOfBlocks++;
+            if (chara.undying) numberOfBlocks++;
+
+        }
+
+        EffectDescriptionBlock block = null;
+
+        for (int i = 0; i < numberOfBlocks; i++)
+        {
+            block = Instantiate(descriptionBlockTemplate.gameObject, blockParent).GetComponent<EffectDescriptionBlock>();
+            block.gameObject.SetActive(true);
+            descriptionBlocks.Add(block);
+        }
+    }
+
+    public void WriteDescriptionBlocks(CardData data, Color color)
+    {
+        int processBlockIndex = 0;
+
+        void SetUpDescription(string description, EffectRangeType range)
+        {
+            if (description == string.Empty) return;
+            descriptionBlocks[processBlockIndex].SetDescription(description, color);
+
+            Sprite icon = null;
+
+            switch (range)
+            {
+                case EffectRangeType.AllLeft:
+                    icon = profile.rangeIconAllLeft;
+                    break;
+                case EffectRangeType.AllRight:
+                    icon = profile.rangeIconAllRight;
+                    break;
+                case EffectRangeType.Hero:
+                    icon = profile.rangeIconHero;
+                    break;
+                case EffectRangeType.Left:
+                    icon = profile.rangeIconLeft;
+                    break;
+                case EffectRangeType.Right:
+                    icon = profile.rangeIconRight;
+                    break;
+                case EffectRangeType.All:
+                    icon = profile.rangeIconAll;
+                    break;
+                case EffectRangeType.Other:
+                    icon = profile.rangeIconSelf;
+                    break;
+                case EffectRangeType.Self:
+                    icon = profile.rangeIconSelf;
+                    break;
+                case EffectRangeType.Plot:
+                    icon = profile.rangeIconPlot;
+                    break;
+                case EffectRangeType.RightAndLeft:
+                    icon = profile.rangeIconRightAndLeft;
+                    break;
+            }
+
+            descriptionBlocks[processBlockIndex].SetRangeType(range, icon);
+            processBlockIndex++;
+        }
+
+        if (data.cardType?.GetType() == typeof(CharacterType))
+        {
+            CharacterType chara = data.cardType as CharacterType;
+
+            if (chara.doubleStrike) SetUpDescription("<b>Double Strike</b>", EffectRangeType.Self);
+            if (chara.undying) SetUpDescription("<b>Undying</b>", EffectRangeType.Self);
+        }
+
+        string storedDescription = string.Empty;
+
+        for (int i = 0; i < data.effects.Count; i++)
+        {
+            var currentEffect = data.effects[i];
+
+            if (storedDescription != string.Empty)
+            {
+                storedDescription += currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
+                storedDescription = storedDescription.Replace("\r", "");
+                storedDescription = storedDescription.Replace("<CR>", "");
+            }
+
+            else
+                storedDescription = currentEffect.GetDescription(currentEffect, data.effectsReferences[i]);
+
+            string[] appendKey  = storedDescription.Split('£');
+            if (appendKey.Contains("append")) 
+            {
+                storedDescription = storedDescription.Replace("£append£", "");
+                continue;
+            }
+
+
+            switch (currentEffect.target)
+            {
+                case EffectTarget.Board:
+
+                    var ranges = currentEffect.range;
+
+                    if (ranges.Contains(BoardRange.All) || (ranges.Contains(BoardRange.AllLeft) && ranges.Contains(BoardRange.AllRight)))
+                        SetUpDescription(storedDescription, EffectRangeType.All);
+
+                    else if (ranges.Contains(BoardRange.FirstRight) && ranges.Contains(BoardRange.FirstLeft))
+                        SetUpDescription(storedDescription, EffectRangeType.RightAndLeft);
+
+                    else if (ranges.Contains(BoardRange.Self))
+                        SetUpDescription(storedDescription, EffectRangeType.Self);
+
+                    else if (ranges.Contains(BoardRange.FirstLeft))
+                        SetUpDescription(storedDescription, EffectRangeType.Left);
+
+                    else if (ranges.Contains(BoardRange.FirstRight))
+                        SetUpDescription(storedDescription, EffectRangeType.Right);
+
+                    else if (ranges.Contains(BoardRange.AllLeft))
+                        SetUpDescription(storedDescription, EffectRangeType.AllLeft);
+
+                    else if (ranges.Contains(BoardRange.AllRight))
+                        SetUpDescription(storedDescription, EffectRangeType.AllRight);
+
+                    break;
+
+                case EffectTarget.Hero:
+                    SetUpDescription(storedDescription, EffectRangeType.Hero);
+                    break;
+
+                default:
+                    SetUpDescription(storedDescription, EffectRangeType.Other);
+                    break;
+            }
+
+            storedDescription = string.Empty;
+        }
+
+        if (data.GetType() == typeof(PlotCard))
+        {
+            PlotCard plot = data as PlotCard;
+            SetUpDescription(plot.objective.GetDescription(), EffectRangeType.Plot);
+        }
+
+        ////Count line in all description blocks
+        //int lineCount = 0;
+        //foreach(EffectDescriptionBlock block in descriptionBlocks)
+        //    lineCount += block.textField.GetTextInfo().lineCount;
+
+        if (descriptionBlocks.Count == 0) return;
+
+        if (!descriptionBlocks[0].pickerCard)
+        {
+            if (descriptionBlocks.Count >= 2)
+            {
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 12;
             }
             else
             {
-                LeanTween.value(gameObject, container.selfImage.color, Color.black, 0.8f).setOnUpdate((Color val) => { container.selfImage.color = val; });
-                LeanTween.scale(container.rectTransform, Vector3.zero, 0.8f).setEaseInOutQuint();
-                LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 20;
             }
         }
         else
         {
-            LeanTween.move(container.rectTransform, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
+            if (descriptionBlocks.Count >= 2)
+            {
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 20;
+            }
+            else
+            {
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 100;
+            }
+        }
+      
+    }
+
+    #region Tweening
+    public void PopupTextFeedback(string popupText, int value, float delay)
+    {
+        string text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.popupDictionary, popupText).Replace("$value$", value.ToString());
+
+        for (int i = 0; i < popupTexts.Count; i++)
+        {
+            if (!popupTexts[i].gameObject.activeSelf)
+            {
+                popupTexts[i].gameObject.SetActive(true);
+                popupTexts[i].text = text;
+
+                //launch tweening
+                CardManager.Instance.cardTweening.FloatAndFade(popupTexts[i],Random.Range(-70,-80), Random.Range(-20,20), delay);
+                break;
+            }
+        }
+    }
+
+    public void CheckForPopup(CharacterType character)
+    {
+        int currentHp = Int16.Parse(characterHealthText.text);
+        int characterHp = character.stats.baseLifePoints;
+        int currentDamage = Int16.Parse(characterAttackText.text);
+        int characterDamage = character.stats.baseAttackDamage;
+        int currentTimer = Int16.Parse(timerText.text);
+        int characterTimer = character.useCount; 
+
+        int count = 0;
+
+        if (characterHp > currentHp)
+        {
+            PopupTextFeedback("$HEALTHUP",characterHp - currentHp, 0.3f * count);
+            count++;
+        }
+        else if(characterHp < currentHp)
+        {
+            PopupTextFeedback("$HEALTHDOWN", currentHp - characterHp, 0.3f * count);
+            count++;
+        }
+
+        if (characterDamage > currentDamage)
+        {
+            PopupTextFeedback("$ATKUP", characterDamage - currentDamage, 0.3f * count);
+            count++;
+        }
+        else if (characterDamage < currentDamage)
+        {
+            PopupTextFeedback("$ATKDOWN", currentDamage - characterDamage, 0.3f * count);
+            count++;
+        }
+
+        if(character.data.GetType() != typeof(PlotCard))
+        {
+            if (characterTimer > currentTimer)
+            {
+                PopupTextFeedback("$USEUP", characterTimer - currentTimer, 0.3f * count);
+            }
+            else if (characterTimer < currentTimer)
+            {
+                PopupTextFeedback("$USEDOWN", currentTimer - characterTimer, 0.3f * count);
+            }
+        }
+    }
+
+    public void CheckForPopup(PlotCard data)
+    {
+        int currentTimer = Int16.Parse(timerText.text);
+        int plotTimer = data.completionTimer;
+
+        int count = 0;
+        if (plotTimer > currentTimer)
+        {
+            PopupTextFeedback("$TIMERUP", plotTimer - currentTimer, 0.3f * count);
+        }
+        else if (plotTimer < currentTimer)
+        {
+            PopupTextFeedback("$TIMERDOWN", currentTimer - plotTimer, 0.3f * count);
+        }
+    }
+
+    public void CheckForPopup(CardData data)
+    {
+        int currentMana = Int16.Parse(manaCostText.text);
+        int cardMana = data.manaCost;
+
+        int count = 0;
+        if (cardMana > currentMana)
+        {
+            PopupTextFeedback("$MANAUP", cardMana - currentMana, 0.3f * count);
+        }
+        else if (cardMana < currentMana)
+        {
+            PopupTextFeedback("$MANADOWN", currentMana - cardMana, 0.3f * count);
         }
     }
 

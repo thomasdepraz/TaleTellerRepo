@@ -1,0 +1,43 @@
+Key	Tooltip
+Double Strike	It attacks twice.
+First Hit	It attacks first.
+Range	It attacks characters a slot further.
+Obsessing	Max Ink is decreased by -1 while in hand.
+Undying	Its HP can’t be inferior than 1.
+Bankrupt	Does something when the Hero has not enough gold.
+Buy	Does something when the Hero has enough gold. Gold is used.
+Last Wish	Does something when it dies.
+Aphoteosis	Does something when it is in hand at the of the turn.
+Illumination	Does something when a card is drawn while on board.
+Overload	Does something when a card is discarded while on board.
+$HEALTH_STAT	<b><sprite name="HealthHero"> Health</b>: {0}  <br>Hero’s health points.  <br><b>If there are no more, the Hero dies, it’s the end of the game</b><br><sprite name="Heal"> heal the hero.<br><sprite name="MaxHealth"> increase the Hero's maximum Health.
+$ATTACK_STAT	<b><sprite name="AttackBase"> Attack</b> : {0}<br>Amount of damage the player inflicts during an attack.<br><sprite name="AttackBase"> increase permanent Attack (current: <b>{1}</b>)<br><sprite name="AttackTemp"> increase additional Attack for this turn only (current: <b>{2}</b>)
+$GOLD_STAT	<b><sprite name="GoldHero"> Gold</b>: {0}<br>Game currency.<br><sprite name="Gold"> increase the Hero's coins<br><sprite name="Purse"> increase the size of the Hero's Purse.
+$DECK	Regroups all of your available cards. <br>It contains {0} cards.
+$DISCARD	Regroups all your used cards. <br>It contains {0} cards.
+$INK	Used to a play card.<br>Recharges at maximum at the beginning of each turn.
+$GOBUTTON	Start reading your chapter.
+$BOARDSLOT	You can place a card on this slot.
+$HERO	This is the main character of your story.It triggers most of the cards effects.
+$INSPIRE	Having a rough time finding the cards you need?<br>Click here to draw {0} cards in exange of 1 Tokken.<br>If you use <b>Inspire</b> with no tokken available, it will add {1} <b>Dark Ideas to your Deck</b>.<br><b>Current amount of Inspire Tokken: {2}</b>.  
+$CARD_NATURE_PLOT	<br>It is also a Plot, you need to achieve his objective before timer reach 0!
+$CARD_NATURE_JUNK	<br>It is also a Junk, it disapears when the plot it is linked to gets resolved.
+$CARD_NATURE_DARKIDEA	<br>It is also a Dark Idea, it has negative effets. Try to get rid of it as fast as possilbe.
+$CARD_TYPE_ENEMY	This Card is an Enemy.<br>It will attack you and your allies nerby.<br>It comes back to your hands while it has stacks.
+$CARD_TYPE_ALLY	This Card is an Ally.<br>It will attack nerby ennemies.<br>It comes back in your hand while it has stacks.
+$CARD_TYPE_OBJECT	This Card is an Object.<br>His effects apply when your hero walks on it.<br>It will be destroyed after usage.
+$CARD_TYPE_LOCATION	This Card is a Location.<br>They trigger most of they effect right when the turn starts.
+$CARD_INK	Amount of Ink requiered to place this card on the track.
+$CARD_ATK	Amount of damages dealt by this character when he hits.
+$CARD_HP	Amount of life point of this character.\nHe is destroyed if it reaches 0
+$CARD_TIMER_PLOT	Timer of the Plot.<br>If it reaches 0, you loose.
+$CARD_TIMER_CHARA	Character stacks.<br>When it reaches 0, character stops coming back to your hand.
+$EFFECT_RANGE_ALL	This effect targets card over the whole track
+$EFFECT_RANGE_ALL-LEFT	This effect targets all the cards on his left
+$EFFECT_RANGE_ALL-RIGHT	This effect targets all the cards on his right
+$EFFECT_RANGE_HERO	This effect targets the Hero
+$EFFECT_RANGE_LEFT	This effect targets the card on his left
+$EFFECT_RANGE_PLOT	This is the objective of the Plot.<br>Finish it to end the Plot.
+$EFFECT_RANGE_RIGHT	This effect targets the card on his right
+$EFFECT_RANGE_RIGHT-LEFT	This effect targets cards next to him
+$EFFECT_RANGE_SELF	This effect targets the card itself.

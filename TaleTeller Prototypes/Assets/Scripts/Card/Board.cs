@@ -24,6 +24,11 @@ public class Board : MonoBehaviour
     private int currentSlot = 0;
     [HideInInspector] public BoardState currentBoardState;
 
+    [Header("Highlight Color Profile")]
+    public Color baseColor;
+    public Color TwoEffectColor;
+    public Color ThreeEffectColor;
+
 
     #region StoryBegin
     public void InitBoard()
@@ -118,7 +123,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    IEnumerator Move(int index)//Temp coroutine to test movement
+    IEnumerator Move(int index)
     {
         EventQueue moveQueue = new EventQueue();
         storyLine.MovePlayer(moveQueue, index);
@@ -155,116 +160,6 @@ public class Board : MonoBehaviour
         }
 
         ResumeStory();
-    }
-    #endregion
-
-    #region CardManagement Method
-    public void DiscardCardFromBoard(CardContainer card, EventQueue queue)
-    {
-        //new discard method
-        queue.events.Add(DiscardCardFromBoardRoutine(card, queue));
-    }
-    IEnumerator DiscardCardFromBoardRoutine(CardContainer card, EventQueue currentQueue)
-    {
-        //Add feedback
-        EventQueue feedback = new EventQueue();
-        card.visuals.MoveCard(card, CardManager.Instance.discardPileTransform.localPosition, true, false, feedback);
-        while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
-
-
-        card.data = card.data.ResetData(card.data);
-
-        CardManager.Instance.cardDeck.discardPile.Add(card.data);
-
-        //remove from board list
-        card.currentSlot.currentPlacedCard = null;
-        card.currentSlot.canvasGroup.blocksRaycasts = true;
-
-        card.ResetContainer();
-
-        currentQueue.UpdateQueue();
-    }
-
-    public void ReturnCardToHand(CardContainer card, bool canPushOverCard, EventQueue queue)
-    {
-        queue.events.Add(ReturnCardToHandRoutine(card, canPushOverCard, queue));
-    }
-    IEnumerator ReturnCardToHandRoutine(CardContainer card, bool canPushOverCard, EventQueue currentQueue)
-    {
-        yield return null;
-
-        EventQueue returnQueue = new EventQueue();
-        
-        if (canPushOverCard)
-        {
-            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize)//if max cards in hand make the player select a card
-            {
-                //MAKE the player pick a card and discard it
-                EventQueue pickQueue = new EventQueue();
-                List<CardData> pickedCards = new List<CardData>();
-
-                CardManager.Instance.cardPicker.Pick(pickQueue, CardManager.Instance.cardHand.GetHandDataList(), pickedCards, 1, false, "Choose a card to discard");
-
-                pickQueue.StartQueue();
-                while(!pickQueue.resolved)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
-
-                //discard all of the picked cards
-                for (int i = 0; i < pickedCards.Count; i++)
-                {
-                    CardManager.Instance.cardHand.DiscardCardFromHand(pickedCards[i].currentContainer, returnQueue);
-                }
-
-                //return card to hand
-                ReturnCard(card, returnQueue);
-            }
-            else//just return card to hand
-            {
-                ReturnCard(card, returnQueue);
-            }
-        }
-        else
-        {
-            if (CardManager.Instance.cardHand.currentHand.Count == CardManager.Instance.cardHand.maxHandSize + 1)//if max cards in hand discard
-            {
-                DiscardCardFromBoard(card, returnQueue);
-            }
-            else//just return card to hand
-            {
-                ReturnCard(card, returnQueue);
-            }
-        }
-
-        returnQueue.StartQueue(); //Actual discard / return happens here
-
-        while(!returnQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
-        currentQueue.UpdateQueue();
-    }
-
-    private void ReturnCard(CardContainer card, EventQueue queue)
-    {
-        queue.events.Add(ReturnCardRoutine(card, queue));
-    }
-    IEnumerator ReturnCardRoutine(CardContainer card, EventQueue queue)
-    {
-        //remove from board list
-        card.currentSlot.currentPlacedCard = null;
-        card.currentSlot.canvasGroup.blocksRaycasts = true;
-        card.currentSlot = null;
-
-
-        //use method from deck to move cardBack to hand
-        CardManager.Instance.cardHand.MoveCard(card, CardManager.Instance.cardHand.RandomPositionInRect(CardManager.Instance.cardHand.handTransform), false); //TODO add event queue from this method
-        CardManager.Instance.cardHand.currentHand.Add(card);
-        yield return new WaitForSeconds(0.5f);
-
-        queue.UpdateQueue();
     }
     #endregion
 
@@ -332,6 +227,92 @@ public class Board : MonoBehaviour
     #endregion
 
     #region Utility
+
+    public void ShowTargetSlots(CardData card)
+    {
+        if (card.effects.Count == 0) return;
+        else
+        {
+            List<int> slotsToHighlight = new List<int>();
+            int currentSlotIndex = CardManager.Instance.currentHoveredSlot.slotIndex;
+
+            for (int i = 0; i < card.effects.Count; i++)
+            {
+                for (int j = 0; j < card.effects[i].range.Length; j++)
+                {
+                    BoardRange effectRange = card.effects[i].range[j];
+                    switch (effectRange)
+                    {
+                        case BoardRange.Self:
+                            slotsToHighlight.Add(currentSlotIndex);
+                            break;
+                        case BoardRange.All:
+                            for (int x = 0; x < slots.Count; x++)
+                            {
+                                slotsToHighlight.Add(x);
+                            }
+                            break;
+                        case BoardRange.AllLeft:
+                            for (int x = currentSlotIndex - 1; x >= 0; x--)
+                            {
+                                slotsToHighlight.Add(x);
+                            }
+                            break;
+                        case BoardRange.AllRight:
+                            for (int x = currentSlotIndex + 1; x < slots.Count; x++)
+                            {
+                                slotsToHighlight.Add(x);
+                            }
+                            break;
+                        case BoardRange.FirstLeft:
+                            if (currentSlotIndex - 1 >= 0) slotsToHighlight.Add(currentSlotIndex - 1);
+                            break;
+                        case BoardRange.SecondLeft:
+                            if (currentSlotIndex - 2 >= 0) slotsToHighlight.Add(currentSlotIndex - 2);
+                            break;
+                        case BoardRange.ThirdLeft:
+                            if (currentSlotIndex - 3 >= 0) slotsToHighlight.Add(currentSlotIndex - 3);
+                            break;
+                        case BoardRange.FourthLeft:
+                            if (currentSlotIndex - 4 >= 0) slotsToHighlight.Add(currentSlotIndex - 4);
+                            break;
+                        case BoardRange.FirstRight:
+                            if (currentSlotIndex + 1 <slots.Count) slotsToHighlight.Add(currentSlotIndex + 1);
+                            break;
+                        case BoardRange.SecondRight:
+                            if (currentSlotIndex + 2 < slots.Count) slotsToHighlight.Add(currentSlotIndex + 2);
+                            break;
+                        case BoardRange.ThirdRight:
+                            if (currentSlotIndex + 3 < slots.Count) slotsToHighlight.Add(currentSlotIndex + 3);
+                            break;
+                        case BoardRange.FourthRight:
+                            if (currentSlotIndex + 4 < slots.Count) slotsToHighlight.Add(currentSlotIndex + 4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            //slotsToHighlight = slotsToHighlight.Distinct().ToList();
+
+            for (int i = 0; i < slotsToHighlight.Count; i++)
+            {
+                //HighlightSlot
+                slots[slotsToHighlight[i]].ShowHighlight();
+            }
+        }
+    }
+
+    public void HideTargetSlots()
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            //Stophighlightslot
+            slots[i].HideHighlight();
+        }
+    }
+
     public bool IsEmpty()
     {
         for (int i = 0; i < slots.Count; i++)

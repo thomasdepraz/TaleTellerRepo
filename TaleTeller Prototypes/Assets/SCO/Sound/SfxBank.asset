@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915188b37e61d1a46bfa02bbc1205fb1, type: 3}
+  m_Name: SfxBank
+  m_EditorClassIdentifier: 
+  clips:
+  - id: SFX_BANKRUPT
+    clip: {fileID: 8300000, guid: 889f94a83499e3046ac49f9686ed5962, type: 3}
+  - id: SFX_BUY
+    clip: {fileID: 8300000, guid: 28d81ad363a02bd4fba7b1616d8aadfd, type: 3}
+  - id: SFX_GAINGOLD
+    clip: {fileID: 8300000, guid: c92bdfa787ddb15439d4fd4f60446a03, type: 3}
+  - id: SFX_GAINGOLDMASSIVE
+    clip: {fileID: 8300000, guid: 8457d8ed6206f994897736b5819cf458, type: 3}
+  - id: SFX_INTERVERTCARD
+    clip: {fileID: 8300000, guid: 780f3b585f573554495f0bd782f02290, type: 3}
+  - id: SFX_OUTOFINK
+    clip: {fileID: 8300000, guid: 5683fec857579184185ff5b3a111b4e9, type: 3}
+  - id: SFX_WRONGPLACEMENT
+    clip: {fileID: 8300000, guid: 4d6316eed581c1b44bf305987bf1d769, type: 3}
+  - id: SFX_ATKFROMHERO
+    clip: {fileID: 8300000, guid: 9f394f0d2c117444498e873ad3d6b29b, type: 3}
+  - id: SFX_DISCARD
+    clip: {fileID: 8300000, guid: 9be149895a98b1a4d8e114e2dc078e76, type: 3}
+  - id: SFX_DRAW
+    clip: {fileID: 8300000, guid: 275730e2c8b44284ba6df79d3b767bd2, type: 3}
+  - id: SFX_HEAL
+    clip: {fileID: 8300000, guid: b4f231ad71e50404884955c6d185dab9, type: 3}
+  - id: SFX_ATKFIREBALL
+    clip: {fileID: 8300000, guid: 9c62c4162ae22bb4bb936f4d2ef72f84, type: 3}
+  - id: SFX_ATKSWORD
+    clip: {fileID: 8300000, guid: 676e77b9435a5e9469d91635d6d7d2bf, type: 3}
+  - id: SFX_CARDPLACED
+    clip: {fileID: 8300000, guid: 0a4d547b7167b084aa67e3f6f4c12ca2, type: 3}
+  - id: SFX_CARDTODECK
+    clip: {fileID: 8300000, guid: dda04b0ea54b27944bb907b9151e3002, type: 3}
+  - id: SFX_REDRESSCARD
+    clip: {fileID: 8300000, guid: e992886ffff64b24f9a26b17385d1280, type: 3}
+  - id: SFX_REFILLDECK
+    clip: {fileID: 8300000, guid: 95496accfbaed6946aaa480b685353ab, type: 3}
+  - id: SFX_BUTTONGO
+    clip: {fileID: 8300000, guid: f705faee8ac656547ab636d1c0b6df2d, type: 3}
+  - id: SFX_LINKEDCARDS
+    clip: {fileID: 8300000, guid: 57a030d70032df04cab8ee4c0a5f4db7, type: 3}
+  - id: SFX_CLOCKTICK01
+    clip: {fileID: 8300000, guid: 334dcfcb534c90249aef0f9b515bf982, type: 3}
+  - id: SFX_CLOCKTICK02
+    clip: {fileID: 8300000, guid: 8375bf7ab10605c4d81d753d4cfecf09, type: 3}
+  - id: SFX_CLOCKTICK03
+    clip: {fileID: 8300000, guid: d11cdf461adc4d644bbb7ccee1670194, type: 3}
+  - id: SFX_CLOCKTICK04
+    clip: {fileID: 8300000, guid: 5ca082a36438f104aa285a632d434aec, type: 3}
+  - id: SFX_CLOCKTICKEND01
+    clip: {fileID: 8300000, guid: 569d35e2d05c87e45bd23e54b9ba400b, type: 3}
+  - id: SFX_CLOCKTICKEND03
+    clip: {fileID: 8300000, guid: 2f55c8b2f0cfeec45a47b0f01285c232, type: 3}
+  - id: SFX_CLOCKTICKEND02
+    clip: {fileID: 8300000, guid: 9a7a1a954d0ab534299a6c78821b1ca2, type: 3}
+  - id: SFX_LASTWISH
+    clip: {fileID: 8300000, guid: bab0278313845b04fa4833538784275b, type: 3}
+  - id: SFX_STATCARDBOOSTED
+    clip: {fileID: 8300000, guid: 54fe367da558175419cf604cbbb70bfe, type: 3}
+  - id: SFX_STATCARDDEVALUATED
+    clip: {fileID: 8300000, guid: c532e8c1302af3841af2314f5daee79b, type: 3}
+  - id: SFX_HITINVICIBLE
+    clip: {fileID: 8300000, guid: 7d2723327a9825041a81f811be443aa8, type: 3}
+  - id: SFX_DESELECTCARD
+    clip: {fileID: 8300000, guid: 34363d10175450a40bd509b267fc0d13, type: 3}
+  - id: SFX_REWARDINGSAPPEAR
+    clip: {fileID: 8300000, guid: c029309b7a934d742a242422c3c22344, type: 3}
+  - id: SFX_REWARDINGSDESAPPEAR
+    clip: {fileID: 8300000, guid: 87f8572d3c6b56d4a9c80262ab2751dc, type: 3}
+  - id: SFX_SELECTCARD
+    clip: {fileID: 8300000, guid: 25e89f0347562e84caa78d5c3f2c0b14, type: 3}
+  - id: SFX_RUNOVERTURE
+    clip: {fileID: 8300000, guid: 2d8684067dca8214fa08a3e54b2488be, type: 3}
+  - id: SFX_PLOTWON
+    clip: {fileID: 8300000, guid: 7f57840ed31f90045b6ec32da55f957e, type: 3}
+  - id: SFX_PLOTFAILED
+    clip: {fileID: 8300000, guid: 42760c0e60f4d2943b8e62e45a8adcbb, type: 3}

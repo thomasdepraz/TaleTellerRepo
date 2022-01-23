@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using NaughtyAttributes;
 
 /// <summary>
 /// Remi Secher - 12/10/2021 01:56 - Creation
@@ -14,6 +15,10 @@ public class CharaStatModifierEffect : CharacterStatsEffect
 
     public EffectValue modifierValue;
     public TargetBehaviour behaviourTargeted;
+
+    public bool forSpecificCard;
+    [ShowIf("forSpecificCard")]
+    public CardData specificCard;
 
     public bool temporaryChange;
 
@@ -53,9 +58,16 @@ public class CharaStatModifierEffect : CharacterStatsEffect
 
         EventQueue feedbackQueue = new EventQueue();
 
-        //TODO: Inset queue for feedback
         foreach (CharacterType t in targets.ToList())
         {
+            if (forSpecificCard)
+                if (t.data.cardName != specificCard.cardName)
+                {
+                    feedbackQueue.resolved = true;
+                    break;
+                }
+                    
+
             switch (modifierValue.type)
             {
                 case EffectValueType.Attack:
@@ -64,27 +76,29 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                     {
                         case EffectValueOperator.Addition:
                             t.stats.baseAttackDamage += modifierValue.value;
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, 1, modifierValue.value, feedbackQueue, false);
+
                             break;
                         case EffectValueOperator.Division:
                             t.stats.baseAttackDamage /= modifierValue.value;
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, -1, modifierValue.value, feedbackQueue, false);
                             break;
                         case EffectValueOperator.Product:
                             t.stats.baseAttackDamage *= modifierValue.value;
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, 1, modifierValue.value, feedbackQueue, false);
                             break;
                         case EffectValueOperator.Substraction:
                             t.stats.baseAttackDamage -= modifierValue.value;
                             t.stats.baseAttackDamage = (int)Mathf.Clamp(t.stats.baseAttackDamage, 0, Mathf.Infinity);
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, -1, modifierValue.value, feedbackQueue, false);
                             break;
                         default:
                             feedbackQueue.resolved = true;
                             break;
                     }
 
-                    t.data.currentContainer.visuals.UpdateBaseElements(t.data);
+                    //t.data.currentContainer.UpdateBaseInfo();
+                    t.data.currentContainer.UpdateCharacterInfo(t);
 
                     break;
                 case EffectValueType.Life:
@@ -93,26 +107,28 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                     {
                         case EffectValueOperator.Addition:
                             t.stats.baseLifePoints += modifierValue.value;
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, 1, modifierValue.value, feedbackQueue, false);
+
                             break;
                         case EffectValueOperator.Division:
                             t.stats.baseLifePoints /= modifierValue.value;
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, -1, modifierValue.value, feedbackQueue, false);
                             break;
                         case EffectValueOperator.Product:
                             t.stats.baseLifePoints *= modifierValue.value;
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, 1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, 1, modifierValue.value, feedbackQueue, false);
+
                             break;
                         case EffectValueOperator.Substraction:
                             t.stats.baseLifePoints -= modifierValue.value;
-                            t.data.currentContainer.visuals.EffectChangeFeedback(t.data.currentContainer, -1, feedbackQueue);
+                            CardManager.Instance.cardTweening.EffectChangeFeedback(t.data.currentContainer, -1, modifierValue.value, feedbackQueue, false);
                             break;
                         default:
                             feedbackQueue.resolved = true;
                             break;
                     }
 
-                    t.data.currentContainer.visuals.UpdateBaseElements(t.data);
+                    t.data.currentContainer.UpdateCharacterInfo(t);
 
                     //NOTE: This situation justify that the process to damage a character need to be encapsulated somewhere
                     EventQueue characterDeathQueue = new EventQueue();
@@ -133,7 +149,7 @@ public class CharaStatModifierEffect : CharacterStatsEffect
                 default:
                     break;
             }
-            t.data.currentContainer.UpdateCharacterInfo(t);
+            //t.data.currentContainer.UpdateCharacterInfo(t);
         }
 
         if(targets.ToArray().Length == 0)

@@ -11,6 +11,7 @@ public class PlotCard : CardData
     public int completionTimer;
     public bool isMainPlot;
     public bool isFinal;
+    [TextArea(2, 3)] public string plotChoiceDescription;
     public List<CardData> legendaryCardRewards = new List<CardData>();
 
     //Eventually CardData malusCardToSpawn 
@@ -22,6 +23,10 @@ public class PlotCard : CardData
         plot.dataReference = data.dataReference;
 
         data.currentContainer = null;
+
+        //load text 
+        if(plotChoiceDescription!=string.Empty)
+            plot.plotChoiceDescription = LocalizationManager.Instance.GetString(LocalizationManager.Instance.schemesDescriptionsDictionary, plot.plotChoiceDescription);
 
         plot.archetype = (Archetype)Random.Range(2, (int)Archetype.NumberOfArchetypes );
         
@@ -59,7 +64,6 @@ public class PlotCard : CardData
         return plot;
     }
 
-
     public void OnPlotAppear(EventQueue queue, CardData data)
     {
         queue.events.Add(OnPlotAppearRoutine(queue, data));
@@ -69,11 +73,11 @@ public class PlotCard : CardData
         yield return null;
 
         //if deck dont contains this card then animate to hand
-        if(!CardManager.Instance.cardDeck.cardDeck.Contains(PlotsManager.Instance.currentPickedCard))
+        if(!CardManager.Instance.cardDeck.cardDeck.Contains(data))
         {
             EventQueue toHandQueue = new EventQueue();
 
-            PlotsManager.Instance.SendPlotToHand(toHandQueue, PlotsManager.Instance.currentPickedCard);
+            CardManager.Instance.CardAppearToHand(data, toHandQueue, CardManager.Instance.plotAppearTransform.position);
 
             toHandQueue.StartQueue();
             while(!toHandQueue.resolved)
@@ -82,8 +86,14 @@ public class PlotCard : CardData
             }
         }
 
+        //Refill deck 
+        EventQueue refillQueue = new EventQueue();
+        CardManager.Instance.cardDeck.Refill(refillQueue);
+        refillQueue.StartQueue();
+        while (!refillQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-        //add all junk cards to deck for now -- TODO later call the appropriate method on plotObjective so it chooses where to send the cards TODO 
+
+        //add all junk cards to deck for now
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)
         {
             switch(objective.junkSpawnLocations[i])
@@ -92,7 +102,7 @@ public class PlotCard : CardData
                     CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
                     
                     EventQueue endDeckfeedback = new EventQueue();
-                    PlotsManager.Instance.SendPlotToDeck(endDeckfeedback, objective.linkedJunkedCards[i]);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], endDeckfeedback, CardManager.Instance.plotAppearTransform.position, false);
                     endDeckfeedback.StartQueue();
                     while(!endDeckfeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -102,20 +112,25 @@ public class PlotCard : CardData
                     CardManager.Instance.cardDeck.cardDeck.Insert(Random.Range(0, CardManager.Instance.cardDeck.cardDeck.Count),objective.linkedJunkedCards[i]);
 
                     EventQueue deckRandomFeedback = new EventQueue();
-                    PlotsManager.Instance.SendPlotToDeck(deckRandomFeedback, objective.linkedJunkedCards[i]);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], deckRandomFeedback, CardManager.Instance.plotAppearTransform.position, false);
+
                     deckRandomFeedback.StartQueue();
                     while (!deckRandomFeedback.resolved) { yield return new WaitForEndOfFrame();}
 
 
                     break;
                 case PlotObjective.JunkSpawnLocation.XInDeck:
-                    if (!(objective.junksPositionsInDeck[i] > CardManager.Instance.cardDeck.cardDeck.Count))
-                        CardManager.Instance.cardDeck.cardDeck.Insert(objective.junksPositionsInDeck[i], objective.linkedJunkedCards[i]);
+                    int r = Random.Range(objective.junksPositionsInDeck[i] - 2, objective.junksPositionsInDeck[i] + 2);
+                    
+                    if(r < 0)
+                        CardManager.Instance.cardDeck.cardDeck.Insert(0, objective.linkedJunkedCards[i]);
+                    else if (r > CardManager.Instance.cardDeck.cardDeck.Count)
+                        CardManager.Instance.cardDeck.cardDeck.Insert(CardManager.Instance.cardDeck.cardDeck.Count, objective.linkedJunkedCards[i]);
                     else
-                        CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+                        CardManager.Instance.cardDeck.cardDeck.Insert(r, objective.linkedJunkedCards[i]);
 
                     EventQueue xInDeckFeedback = new EventQueue();
-                    PlotsManager.Instance.SendPlotToDeck(xInDeckFeedback, objective.linkedJunkedCards[i]);
+                    CardManager.Instance.CardAppearToDeck(objective.linkedJunkedCards[i], xInDeckFeedback, CardManager.Instance.plotAppearTransform.position, false);
                     xInDeckFeedback.StartQueue();
                     while (!xInDeckFeedback.resolved) { yield return new WaitForEndOfFrame(); }
 
@@ -124,11 +139,34 @@ public class PlotCard : CardData
                 case PlotObjective.JunkSpawnLocation.Hand:
 
                     EventQueue drawQueue = new EventQueue();
-                    PlotsManager.Instance.SendPlotToHand(drawQueue, objective.linkedJunkedCards[i]);
+
+                    CardManager.Instance.CardAppearToHand(objective.linkedJunkedCards[i], drawQueue, CardManager.Instance.plotAppearTransform.position);
+
                     drawQueue.StartQueue();//Actual draw
                     while (!drawQueue.resolved)
                     {
                         yield return new WaitForEndOfFrame();
+                    }
+
+                    break;
+                case PlotObjective.JunkSpawnLocation.FromCard:
+
+                    for(int x = i; x >= 0; x--)
+                    {
+                        if(objective.junkSpawnLocations[x] != PlotObjective.JunkSpawnLocation.FromCard)
+                        {
+                            for(int z = 0; z < objective.linkedJunkedCards[x].effects.Count; z++)
+                            {
+                                if(objective.linkedJunkedCards[x].effects[z].GetType() == typeof(AddJunkToHandEffect))
+                                {
+                                    AddJunkToHandEffect junkToHandEffect = objective.linkedJunkedCards[x].effects[z] as AddJunkToHandEffect;
+
+                                    junkToHandEffect.junkCardsToSpawn.Add(objective.linkedJunkedCards[i]);
+                                }
+                            }
+
+                            break;
+                        }
                     }
 
                     break;
@@ -147,7 +185,7 @@ public class PlotCard : CardData
         yield return null;
         EventQueue updateCardStatusQueue = new EventQueue();
 
-        CardManager.Instance.board.ReturnCardToHand(currentContainer, true, updateCardStatusQueue);
+        CardManager.Instance.CardBoardToHand(currentContainer, true, updateCardStatusQueue);
 
         updateCardStatusQueue.StartQueue();
         while(!updateCardStatusQueue.resolved)
@@ -165,13 +203,24 @@ public class PlotCard : CardData
     }
     IEnumerator OnEndPlotCompleteRoutine(EventQueue currentQueue)
     {
-        
         //Destroy
         currentContainer.ResetContainer();
         StoryManager.Instance.cardsToDestroy.Add(this);
 
-        //Choose next card choose next card if not last //TODO
-        if(PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
+        //destroy all linked junk cards
+        EventQueue destroyQueue = new EventQueue();
+
+        objective.DestroyJunk(destroyQueue);
+
+        destroyQueue.StartQueue();
+
+        while (!destroyQueue.resolved)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        //Choose next card if not last
+        if (PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
         {
             EventQueue updateQueue = new EventQueue();
             PlotsManager.Instance.currentMainPlotScheme.UpdateScheme(updateQueue, PlotsManager.Instance.currentMainPlotScheme);
@@ -184,7 +233,6 @@ public class PlotCard : CardData
         }
         else //If last then go to next acte
         {
-            Debug.LogError("NORMALEMENT C'EST LA FIN DE l'ACTE");
             StoryManager.Instance.NextStoryArc();
         }
 
@@ -199,20 +247,7 @@ public class PlotCard : CardData
     {
         yield return null;
 
-        //destroy all linked junk cards
-        EventQueue destroyQueue = new EventQueue();
-
-        objective.DestroyJunk(destroyQueue);
-
-        destroyQueue.StartQueue();
-
-        while(!destroyQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-
         //Reward
-        //TODO IMPLEMENT QUEUEING IN HERE
         EventQueue rewardQueue = new EventQueue();
 
         if (isMainPlot)
@@ -220,20 +255,17 @@ public class PlotCard : CardData
             if (isFinal)
             {
                 //Final Step of main plot reward
-                Debug.Log("Complete Final main plot");
                 RewardManager.Instance.ChooseMainPlotRewardFinal(rewardQueue, this);
             }
             else
             {
                 //Main Plot reward
-                Debug.Log("Complete main plot");
                 RewardManager.Instance.ChooseMainPlotReward(rewardQueue, this);
             }
         }
         else
         {
             //Secondary plot reward
-            Debug.Log("Secondary Plot");
             RewardManager.Instance.ChooseSecondaryPlotReward(rewardQueue, this);
         }
         rewardQueue.StartQueue();
@@ -261,14 +293,14 @@ public class PlotCard : CardData
 
     public void FailPlot(EventQueue queue)
     {
-        queue.events.Add(FailPilotRoutine(queue));
+        queue.events.Add(FailPlotRoutine(queue));
     }
-    public IEnumerator FailPilotRoutine(EventQueue currentQueue)//TODO
+    public IEnumerator FailPlotRoutine(EventQueue currentQueue)
     {
         yield return null;
         if (isMainPlot)
         {
-            //Show the card + why the player lost
+            //Show the card + why the player lost TODO
 
 
             //GameOver
@@ -287,7 +319,7 @@ public class PlotCard : CardData
             //TEMP pick a random card within the list and add it to the deck
             CardData darkIdea = PlotsManager.Instance.darkIdeas[Random.Range(0, PlotsManager.Instance.darkIdeas.Count-1)];
             EventQueue sendToDeckQueue = new EventQueue();
-            PlotsManager.Instance.SendPlotToDeck(sendToDeckQueue, darkIdea);
+            CardManager.Instance.CardAppearToDeck(darkIdea, sendToDeckQueue, CardManager.Instance.plotAppearTransform.position);
             sendToDeckQueue.StartQueue();
             while (!sendToDeckQueue.resolved) { yield return new WaitForEndOfFrame(); }
             
@@ -304,11 +336,25 @@ public class PlotCard : CardData
     {
         queue.events.Add(UpdateTimerRoutine(queue));
     }
-    IEnumerator UpdateTimerRoutine(EventQueue currentQueue)
+    IEnumerator UpdateTimerRoutine(EventQueue currentQueue) 
     {
         yield return null;
         completionTimer--;
+
         currentContainer.UpdatePlotInfo(this);
+        if(completionTimer == 1)
+        {
+            currentContainer.UpdateTimerTweening(this, true);
+        }
+        else
+        {
+            if (currentContainer.audioSource == null) currentContainer.audioSource = SoundManager.Instance.GenerateAudioSource(currentContainer.gameObject);
+            Sound intervert = new Sound(currentContainer.audioSource, "SFX_CLOCKTICK01", SoundType.SFX, false, false);
+            intervert.Play();
+
+            CardManager.Instance.cardTweening.ScaleBounce(currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
+        }
+        yield return new WaitForSeconds(0.4f);
         if(completionTimer <= 0)
         {
             EventQueue failQueue = new EventQueue();

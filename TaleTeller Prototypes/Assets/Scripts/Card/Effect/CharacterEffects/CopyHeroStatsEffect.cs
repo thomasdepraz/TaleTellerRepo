@@ -72,9 +72,9 @@ public class CopyHeroStatsEffect : CharacterStatsEffect
             if (changeHealthInto.modifyThisStat)
                 CharacStatsChanger(ref chara.stats.baseLifePoints, changeHealthInto);
 
-            chara.data.currentContainer.visuals.EffectChangeFeedback(chara.data.currentContainer, 1, feedbackQueue);
-
-            chara.data.currentContainer.visuals.UpdateBaseElements(chara.data);
+            //chara.data.currentContainer.visuals.EffectChangeFeedback(chara.data.currentContainer, 1, feedbackQueue);
+            //CardManager.Instance.cardTweening.EffectChangeFeedback(chara.data.currentContainer, 1 , 0,feedbackQueue);
+            chara.data.currentContainer.UpdateCharacterInfo(chara);
         }
 
         if (targets.Count == 0)

@@ -13,6 +13,7 @@ public class Hero : MonoBehaviour
     public Image goldFrame;
     [Space]
     public TextMeshProUGUI heroHpUI;
+    public TextMeshProUGUI heroOverHealPointsUI;
     public TextMeshProUGUI heroAttackUI;
     public TextMeshProUGUI heroGoldUI;
 
@@ -20,10 +21,14 @@ public class Hero : MonoBehaviour
     //Private hero variables
     private int _maxLifePoints;
     private int _lifePoints;
+    private int _overHealPoints;
     private int _attackDamage;
     private int _bonusDamage;
     private int _maxGoldPoints;
     private int _goldPoints;
+
+    [HideInInspector]public AudioSource audioSource;
+
     [HideInInspector]public int maxLifePoints
     { 
         get => _maxLifePoints ; 
@@ -34,6 +39,7 @@ public class Hero : MonoBehaviour
             FrameTweening(hpFrame.gameObject);
         }
     }
+
     [HideInInspector]public int lifePoints 
     { 
         get => _lifePoints ;
@@ -43,17 +49,12 @@ public class Hero : MonoBehaviour
 
             _lifePoints = value;
 
-            if (_lifePoints > maxLifePoints)
-                _lifePoints = maxLifePoints;
-            else if (_lifePoints < 0)
+            if (_lifePoints < 0)
                 _lifePoints = 0;
+            else if (_lifePoints > maxLifePoints)
+                _lifePoints = maxLifePoints;
 
-
-            heroHpUI.text = lifePoints.ToString() + "/" + maxLifePoints;
-
-            //Different feedack if damage taken or if healed
-            if(diff != 0 && diff!= maxLifePoints)
-                GameManager.Instance.storyManager.HeroLifeFeedback(diff);
+            heroHpUI.text = (lifePoints).ToString() + "/" + maxLifePoints;
 
             FrameTweening(hpFrame.gameObject);
         }
@@ -64,7 +65,11 @@ public class Hero : MonoBehaviour
         set
         {
             _attackDamage = value;
-            heroAttackUI.text = value.ToString();
+
+            if (_bonusDamage != 0)
+                heroAttackUI.text = value.ToString() + " + " + _bonusDamage.ToString();
+            else
+                heroAttackUI.text = value.ToString();
             FrameTweening(attackFrame.gameObject);
         }
     }
@@ -102,8 +107,16 @@ public class Hero : MonoBehaviour
         get => _goldPoints;
         set
         {
+            if(value>_goldPoints)
+            {
+                if(audioSource == null)audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                Sound gold = new Sound(audioSource, "SFX_GAINGOLD", SoundType.SFX, false, false);
+                gold.Play();
+            }
+            
             _goldPoints = value;
             
+
 
             if (_goldPoints > maxGoldPoints)
                 _goldPoints = maxGoldPoints;

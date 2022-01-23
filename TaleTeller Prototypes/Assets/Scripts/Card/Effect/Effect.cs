@@ -81,6 +81,7 @@ public class Effect : ScriptableObject
 {
     [HideInInspector] public CardData linkedData;
     public string description;
+    public bool appendWithNext;
     public Trigger trigger;
     public EffectTarget target;
 
@@ -101,6 +102,9 @@ public class Effect : ScriptableObject
     public virtual void InitEffect(CardData card) // <-- Extend this base each time you want to support a new event
     {
         linkedData = card;
+        if(description!=string.Empty)
+            description = LocalizationManager.Instance.GetString(LocalizationManager.Instance.cardsDictionary, description);
+
         //switch case that subscribes OnTriggerEffect() to the right delegate based on the effect trigger
         switch (trigger)
         {
@@ -160,12 +164,12 @@ public class Effect : ScriptableObject
         }
     }
 
-    public virtual void OnTriggerEffect(EventQueue queue) //TODO REMOVE VIRTUAL
+    public void OnTriggerEffect(EventQueue queue)
     {
         //ajouter la coroutine � la queue
         queue.events.Add(EffectLogic(queue));
     }
-    public virtual void OnTriggerEffect(EventQueue queue, CardData data = null) //TODO REMOVE VIRTUAL
+    public void OnTriggerEffect(EventQueue queue, CardData data = null)
     {
         //ajouter la coroutine � la queue
         queue.events.Add(EffectLogic(queue, data));
@@ -314,10 +318,11 @@ public class Effect : ScriptableObject
         return targets;
     }
 
-    public virtual string GetDescription(Effect effect)
+    public virtual string GetDescription(Effect effect, Effect reference)
     {
         string result = string.Empty;
         string[] temp = effect.description.Split('$');
+        string[] referenceTemp = effect.description.Split('$');
 
         for (int i = 0; i < temp.Length; i++)
         {
@@ -332,14 +337,20 @@ public class Effect : ScriptableObject
                 FieldInfo prop = type.GetField(temp[i]);
                 EffectValue val = prop.GetValue(effect) as EffectValue;
 
-                value = val.value.ToString();
+                Type refType = reference.GetType();
+                FieldInfo refProp = refType.GetField(referenceTemp[i]);
+                EffectValue refVal = refProp.GetValue(reference) as EffectValue;
+
+                if (val.value != refVal.value)
+                    value = $"*{val.value}*";
+                else
+                    value = $"{val.value}";
             }
             result += value;
         }
         
         return result;
     }
-
 }
 
 
