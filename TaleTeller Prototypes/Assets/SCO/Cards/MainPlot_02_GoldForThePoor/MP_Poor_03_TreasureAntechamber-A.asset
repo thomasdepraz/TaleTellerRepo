@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 02000000
@@ -47,7 +48,10 @@ MonoBehaviour:
   junksPositionsInDeck: 
   mustPlaceAll: 1
   specificJunkToPlace: []
-  plotOnBoard: 1
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +69,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 3
-  cardGraph: {fileID: 21300000, guid: 0951fa2e71d4ce94daff3cd66ee7b343, type: 3}
+  cardGraph: {fileID: 21300000, guid: 2fb6b6d45f66bbe46b20300fcab9ebaf, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -94,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Poor_03_TreasureAntichamber_A_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 02000000

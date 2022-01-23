@@ -36,7 +36,10 @@ MonoBehaviour:
   junksPositionsInDeck: 
   mustPlaceAll: 1
   specificJunkToPlace: []
-  plotOnBoard: 0
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []
 --- !u!114 &-582879030233534013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Priest_02_TempleAltar_A_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 3
   range: 
@@ -76,7 +80,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 3
-  cardGraph: {fileID: 21300000, guid: c63a63548bf0c744aa7a05094b137470, type: 3}
+  cardGraph: {fileID: 21300000, guid: 5ead35d8084ed894c80b63fb18957671, type: 3}
   currentContainer: {fileID: 0}
   description: Place all the Pieces of Artifact on the Track.
   effectsReferences:

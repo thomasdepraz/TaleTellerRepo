@@ -35,6 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Idea_LittleGoblin_Base_Effect0
+  appendWithNext: 0
   trigger: 8
   target: 1
   range: 
@@ -44,6 +45,8 @@ MonoBehaviour:
     type: 2
     op: 1
   temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +64,7 @@ MonoBehaviour:
   rarity: 1
   archetype: 1
   manaCost: 1
-  cardGraph: {fileID: 21300000, guid: 72a4ea3c70e7c39499622d676c5e9a9a, type: 3}
+  cardGraph: {fileID: 21300000, guid: ba0fba94055003749be184bdc37bdb4a, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

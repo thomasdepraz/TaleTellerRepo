@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Poor_03_TreasureAntichamber_B_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 02000000
@@ -23,6 +24,8 @@ MonoBehaviour:
     type: 1
     op: 1
   behaviourTargeted: 2
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 1
 --- !u!114 &-63025082628968401
 MonoBehaviour:
@@ -47,6 +50,10 @@ MonoBehaviour:
   numberToKill: 3
   mustKillSpecific: 0
   specificJunkToKill: []
+  mustBeKilledBySpecific: 0
+  mustBeKilledBySpecificJunk: 0
+  specificJunkThatKill: {fileID: 0}
+  mustBeKilledBySpecificPlot: 0
   plotOnBoard: 0
   positionToValidate: 0
   otherJunkOnBoard: 0
@@ -68,7 +75,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 0951fa2e71d4ce94daff3cd66ee7b343, type: 3}
+  cardGraph: {fileID: 21300000, guid: 2fb6b6d45f66bbe46b20300fcab9ebaf, type: 3}
   currentContainer: {fileID: 0}
   description: 'Defeat the 3 Armored Cultists.
 
@@ -99,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Poor_03_TreasureAntichamber_B_Effect1
+  appendWithNext: 0
   trigger: 2
   target: 1
   range: 
@@ -108,6 +116,8 @@ MonoBehaviour:
     type: 1
     op: 1
   temporaryChange: 1
+  cardsDependant: 0
+  typeDependants: []
 --- !u!114 &8992087060354113490
 MonoBehaviour:
   m_ObjectHideFlags: 0

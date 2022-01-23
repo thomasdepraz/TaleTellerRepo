@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_StolenPurse
+  appendWithNext: 0
   trigger: 1
   target: 1
   range: 
@@ -23,6 +24,8 @@ MonoBehaviour:
     type: 2
     op: 1
   temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []
 --- !u!114 &-254858034558820941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +65,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: d90b16ce562ca7040a4ee26928f44227, type: 3}
+  cardGraph: {fileID: 21300000, guid: acba1375c1ea34143b2755a1c079cf86, type: 3}
   currentContainer: {fileID: 0}
   description: The Hero gains +3 Gold.
   effectsReferences:

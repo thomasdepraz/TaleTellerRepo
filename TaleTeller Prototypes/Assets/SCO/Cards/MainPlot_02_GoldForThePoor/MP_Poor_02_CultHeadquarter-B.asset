@@ -38,7 +38,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 74af055fbc2c3f44387154eea0e17034, type: 3}
+  cardGraph: {fileID: 21300000, guid: 765d17b209df0a5498107b9bf52c085b, type: 3}
   currentContainer: {fileID: 0}
   description: 'Place the Fleeing Medicant Cultist on the Track.
 
@@ -87,7 +87,10 @@ MonoBehaviour:
   junksPositionsInDeck: 0a000000
   mustPlaceAll: 1
   specificJunkToPlace: []
-  plotOnBoard: 0
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []
 --- !u!114 &8568812777933421953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Poor_02_CultHeadquarter_B_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 03000000

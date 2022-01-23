@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 21300000, guid: 11f80291af4cc3f4a9e59c47ec8352f8, type: 3}
+  cardGraph: {fileID: 21300000, guid: 480f7d470542b854f86a6c07b5c25dc7, type: 3}
   currentContainer: {fileID: 0}
   description: Discard the first Card from the Deck.
   effectsReferences:
@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_CultistArmor_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 4
   range: 

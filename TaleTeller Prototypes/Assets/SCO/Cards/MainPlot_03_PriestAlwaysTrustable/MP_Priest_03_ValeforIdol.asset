@@ -23,6 +23,10 @@ MonoBehaviour:
   numberToKill: 3
   mustKillSpecific: 0
   specificJunkToKill: []
+  mustBeKilledBySpecific: 0
+  mustBeKilledBySpecificJunk: 0
+  specificJunkThatKill: {fileID: 0}
+  mustBeKilledBySpecificPlot: 0
   plotOnBoard: 0
   positionToValidate: 0
   otherJunkOnBoard: 0
@@ -57,7 +61,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: e7e81714daed50c47be8b8ba66e4273d, type: 3}
+  cardGraph: {fileID: 21300000, guid: 34d8d312d87491c4d932e6b5526e6011, type: 3}
   currentContainer: {fileID: 0}
   description: 'Defeat the 3 Valefor''s replicas.
 
@@ -87,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Priest_04_ValeforIdol_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 0500000009000000
@@ -96,4 +101,6 @@ MonoBehaviour:
     type: 1
     op: 2
   behaviourTargeted: 2
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 0

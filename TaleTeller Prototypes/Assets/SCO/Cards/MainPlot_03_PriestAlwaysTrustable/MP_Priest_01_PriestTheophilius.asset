@@ -21,6 +21,10 @@ MonoBehaviour:
   numberToKill: 1
   mustKillSpecific: 0
   specificJunkToKill: []
+  mustBeKilledBySpecific: 0
+  mustBeKilledBySpecificJunk: 0
+  specificJunkThatKill: {fileID: 0}
+  mustBeKilledBySpecificPlot: 0
   plotOnBoard: 1
   positionToValidate: 1
   otherJunkOnBoard: 0
@@ -42,7 +46,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 21300000, guid: 20c999a9afd17b94b8e6e3c28b5bf6e5, type: 3}
+  cardGraph: {fileID: 21300000, guid: 119a0b6e496b58e43ac41466fc29d756, type: 3}
   currentContainer: {fileID: 0}
   description: Defeat the Demon while Theophilus is on the next step.
   effectsReferences:
@@ -91,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_Priest_01_PriestTheophilius_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 1
   range: 
@@ -100,3 +105,5 @@ MonoBehaviour:
     type: 7
     op: 1
   temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []
