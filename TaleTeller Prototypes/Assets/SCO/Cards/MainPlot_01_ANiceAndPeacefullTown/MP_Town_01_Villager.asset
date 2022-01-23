@@ -63,7 +63,7 @@ MonoBehaviour:
   cardName: Villager
   rarity: 0
   archetype: 0
-  manaCost: 3
+  manaCost: 2
   cardGraph: {fileID: 21300000, guid: 2f15b740eff7bbd42a77f551dae581ed, type: 3}
   currentContainer: {fileID: 0}
   description: 
@@ -73,10 +73,10 @@ MonoBehaviour:
   cardTypeReference: {fileID: -7357148306835399227}
   cardType: {fileID: 0}
   objective: {fileID: 1055613166009445963}
-  completionTimer: 3
+  completionTimer: 4
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $PeacefulTown_Step01_Description
   legendaryCardRewards: []
 --- !u!114 &1055613166009445963
 MonoBehaviour:
