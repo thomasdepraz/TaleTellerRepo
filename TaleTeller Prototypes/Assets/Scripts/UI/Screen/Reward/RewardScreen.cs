@@ -36,8 +36,8 @@ public class RewardScreen : GameScreen
 
         visuals.InitButton(SelectCardReward, SelectHeroReward, addCardReward, removeCardReward, heroRewards);
 
-        if (CardManager.Instance.cardDeck.cachedDeck.Count <= 10 || addRewardData!=null) visuals.removeButton.gameObject.SetActive(false);
-        else visuals.removeButton.gameObject.SetActive(true);
+        if (CardManager.Instance.cardDeck.cachedDeck.Count <= 10 || addRewardData != null) visuals.removeButton.interactable = false;
+        else visuals.removeButton.interactable = true;
 
         visuals.confirmButton.onClick = Confirm;
         visuals.confirmButton.interactable = false;

@@ -369,9 +369,9 @@ public class CardManager : Singleton<CardManager>
     }
     IEnumerator DiscardFromDeckRoutine(int countToDiscard, EventQueue queue)
     {
-        Instance.cardDeck.InitCachedDeck();
+        //Instance.cardDeck.InitCachedDeck();
 
-        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.WITHDRAW, countToDiscard, cardDeck.cachedDeck, true);
+        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.WITHDRAW, countToDiscard, GetCurrentCards(), true);
         bool wait = true;
         screen.Open(()=> wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
@@ -381,13 +381,33 @@ public class CardManager : Singleton<CardManager>
         screen.Close(()=> wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
 
+
         for (int i = 0; i < screen.pickedCards.Count; i++)
         {
-            cardDeck.cachedDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+            if(cardDeck.cardDeck.Contains(screen.pickedCards[i].container.data))
+                cardDeck.cachedDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+
+            else if (cardDeck.discardPile.Contains(screen.pickedCards[i].container.data))
+                cardDeck.cachedDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+
+            else if (cardHand.IsInHand(screen.pickedCards[i].container.data.currentContainer))
+                screen.pickedCards[i].container.data.currentContainer.ResetContainer();
+            
+            else if(board.IsCardOnBoard(screen.pickedCards[i].container.data))
+                screen.pickedCards[i].container.data.currentContainer.ResetContainer();
+
+
+            if (screen.pickedCards[i].container.data.currentContainer != null)
+            {
+                screen.pickedCards[i].container.data.UnsubscribeEvents(screen.pickedCards[i].container.data) ;
+                StoryManager.Instance.cardsToDestroy.Add(screen.pickedCards[i].container.data);
+            }
         }
 
+        
+
         ////refill deck + reinit cards
-        cardDeck.ResetCachedDeck();
+        //cardDeck.ResetCachedDeck();
         queue.UpdateQueue();
     }
     #endregion
@@ -395,5 +415,47 @@ public class CardManager : Singleton<CardManager>
     public void UpdateHandCount()
     {
         cardHand.handCountText.text = $"{cardHand.GetHandCount()}/{cardHand.maxHandSize}";
+    }
+
+    public List<CardData> GetCurrentCards()
+    {
+        List<CardData> result = new List<CardData>();
+
+        //DECK
+        for (int i = 0; i < cardDeck.cardDeck.Count; i++)
+        {
+            Type cardType = cardDeck.cardDeck[i].GetType();
+            if (cardType != typeof(PlotCard) && cardType != typeof(JunkCard))
+                result.Add(cardDeck.cardDeck[i]);
+        }
+
+        //DISCARD
+        for (int i = 0; i < cardDeck.discardPile.Count; i++)
+        {
+            Type cardType = cardDeck.discardPile[i].GetType();
+            if (cardType != typeof(PlotCard) && cardType != typeof(JunkCard))
+                result.Add(cardDeck.discardPile[i]);
+        }
+
+        //BOARD
+        for (int i = 0; i < board.slots.Count; i++)
+        {
+            if(board.slots[i].currentPlacedCard != null)
+            {
+                Type cardType = board.slots[i].currentPlacedCard.data.GetType();
+                if (cardType != typeof(PlotCard) && cardType != typeof(JunkCard))
+                    result.Add(board.slots[i].currentPlacedCard.data);
+            }
+        }
+
+        //HAND
+        for (int i = 0; i < cardHand.currentHand.Count; i++)
+        {
+            Type cardType = cardHand.currentHand[i].data.GetType();
+            if (cardType != typeof(PlotCard) && cardType != typeof(JunkCard))
+                result.Add(cardHand.currentHand[i].data);
+        }
+
+        return result;
     }
 }
