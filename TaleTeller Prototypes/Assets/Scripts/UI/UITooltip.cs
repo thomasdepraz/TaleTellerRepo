@@ -65,8 +65,11 @@ public class UITooltip : MonoBehaviour
                 result = string.Format(result, GameManager.Instance.currentHero.lifePoints);
                 break;
             case UITooltipTarget.ATTACK_STAT:
+                int baseAttack = GameManager.Instance.currentHero.attackDamage;
+                int bonusAttack = GameManager.Instance.currentHero.bonusDamage;
+                int totalAttack = baseAttack + bonusAttack;
                 result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$ATTACK_STAT");
-                result = string.Format(result, GameManager.Instance.currentHero.attackDamage);
+                result = string.Format(result,totalAttack, baseAttack, bonusAttack);
                 break;
             case UITooltipTarget.GOLD_STAT:
                 result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$GOLD_STAT");
