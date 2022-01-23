@@ -42,7 +42,7 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $TurbulentOutset_Step03A_Objective
   legendaryCardRewards: []
 --- !u!114 &4349929708188265433
 MonoBehaviour:
@@ -58,6 +58,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_TurbulentOutset_03_GatesOfTown_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 0
   range: 
@@ -67,6 +68,8 @@ MonoBehaviour:
     type: 0
     op: 1
   temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []
 --- !u!114 &4457140848372181190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,4 +92,7 @@ MonoBehaviour:
   junksPositionsInDeck: 000000000100000002000000
   mustPlaceAll: 1
   specificJunkToPlace: []
-  plotOnBoard: 1
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $MP_TurbulentOutset_02_TownCenter_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 03000000
@@ -21,8 +22,10 @@ MonoBehaviour:
   modifierValue:
     value: 2
     type: 1
-    op: 2
+    op: 1
   behaviourTargeted: 2
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
   temporaryChange: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -53,7 +56,7 @@ MonoBehaviour:
   completionTimer: 5
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $TurbulentOutset_Step02A_Objective
   legendaryCardRewards: []
 --- !u!114 &1360424415077956641
 MonoBehaviour:
@@ -93,4 +96,7 @@ MonoBehaviour:
   mustPlaceAll: 0
   specificJunkToPlace:
   - {fileID: 11400000, guid: 59f44e689562a4846aaa70806f725c59, type: 2}
-  plotOnBoard: 1
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []

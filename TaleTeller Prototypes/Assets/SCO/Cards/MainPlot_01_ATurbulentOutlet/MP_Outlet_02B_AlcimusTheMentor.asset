@@ -24,7 +24,10 @@ MonoBehaviour:
   mustPlaceAll: 0
   specificJunkToPlace:
   - {fileID: 11400000, guid: e36cb0b11ae60bb4da0a3d55acbd415e, type: 2}
-  plotOnBoard: 1
+  specifyNumbers: 0
+  numberToPlace: 
+  mustPlaceTypeCards: 0
+  typeRestrictions: []
 --- !u!114 &-6255910868806202655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,5 +77,5 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $TurbulentOutset_Step02B_Objective
   legendaryCardRewards: []
