@@ -57,7 +57,7 @@ MonoBehaviour:
   objective: {fileID: -2040187732016620431}
   completionTimer: 4
   isMainPlot: 1
-  isFinal: 1
+  isFinal: 0
   plotChoiceDescription: $TurbulentOutset_Step01_Description
   legendaryCardRewards: []
 --- !u!114 &1952050231884971662

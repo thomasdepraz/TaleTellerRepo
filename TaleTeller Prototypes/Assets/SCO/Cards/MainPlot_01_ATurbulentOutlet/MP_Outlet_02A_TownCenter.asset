@@ -20,10 +20,10 @@ MonoBehaviour:
   range: 03000000
   values: []
   modifierValue:
-    value: 2
+    value: 1
     type: 1
     op: 1
-  behaviourTargeted: 2
+  behaviourTargeted: 0
   forSpecificCard: 0
   specificCard: {fileID: 0}
   temporaryChange: 1
@@ -88,11 +88,9 @@ MonoBehaviour:
   linkedJunkedCards:
   - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
   - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
-  - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
-  - {fileID: 11400000, guid: 626223002bf7d5849be4edaa784e8ff4, type: 2}
   - {fileID: 11400000, guid: 59f44e689562a4846aaa70806f725c59, type: 2}
-  junkSpawnLocations: 0300000003000000030000000300000003000000
-  junksPositionsInDeck: 0000000001000000020000000300000005000000
+  junkSpawnLocations: 000000000300000003000000
+  junksPositionsInDeck: 000000000300000006000000
   mustPlaceAll: 0
   specificJunkToPlace:
   - {fileID: 11400000, guid: 59f44e689562a4846aaa70806f725c59, type: 2}

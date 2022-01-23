@@ -125,7 +125,7 @@ public class PlotCard : CardData
                     if(r < 0)
                         CardManager.Instance.cardDeck.cardDeck.Insert(0, objective.linkedJunkedCards[i]);
                     else if (r > CardManager.Instance.cardDeck.cardDeck.Count)
-                        CardManager.Instance.cardDeck.cardDeck.Add(objective.linkedJunkedCards[i]);
+                        CardManager.Instance.cardDeck.cardDeck.Insert(CardManager.Instance.cardDeck.cardDeck.Count, objective.linkedJunkedCards[i]);
                     else
                         CardManager.Instance.cardDeck.cardDeck.Insert(r, objective.linkedJunkedCards[i]);
 
