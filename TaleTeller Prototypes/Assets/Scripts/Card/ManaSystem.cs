@@ -73,6 +73,8 @@ public class ManaSystem : MonoBehaviour
     }
     private List<ManaPoolModifier> poolModifiers = new List<ManaPoolModifier>();
 
+    private AudioSource audioSource;
+
     void Start()
     {
         //Init Text correctly
@@ -138,6 +140,9 @@ public class ManaSystem : MonoBehaviour
         if (currentMana - cardCost < 0)
         {
             ShakeFrame();
+            if (audioSource == null) audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+            Sound intervert = new Sound(audioSource, "SFX_OUTOFINK", SoundType.SFX, false, false);
+            intervert.Play();
             return false;
         }
         else

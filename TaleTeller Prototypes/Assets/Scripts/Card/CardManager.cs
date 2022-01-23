@@ -158,6 +158,10 @@ public class CardManager : Singleton<CardManager>
         cardHand.currentHand.Add(data.currentContainer);
         UpdateHandCount();
 
+        if (data.currentContainer.audioSource == null) data.currentContainer.audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+        Sound intervert = new Sound(data.currentContainer.audioSource, "SFX_DRAW", SoundType.SFX, false, false);
+        intervert.Play();
+
         data.currentContainer.rectTransform.SetParent(cardHand.handTransform);
         cardTweening.MoveCard(data.currentContainer, cardHand.GetPosInHand(data.currentContainer), !alreadyAppeared, !alreadyAppeared, queue);
         yield return new WaitForSeconds(0.2f);
@@ -272,6 +276,10 @@ public class CardManager : Singleton<CardManager>
     }
     IEnumerator CardBoardToDiscardRoutine(CardContainer card, EventQueue currentQueue)
     {
+        if (card.audioSource == null) card.audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+        Sound intervert = new Sound(card.audioSource, "SFX_DISCARD", SoundType.SFX, false, false);
+        intervert.Play();
+
         //Add feedback
         EventQueue feedback = new EventQueue();
         cardTweening.MoveCard(card, discardPileTransform.position, true, false, feedback);
@@ -318,6 +326,10 @@ public class CardManager : Singleton<CardManager>
         while (!overloadQueue.resolved)
         { yield return new WaitForEndOfFrame(); }
         #endregion
+
+        if (card.audioSource == null) card.audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+        Sound intervert = new Sound(card.audioSource, "SFX_DISCARD", SoundType.SFX, false, false);
+        intervert.Play();
 
         //Add feedback
         EventQueue feedback = new EventQueue();
@@ -381,7 +393,6 @@ public class CardManager : Singleton<CardManager>
         wait = true;
         screen.Close(()=> wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
-
 
         for (int i = 0; i < screen.pickedCards.Count; i++)
         {
