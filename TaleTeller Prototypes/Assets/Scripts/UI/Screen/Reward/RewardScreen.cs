@@ -17,6 +17,7 @@ public class RewardScreen : GameScreen
 
     public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme, List<CardData> addRewardData = null)
     {
+        ScreenManager.Instance.currentScreen = this;
         visuals = ScreenManager.Instance.rewardScreenVisuals; ;
         visuals.InitText(currentScheme);
 
@@ -78,14 +79,12 @@ public class RewardScreen : GameScreen
     public override void Open(Action onComplete)
     {
         open = true;
-        visuals.canvas.gameObject.SetActive(true);
+        visuals.OpenTween(onComplete);
         LayoutRebuilder.ForceRebuildLayoutImmediate(visuals.layoutRoot);
-        onComplete?.Invoke();
     }
     public override void Close(Action onComplete)
     {
-        visuals.canvas.gameObject.SetActive(false);
-        onComplete?.Invoke();
+        visuals.CloseTween(onComplete);
     }
 
     public override void InitializeContent(Action onComplete)

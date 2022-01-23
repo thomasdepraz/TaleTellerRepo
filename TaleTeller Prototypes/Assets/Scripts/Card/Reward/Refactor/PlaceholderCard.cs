@@ -36,11 +36,14 @@ public class PlaceholderCard : MonoBehaviour
 
     public void OnPointerClick()
     {
-        if (selected)
-            selected = false;
-        else selected = true;
+        if(ScreenManager.Instance.currentScreen.open)
+        {
+            if (selected)
+                selected = false;
+            else selected = true;
 
-        onClick?.Invoke();
+            onClick?.Invoke();
+        }
     }
 
     public void SelectFeedback(bool selected)

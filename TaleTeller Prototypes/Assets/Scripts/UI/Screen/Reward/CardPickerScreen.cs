@@ -20,6 +20,8 @@ public class CardPickerScreen : GameScreen
     bool skippable;
     public CardPickerScreen(PickScreenMode mode, int numberToPick, List<CardData> targetCards, bool skippable)
     {
+        ScreenManager.Instance.currentScreen = this;
+
         if (targetCards.Count < numberToPick) numberToPick = targetCards.Count;
 
         visuals = ScreenManager.Instance.pickerScreenVisual;
@@ -61,8 +63,7 @@ public class CardPickerScreen : GameScreen
 
     public override void Close(Action onComplete)
     {
-        visuals.canvas.gameObject.SetActive(false);
-        onComplete?.Invoke();
+        visuals.CloseTween(onComplete);
     }
 
     public override void InitializeContent(Action onComplete)
@@ -73,11 +74,8 @@ public class CardPickerScreen : GameScreen
     public override void Open(Action onComplete)
     {
         open = true;
-        visuals.canvas.gameObject.SetActive(true);
-
+        visuals.OpenTween((onComplete));
         LeanTween.value(1, 1, 0.1f).setOnUpdate((float value) => visuals.scrollBar.value = value);
-
-        onComplete?.Invoke();
     }
 
     public bool CheckValid()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,8 +9,9 @@ using UnityEngine.UI;
 public class CardPickerScreenVisual
 {
     public Canvas canvas;
+    public CanvasScaler canvasScaler;
     public RectTransform bristolTransform;
-    public RectTransform panelTransform;
+    public Image panel;
     public RectTransform scrollviewContentTransform;
     public Scrollbar scrollBar;
     public GameObject cardRowPrefab;
@@ -50,9 +52,6 @@ public class CardPickerScreenVisual
             else
                 cardRows[i].gameObject.SetActive(true);
         }
-
-
-
     }
 
     public void ResetPlaceholders()
@@ -77,5 +76,46 @@ public class CardPickerScreenVisual
     public void UpdateCount(int current, int max)
     {
         countText.text = $"{current} / {max}";
+    }
+
+    public void OpenTween(Action onComplete)
+    {
+        Color panelColor = panel.color;
+        panel.color = Color.clear;
+
+        bristolTransform.localPosition = new Vector3(-canvasScaler.referenceResolution.x, 0, 0);
+        canvas.gameObject.SetActive(true);
+        LeanTween.moveLocal(bristolTransform.gameObject, Vector3.zero + Vector3.right * 10, 1f).setEaseInQuint().setOnComplete(() =>
+        {
+            LeanTween.moveLocal(bristolTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
+        });
+
+        LeanTween.color(panel.gameObject, panelColor, 0.5f).setDelay(1f).setEaseOutQuint().setOnUpdate((Color col) => 
+        {
+            panel.color = col;
+        }).setOnComplete(onComplete);
+    }
+
+    public void CloseTween(Action onComplete)
+    {
+
+        LeanTween.moveLocal(bristolTransform.gameObject, Vector3.zero - Vector3.right * 10, 0.3f).setEaseInQuint().setOnComplete(() =>
+        {
+            LeanTween.moveLocal(bristolTransform.gameObject, new Vector3(canvasScaler.referenceResolution.x, 0,0), 1f).setEaseInQuint();
+        });
+
+        Color panelColor = panel.color;
+        LeanTween.value(panel.gameObject, panelColor, Color.clear, 0.5f).setDelay(1f).setEaseInQuint().setOnUpdate((Color col)=> 
+        {
+            panel.color = col;
+        }).setOnComplete(()=> 
+        {
+            canvas.gameObject.SetActive(false);
+            panel.color = panelColor;
+            onComplete?.Invoke();
+        
+        });
+
+        panel.color = panelColor;
     }
 }

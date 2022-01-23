@@ -12,4 +12,6 @@ public class ScreenManager : Singleton<ScreenManager>
     public ChapterScreenVisuals chapterScreenVisuals;
     public ChooseCardRewardScreenVisuals chooseCardRewardScreenVisuals;
     public CardPickerScreenVisual pickerScreenVisual;
+
+    public GameScreen currentScreen;
 }

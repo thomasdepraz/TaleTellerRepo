@@ -29,6 +29,7 @@ public class ChapterScreen : GameScreen
 
     public ChapterScreen(List<MainPlotScheme>schemesToChooseFrom)
     {
+        ScreenManager.Instance.currentScreen = this;
         screenMode = ChapterScreenMode.PLOT;
         open = true;
 
@@ -60,6 +61,7 @@ public class ChapterScreen : GameScreen
 
     public ChapterScreen(SchemeStep currentStep)
     {
+        ScreenManager.Instance.currentScreen = this;
         screenMode = ChapterScreenMode.CARD;
         open = true;
 
@@ -95,12 +97,12 @@ public class ChapterScreen : GameScreen
 
     public override void Open(Action onComplete)
     {
-        visuals.OpenTween(() => { onComplete?.Invoke(); });
+        visuals.OpenTween(onComplete);
     }
 
     public override void Close(Action onComplete)
     {
-        visuals.CloseTween(() => { onComplete?.Invoke(); });
+        visuals.CloseTween(onComplete);
     }
 
     public override void InitializeContent(Action onComplete)

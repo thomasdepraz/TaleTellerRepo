@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class ChapterScreenVisuals 
 {
     public Canvas canvas;
+    public CanvasScaler canvasScaler;
+    public Image panel;
     public RectTransform bookTransform;
     public RectTransform instructionTransform;
     public RectTransform titleTransform_A;
@@ -85,27 +87,42 @@ public class ChapterScreenVisuals
 
     public void OpenTween(Action onComplete)
     {
-        bookTransform.localPosition = bookTransform.localPosition + Vector3.down * 2000;
+        bookTransform.localPosition = new Vector3(0, -canvasScaler.referenceResolution.y, 0);
         canvas.gameObject.SetActive(true);
+        Color panelColor = panel.color;
+        panel.color = Color.clear;
 
-        LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero + Vector3.up *10, 1f).setEaseInQuint().setOnComplete(() =>
+        LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero + Vector3.up *10, 0.5f).setEaseInQuint().setOnComplete(() =>
         {
-            LeanTween.moveLocal(bookTransform.gameObject,Vector3.zero, 0.3f).setEaseOutQuint().setOnComplete(onComplete);
+            LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
 
         });
+
+        LeanTween.color(panel.gameObject, panelColor, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
+        {
+            panel.color = col;
+        }).setOnComplete(onComplete);
     }
 
     public void CloseTween(Action onComplete)
     {
         LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero + Vector3.down * 10, 0.3f).setEaseInQuint().setOnComplete(() =>
         {
-            LeanTween.moveLocal(bookTransform.gameObject, Vector3.up * 2000, 0.5f).setEaseInQuint().setOnComplete(() =>
-            {
-                onComplete?.Invoke();
-                canvas.gameObject.SetActive(false);
-                bookTransform.localPosition = Vector3.zero;
+            LeanTween.moveLocal(bookTransform.gameObject, new Vector3(0, canvasScaler.referenceResolution.y, 0), 0.5f).setEaseInQuint();
+        });
 
-            });
+
+        Color panelColor = panel.color;
+        LeanTween.value(panel.gameObject, panelColor, Color.clear, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
+        {
+            panel.color = col;
+        }).setOnComplete(() =>
+        {
+            canvas.gameObject.SetActive(false);
+            panel.color = panelColor;
+            bookTransform.localPosition = Vector3.zero; 
+            onComplete?.Invoke();
+
         });
     }
 

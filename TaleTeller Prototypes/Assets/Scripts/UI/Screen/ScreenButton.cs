@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,14 +7,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler 
+public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler
 {
     public Action onClick;
     public Image buttonImage;
+    public Image scaledImage;
     public TextMeshProUGUI buttonText;
     public Color baseColor = new Color(0.3f, 0.3f, 0.3f, 1);
+    public Color selectedColor;
+    public Color pressedColor;
     public Color diabledColor = new Color(1,1,1,0.5f);
     bool _selected;
+
+    public bool highlight;
+    [ShowIf("highlight")]public Image highlightImage;
+    [ShowIf("highlight")] public Color highlightColor;
+
+    Color buttonTextColor;
+
     public bool selected 
     {
         get => _selected;
@@ -38,13 +49,12 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
     }
 
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if(interactable)
         {
-            LeanTween.cancel(buttonImage.gameObject);
-            LeanTween.scale(buttonImage.gameObject, Vector3.one * 1.1f, 0.1f).setEaseInOutQuint();
+            LeanTween.cancel(scaledImage.gameObject);
+            LeanTween.scale(scaledImage.gameObject, Vector3.one * 1.1f, 0.1f).setEaseInOutQuint();
         }
     }
 
@@ -52,33 +62,41 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if(interactable)
         {
-            LeanTween.cancel(buttonImage.gameObject);
-            LeanTween.scale(buttonImage.gameObject, Vector3.one, 0.1f).setEaseInOutQuint();
+            if (buttonImage.color == pressedColor) buttonImage.color = selected ? selectedColor : baseColor;
+
+            LeanTween.cancel(scaledImage.gameObject);
+            LeanTween.scale(scaledImage.gameObject, Vector3.one, 0.1f).setEaseInOutQuint();
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(interactable)
+        if(ScreenManager.Instance.currentScreen.open)
         {
-            if (selected)
-                selected = false;
-            else selected = true;
+            if(interactable)
+            {
+                if (selected)
+                    selected = false;
+                else selected = true;
 
-            onClick?.Invoke();
+                onClick?.Invoke();
+            }
         }
     }
 
     public void SetInteractable(bool interactable)
     {
+        if (buttonText != null) buttonTextColor = Color.black;
         if(interactable)
         {
             buttonImage.color = baseColor;
+            if (buttonText != null) buttonText.color = buttonTextColor;
         }
         else
         {
             buttonImage.color = diabledColor;
             buttonImage.gameObject.transform.localScale = Vector3.one;
+            if (buttonText != null) buttonText.color = new Color(buttonTextColor.r, buttonTextColor.g, buttonTextColor.b, 0.3f);
         }
     }
 
@@ -86,17 +104,51 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if(selected)
         {
-            baseColor = buttonImage.color;//TEMP
-            buttonImage.color = Color.red;
+            if(highlight)
+            {
+                if (highlightImage != null)
+                {
+                    buttonImage.color = baseColor;
+                    //CardManager.Instance.cardTweening.ShowHighlight(highlightImage, highlightColor);
+                    highlightImage.color = highlightColor;
+                }
+                else
+                {
+                    buttonImage.color = selectedColor;
+                }
+            }
+            else
+            {
+                buttonImage.color = baseColor;
+                //buttonImage.gameObject.transform.localScale = Vector3.one;
+                
+            }
         }
         else
         {
-            buttonImage.color = baseColor;
+            if(highlight)
+            {
+                buttonImage.color = baseColor;
+                if (highlightImage != null)
+                {
+                    buttonImage.color = baseColor;
+                    //CardManager.Instance.cardTweening.HideHighlight(highlightImage);
+                    highlightImage.color = Color.clear;
+                }
+            }
         }
     }
 
     public void SetText(string text)
     {
         buttonText.text = text;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if(interactable)
+        {
+            buttonImage.color = pressedColor;
+        }
     }
 }

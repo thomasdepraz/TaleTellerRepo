@@ -9,8 +9,9 @@ using UnityEngine.UI;
 public class RewardScreenVisuals
 {
     public Canvas canvas;
-    public Image backgroundImage;
-    public Image bookImage;
+    public CanvasScaler canvasScaler;
+    public Image panel;
+    public RectTransform bookTransform;
     public RectTransform completeTextTransform;
     public Image illustration;
     public RectTransform questTextTransform;
@@ -58,5 +59,50 @@ public class RewardScreenVisuals
             heroRewardsButton[index].onClick = ()=> selectHero(heroRewards[index], heroRewardsButton[index]);
             heroRewardsButton[index].SetText(heroRewards[index].GetString());
         }
+    }
+
+    public void OpenTween(Action onComplete)
+    {
+        bookTransform.localPosition = new Vector3(0, -canvasScaler.referenceResolution.y, 0);
+        canvas.gameObject.SetActive(true);
+        Color panelColor = panel.color;
+        panel.color = Color.clear;
+
+        LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero + Vector3.up * 10, 0.5f).setEaseInQuint().setOnComplete(() =>
+        {
+            LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
+
+        });
+
+        LeanTween.color(panel.gameObject, panelColor, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
+        {
+            panel.color = col;
+        }).setOnComplete(()=> 
+        {
+            onComplete?.Invoke();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot);
+        });
+    }
+
+    public void CloseTween(Action onComplete)
+    {
+        LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero + Vector3.down * 10, 0.3f).setEaseInQuint().setOnComplete(() =>
+        {
+            LeanTween.moveLocal(bookTransform.gameObject, new Vector3(0, canvasScaler.referenceResolution.y, 0), 0.5f).setEaseInQuint();
+        });
+
+
+        Color panelColor = panel.color;
+        LeanTween.value(panel.gameObject, panelColor, Color.clear, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
+        {
+            panel.color = col;
+        }).setOnComplete(() =>
+        {
+            canvas.gameObject.SetActive(false);
+            panel.color = panelColor;
+            bookTransform.localPosition = Vector3.zero;
+            onComplete?.Invoke();
+
+        });
     }
 }
