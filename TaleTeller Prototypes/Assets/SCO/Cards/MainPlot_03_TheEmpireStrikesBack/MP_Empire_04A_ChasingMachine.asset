@@ -27,6 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 1
   target: 1
   range: 
@@ -36,7 +37,7 @@ MonoBehaviour:
     type: 0
     op: 2
   temporaryChange: 0
-  handCardsDependant: 0
+  cardsDependant: 0
   typeDependants: []
 --- !u!114 &11400000
 MonoBehaviour:
@@ -55,7 +56,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 2bdbc754eb4694d43b666b1ea47c7aed, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -84,6 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 04000000

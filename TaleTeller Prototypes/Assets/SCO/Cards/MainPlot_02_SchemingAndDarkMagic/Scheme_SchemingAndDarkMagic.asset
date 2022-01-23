@@ -33,4 +33,5 @@ MonoBehaviour:
   currentStep: 0
   plotName: Scheming and dark magic
   plotDescription: $DarkMagic_Description
-  plotIllustration: {fileID: 0}
+  plotEndDescription: 
+  plotIllustration: {fileID: 21300000, guid: 3f3e05ae919199040a25c0841a17d54f, type: 3}

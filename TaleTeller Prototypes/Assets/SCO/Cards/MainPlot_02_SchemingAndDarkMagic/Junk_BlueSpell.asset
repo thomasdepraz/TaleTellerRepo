@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_BlueSpell_Effect0
+  appendWithNext: 0
   trigger: 8
   target: 0
   range: 
@@ -23,7 +24,7 @@ MonoBehaviour:
     type: 1
     op: 1
   temporaryChange: 0
-  handCardsDependant: 1
+  cardsDependant: 0
   typeDependants:
   - typeToHave: 0
     characterType: 0
@@ -65,7 +66,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 1c9060f6d745baa4e8096ca76e44dc42, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

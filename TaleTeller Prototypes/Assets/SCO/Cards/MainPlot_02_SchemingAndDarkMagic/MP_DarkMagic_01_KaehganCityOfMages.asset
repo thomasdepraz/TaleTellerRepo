@@ -64,6 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $SM_DarkMagic_01_Kaeghan_Effect0
+  appendWithNext: 0
   trigger: 2
   target: 2
   range: 0300000004000000
@@ -92,7 +93,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 2
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 3f3e05ae919199040a25c0841a17d54f, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

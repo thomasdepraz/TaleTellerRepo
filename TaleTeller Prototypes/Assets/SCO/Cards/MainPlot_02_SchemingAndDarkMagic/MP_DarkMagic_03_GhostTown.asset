@@ -51,7 +51,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 949a5957f83132a45bf83431381a2a67, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $SM_DarkMagic_03_GhostTown_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 2
   range: 03000000

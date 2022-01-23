@@ -38,7 +38,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 381d54988950fac428e03c319aa2dc4b, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: 
+  appendWithNext: 0
   trigger: 6
   target: 3
   range: 
@@ -70,3 +71,5 @@ MonoBehaviour:
   junkCardsToSpawn:
   - {fileID: 11400000, guid: 30dd99a7782ff8b4c9aa897626cc18cb, type: 2}
   junkSpawnLocations: 02000000
+  restrictionOnBoard: 0
+  junkToPlaceOnBoard: {fileID: 0}

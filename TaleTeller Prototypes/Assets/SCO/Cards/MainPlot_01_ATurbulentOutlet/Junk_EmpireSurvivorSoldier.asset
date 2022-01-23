@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_EmpireSurvivor_Effect0
+  appendWithNext: 0
   trigger: 8
   target: 1
   range: 
@@ -23,6 +24,8 @@ MonoBehaviour:
     type: 0
     op: 1
   temporaryChange: 0
+  cardsDependant: 0
+  typeDependants: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,7 +43,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 1ff5613c4aaa51d48b8fb4d46817ed84, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:

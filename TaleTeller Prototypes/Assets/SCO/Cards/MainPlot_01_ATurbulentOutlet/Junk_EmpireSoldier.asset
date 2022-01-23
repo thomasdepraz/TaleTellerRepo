@@ -38,7 +38,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 0
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: d91a7f33994c3e143a2079611cfa2091, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -62,10 +62,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_EmpireSoldier_Effect0
+  appendWithNext: 0
   trigger: 8
   target: 4
   range: 
   values: []
+  boardEffectTypesDependant: 0
+  effectTypeToTarget:
+    type: 0
+    op: 0
   choiceValue:
     value: 1
     type: 9

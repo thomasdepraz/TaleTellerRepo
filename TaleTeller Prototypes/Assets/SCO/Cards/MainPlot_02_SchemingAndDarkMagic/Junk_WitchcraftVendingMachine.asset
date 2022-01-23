@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
   description: $Junk_VendingMachine_Effect0
+  appendWithNext: 0
   trigger: 1
   target: 1
   range: 
@@ -49,7 +50,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 3
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 93b88d0cc2d20864f94686ae46c0f38a, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
