@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6136929982272534530
+--- !u!114 &-8083674963887589075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,17 +13,43 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Idea_Shallows_Trade_Effect1
+  description: 
   appendWithNext: 0
   trigger: 2
   target: 2
-  range: 02000000
+  range: 04000000
   values: []
-  typeToTarget: 4
-  operatorToTarget: 0
+  typeToTarget: 5
+  operatorToTarget: 2
   modification:
-    value: 4
-    type: 4
+    value: 1
+    type: 5
+    op: 2
+  modifyTemporary: 0
+--- !u!114 &-2009264064937699608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5b1c94cd704fa46b8e38ba3f28afd7, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 2
+  target: 2
+  range: 03000000
+  values: []
+  typeToTarget: 5
+  operatorToTarget: 1
+  modification:
+    value: 1
+    type: 5
     op: 1
   modifyTemporary: 0
 --- !u!114 &11400000
@@ -47,37 +73,11 @@ MonoBehaviour:
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: 2436968478769966264}
-  - {fileID: -6136929982272534530}
+  - {fileID: -2009264064937699608}
+  - {fileID: -8083674963887589075}
   effects: []
   cardTypeReference: {fileID: 3016714200515736602}
   cardType: {fileID: 0}
---- !u!114 &2436968478769966264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5b1c94cd704fa46b8e38ba3f28afd7, type: 3}
-  m_Name: Effect0
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $Idea_Shallows_Trade_Effect0
-  appendWithNext: 0
-  trigger: 2
-  target: 2
-  range: 02000000
-  values: []
-  typeToTarget: 3
-  operatorToTarget: 0
-  modification:
-    value: 4
-    type: 3
-    op: 1
-  modifyTemporary: 0
 --- !u!114 &3016714200515736602
 MonoBehaviour:
   m_ObjectHideFlags: 0
