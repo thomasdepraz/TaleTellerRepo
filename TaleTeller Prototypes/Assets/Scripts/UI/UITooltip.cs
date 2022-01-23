@@ -13,6 +13,7 @@ public enum UITooltipTarget
     GOBUTTON,
     BOARDSLOT, 
     HERO,
+    INSPIRE,
     CARD_TYPE,
     CARD_INK,
     CARD_TIMER,
@@ -96,6 +97,11 @@ public class UITooltip : MonoBehaviour
                 break;
             case UITooltipTarget.HERO:
                 result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$HERO");
+                break;
+            case UITooltipTarget.INSPIRE:
+                var inspire = CardManager.Instance.inspire;
+                result = LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$INSPIRE");
+                result = string.Format(result, inspire.drawCardsCount, inspire.darkIdeasCount, inspire.useCount);
                 break;
             default:
                 break;

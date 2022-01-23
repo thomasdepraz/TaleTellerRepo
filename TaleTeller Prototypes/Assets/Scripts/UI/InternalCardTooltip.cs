@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class InternalCardTooltip : UITooltip
 {
     public CardContainer container;
@@ -47,7 +42,10 @@ public class InternalCardTooltip : UITooltip
     public override string GetTooltipDescription()
     {
         string result = string.Empty;
-        var cardType = container.data.cardType;
+        var cardType = container.data?.cardType;
+
+        if (cardType == null)
+            return string.Empty;
 
         switch (tooltipTarget)
         {
@@ -76,6 +74,9 @@ public class InternalCardTooltip : UITooltip
                         break;
                     case CardNature.Plot:
                         result += LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_NATURE_PLOT");
+                        break;
+                    case CardNature.DarkIdea:
+                        result += LocalizationManager.Instance.GetString(LocalizationManager.Instance.tooltipDictionary, "$CARD_NATURE_DARKIDEA");
                         break;
                     default:
                         break;

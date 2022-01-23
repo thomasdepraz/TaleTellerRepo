@@ -19,8 +19,10 @@ $INK	Used to a play card.<br>Recharges at maximum at the beginning of each turn.
 $GOBUTTON	Start reading your chapter.
 $BOARDSLOT	You can place a card on this slot.
 $HERO	This is the main character of your story.It triggers most of the cards effects.
+$INSPIRE	Having a rough time finding the cards you need?<br>Click here to draw {0} cards in exange of 1 Tokken.<br>If you use <b>Inspire</b> with no tokken available, it will add {1} <b>Dark Ideas to your Deck</b>.<br><b>Current amount of Inspire Tokken: {2}</b>.  
 $CARD_NATURE_PLOT	<br>It is also a Plot, you need to achieve his objective before timer reach 0!
 $CARD_NATURE_JUNK	<br>It is also a Junk, it disapears when the plot it is linked to gets resolved.
+$CARD_NATURE_DARKIDEA	<br>It is also a Dark Idea, it has negative effets. Try to get rid of it as fast as possilbe.
 $CARD_TYPE_ENEMY	This Card is an Enemy.<br>It will attack you and your allies nerby.<br>It comes back to your hands while it has stacks.
 $CARD_TYPE_ALLY	This Card is an Ally.<br>It will attack nerby ennemies.<br>It comes back in your hand while it has stacks.
 $CARD_TYPE_OBJECT	This Card is an Object.<br>His effects apply when your hero walks on it.<br>It will be destroyed after usage.
