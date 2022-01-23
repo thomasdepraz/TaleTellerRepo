@@ -63,6 +63,8 @@ public class CardVisuals : MonoBehaviour
         BuildDescriptionBlocks(data);
         #endregion
 
+        if (data == null) return;
+
         //Init basics
         #region Basics
         cardIllustration.sprite = data.cardGraph;
