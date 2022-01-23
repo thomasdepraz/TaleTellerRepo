@@ -330,8 +330,8 @@ public class Deck : MonoBehaviour
             CardManager.Instance.CardAppear(overdrawQueue, dealtCard, CardManager.Instance.deckTransform.position);
 
         //the card can be burn or push another card from the board
-        if (dealtCard.GetType() == typeof(PlotCard) || dealtCard.GetType() == typeof(JunkCard)) //if its a plot card it pushes cards from the board
-        {
+        //if (dealtCard.GetType() == typeof(PlotCard) || dealtCard.GetType() == typeof(JunkCard)) //if its a plot card it pushes cards from the board
+        //{
             //EventQueue pickQueue = new EventQueue();
             //List<CardData> pickedCards = new List<CardData>();
 
@@ -360,11 +360,11 @@ public class Deck : MonoBehaviour
 
             }
             Deal(overdrawQueue, dealtCard);
-        }
+        /*}
         else
         {
             Burn(overdrawQueue, dealtCard);
-        }
+        }*/
 
         overdrawQueue.StartQueue();
         while(!overdrawQueue.resolved)

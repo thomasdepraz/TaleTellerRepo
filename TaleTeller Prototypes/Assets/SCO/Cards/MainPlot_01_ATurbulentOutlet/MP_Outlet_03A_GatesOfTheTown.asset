@@ -29,7 +29,7 @@ MonoBehaviour:
   cardName: Gates of the Town
   rarity: 0
   archetype: 0
-  manaCost: 0
+  manaCost: 1
   cardGraph: {fileID: 21300000, guid: 0efe7914c0a444249b0ccc170782167b, type: 3}
   currentContainer: {fileID: 0}
   description: 

@@ -42,7 +42,7 @@ MonoBehaviour:
   stats:
     baseLifePoints: 30
     baseAttackDamage: 2
-  behaviour: 1
+  behaviour: 2
   fightingRange: 3
   doubleStrike: 0
   undying: 0

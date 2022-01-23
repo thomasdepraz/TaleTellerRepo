@@ -139,7 +139,7 @@ $Junk_MightyAstaroth_Effect0	This card +$modifierValue$ <sprite name="Heal">.
 $Junk_ValeforReplica_Effect0	This card +$modifierValue$ <sprite name="AttackBase">.
 $MP_TurbulentOutset_01_MentorField_Effect0	Increase  <sprite name="Heal"> gain source by $modification$. 
 $MP_TurbulentOutset_01_MentorField_Objective	Place 2 Seedlings and the Mentor's Field on the Track.
-$MP_TurbulentOutset_02_TownCenter_Effect0	-$modifierValue$ <sprite name="AttackBase"> to Enemies.
+$MP_TurbulentOutset_02_TownCenter_Effect0	 +$modifierValue$ <sprite name="AttackBase"> to Characters.
 $MP_TurbulentOutset_02_TownCenter_Objective	Find and place the Empire Troop with the Town Center.
 $MP_TurbulentOutset_02_AlcimusTheMentor_Effect0	/
 $MP_TurbulentOutset_02_AlcimusTheMentor_Objective	Find and place the Burning Town with the Mentor.

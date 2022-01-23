@@ -16,11 +16,9 @@ MonoBehaviour:
   objectiveName: $MP_TurbulentOutset_02_AlcimusTheMentor_Objective
   linkedJunkedCards:
   - {fileID: 11400000, guid: 29f0e968dcd549c40b735ea7b87f7be6, type: 2}
-  - {fileID: 11400000, guid: 29f0e968dcd549c40b735ea7b87f7be6, type: 2}
-  - {fileID: 11400000, guid: 29f0e968dcd549c40b735ea7b87f7be6, type: 2}
   - {fileID: 11400000, guid: e36cb0b11ae60bb4da0a3d55acbd415e, type: 2}
-  junkSpawnLocations: 00000000030000000300000003000000
-  junksPositionsInDeck: 00000000010000000300000006000000
+  junkSpawnLocations: 0000000003000000
+  junksPositionsInDeck: 0000000006000000
   mustPlaceAll: 0
   specificJunkToPlace:
   - {fileID: 11400000, guid: e36cb0b11ae60bb4da0a3d55acbd415e, type: 2}
@@ -42,8 +40,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 10
-    baseAttackDamage: 3
+    baseLifePoints: 6
+    baseAttackDamage: 2
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
@@ -65,7 +63,7 @@ MonoBehaviour:
   cardName: Alcimus the Mentor
   rarity: 0
   archetype: 0
-  manaCost: 2
+  manaCost: 1
   cardGraph: {fileID: 21300000, guid: 968fee72b9bdebd4996d2352af500f8c, type: 3}
   currentContainer: {fileID: 0}
   description: 
