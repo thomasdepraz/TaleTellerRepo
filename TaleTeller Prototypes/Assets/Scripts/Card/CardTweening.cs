@@ -18,9 +18,21 @@ public class CardTweening : MonoBehaviour
         if (Mathf.Abs(direction) > 0)
         {
             float originX = container.rectTransform.localPosition.x;
-            LeanTween.moveLocalX(container.gameObject, originX + direction * -2f, 0.5f).setEaseOutQuint().setOnComplete(
-                value => LeanTween.moveLocalX(container.gameObject, originX + direction * 50, 0.2f).setEaseInQuint().setOnComplete(
-                    val => LeanTween.moveLocalX(container.gameObject, originX, 1).setEaseOutQuint().setOnComplete(end => { if (queue != null) queue.resolved = true; })));
+            LeanTween.moveLocalX(container.gameObject, originX + direction * -2f, 0.5f).setEaseOutQuint().setOnComplete(() =>
+            {
+                if (container.audioSource == null) container.audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                Sound intervert = new Sound(container.audioSource, "SFX_ATKSWORD", SoundType.SFX, false, false);
+                intervert.Play();
+                LeanTween.moveLocalX(container.gameObject, originX + direction * 50, 0.2f).setEaseInQuint().setOnComplete(() =>
+                {
+
+                    LeanTween.moveLocalX(container.gameObject, originX, 1).setEaseOutQuint().setOnComplete(()=> 
+                    { 
+                        if (queue != null) queue.resolved = true; 
+                    });
+
+                });
+            });
         }
         else
         {
@@ -42,10 +54,16 @@ public class CardTweening : MonoBehaviour
             if (direction > 0)
             {
                 container.visuals.PopupTextFeedback("$BUFF", Mathf.Abs(value), 0);
+                if (container.audioSource == null) container.audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                Sound intervert = new Sound(container.audioSource, "SFX_STATCARDBOOSTED", SoundType.SFX, false, false);
+                intervert.Play();
             }
             else if (direction < 0)
             {
                 container.visuals.PopupTextFeedback("$DEBUFF", Mathf.Abs(value), 0);
+                if (container.audioSource == null) container.audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                Sound intervert = new Sound(container.audioSource, "SFX_STATCARDDEVALUTED", SoundType.SFX, false, false);
+                intervert.Play();
             }
         }
     }

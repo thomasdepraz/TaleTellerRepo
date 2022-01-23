@@ -348,6 +348,10 @@ public class PlotCard : CardData
         }
         else
         {
+            if (currentContainer.audioSource == null) currentContainer.audioSource = SoundManager.Instance.GenerateAudioSource(currentContainer.gameObject);
+            Sound intervert = new Sound(currentContainer.audioSource, "SFX_CLOCKTICK01", SoundType.SFX, false, false);
+            intervert.Play();
+
             CardManager.Instance.cardTweening.ScaleBounce(currentContainer.visuals.cardTimerFrame.gameObject, 1.5f);
         }
         yield return new WaitForSeconds(0.4f);

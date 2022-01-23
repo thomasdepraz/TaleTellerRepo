@@ -27,7 +27,7 @@ public class Hero : MonoBehaviour
     private int _maxGoldPoints;
     private int _goldPoints;
 
-    private AudioSource audioSource;
+    [HideInInspector]public AudioSource audioSource;
 
     [HideInInspector]public int maxLifePoints
     { 

@@ -33,6 +33,8 @@ public class CardContainer : MonoBehaviour
     public CanvasGroup canvasGroup;
     private bool isDragging;
     private bool canTween = true;
+
+    [HideInInspector]public AudioSource audioSource;
     
     private void Update()
     {
@@ -175,182 +177,201 @@ public class CardContainer : MonoBehaviour
 
     public void OnEndDrag()
     {
-        #region Tweening + Graphics
-        canTween = false;
-        rectTransform.rotation = new Quaternion(0, 0, 0, 0);
-        rectTransform.localScale = Vector3.one;
-        shadowTransform.gameObject.SetActive(false);
-        #endregion
-
-        CardManager.Instance.board.HideTargetSlots();
-
-        //If hovers, swap card, else drop in or out of slot
-        if(CardManager.Instance.hoveredCard != null)
+        if (CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
-            #region Swap Card
-            //Swap cards from the board
-            if (currentSlot != null) //If card in board
-            {
-                if (CardManager.Instance.hoveredCard.currentSlot != null) //if other card in board
-                {
-                    BoardSlot tempSlot = CardManager.Instance.hoveredCard.currentSlot;
-
-                    CardManager.Instance.hoveredCard.currentSlot = currentSlot;
-                    CardManager.Instance.hoveredCard.currentSlot.currentPlacedCard = CardManager.Instance.hoveredCard;
-                    CardManager.Instance.hoveredCard.rectTransform.position = CardManager.Instance.hoveredCard.currentSlot.transform.position;
-                    CardManager.Instance.hoveredCard.currentSlot.canvasGroup.blocksRaycasts = false;
-
-                    tempSlot.currentPlacedCard = this;
-                    currentSlot = tempSlot;
-                    rectTransform.position = currentSlot.transform.position;
-                }
-                else //if other card in hand
-                {
-                    if(IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
-                    {
-                        //If you have enough mana to swap cards
-                        int manaDifference = CardManager.Instance.hoveredCard.data.manaCost - data.manaCost;
-                        if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
-                        {
-                            CardContainer hoveredCard = CardManager.Instance.hoveredCard;
-                            HandSlot hoveredCardHandSlot = hoveredCard.currentHandSlot;
-                            BoardSlot tempSlot = currentSlot;
-
-                            PlaceOnBoardSlot(hoveredCard, tempSlot);
-                            RemoveFromBoard(this);
-                            PlaceOnHandSlot(this, hoveredCardHandSlot);
-                        }
-                        else
-                        {
-                            ReturnToOriginHandSlot(this);
-                            canTween = true; //temp ?
-                        }
-                    }
-                    else
-                    {
-                        rectTransform.position = currentSlot.transform.position;
-                    }
-                }
-
-                CardManager.Instance.hoveredCard = null;
-            }
-            else //if card in hand
-            {
-                if (CardManager.Instance.hoveredCard.currentSlot != null)//If card other card in board
-                {
-                    if(IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
-                    {
-                        //If you have enough mana to swap cards
-                        int manaDifference = data.manaCost - CardManager.Instance.hoveredCard.data.manaCost;
-
-                        if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
-                        {
-                            CardContainer hoveredCard = CardManager.Instance.hoveredCard;
-                            BoardSlot hoveredCardSlot = hoveredCard.currentSlot;
-
-                            RemoveFromBoard(hoveredCard);
-                            PlaceOnHandSlot(hoveredCard, currentHandSlot);
-                            PlaceOnBoardSlot(this, hoveredCardSlot);
-                        }
-                        else
-                        {
-                            ReturnToOriginHandSlot(this);
-                            canTween = true; //temp ?
-                            Debug.Log("Not enough mana");
-                        }
-                    }
-                    else
-                    {
-                        ReturnToOriginHandSlot(this);
-                    }
-                }
-                else
-                {
-                    if(IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
-                    {
-                        HandSlot originSlot = currentHandSlot;
-                        CardContainer hoveredCard = CardManager.Instance.hoveredCard;
-
-                        PlaceOnHandSlot(this, hoveredCard.currentHandSlot);
-
-                        PlaceOnHandSlot(hoveredCard, originSlot);
-                    }
-                    else
-                    {
-                        ReturnToOriginHandSlot(this);
-                    }
-                }
-                CardManager.Instance.hoveredCard = null;
-            }
+            #region Tweening + Graphics
+            canTween = false;
+            rectTransform.rotation = new Quaternion(0, 0, 0, 0);
+            rectTransform.localScale = Vector3.one;
+            shadowTransform.gameObject.SetActive(false);
             #endregion
-        }
-        else
-        {
-            #region Drop in/out slot
-            //Drop In Slot
-            if (CardManager.Instance.currentHoveredSlot != null)
+
+            CardManager.Instance.board.HideTargetSlots();
+
+            //If hovers, swap card, else drop in or out of slot
+            if (CardManager.Instance.hoveredCard != null)
             {
-                //if you have enough man else abort and reset card
-                int manaCost = currentSlot != null ? 0 : data.manaCost;
-
-                if (CardManager.Instance.manaSystem.CanUseCard(manaCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
+                #region Swap Card
+                //Swap cards from the board
+                if (currentSlot != null) //If card in board
                 {
+                    if (CardManager.Instance.hoveredCard.currentSlot != null) //if other card in board
+                    {
+                        BoardSlot tempSlot = CardManager.Instance.hoveredCard.currentSlot;
 
-                    PlaceOnBoardSlot(this, CardManager.Instance.currentHoveredSlot);
+                        CardManager.Instance.hoveredCard.currentSlot = currentSlot;
+                        CardManager.Instance.hoveredCard.currentSlot.currentPlacedCard = CardManager.Instance.hoveredCard;
+                        CardManager.Instance.hoveredCard.rectTransform.position = CardManager.Instance.hoveredCard.currentSlot.transform.position;
+                        CardManager.Instance.hoveredCard.currentSlot.canvasGroup.blocksRaycasts = false;
 
-                    currentHandSlot.currentPlacedCard = null;
+                        tempSlot.currentPlacedCard = this;
+                        currentSlot = tempSlot;
+                        rectTransform.position = currentSlot.transform.position;
 
-                    if(data.GetType()==typeof(PlotCard))
+                        if (audioSource == null) audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                        Sound intervert = new Sound(audioSource, "SFX_INTERVERTCARD", SoundType.SFX, false, false);
+                        intervert.Play();
+                    }
+                    else //if other card in hand
+                    {
+                        if (IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
+                        {
+                            //If you have enough mana to swap cards
+                            int manaDifference = CardManager.Instance.hoveredCard.data.manaCost - data.manaCost;
+                            if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
+                            {
+                                CardContainer hoveredCard = CardManager.Instance.hoveredCard;
+                                HandSlot hoveredCardHandSlot = hoveredCard.currentHandSlot;
+                                BoardSlot tempSlot = currentSlot;
+
+                                PlaceOnBoardSlot(hoveredCard, tempSlot);
+                                RemoveFromBoard(this);
+                                PlaceOnHandSlot(this, hoveredCardHandSlot);
+
+                                if (audioSource == null) audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                                Sound intervert = new Sound(audioSource, "SFX_INTERVERTCARD", SoundType.SFX, false, false);
+                                intervert.Play();
+                            }
+                            else
+                            {
+                                ReturnToOriginHandSlot(this);
+                                canTween = true; //temp ?
+                            }
+                        }
+                        else
+                        {
+                            rectTransform.position = currentSlot.transform.position;
+                        }
+                    }
+
+                    CardManager.Instance.hoveredCard = null;
+                }
+                else //if card in hand
+                {
+                    if (CardManager.Instance.hoveredCard.currentSlot != null)//If card other card in board
+                    {
+                        if (IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
+                        {
+                            //If you have enough mana to swap cards
+                            int manaDifference = data.manaCost - CardManager.Instance.hoveredCard.data.manaCost;
+
+                            if (CardManager.Instance.manaSystem.CanUseCard(manaDifference))
+                            {
+                                CardContainer hoveredCard = CardManager.Instance.hoveredCard;
+                                BoardSlot hoveredCardSlot = hoveredCard.currentSlot;
+
+                                RemoveFromBoard(hoveredCard);
+                                PlaceOnHandSlot(hoveredCard, currentHandSlot);
+                                PlaceOnBoardSlot(this, hoveredCardSlot);
+
+                                if (audioSource == null) audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                                Sound intervert = new Sound(audioSource, "SFX_INTERVERTCARD", SoundType.SFX, false, false);
+                                intervert.Play();
+                            }
+                            else
+                            {
+                                ReturnToOriginHandSlot(this);
+                                canTween = true; //temp ?
+                                Debug.Log("Not enough mana");
+                            }
+                        }
+                        else
+                        {
+                            ReturnToOriginHandSlot(this);
+                        }
+                    }
+                    else
+                    {
+                        if (IsCorrectPlacement(this, CardManager.Instance.hoveredCard))
+                        {
+                            HandSlot originSlot = currentHandSlot;
+                            CardContainer hoveredCard = CardManager.Instance.hoveredCard;
+
+                            PlaceOnHandSlot(this, hoveredCard.currentHandSlot);
+
+                            PlaceOnHandSlot(hoveredCard, originSlot);
+
+                            if (audioSource == null) audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                            Sound intervert = new Sound(audioSource, "SFX_INTERVERTCARD", SoundType.SFX, false, false);
+                            intervert.Play();
+                        }
+                        else
+                        {
+                            ReturnToOriginHandSlot(this);
+                        }
+                    }
+                    CardManager.Instance.hoveredCard = null;
+                }
+                #endregion
+            }
+            else
+            {
+                #region Drop in/out slot
+                //Drop In Slot
+                if (CardManager.Instance.currentHoveredSlot != null)
+                {
+                    //if you have enough man else abort and reset card
+                    int manaCost = currentSlot != null ? 0 : data.manaCost;
+
+                    if (CardManager.Instance.manaSystem.CanUseCard(manaCost) && CardManager.Instance.currentHoveredSlot != currentSlot)
+                    {
+
+                        PlaceOnBoardSlot(this, CardManager.Instance.currentHoveredSlot);
+
+                        currentHandSlot.currentPlacedCard = null;
+
+                        if (data.GetType() == typeof(PlotCard))
+                        {
+                            PlotCard card = data as PlotCard;
+                            UpdateTimerTweening(card, false);
+                        }
+                    }
+                    else
+                    {
+                        //reset card position
+                        ReturnToOriginHandSlot(this);
+                        canTween = true; //temp ?
+                    }
+                }
+                else //Drop Out Slot
+                {
+                    targetTransform = null;
+                    CardManager.Instance.holdingCard = false;
+
+                    if (CardManager.Instance.currentHoveredHandSlot != null)
+                    {
+                        if (IsCorrectPlacement(this, CardManager.Instance.currentHoveredHandSlot))
+                        {
+                            PlaceOnHandSlot(this, CardManager.Instance.currentHoveredHandSlot);
+                        }
+                        else
+                        {
+                            ReturnToOriginHandSlot(this);
+                        }
+                    }
+                    else
+                    {
+                        ReturnToOriginHandSlot(this);
+                    }
+
+                    if (currentSlot != null)//Remove card from board
+                    {
+                        RemoveFromBoard(this);
+                    }
+
+                    if (data.GetType() == typeof(PlotCard))
                     {
                         PlotCard card = data as PlotCard;
-                        UpdateTimerTweening(card, false);
+                        UpdateTimerTweening(card, true);
                     }
                 }
-                else
-                {
-                    //reset card position
-                    ReturnToOriginHandSlot(this);
-                    canTween = true; //temp ?
-                }
+                #endregion
             }
-            else //Drop Out Slot
-            {
-                targetTransform = null;
-                CardManager.Instance.holdingCard = false;
 
-                if(CardManager.Instance.currentHoveredHandSlot != null)
-                {
-                    if(IsCorrectPlacement(this, CardManager.Instance.currentHoveredHandSlot))
-                    {
-                        PlaceOnHandSlot(this, CardManager.Instance.currentHoveredHandSlot);
-                    }
-                    else
-                    {
-                        ReturnToOriginHandSlot(this);
-                    }
-                }
-                else
-                {
-                    ReturnToOriginHandSlot(this);
-                }
-
-                if (currentSlot != null)//Remove card from board
-                {
-                    RemoveFromBoard(this);
-                }
-
-                if (data.GetType() == typeof(PlotCard))
-                {
-                    PlotCard card = data as PlotCard;
-                    UpdateTimerTweening(card, true);
-                }
-            }
-            #endregion
+            CardManager.Instance.currentHoveredSlot = null;
+            CardManager.Instance.holdingCard = false;
+            CardManager.Instance.currentCard = null;
         }
-
-        CardManager.Instance.currentHoveredSlot = null;
-        CardManager.Instance.holdingCard = false;
-        CardManager.Instance.currentCard = null;
     }
 
     public void OnPointerEnter()
@@ -489,15 +510,23 @@ public class CardContainer : MonoBehaviour
         CardManager.Instance.UpdateHandCount();
     }
 
+    void WrongPlacementSound()
+    {
+        if (audioSource == null) audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+        Sound intervert = new Sound(audioSource, "SFX_WRONGPLACEMENT", SoundType.SFX, false, false);
+        intervert.Play();
+    }
     bool IsCorrectPlacement(CardContainer container, HandSlot hoveredHandSlot)
     {
         Type cardType = container.data.GetType();
         if (cardType != typeof(PlotCard) && hoveredHandSlot == CardManager.Instance.cardHand.plotHandSlot)
         {
+            WrongPlacementSound();
             return false;
         }
         else if(cardType == typeof(PlotCard) && hoveredHandSlot != CardManager.Instance.cardHand.plotHandSlot)
         {
+            WrongPlacementSound();
             return false;
         }
         return true;
@@ -510,10 +539,12 @@ public class CardContainer : MonoBehaviour
 
         if (currentCardType == typeof(PlotCard) && hoveredCardType != typeof(PlotCard))
         {
+            WrongPlacementSound();
             return false;
         }
         if (currentCardType != typeof(PlotCard) && hoveredCardType == typeof(PlotCard))
         {
+            WrongPlacementSound();
             return false;
         }
 
@@ -608,6 +639,10 @@ public class CardContainer : MonoBehaviour
         {
             if(card.completionTimer == 1)
             {
+                if (audioSource == null) audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
+                Sound intervert = new Sound(audioSource, "SFX_CLOCKTICKEND01", SoundType.SFX, false, false);
+                intervert.Play();
+
                 visuals.timerText.color = Color.red;
                 LeanTween.cancel(card.currentContainer.visuals.cardTimerFrame.gameObject);
                 card.currentContainer.visuals.cardTimerFrame.gameObject.transform.localScale = Vector3.one;
