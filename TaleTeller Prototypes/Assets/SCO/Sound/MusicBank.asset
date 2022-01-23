@@ -14,6 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - id: MUS_TITLE
-    clip: {fileID: 0}
-  - id: MUS_MAINTHEME
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 30cd098dafbe7414799b3f27ee570fa1, type: 3}
+  - id: MUS_THEME01
+    clip: {fileID: 8300000, guid: c3b8d6fe1e4a0b54498503f045d5a3a5, type: 3}
+  - id: MUS_THEME02
+    clip: {fileID: 8300000, guid: ae49a6aacc4b43348848cdd168d89af6, type: 3}
+  - id: MUS_THEME03
+    clip: {fileID: 8300000, guid: 0ea11e4b9e2ca2248a37612d2899af6f, type: 3}
+  - id: MUS_THEME04
+    clip: {fileID: 8300000, guid: b17643629d1d477408c5d1e045b1e843, type: 3}
+  - id: MUS_THEME05
+    clip: {fileID: 8300000, guid: e873beaad01e24b4795e565a480fc40f, type: 3}
+  - id: MUS_THEME06
+    clip: {fileID: 8300000, guid: 5cf407f817a1bbb41a0876ec1d8e17a4, type: 3}
+  - id: MUS_THEME07
+    clip: {fileID: 8300000, guid: d0e2d8203f10afe48b4d78b40ca321d2, type: 3}
