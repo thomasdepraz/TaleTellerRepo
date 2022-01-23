@@ -10,9 +10,9 @@ Last Wish	Does something when it dies.
 Aphoteosis	Does something when it is in hand at the of the turn.
 Illumination	Does something when a card is drawn while on board.
 Overload	Does something when a card is discarded while on board.
-$HEALTH_STAT	<b>Health</b>: {0}  <br>Hero’s health points.  <br><b>If there are no more, the Hero dies, it’s the end of the game</b>
-$ATTACK_STAT	<b>Attack</b> : {0}<br>Amount of damage the player inflicts during an attack.
-$GOLD_STAT	<b>Gold</b>: {0}<br>Game currency.
+$HEALTH_STAT	<b><sprite name="HealthHero"> Health</b>: {0}  <br>Hero’s health points.  <br><b>If there are no more, the Hero dies, it’s the end of the game</b><br><sprite name="Heal"> heal the hero.<br><sprite name="MaxHealth"> increase the Hero's maximum Health.
+$ATTACK_STAT	<b><sprite name="AttackBase"> Attack</b> : {0}<br>Amount of damage the player inflicts during an attack.<br><sprite name="AttackBase"> increase permanent Attack (current: <b>{1}</b>)<br><sprite name="AttackTemp"> increase additional Attack for this turn only (current: <b>{2}</b>)
+$GOLD_STAT	<b><sprite name="GoldHero"> Gold</b>: {0}<br>Game currency.<br><sprite name="Gold"> increase the Hero's coins<br><sprite name="Purse"> increase the size of the Hero's Purse.
 $DECK	Regroups all of your available cards. <br>It contains {0} cards.
 $DISCARD	Regroups all your used cards. <br>It contains {0} cards.
 $INK	Used to a play card.<br>Recharges at maximum at the beginning of each turn.
