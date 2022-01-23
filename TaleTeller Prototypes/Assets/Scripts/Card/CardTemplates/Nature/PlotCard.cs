@@ -86,6 +86,12 @@ public class PlotCard : CardData
             }
         }
 
+        //Refill deck 
+        EventQueue refillQueue = new EventQueue();
+        CardManager.Instance.cardDeck.Refill(refillQueue);
+        refillQueue.StartQueue();
+        while (!refillQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
 
         //add all junk cards to deck for now
         for (int i = 0; i < objective.linkedJunkedCards.Count; i++)

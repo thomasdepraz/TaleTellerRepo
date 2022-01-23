@@ -221,7 +221,7 @@ public class Deck : MonoBehaviour
     }
 
     #region Utility
-    void Refill(EventQueue queue)
+    public void Refill(EventQueue queue)
     {
         queue.events.Add(RefillDeck(queue));
     }
