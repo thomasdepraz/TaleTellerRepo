@@ -28,5 +28,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6f207422d9bba6842a9480034edc7727, type: 2}
     chapterDescription: $TurbulentOutset_Step04_Description
   currentStep: 0
+  plotName: A turbulent outlet
   plotDescription: $TurbulentOutset_Description
   plotIllustration: {fileID: 0}

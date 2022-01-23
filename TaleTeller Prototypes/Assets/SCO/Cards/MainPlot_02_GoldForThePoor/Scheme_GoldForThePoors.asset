@@ -28,5 +28,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 97c6d0b27a5ffeb4fbe1fa709ea1ad74, type: 2}
     chapterDescription: $GoldForThePoors_Step04_Description
   currentStep: 0
+  plotName: Gold for the poors
   plotDescription: $GoldForThePoors_Description
   plotIllustration: {fileID: 0}

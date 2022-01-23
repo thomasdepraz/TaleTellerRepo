@@ -41,8 +41,8 @@ public class ChapterScreen : GameScreen
         visuals.illustrationButton_A.buttonImage.sprite = schemesToChooseFrom[0].plotIllustration;
         visuals.illustrationButton_B.buttonImage.sprite = schemesToChooseFrom[1].plotIllustration;
 
-        visuals.titleText_A.text = schemesToChooseFrom[0].name;
-        visuals.titleText_B.text = schemesToChooseFrom[1].name;
+        visuals.titleText_A.text = schemesToChooseFrom[0].plotName;
+        visuals.titleText_B.text = schemesToChooseFrom[1].plotName;
 
         visuals.chapterText_A.text = schemesToChooseFrom[0].plotDescription;
         visuals.chapterText_B.text = schemesToChooseFrom[1].plotDescription;

@@ -28,5 +28,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 433b431601fb13f4085c0290cc6640c3, type: 2}
     chapterDescription: $PeacefulTown_Step04_Description
   currentStep: 0
+  plotName: A nice and peaceful town
   plotDescription: $PeacefulTown_Description
   plotIllustration: {fileID: 0}

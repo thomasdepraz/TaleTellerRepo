@@ -28,5 +28,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 70533097fb73cf647807567b8b5b1b60, type: 2}
     chapterDescription: $Priest_Step04_Description
   currentStep: 0
+  plotName: A priest is always trustable
   plotDescription: $Priest_Description
   plotIllustration: {fileID: 0}

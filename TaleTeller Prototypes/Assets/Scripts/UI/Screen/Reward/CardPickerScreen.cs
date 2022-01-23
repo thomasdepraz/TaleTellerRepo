@@ -54,6 +54,8 @@ public class CardPickerScreen : GameScreen
             default:
                 break;
         }
+        string text =
+        visuals.instructionText.text = visuals.instructionText.text.Replace("$value$", $"{numberToPick}");
     }
 
     public override void Close(Action onComplete)

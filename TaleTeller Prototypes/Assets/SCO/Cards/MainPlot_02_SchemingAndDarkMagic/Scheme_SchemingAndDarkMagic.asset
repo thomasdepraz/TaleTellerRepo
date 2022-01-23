@@ -31,5 +31,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ba968b05791ac7b4fa09a2c3102aa5ec, type: 2}
     chapterDescription: $DarkMagic_Step05_Description
   currentStep: 0
+  plotName: Scheming and dark magic
   plotDescription: $DarkMagic_Description
   plotIllustration: {fileID: 0}

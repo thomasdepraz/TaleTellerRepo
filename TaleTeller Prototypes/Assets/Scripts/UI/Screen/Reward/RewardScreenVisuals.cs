@@ -42,13 +42,17 @@ public class RewardScreenVisuals
     {
         addButton.onClick = () => selectCard(addCardReward, addButton);
         addButton.SetText(addCardReward.GetString());
+        addButton.selected = false;
+
         removeButton.onClick = () => selectCard(removeCardReward, removeButton);
         removeButton.SetText(removeCardReward.GetString());
+        removeButton.selected = false;
 
         for (int i = 0; i < heroRewards.Count; i++)
         {
             int index = i;
 
+            heroRewardsButton[index].selected = false;
             heroRewardsButton[index].gameObject.SetActive(true);
             heroRewardsButton[index].onClick = ()=> selectHero(heroRewards[index], heroRewardsButton[index]);
             heroRewardsButton[index].SetText(heroRewards[index].GetString());

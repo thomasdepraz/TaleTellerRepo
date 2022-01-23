@@ -15,6 +15,7 @@ public class MainPlotScheme : ScriptableObject
     public List<SchemeStep> schemeSteps = new List<SchemeStep>();
     [HideInInspector]public int currentStep;
 
+    public string plotName;
     [TextArea(2,5)]
     public string plotDescription;
     public Sprite plotIllustration;

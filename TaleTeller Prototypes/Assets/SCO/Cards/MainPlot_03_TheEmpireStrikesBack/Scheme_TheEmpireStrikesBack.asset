@@ -31,5 +31,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 62e82081e3175b14783eac2ff6425841, type: 2}
     chapterDescription: $Empire_Step05_Description
   currentStep: 0
+  plotName: The empire strikes back
   plotDescription: $Empire_Description
   plotIllustration: {fileID: 0}
