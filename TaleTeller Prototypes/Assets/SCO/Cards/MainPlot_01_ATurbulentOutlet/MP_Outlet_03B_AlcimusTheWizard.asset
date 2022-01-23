@@ -24,6 +24,7 @@ MonoBehaviour:
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
+  junkPosRestrictions: []
 --- !u!114 &-3642540941236040535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,5 +74,5 @@ MonoBehaviour:
   completionTimer: 4
   isMainPlot: 1
   isFinal: 0
-  plotChoiceDescription: 
+  plotChoiceDescription: $TurbulentOutset_Step03B_Objective
   legendaryCardRewards: []
