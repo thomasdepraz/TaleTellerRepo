@@ -393,10 +393,13 @@ public class CardVisuals : MonoBehaviour
     {
         int numberOfBlocks = 0;//data.effects.Where(e => !e.appendWithNext).Count();
 
-        for (int i = 0; i < data.effects.Count; i++)
+        if(data.effects != null)
         {
-            string txt = data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
-            if (txt != string.Empty && !txt.Split('£').Contains("append")) numberOfBlocks++;
+            for (int i = 0; i < data.effects.Count; i++)
+            {
+                string txt = data.effects[i].GetDescription(data.effects[i], data.effectsReferences[i]);
+                if (txt != string.Empty && !txt.Split('£').Contains("append")) numberOfBlocks++;
+            }
         }
 
         if (data.GetType() == typeof(PlotCard))

@@ -21,7 +21,7 @@ MonoBehaviour:
   doubleStrike: 0
   undying: 0
   useCount: 3
---- !u!114 &-4222415161089856297
+--- !u!114 &-782719038566067019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,23 +30,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48864efdef4999d4dbd3ce372cf320d7, type: 3}
-  m_Name: Effect1
+  m_Script: {fileID: 11500000, guid: e74ed66125fff484da8e3bfc2169aa1a, type: 3}
+  m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Idea_KingsTreasure_Trade_Effect1
+  description: 
   appendWithNext: 0
   trigger: 1
-  target: 1
-  range: 
+  target: 2
+  range: 0500000009000000
   values: []
-  gainValue:
-    value: 2
+  boardEffectTypesDependant: 1
+  effectTypeToTarget:
     type: 2
+    op: 0
+  choiceValue:
+    value: 1
+    type: 9
     op: 1
-  temporaryChange: 0
-  cardsDependant: 0
-  typeDependants: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,34 +69,7 @@ MonoBehaviour:
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: 5931309443474790133}
-  - {fileID: -4222415161089856297}
+  - {fileID: -782719038566067019}
   effects: []
   cardTypeReference: {fileID: -5985273405189980548}
   cardType: {fileID: 0}
---- !u!114 &5931309443474790133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 249eb1e7e62cfed4cb4568397e2b004f, type: 3}
-  m_Name: Effect1
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}
-  description: $Idea_KingsTreasure_Trade_Effect0
-  appendWithNext: 0
-  trigger: 1
-  target: 3
-  range: 
-  values: []
-  effectTypeToTarget:
-    type: 2
-    op: 0
-  drawValue:
-    value: 1
-    type: 5
-    op: 1

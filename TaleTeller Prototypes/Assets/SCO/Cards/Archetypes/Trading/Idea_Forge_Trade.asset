@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4794752839839711983
+--- !u!114 &-3690311600176906098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,24 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: afdd823048dfc3a4394a5bf04ad3e20a, type: 3}
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: $Idea_Forge_Trade_Effect0
+  description: 
   appendWithNext: 0
-  trigger: 2
-  target: 2
-  range: 0300000004000000
+  trigger: 1
+  target: 0
+  range: 
   values: []
-  modifierValue:
+  buyValue:
     value: 2
-    type: 1
-    op: 1
-  behaviourTargeted: 0
-  forSpecificCard: 0
-  specificCard: {fileID: 0}
-  temporaryChange: 0
+    type: 3
+    op: 0
+  effectTriggerIfCanPay: {fileID: 0}
 --- !u!114 &-3667676562537704007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +58,35 @@ MonoBehaviour:
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
-  - {fileID: -4794752839839711983}
+  - {fileID: -3690311600176906098}
+  - {fileID: 7631274583879147777}
   effects: []
   cardTypeReference: {fileID: -3667676562537704007}
   cardType: {fileID: 0}
+--- !u!114 &7631274583879147777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b261fc276da7c334dbffb6e240fc8c0a, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 0
+  target: 2
+  range: 04000000
+  values: []
+  modifierValue:
+    value: 2
+    type: 1
+    op: 1
+  behaviourTargeted: 0
+  forSpecificCard: 0
+  specificCard: {fileID: 0}
+  temporaryChange: 0
