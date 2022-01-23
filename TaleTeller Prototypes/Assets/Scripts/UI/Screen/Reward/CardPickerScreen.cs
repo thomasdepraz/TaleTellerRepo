@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PickScreenMode
 {
@@ -73,6 +74,9 @@ public class CardPickerScreen : GameScreen
     {
         open = true;
         visuals.canvas.gameObject.SetActive(true);
+
+        LeanTween.value(1, 1, 0.1f).setOnUpdate((float value) => visuals.scrollBar.value = value);
+
         onComplete?.Invoke();
     }
 

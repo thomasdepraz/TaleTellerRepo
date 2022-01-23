@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class CardPickerScreenVisual
@@ -10,9 +11,10 @@ public class CardPickerScreenVisual
     public RectTransform bristolTransform;
     public RectTransform panelTransform;
     public RectTransform scrollviewContentTransform;
-    public GameObject scrollBar;
+    public Scrollbar scrollBar;
     public GameObject cardRowPrefab;
     public List<PlaceholderCard> cardPlaceholders;
+    public List<GameObject> cardRows;
     public ScreenButton confirmButton;
 
     public TextMeshProUGUI instructionText;
@@ -29,19 +31,28 @@ public class CardPickerScreenVisual
             cardPlaceholders[i].container.InitializeContainer(datas[i], true);
         }
 
-        if (datas.Count > 5) scrollBar.SetActive(false);
-        else scrollBar.SetActive(true);
+        if (datas.Count <= 5) scrollBar.gameObject.SetActive(false);
+        else scrollBar.gameObject.SetActive(true);
 
         for (int i = 0; i < cardPlaceholders.Count; i++)
         {
             cardPlaceholders[i].gameObject.SetActive(false);
         }
-
         for (int i = 0; i < datas.Count; i++)
         {
             cardPlaceholders[i].gameObject.SetActive(true);
         }
-        
+
+        for (int i = 0; i < cardRows.Count; i++)
+        {
+            if (!cardRows[i].transform.GetChild(0).gameObject.activeSelf)
+                cardRows[i].gameObject.SetActive(false);
+            else
+                cardRows[i].gameObject.SetActive(true);
+        }
+
+
+
     }
 
     public void ResetPlaceholders()
@@ -56,6 +67,7 @@ public class CardPickerScreenVisual
     {
         GameObject newRow = GameObject.Instantiate(cardRowPrefab, scrollviewContentTransform);
         newRow.transform.SetAsLastSibling();
+        cardRows.Add(newRow);
         for (int i = 0; i < newRow.transform.childCount; i++)
         {
            cardPlaceholders.Add(newRow.transform.GetChild(i).GetComponent<PlaceholderCard>());
