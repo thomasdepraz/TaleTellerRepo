@@ -55,11 +55,11 @@ public class AddCardReward : Reward
         switch (actNumber)
         {
             case 0:
-                return GetRandomCards(55f, 30f, 15f, 0f, number);
+                return GetRandomCards(75f, 20f, 5f, 0f, number);
             case 1:
-                return GetRandomCards(30f, 40f, 20f, 10f, number);
+                return GetRandomCards(55f, 30f, 15f, 5f, number);
             case 2:
-                return GetRandomCards(0f, 40f, 40f, 20f, number);
+                return GetRandomCards(30f, 40f, 20f, 10f, number);
             default:
                 return null;
         }

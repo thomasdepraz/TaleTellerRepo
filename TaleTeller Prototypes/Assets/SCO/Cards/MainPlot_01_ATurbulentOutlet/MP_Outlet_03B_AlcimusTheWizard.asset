@@ -17,10 +17,8 @@ MonoBehaviour:
   linkedJunkedCards:
   - {fileID: 11400000, guid: fddb991f6c767104a9783e3a611f7e6f, type: 2}
   - {fileID: 11400000, guid: fddb991f6c767104a9783e3a611f7e6f, type: 2}
-  - {fileID: 11400000, guid: fddb991f6c767104a9783e3a611f7e6f, type: 2}
-  - {fileID: 11400000, guid: fddb991f6c767104a9783e3a611f7e6f, type: 2}
-  junkSpawnLocations: 03000000030000000300000003000000
-  junksPositionsInDeck: 00000000020000000300000005000000
+  junkSpawnLocations: 0000000000000000
+  junksPositionsInDeck: 0000000000000000
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
@@ -39,8 +37,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 10
-    baseAttackDamage: 2
+    baseLifePoints: 14
+    baseAttackDamage: 3
   behaviour: 1
   fightingRange: 3
   doubleStrike: 0
@@ -62,7 +60,7 @@ MonoBehaviour:
   cardName: Alcimus the Wizard
   rarity: 0
   archetype: 0
-  manaCost: 0
+  manaCost: 2
   cardGraph: {fileID: 21300000, guid: 2fe3af29aa116ba409ca2c6b6b6bbc3b, type: 3}
   currentContainer: {fileID: 0}
   description: 

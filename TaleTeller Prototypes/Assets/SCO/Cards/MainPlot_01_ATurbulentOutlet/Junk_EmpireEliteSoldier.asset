@@ -15,7 +15,7 @@ MonoBehaviour:
   data: {fileID: 0}
   stats:
     baseLifePoints: 5
-    baseAttackDamage: 4
+    baseAttackDamage: 3
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
   cardName: Empire Elite Soldier
   rarity: 0
   archetype: 0
-  manaCost: 0
+  manaCost: 1
   cardGraph: {fileID: 21300000, guid: f7d91034ab01d664c92233c8bb41f31a, type: 3}
   currentContainer: {fileID: 0}
   description: 

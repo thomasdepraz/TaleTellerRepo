@@ -60,7 +60,7 @@ MonoBehaviour:
   range: 0300000004000000
   values: []
   modifierValue:
-    value: 3
+    value: 2
     type: 0
     op: 2
   behaviourTargeted: 0

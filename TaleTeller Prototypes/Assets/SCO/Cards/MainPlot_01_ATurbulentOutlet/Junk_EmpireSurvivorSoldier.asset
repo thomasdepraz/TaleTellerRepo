@@ -20,7 +20,7 @@ MonoBehaviour:
   range: 
   values: []
   gainValue:
-    value: 4
+    value: 3
     type: 0
     op: 1
   temporaryChange: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 4
+    baseLifePoints: 3
     baseAttackDamage: 1
   behaviour: 2
   fightingRange: 3

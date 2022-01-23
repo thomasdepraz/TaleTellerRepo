@@ -55,7 +55,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: 3020139332154673912}
   cardType: {fileID: 0}
   objective: {fileID: -2040187732016620431}
-  completionTimer: 4
+  completionTimer: 3
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: $TurbulentOutset_Step01_Description
@@ -77,7 +77,7 @@ MonoBehaviour:
   appendWithNext: 0
   trigger: 2
   target: 2
-  range: 03000000
+  range: 04000000
   values: []
   typeToTarget: 0
   operatorToTarget: 1
