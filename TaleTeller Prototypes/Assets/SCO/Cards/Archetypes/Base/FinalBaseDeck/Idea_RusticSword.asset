@@ -68,7 +68,7 @@ MonoBehaviour:
   description: $Idea_RusticSword_Base_Effect0
   appendWithNext: 0
   trigger: 1
-  target: 0
+  target: 1
   range: 
   values: []
   buyValue:

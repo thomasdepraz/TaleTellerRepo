@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_Tavern_Trade_Effect0
   appendWithNext: 0
   trigger: 2
   target: 0
@@ -37,16 +37,16 @@ MonoBehaviour:
   m_Name: Effect1
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_Tavern_Trade_Effect1
   appendWithNext: 0
   trigger: 0
-  target: 0
-  range: 
+  target: 2
+  range: 04000000
   values: []
   modifierValue:
-    value: 0
+    value: 4
     type: 0
-    op: 0
+    op: 1
   behaviourTargeted: 0
   forSpecificCard: 0
   specificCard: {fileID: 0}
@@ -73,6 +73,7 @@ MonoBehaviour:
   description: 
   effectsReferences:
   - {fileID: -3544280793735103036}
+  - {fileID: -3298032873858886588}
   effects: []
   cardTypeReference: {fileID: 1714582858014566928}
   cardType: {fileID: 0}

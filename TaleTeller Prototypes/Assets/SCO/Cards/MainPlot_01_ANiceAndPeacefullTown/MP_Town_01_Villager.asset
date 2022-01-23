@@ -130,5 +130,5 @@ MonoBehaviour:
   temporaryChange: 0
   cardsDependant: 1
   typeDependants:
-  - typeToHave: 2
-    characterType: 0
+  - typeToHave: 0
+    characterType: 1
