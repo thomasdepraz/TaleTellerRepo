@@ -110,7 +110,7 @@ public class Hero : MonoBehaviour
             if(value>_goldPoints)
             {
                 if(audioSource == null)audioSource = SoundManager.Instance.GenerateAudioSource(gameObject);
-                Sound gold = new Sound(audioSource, "GAINGOLD", SoundType.SFX, false, false);
+                Sound gold = new Sound(audioSource, "SFX_GAINGOLD", SoundType.SFX, false, false);
                 gold.Play();
             }
             

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseLifePoints: 20
   baseAttackDamage: 1
-  baseGold: 10
+  baseGold: 0
   baseMaxGold: 10
