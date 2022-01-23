@@ -11,6 +11,7 @@ public class EffectDescriptionBlock : MonoBehaviour
     public TextMeshProUGUI textField;
     public Image rangeImage;
     public EffectRangeType rangeType;
+    public bool pickerCard = false;
 
     public void SetDescription(string description, Color color)
     {

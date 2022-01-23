@@ -393,6 +393,8 @@ public class CardVisuals : MonoBehaviour
     {
         int numberOfBlocks = 0;//data.effects.Where(e => !e.appendWithNext).Count();
 
+        if(data == null) return;
+
         if(data.effects != null)
         {
             for (int i = 0; i < data.effects.Count; i++)
@@ -557,16 +559,35 @@ public class CardVisuals : MonoBehaviour
         //foreach(EffectDescriptionBlock block in descriptionBlocks)
         //    lineCount += block.textField.GetTextInfo().lineCount;
 
-        if (descriptionBlocks.Count >= 2)
+        if (descriptionBlocks.Count == 0) return;
+
+        if (!descriptionBlocks[0].pickerCard)
         {
-            foreach (EffectDescriptionBlock block in descriptionBlocks)
-                block.textField.fontSizeMax = 12;
+            if (descriptionBlocks.Count >= 2)
+            {
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 12;
+            }
+            else
+            {
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 20;
+            }
         }
         else
         {
-            foreach (EffectDescriptionBlock block in descriptionBlocks)
-                block.textField.fontSizeMax = 20;
+            if (descriptionBlocks.Count >= 2)
+            {
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 20;
+            }
+            else
+            {
+                foreach (EffectDescriptionBlock block in descriptionBlocks)
+                    block.textField.fontSizeMax = 100;
+            }
         }
+      
     }
 
     #region Tweening
