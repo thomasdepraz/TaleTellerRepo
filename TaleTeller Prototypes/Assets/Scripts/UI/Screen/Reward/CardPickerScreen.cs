@@ -101,6 +101,7 @@ public class CardPickerScreen : GameScreen
         else
         {
             pickedCards.Add(card);
+            Debug.Log(card.container.data);
         }
 
         if (pickedCards.Count > numberToPick)
@@ -114,6 +115,6 @@ public class CardPickerScreen : GameScreen
 
     ~CardPickerScreen()
     {
-        visuals.ResetPlaceholders();
+        //visuals.ResetPlaceholders();
     }
 }

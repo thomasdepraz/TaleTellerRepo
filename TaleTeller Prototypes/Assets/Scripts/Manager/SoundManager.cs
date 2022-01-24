@@ -204,7 +204,7 @@ public class SoundManager : Singleton<SoundManager>
         while (timeElapsed < musicLength)
         {
             yield return new WaitForEndOfFrame();
-            Debug.Log("Sound tick");
+            //Debug.Log("Sound tick");
             timeElapsed += Time.deltaTime;
         }
 
