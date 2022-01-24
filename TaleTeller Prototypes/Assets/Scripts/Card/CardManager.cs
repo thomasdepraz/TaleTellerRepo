@@ -134,7 +134,10 @@ public class CardManager : Singleton<CardManager>
             Type cardType = card.GetType();
             if(cardType != typeof(PlotCard) && cardType != typeof(JunkCard))
             {
-                cardDeck.cachedDeck.Insert(r, card.dataReference);
+                if (r < cardDeck.cachedDeck.Count)
+                    cardDeck.cachedDeck.Insert(r, card.dataReference);
+                else
+                    cardDeck.cachedDeck.Insert(cardDeck.cachedDeck.Count, card.dataReference);
             }
         }
 

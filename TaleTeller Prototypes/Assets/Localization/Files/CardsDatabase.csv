@@ -201,7 +201,7 @@ $MP_PeacefulTown_02_TownSquare_Objective	Place 1 Village's Mob, 1 Church, 2 Enem
 $MP_PeacefulTown_03_CreatureSpawner_Effect0	<b>End of Turn :</b> Draw 3 Gobelins.
 $MP_PeacefulTown_03_CreatureSpawner_Objective	Destroy the Creature Spawner.
 $MP_PeacefulTown_03_Witch_Effect0	/
-$MP_PeacefulTown_03_Witch_Objective	Place the Witch, 2 Allies and the Town Exit.
+$MP_PeacefulTown_03_Witch_Objective	Place the Witch, 3 Allies and the Town Exit.
 $MP_PeacefulTown_04_GiantSpider_Effect0	/
 $MP_PeacefulTown_04_GiantSpider_Objective	Defeat the Giant Spider.
 $Junk_Salesman_Effect0	£append£<b>Buy($buyValue$<sprite name="Gold">) :</b> 

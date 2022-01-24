@@ -17,10 +17,10 @@ MonoBehaviour:
   appendWithNext: 0
   trigger: 2
   target: 2
-  range: 03000000
+  range: 04000000
   values: []
   modifierValue:
-    value: 3
+    value: 2
     type: 0
     op: 1
   behaviourTargeted: 0
