@@ -44,7 +44,8 @@ MonoBehaviour:
   junkCardsToSpawn:
   - {fileID: 11400000, guid: d1b37d0883ea497458277a27ed9ca381, type: 2}
   - {fileID: 11400000, guid: d1b37d0883ea497458277a27ed9ca381, type: 2}
-  junkSpawnLocations: 0000000000000000
+  - {fileID: 11400000, guid: d1b37d0883ea497458277a27ed9ca381, type: 2}
+  junkSpawnLocations: 000000000000000000000000
   restrictionOnBoard: 0
   junkToPlaceOnBoard: {fileID: 0}
 --- !u!114 &11400000
@@ -73,7 +74,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: -8549004677504087409}
   cardType: {fileID: 0}
   objective: {fileID: 4541343099129513922}
-  completionTimer: 6
+  completionTimer: 5
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: $PeacefulTown_Step03A_Objective

@@ -125,7 +125,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3417540031139067788}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -168,7 +168,7 @@ MonoBehaviour:
   instructionDataBase: {fileID: 11400000, guid: c69571b22f9deee41a7b15fd2dde620b, type: 2}
   schemesDatabase: {fileID: 4900000, guid: 43639d8aec9811542b070f4ebf798e20, type: 3}
   tooltipDatabase: {fileID: 4900000, guid: 9ce2772f9370d85489b1b8ab3312b00e, type: 3}
-  cardsDatabase: {fileID: 4900000, guid: 1ff66f7ab937c444287885e90c3a0a0f, type: 3}
+  cardsDatabase: {fileID: 4900000, guid: 05dfb9a7c17747948b0a0fd1d8888d49, type: 3}
   popupDatabase: {fileID: 4900000, guid: 4a71ee7f64a2a67449977c2b5049352a, type: 3}
   screenDatabase: {fileID: 4900000, guid: bf45a927c971ea64c9d3e4726f646f9a, type: 3}
 --- !u!1 &3417540031349418613

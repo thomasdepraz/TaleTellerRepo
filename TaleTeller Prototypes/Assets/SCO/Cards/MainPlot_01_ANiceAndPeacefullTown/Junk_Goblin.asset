@@ -37,7 +37,7 @@ MonoBehaviour:
   cardName: Goblin
   rarity: 0
   archetype: 0
-  manaCost: 0
+  manaCost: 1
   cardGraph: {fileID: 21300000, guid: ba0fba94055003749be184bdc37bdb4a, type: 3}
   currentContainer: {fileID: 0}
   description: 
