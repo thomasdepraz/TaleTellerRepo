@@ -197,24 +197,24 @@ $MP_PeacefulTown_01_Villager_Objective	Place the Villager and the Delivery Packa
 $MP_PeacefulTown_02_RevivingTree_Effect0	<b>End of Turn :</b> +$modifierValue$<sprite name="Heal"> to Enemies if in Hand.
 $MP_PeacefulTown_02_RevivingTree_Objective	Defeat the $value$ Wandering Skeletons.
 $MP_PeacefulTown_02_TownSquare_Effect0	+$modifierValue$<sprite name="AttackBase"> to Characters.
-$MP_PeacefulTown_02_TownSquare_Objective	Place 1 Neighbourhood, 1 Church, 2 Enemies and the Town Square.
-$MP_PeacefulTown_03_CreatureSpawner_Effect0	<b>End of Turn :</b> Draw 2 Gobelins.
+$MP_PeacefulTown_02_TownSquare_Objective	Place 1 Village's Mob, 1 Church, 2 Enemies and the Town Square.
+$MP_PeacefulTown_03_CreatureSpawner_Effect0	<b>End of Turn :</b> Draw 3 Gobelins.
 $MP_PeacefulTown_03_CreatureSpawner_Objective	Destroy the Creature Spawner.
 $MP_PeacefulTown_03_Witch_Effect0	/
-$MP_PeacefulTown_03_Witch_Objective	Place the Witch, 2 Characters and the Town Exit.
+$MP_PeacefulTown_03_Witch_Objective	Place the Witch, 2 Allies and the Town Exit.
 $MP_PeacefulTown_04_GiantSpider_Effect0	/
 $MP_PeacefulTown_04_GiantSpider_Objective	Defeat the Giant Spider.
 $Junk_Salesman_Effect0	£append£<b>Buy($buyValue$<sprite name="Gold">) :</b> 
 $Junk_Salesman_Effect1	Draw 1 Delivery Package.
 $Junk_DeliveryPackage_Effect0	Draw $drawValue$.
 $Junk_WanderingSkeleton_Effect0	/
-$Junk_GreenMushroom_Effect0	 +$modifierValue$<sprite name="Heal"> to Characters.
+$Junk_GreenMushroom_Effect0	 -$modifierValue$<sprite name="Heal"> to Characters.
 $Junk_RedNettle_Effect0	+$gainValue$<sprite name="AttackTemp">.
 $Junk_Neighbourhood_Effect0	/
 $Junk_Church_Effect0	-$modifierValue$<sprite name="Heal"> to Enemies.
 $Junk_ArmedSkeleton_Effect0	/
 $Junk_Gobelin_Effect0	/
-$Junk_Pitchfork_Effect0	+$gainValue$<sprite name="AttackBase">.
+$Junk_Pitchfork_Effect0	Discard $discardValue$ cards.
 $Junk_ArmedVillager_Effect0	/
 $Junk_TownExit_Effect0	+$modifierValue$<sprite name="Heal"> to Characters.
 $Junk_Cocoon_Effect0	<b>Last Wish :</b> Draw 1 Small Spider.

@@ -43,7 +43,7 @@ MonoBehaviour:
   cardName: Town Square
   rarity: 0
   archetype: 0
-  manaCost: 0
+  manaCost: 2
   cardGraph: {fileID: 21300000, guid: 7c8f2429d672da349b4455ecf3c9e736, type: 3}
   currentContainer: {fileID: 0}
   description: 
@@ -53,7 +53,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: 1948392438400435131}
   cardType: {fileID: 0}
   objective: {fileID: 5132802568922060052}
-  completionTimer: 6
+  completionTimer: 5
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: $PeacefulTown_Step02B_Objective
@@ -91,7 +91,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 274b5b34e0ccafc448d6846affc2f26c, type: 2}
   - {fileID: 11400000, guid: 274b5b34e0ccafc448d6846affc2f26c, type: 2}
   junkSpawnLocations: 03000000000000000300000003000000
-  junksPositionsInDeck: 02000000000000000400000004000000
+  junksPositionsInDeck: 02000000000000000300000003000000
   mustPlaceAll: 0
   specificJunkToPlace:
   - {fileID: 11400000, guid: 2777654d5c6a8f4489c89909dc01b4ec, type: 2}

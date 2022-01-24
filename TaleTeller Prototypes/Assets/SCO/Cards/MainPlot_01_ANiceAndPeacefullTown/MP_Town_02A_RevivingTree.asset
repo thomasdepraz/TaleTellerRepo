@@ -60,7 +60,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: 8817555457162962567}
   cardType: {fileID: 0}
   objective: {fileID: -5656281353155453051}
-  completionTimer: 5
+  completionTimer: 4
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: $PeacefulTown_Step02A_Objective
@@ -85,7 +85,7 @@ MonoBehaviour:
   range: 
   values: []
   modifierValue:
-    value: 1
+    value: 2
     type: 0
     op: 1
   behaviourTargeted: 2

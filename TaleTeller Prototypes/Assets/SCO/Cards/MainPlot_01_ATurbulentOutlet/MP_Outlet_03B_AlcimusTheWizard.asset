@@ -17,8 +17,9 @@ MonoBehaviour:
   linkedJunkedCards:
   - {fileID: 11400000, guid: fddb991f6c767104a9783e3a611f7e6f, type: 2}
   - {fileID: 11400000, guid: fddb991f6c767104a9783e3a611f7e6f, type: 2}
-  junkSpawnLocations: 0000000000000000
-  junksPositionsInDeck: 0000000000000000
+  - {fileID: 11400000, guid: fddb991f6c767104a9783e3a611f7e6f, type: 2}
+  junkSpawnLocations: 000000000000000003000000
+  junksPositionsInDeck: 000000000000000003000000
   boardRestriction: 0
   restriction: 0
   typeRestrictions: []
@@ -69,7 +70,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: -3642540941236040535}
   cardType: {fileID: 0}
   objective: {fileID: -6194813637866235208}
-  completionTimer: 4
+  completionTimer: 5
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: $TurbulentOutset_Step03B_Objective

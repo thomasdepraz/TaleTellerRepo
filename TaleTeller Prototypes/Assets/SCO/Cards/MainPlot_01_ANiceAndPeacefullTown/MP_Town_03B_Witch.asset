@@ -55,7 +55,7 @@ MonoBehaviour:
   mustPlaceTypeCards: 1
   typeRestrictions:
   - typeToHave: 0
-    characterType: 2
+    characterType: 0
     restrictionMethod: 1
     count: 2
 --- !u!114 &8438381072396075051
@@ -72,8 +72,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 2
-    baseAttackDamage: 4
+    baseLifePoints: 3
+    baseAttackDamage: 5
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0
