@@ -37,7 +37,7 @@ MonoBehaviour:
   cardName: Small Spider
   rarity: 0
   archetype: 0
-  manaCost: 0
+  manaCost: 1
   cardGraph: {fileID: 21300000, guid: 3c21c1f08f484b24e835aae622540bfe, type: 3}
   currentContainer: {fileID: 0}
   description: 
@@ -68,7 +68,7 @@ MonoBehaviour:
   range: 
   values: []
   gainValue:
-    value: 5
+    value: 4
     type: 0
     op: 1
   temporaryChange: 0
