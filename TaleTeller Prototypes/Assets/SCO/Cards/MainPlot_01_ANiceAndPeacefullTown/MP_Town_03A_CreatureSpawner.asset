@@ -95,8 +95,6 @@ MonoBehaviour:
   linkedJunkedCards:
   - {fileID: 11400000, guid: c1368b6726505244682613793e6b3643, type: 2}
   - {fileID: 11400000, guid: c1368b6726505244682613793e6b3643, type: 2}
-  - {fileID: 11400000, guid: 8ceb5ff991e764f4cbe4e69c8afa2eff, type: 2}
-  - {fileID: 11400000, guid: 8ceb5ff991e764f4cbe4e69c8afa2eff, type: 2}
   junkSpawnLocations: 03000000030000000300000003000000
   junksPositionsInDeck: 01000000030000000400000006000000
   boardRestriction: 0
