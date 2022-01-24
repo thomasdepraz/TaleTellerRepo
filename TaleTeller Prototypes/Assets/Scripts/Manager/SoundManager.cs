@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -23,6 +25,8 @@ public class SoundManager : Singleton<SoundManager>
     {
         soundsDictionary = InitDictionary(soundBank);
         musicDictionary = InitDictionary(musicBank);
+        InitMusicQueue();
+        LaunchMusic(SceneManager.GetActiveScene().buildIndex);
     }
 
     public Dictionary<string, AudioClip> InitDictionary(SoundBank bank)
@@ -56,7 +60,7 @@ public class SoundManager : Singleton<SoundManager>
         float originalVolume = source.volume;
         LeanTween.value(source.gameObject, originalVolume, targetVolume, time).setOnUpdate((float value) =>
         {
-            
+            source.volume = value;
         }).setEaseOutSine();
     }
 
@@ -65,7 +69,7 @@ public class SoundManager : Singleton<SoundManager>
         float originalVolume = source.volume;
         LeanTween.value(source.gameObject, originalVolume, targetVolume, time).setOnUpdate((float value) =>
         {
-
+            source.volume = value;
         }).setEaseOutSine().setOnComplete(()=> onCompleteAction.Invoke());
     }
 
@@ -132,6 +136,89 @@ public class SoundManager : Singleton<SoundManager>
         AudioSource source =  go.AddComponent<AudioSource>();
         return source;
     }
+
+    #region Music
+
+    AudioSource musicSourceOne;
+    AudioSource musicSourceTwo;
+    List<AudioSource> allMusicSources
+    {
+        get { return new List<AudioSource>() { musicSourceOne, musicSourceTwo }; }
+    }
+
+    List<string> playlist = new List<string>();
+
+    Coroutine currentPlaying;
+
+    public void InitMusicQueue()
+    {
+        if (musicSourceOne == null) musicSourceOne = SoundManager.Instance.GenerateAudioSource(gameObject);
+        if (musicSourceTwo == null) musicSourceTwo = SoundManager.Instance.GenerateAudioSource(gameObject);
+
+        for(int i = 3; i<8; i++)
+            playlist.Add("MUS_THEME0" + i.ToString());
+
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+    }
+
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        LaunchMusic(arg0.buildIndex);
+    }
+
+    void LaunchMusic(int sceneIndex)
+    {
+        AudioSource availableSource = allMusicSources.Where(s => !s.isPlaying).First();
+        AudioSource busySource = allMusicSources.Where(s => s.isPlaying).FirstOrDefault();
+        Sound soundToPlay = null;
+
+        //Menu Music
+        if (sceneIndex == 0)
+        {
+            if (currentPlaying != null) StopCoroutine(currentPlaying);
+            soundToPlay = new Sound(availableSource, "MUS_TITLE", SoundType.MUSIC, true, false);
+        }
+        //Game Music
+        else if(sceneIndex == 2)
+        {
+            soundToPlay = new Sound(availableSource, playlist[UnityEngine.Random.Range((int)0, (int)playlist.Count)], SoundType.MUSIC, false, false);
+            currentPlaying = StartCoroutine(CurrentPlayingMusic(soundToPlay.currentSource.clip.length - 5));
+        }
+         
+
+        if (busySource != null)
+        {
+            CrossFade(busySource, availableSource, 5f);
+        }
+        else
+        {
+            availableSource.volume = 0;
+            soundToPlay.Play();
+            FadeSound(musicSourceOne, 1f, 10f);
+        }
+    }
+
+    IEnumerator CurrentPlayingMusic(float musicLength)
+    {
+        float timeElapsed = 0;
+        while (timeElapsed < musicLength)
+        {
+            yield return new WaitForEndOfFrame();
+            Debug.Log("Sound tick");
+            timeElapsed += Time.deltaTime;
+        }
+
+        AudioSource availableSource = allMusicSources.Where(s => !s.isPlaying).First();
+        AudioSource busySource = allMusicSources.Where(s => s.isPlaying).FirstOrDefault();
+
+        Sound soundToPlay = new Sound(availableSource, playlist[UnityEngine.Random.Range((int)0, (int)playlist.Count)], SoundType.MUSIC, false, false);
+        availableSource.volume = 0;
+        soundToPlay.Play();
+        FadeSound(musicSourceOne, 1f, 10f);
+        currentPlaying = StartCoroutine(CurrentPlayingMusic(soundToPlay.currentSource.clip.length - 5));
+    }
+
+    #endregion
 }
 
 public enum SoundType
