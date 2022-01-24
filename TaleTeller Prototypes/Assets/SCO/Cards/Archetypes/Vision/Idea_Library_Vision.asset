@@ -43,7 +43,7 @@ MonoBehaviour:
   target: 2
   range: 03000000
   values: []
-  typeToTarget: 5
+  typeToTarget: 9
   operatorToTarget: 1
   modification:
     value: 1
