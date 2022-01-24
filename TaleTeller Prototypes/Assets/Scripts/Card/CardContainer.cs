@@ -75,6 +75,10 @@ public class CardContainer : MonoBehaviour
     {
         this.data = data;
 
+        if (data == null)
+        {
+            return;
+        }
         //load Data and activate gameobject
         visuals.InitializeVisuals(data);
 
