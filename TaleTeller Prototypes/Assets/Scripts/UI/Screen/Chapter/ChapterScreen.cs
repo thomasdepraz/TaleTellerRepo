@@ -16,12 +16,10 @@ public class ChapterScreen : GameScreen
     public MainPlotScheme chosenScheme;
     public CardContainer chosenCard;
     public RewardInfo selectedRewardInfo;
+    public List<MainPlotScheme> schemesToChooseFrom;
+    public SchemeStep currentStep;
+    public List<RewardInfo> rewardInfos;
 
-    Action illustrationClick_A;
-    Action illustrationClick_B;
-    Action placeHolderClick_A;
-    Action placeHolderClick_B;
-    Action confirmClick;
     RewardInfo rewardInfo_A;
     RewardInfo rewardInfo_B;
     ScreenButton selectedIllustration;
@@ -31,32 +29,10 @@ public class ChapterScreen : GameScreen
     {
         ScreenManager.Instance.currentScreen = this;
         screenMode = ChapterScreenMode.PLOT;
-        open = true;
-
         visuals = ScreenManager.Instance.chapterScreenVisuals;
-        visuals.SetMode(ChapterScreenMode.PLOT, 0);
+        this.schemesToChooseFrom = schemesToChooseFrom;
 
-        //Load data on visuals
-        visuals.instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeInstruction);
-
-        visuals.illustrationButton_A.buttonImage.sprite = schemesToChooseFrom[0].plotIllustration;
-        visuals.illustrationButton_B.buttonImage.sprite = schemesToChooseFrom[1].plotIllustration;
-
-        visuals.titleText_A.text = schemesToChooseFrom[0].plotName;
-        visuals.titleText_B.text = schemesToChooseFrom[1].plotName;
-
-        visuals.chapterText_A.text = schemesToChooseFrom[0].plotDescription;
-        visuals.chapterText_B.text = schemesToChooseFrom[1].plotDescription;
-
-        illustrationClick_A = () => ClickIllustration(visuals.illustrationButton_A, schemesToChooseFrom[0]);
-        illustrationClick_B = () => ClickIllustration(visuals.illustrationButton_B, schemesToChooseFrom[1]);
-
-        visuals.illustrationButton_A.onClick = illustrationClick_A;
-        visuals.illustrationButton_B.onClick = illustrationClick_B;
-
-        confirmClick = () => Confirm();
-        visuals.confirmButton.onClick = confirmClick;
-        visuals.confirmButton.interactable = false;
+        visuals.Initialize(this);
     }
 
     public ChapterScreen(SchemeStep currentStep)
@@ -64,50 +40,37 @@ public class ChapterScreen : GameScreen
         ScreenManager.Instance.currentScreen = this;
         screenMode = ChapterScreenMode.CARD;
         open = true;
-
+        this.currentStep = currentStep;
         visuals = ScreenManager.Instance.chapterScreenVisuals;
-        visuals.SetMode(ChapterScreenMode.CARD, currentStep.stepOptions.Count);
 
-        //Load data on visuals
-        visuals.instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeStepInstruction);
+        rewardInfos = GetRewardInfos();
 
-        visuals.titleText_A.text = currentStep.stepOptions[0].cardName;
-        visuals.chapterText_A.text = (currentStep.stepOptions[0] as PlotCard).plotChoiceDescription;
-        visuals.card_A.InitializeContainer(currentStep.stepOptions[0], true);
-        rewardInfo_A = new RewardInfo(StoryManager.Instance.actCount);
-        visuals.rewardIcon_A.sprite = GetRewardIcon(rewardInfo_A.type);
-        placeHolderClick_A = () => ClickCard(rewardInfo_A, visuals.placeholder_A, visuals.card_A);
-        visuals.placeholder_A.onClick = placeHolderClick_A;
-        
-        if(currentStep.stepOptions.Count > 1)
+        visuals.Initialize(this);
+    }
+
+    List<RewardInfo> GetRewardInfos()
+    {
+        List<RewardInfo> result = new List<RewardInfo>();
+
+        RewardInfo baseInfo = new RewardInfo(StoryManager.Instance.actCount);
+        result.Add(baseInfo);
+        for (int i = 1; i < currentStep.stepOptions.Count; i++)
         {
-            visuals.titleText_B.text = currentStep.stepOptions[1].cardName;
-            visuals.chapterText_B.text = (currentStep.stepOptions[1] as PlotCard).plotChoiceDescription;
-            visuals.card_B.InitializeContainer(currentStep.stepOptions[1], true);
-            rewardInfo_B = new RewardInfo(rewardInfo_A.rarity);
-            visuals.rewardIcon_B.sprite = GetRewardIcon(rewardInfo_B.type);
-            placeHolderClick_B = () => ClickCard(rewardInfo_B, visuals.placeholder_B, visuals.card_B);
-            visuals.placeholder_B.onClick = placeHolderClick_B;
+            result.Add(new RewardInfo(baseInfo.rarity));
         }
 
-        confirmClick = () => Confirm();
-        visuals.confirmButton.onClick = confirmClick;
-        visuals.confirmButton.interactable = false;
+        return result;
     }
 
     public override void Open(Action onComplete)
     {
-        visuals.OpenTween(onComplete);
+        open = true;
+        visuals.Open(onComplete);
     }
 
     public override void Close(Action onComplete)
     {
-        visuals.CloseTween(onComplete);
-    }
-
-    public override void InitializeContent(Action onComplete)
-    {
-        onComplete?.Invoke();
+        visuals.Close(onComplete);
     }
 
     public void ClickIllustration(ScreenButton button, MainPlotScheme scheme)
@@ -132,7 +95,7 @@ public class ChapterScreen : GameScreen
 
     }
 
-    public void ClickCard(RewardInfo rewardInfo, PlaceholderCard placeholder, CardContainer chosenCard)
+    public void ClickCard(RewardInfo rewardInfo, PlaceholderCard placeholder)
     {
         if(placeholder == selectedPlaceholder)
         {
@@ -147,7 +110,7 @@ public class ChapterScreen : GameScreen
         if (selectedRewardInfo != rewardInfo)
         {
             selectedRewardInfo = rewardInfo;
-            this.chosenCard = chosenCard;
+            this.chosenCard = placeholder.container;
         }
 
 
@@ -176,26 +139,6 @@ public class ChapterScreen : GameScreen
                 return null;
             default:
                 return null;
-        }
-    }
-
-    ~ChapterScreen()
-    {
-        visuals.confirmButton.onClick -= confirmClick;
-        switch (screenMode)
-        {
-            case ChapterScreenMode.CARD:
-                visuals.card_A.ResetContainer(true);
-                visuals.card_B.ResetContainer(true);
-                visuals.placeholder_A.onClick -= placeHolderClick_A;
-                visuals.placeholder_B.onClick -= placeHolderClick_B;
-                break;
-            case ChapterScreenMode.PLOT:
-                visuals.illustrationButton_A.onClick -= illustrationClick_A;
-                visuals.illustrationButton_A.onClick -= illustrationClick_A;
-                break;
-            default:
-                break;
         }
     }
 }

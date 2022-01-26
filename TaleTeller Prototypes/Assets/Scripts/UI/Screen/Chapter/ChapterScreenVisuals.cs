@@ -6,124 +6,162 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class ChapterScreenVisuals 
+public class ChapterScreenVisuals : GameScreenVisuals
 {
-    public Canvas canvas;
-    public CanvasScaler canvasScaler;
-    public Image panel;
-    public RectTransform bookTransform;
-    public RectTransform instructionTransform;
-    public RectTransform titleTransform_A;
-    public RectTransform titleTransform_B;
-    public RectTransform chapterTransform_A;
-    public RectTransform chapterTransform_B;
-    public RectTransform rewardTransform_A;
-    public RectTransform rewardTransform_B;
+    public List<ScreenButton> illustrationButtons;
+    public List<PlaceholderCard> cardsPlacholders;
+
     [Space]
-    public ScreenButton confirmButton;
-    public ScreenButton illustrationButton_A;
-    public ScreenButton illustrationButton_B;
-    public CardContainer card_A;
-    public CardContainer card_B;
-    public PlaceholderCard placeholder_A;
-    public PlaceholderCard placeholder_B;
-    [Space]
-    public Image illustrationImage_A;
-    public Image illustrationImage_B;
-    public Image rewardIcon_A;
-    public Image rewardIcon_B;
+    public List<Image> illustrations;
+    public List<Image> rewardIcons;
+    public List<GameObject> titles;
+    public List<GameObject> chapters;
+    public List<GameObject> rewards;
+
     [Space]
     public TextMeshProUGUI instructionText;
-    public TextMeshProUGUI titleText_A;
-    public TextMeshProUGUI titleText_B;
-    public TextMeshProUGUI chapterText_A;
-    public TextMeshProUGUI chapterText_B;
-    public TextMeshProUGUI rewardButtonsText_A;
-    public TextMeshProUGUI rewardButtonsText_B;
+    public List<TextMeshProUGUI> titleTexts;
+    public List<TextMeshProUGUI> chapterTexts;
+    public List<TextMeshProUGUI> rewardTexts;
     public TextMeshProUGUI confirmButtonText;
 
-    public void SetMode(ChapterScreenMode mode, int choice)
+    void SetMode(ChapterScreenMode mode, ChapterScreen screen)
     {
-        titleTransform_A.gameObject.SetActive(true);
-        titleTransform_B.gameObject.SetActive(true);
-        chapterTransform_A.gameObject.SetActive(true);
-        chapterTransform_B.gameObject.SetActive(true);
-        rewardTransform_A.gameObject.SetActive(true);
-        rewardTransform_B.gameObject.SetActive(true);
-
         switch (mode)
         {
             case ChapterScreenMode.CARD:
-                placeholder_A.selected = false;
-                placeholder_B.selected = false;
-                illustrationButton_A.gameObject.SetActive(false);
-                illustrationButton_B.gameObject.SetActive(false);
-                card_A.gameObject.SetActive(true);
-                card_B.gameObject.SetActive(true);
-                rewardTransform_A.gameObject.SetActive(true);
-                rewardTransform_B.gameObject.SetActive(true);
-                if (choice == 1)
+                for (int i = 0; i < screen.currentStep.stepOptions.Count; i++)
                 {
-                    titleTransform_B.gameObject.SetActive(false);
-                    chapterTransform_B.gameObject.SetActive(false);
-                    rewardTransform_B.gameObject.SetActive(false);
-                    card_B.gameObject.SetActive(false);
+                    titles[i].SetActive(true);
+                    chapters[i].SetActive(true);
+                    rewards[i].SetActive(true);
+                    cardsPlacholders[i].gameObject.SetActive(true);
                 }
                 break;
             case ChapterScreenMode.PLOT:
-                illustrationButton_A.selected = false;
-                illustrationButton_B.selected = false;
-                illustrationButton_A.gameObject.SetActive(true);
-                illustrationButton_B.gameObject.SetActive(true);
-                card_A.gameObject.SetActive(false);
-                card_B.gameObject.SetActive(false);
-                rewardTransform_A.gameObject.SetActive(false);
-                rewardTransform_B.gameObject.SetActive(false);
+                for (int i = 0; i < screen.schemesToChooseFrom.Count; i++)
+                {
+                    titles[i].SetActive(true);
+                    chapters[i].SetActive(true);
+                    illustrationButtons[i].gameObject.SetActive(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    void LoadData(ChapterScreenMode mode, ChapterScreen screen)
+    {
+        switch (mode)
+        {
+            case ChapterScreenMode.PLOT:
+                instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeInstruction);
+
+                for (int i = 0; i < screen.schemesToChooseFrom.Count; i++)
+                {
+                    int j = i;
+                    illustrationButtons[i].buttonImage.sprite = screen.schemesToChooseFrom[i].plotIllustration;
+                    titleTexts[i].text = screen.schemesToChooseFrom[i].plotName;
+                    chapterTexts[i].text = screen.schemesToChooseFrom[i].plotDescription;
+
+                    illustrationButtons[j].onClick = () => screen.ClickIllustration(illustrationButtons[j], screen.schemesToChooseFrom[j]);
+                }
+                break;
+
+            case ChapterScreenMode.CARD:
+                instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseSchemeStepInstruction);
+
+                for (int i = 0; i < screen.currentStep.stepOptions.Count; i++)
+                {
+                    int j = i;
+                    titleTexts[j].text = screen.currentStep.stepOptions[j].cardName;
+                    chapterTexts[i].text = (screen.currentStep.stepOptions[j] as PlotCard).plotChoiceDescription;
+                    rewardIcons[i].sprite = screen.GetRewardIcon(screen.rewardInfos[i].type);
+                    cardsPlacholders[j].onClick = () => screen.ClickCard(screen.rewardInfos[j], cardsPlacholders[j]);
+                    cardsPlacholders[j].container.InitializeContainer(screen.currentStep.stepOptions[j], true);
+                }
                 break;
             default:
                 break;
         }
     }
 
-    public void OpenTween(Action onComplete)
+    public override void Initialize(GameScreen gameScreen)
     {
-        bookTransform.localPosition = new Vector3(0, -canvasScaler.referenceResolution.y, 0);
-        canvas.gameObject.SetActive(true);
-        Color panelColor = panel.color;
-        panel.color = Color.clear;
+        Reset();
 
-        LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero + Vector3.up *10, 0.5f).setEaseInQuint().setOnComplete(() =>
+        ChapterScreen screen = gameScreen as ChapterScreen;
+        SetMode(screen.screenMode, screen);
+        LoadData(screen.screenMode, screen);
+
+        confirmButtonText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CONFIRM");
+        confirmButton.onClick = screen.Confirm;
+        confirmButton.interactable = false;
+    }
+
+    public override void Open(Action onComplete)
+    {
+        contentTransform.localPosition = new Vector3(0, -canvasScaler.referenceResolution.y, 0);
+        canvas.gameObject.SetActive(true);
+        Color panelColor = backgroundPanel.color;
+        backgroundPanel.color = Color.clear;
+
+        LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero + Vector3.up * 10, 0.5f).setEaseInQuint().setOnComplete(() =>
         {
-            LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
+            LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
 
         });
 
-        LeanTween.color(panel.gameObject, panelColor, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
+        LeanTween.color(backgroundPanel.gameObject, panelColor, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
         {
-            panel.color = col;
+            backgroundPanel.color = col;
         }).setOnComplete(onComplete);
     }
 
-    public void CloseTween(Action onComplete)
+    public override void Close(Action onComplete)
     {
-        LeanTween.moveLocal(bookTransform.gameObject, Vector3.zero + Vector3.down * 10, 0.3f).setEaseInQuint().setOnComplete(() =>
+        LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero + Vector3.down * 10, 0.3f).setEaseInQuint().setOnComplete(() =>
         {
-            LeanTween.moveLocal(bookTransform.gameObject, new Vector3(0, canvasScaler.referenceResolution.y, 0), 0.5f).setEaseInQuint();
+            LeanTween.moveLocal(contentTransform.gameObject, new Vector3(0, canvasScaler.referenceResolution.y, 0), 0.5f).setEaseInQuint();
         });
 
 
-        Color panelColor = panel.color;
-        LeanTween.value(panel.gameObject, panelColor, Color.clear, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
+        Color panelColor = backgroundPanel.color;
+        LeanTween.value(backgroundPanel.gameObject, panelColor, Color.clear, 0.5f).setDelay(0.5f).setEaseOutQuint().setOnUpdate((Color col) =>
         {
-            panel.color = col;
+            backgroundPanel.color = col;
         }).setOnComplete(() =>
         {
             canvas.gameObject.SetActive(false);
-            panel.color = panelColor;
-            bookTransform.localPosition = Vector3.zero; 
+            backgroundPanel.color = panelColor;
+            contentTransform.localPosition = Vector3.zero;
             onComplete?.Invoke();
 
         });
     }
 
+    public override void Reset()
+    {
+        for (int i = 0; i < illustrationButtons.Count; i++)
+        {
+            illustrationButtons[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < cardsPlacholders.Count; i++)
+        {
+            cardsPlacholders[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < titles.Count; i++)
+        {
+            titles[i].SetActive(false);
+        }
+        for (int i = 0; i < chapters.Count; i++)
+        {
+            chapters[i].SetActive(false);
+        }
+        for (int i = 0; i < rewards.Count; i++)
+        {
+            rewards[i].SetActive(false);
+        }
+    }
 }

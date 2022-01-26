@@ -6,24 +6,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class CardPickerScreenVisual
+public class CardPickerScreenVisual : GameScreenVisuals
 {
-    public Canvas canvas;
-    public CanvasScaler canvasScaler;
-    public RectTransform bristolTransform;
-    public Image panel;
     public RectTransform scrollviewContentTransform;
     public Scrollbar scrollBar;
     public GameObject cardRowPrefab;
     public List<PlaceholderCard> cardPlaceholders;
     public List<GameObject> cardRows;
-    public ScreenButton confirmButton;
 
     public TextMeshProUGUI instructionText;
     public TextMeshProUGUI countText;
     public TextMeshProUGUI confirmButtonText;
-
-
 
     public void LoadData(List<CardData> datas)
     { 
@@ -78,44 +71,84 @@ public class CardPickerScreenVisual
         countText.text = $"{current} / {max}";
     }
 
-    public void OpenTween(Action onComplete)
+    public override void Initialize(GameScreen gameScreen)
     {
-        Color panelColor = panel.color;
-        panel.color = Color.clear;
+        CardPickerScreen screen = gameScreen as CardPickerScreen;
+        LoadData(screen.targetCards);
 
-        bristolTransform.localPosition = new Vector3(-canvasScaler.referenceResolution.x, 0, 0);
-        canvas.gameObject.SetActive(true);
-        LeanTween.moveLocal(bristolTransform.gameObject, Vector3.zero + Vector3.right * 10, 1f).setEaseInQuint().setOnComplete(() =>
+        for (int i = 0; i < cardPlaceholders.Count; i++)
         {
-            LeanTween.moveLocal(bristolTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
+            int j = i;
+            cardPlaceholders[j].onClick = () => screen.SelectCard(cardPlaceholders[j]);
+            cardPlaceholders[j].selected = false;
+        }
+
+        switch (screen.screenMode)
+        {
+            case PickScreenMode.ADD:
+                instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$ADD");
+                break;
+            case PickScreenMode.WITHDRAW:
+                instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$WITHDRAW");
+                break;
+            case PickScreenMode.CHOICE:
+                instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CHOICE");
+                break;
+            case PickScreenMode.REPLACE:
+                instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$REPLACE");
+                break;
+            default:
+                break;
+        }
+        string text = instructionText.text.Replace("$value$", $"{screen.numberToPick}");
+        instructionText.text = text;
+
+        confirmButton.onClick = screen.Confirm;
+        confirmButton.interactable = screen.CheckValid();
+    }
+
+    public override void Open(Action onComplete)
+    {
+        Color panelColor = backgroundPanel.color;
+        backgroundPanel.color = Color.clear;
+
+        contentTransform.localPosition = new Vector3(-canvasScaler.referenceResolution.x, 0, 0);
+        canvas.gameObject.SetActive(true);
+        LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero + Vector3.right * 10, 1f).setEaseInQuint().setOnComplete(() =>
+        {
+            LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
         });
 
-        LeanTween.color(panel.gameObject, panelColor, 0.5f).setDelay(1f).setEaseOutQuint().setOnUpdate((Color col) => 
+        LeanTween.color(backgroundPanel.gameObject, panelColor, 0.5f).setDelay(1f).setEaseOutQuint().setOnUpdate((Color col) =>
         {
-            panel.color = col;
+            backgroundPanel.color = col;
         }).setOnComplete(onComplete);
     }
 
-    public void CloseTween(Action onComplete)
+    public override void Close(Action onComplete)
     {
-
-        LeanTween.moveLocal(bristolTransform.gameObject, Vector3.zero - Vector3.right * 10, 0.3f).setEaseInQuint().setOnComplete(() =>
+        LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero - Vector3.right * 10, 0.3f).setEaseInQuint().setOnComplete(() =>
         {
-            LeanTween.moveLocal(bristolTransform.gameObject, new Vector3(canvasScaler.referenceResolution.x, 0,0), 1f).setEaseInQuint();
+            LeanTween.moveLocal(contentTransform.gameObject, new Vector3(canvasScaler.referenceResolution.x, 0, 0), 1f).setEaseInQuint();
         });
 
-        Color panelColor = panel.color;
-        LeanTween.value(panel.gameObject, panelColor, Color.clear, 0.5f).setDelay(1f).setEaseInQuint().setOnUpdate((Color col)=> 
+        Color panelColor = backgroundPanel.color;
+        LeanTween.value(backgroundPanel.gameObject, panelColor, Color.clear, 0.5f).setDelay(1f).setEaseInQuint().setOnUpdate((Color col) =>
         {
-            panel.color = col;
-        }).setOnComplete(()=> 
+            backgroundPanel.color = col;
+        }).setOnComplete(() =>
         {
             canvas.gameObject.SetActive(false);
-            panel.color = panelColor;
+            backgroundPanel.color = panelColor;
             onComplete?.Invoke();
-        
+
         });
 
-        panel.color = panelColor;
+        backgroundPanel.color = panelColor;
+    }
+
+    public override void Reset()
+    {
+        ResetPlaceholders();
     }
 }

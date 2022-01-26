@@ -16,8 +16,11 @@ public class CardPickerScreen : GameScreen
 
     CardPickerScreenVisual visuals;
     public List<PlaceholderCard> pickedCards;
-    int numberToPick;
+    public List<CardData> targetCards;
+    public PickScreenMode screenMode;
+    public int numberToPick;
     bool skippable;
+
     public CardPickerScreen(PickScreenMode mode, int numberToPick, List<CardData> targetCards, bool skippable)
     {
         ScreenManager.Instance.currentScreen = this;
@@ -28,54 +31,21 @@ public class CardPickerScreen : GameScreen
         pickedCards = new List<PlaceholderCard>();
         this.numberToPick = numberToPick;
         this.skippable = skippable;
+        this.targetCards = targetCards;
+        screenMode = mode;
 
-        visuals.LoadData(targetCards);
-        for (int i = 0; i < visuals.cardPlaceholders.Count; i++)
-        {
-            int j = i;
-            visuals.cardPlaceholders[j].onClick = () => SelectCard(visuals.cardPlaceholders[j]);
-            visuals.cardPlaceholders[j].selected = false;
-        }
-
-        visuals.confirmButton.onClick = Confirm;
-        visuals.confirmButton.interactable = CheckValid();
-
-        switch (mode)
-        {
-            case PickScreenMode.ADD:
-                visuals.instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$ADD");
-                break;
-            case PickScreenMode.WITHDRAW:
-                visuals.instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$WITHDRAW");
-                break;
-            case PickScreenMode.CHOICE:
-                visuals.instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$CHOICE");
-                break;
-            case PickScreenMode.REPLACE:
-                visuals.instructionText.text = LocalizationManager.Instance.GetString(LocalizationManager.Instance.screenDictionary, "$REPLACE");
-                break;
-            default:
-                break;
-        }
-        string text =
-        visuals.instructionText.text = visuals.instructionText.text.Replace("$value$", $"{numberToPick}");
-    }
-
-    public override void Close(Action onComplete)
-    {
-        visuals.CloseTween(onComplete);
-    }
-
-    public override void InitializeContent(Action onComplete)
-    {
-        throw new NotImplementedException();
+        visuals.Initialize(this);
     }
 
     public override void Open(Action onComplete)
     {
         open = true;
-        visuals.OpenTween((onComplete));
+        visuals.Open((onComplete));
         LeanTween.value(1, 1, 0.1f).setOnUpdate((float value) => visuals.scrollBar.value = value);
+    }
+    public override void Close(Action onComplete)
+    {
+        visuals.Close(onComplete);
     }
 
     public bool CheckValid()
@@ -111,10 +81,5 @@ public class CardPickerScreen : GameScreen
         }
 
         visuals.confirmButton.interactable = CheckValid();
-    }
-
-    ~CardPickerScreen()
-    {
-        //visuals.ResetPlaceholders();
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class RewardScreen : GameScreen
 {
+    public MainPlotScheme currentScheme;
     public Reward chosenHeroReward;
     public Reward chosenCardReward;
     public List<Reward> heroRewards;
@@ -15,35 +16,29 @@ public class RewardScreen : GameScreen
 
     public RewardScreenVisuals visuals;
 
+    public Action<Reward, ScreenButton> selectCard;
+    public Action<Reward, ScreenButton> selectHero;
+    public List<CardData> addRewardData;
+
     public RewardScreen(RewardInfo currentRewardInfo, MainPlotScheme currentScheme, List<CardData> addRewardData = null)
     {
         ScreenManager.Instance.currentScreen = this;
         visuals = ScreenManager.Instance.rewardScreenVisuals; ;
-        visuals.InitText(currentScheme);
 
-        visuals.illustration = null;//TODO
+        this.currentScheme = currentScheme;
+        selectCard = SelectCardReward;
+        selectHero = SelectHeroReward;
 
+        #region Reward
         if (addRewardData == null) addCardReward = new AddCardReward(2);
         else addCardReward = new AddCardReward(addRewardData, 2);
 
         removeCardReward = new RemoveCardReward(3);//TODO EXPOSE MAGIC NUMBERS
 
         heroRewards = GenerateRewards(currentRewardInfo.type);
+        #endregion
 
-        for (int i = 0; i < visuals.heroRewardsButton.Count; i++)
-        {
-            visuals.heroRewardsButton[i].gameObject.SetActive(false);
-        }
-
-        visuals.InitButton(SelectCardReward, SelectHeroReward, addCardReward, removeCardReward, heroRewards);
-
-        if (CardManager.Instance.cardDeck.cachedDeck.Count <= 10 || addRewardData != null) visuals.removeButton.interactable = false;
-        else visuals.removeButton.interactable = true;
-
-        visuals.confirmButton.onClick = Confirm;
-        visuals.confirmButton.interactable = false;
-
-        LayoutRebuilder.ForceRebuildLayoutImmediate(visuals.layoutRoot);
+        visuals.Initialize(this);
     }
 
     public List<Reward> GenerateRewards(RewardType type)
@@ -79,17 +74,12 @@ public class RewardScreen : GameScreen
     public override void Open(Action onComplete)
     {
         open = true;
-        visuals.OpenTween(onComplete);
+        visuals.Open(onComplete);
         LayoutRebuilder.ForceRebuildLayoutImmediate(visuals.layoutRoot);
     }
     public override void Close(Action onComplete)
     {
-        visuals.CloseTween(onComplete);
-    }
-
-    public override void InitializeContent(Action onComplete)
-    {
-        onComplete?.Invoke();
+        visuals.Close(onComplete);
     }
 
     public void Confirm()
@@ -150,12 +140,5 @@ public class RewardScreen : GameScreen
     public bool CheckValid()
     {
         return chosenHeroReward != null && chosenCardReward!= null;
-    }
-
-  
-
-    ~RewardScreen()
-    {
-        visuals.confirmButton.onClick -= Confirm;
     }
 }
