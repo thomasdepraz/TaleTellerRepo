@@ -9,6 +9,7 @@ public class GoButton : MonoBehaviour
     , IPointerExitHandler
     , IPointerDownHandler
     , IPointerUpHandler
+    ,IPointerClickHandler
 {
     [Header("Sprites")]
     public Image image;
@@ -16,7 +17,6 @@ public class GoButton : MonoBehaviour
     public Sprite hoveredSprite;
     public Color onPressColor;
 
-    bool canClick;
     public RectTransform rectTransform;
     public Board board;
     Vector3 originPos;
@@ -37,7 +37,6 @@ public class GoButton : MonoBehaviour
         if(Input.GetMouseButton(0))
         {
             image.color = onPressColor;
-            canClick = true;
         }
     }
     public void HoveringTween()
@@ -50,7 +49,6 @@ public class GoButton : MonoBehaviour
     {
         image.sprite = defaultSprite;
         image.color = Color.white;
-        canClick = false;
 
         if(LeanTween.isTweening(gameObject))
         {
@@ -63,20 +61,32 @@ public class GoButton : MonoBehaviour
     public void OnPointerDown(PointerEventData eventData)
     {
         image.color = onPressColor;
-        if(!board.IsEmpty() && CardManager.Instance.board.currentBoardState == BoardState.Idle)
-            canClick = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //Launch draft board methods
-        if(canClick)
+        image.color = Color.white;
+    }
+
+    public bool CheckValid()
+    {
+
+        if (CardManager.Instance.board.currentBoardState != BoardState.Idle)
         {
-            //board.CreateStory();
-            board.InitBoard();
+            HeroMessage errorMessage = new HeroMessage("Can't do that now");
+            return false;
+        }
+        else if (board.IsEmpty())
+        {
+            HeroMessage errorMessage = new HeroMessage("The board is empty !");
+            return false;
         }
 
-        image.color = Color.white;
-        canClick = false;
+        return true;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (CheckValid()) board.InitBoard();
     }
 }

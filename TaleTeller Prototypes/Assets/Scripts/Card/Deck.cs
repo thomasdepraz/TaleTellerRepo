@@ -17,6 +17,7 @@ public class Deck : MonoBehaviour
 
     [Header("Debug")]
     public bool enableDebugDeck;
+    public bool enableNoShuffle;
     [ShowIf("enableDebugDeck")]
     [Range(1,3)] public int actToTest = 1;
 
@@ -150,7 +151,7 @@ public class Deck : MonoBehaviour
             cardDeck[i] = cardDeck[i].InitializeData(cardDeck[i]);
         }
 
-        ShuffleCards(cardDeck);
+        if(!enableNoShuffle)ShuffleCards(cardDeck);
     }
 
     public List<CardData> ShuffleCards(List<CardData> deckToShuffle) //FisherYates Shuffle
@@ -245,7 +246,7 @@ public class Deck : MonoBehaviour
         }
 
         //All the discarded cards ar back in the deck now u can shuffle
-        ShuffleCards(cardDeck);
+        if(!enableNoShuffle)ShuffleCards(cardDeck);
         queue.UpdateQueue();
     }
 

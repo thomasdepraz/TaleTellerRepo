@@ -11,6 +11,7 @@ public class TutorialScreen : GameScreen
 
     public TutorialScreen(string tutorialText,string instructionText)
     {
+        ScreenManager.Instance.currentScreen = this;
         this.tutorialText = tutorialText;
         this.instructionText = instructionText;
         visuals = ScreenManager.Instance.tutorialScreenVisuals;

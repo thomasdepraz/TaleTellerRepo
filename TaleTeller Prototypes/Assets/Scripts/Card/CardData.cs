@@ -30,7 +30,6 @@ public enum Archetype
     NumberOfArchetypes//Always last Archetype
 }
 
-[CreateAssetMenu(fileName = "Card", menuName = "Data/Card", order = 0)]
 public class CardData : ScriptableObject
 {
     public CardData dataReference;

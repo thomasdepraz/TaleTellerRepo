@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8006644576939029909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f005a91b8b94c943892919a5a389161, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: TutorialCompanion
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Tutorial Companion
+  rarity: 1
+  archetype: 1
+  manaCost: 0
+  cardGraph: {fileID: 21300000, guid: b672c362344d9ac49b31ae3a2df2c9f4, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: 7144387166692841098}
+  effects: []
+  cardTypeReference: {fileID: -8006644576939029909}
+  cardType: {fileID: 0}
+--- !u!114 &7144387166692841098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88bda77f78923444b1780c855962e5f, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 1
+  target: 0
+  range: 
+  values: []
+  tutorialText: Je suis un carton de tutoriel

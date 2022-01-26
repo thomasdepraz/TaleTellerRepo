@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CardManager : Singleton<CardManager>
@@ -34,6 +35,11 @@ public class CardManager : Singleton<CardManager>
 
     public Pointer pointerRef;
     public GameObject pointer;
+
+    [Header("Player Exclamation")]
+    public RectTransform exclamationPanelTransform;
+    public TextMeshProUGUI exclamationText;
+    public HeroMessage currentMessage;
 
     //Init Card
     public void CardInitialize(CardData data)
