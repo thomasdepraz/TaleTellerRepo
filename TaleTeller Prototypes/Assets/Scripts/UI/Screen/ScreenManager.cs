@@ -13,4 +13,5 @@ public class ScreenManager : Singleton<ScreenManager>
     public CardPickerScreenVisual pickerScreenVisual;
 
     public GameScreen currentScreen;
+    public TutorialScreenVisuals tutorialScreenVisuals;
 }
