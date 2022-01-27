@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroMessage
 {
@@ -23,6 +24,7 @@ public class HeroMessage
         LeanTween.cancel(manager.exclamationPanelTransform.gameObject);
         manager.exclamationPanelTransform.gameObject.SetActive(true);
         LeanTween.value(manager.exclamationPanelTransform.gameObject, 0,0,2f).setOnComplete(CloseMessageBox);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(manager.exclamationPanelTransform);
     }
 
     void CloseMessageBox()
