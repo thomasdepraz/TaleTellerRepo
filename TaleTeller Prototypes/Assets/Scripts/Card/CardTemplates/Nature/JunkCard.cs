@@ -95,35 +95,7 @@ public class JunkCard : CardData
     {
         EventQueue destroyQueue = new EventQueue();
 
-        //Discard the card based on where it is 
-        if (currentContainer != null) //means it's in the hand or board
-        {
-            currentContainer.ResetContainer();
-            UnsubscribeEvents(this);
-            StoryManager.Instance.cardsToDestroy.Add(this);
-        }
-        else 
-        {
-            //It's maybe in the deck or discard pile
-            if(CardManager.Instance.cardDeck.cardDeck.Contains(this))
-            {
-                //remove and destroy
-                CardManager.Instance.cardDeck.cardDeck.Remove(this);
-                UnsubscribeEvents(this);
-                StoryManager.Instance.cardsToDestroy.Add(this);
-            }
-            else if(CardManager.Instance.cardDeck.discardPile.Contains(this))
-            {
-                //remove and destroy
-                CardManager.Instance.cardDeck.discardPile.Remove(this);
-                UnsubscribeEvents(this);
-                StoryManager.Instance.cardsToDestroy.Add(this);
-            }
-            else
-            {
-                Debug.LogError("The junk card that needs to be discarded cant be found");
-            }
-        }
+        CardManager.Instance.CardToOblivion(destroyQueue, this);
 
         destroyQueue.StartQueue();//<-- actual destroy happens here
 

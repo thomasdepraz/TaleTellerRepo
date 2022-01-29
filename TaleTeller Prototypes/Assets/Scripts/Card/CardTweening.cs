@@ -105,7 +105,7 @@ public class CardTweening : MonoBehaviour
         else
         {
             if(container.rectTransform.localScale != Vector3.one)
-                LeanTween.scale(container.gameObject, Vector3.one, 0.5f).setEaseInOutQuint();
+                LeanTween.scale(container.gameObject, Vector3.one * scaleMultiplier, 0.8f).setEaseInOutQuint();
             LeanTween.move(container.gameObject, target, 0.8f).setEaseInOutQuint().setOnComplete(value => { if (queue != null) queue.resolved = true; });
         }
     }

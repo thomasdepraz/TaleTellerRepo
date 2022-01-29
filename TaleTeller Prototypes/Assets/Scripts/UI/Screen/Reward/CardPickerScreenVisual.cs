@@ -13,6 +13,7 @@ public class CardPickerScreenVisual : GameScreenVisuals
     public GameObject cardRowPrefab;
     public List<PlaceholderCard> cardPlaceholders;
     public List<GameObject> cardRows;
+    public List<HorizontalLayoutGroup> cardRowLayouts;
 
     public TextMeshProUGUI instructionText;
     public TextMeshProUGUI countText;
@@ -41,9 +42,28 @@ public class CardPickerScreenVisual : GameScreenVisuals
         for (int i = 0; i < cardRows.Count; i++)
         {
             if (!cardRows[i].transform.GetChild(0).gameObject.activeSelf)
+            {
                 cardRows[i].gameObject.SetActive(false);
+            }
             else
+            {
                 cardRows[i].gameObject.SetActive(true);
+            }
+        }
+    }
+
+    void DisableLayouts()
+    {
+        for (int i = 0; i < cardRows.Count; i++)
+        {
+            if (!cardRows[i].transform.GetChild(0).gameObject.activeSelf)
+            {
+                cardRowLayouts[i].enabled = true;
+            }
+            else
+            {
+                cardRowLayouts[i].enabled = false;
+            }
         }
     }
 
@@ -60,6 +80,7 @@ public class CardPickerScreenVisual : GameScreenVisuals
         GameObject newRow = GameObject.Instantiate(cardRowPrefab, scrollviewContentTransform);
         newRow.transform.SetAsLastSibling();
         cardRows.Add(newRow);
+        cardRowLayouts.Add(newRow.GetComponent<HorizontalLayoutGroup>());
         for (int i = 0; i < newRow.transform.childCount; i++)
         {
            cardPlaceholders.Add(newRow.transform.GetChild(i).GetComponent<PlaceholderCard>());
@@ -116,6 +137,7 @@ public class CardPickerScreenVisual : GameScreenVisuals
         canvas.gameObject.SetActive(true);
         LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero + Vector3.right * 10, 1f).setEaseInQuint().setOnComplete(() =>
         {
+            DisableLayouts();
             LeanTween.moveLocal(contentTransform.gameObject, Vector3.zero, 0.3f).setEaseOutQuint();
         });
 

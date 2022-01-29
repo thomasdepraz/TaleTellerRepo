@@ -412,7 +412,7 @@ Canvas:
   m_GameObject: {fileID: 906381296784982513}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -421,7 +421,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1201088193
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &403269337641089509
@@ -1049,6 +1049,13 @@ MonoBehaviour:
     - {fileID: 5725383736200323626}
     - {fileID: 2286045305862675683}
     - {fileID: 7083730366427332686}
+    cardRowLayouts:
+    - {fileID: 4643820539193829598}
+    - {fileID: 2551413167537976719}
+    - {fileID: 6595894485855699023}
+    - {fileID: 670918002443170543}
+    - {fileID: 6040004292252482234}
+    - {fileID: 3371500662789280410}
     instructionText: {fileID: 8407092664212093299}
     countText: {fileID: 7965192296052857131}
     confirmButtonText: {fileID: 894652647428912209}
@@ -4657,7 +4664,7 @@ Canvas:
   m_GameObject: {fileID: 2011652686924597478}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -4666,7 +4673,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1201088193
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2011652686924597473
@@ -4757,7 +4764,7 @@ Canvas:
   m_GameObject: {fileID: 2011652686962844737}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -4766,7 +4773,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1201088193
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2011652686962844739
@@ -8078,7 +8085,7 @@ Canvas:
   m_GameObject: {fileID: 7227773533107908503}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -8087,7 +8094,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1201088193
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1251776447414153244

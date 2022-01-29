@@ -25,6 +25,8 @@ public class PlaceholderCard : MonoBehaviour
         gameObject.transform.localScale = Vector3.one;
         LeanTween.rotate(gameObject, Vector3.zero, 0.1f).setEaseOutQuint();
         LeanTween.scale(gameObject, Vector3.one * 1.5f, 0.2f).setEaseOutQuint();
+
+        gameObject.transform.SetAsLastSibling();
     }
 
     public void OnPointerExit()

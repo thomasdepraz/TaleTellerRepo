@@ -203,13 +203,11 @@ public class PlotCard : CardData
     }
     IEnumerator OnEndPlotCompleteRoutine(EventQueue currentQueue)
     {
-        //Destroy
-        currentContainer.ResetContainer();
-        StoryManager.Instance.cardsToDestroy.Add(this);
 
         //destroy all linked junk cards
         EventQueue destroyQueue = new EventQueue();
 
+        CardManager.Instance.CardToOblivion(destroyQueue, this);
         objective.DestroyJunk(destroyQueue);
 
         destroyQueue.StartQueue();

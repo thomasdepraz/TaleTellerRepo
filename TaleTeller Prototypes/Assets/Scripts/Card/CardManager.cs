@@ -20,6 +20,7 @@ public class CardManager : Singleton<CardManager>
     public RectTransform deckTransform;
     public RectTransform plotAppearTransform;
     public RectTransform deckAppearTransform;
+    public RectTransform oblivionTransfrom;
 
     public ManaSystem manaSystem;
 
@@ -148,6 +149,59 @@ public class CardManager : Singleton<CardManager>
         }
 
         card.currentContainer.ResetContainer();
+        queue.UpdateQueue();
+    }
+    #endregion
+
+    #region SendToOblivion
+    public void CardToOblivion(EventQueue queue, CardData card)
+    {
+        queue.events.Add(CardToOblivionRoutine(queue, card));
+    }
+    IEnumerator CardToOblivionRoutine(EventQueue queue, CardData card)
+    {
+        //Move feedback
+        card.UnsubscribeEvents(card);
+        StoryManager.Instance.cardsToDestroy.Add(card);
+
+        if(card.currentContainer != null)
+        {
+            if(card.GetType()== typeof(PlotCard))
+            {
+                card.currentContainer.rectTransform.localScale = Vector3.one * 1.01f;
+                EventQueue centerFeedback = new EventQueue();
+                cardTweening.MoveCard(card.currentContainer, plotAppearTransform.position, false, false, centerFeedback, 2f);
+                while (!centerFeedback.resolved) { yield return new WaitForEndOfFrame(); }
+            }
+
+            EventQueue feedback = new EventQueue();
+            cardTweening.MoveCard(card.currentContainer, oblivionTransfrom.position, false, false, feedback);
+            while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+
+            card.currentContainer.ResetContainer();
+        }
+
+        if(cardDeck.cardDeck.Contains(card))
+        {
+            CardInitialize(card);
+            card.currentContainer.rectTransform.position = deckTransform.position;
+
+            EventQueue feedback = new EventQueue();
+            cardTweening.MoveCard(card.currentContainer, oblivionTransfrom.position, true, true, feedback);
+            while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+            cardDeck.cardDeck.Remove(card);
+        }
+        else if (cardDeck.discardPile.Contains(card))
+        {
+            CardInitialize(card);
+            card.currentContainer.rectTransform.position = discardPileTransform.position;
+
+            EventQueue feedback = new EventQueue();
+            cardTweening.MoveCard(card.currentContainer, oblivionTransfrom.position, true, true, feedback);
+            while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
+            cardDeck.discardPile.Remove(card);
+        }
+
         queue.UpdateQueue();
     }
     #endregion
@@ -391,8 +445,6 @@ public class CardManager : Singleton<CardManager>
     }
     IEnumerator DiscardFromDeckRoutine(int countToDiscard, EventQueue queue)
     {
-        //Instance.cardDeck.InitCachedDeck();
-
         CardPickerScreen screen = new CardPickerScreen(PickScreenMode.WITHDRAW, countToDiscard, GetCurrentCards(), true);
         bool wait = true;
         screen.Open(()=> wait = false);
@@ -406,10 +458,10 @@ public class CardManager : Singleton<CardManager>
         for (int i = 0; i < screen.pickedCards.Count; i++)
         {
             if(cardDeck.cardDeck.Contains(screen.pickedCards[i].container.data))
-                cardDeck.cachedDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+                cardDeck.cardDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
 
             else if (cardDeck.discardPile.Contains(screen.pickedCards[i].container.data))
-                cardDeck.cachedDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+                cardDeck.discardPile.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
 
             else if (cardHand.IsInHand(screen.pickedCards[i].container.data.currentContainer))
                 screen.pickedCards[i].container.data.currentContainer.ResetContainer();
