@@ -49,25 +49,8 @@ public class CardContainer : MonoBehaviour
             shadowTransform.rotation = new Quaternion(0,0,0,1);
             rectTransform.position = targetTransform.position;
             rectTransform.rotation = Quaternion.Lerp(rectTransform.rotation, new Quaternion(CardManager.Instance.pointerRef.pointerDirection.y*0.3f, -CardManager.Instance.pointerRef.pointerDirection.x*0.3f, 0, 1), Time.deltaTime);
+            shadowTransform.localScale = new Vector3(1f - Mathf.Abs(rectTransform.rotation.y*0.5f), 1f -  Mathf.Abs(rectTransform.rotation.x*0.5f), 1);
         }
-
-        //if(Input.GetKeyDown(KeyCode.S))
-        //{
-        //    visuals.ShakeCard(this, new EventQueue());
-        //}
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    CardManager.Instance.cardTweening.CardAttack(this, 0, new EventQueue());
-        //}
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    visuals.EffectChangeFeedback(this, 1, new EventQueue());
-        //}
-        //if (Input.GetKeyDown(KeyCode.H))
-        //{
-        //   visuals.PopupTextFeedback("$BUFF", 1);
-        //}
-
     }
 
     #region Init/Reset
@@ -380,7 +363,7 @@ public class CardContainer : MonoBehaviour
 
     public void OnPointerEnter()
     {
-        print(GetInfos());
+        //print(GetInfos());
         if(CardManager.Instance.board.currentBoardState == BoardState.Idle && !LeanTween.isTweening(gameObject))
         {
             if (CardManager.Instance.holdingCard && CardManager.Instance.currentCard != this)
@@ -396,6 +379,7 @@ public class CardContainer : MonoBehaviour
 
                 //Reset card rotation
                 rectTransform.rotation = new Quaternion(0, 0, 0, 0);
+                shadowTransform.localScale = Vector3.zero;
 
                 //Scale up and bring to front;
                 LeanTween.cancel(gameObject);
