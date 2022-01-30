@@ -90,6 +90,22 @@ public class TempStatsReward : Reward
 
     public override string GetString()
     {
-        return $"+ {buffValue} {statType}";
+        string sprite =string.Empty;
+        switch (statType)
+        {
+            case TempHeroStats.TEMP_ATTACK:
+                sprite = "<sprite name= \"AttackTemp\">";
+                break;
+            case TempHeroStats.HEALTH:
+                sprite = "<sprite name= \"Heal\">";
+                break;
+            case TempHeroStats.GOLD:
+                sprite = "<sprite name= \"Gold\">";
+                break;
+            default:
+                break;
+        }
+
+        return $"+ {buffValue} {sprite}";
     }
 }

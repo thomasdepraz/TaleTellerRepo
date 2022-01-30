@@ -90,6 +90,22 @@ public class MaxStatsReward : Reward
 
     public override string GetString()
     {
-        return $"+ {buffValue} {statType}";
+        string sprite = string.Empty;
+        switch (statType)
+        {
+            case MaxHeroStats.MAX_ATTACK:
+                sprite = "<sprite name= \"AttackBase\">";
+                break;
+            case MaxHeroStats.MAX_HEALTH:
+                sprite = "<sprite name= \"MaxHealth\">";
+                break;
+            case MaxHeroStats.MAX_PURSE:
+                sprite = "<sprite name= \"Purse\">";
+                break;
+            default:
+                break;
+        }
+
+        return $"+ {buffValue} {sprite}";
     }
 }
