@@ -39,18 +39,23 @@ public class MaxStatsReward : Reward
 
     public int GetBuffValue(MaxHeroStats statType, RewardRarity rarity)
     {
+        Vector3 values = Vector3.zero;
         switch (rarity)
         {
             case RewardRarity.COMMON:
-                return GetValueFromType(statType, 3, 2, 1);
+                values = RewardManager.Instance.rewardProfile.maxStatsRewardValues[0];
+                break;
             case RewardRarity.RARE:
-                return GetValueFromType(statType, 5, 3, 1);
+                values = RewardManager.Instance.rewardProfile.maxStatsRewardValues[1];
+                break;
             case RewardRarity.EPIC:
-                return GetValueFromType(statType, 10, 5, 2);
+                values = RewardManager.Instance.rewardProfile.maxStatsRewardValues[2];
+                break;
             default:
                 Debug.LogWarning($"{rarity} is not a valid type");
                 return 0;
         }
+        return GetValueFromType(statType, (int)values.x, (int)values.y, (int)values.z);
     }
 
     int GetValueFromType(MaxHeroStats statType, int purseValue, int maxHpValue, int maxAttackValue)

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed10473c9e37894d90c3c0d4908fb58, type: 3}
+  m_Name: RewardProfile
+  m_EditorClassIdentifier: 
+  commonColor: {r: 0.8584906, g: 0.8374703, b: 0.69975084, a: 1}
+  rareColor: {r: 0.42896044, g: 0.8207547, b: 0.8207547, a: 1}
+  epicColor: {r: 0.7830189, g: 0.4240121, b: 0.7640455, a: 1}
+  inspireIcon: {fileID: 2122501309460574069, guid: b3a1c60dc40eb8e43b89d48084715e3a, type: 3}
+  maxStatsIcon: {fileID: 21300000, guid: 2ef1adf4f5d0eba4ead3a7ff1edf5505, type: 3}
+  tempStatsIcon: {fileID: 21300000, guid: b8ff7454a267b104397dcde1d59431ed, type: 3}
+  rewardTypeRates: {x: 50, y: 40, z: 10}
+  actDropRates:
+  - {x: 65, y: 25, z: 10}
+  - {x: 45, y: 40, z: 15}
+  - {x: 20, y: 60, z: 20}
+  tempStatsRewardValues:
+  - {x: 4, y: 4, z: 2}
+  - {x: 6, y: 6, z: 4}
+  - {x: 10, y: 10, z: 6}
+  maxStatsRewardValues:
+  - {x: 3, y: 2, z: 1}
+  - {x: 5, y: 3, z: 1}
+  - {x: 10, y: 5, z: 2}

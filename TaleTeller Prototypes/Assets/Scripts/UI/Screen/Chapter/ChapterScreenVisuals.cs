@@ -16,7 +16,8 @@ public class ChapterScreenVisuals : GameScreenVisuals
     public List<Image> rewardIcons;
     public List<GameObject> titles;
     public List<GameObject> chapters;
-    public List<GameObject> rewards;
+    public List<Image> rewards;
+    public List<RewardTooltip> rewardsTooltip;
 
     [Space]
     public TextMeshProUGUI instructionText;
@@ -34,7 +35,7 @@ public class ChapterScreenVisuals : GameScreenVisuals
                 {
                     titles[i].SetActive(true);
                     chapters[i].SetActive(true);
-                    rewards[i].SetActive(true);
+                    rewards[i].gameObject.SetActive(true);
                     cardsPlacholders[i].gameObject.SetActive(true);
                 }
                 break;
@@ -77,6 +78,8 @@ public class ChapterScreenVisuals : GameScreenVisuals
                     titleTexts[j].text = screen.currentStep.stepOptions[j].cardName;
                     chapterTexts[i].text = (screen.currentStep.stepOptions[j] as PlotCard).plotChoiceDescription;
                     rewardIcons[i].sprite = screen.GetRewardIcon(screen.rewardInfos[i].type);
+                    rewards[i].color = screen.GetRewardsColor(screen.rewardInfos[i].rarity);
+                    rewardsTooltip[i].rewardInfo = screen.rewardInfos[i];
                     cardsPlacholders[j].onClick = () => screen.ClickCard(screen.rewardInfos[j], cardsPlacholders[j]);
                     cardsPlacholders[j].container.InitializeContainer(screen.currentStep.stepOptions[j], true);
                 }
@@ -161,7 +164,7 @@ public class ChapterScreenVisuals : GameScreenVisuals
         }
         for (int i = 0; i < rewards.Count; i++)
         {
-            rewards[i].SetActive(false);
+            rewards[i].gameObject.SetActive(false);
         }
     }
 }

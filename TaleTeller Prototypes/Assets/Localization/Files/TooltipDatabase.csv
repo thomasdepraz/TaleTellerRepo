@@ -41,3 +41,4 @@ $EFFECT_RANGE_PLOT	This is the objective of the Plot.<br>Finish it to end the Pl
 $EFFECT_RANGE_RIGHT	This effect targets the card on his right
 $EFFECT_RANGE_RIGHT-LEFT	This effect targets cards next to him
 $EFFECT_RANGE_SELF	This effect targets the card itself.
+$REWARD	<b>Rarity</b> : {0} <br><b>Type</b>: {1}

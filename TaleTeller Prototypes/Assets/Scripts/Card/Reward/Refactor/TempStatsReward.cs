@@ -39,18 +39,23 @@ public class TempStatsReward : Reward
 
     public int GetBuffValue(TempHeroStats statType, RewardRarity rarity)
     {
+        Vector3 values = Vector3.zero;
         switch (rarity)
         {
             case RewardRarity.COMMON:
-                return GetValueFromType(statType, 4, 4, 2);
+                values = RewardManager.Instance.rewardProfile.tempStatsRewardValues[0];
+                break;
             case RewardRarity.RARE:
-                return GetValueFromType(statType, 6, 6, 4);
+                values = RewardManager.Instance.rewardProfile.tempStatsRewardValues[1];
+                break;
             case RewardRarity.EPIC:
-                return GetValueFromType(statType, 10, 10, 6);
+                values = RewardManager.Instance.rewardProfile.tempStatsRewardValues[2];
+                break;
             default:
                 Debug.LogWarning($"{rarity} is not a valid type");
                 return 0;
         }
+        return GetValueFromType(statType, (int)values.x, (int)values.y, (int)values.z);
     }
 
     int GetValueFromType(TempHeroStats statType, int goldValue, int healthValue, int bonusAttackValue)

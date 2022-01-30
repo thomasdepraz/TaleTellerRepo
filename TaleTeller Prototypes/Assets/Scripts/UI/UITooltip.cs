@@ -26,7 +26,8 @@ public enum UITooltipTarget
     CARD_RANGE_HERO,
     CARD_RANGE_RIGHTANDLEFT,
     CARD_RANGE_ALL,
-    CARD_RANGE_PLOT
+    CARD_RANGE_PLOT,
+    REWARD
 }
 public class UITooltip : MonoBehaviour
 {
