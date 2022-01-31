@@ -99,13 +99,13 @@ public class TempStatsReward : Reward
         switch (statType)
         {
             case TempHeroStats.TEMP_ATTACK:
-                sprite = "<sprite name= \"AttackTemp\">";
+                sprite = "<sprite name=\"AttackTemp\">";
                 break;
             case TempHeroStats.HEALTH:
-                sprite = "<sprite name= \"Heal\">";
+                sprite = "<sprite name=\"Heal\">";
                 break;
             case TempHeroStats.GOLD:
-                sprite = "<sprite name= \"Gold\">";
+                sprite = "<sprite name=\"Gold\">";
                 break;
             default:
                 break;

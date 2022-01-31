@@ -99,13 +99,13 @@ public class MaxStatsReward : Reward
         switch (statType)
         {
             case MaxHeroStats.MAX_ATTACK:
-                sprite = "<sprite name= \"AttackBase\">";
+                sprite = "<sprite name=\"AttackBase\">";
                 break;
             case MaxHeroStats.MAX_HEALTH:
-                sprite = "<sprite name= \"MaxHealth\">";
+                sprite = "<sprite name=\"MaxHealth\">";
                 break;
             case MaxHeroStats.MAX_PURSE:
-                sprite = "<sprite name= \"Purse\">";
+                sprite = "<sprite name=\"Purse\">";
                 break;
             default:
                 break;
