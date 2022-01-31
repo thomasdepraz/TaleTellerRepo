@@ -59,15 +59,18 @@ public class Inspire : MonoBehaviour
 
         if(use == 0)
         {
-            EventQueue appearQueue = new EventQueue();
-            int random = Random.Range(0, PlotsManager.Instance.darkIdeas.Count);
-            CardData cardToAppear = PlotsManager.Instance.darkIdeas[random];
-            cardToAppear = cardToAppear.InitializeData(cardToAppear);
+            for(int i = 0; i <darkIdeasCount; i++)
+            {
+                EventQueue appearQueue = new EventQueue();
+                int random = Random.Range(0, PlotsManager.Instance.darkIdeas.Count);
+                CardData cardToAppear = PlotsManager.Instance.darkIdeas[random];
+                cardToAppear = cardToAppear.InitializeData(cardToAppear);
 
-            CardManager.Instance.CardAppearToDeck(cardToAppear, appearQueue, CardManager.Instance.plotAppearTransform.position);
+                CardManager.Instance.CardAppearToDeck(cardToAppear, appearQueue, CardManager.Instance.plotAppearTransform.position);
 
-            appearQueue.StartQueue();
-            while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
+                appearQueue.StartQueue();
+                while (!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
+            }
         }
 
         yield return new WaitForSeconds(0.5f);
