@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,8 +50,12 @@ public class Hero : MonoBehaviour
 
             _lifePoints = value;
 
-            if (_lifePoints < 0)
+            if (_lifePoints <= 0)
+            {
                 _lifePoints = 0;
+                //GameOver Routine
+                EventManager.Instance.StartCoroutine(DeathRoutine());
+            }
             else if (_lifePoints > maxLifePoints)
                 _lifePoints = maxLifePoints;
 
@@ -148,5 +153,15 @@ public class Hero : MonoBehaviour
     public void FrameTweening(GameObject frame)
     {
         LeanTween.scale(frame, new Vector3(1.1f, 1.1f, 1.1f), 0.2f).setEaseInOutCubic().setLoopPingPong(1);
+    }
+
+
+    public IEnumerator DeathRoutine()
+    {
+        EventQueue gameOverQueue = new EventQueue();
+        GameManager.Instance.GameOver(gameOverQueue);
+        gameOverQueue.StartQueue();
+
+        while (!gameOverQueue.resolved) { yield return new WaitForEndOfFrame(); }
     }
 }
