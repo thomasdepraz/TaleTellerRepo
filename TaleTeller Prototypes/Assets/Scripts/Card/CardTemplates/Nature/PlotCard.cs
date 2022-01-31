@@ -264,7 +264,6 @@ public class PlotCard : CardData
         else
         {
             //Secondary plot reward
-            RewardManager.Instance.ChooseSecondaryPlotReward(rewardQueue, this);
         }
         rewardQueue.StartQueue();
         while(!rewardQueue.resolved)

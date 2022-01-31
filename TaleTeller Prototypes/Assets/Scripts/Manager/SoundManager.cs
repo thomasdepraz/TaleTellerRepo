@@ -212,9 +212,7 @@ public class SoundManager : Singleton<SoundManager>
         AudioSource busySource = allMusicSources.Where(s => s.isPlaying).FirstOrDefault();
 
         Sound soundToPlay = new Sound(availableSource, playlist[UnityEngine.Random.Range((int)0, (int)playlist.Count)], SoundType.MUSIC, false, false);
-        availableSource.volume = 0;
-        soundToPlay.Play();
-        FadeSound(musicSourceOne, 1f, 10f);
+        CrossFade(busySource, availableSource, 5f);
         currentPlaying = StartCoroutine(CurrentPlayingMusic(soundToPlay.currentSource.clip.length - 5));
     }
 

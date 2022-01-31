@@ -36,13 +36,14 @@ public class RewardInfo
     public static RewardType GetRewardType()
     {
         RewardType result = RewardType.MAX_STATS;
-        float random = Random.Range(0f,100f);
+        Vector3 rates = RewardManager.Instance.rewardProfile.rewardTypeRates;
+        float random = Random.Range(0f, rates.x + rates.y + rates.z);
 
-        if (random <= 50f) //50%
+        if (random <= rates.x)
             result = RewardType.MAX_STATS;
-        else if (random > 50f && random <= 90f) //40%
+        else if (random > rates.x && random <= rates.x+rates.y)
             result = RewardType.TEMP_STATS;
-        else if (random > 90f) //10%
+        else if (random > rates.x + rates.y && random <= rates.x+rates.y+rates.z)
             result = RewardType.TEMP_STATS;
 
         return result;
@@ -50,18 +51,23 @@ public class RewardInfo
 
     public static RewardRarity GetRewardRarity(int actNumber)
     {
+        Vector3 rates = Vector3.zero;
         switch (actNumber)
         {
             case 0:
-                return GetRandomRarity(65f, 25f, 10f);
+                rates = RewardManager.Instance.rewardProfile.actDropRates[0];
+                break;
             case 1:
-                return GetRandomRarity(45f, 40f, 15f);
+                rates = RewardManager.Instance.rewardProfile.actDropRates[1];
+                break;
             case 2:
-                return GetRandomRarity(20f, 60f, 20f);
+                rates = RewardManager.Instance.rewardProfile.actDropRates[2];
+                break;
             default:
                 Debug.LogWarning($"actNumber : {actNumber} is invalid");
                 return RewardRarity.NONE;
         }
+        return GetRandomRarity(rates.x, rates.y, rates.z);
     }
 
     public static  RewardRarity GetRandomRarity(float commonWeight, float rareWeight, float epicWeight)

@@ -69,7 +69,7 @@ public class Deck : MonoBehaviour
 
                 int numCommonCards = Mathf.RoundToInt(numCardsToAdd * 0.55f);
 
-                List<CardData> commonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
+                List<CardData> commonCards = RewardManager.Instance.GetDebugDeckList(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
 
                 for(int i = 0; i < commonCards.Count; i++)
                 {
@@ -78,7 +78,7 @@ public class Deck : MonoBehaviour
 
                 int numUncommonCards = Mathf.RoundToInt(numCardsToAdd * 0.30f);
 
-                List<CardData> uncommonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
+                List<CardData> uncommonCards = RewardManager.Instance.GetDebugDeckList(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
 
                 for (int i = 0; i < uncommonCards.Count; i++)
                 {
@@ -87,7 +87,7 @@ public class Deck : MonoBehaviour
 
                 int numRareCards = Mathf.RoundToInt(numCardsToAdd * 0.15f);
 
-                List<CardData> rareCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
+                List<CardData> rareCards = RewardManager.Instance.GetDebugDeckList(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
 
                 for (int i = 0; i < rareCards.Count; i++)
                 {
@@ -100,7 +100,7 @@ public class Deck : MonoBehaviour
 
                     numCommonCards = Mathf.RoundToInt(numCardsToAdd * 0.30f);
 
-                    commonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
+                    commonCards = RewardManager.Instance.GetDebugDeckList(RewardManager.Instance.rewardPoolAllIdeas, numCommonCards, CardRarity.Common);
 
                     for (int i = 0; i < commonCards.Count; i++)
                     {
@@ -109,7 +109,7 @@ public class Deck : MonoBehaviour
 
                     numUncommonCards = Mathf.RoundToInt(numCardsToAdd * 0.40f);
 
-                    uncommonCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
+                    uncommonCards = RewardManager.Instance.GetDebugDeckList(RewardManager.Instance.rewardPoolAllIdeas, numUncommonCards, CardRarity.Uncommon);
 
                     for (int i = 0; i < uncommonCards.Count; i++)
                     {
@@ -118,7 +118,7 @@ public class Deck : MonoBehaviour
 
                     numRareCards = Mathf.RoundToInt(numCardsToAdd * 0.20f);
 
-                    rareCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
+                    rareCards = RewardManager.Instance.GetDebugDeckList(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Rare);
 
                     for (int i = 0; i < rareCards.Count; i++)
                     {
@@ -127,7 +127,7 @@ public class Deck : MonoBehaviour
 
                     int numEpicCards = Mathf.RoundToInt(numCardsToAdd * 0.10f);
 
-                    List<CardData> epicCards = RewardManager.Instance.GetMainPlotRewardsSecondBatch(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Epic);
+                    List<CardData> epicCards = RewardManager.Instance.GetDebugDeckList(RewardManager.Instance.rewardPoolAllIdeas, numRareCards, CardRarity.Epic);
 
                     for (int i = 0; i < epicCards.Count; i++)
                     {

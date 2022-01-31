@@ -132,13 +132,30 @@ public class ChapterScreen : GameScreen
         switch (type)
         {
             case RewardType.MAX_STATS:
-                return null;
+                return RewardManager.Instance.rewardProfile.maxStatsIcon;
             case RewardType.TEMP_STATS:
-                return null;
+                return RewardManager.Instance.rewardProfile.tempStatsIcon;
             case RewardType.INSPIRE:
-                return null;
+                return RewardManager.Instance.rewardProfile.inspireIcon;
             default:
                 return null;
+        }
+    }
+
+    public Color GetRewardsColor(RewardRarity rarity)
+    {
+        switch (rarity)
+        {
+            case RewardRarity.NONE:
+                return Color.white;
+            case RewardRarity.COMMON:
+                return RewardManager.Instance.rewardProfile.commonColor;
+            case RewardRarity.RARE:
+                return RewardManager.Instance.rewardProfile.rareColor;
+            case RewardRarity.EPIC:
+                return RewardManager.Instance.rewardProfile.epicColor;
+            default:
+                return Color.black;
         }
     }
 }

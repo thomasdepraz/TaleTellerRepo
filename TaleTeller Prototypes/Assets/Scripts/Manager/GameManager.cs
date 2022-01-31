@@ -56,6 +56,8 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator GameOverCoroutine(EventQueue queue)
     {
+        //Pause so other routines stop;
+        pause = true;
         //Fade To Black
         //NOTE USE SOMETHING ELSE LATER
         Fade(true);
