@@ -22,7 +22,6 @@ public class Hero : MonoBehaviour
     //Private hero variables
     private int _maxLifePoints;
     private int _lifePoints;
-    private int _overHealPoints;
     private int _attackDamage;
     private int _bonusDamage;
     private int _maxGoldPoints;
@@ -35,7 +34,11 @@ public class Hero : MonoBehaviour
         get => _maxLifePoints ; 
         set 
         {
+            int dif = value - _maxLifePoints;
             _maxLifePoints = value;
+
+            lifePoints += dif; 
+
             heroHpUI.text = lifePoints + "/" + value.ToString();
             FrameTweening(hpFrame.gameObject);
         }
