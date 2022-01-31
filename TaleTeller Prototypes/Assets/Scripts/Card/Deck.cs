@@ -337,6 +337,16 @@ public class Deck : MonoBehaviour
 
         }
 
+        List<CardData> cardsAbleToDiscard = CardManager.Instance.cardHand.GetHandDataList();
+
+        foreach(CardData c in cardsAbleToDiscard)
+        {
+            if(c.cardType.GetType() == typeof(DarkIdeaCard))
+            {
+                cardsAbleToDiscard.Remove(c);
+            }
+        }
+
         CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, CardManager.Instance.cardHand.GetHandDataList(), false);
         bool wait = true;
         screen.Open(() => wait = false);
@@ -353,12 +363,7 @@ public class Deck : MonoBehaviour
 
         }
         Deal(overdrawQueue, dealtCard);
-        /*}
-        else
-        {
-            Burn(overdrawQueue, dealtCard);
-        }*/
-
+       
         overdrawQueue.StartQueue();
         while(!overdrawQueue.resolved)
         {
