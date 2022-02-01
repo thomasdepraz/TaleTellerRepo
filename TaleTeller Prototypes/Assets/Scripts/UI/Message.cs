@@ -48,7 +48,7 @@ public class Message
     {
         LeanTween.cancel(manager.messagePanelTransform.gameObject);
         manager.messagePanelTransform.gameObject.SetActive(true);
-        LeanTween.value(manager.messagePanelTransform.gameObject, 0,0,2f).setOnComplete(CloseMessageBox);
+        LeanTween.value(manager.messagePanelTransform.gameObject, 0, 0, 2f);
         LayoutRebuilder.ForceRebuildLayoutImmediate(manager.messagePanelTransform);
     }
 

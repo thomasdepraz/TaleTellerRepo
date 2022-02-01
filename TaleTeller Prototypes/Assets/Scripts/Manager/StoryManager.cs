@@ -26,6 +26,12 @@ public class StoryManager : Singleton<StoryManager>
     public IEnumerator Start()
     {
         CardManager.Instance.UpdateHandCount();
+
+        //EventQueue message = new EventQueue();
+        //Message tutorialMessage = new Message("TEST THE MESSAGE SYSTEM", message, CardManager.Instance.deckAppearTransform.position);
+        //message.StartQueue();
+        //while (!message.resolved) { yield return new WaitForEndOfFrame(); }
+
         yield return new WaitForSeconds(1);
         StartTurn();
     }

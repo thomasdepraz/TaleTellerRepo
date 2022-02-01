@@ -19,6 +19,7 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public Color diabledColor = new Color(1,1,1,0.5f);
     bool _selected;
 
+    public bool noScreenMode;
     public bool highlight;
     [ShowIf("highlight")]public Image highlightImage;
     [ShowIf("highlight")] public Color highlightColor;
@@ -71,9 +72,23 @@ public class ScreenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(ScreenManager.Instance.currentScreen.open)
+        if(!noScreenMode)
         {
-            if(interactable)
+            if(ScreenManager.Instance.currentScreen.open)
+            {
+                if(interactable)
+                {
+                    if (selected)
+                        selected = false;
+                    else selected = true;
+
+                    onClick?.Invoke();
+                }
+            }
+        }
+        else
+        {
+            if (interactable)
             {
                 if (selected)
                     selected = false;
