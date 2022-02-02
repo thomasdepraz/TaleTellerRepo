@@ -5,18 +5,20 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
 
+public enum GameState {GAME, TUTORIAL}
 public class GameManager : Singleton<GameManager>
 {
     [Header("References")]
     public Hero currentHero;
     public InstructionsData instructionsData;
-    public StoryManager storyManager;
+    public TutorialManager tutorialManager;
     public GameObject goButton;
     public Image fadePanel;
     public Pointer pointer;
     public Button returnToMenuButton;
 
     [HideInInspector]public bool pause;
+    public GameState currentState = GameState.TUTORIAL;
 
     public void Awake()
     {

@@ -16,6 +16,8 @@ public class BoardSlot : MonoBehaviour
         set
         {
             _currentPlacedCard = value;
+            CardManager.Instance.board.boardUpdate?.Invoke();
+
         }        
     }
     public CanvasGroup canvasGroup;

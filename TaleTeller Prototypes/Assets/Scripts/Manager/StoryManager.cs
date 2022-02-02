@@ -25,20 +25,23 @@ public class StoryManager : Singleton<StoryManager>
 
     public IEnumerator Start()
     {
-        CardManager.Instance.UpdateHandCount();
+        //Play tutorial or not 
+        if(GameManager.Instance.currentState == GameState.TUTORIAL)
+        {
+            GameManager.Instance.tutorialManager.InitializeGameScreen();
+        }
+        else
+        {
+            CardManager.Instance.UpdateHandCount();
 
-        //EventQueue message = new EventQueue();
-        //Message tutorialMessage = new Message("TEST THE MESSAGE SYSTEM", message, CardManager.Instance.deckAppearTransform.position);
-        //message.StartQueue();
-        //while (!message.resolved) { yield return new WaitForEndOfFrame(); }
+            //EventQueue message = new EventQueue();
+            //Message tutorialMessage = new Message("TEST THE MESSAGE SYSTEM", message, CardManager.Instance.deckAppearTransform.position);
+            //message.StartQueue();
+            //while (!message.resolved) { yield return new WaitForEndOfFrame(); }
 
-        yield return new WaitForSeconds(1);
-        StartTurn();
-    }
-
-    private void Update()
-    {
-        //Debug.Log("");
+            yield return new WaitForSeconds(1);
+            StartTurn();
+        }
     }
 
     public void StartTurn()
@@ -48,7 +51,7 @@ public class StoryManager : Singleton<StoryManager>
     public IEnumerator StartTurnRoutine()
     {
         yield return null;
-        if(turnCount == 0 )
+        if(turnCount == 0 && GameManager.Instance.currentState != GameState.TUTORIAL)
         {
             EventQueue mainQueue = new EventQueue();
 
@@ -61,21 +64,6 @@ public class StoryManager : Singleton<StoryManager>
             }
         }
 
-
-        //TEMP secondary plot deal --it ll probably be elswhere later
-        //if (turnCount > 0 && turnCount % 2 == 0 && PlotsManager.Instance.secondaryPlots.Count > 0)
-        //{
-        //    EventQueue secondaryPlotsQueue = new EventQueue();
-        //    PlotsManager.Instance.ChooseSecondaryPlots(secondaryPlotsQueue);
-        //    secondaryPlotsQueue.StartQueue();
-
-        //    while (!secondaryPlotsQueue.resolved)
-        //    {
-        //        yield return new WaitForEndOfFrame();
-        //    }
-        //}
-
-
         //Deal Cards
         int numberOfCardsToDeal = 0;
         if (turnCount == 0)
@@ -83,6 +71,7 @@ public class StoryManager : Singleton<StoryManager>
         else
             numberOfCardsToDeal = CardManager.Instance.cardDeck.drawAmount;
 
+        if (GameManager.Instance.currentState == GameState.TUTORIAL) numberOfCardsToDeal = GameManager.Instance.tutorialManager.GetCardCount();
 
         EventQueue drawQueue = new EventQueue();
         CardManager.Instance.cardDeck.DrawCards(numberOfCardsToDeal, drawQueue);
@@ -99,11 +88,14 @@ public class StoryManager : Singleton<StoryManager>
         #region OnTurnStartEvent
         EventQueue onStartTurnQueue = new EventQueue();
         CallGeneralEvent("onTurnStart", onStartTurnQueue);
+        if (GameManager.Instance.currentState == GameState.TUTORIAL) GameManager.Instance.tutorialManager.StartTurnAction(onStartTurnQueue);
         onStartTurnQueue.StartQueue();
         while (!onStartTurnQueue.resolved)
         {
             yield return new WaitForEndOfFrame();
         }
+        
+
         #endregion
 
         //Mana Init

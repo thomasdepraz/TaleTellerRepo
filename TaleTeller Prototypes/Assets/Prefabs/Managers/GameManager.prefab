@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 3417540031139067779}
   - component: {fileID: 3417540031139067778}
   - component: {fileID: 3417540031139067777}
+  - component: {fileID: 4076653973841923050}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -147,12 +148,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHero: {fileID: 0}
   instructionsData: {fileID: 11400000, guid: 9ed49f99f4166d1458ae553c884bd3b7, type: 2}
-  storyManager: {fileID: 0}
+  tutorialManager: {fileID: 4076653973841923050}
   goButton: {fileID: 0}
   fadePanel: {fileID: 3417540032467434517}
   pointer: {fileID: 0}
   returnToMenuButton: {fileID: 3417540031349418603}
   pause: 0
+  currentState: 0
 --- !u!114 &3417540031139067777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +173,19 @@ MonoBehaviour:
   cardsDatabase: {fileID: 4900000, guid: 1185ad5e48afbf549b5cfe8b5d258ecb, type: 3}
   popupDatabase: {fileID: 4900000, guid: 4a71ee7f64a2a67449977c2b5049352a, type: 3}
   screenDatabase: {fileID: 4900000, guid: bf45a927c971ea64c9d3e4726f646f9a, type: 3}
+--- !u!114 &4076653973841923050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417540031139067788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878b1030bcc5d9f43b9025cce10d6444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scalerReference: {fileID: 3417540030622944463}
 --- !u!1 &3417540031349418613
 GameObject:
   m_ObjectHideFlags: 0

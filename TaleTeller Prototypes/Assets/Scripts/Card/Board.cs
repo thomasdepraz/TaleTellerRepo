@@ -14,6 +14,11 @@ public enum BoardState
 }
 public class Board : MonoBehaviour
 {
+
+    public Transform boardTransform;
+    public Transform lineTransform;
+    public Transform goButtonTransform;
+
     public int numberOfSlots;
     public List<BoardSlot> slots = new List<BoardSlot>();
     public StoryLine storyLine;
@@ -28,6 +33,8 @@ public class Board : MonoBehaviour
     public Color baseColor;
     public Color TwoEffectColor;
     public Color ThreeEffectColor;
+
+    public Action boardUpdate;
 
 
     #region StoryBegin
