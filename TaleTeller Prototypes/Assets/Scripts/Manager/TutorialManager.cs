@@ -182,7 +182,7 @@ public class TutorialManager : MonoBehaviour
                 HeroMessage manaMessage = new HeroMessage("hello chris :)", messageQueue, true);
                 HeroMessage tryCardsMessage = new HeroMessage("hello chris :)", messageQueue, true);
                 messageQueue.StartQueue();
-                while (messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+                while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
               
                 
@@ -198,14 +198,15 @@ public class TutorialManager : MonoBehaviour
 
     public bool ValidConditions()
     {
+        //NOTE : dont forget to call initboard somewhere if theres no message
         bool valid = false;
         switch (TurnCount)
         {
             case 0:
                 valid = tutorialConditions[0].isValid(tutorialCards);
                 //Make different routines
-                if (valid) StartCoroutine(ValidationMessageRoutine("Well Done"));
-                else StartCoroutine(ValidationMessageRoutine("Wesh tu fais quoi frr"));
+                if (valid) StartCoroutine(ValidationMessageRoutine("Well Done", valid));
+                else StartCoroutine(ValidationMessageRoutine("Wesh tu fais quoi frr", valid));
                 return valid;
 
             default:
@@ -213,7 +214,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    IEnumerator ValidationMessageRoutine(string message)
+    IEnumerator ValidationMessageRoutine(string message, bool init)
     {
         currentState = TutorialState.PENDING;
         EventQueue messageQueue = new EventQueue();
@@ -227,5 +228,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         currentState = TutorialState.RUNNING;
+
+        if(init) CardManager.Instance.board.InitBoard();
     }
 }

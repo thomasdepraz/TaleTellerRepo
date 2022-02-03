@@ -42,6 +42,10 @@ public class HeroMessage
         manager.playerMessageButton.onClick = () => { validated = true; };
         manager.playerMessageButton.interactable = true;
 
+        BoardState originState = CardManager.Instance.board.currentBoardState;
+
+        CardManager.Instance.board.currentBoardState = BoardState.None;
+
         if(manager.currentPlayerMessage != null)
         {
             manager.currentPlayerMessage.CloseMessageBox();
@@ -65,6 +69,8 @@ public class HeroMessage
 
         CloseMessageBox();
         yield return new WaitForSeconds(0.2f);
+
+        CardManager.Instance.board.currentBoardState = originState;
 
         queue.UpdateQueue();
     }

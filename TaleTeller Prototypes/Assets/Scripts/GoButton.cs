@@ -70,35 +70,28 @@ public class GoButton : MonoBehaviour
 
     public bool CheckValid()
     {
-        if(GameManager.Instance.currentState == GameState.GAME)
+
+        if (CardManager.Instance.board.currentBoardState != BoardState.Idle)
         {
-            if (CardManager.Instance.board.currentBoardState != BoardState.Idle)
-            {
-                HeroMessage errorMessage = new HeroMessage("Can't do that now");
-                return false;
-            }
-            else if (board.IsEmpty())
-            {
-                HeroMessage errorMessage = new HeroMessage("The board is empty !");
-                return false;
-            }
-            return true;
+            HeroMessage errorMessage = new HeroMessage("Can't do that now");
+            return false;
         }
-        else
+        else if (board.IsEmpty())
         {
-            if(GameManager.Instance.tutorialManager.currentState == TutorialState.PENDING)
-            {
-                return false;
-            }
-            else
-            { 
-                return GameManager.Instance.tutorialManager.ValidConditions();
-            }
+            HeroMessage errorMessage = new HeroMessage("The board is empty !");
+            return false;
         }
+        return true;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (CheckValid()) board.InitBoard();
+        if (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.currentState != TutorialState.PENDING)
+            GameManager.Instance.tutorialManager.ValidConditions();
+        else if(GameManager.Instance.currentState == GameState.GAME)
+        {
+            if (CheckValid()) board.InitBoard();
+        }
+
     }
 }
