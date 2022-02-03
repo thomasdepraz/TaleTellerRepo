@@ -28,16 +28,12 @@ public class StoryManager : Singleton<StoryManager>
         //Play tutorial or not 
         if(GameManager.Instance.currentState == GameState.TUTORIAL)
         {
+            CardManager.Instance.cardDeck.enableNoShuffle = true;
             GameManager.Instance.tutorialManager.InitializeGameScreen();
         }
         else
         {
             CardManager.Instance.UpdateHandCount();
-
-            //EventQueue message = new EventQueue();
-            //Message tutorialMessage = new Message("TEST THE MESSAGE SYSTEM", message, CardManager.Instance.deckAppearTransform.position);
-            //message.StartQueue();
-            //while (!message.resolved) { yield return new WaitForEndOfFrame(); }
 
             yield return new WaitForSeconds(1);
             StartTurn();
@@ -51,7 +47,7 @@ public class StoryManager : Singleton<StoryManager>
     public IEnumerator StartTurnRoutine()
     {
         yield return null;
-        if(turnCount == 0 && GameManager.Instance.currentState != GameState.TUTORIAL)
+        if(turnCount == 0 && GameManager.Instance.currentState == GameState.GAME)
         {
             EventQueue mainQueue = new EventQueue();
 
@@ -94,8 +90,6 @@ public class StoryManager : Singleton<StoryManager>
         {
             yield return new WaitForEndOfFrame();
         }
-        
-
         #endregion
 
         //Mana Init

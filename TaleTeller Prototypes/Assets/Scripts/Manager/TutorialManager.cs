@@ -4,9 +4,71 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
+
+public enum TutorialState { RUNNING, PENDING}
+public enum ConditionsType { PLACED, ADJACENT}
+
+[Serializable]
+public struct TutorialConditions
+{
+    public List<int> indexToCompare;
+    public ConditionsType conditions;
+
+    public bool isValid(List<CardData> tutorialCards)
+    {
+        switch (conditions)
+        {
+            case ConditionsType.PLACED:
+                for (int i = 0; i < indexToCompare.Count; i++)
+                {
+                    if (!CardManager.Instance.board.IsCardOnBoard(tutorialCards[indexToCompare[i]]))
+                        return false;
+                }
+                return true;
+            case ConditionsType.ADJACENT:
+                List<CardData> cardsToCompare = new List<CardData>();
+                for (int i = 0; i < indexToCompare.Count; i++)
+                {
+                    cardsToCompare.Add(tutorialCards[indexToCompare[i]]);
+                }
+
+                for (int i = 0; i < cardsToCompare.Count; i++)
+                {
+                    if (!CardManager.Instance.board.IsCardOnBoard(cardsToCompare[i]))
+                        return false;
+                }
+
+                int count = 0;
+                for (int slot = 0; slot < CardManager.Instance.board.slots.Count; slot++)
+                {
+                    CardData data = null;
+
+                    if (CardManager.Instance.board.slots[slot].currentPlacedCard != null)
+                        data = CardManager.Instance.board.slots[slot].currentPlacedCard.data;
+
+                    if(data != null && cardsToCompare.Contains(data))
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        count = 0;
+                    }
+                    if (count == cardsToCompare.Count) return true;
+                }
+
+                return false;
+
+            default:
+                return false;
+        }
+    }
+}
 public class TutorialManager : MonoBehaviour
 {
     public int TurnCount { get; set; } = 0;
+    public TutorialState currentState = TutorialState.RUNNING;
 
     //Object Origins
     [SerializeField] private CanvasScaler scalerReference;
@@ -17,13 +79,14 @@ public class TutorialManager : MonoBehaviour
     private Vector3 goButtonOrigin;
     private Vector3 handOrigin;
 
-
+    List<CardData> tutorialCards = new List<CardData>();
+    public List<TutorialConditions> tutorialConditions = new List<TutorialConditions>();   
 
     IEnumerator IntroductionRoutine()
     {
         //Screen
         #region Screen_01
-        TutorialScreen screen_01 = new TutorialScreen("Bienvenue", "TUTO_01");
+        TutorialScreen screen_01 = new TutorialScreen("Bienvenue", "TUTO_01", null);
         bool wait = true;
         screen_01.Open(()=> wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
@@ -35,7 +98,7 @@ public class TutorialManager : MonoBehaviour
 
         //Screen
         #region Screen_02
-        TutorialScreen screen_02 = new TutorialScreen("Bienvenue bis", "TUTO_02");
+        TutorialScreen screen_02 = new TutorialScreen("Bienvenue bis", "TUTO_02", null);
         wait = true;
         screen_02.Open(() => wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
@@ -56,9 +119,17 @@ public class TutorialManager : MonoBehaviour
         while (!lineMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
 
-        yield return new WaitForEndOfFrame();
-    }
+        //GetTutorialCards
+        for (int i = 0; i < CardManager.Instance.cardDeck.cardDeck.Count; i++)
+        {
+            tutorialCards.Add(CardManager.Instance.cardDeck.cardDeck[i]);
+        }
 
+        
+
+        //StartTurn 
+        StoryManager.Instance.StartTurn();
+    }
 
     public void AppearObject(Transform transform, Vector3 target, Action onComplete)
     {
@@ -96,17 +167,14 @@ public class TutorialManager : MonoBehaviour
 
     public void StartTurnAction(EventQueue queue)
     {
-        queue.events.Add(StartTurnActionRoutine());
+        queue.events.Add(StartTurnActionRoutine(queue));
     }
 
-    private IEnumerator StartTurnActionRoutine()
+    private IEnumerator StartTurnActionRoutine(EventQueue queue)
     {
         switch (TurnCount)
         {
             case 0:
-                bool valid = false;
-                CardManager.Instance.board.boardUpdate += () => valid = ValidConditions();
-
                 EventQueue messageQueue = new EventQueue();
                 HeroMessage ideaMessage = new HeroMessage("hello", messageQueue, true);
                 HeroMessage cardMessage = new HeroMessage("hello bis", messageQueue, true);
@@ -116,7 +184,7 @@ public class TutorialManager : MonoBehaviour
                 messageQueue.StartQueue();
                 while (messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-                while (valid == false) { yield return new WaitForEndOfFrame(); } //attente que les conditions soient valides
+              
                 
 
                 break;
@@ -125,20 +193,39 @@ public class TutorialManager : MonoBehaviour
                 break;
         }
         yield return new WaitForEndOfFrame();
+        queue.UpdateQueue();
     }
-
 
     public bool ValidConditions()
     {
+        bool valid = false;
         switch (TurnCount)
         {
-          
+            case 0:
+                valid = tutorialConditions[0].isValid(tutorialCards);
+                //Make different routines
+                if (valid) StartCoroutine(ValidationMessageRoutine("Well Done"));
+                else StartCoroutine(ValidationMessageRoutine("Wesh tu fais quoi frr"));
+                return valid;
 
             default:
                 return false;
         }
     }
 
+    IEnumerator ValidationMessageRoutine(string message)
+    {
+        currentState = TutorialState.PENDING;
+        EventQueue messageQueue = new EventQueue();
+
+        HeroMessage heroMessage = new HeroMessage(message, messageQueue, true);
+
+        messageQueue.StartQueue();
+        while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
 
+        yield return new WaitForEndOfFrame();
+
+        currentState = TutorialState.RUNNING;
+    }
 }

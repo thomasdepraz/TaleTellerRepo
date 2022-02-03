@@ -185,7 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878b1030bcc5d9f43b9025cce10d6444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   scalerReference: {fileID: 3417540030622944463}
+  tutorialConditions:
+  - indexToCompare: 0000000001000000
+    conditions: 0
 --- !u!1 &3417540031349418613
 GameObject:
   m_ObjectHideFlags: 0
