@@ -60,6 +60,14 @@ public class StoryManager : Singleton<StoryManager>
             }
         }
 
+        if(GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.TurnCount == 3)
+        {
+            EventQueue appearQueue = new EventQueue();
+            GameManager.Instance.tutorialManager.AppearPlot(appearQueue);
+            appearQueue.StartQueue();
+            while(!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }   
+        }
+
         //Deal Cards
         int numberOfCardsToDeal = 0;
         if (turnCount == 0)
@@ -105,7 +113,6 @@ public class StoryManager : Singleton<StoryManager>
     }
     IEnumerator TurnEndRoutine()
     {
-        Debug.Log("End of turn");
         CardManager.Instance.board.currentBoardState = BoardState.None;
 
         EventQueue onEndQueue = new EventQueue();
@@ -118,6 +125,9 @@ public class StoryManager : Singleton<StoryManager>
         {
             yield return new WaitForEndOfFrame();
         }
+
+        if (GameManager.Instance.currentState == GameState.TUTORIAL)
+            GameManager.Instance.tutorialManager.TurnCount++;
 
         if(transitionToNextAct)
         {
@@ -256,7 +266,7 @@ public class StoryManager : Singleton<StoryManager>
         /*if(turnReset)
             GameManager.Instance.currentHero.bonusDamage = (int)Mathf.Ceil(GameManager.Instance.currentHero.bonusDamage / 2f);
         else*/
-            GameManager.Instance.currentHero.bonusDamage = 0;
+        GameManager.Instance.currentHero.bonusDamage = 0;
 
         CardManager.Instance.board.storyLine.ResetPlayerPosition();
 

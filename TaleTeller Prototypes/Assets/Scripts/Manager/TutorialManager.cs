@@ -68,7 +68,7 @@ public struct TutorialConditions
 public class TutorialManager : MonoBehaviour
 {
     public int TurnCount { get; set; } = 0;
-    public TutorialState currentState = TutorialState.RUNNING;
+    [HideInInspector] public TutorialState currentState = TutorialState.RUNNING;
 
     //Object Origins
     [SerializeField] private CanvasScaler scalerReference;
@@ -165,7 +165,7 @@ public class TutorialManager : MonoBehaviour
             case 0: return 2; 
 
             default:
-                return 0;
+                return 1;
         }
     }
 
@@ -272,5 +272,18 @@ public class TutorialManager : MonoBehaviour
 
         //clear queues
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);//TEMP
+    }
+
+    public void AppearPlot(EventQueue queue)
+    {
+        queue.events.Add(AppearPlotRoutine(queue));
+    }
+    IEnumerator AppearPlotRoutine(EventQueue queue)
+    {
+        EventQueue appearQueue = new EventQueue();
+        CardManager.Instance.CardAppearToHand(tutorialPlotCard,appearQueue, CardManager.Instance.plotAppearTransform.position);
+        appearQueue.StartQueue();
+        while(!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        queue.UpdateQueue();
     }
 }

@@ -9,7 +9,7 @@ public class GoButton : MonoBehaviour
     , IPointerExitHandler
     , IPointerDownHandler
     , IPointerUpHandler
-    ,IPointerClickHandler
+    , IPointerClickHandler
 {
     [Header("Sprites")]
     public Image image;

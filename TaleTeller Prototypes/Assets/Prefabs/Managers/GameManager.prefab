@@ -190,6 +190,7 @@ MonoBehaviour:
   tutorialConditions:
   - indexToCompare: 0000000001000000
     conditions: 0
+  tutorialPlotCard: {fileID: 11400000, guid: 31f914135e464414bb540500e81c7d8f, type: 2}
 --- !u!1 &3417540031349418613
 GameObject:
   m_ObjectHideFlags: 0
