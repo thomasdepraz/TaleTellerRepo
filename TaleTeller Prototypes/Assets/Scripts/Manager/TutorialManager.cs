@@ -80,7 +80,8 @@ public class TutorialManager : MonoBehaviour
     private Vector3 handOrigin;
 
     List<CardData> tutorialCards = new List<CardData>();
-    public List<TutorialConditions> tutorialConditions = new List<TutorialConditions>();   
+    public List<TutorialConditions> tutorialConditions = new List<TutorialConditions>();
+    public PlotCard tutorialPlotCard;
 
     IEnumerator IntroductionRoutine()
     {
@@ -125,6 +126,9 @@ public class TutorialManager : MonoBehaviour
             tutorialCards.Add(CardManager.Instance.cardDeck.cardDeck[i]);
         }
 
+        //Add plot card 
+        CardData plot = tutorialPlotCard.InitializeData(tutorialPlotCard);
+        tutorialCards.Add(plot);
         
 
         //StartTurn 
@@ -183,10 +187,6 @@ public class TutorialManager : MonoBehaviour
                 HeroMessage tryCardsMessage = new HeroMessage("hello chris :)", messageQueue, true);
                 messageQueue.StartQueue();
                 while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
-
-              
-                
-
                 break;
 
             default:
@@ -230,5 +230,47 @@ public class TutorialManager : MonoBehaviour
         currentState = TutorialState.RUNNING;
 
         if(init) CardManager.Instance.board.InitBoard();
+    }
+
+    public void EndTutorial()
+    {
+        StartCoroutine(EndTutorialRoutine());
+    }
+    IEnumerator EndTutorialRoutine()
+    {
+
+        List<EventQueue> events = new List<EventQueue>();
+        events = StoryManager.Instance.queueList;
+
+        //Destroy all event queue and stop all of there coroutines
+        while (events.Count > 0)
+        {
+            for (int i = 0; i < events[0].events.Count; i++)
+            {
+                StopCoroutine(events[0].events[i]);
+            }
+
+            events.RemoveAt(0);
+        }
+
+
+        //Screen
+        #region Screen_01
+        TutorialScreen screen_01 = new TutorialScreen("Bienvenue", "TUTO_01", null);
+        bool wait = true;
+        screen_01.Open(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        while (screen_01.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        screen_01.Close(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //fade to black : todo return to menu screen
+
+        //end and return to menu
+
+        //clear queues
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);//TEMP
     }
 }

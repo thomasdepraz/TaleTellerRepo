@@ -217,24 +217,33 @@ public class PlotCard : CardData
             yield return new WaitForEndOfFrame();
         }
 
-        //Choose next card if not last
-        if (PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
-        {
-            EventQueue updateQueue = new EventQueue();
-            PlotsManager.Instance.currentMainPlotScheme.UpdateScheme(updateQueue, PlotsManager.Instance.currentMainPlotScheme);
 
-            updateQueue.StartQueue();
-            while(!updateQueue.resolved)
+        if(GameManager.Instance.currentState == GameState.GAME)
+        {
+            //Choose next card if not last
+            if (PlotsManager.Instance.currentMainPlotScheme.currentStep < PlotsManager.Instance.currentMainPlotScheme.schemeSteps.Count)
             {
-                yield return new WaitForEndOfFrame();
+                EventQueue updateQueue = new EventQueue();
+                PlotsManager.Instance.currentMainPlotScheme.UpdateScheme(updateQueue, PlotsManager.Instance.currentMainPlotScheme);
+
+                updateQueue.StartQueue();
+                while(!updateQueue.resolved)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
             }
+            else //If last then go to next acte
+            {
+                StoryManager.Instance.NextStoryArc();
+            }
+
+            currentQueue.UpdateQueue();
         }
-        else //If last then go to next acte
+        else
         {
-            StoryManager.Instance.NextStoryArc();
+            GameManager.Instance.tutorialManager.EndTutorial();
         }
 
-        currentQueue.UpdateQueue();
     }
 
     public void CompletePlot(EventQueue queue)
