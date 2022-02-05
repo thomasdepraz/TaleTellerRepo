@@ -129,10 +129,18 @@ public class TutorialManager : MonoBehaviour
         //Add plot card 
         CardData plot = tutorialPlotCard.InitializeData(tutorialPlotCard);
         tutorialCards.Add(plot);
-        
+
+        //return to menu test
+        GameOverScreen gameOverScreen = new GameOverScreen("Test", "this is the end of the tutorial", plot);
+        wait = true;
+        gameOverScreen.Open(() => wait = false);
+        while(wait) { yield return new WaitForEndOfFrame(); }
+
+        while(gameOverScreen.open) { yield return new WaitForEndOfFrame(); }
+
 
         //StartTurn 
-        StoryManager.Instance.StartTurn();
+        //StoryManager.Instance.StartTurn();
     }
 
     public void AppearObject(Transform transform, Vector3 target, Action onComplete)

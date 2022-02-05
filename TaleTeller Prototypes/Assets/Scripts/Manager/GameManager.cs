@@ -19,11 +19,17 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector]public bool pause;
     public GameState currentState = GameState.TUTORIAL;
+    public bool tutorialComplete;
 
     public void Awake()
     {
         CreateSingleton(false);
         instructionsData = Instantiate(instructionsData);
+
+        if (!tutorialComplete)
+            currentState = GameState.TUTORIAL;
+        else
+            currentState = GameState.GAME;
     }
 
     public void Update()
