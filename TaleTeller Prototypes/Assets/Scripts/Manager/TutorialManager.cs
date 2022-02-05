@@ -93,11 +93,7 @@ public class TutorialManager : MonoBehaviour
         //Screen
         #region Screen_01
         TutorialScreen screen_01 = new TutorialScreen(
-            "Taleteller is a narrative card game in which you need to achieve objectives in order to develop a story. " +
-            "\n" +
-            "\nIn this game, you embody a writer that wants to achieve is first own book. For it, he needs to make his protagonist lives several events and involve him in different intrigues." +
-            "\n" +
-            "\nTo do so, you need to put elements in your games. You can put cards on the board to develop your story.",
+            LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_00"),
             "WELCOME writer ! ", tutorialSprites[0]);
         bool wait = true;
         screen_01.Open(()=> wait = false);
@@ -110,14 +106,7 @@ public class TutorialManager : MonoBehaviour
 
         //Screen
         #region Screen_02
-        TutorialScreen screen_02 = new TutorialScreen("A turn in Taleteller is divided in two part : " +
-            "\n1 - Writing :" +
-            "\nIn this part, you are able to prepare your turn.Each card can be placed on a location. You can think about the actions of each card." +
-            "\n" +
-            "\nOnce you think you’re done, click on the GO button, the second part will start." +
-            "\n" +
-            "\n2 - Lecture :" +
-            "\nIn this part, the player hasn’t got any input. Your hero takes the lead ! In fact, he will cross board and trigger the effect of each card one by one.Once he arrives at the end, it’s the end of the turn.", 
+        TutorialScreen screen_02 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_01"), 
             "", tutorialSprites[1]);
         wait = true;
         screen_02.Open(() => wait = false);
@@ -138,7 +127,7 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_01
         EventQueue lineMessageQueue = new EventQueue();
-        HeroMessage lineMessage = new HeroMessage("Hello adventurer, I’m the main character of the story, you and me are now linked. That’s why I’ll support your learning.", lineMessageQueue, true);
+        HeroMessage lineMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_00"), lineMessageQueue, true);
         lineMessageQueue.StartQueue();
         while (!lineMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -153,7 +142,7 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_02
         EventQueue deckMessageQueue = new EventQueue();
-        HeroMessage deckMessage = new HeroMessage("It contains all your cards. If it’s empty, no worries, it will refill on its own using your discard pile.", deckMessageQueue, true);
+        HeroMessage deckMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_01"), deckMessageQueue, true);
         deckMessageQueue.StartQueue();
         while (!deckMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -168,7 +157,7 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_03
         EventQueue discardMessageQueue = new EventQueue();
-        HeroMessage discardMessage = new HeroMessage("Here it is. Your Discard Pile will get all your cards used.", discardMessageQueue, true);
+        HeroMessage discardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_02"), discardMessageQueue, true);
         discardMessageQueue.StartQueue();
         while (!discardMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -183,9 +172,7 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_04
         EventQueue handMessageQueue = new EventQueue();
-        HeroMessage handMessage = new HeroMessage("In this space, you can store your cards. You can store up to 7 cards and 1 special card called “Plot.” " +
-            "\nIf you draw a card when your hand is full, you will have to discard it. " +
-            "\nYou can play your card on the different locations.", handMessageQueue, true);
+        HeroMessage handMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_03"), handMessageQueue, true);
         handMessageQueue.StartQueue();
         while (!handMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -200,7 +187,7 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_05
         EventQueue boardMessageQueue = new EventQueue();
-        HeroMessage boardMessage = new HeroMessage("As you can see, each step is linked to a card location. This line is where I’ll cross the board and trigger the cards placed during the preparation period.", boardMessageQueue, true);
+        HeroMessage boardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_04"), boardMessageQueue, true);
         boardMessageQueue.StartQueue();
         while (!boardMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -215,7 +202,7 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_06
         EventQueue goButtonMessageQueue = new EventQueue();
-        HeroMessage goButtonMessage = new HeroMessage("To make me cross the board, Here is the “Go Button”. Once you click on it, I will take the lead and live the story you prepared to me.", goButtonMessageQueue, true);
+        HeroMessage goButtonMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_05"), goButtonMessageQueue, true);
         goButtonMessageQueue.StartQueue();
         while (!goButtonMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -223,7 +210,7 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_07
         EventQueue tooltipMessageQueue = new EventQueue();
-        HeroMessage tooltipMessage = new HeroMessage("If you don’t understand a thing, just keep the cursor in it. It will gives you advices.", tooltipMessageQueue, true);
+        HeroMessage tooltipMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_06"), tooltipMessageQueue, true);
         tooltipMessageQueue.StartQueue();
         while (!tooltipMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -238,24 +225,14 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_08
         EventQueue statsMessageQueue = new EventQueue();
-        HeroMessage statsMessage = new HeroMessage("Oh ! I forgot to mention something. Here are my statistics.", statsMessageQueue, true);
+        HeroMessage statsMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_07"), statsMessageQueue, true);
         statsMessageQueue.StartQueue();
         while (!statsMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
 
         //Screen
         #region Screen_03
-        TutorialScreen screen_03 = new TutorialScreen("There is the attack one (icone attack), the health one (icone health) and the gold one (icone gold). " +
-            "\nThis(icone attack) represents the amount of damage that I will give when I hit an enemy." +
-            "\n" +
-            "\nThe(icone gold) represents my currently amount of gold.With those coins, I can trigger some cards effects." +
-            "\n" +
-            "\nThe(icone hearth) represent my health points.If I run out of it, I die and the game is over." +
-            "\n" +
-            "\nDuring the game I will get upgrade and all of these statistics has a maximum value that can change during the game." +
-            "\n" +
-            "\nFor example, at the beginning of the game, my wallet(icone maxGold) can store up to 10 gold.If my wallet is full, and I earn gold, I’ll not able to store those coins.",
-            "", tutorialSprites[2]);
+        TutorialScreen screen_03 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_02"), "", tutorialSprites[2]);
         wait = true;
         screen_03.Open(() => wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
@@ -336,21 +313,12 @@ public class TutorialManager : MonoBehaviour
             case 0:
                 #region Turn_01
                 EventQueue messageQueue = new EventQueue();
-                HeroMessage ideaMessage = new HeroMessage("At the beginning of each turn, you will receive cards. Those cards represent the ideas, as a writer, you have. We’ll call them “Idea Cards”.", messageQueue, true);
-                HeroMessage cardMessage = new HeroMessage("The card you received are item one, Let me explain this type of card.", messageQueue, true);
+                HeroMessage ideaMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_07"), messageQueue, true);
+                HeroMessage cardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_08"), messageQueue, true);
                 messageQueue.StartQueue();
                 while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-                TutorialScreen screen_01 = new TutorialScreen(
-            "A card is composed of several elements :" +
-            "\nAt the left top corner, you can see a number. This number represent the amount of ink you need to use to play this card." +
-            "\n" +
-            "\nAt the bottom of the card, you can read the card effect.Sometimes, two effects are present.Each effect as a target represented by an icone.The target is the game element that will experience the effect." +
-            "\n" +
-            "\nAt the end of a turn, an item card played will go to your discard pile." +
-            "\n" +
-            "\n(Sometimes a card may have a gem at the bottom of it, it represents the rarety of the card)",
-            "", tutorialSprites[2]);
+                TutorialScreen screen_01 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_03"), "", tutorialSprites[2]);
                 bool wait = true;
                 screen_01.Open(() => wait = false);
                 while (wait) { yield return new WaitForEndOfFrame(); }
@@ -358,6 +326,7 @@ public class TutorialManager : MonoBehaviour
                 wait = true;
                 screen_01.Close(() => wait = false);
                 while (wait) { yield return new WaitForEndOfFrame(); }
+
                 #endregion
                 break;
 

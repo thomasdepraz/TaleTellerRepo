@@ -16,6 +16,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     [SerializeField] private TextAsset cardsDatabase;
     [SerializeField] private TextAsset popupDatabase;
     [SerializeField] private TextAsset screenDatabase;
+    [SerializeField] private TextAsset tutorielDataBase;
 
     public Dictionary<string, string> instructionsDictionary;
     public Dictionary<string, string> schemesDescriptionsDictionary;
@@ -23,6 +24,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     public Dictionary<string, string> cardsDictionary;
     public Dictionary<string, string> popupDictionary;
     public Dictionary<string, string> screenDictionary;
+    public Dictionary<string, string> tutorielDictionary;
     //Create as meany as needed
 
 
@@ -34,6 +36,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
         cardsDictionary = InitDictionary(cardsDatabase);
         popupDictionary = InitDictionary(popupDatabase);
         screenDictionary = InitDictionary(screenDatabase);
+        tutorielDictionary = InitDictionary(tutorielDataBase);
     }
 
     public Dictionary<string, string> InitDictionary(KeyStringPair[] pairs) ///Add methods overrides
