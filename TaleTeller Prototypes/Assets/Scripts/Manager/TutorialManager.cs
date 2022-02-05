@@ -78,6 +78,9 @@ public class TutorialManager : MonoBehaviour
     private Vector3 discardOrigin;
     private Vector3 goButtonOrigin;
     private Vector3 handOrigin;
+    private Vector3 statsOrigin;
+    private Vector3 inspireOrigin;
+    private Vector3 inkOrigin;
 
     public List<Sprite> tutorialSprites = new List<Sprite>();
 
@@ -173,14 +176,16 @@ public class TutorialManager : MonoBehaviour
         //Appear Hand
         #region Appear_04
         wait = true;
-        AppearObject(CardManager.Instance.cardHand.handTransformIdea, handOrigin, () => wait = false);
+        AppearObject(CardManager.Instance.cardHand.handTransform, handOrigin, () => wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
         #endregion
 
         //Hero Message
         #region Hero_04
         EventQueue handMessageQueue = new EventQueue();
-        HeroMessage handMessage = new HeroMessage("In this space, you can store your cards. You can store up to 7 cards and 1 special card called 'Plot.' If you draw a card when your hand is full, you will have to discard it. You can play your card on the different locations.", handMessageQueue, true);
+        HeroMessage handMessage = new HeroMessage("In this space, you can store your cards. You can store up to 7 cards and 1 special card called “Plot.” " +
+            "\nIf you draw a card when your hand is full, you will have to discard it. " +
+            "\nYou can play your card on the different locations.", handMessageQueue, true);
         handMessageQueue.StartQueue();
         while (!handMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         #endregion
@@ -210,9 +215,54 @@ public class TutorialManager : MonoBehaviour
         //Hero Message
         #region Hero_06
         EventQueue goButtonMessageQueue = new EventQueue();
-        HeroMessage goButtonMessage = new HeroMessage("As you can see, each step is linked to a card location. This line is where I’ll cross the board and trigger the cards placed during the preparation period.", goButtonMessageQueue, true);
-        boardMessageQueue.StartQueue();
-        while (!boardMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        HeroMessage goButtonMessage = new HeroMessage("To make me cross the board, Here is the “Go Button”. Once you click on it, I will take the lead and live the story you prepared to me.", goButtonMessageQueue, true);
+        goButtonMessageQueue.StartQueue();
+        while (!goButtonMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_07
+        EventQueue tooltipMessageQueue = new EventQueue();
+        HeroMessage tooltipMessage = new HeroMessage("If you don’t understand a thing, just keep the cursor in it. It will gives you advices.", tooltipMessageQueue, true);
+        tooltipMessageQueue.StartQueue();
+        while (!tooltipMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Appear Stats
+        #region Appear_07
+        wait = true;
+        AppearObject(GameManager.Instance.currentHero.statsFrame, statsOrigin, () => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_08
+        EventQueue statsMessageQueue = new EventQueue();
+        HeroMessage statsMessage = new HeroMessage("Oh ! I forgot to mention something. Here are my statistics.", statsMessageQueue, true);
+        statsMessageQueue.StartQueue();
+        while (!statsMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Screen
+        #region Screen_03
+        TutorialScreen screen_03 = new TutorialScreen("There is the attack one (icone attack), the health one (icone health) and the gold one (icone gold). " +
+            "\nThis(icone attack) represents the amount of damage that I will give when I hit an enemy." +
+            "\n" +
+            "\nThe(icone gold) represents my currently amount of gold.With those coins, I can trigger some cards effects." +
+            "\n" +
+            "\nThe(icone hearth) represent my health points.If I run out of it, I die and the game is over." +
+            "\n" +
+            "\nDuring the game I will get upgrade and all of these statistics has a maximum value that can change during the game." +
+            "\n" +
+            "\nFor example, at the beginning of the game, my wallet(icone maxGold) can store up to 10 gold.If my wallet is full, and I earn gold, I’ll not able to store those coins.",
+            "", tutorialSprites[2]);
+        wait = true;
+        screen_03.Open(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        while (screen_03.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        screen_03.Close(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
         #endregion
 
         //GetTutorialCards
@@ -244,15 +294,21 @@ public class TutorialManager : MonoBehaviour
         lineOrigin = manager.board.lineTransform.localPosition;
         deckOrigin = manager.deckTransform.localPosition;
         discardOrigin = manager.discardPileTransform.localPosition;
-        handOrigin = manager.cardHand.handTransformIdea.localPosition;
+        handOrigin = manager.cardHand.handTransform.localPosition;
         goButtonOrigin = manager.board.goButtonTransform.localPosition;
+        statsOrigin = GameManager.Instance.currentHero.statsFrame.localPosition;
+        inspireOrigin = manager.inspire.frame.rectTransform.localPosition;
+        inkOrigin = manager.manaSystem.manaFrame.rectTransform.localPosition;
 
-        //manager.board.boardTransform.localPosition = new Vector3(boardOrigin.x, -scalerReference.referenceResolution.y ,boardOrigin.z);
+        manager.board.boardTransform.localPosition = new Vector3(boardOrigin.x, -scalerReference.referenceResolution.y ,boardOrigin.z);
         manager.board.lineTransform.localPosition = new Vector3(lineOrigin.x, -scalerReference.referenceResolution.y, lineOrigin.z);
         manager.deckTransform.localPosition = new Vector3(deckOrigin.x, -scalerReference.referenceResolution.y, deckOrigin.z);
         manager.discardPileTransform.localPosition = new Vector3(discardOrigin.x, -scalerReference.referenceResolution.y, discardOrigin.z);
-        manager.cardHand.handTransformIdea.localPosition = new Vector3(handOrigin.x, -scalerReference.referenceResolution.y, handOrigin.z);
+        manager.cardHand.handTransform.localPosition = new Vector3(handOrigin.x, -scalerReference.referenceResolution.y, handOrigin.z);
         manager.board.goButtonTransform.localPosition = new Vector3(goButtonOrigin.x, -scalerReference.referenceResolution.y, goButtonOrigin.z);
+        GameManager.Instance.currentHero.statsFrame.localPosition = new Vector3(statsOrigin.x, +scalerReference.referenceResolution.y, statsOrigin.z);
+        manager.inspire.frame.rectTransform.localPosition = new Vector3(inspireOrigin.x, -scalerReference.referenceResolution.y, inspireOrigin.z);
+        manager.manaSystem.manaFrame.rectTransform.localPosition = new Vector3(inkOrigin.x, -scalerReference.referenceResolution.y, inkOrigin.z);
 
         StartCoroutine(IntroductionRoutine());
     }
@@ -278,14 +334,31 @@ public class TutorialManager : MonoBehaviour
         switch (TurnCount)
         {
             case 0:
+                #region Turn_01
                 EventQueue messageQueue = new EventQueue();
-                HeroMessage ideaMessage = new HeroMessage("hello", messageQueue, true);
-                HeroMessage cardMessage = new HeroMessage("hello bis", messageQueue, true);
-                HeroMessage inkPotMessage = new HeroMessage("hello tris", messageQueue, true);
-                HeroMessage manaMessage = new HeroMessage("hello chris :)", messageQueue, true);
-                HeroMessage tryCardsMessage = new HeroMessage("hello chris :)", messageQueue, true);
+                HeroMessage ideaMessage = new HeroMessage("At the beginning of each turn, you will receive cards. Those cards represent the ideas, as a writer, you have. We’ll call them “Idea Cards”.", messageQueue, true);
+                HeroMessage cardMessage = new HeroMessage("The card you received are item one, Let me explain this type of card.", messageQueue, true);
                 messageQueue.StartQueue();
                 while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+                TutorialScreen screen_01 = new TutorialScreen(
+            "A card is composed of several elements :" +
+            "\nAt the left top corner, you can see a number. This number represent the amount of ink you need to use to play this card." +
+            "\n" +
+            "\nAt the bottom of the card, you can read the card effect.Sometimes, two effects are present.Each effect as a target represented by an icone.The target is the game element that will experience the effect." +
+            "\n" +
+            "\nAt the end of a turn, an item card played will go to your discard pile." +
+            "\n" +
+            "\n(Sometimes a card may have a gem at the bottom of it, it represents the rarety of the card)",
+            "", tutorialSprites[2]);
+                bool wait = true;
+                screen_01.Open(() => wait = false);
+                while (wait) { yield return new WaitForEndOfFrame(); }
+                while (screen_01.open) { yield return new WaitForEndOfFrame(); }
+                wait = true;
+                screen_01.Close(() => wait = false);
+                while (wait) { yield return new WaitForEndOfFrame(); }
+                #endregion
                 break;
 
             default:
