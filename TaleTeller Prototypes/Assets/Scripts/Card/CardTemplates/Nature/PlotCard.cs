@@ -249,34 +249,35 @@ public class PlotCard : CardData
     }
     IEnumerator CompletePlotRoutine(EventQueue currentQueue)
     {
-        yield return null;
-
-        //Reward
-        EventQueue rewardQueue = new EventQueue();
-
-        if (isMainPlot)
+        if(GameManager.Instance.currentState == GameState.GAME)
         {
-            if (isFinal)
+            //Reward
+            EventQueue rewardQueue = new EventQueue();
+
+            if (isMainPlot)
             {
-                //Final Step of main plot reward
-                RewardManager.Instance.ChooseMainPlotRewardFinal(rewardQueue, this);
+                if (isFinal)
+                {
+                    //Final Step of main plot reward
+                    RewardManager.Instance.ChooseMainPlotRewardFinal(rewardQueue, this);
+                }
+                else
+                {
+                    //Main Plot reward
+                    RewardManager.Instance.ChooseMainPlotReward(rewardQueue, this);
+                }
             }
             else
             {
-                //Main Plot reward
-                RewardManager.Instance.ChooseMainPlotReward(rewardQueue, this);
+                //Secondary plot reward
+            }
+            rewardQueue.StartQueue();
+            while (!rewardQueue.resolved)
+            {
+                yield return new WaitForEndOfFrame();
             }
         }
-        else
-        {
-            //Secondary plot reward
-        }
-        rewardQueue.StartQueue();
-        while(!rewardQueue.resolved)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        
+
         //Send to oblivion or wait for end of story to send to oblivion and pickj new plot scheme //TODO implement queuing
         if(isMainPlot)
         {
