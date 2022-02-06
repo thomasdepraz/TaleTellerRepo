@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 [Serializable]
 
@@ -130,13 +131,7 @@ public class TutorialManager : MonoBehaviour
         CardData plot = tutorialPlotCard.InitializeData(tutorialPlotCard);
         tutorialCards.Add(plot);
 
-        //return to menu test
-        GameOverScreen gameOverScreen = new GameOverScreen("Test", "this is the end of the tutorial", plot);
-        wait = true;
-        gameOverScreen.Open(() => wait = false);
-        while(wait) { yield return new WaitForEndOfFrame(); }
-
-        while(gameOverScreen.open) { yield return new WaitForEndOfFrame(); }
+      
 
 
         //StartTurn 
@@ -261,25 +256,19 @@ public class TutorialManager : MonoBehaviour
             events.RemoveAt(0);
         }
 
+        //Save
+        SaveManager.Save(new SaveFile(CoreManager.Instance));
+        yield return new WaitForSeconds(0.5f);//TEMP : Wait for save writing
 
-        //Screen
-        #region Screen_01
-        TutorialScreen screen_01 = new TutorialScreen("Bienvenue", "TUTO_01", null);
+
+
+        //return to menu test
+        GameOverScreen gameOverScreen = new GameOverScreen("Test", "this is the end of the tutorial", tutorialPlotCard);
         bool wait = true;
-        screen_01.Open(() => wait = false);
+        gameOverScreen.Open(() => wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
-        while (screen_01.open) { yield return new WaitForEndOfFrame(); }
-        wait = true;
-        screen_01.Close(() => wait = false);
-        while (wait) { yield return new WaitForEndOfFrame(); }
-        #endregion
 
-        //fade to black : todo return to menu screen
-
-        //end and return to menu
-
-        //clear queues
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);//TEMP
+        while (gameOverScreen.open) { yield return new WaitForEndOfFrame(); }
     }
 
     public void AppearPlot(EventQueue queue)

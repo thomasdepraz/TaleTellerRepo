@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using NaughtyAttributes;
-using Utility;
 
 public enum GameState {GAME, TUTORIAL}
 public class GameManager : Singleton<GameManager>
@@ -45,12 +43,6 @@ public class GameManager : Singleton<GameManager>
 
     public void Update()
     {
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
-        {
-            SaveFile save = new SaveFile();
-            SaveManager.Save(save);
-        }
-
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
         {
             if (Time.timeScale > 1)
