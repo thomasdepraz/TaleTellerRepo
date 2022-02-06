@@ -9,6 +9,7 @@ public class Hero : MonoBehaviour
     [SerializeField] public HeroBaseData heroData;
 
     [Header("UI")]
+    public RectTransform statsFrame;
     public Image hpFrame;
     public Image attackFrame;
     public Image goldFrame;

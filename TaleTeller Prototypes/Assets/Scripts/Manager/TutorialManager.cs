@@ -79,6 +79,11 @@ public class TutorialManager : MonoBehaviour
     private Vector3 discardOrigin;
     private Vector3 goButtonOrigin;
     private Vector3 handOrigin;
+    private Vector3 statsOrigin;
+    private Vector3 inspireOrigin;
+    private Vector3 inkOrigin;
+
+    public List<Sprite> tutorialSprites = new List<Sprite>();
 
     List<CardData> tutorialCards = new List<CardData>();
     public List<TutorialConditions> tutorialConditions = new List<TutorialConditions>();
@@ -88,7 +93,9 @@ public class TutorialManager : MonoBehaviour
     {
         //Screen
         #region Screen_01
-        TutorialScreen screen_01 = new TutorialScreen("Bienvenue", "TUTO_01", null);
+        TutorialScreen screen_01 = new TutorialScreen(
+            LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_00"),
+            "WELCOME writer ! ", tutorialSprites[0]);
         bool wait = true;
         screen_01.Open(()=> wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
@@ -100,7 +107,8 @@ public class TutorialManager : MonoBehaviour
 
         //Screen
         #region Screen_02
-        TutorialScreen screen_02 = new TutorialScreen("Bienvenue bis", "TUTO_02", null);
+        TutorialScreen screen_02 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_01"), 
+            "", tutorialSprites[1]);
         wait = true;
         screen_02.Open(() => wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
@@ -110,16 +118,130 @@ public class TutorialManager : MonoBehaviour
         while (wait) { yield return new WaitForEndOfFrame(); }
         #endregion
 
-        //Hero and board
+        //Appear Line
+        #region Appear_01
         wait = true;
         AppearObject(CardManager.Instance.board.lineTransform, lineOrigin, () => wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
 
+        //Hero Message
+        #region Hero_01
         EventQueue lineMessageQueue = new EventQueue();
-        HeroMessage lineMessage = new HeroMessage("Salut le sang", lineMessageQueue, true);
+        HeroMessage lineMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_00"), lineMessageQueue, true);
         lineMessageQueue.StartQueue();
         while (!lineMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
 
+        //Appear Deck
+        #region Appear_02
+        wait = true;
+        AppearObject(CardManager.Instance.deckTransform, deckOrigin, () => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_02
+        EventQueue deckMessageQueue = new EventQueue();
+        HeroMessage deckMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_01"), deckMessageQueue, true);
+        deckMessageQueue.StartQueue();
+        while (!deckMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Appear Discard
+        #region Appear_03
+        wait = true;
+        AppearObject(CardManager.Instance.discardPileTransform, discardOrigin, () => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_03
+        EventQueue discardMessageQueue = new EventQueue();
+        HeroMessage discardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_02"), discardMessageQueue, true);
+        discardMessageQueue.StartQueue();
+        while (!discardMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Appear Hand
+        #region Appear_04
+        wait = true;
+        AppearObject(CardManager.Instance.cardHand.handTransform, handOrigin, () => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_04
+        EventQueue handMessageQueue = new EventQueue();
+        HeroMessage handMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_03"), handMessageQueue, true);
+        handMessageQueue.StartQueue();
+        while (!handMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Appear Board
+        #region Appear_05
+        wait = true;
+        AppearObject(CardManager.Instance.board.boardTransform, boardOrigin, () => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_05
+        EventQueue boardMessageQueue = new EventQueue();
+        HeroMessage boardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_04"), boardMessageQueue, true);
+        boardMessageQueue.StartQueue();
+        while (!boardMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Appear Go Button
+        #region Appear_06
+        wait = true;
+        AppearObject(CardManager.Instance.board.goButtonTransform, goButtonOrigin, () => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_06
+        EventQueue goButtonMessageQueue = new EventQueue();
+        HeroMessage goButtonMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_05"), goButtonMessageQueue, true);
+        goButtonMessageQueue.StartQueue();
+        while (!goButtonMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_07
+        EventQueue tooltipMessageQueue = new EventQueue();
+        HeroMessage tooltipMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_06"), tooltipMessageQueue, true);
+        tooltipMessageQueue.StartQueue();
+        while (!tooltipMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Appear Stats
+        #region Appear_07
+        wait = true;
+        AppearObject(GameManager.Instance.currentHero.statsFrame, statsOrigin, () => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Hero Message
+        #region Hero_08
+        EventQueue statsMessageQueue = new EventQueue();
+        HeroMessage statsMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_07"), statsMessageQueue, true);
+        statsMessageQueue.StartQueue();
+        while (!statsMessageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+        #endregion
+
+        //Screen
+        #region Screen_03
+        TutorialScreen screen_03 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_02"), "", tutorialSprites[2]);
+        wait = true;
+        screen_03.Open(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        while (screen_03.open) { yield return new WaitForEndOfFrame(); }
+        wait = true;
+        screen_03.Close(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+        #endregion
 
         //GetTutorialCards
         for (int i = 0; i < CardManager.Instance.cardDeck.cardDeck.Count; i++)
@@ -150,13 +272,23 @@ public class TutorialManager : MonoBehaviour
         //Hide Board
         boardOrigin = manager.board.boardTransform.localPosition;
         lineOrigin = manager.board.lineTransform.localPosition;
+        deckOrigin = manager.deckTransform.localPosition;
+        discardOrigin = manager.discardPileTransform.localPosition;
+        handOrigin = manager.cardHand.handTransform.localPosition;
         goButtonOrigin = manager.board.goButtonTransform.localPosition;
+        statsOrigin = GameManager.Instance.currentHero.statsFrame.localPosition;
+        inspireOrigin = manager.inspire.frame.rectTransform.localPosition;
+        inkOrigin = manager.manaSystem.manaFrame.rectTransform.localPosition;
 
-        //manager.board.boardTransform.localPosition = new Vector3(boardOrigin.x, -scalerReference.referenceResolution.y ,boardOrigin.z);
+        manager.board.boardTransform.localPosition = new Vector3(boardOrigin.x, -scalerReference.referenceResolution.y ,boardOrigin.z);
         manager.board.lineTransform.localPosition = new Vector3(lineOrigin.x, -scalerReference.referenceResolution.y, lineOrigin.z);
-
-
-
+        manager.deckTransform.localPosition = new Vector3(deckOrigin.x, -scalerReference.referenceResolution.y, deckOrigin.z);
+        manager.discardPileTransform.localPosition = new Vector3(discardOrigin.x, -scalerReference.referenceResolution.y, discardOrigin.z);
+        manager.cardHand.handTransform.localPosition = new Vector3(handOrigin.x, -scalerReference.referenceResolution.y, handOrigin.z);
+        manager.board.goButtonTransform.localPosition = new Vector3(goButtonOrigin.x, -scalerReference.referenceResolution.y, goButtonOrigin.z);
+        GameManager.Instance.currentHero.statsFrame.localPosition = new Vector3(statsOrigin.x, +scalerReference.referenceResolution.y, statsOrigin.z);
+        manager.inspire.frame.rectTransform.localPosition = new Vector3(inspireOrigin.x, -scalerReference.referenceResolution.y, inspireOrigin.z);
+        manager.manaSystem.manaFrame.rectTransform.localPosition = new Vector3(inkOrigin.x, -scalerReference.referenceResolution.y, inkOrigin.z);
 
         StartCoroutine(IntroductionRoutine());
     }
@@ -182,14 +314,23 @@ public class TutorialManager : MonoBehaviour
         switch (TurnCount)
         {
             case 0:
+                #region Turn_01
                 EventQueue messageQueue = new EventQueue();
-                HeroMessage ideaMessage = new HeroMessage("hello", messageQueue, true);
-                HeroMessage cardMessage = new HeroMessage("hello bis", messageQueue, true);
-                HeroMessage inkPotMessage = new HeroMessage("hello tris", messageQueue, true);
-                HeroMessage manaMessage = new HeroMessage("hello chris :)", messageQueue, true);
-                HeroMessage tryCardsMessage = new HeroMessage("hello chris :)", messageQueue, true);
+                HeroMessage ideaMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_07"), messageQueue, true);
+                HeroMessage cardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_08"), messageQueue, true);
                 messageQueue.StartQueue();
                 while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+                TutorialScreen screen_01 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_03"), "", tutorialSprites[2]);
+                bool wait = true;
+                screen_01.Open(() => wait = false);
+                while (wait) { yield return new WaitForEndOfFrame(); }
+                while (screen_01.open) { yield return new WaitForEndOfFrame(); }
+                wait = true;
+                screen_01.Close(() => wait = false);
+                while (wait) { yield return new WaitForEndOfFrame(); }
+
+                #endregion
                 break;
 
             default:
