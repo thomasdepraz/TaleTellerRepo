@@ -531,14 +531,21 @@ public class TutorialManager : MonoBehaviour
         }
 
         //Last Events Queue
-
+        TutorialScreen screen_06 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T5_00"), "", tutorialSprites[11]);
+        bool wait4 = true;
+        screen_06.Open(() => wait4 = false);
+        while (wait4) { yield return new WaitForEndOfFrame(); }
+        while (screen_06.open) { yield return new WaitForEndOfFrame(); }
+        wait4 = true;
+        screen_06.Close(() => wait4 = false);
+        while (wait4) { yield return new WaitForEndOfFrame(); }
 
         //Save
         SaveManager.Save(new SaveFile(CoreManager.Instance));
         yield return new WaitForSeconds(0.5f);//TEMP : Wait for save writing
 
         //return to menu test
-        GameOverScreen gameOverScreen = new GameOverScreen("Test", "this is the end of the tutorial", tutorialPlotCard);
+        GameOverScreen gameOverScreen = new GameOverScreen("The End", "You finished the tutorial. Now you can start your own story from the menu ! ", tutorialPlotCard);
         bool wait = true;
         gameOverScreen.Open(() => wait = false);
         while (wait) { yield return new WaitForEndOfFrame(); }
