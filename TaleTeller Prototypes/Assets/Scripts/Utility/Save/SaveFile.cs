@@ -36,8 +36,24 @@ namespace Utility
             string saveString = GetSaveString();
 
             if (saveString != string.Empty)
-                return JsonConvert.DeserializeObject<SaveFile>(saveString);
-            else return new SaveFile();
+            {
+                try
+                {
+                    return JsonConvert.DeserializeObject<SaveFile>(saveString);
+                }
+                catch
+                {
+                    SaveFile save = new SaveFile();
+                    Save(save); //overwrite corrupted file
+                    return save;
+                }
+            }
+            else
+            {
+                SaveFile save = new SaveFile();
+                Save(save); //overwrite corrupted file
+                return save;
+            }
         }
 
         public static string GetSaveString()
