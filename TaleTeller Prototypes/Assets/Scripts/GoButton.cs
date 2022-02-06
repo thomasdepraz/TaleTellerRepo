@@ -27,17 +27,21 @@ public class GoButton : MonoBehaviour
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //do some tweening
-        originPos = rectTransform.anchoredPosition;
-        originRot = rectTransform.rotation;
-        originScale = rectTransform.localScale;
-
-        tween = LeanTween.scale(this.gameObject, new Vector3(1.2f,1.2f,1.2f), 0.1f).setLoopPingPong(1).setOnComplete(HoveringTween);
-        image.sprite = hoveredSprite;
-        if(Input.GetMouseButton(0))
+        if (GameManager.Instance.currentState == GameState.GAME || (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.canUseGoButton))
         {
-            image.color = onPressColor;
+            //do some tweening
+            originPos = rectTransform.anchoredPosition;
+            originRot = rectTransform.rotation;
+            originScale = rectTransform.localScale;
+
+            tween = LeanTween.scale(this.gameObject, new Vector3(1.2f,1.2f,1.2f), 0.1f).setLoopPingPong(1).setOnComplete(HoveringTween);
+            image.sprite = hoveredSprite;
+            if(Input.GetMouseButton(0))
+            {
+                image.color = onPressColor;
+            }
         }
+
     }
     public void HoveringTween()
     {
@@ -47,25 +51,35 @@ public class GoButton : MonoBehaviour
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.sprite = defaultSprite;
-        image.color = Color.white;
-
-        if(LeanTween.isTweening(gameObject))
+        if (GameManager.Instance.currentState == GameState.GAME || (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.canUseGoButton))
         {
-            LeanTween.cancel(gameObject);
-            rectTransform.anchoredPosition = originPos;
-            rectTransform.rotation = originRot;
-            rectTransform.localScale = originScale;
+            image.sprite = defaultSprite;
+            image.color = Color.white;
+
+            if(LeanTween.isTweening(gameObject))
+            {
+                LeanTween.cancel(gameObject);
+                rectTransform.anchoredPosition = originPos;
+                rectTransform.rotation = originRot;
+                rectTransform.localScale = originScale;
+            }
         }
+
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        image.color = onPressColor;
+        if (GameManager.Instance.currentState == GameState.GAME || (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.canUseGoButton))
+        {
+            image.color = onPressColor;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        image.color = Color.white;
+        if (GameManager.Instance.currentState == GameState.GAME || (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.canUseGoButton))
+        {
+            image.color = Color.white;
+        }
     }
 
     public bool CheckValid()
