@@ -163,7 +163,7 @@ public class Hero : MonoBehaviour
     public IEnumerator DeathRoutine()
     {
         EventQueue gameOverQueue = new EventQueue();
-        GameManager.Instance.GameOver(gameOverQueue);
+        GameManager.Instance.GameOver(gameOverQueue, GameOverType.PLAYER_DEATH);
         gameOverQueue.StartQueue();
 
         while (!gameOverQueue.resolved) { yield return new WaitForEndOfFrame(); }

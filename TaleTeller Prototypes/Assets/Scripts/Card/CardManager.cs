@@ -47,6 +47,8 @@ public class CardManager : Singleton<CardManager>
     public Message currentMessage;
     public ScreenButton messageButton;
 
+    public CardData activatedCard;
+
     //Init Card
     public void CardInitialize(CardData data)
     {

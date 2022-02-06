@@ -119,6 +119,8 @@ public class CharacterType : CardTypes
         }
         else
         {
+            CardManager.Instance.activatedCard = data;
+
             int hitCount = doubleStrike ? 2:1;
 
             for (int i = 0; i < hitCount; i++)
@@ -368,7 +370,7 @@ public class CharacterType : CardTypes
                     }
                     else
                     {
-                        plot.FailPlot(discardQueue);//if kill when not objective lose 
+                        plot.FailPlot(discardQueue, GameOverType.PLOT_DEATH);//if kill when not objective lose 
                     }
                 }
                 else //if secondary send to oblivion

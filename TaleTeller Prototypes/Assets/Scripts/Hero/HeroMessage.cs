@@ -78,6 +78,16 @@ public class HeroMessage
 
     void OpenMessageBox()
     {
+        if(manager.exclamationPanelTransform.position.x > 0)
+        {
+            manager.exclamationPanelTransform.pivot = new Vector2(1f, 0.5f);
+        }
+        else
+        {
+            manager.exclamationPanelTransform.pivot = new Vector2(0f, 0.5f);
+        }
+
+
         LeanTween.cancel(manager.exclamationPanelTransform.gameObject);
         manager.exclamationPanelTransform.gameObject.SetActive(true);
         LeanTween.value(manager.exclamationPanelTransform.gameObject, 0,0,2f).setOnComplete(CloseMessageBox);
@@ -86,6 +96,15 @@ public class HeroMessage
 
     void OpenMessageBox(Action onComplete)
     {
+        if (manager.exclamationPanelTransform.position.x > 0)
+        {
+            manager.exclamationPanelTransform.pivot = new Vector2(1f, 0.5f);
+        }
+        else
+        {
+            manager.exclamationPanelTransform.pivot = new Vector2(0f, 0.5f);
+        }
+
         LeanTween.cancel(manager.exclamationPanelTransform.gameObject);
         manager.exclamationPanelTransform.gameObject.SetActive(true);
         LeanTween.value(manager.exclamationPanelTransform.gameObject, 0, 0, 2f).setOnComplete(onComplete);
@@ -94,6 +113,7 @@ public class HeroMessage
 
     void CloseMessageBox()
     {
+        manager.exclamationPanelTransform.localScale = Vector3.one;
         manager.exclamationPanelTransform.gameObject.SetActive(false);
         manager.currentPlayerMessage = null;
     }

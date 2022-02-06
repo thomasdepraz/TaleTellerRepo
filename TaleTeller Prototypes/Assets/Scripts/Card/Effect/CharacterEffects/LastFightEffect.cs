@@ -33,6 +33,7 @@ public class LastFightEffect : CharacterCombatEffect
 
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
+        CardManager.Instance.activatedCard = data;
         CharacterType character = linkedData.cardType as CharacterType;
         if (foughtHeroLast)
         {

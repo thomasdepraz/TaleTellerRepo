@@ -16,6 +16,7 @@ public class GameOverScreen : GameScreen
         ScreenManager.Instance.currentScreen = this;
         this.title = title;
         this.content = content;
+        this.card = card;
         visuals = ScreenManager.Instance.gameOverScreenVisuals;
         visuals.Initialize(this);
     }

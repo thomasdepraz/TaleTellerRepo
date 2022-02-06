@@ -80,6 +80,7 @@ public class HeroStatsModifierEffect : HeroStatsEffects
     {
         Debug.Log("Hero Gain Effect");
         yield return null;
+        CardManager.Instance.activatedCard = cardData;
 
         switch (gainValue.type)
         {

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public enum GameState {GAME, TUTORIAL}
+
+public enum GameOverType { PLAYER_DEATH, PLOT_DEATH, PLOT_TIMER};
 public class GameManager : Singleton<GameManager>
 {
     [Header("References")]
@@ -66,19 +68,15 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region GameOver
-    public void GameOver(EventQueue queue)
+    public void GameOver(EventQueue queue, GameOverType gameOverType)
     {
-        queue.events.Add(GameOverCoroutine(queue));
+        queue.events.Add(GameOverCoroutine(queue, gameOverType));
     }
 
-    IEnumerator GameOverCoroutine(EventQueue queue)
+    IEnumerator GameOverCoroutine(EventQueue queue, GameOverType gameOverType)
     {
         //Pause so other routines stop;
         pause = true;
-        //Fade To Black
-        //NOTE USE SOMETHING ELSE LATER
-        Fade(true);
-        yield return new WaitForSeconds(1);
 
         List<EventQueue> events  = new List<EventQueue>();
         events = StoryManager.Instance.queueList;
@@ -93,10 +91,34 @@ public class GameManager : Singleton<GameManager>
 
             events.RemoveAt(0);
         }
+        string instruction = string.Empty;
+        string content = string.Empty;
 
+        switch (gameOverType)
+        {
+            case GameOverType.PLAYER_DEATH:
+                instruction = "The hero died...";
+                content = "";
+                break;
+            case GameOverType.PLOT_DEATH:
+                instruction = "The plot card died...";
+                content = "";
+                break;
+            case GameOverType.PLOT_TIMER:
+                instruction = "The story got boring...";
+                content = "";
+                break;
+            default:
+                break;
+        }
 
-        //Return to Menu Button
-        returnToMenuButton.gameObject.SetActive(true);
+        //return to menu test
+        GameOverScreen gameOverScreen = new GameOverScreen(instruction, content, CardManager.Instance.activatedCard);
+        bool wait = true;
+        gameOverScreen.Open(() => wait = false);
+        while (wait) { yield return new WaitForEndOfFrame(); }
+
+        while (gameOverScreen.open) { yield return new WaitForEndOfFrame(); }
     }
     #endregion
 

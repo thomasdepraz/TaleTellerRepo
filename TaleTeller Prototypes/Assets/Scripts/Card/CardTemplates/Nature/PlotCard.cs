@@ -14,9 +14,6 @@ public class PlotCard : CardData
     [TextArea(2, 3)] public string plotChoiceDescription;
     public List<CardData> legendaryCardRewards = new List<CardData>();
 
-    //Eventually CardData malusCardToSpawn 
-
-    //TEMP
     public override CardData InitializeData(CardData data)
     {
         PlotCard plot = Instantiate(data.dataReference) as PlotCard;//make data an instance of itself
@@ -297,42 +294,26 @@ public class PlotCard : CardData
         currentQueue.UpdateQueue();
     }
 
-    public void FailPlot(EventQueue queue)
+    public void FailPlot(EventQueue queue, GameOverType gameOverType)
     {
-        queue.events.Add(FailPlotRoutine(queue));
+        queue.events.Add(FailPlotRoutine(queue, gameOverType));
     }
-    public IEnumerator FailPlotRoutine(EventQueue currentQueue)
+    public IEnumerator FailPlotRoutine(EventQueue currentQueue, GameOverType gameOverType)
     {
-        yield return null;
-        if (isMainPlot)
+        CardManager.Instance.activatedCard = this;
+
+        //Show the card + why the player lost TODO
+
+
+        //GameOver
+        EventQueue gameOverQueue = new EventQueue();
+
+        GameManager.Instance.GameOver(gameOverQueue, gameOverType);
+
+        gameOverQueue.StartQueue();
+        while(!gameOverQueue.resolved)
         {
-            //Show the card + why the player lost TODO
-
-
-            //GameOver
-            EventQueue gameOverQueue = new EventQueue();
-
-            GameManager.Instance.GameOver(gameOverQueue);
-
-            gameOverQueue.StartQueue();
-            while(!gameOverQueue.resolved)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-        }
-        else
-        {
-            //TEMP pick a random card within the list and add it to the deck
-            CardData darkIdea = PlotsManager.Instance.darkIdeas[Random.Range(0, PlotsManager.Instance.darkIdeas.Count-1)];
-            EventQueue sendToDeckQueue = new EventQueue();
-            CardManager.Instance.CardAppearToDeck(darkIdea, sendToDeckQueue, CardManager.Instance.plotAppearTransform.position);
-            sendToDeckQueue.StartQueue();
-            while (!sendToDeckQueue.resolved) { yield return new WaitForEndOfFrame(); }
-            
-
-            //DestroyCard -- NOTE REGROUP THIS FUNCTION SOMEWHERE
-            currentContainer.ResetContainer();
-            StoryManager.Instance.cardsToDestroy.Add(this);
+            yield return new WaitForEndOfFrame();
         }
 
         currentQueue.UpdateQueue();
@@ -364,7 +345,7 @@ public class PlotCard : CardData
         if(completionTimer <= 0)
         {
             EventQueue failQueue = new EventQueue();
-            FailPlot(failQueue);
+            FailPlot(failQueue, GameOverType.PLOT_TIMER);
 
             failQueue.StartQueue();
             while(!failQueue.resolved)

@@ -25,14 +25,6 @@ public class Deck : MonoBehaviour
     public Image deckHighlight;
     public Image discardHighlight;
 
-    public void Awake()
-    {
-        if(enableDebugDeck)
-        {
-            
-        }
-    }
-
     public void Start()
     {
         baseDeck = Instantiate(baseDeck);

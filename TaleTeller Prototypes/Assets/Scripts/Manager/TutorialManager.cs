@@ -85,9 +85,9 @@ public class TutorialManager : MonoBehaviour
 
     public List<Sprite> tutorialSprites = new List<Sprite>();
 
-    List<CardData> tutorialCards = new List<CardData>();
+    public List<CardData> tutorialCards = new List<CardData>();
     public List<TutorialConditions> tutorialConditions = new List<TutorialConditions>();
-    public PlotCard tutorialPlotCard;
+    public CardData tutorialPlotCard;
 
     IEnumerator IntroductionRoutine()
     {
@@ -243,16 +243,17 @@ public class TutorialManager : MonoBehaviour
         while (wait) { yield return new WaitForEndOfFrame(); }
         #endregion
 
-        //GetTutorialCards
-        for (int i = 0; i < CardManager.Instance.cardDeck.cardDeck.Count; i++)
+        //Init cards deck
+        CardManager.Instance.cardDeck.cardDeck.Clear();
+        for (int i = 0; i < tutorialCards.Count; i++)
         {
-            tutorialCards.Add(CardManager.Instance.cardDeck.cardDeck[i]);
+            tutorialCards[i] = tutorialCards[i].InitializeData(tutorialCards[i]);
+            CardManager.Instance.cardDeck.cardDeck.Add(tutorialCards[i]);
         }
 
         //Add plot card 
-        CardData plot = tutorialPlotCard.InitializeData(tutorialPlotCard);
-        tutorialCards.Add(plot);
-
+        tutorialPlotCard = tutorialPlotCard.InitializeData(tutorialPlotCard);
+        tutorialCards.Add(tutorialPlotCard);
 
         //StartTurn 
         StoryManager.Instance.StartTurn();
