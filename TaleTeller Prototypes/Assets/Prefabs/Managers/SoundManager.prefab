@@ -47,3 +47,5 @@ MonoBehaviour:
   musicBank: {fileID: 11400000, guid: 8291178b702b1b7428465a1266d21f94, type: 2}
   sfxGroup: {fileID: 7420215798805001767, guid: a79e526f28458b54f906b2c603a9051c, type: 2}
   musicGroup: {fileID: 2357072015074244472, guid: a79e526f28458b54f906b2c603a9051c, type: 2}
+  menuScene: 1
+  gameScene: 3

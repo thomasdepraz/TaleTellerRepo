@@ -9,7 +9,7 @@ public class GoButton : MonoBehaviour
     , IPointerExitHandler
     , IPointerDownHandler
     , IPointerUpHandler
-    ,IPointerClickHandler
+    , IPointerClickHandler
 {
     [Header("Sprites")]
     public Image image;
@@ -81,12 +81,17 @@ public class GoButton : MonoBehaviour
             HeroMessage errorMessage = new HeroMessage("The board is empty !");
             return false;
         }
-
         return true;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (CheckValid()) board.InitBoard();
+        if (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.currentState != TutorialState.PENDING)
+            GameManager.Instance.tutorialManager.ValidConditions();
+        else if(GameManager.Instance.currentState == GameState.GAME)
+        {
+            if (CheckValid()) board.InitBoard();
+        }
+
     }
 }

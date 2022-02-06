@@ -3,25 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using NaughtyAttributes;
 
+public enum GameState {GAME, TUTORIAL}
 public class GameManager : Singleton<GameManager>
 {
     [Header("References")]
     public Hero currentHero;
     public InstructionsData instructionsData;
-    public StoryManager storyManager;
+    public TutorialManager tutorialManager;
     public GameObject goButton;
     public Image fadePanel;
     public Pointer pointer;
     public Button returnToMenuButton;
 
     [HideInInspector]public bool pause;
+    public GameState currentState = GameState.TUTORIAL;
+
 
     public void Awake()
     {
         CreateSingleton(false);
         instructionsData = Instantiate(instructionsData);
+    }
+
+    public void Start()
+    {
+        #region Load Save
+        if (CoreManager.Instance.playTutorial || !CoreManager.Instance.completeTutorial)
+        {
+            CoreManager.Instance.playTutorial = false;
+            currentState = GameState.TUTORIAL;
+        }
+        else
+        {
+            currentState = GameState.GAME;
+        }
+        #endregion
     }
 
     public void Update()

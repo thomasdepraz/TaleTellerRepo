@@ -16,6 +16,7 @@ public class TutorialScreenVisuals : GameScreenVisuals
     public override void Initialize(GameScreen gameScreen)
     {
         TutorialScreen screen = gameScreen as TutorialScreen;
+        illustration.sprite = screen.illustration;
         instructionsText.text = screen.instructionText;
         tutorialText.text = screen.tutorialText;
 

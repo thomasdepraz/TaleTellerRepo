@@ -40,7 +40,12 @@ public class CardManager : Singleton<CardManager>
     [Header("Player Exclamation")]
     public RectTransform exclamationPanelTransform;
     public TextMeshProUGUI exclamationText;
-    public HeroMessage currentMessage;
+    public RectTransform messagePanelTransform;
+    public TextMeshProUGUI messageText;
+    public HeroMessage currentPlayerMessage;
+    public ScreenButton playerMessageButton;
+    public Message currentMessage;
+    public ScreenButton messageButton;
 
     //Init Card
     public void CardInitialize(CardData data)

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using NaughtyAttributes;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -20,6 +21,10 @@ public class SoundManager : Singleton<SoundManager>
 
     public AudioMixerGroup sfxGroup;
     public AudioMixerGroup musicGroup;
+
+    [Header("Music Scenes")]
+    [Scene] public int menuScene;
+    [Scene] public int gameScene;
 
     public void Start()
     {
@@ -173,13 +178,13 @@ public class SoundManager : Singleton<SoundManager>
         Sound soundToPlay = null;
 
         //Menu Music
-        if (sceneIndex == 0)
+        if (sceneIndex == menuScene)
         {
             if (currentPlaying != null) StopCoroutine(currentPlaying);
             soundToPlay = new Sound(availableSource, "MUS_TITLE", SoundType.MUSIC, true, false);
         }
         //Game Music
-        else if(sceneIndex == 2)
+        else if(sceneIndex == gameScene)
         {
             soundToPlay = new Sound(availableSource, playlist[UnityEngine.Random.Range((int)0, (int)playlist.Count)], SoundType.MUSIC, false, false);
             currentPlaying = StartCoroutine(CurrentPlayingMusic(soundToPlay.currentSource.clip.length - 5));

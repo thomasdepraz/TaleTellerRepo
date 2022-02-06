@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class TutorialEffect : Effect
 {
+    public bool doOnce;
+    private bool effectAvailable = true;
+
     public string tutorialText;
+    public Sprite tutorialIllustration;
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
-        TutorialScreen screen = new TutorialScreen(tutorialText, "$TUTORIAL$");
-        bool wait = true;
-        screen.Open(()=> wait = false);
-        while (wait) { yield return new WaitForEndOfFrame(); }
+        if(effectAvailable)
+        {
+            TutorialScreen screen = new TutorialScreen(tutorialText, "$TUTORIAL$", tutorialIllustration);
+            bool wait = true;
+            screen.Open(()=> wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
 
-        while (screen.open) { yield return new WaitForEndOfFrame(); }
+            while (screen.open) { yield return new WaitForEndOfFrame(); }
 
-        wait = true;
-        screen.Close(() => wait = false);
-        while (wait) { yield return new WaitForEndOfFrame(); }
+            wait = true;
+            screen.Close(() => wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
+        }
+
+        if (doOnce)
+            effectAvailable = false;
+
 
         currentQueue.UpdateQueue();
     }

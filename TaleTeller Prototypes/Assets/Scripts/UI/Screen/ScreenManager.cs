@@ -8,10 +8,11 @@ public class ScreenManager : Singleton<ScreenManager>
     {
         CreateSingleton();
     }
+    public GameScreen currentScreen;
+
     public RewardScreenVisuals rewardScreenVisuals;
     public ChapterScreenVisuals chapterScreenVisuals;
     public CardPickerScreenVisual pickerScreenVisual;
-
-    public GameScreen currentScreen;
     public TutorialScreenVisuals tutorialScreenVisuals;
+    public GameOverScreenVisuals gameOverScreenVisuals;
 }

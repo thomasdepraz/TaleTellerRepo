@@ -25,14 +25,19 @@ public class StoryManager : Singleton<StoryManager>
 
     public IEnumerator Start()
     {
-        CardManager.Instance.UpdateHandCount();
-        yield return new WaitForSeconds(1);
-        StartTurn();
-    }
+        //Play tutorial or not 
+        if(GameManager.Instance.currentState == GameState.TUTORIAL)
+        {
+            CardManager.Instance.cardDeck.enableNoShuffle = true;
+            GameManager.Instance.tutorialManager.InitializeGameScreen();
+        }
+        else
+        {
+            CardManager.Instance.UpdateHandCount();
 
-    private void Update()
-    {
-        //Debug.Log("");
+            yield return new WaitForSeconds(1);
+            StartTurn();
+        }
     }
 
     public void StartTurn()
@@ -42,7 +47,7 @@ public class StoryManager : Singleton<StoryManager>
     public IEnumerator StartTurnRoutine()
     {
         yield return null;
-        if(turnCount == 0 )
+        if(turnCount == 0 && GameManager.Instance.currentState == GameState.GAME)
         {
             EventQueue mainQueue = new EventQueue();
 
@@ -55,20 +60,13 @@ public class StoryManager : Singleton<StoryManager>
             }
         }
 
-
-        //TEMP secondary plot deal --it ll probably be elswhere later
-        //if (turnCount > 0 && turnCount % 2 == 0 && PlotsManager.Instance.secondaryPlots.Count > 0)
-        //{
-        //    EventQueue secondaryPlotsQueue = new EventQueue();
-        //    PlotsManager.Instance.ChooseSecondaryPlots(secondaryPlotsQueue);
-        //    secondaryPlotsQueue.StartQueue();
-
-        //    while (!secondaryPlotsQueue.resolved)
-        //    {
-        //        yield return new WaitForEndOfFrame();
-        //    }
-        //}
-
+        if(GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.TurnCount == 3)
+        {
+            EventQueue appearQueue = new EventQueue();
+            GameManager.Instance.tutorialManager.AppearPlot(appearQueue);
+            appearQueue.StartQueue();
+            while(!appearQueue.resolved) { yield return new WaitForEndOfFrame(); }   
+        }
 
         //Deal Cards
         int numberOfCardsToDeal = 0;
@@ -77,6 +75,7 @@ public class StoryManager : Singleton<StoryManager>
         else
             numberOfCardsToDeal = CardManager.Instance.cardDeck.drawAmount;
 
+        if (GameManager.Instance.currentState == GameState.TUTORIAL) numberOfCardsToDeal = GameManager.Instance.tutorialManager.GetCardCount();
 
         EventQueue drawQueue = new EventQueue();
         CardManager.Instance.cardDeck.DrawCards(numberOfCardsToDeal, drawQueue);
@@ -93,6 +92,7 @@ public class StoryManager : Singleton<StoryManager>
         #region OnTurnStartEvent
         EventQueue onStartTurnQueue = new EventQueue();
         CallGeneralEvent("onTurnStart", onStartTurnQueue);
+        if (GameManager.Instance.currentState == GameState.TUTORIAL) GameManager.Instance.tutorialManager.StartTurnAction(onStartTurnQueue);
         onStartTurnQueue.StartQueue();
         while (!onStartTurnQueue.resolved)
         {
@@ -113,7 +113,6 @@ public class StoryManager : Singleton<StoryManager>
     }
     IEnumerator TurnEndRoutine()
     {
-        Debug.Log("End of turn");
         CardManager.Instance.board.currentBoardState = BoardState.None;
 
         EventQueue onEndQueue = new EventQueue();
@@ -126,6 +125,9 @@ public class StoryManager : Singleton<StoryManager>
         {
             yield return new WaitForEndOfFrame();
         }
+
+        if (GameManager.Instance.currentState == GameState.TUTORIAL)
+            GameManager.Instance.tutorialManager.TurnCount++;
 
         if(transitionToNextAct)
         {
@@ -264,7 +266,7 @@ public class StoryManager : Singleton<StoryManager>
         /*if(turnReset)
             GameManager.Instance.currentHero.bonusDamage = (int)Mathf.Ceil(GameManager.Instance.currentHero.bonusDamage / 2f);
         else*/
-            GameManager.Instance.currentHero.bonusDamage = 0;
+        GameManager.Instance.currentHero.bonusDamage = 0;
 
         CardManager.Instance.board.storyLine.ResetPlayerPosition();
 
