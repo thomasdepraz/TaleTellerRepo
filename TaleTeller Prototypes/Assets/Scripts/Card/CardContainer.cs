@@ -373,7 +373,7 @@ public class CardContainer : MonoBehaviour
 
             originPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y);
 
-            if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard && canTween)//Check if in hand
+            if (!CardManager.Instance.holdingCard && canTween)//Check if in hand
             {
                 canTween = false;
 
@@ -418,7 +418,7 @@ public class CardContainer : MonoBehaviour
 
             #region Tweening
             canTween = true;
-            if (transform.parent == CardManager.Instance.cardHandContainer.transform && !CardManager.Instance.holdingCard)//Check if in hand
+            if (!CardManager.Instance.holdingCard)//Check if in hand
             {
                 //Scale down 
                 shadowTransform.gameObject.SetActive(false);

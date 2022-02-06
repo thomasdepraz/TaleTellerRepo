@@ -253,11 +253,9 @@ public class TutorialManager : MonoBehaviour
         CardData plot = tutorialPlotCard.InitializeData(tutorialPlotCard);
         tutorialCards.Add(plot);
 
-      
-
 
         //StartTurn 
-        //StoryManager.Instance.StartTurn();
+        StoryManager.Instance.StartTurn();
     }
 
     public void AppearObject(Transform transform, Vector3 target, Action onComplete)
@@ -357,7 +355,6 @@ public class TutorialManager : MonoBehaviour
                 return false;
         }
     }
-
     IEnumerator ValidationMessageRoutine(string message, bool init)
     {
         currentState = TutorialState.PENDING;
