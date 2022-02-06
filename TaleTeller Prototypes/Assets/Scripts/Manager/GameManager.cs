@@ -97,16 +97,16 @@ public class GameManager : Singleton<GameManager>
         switch (gameOverType)
         {
             case GameOverType.PLAYER_DEATH:
-                instruction = "The hero died...";
-                content = "";
+                instruction = "The End (not the good one)";
+                content = "The Hero died... and no, he is not getting revived.";
                 break;
             case GameOverType.PLOT_DEATH:
-                instruction = "The plot card died...";
-                content = "";
+                instruction = "The End (not the good one)";
+                content = "The key character of your plot died, how are you going to end it now...";
                 break;
             case GameOverType.PLOT_TIMER:
-                instruction = "The story got boring...";
-                content = "";
+                instruction = "The End (not the good one)";
+                content = "You didn't achieve the objective in time, and nobody likes reading a boring book...";
                 break;
             default:
                 break;

@@ -247,10 +247,11 @@ public class TutorialManager : MonoBehaviour
 
         //Init cards deck
         CardManager.Instance.cardDeck.cardDeck.Clear();
-        for (int i = 0; i < tutorialCards.Count; i++)
-        {
-            tutorialCards[i] = tutorialCards[i].InitializeData(tutorialCards[i]);
-            CardManager.Instance.cardDeck.cardDeck.Add(tutorialCards[i]);
+        for (int i = 0; i < tutorialCards.Count; i++)
+        {
+            tutorialCards[i] = tutorialCards[i].InitializeData(tutorialCards[i]);
+
+            CardManager.Instance.cardDeck.cardDeck.Add(tutorialCards[i]);
         }
 
         //Add plot card 

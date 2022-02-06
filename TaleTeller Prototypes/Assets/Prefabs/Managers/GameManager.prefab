@@ -201,6 +201,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f534fc36e780fe14baa9189e359f6acc, type: 3}
   - {fileID: 21300000, guid: 6a462857989760b43a6bca46ff9975e5, type: 3}
   - {fileID: 21300000, guid: 0c2b647b9990ae844ae1dca59d2cfc92, type: 3}
+  tutorialCards:
+  - {fileID: 11400000, guid: f57aabcd70602b64d80a11d465e73a40, type: 2}
+  - {fileID: 11400000, guid: 87b4ae01881b83e4389e1744f3bc415a, type: 2}
+  - {fileID: 11400000, guid: 27a88450e220cfb4f998d704cfe26c9d, type: 2}
+  - {fileID: 11400000, guid: 4de51ab22bd9e1843b8d6b8bb7f39ac7, type: 2}
+  - {fileID: 11400000, guid: 5e00d49528fcb3141b52373475909cb1, type: 2}
+  - {fileID: 11400000, guid: 492ddb75e1d8f9e44a341082c452b155, type: 2}
+  - {fileID: 11400000, guid: 4de51ab22bd9e1843b8d6b8bb7f39ac7, type: 2}
+  - {fileID: 11400000, guid: 87b4ae01881b83e4389e1744f3bc415a, type: 2}
+  - {fileID: 11400000, guid: e55569a6cd4a0bc41a37c9564af440dd, type: 2}
   tutorialConditions:
   - indexToCompare: 0000000001000000
     conditions: 0
