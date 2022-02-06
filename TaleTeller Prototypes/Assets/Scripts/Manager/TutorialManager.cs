@@ -105,6 +105,8 @@ public class TutorialManager : MonoBehaviour
         while(wait) { yield return new WaitForEndOfFrame(); }
         #endregion
 
+        GameManager.Instance.currentHero.lifePoints--;
+
         //Screen
         #region Screen_02
         TutorialScreen screen_02 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_01"), 
@@ -314,12 +316,12 @@ public class TutorialManager : MonoBehaviour
             case 0:
                 #region Turn_01
                 EventQueue messageQueue = new EventQueue();
-                HeroMessage ideaMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_07"), messageQueue, true);
-                HeroMessage cardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T0_08"), messageQueue, true);
+                HeroMessage ideaMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T1_00"), messageQueue, true);
+                HeroMessage cardMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T1_01"), messageQueue, true);
                 messageQueue.StartQueue();
                 while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
 
-                TutorialScreen screen_01 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T0_03"), "", tutorialSprites[2]);
+                TutorialScreen screen_01 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T1_00"), "", tutorialSprites[3]);
                 bool wait = true;
                 screen_01.Open(() => wait = false);
                 while (wait) { yield return new WaitForEndOfFrame(); }
@@ -328,6 +330,64 @@ public class TutorialManager : MonoBehaviour
                 screen_01.Close(() => wait = false);
                 while (wait) { yield return new WaitForEndOfFrame(); }
 
+                messageQueue = new EventQueue();
+                HeroMessage inkMessage1 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T1_02"), messageQueue, true);
+                messageQueue.StartQueue();
+                wait = true;
+                AppearObject(CardManager.Instance.manaSystem.manaFrame.rectTransform, inkOrigin, () => wait = false);
+                while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+                messageQueue = new EventQueue();
+                HeroMessage inkMessage2 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T1_03"), messageQueue, true);
+                messageQueue.StartQueue();
+                while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+                messageQueue = new EventQueue();
+                HeroMessage placeMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T1_04"), messageQueue, true);
+                messageQueue.StartQueue();
+                while (!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
+
+                #endregion
+                break;
+
+            case 1:
+                #region Turn_02
+                EventQueue messageQueue2 = new EventQueue();
+                HeroMessage character1Message2 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T2_00"), messageQueue2, true);
+                messageQueue2.StartQueue();
+                while (!messageQueue2.resolved) { yield return new WaitForEndOfFrame(); }
+
+                TutorialScreen screen_02 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T2_00"), "", tutorialSprites[4]);
+                bool wait2 = true;
+                screen_02.Open(() => wait2 = false);
+                while (wait2) { yield return new WaitForEndOfFrame(); }
+                while (screen_02.open) { yield return new WaitForEndOfFrame(); }
+                wait2 = true;
+                screen_02.Close(() => wait2 = false);
+                while (wait2) { yield return new WaitForEndOfFrame(); }
+
+                messageQueue2 = new EventQueue();
+                HeroMessage character2Message2 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T2_01"), messageQueue2, true);
+                messageQueue2.StartQueue();
+                while (!messageQueue2.resolved) { yield return new WaitForEndOfFrame(); }
+                #endregion
+                break;
+
+            case 2:
+                #region Turn_03
+                TutorialScreen screen_03 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T3_00"), "", tutorialSprites[7]);
+                bool wait3 = true;
+                screen_03.Open(() => wait2 = false);
+                while (wait3) { yield return new WaitForEndOfFrame(); }
+                while (screen_03.open) { yield return new WaitForEndOfFrame(); }
+                wait3 = true;
+                screen_03.Close(() => wait2 = false);
+                while (wait3) { yield return new WaitForEndOfFrame(); }
+
+                EventQueue messageQueue3 = new EventQueue();
+                HeroMessage character2Message3 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T3_00"), messageQueue3, true);
+                messageQueue3.StartQueue();
+                while (!messageQueue3.resolved) { yield return new WaitForEndOfFrame(); }
                 #endregion
                 break;
 
@@ -345,10 +405,17 @@ public class TutorialManager : MonoBehaviour
         switch (TurnCount)
         {
             case 0:
-                valid = tutorialConditions[0].isValid(tutorialCards);
+                valid = tutorialConditions[TurnCount].isValid(tutorialCards);
                 //Make different routines
-                if (valid) StartCoroutine(ValidationMessageRoutine("Well Done", valid));
-                else StartCoroutine(ValidationMessageRoutine("Wesh tu fais quoi frr", valid));
+                if (valid) CardManager.Instance.board.InitBoard();
+                else StartCoroutine(ValidationMessageRoutine(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T1_05"), valid));
+                return valid;
+
+            case 1:
+                valid = tutorialConditions[TurnCount].isValid(tutorialCards);
+                //Make different routines
+                if (valid) CardManager.Instance.board.InitBoard();
+                else StartCoroutine(ValidationMessageRoutine(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T2_01"), valid));
                 return valid;
 
             default:

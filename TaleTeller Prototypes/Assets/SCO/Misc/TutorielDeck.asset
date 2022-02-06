@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8a35e817048774ba742e81421bf5a4, type: 3}
   m_Name: TutorielDeck
   m_EditorClassIdentifier: 
-  deck: []
+  deck:
+  - {fileID: 11400000, guid: f57aabcd70602b64d80a11d465e73a40, type: 2}
+  - {fileID: 11400000, guid: 87b4ae01881b83e4389e1744f3bc415a, type: 2}
+  - {fileID: 11400000, guid: 27a88450e220cfb4f998d704cfe26c9d, type: 2}
+  - {fileID: 11400000, guid: 4de51ab22bd9e1843b8d6b8bb7f39ac7, type: 2}
+  - {fileID: 11400000, guid: 5e00d49528fcb3141b52373475909cb1, type: 2}
+  - {fileID: 11400000, guid: 492ddb75e1d8f9e44a341082c452b155, type: 2}
+  - {fileID: 11400000, guid: 4de51ab22bd9e1843b8d6b8bb7f39ac7, type: 2}
+  - {fileID: 11400000, guid: 87b4ae01881b83e4389e1744f3bc415a, type: 2}
+  - {fileID: 11400000, guid: e55569a6cd4a0bc41a37c9564af440dd, type: 2}

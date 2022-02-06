@@ -1,38 +1,39 @@
 Key	Text
 $Slide_T0_00	Welcome to you Writer ! You are new in Taleteller, this Card Game where your ideas take the form of cards ? Then, this Writing Lesson is going to remind you the basic to write your future masterpiece !<br><br>Are you ready ? It won't last long !
-$Slide_T0_01	Like any Card Game, Taleteller is abased on turns. A turn is divided in two stages :<br>1 - Writing :<br>During this stage, you are able to prepare your Storyline. Each card can be placed on a slot. You can think about the actions of each card and their order. Once you think you’re done, click on the GO button, the second stage will begin.<br><br>2 - Lecture :<br>During this stage, your Hero takes the lead! In fact, he will cross all the cards, from the left to the right, and he will trigger the effect of each card one by one. Once he reached the last slot, the Lecture stage and also the turn end.
+$Slide_T0_01	Like any Card Game, Taleteller is abased on turns. A turn is divided in two stages :<br>1 - Writing :<br>During this stage, you are able to prepare your Storyline. Each card can be placed on a slot. You can think about the actions of each card and their order. Once you think you’re done, click on the GO button, the second stage will begin.<br><br>2 - Lecture :<br>During this stage, your Hero takes the lead! In fact, he will cross all the cards, from the left to the right, and he will trigger the effect of each card one by one. Once he reached the last slot, the Reading stage and also the turn end.
 $Slide_T0_02	There are three different statistics. You will find the HP (the Hero's health), the ATK (the Hero's strength), and the GOLD (the Hero can collect it though the stories).<br><br>If the HP run out, the Hero will be considered as dead, and the story will end. The ATK represents the amount of damage that the Hero will cause to an Enemy. The GOLD will allow the Hero to trigger specific card effects.<br><br>During the different stories, you will have the possibility to increase the maximum amount of each of these statistics. It will make the Hero's journey easier.
 $Slide_T1_00	A card is composed of several components :<br>In the top left corner, you can notice a number. It represents the amount of ink you need to use to place this card.<br><br>In the center of the card, you can read the effect. Sometimes, two effects are present. Each effect has a target represented by an icone. The target is the game element that will be impacted by the effect.<br><br>At the end of the turn, a placed Item card will go to the Discard pile.<br><br>(Sometimes a card might have a colored gem. It represents its rarety).
 $Slide_T2_00	Another type of cards is called “Characters”. Like the Hero, they have a HP value and an ATK value.
 $Slide_T2_01	They are divided into “Allies” and “Enemies”. If they are located on two adjacent slots, then they will give a hit to the one of the opposite side.<br><br>If their HP is equal to 0, then the card is sent to the Discard.<br><br>The Characters also have a Number of Use. It is indicated on the top right corner of the card. It indicates the number of times the card can be placed on the Storyline. 
+$Slide_T2_02	The Characters also have a Number of Use. It is indicated on the top right corner of the card. It indicates the number of times the card can be placed on the Track.
 $Slide_T3_00	To write a book properly, you need to confront your Hero with plots. To do so, you will have to manage a new type of cards : the Plots !<br><br>If you succeed in completing their objective, then you can go to the next Chapter / Act. You have to complete all the Plots you’ve got to end your book.<br><br>But those cards also have a timer. If it goes to 0, then you will fail in writing your Book. You can consider it as a Game Over.<br><br>Most of the Plot will give you Extras, which are basically cards that will disappear once the Plot is completed.
 $Slide_T4_00	A third type of cards are called “Locations”. They also have a specific effect, like the “Items”.<br><br>The difference consists in the effect range. A location will affect the entire Storyline (or a large part of it) and its effect is triggered once the Lecture phase begins.
 $Slide_T4_01	If you feel like you don’t have enough cards to complete your objective, then you can use the Inspire button.<br><br>In that case, you will draw 1 card. But be careful, if you use this button more than 2 times, then you will also get Dark Thoughts in your Deck.
 $Slide_T4_02	The Dark Toughts are specific Cards. You can easily recognize them thanks to their black background.<br><br>They represent a real threat for you, so try to avoid amassing them.<br><br>You can play them or discard them (if you are allowed to) to get rid of them.
 $Slide_T5_00	Well done ! You finally passed your writing test ! Now that you are ready to start the writing of your first book, you need to understand how this latter is structured.<br><br>As you can see, a Book is composed of 3 Acts. Those Acts are defined by the Storyline you will select.<br><br>Each very Act is divided into 4 to 5 Chapters. You reach a new Chapter once you complete the objective of a Plot.<br><br>But be careful ! If the timer goes to 0, or if your Hero dies, then you will have to write your book again from the beginning.
-$Dialogue_T0_00	"Greetings Writer. I’m the protagonist of your future stories. You and I are now linked. That’s why I’ll help you during this lesson."
-$Dialogue_T0_01	"The Deck contains all your cards. If it’s empty, no worries, it will refill on its own using your Discard pile."
-$Dialogue_T0_02	"Here is your Discard pile. All the cards you will play will finish in this part of the board."
-$Dialogue_T0_03	"In this area of the board, you can store your cards. If you draw a card while your Hand is full, you will have to discard one of them to get the new one. You can play your card in your Hand on the different slots of the Storyline."
-$Dialogue_T0_04	"This is the Storyline. As you can see, each step is linked to a slot where you can place a card. During the Lecture, I will trigger the effect by walking to each of those steps."
-$Dialogue_T0_05	"The 'Go Button' allows you to start the Lecture stage. Once you've clicked it, I will take the lead and live the story you prepared."
-$Dialogue_T0_06	"If you don’t understand something on the board, just keep the cursor over it. It will gives you advice."
-$Dialogue_T0_07	"Oh ! I forgot to mention something. Here are my statistics -yes, like in one of your favorite RPG-."
-$Dialogue_T0_08	"Enough small talk, let the game begins !"
-$Dialogue_T1_00	"At the beginning of each turn you will draw cards. Those cards represent your ideas as the Writer you are. We’ll call them 'Idea Cards'."
-$Dialogue_T1_01	"The card you just have drawn is an Item."
-$Dialogue_T1_02	"Now I will learn you how to use them. As you can see, there is an Ink Pot just above me."
-$Dialogue_T1_03	"This Ink Pot can be considered as the fuel of your writing. To place a card, you need to spend a quantity of it. If you don’t have enough Ink, you cannot place it."
-$Dialogue_T1_04	"Place these two cards on the slots of the Storyline to let me trigger their effects during the Lecture."
-$Dialogue_T1_05	"Make sure that you've placed the two cards on the Storyline before using this button."
-$Dialogue_T1_06	"This Item has a range. In that case, it affects myself by giving me HP."
-$Dialogue_T1_07	"As I told you before, some cards might have effcts which impact different targets on the board, like the Deck for instance."
-$Dialogue_T1_08	Now that the turn is over, the cards you used on the Storyline go to the Discard pile."
-$Dialogue_T1_09	I have to go back to the beginning of the Storyline. Don't worry, the Ink Pot will refill automatically !"
-$Dialogue_T2_00	"It looks like you just found a Character !"
-$Dialogue_T2_01	"I would like to show you something. Can you place your two Characters on adjacent slots ?"
-$Dialogue_T2_02	"As you can see, the Number of Use decreases by one at the end of the turn ! Once it is equal to 0, the card goes to the Discard !"
-$Dialogue_T3_00	"You can also place an Ally on the two sides of an Enemy. If it can take a hit, it will hit back the Enemy once I reach its position."
-$Dialogue_T3_01	"Now that I reached the end of the Storyline, the turn is ended. The timer of the plot decreases by one, and it goes back to your Hand."
-$Dialogue_T4_00	"Oh, you’ve drawn a new type of card !"
-$Dialogue_T4_01	"I think you’ve seen enough information to be autonomous ! Let this Plot ends !"
+$Dialogue_T0_00	Greetings Writer. I’m the protagonist of your future stories. You and I are now linked. That’s why I’ll help you during this lesson.
+$Dialogue_T0_01	The Deck contains all your cards. If it’s empty, no worries, it will refill on its own using your Discard pile.
+$Dialogue_T0_02	Here is your Discard pile. All the cards you will play will finish in this part of the board.
+$Dialogue_T0_03	In this area of the board, you can store your cards. <br>If you draw a card while your Hand is full, you will have to discard one of them to get the new one.<br> You can play your card in your Hand on the different slots of the Storyline.
+$Dialogue_T0_04	This is the Storyline. As you can see, each step is linked to a slot where you can place a card. <br>During the Lecture, I will trigger the effect by walking to each of those steps.
+$Dialogue_T0_05	The 'Go Button' allows you to start the Lecture stage. Once you've clicked it, I will take the lead and live the story you prepared.
+$Dialogue_T0_06	If you don’t understand something on the board, just keep the cursor over it. It will gives you advice.
+$Dialogue_T0_07	Oh ! I forgot to mention something. Here are my statistics -yes, like in one of your favorite RPG-.
+$Dialogue_T0_08	Enough small talk, let the game begins !
+$Dialogue_T1_00	At the beginning of each turn you will draw cards. <br>Those cards represent your ideas as the Writer you are.<br> We’ll call them 'Idea Cards'.
+$Dialogue_T1_01	The card you just have drawn is an Item.
+$Dialogue_T1_02	Now I will learn you how to use them. As you can see, there is an Ink Pot just above me.
+$Dialogue_T1_03	This Ink Pot can be considered as the fuel of your writing. <br>To place a card, you need to spend a quantity of it.<br> If you don’t have enough Ink, you cannot place it.
+$Dialogue_T1_04	Place these two cards on the slots of the Storyline to let me trigger their effects during the Lecture.
+$Dialogue_T1_05	Make sure that you've placed the two cards on the Storyline before using this button.
+$Dialogue_T1_06	This Item has a range. In that case, it affects myself by giving me HP.
+$Dialogue_T1_07	As I told you before, some cards might have effects which impact different targets on the board, like the Deck for instance.
+$Dialogue_T1_08	Now that the turn is over, the cards you used on the Storyline go to the Discard pile.
+$Dialogue_T1_09	I have to go back to the beginning of the Storyline. Don't worry, the Ink Pot will refill automatically !
+$Dialogue_T2_00	It looks like you just found a Character !
+$Dialogue_T2_01	I would like to show you something. Can you place your two Characters on adjacent slots ?
+$Dialogue_T2_02	The Number of Use decreases by one at the end of the turn ! Once it is equal to 0, the card goes to the Discard !
+$Dialogue_T3_00	You can also place an Ally on the two sides of an Enemy. If it can take a hit, it will hit back the Enemy once I reach its position.
+$Dialogue_T3_01	Now that I reached the end of the Storyline, the turn is ended. The timer of the plot decreases by one, and it goes back to your Hand.
+$Dialogue_T4_00	Oh, you’ve drawn a new type of card !
+$Dialogue_T4_01	I think you’ve seen enough information to be autonomous ! Let this Plot ends !

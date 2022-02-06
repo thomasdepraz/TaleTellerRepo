@@ -12,7 +12,7 @@ public class HeroMessageEffect : Effect
         if(effectAvailable)
         {
             EventQueue messageQueue = new EventQueue();
-            HeroMessage heroMessage = new HeroMessage(message, messageQueue, true);
+            HeroMessage heroMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, message), messageQueue, true);
             messageQueue.StartQueue();
             while(!messageQueue.resolved) { yield return new WaitForEndOfFrame(); }
         }

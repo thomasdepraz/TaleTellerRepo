@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6561920012208963948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88bda77f78923444b1780c855962e5f, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 9
+  target: 0
+  range: 
+  values: []
+  doOnce: 1
+  tutorialText: $Slide_T2_01
+  tutorialIllustration: {fileID: 21300000, guid: 2606fff24c89b3a47baeda1cd55f1fe2, type: 3}
+--- !u!114 &-5114050863913606493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f67e1296a9a04479a69dcaf49f3400, type: 3}
+  m_Name: Card Type
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  stats:
+    baseLifePoints: 2
+    baseAttackDamage: 1
+  behaviour: 1
+  fightingRange: 3
+  doubleStrike: 0
+  undying: 0
+  useCount: 2
+--- !u!114 &-2659852052133314086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9171e8d2e77a29499ddb032f52c3d71, type: 3}
+  m_Name: Effect2
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 3
+  target: 0
+  range: 
+  values: []
+  doOnce: 0
+  message: $Dialogue_T2_02
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
+  m_Name: Idea_Companion_TutorialVar
+  m_EditorClassIdentifier: 
+  dataReference: {fileID: 11400000}
+  cardName: Companion
+  rarity: 1
+  archetype: 1
+  manaCost: 1
+  cardGraph: {fileID: 21300000, guid: b672c362344d9ac49b31ae3a2df2c9f4, type: 3}
+  currentContainer: {fileID: 0}
+  description: 
+  effectsReferences:
+  - {fileID: -6561920012208963948}
+  - {fileID: 1616349609532978586}
+  - {fileID: -2659852052133314086}
+  effects: []
+  cardTypeReference: {fileID: -5114050863913606493}
+  cardType: {fileID: 0}
+--- !u!114 &1616349609532978586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88bda77f78923444b1780c855962e5f, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 3
+  target: 0
+  range: 
+  values: []
+  doOnce: 0
+  tutorialText: $Slide_T2_02
+  tutorialIllustration: {fileID: 21300000, guid: 1ce344c5759592349b485dcf9333c490, type: 3}
