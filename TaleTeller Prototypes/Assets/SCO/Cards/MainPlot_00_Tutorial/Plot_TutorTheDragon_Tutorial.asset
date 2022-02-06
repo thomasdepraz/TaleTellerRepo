@@ -35,7 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 7
+    baseLifePoints: 3
     baseAttackDamage: 1
   behaviour: 2
   fightingRange: 3
@@ -62,13 +62,56 @@ MonoBehaviour:
   cardGraph: {fileID: 21300000, guid: 2eab1df56b59ad149ba5ea557506752e, type: 3}
   currentContainer: {fileID: 0}
   description: 
-  effectsReferences: []
+  effectsReferences:
+  - {fileID: 3164791913351565344}
   effects: []
   cardTypeReference: {fileID: -2216689539044958781}
   cardType: {fileID: 0}
   objective: {fileID: -7258997109705444086}
   completionTimer: 4
-  isMainPlot: 0
+  isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: 
   legendaryCardRewards: []
+--- !u!114 &3139347223666528103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9171e8d2e77a29499ddb032f52c3d71, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 0
+  target: 0
+  range: 
+  values: []
+  doOnce: 0
+  message: 
+--- !u!114 &3164791913351565344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9171e8d2e77a29499ddb032f52c3d71, type: 3}
+  m_Name: Effect0
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 3
+  target: 0
+  range: 
+  values: []
+  doOnce: 1
+  message: $Dialogue_T3_03

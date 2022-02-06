@@ -7,7 +7,7 @@ using Utility;
 
 [Serializable]
 
-public enum TutorialState { RUNNING, PENDING}
+public enum TutorialState {RUNNING, PENDING}
 public enum ConditionsType { PLACED, ADJACENT}
 
 [Serializable]
@@ -88,6 +88,7 @@ public class TutorialManager : MonoBehaviour
     public List<CardData> tutorialCards = new List<CardData>();
     public List<TutorialConditions> tutorialConditions = new List<TutorialConditions>();
     public CardData tutorialPlotCard;
+    public bool canUseGoButton = false;
 
     IEnumerator IntroductionRoutine()
     {
@@ -258,6 +259,8 @@ public class TutorialManager : MonoBehaviour
         tutorialPlotCard = tutorialPlotCard.InitializeData(tutorialPlotCard);
         tutorialCards.Add(tutorialPlotCard);
 
+        canUseGoButton = true;
+
         //StartTurn 
         StoryManager.Instance.StartTurn();
     }
@@ -379,17 +382,73 @@ public class TutorialManager : MonoBehaviour
                 #region Turn_03
                 TutorialScreen screen_03 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T3_00"), "", tutorialSprites[7]);
                 bool wait3 = true;
-                screen_03.Open(() => wait2 = false);
+                screen_03.Open(() => wait3 = false);
                 while (wait3) { yield return new WaitForEndOfFrame(); }
                 while (screen_03.open) { yield return new WaitForEndOfFrame(); }
                 wait3 = true;
-                screen_03.Close(() => wait2 = false);
+                screen_03.Close(() => wait3 = false);
                 while (wait3) { yield return new WaitForEndOfFrame(); }
 
                 EventQueue messageQueue3 = new EventQueue();
-                HeroMessage character2Message3 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T3_00"), messageQueue3, true);
+                HeroMessage plotMessage3 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T3_00"), messageQueue3, true);
                 messageQueue3.StartQueue();
                 while (!messageQueue3.resolved) { yield return new WaitForEndOfFrame(); }
+
+                messageQueue3 = new EventQueue();
+                HeroMessage characterMessage3 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T3_01"), messageQueue3, true);
+                messageQueue3.StartQueue();
+                while (!messageQueue3.resolved) { yield return new WaitForEndOfFrame(); }
+
+                messageQueue3 = new EventQueue();
+                HeroMessage plot2Message3 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T3_02"), messageQueue3, true);
+                messageQueue3.StartQueue();
+                while (!messageQueue3.resolved) { yield return new WaitForEndOfFrame(); }
+
+                #endregion
+                break;
+
+            case 3:
+                #region Turn_04
+                EventQueue messageQueue4 = new EventQueue();
+                HeroMessage newCardMessage4 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T4_00"), messageQueue4, true);
+                messageQueue4.StartQueue();
+                while (!messageQueue4.resolved) { yield return new WaitForEndOfFrame(); }
+
+                TutorialScreen screen_04 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T4_00"), "", tutorialSprites[8]);
+                bool wait4 = true;
+                screen_04.Open(() => wait4 = false);
+                while (wait4) { yield return new WaitForEndOfFrame(); }
+                while (screen_04.open) { yield return new WaitForEndOfFrame(); }
+                wait4 = true;
+                screen_04.Close(() => wait4 = false);
+                while (wait4) { yield return new WaitForEndOfFrame(); }
+
+                wait = true;
+                AppearObject(CardManager.Instance.inspire.frame.rectTransform, inspireOrigin, () => wait = false);
+                while (wait) { yield return new WaitForEndOfFrame(); }
+
+                TutorialScreen screen_05 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T4_01"), "", tutorialSprites[9]);
+                wait4 = true;
+                screen_05.Open(() => wait4 = false);
+                while (wait4) { yield return new WaitForEndOfFrame(); }
+                while (screen_05.open) { yield return new WaitForEndOfFrame(); }
+                wait4 = true;
+                screen_05.Close(() => wait4 = false);
+                while (wait4) { yield return new WaitForEndOfFrame(); }
+
+                TutorialScreen screen_06 = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Slide_T4_02"), "", tutorialSprites[10]);
+                wait4 = true;
+                screen_06.Open(() => wait4 = false);
+                while (wait4) { yield return new WaitForEndOfFrame(); }
+                while (screen_06.open) { yield return new WaitForEndOfFrame(); }
+                wait4 = true;
+                screen_06.Close(() => wait4 = false);
+                while (wait4) { yield return new WaitForEndOfFrame(); }
+
+                messageQueue4 = new EventQueue();
+                HeroMessage autonomousMessage3 = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T4_01"), messageQueue4, true);
+                messageQueue4.StartQueue();
+                while (!messageQueue4.resolved) { yield return new WaitForEndOfFrame(); }
                 #endregion
                 break;
 
@@ -420,8 +479,16 @@ public class TutorialManager : MonoBehaviour
                 else StartCoroutine(ValidationMessageRoutine(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T2_01"), valid));
                 return valid;
 
+            case 2:
+                valid = tutorialConditions[TurnCount].isValid(tutorialCards);
+                //Make different routines
+                if (valid) CardManager.Instance.board.InitBoard();
+                else StartCoroutine(ValidationMessageRoutine(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, "$Dialogue_T3_02"), valid));
+                return valid;
+
             default:
-                return false;
+                CardManager.Instance.board.InitBoard();
+                return true;
         }
     }
     IEnumerator ValidationMessageRoutine(string message, bool init)
@@ -463,11 +530,12 @@ public class TutorialManager : MonoBehaviour
             events.RemoveAt(0);
         }
 
+        //Last Events Queue
+
+
         //Save
         SaveManager.Save(new SaveFile(CoreManager.Instance));
         yield return new WaitForSeconds(0.5f);//TEMP : Wait for save writing
-
-
 
         //return to menu test
         GameOverScreen gameOverScreen = new GameOverScreen("Test", "this is the end of the tutorial", tutorialPlotCard);

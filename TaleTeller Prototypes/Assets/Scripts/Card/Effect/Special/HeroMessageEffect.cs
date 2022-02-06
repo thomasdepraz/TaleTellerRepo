@@ -9,7 +9,7 @@ public class HeroMessageEffect : Effect
     public string message;
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
-        if(effectAvailable)
+        if(effectAvailable && GameManager.Instance.tutorialManager.TurnCount < 3)
         {
             EventQueue messageQueue = new EventQueue();
             HeroMessage heroMessage = new HeroMessage(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, message), messageQueue, true);

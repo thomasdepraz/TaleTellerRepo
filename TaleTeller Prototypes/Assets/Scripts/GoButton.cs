@@ -86,7 +86,7 @@ public class GoButton : MonoBehaviour
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.currentState != TutorialState.PENDING)
+        if (GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.currentState != TutorialState.PENDING && CardManager.Instance.board.currentBoardState == BoardState.Idle && GameManager.Instance.tutorialManager.canUseGoButton)
             GameManager.Instance.tutorialManager.ValidConditions();
         else if(GameManager.Instance.currentState == GameState.GAME)
         {

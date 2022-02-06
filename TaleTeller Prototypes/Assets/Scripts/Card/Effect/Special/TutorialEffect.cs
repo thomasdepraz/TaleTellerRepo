@@ -11,7 +11,7 @@ public class TutorialEffect : Effect
     public Sprite tutorialIllustration;
     public override IEnumerator EffectLogic(EventQueue currentQueue, CardData data = null)
     {
-        if(effectAvailable)
+        if(effectAvailable && GameManager.Instance.tutorialManager.TurnCount < 3)
         {
             TutorialScreen screen = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, tutorialText), "", tutorialIllustration);
             bool wait = true;
