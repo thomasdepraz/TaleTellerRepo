@@ -557,7 +557,7 @@ public class CardContainer : MonoBehaviour
         int count = 0;
 
         //if effect contains keyword appear tooltip
-        string effectDescription = visuals.cardDescriptionText.text;
+        string effectDescription = visuals.cardDescriptionText.text.ToLower();
         for (int j = 0; j < keywords.Count; j++)
         {
             if(effectDescription.Contains(keywords[j]))

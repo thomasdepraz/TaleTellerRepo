@@ -1,15 +1,16 @@
 Key	Tooltip
-Double Strike	It attacks twice.
-First Hit	It attacks first.
-Range	It attacks characters a slot further.
-Obsessing	Max Ink is decreased by -1 while in hand.
-Undying	Its HP can’t be inferior than 1.
-Bankrupt	Does something when the Hero has not enough gold.
-Buy	Does something when the Hero has enough gold. Gold is used.
-Last Wish	Does something when it dies.
-Aphoteosis	Does something when it is in hand at the of the turn.
-Illumination	Does something when a card is drawn while on board.
-Overload	Does something when a card is discarded while on board.
+double strike	It attacks twice.
+first hit	It attacks first.
+range	It attacks characters a slot further.
+obsessing	Max Ink is decreased by -1 while in hand.
+undying	Its HP can’t be inferior than 1.
+bankrupt	Does something when the Hero has not enough gold.
+buy	Does something when the Hero has enough gold. Gold is used.
+last wish	Does something when it dies.
+aphoteosis	Does something when it is in hand at the of the turn.
+illumination	Does something when a card is drawn while on board.
+overload	Does something when a card is discarded while on board.
+choice	Choose a card between the first three cards of the deck, you draw it and the others go to the discard.
 $HEALTH_STAT	<b><sprite name="HealthHero"> Health</b>: {0}  <br>Hero’s health points.  <br><b>If there are no more, the Hero dies, it’s the end of the game</b><br><sprite name="Heal"> heal the hero.<br><sprite name="MaxHealth"> increase the Hero's maximum Health.
 $ATTACK_STAT	<b><sprite name="AttackBase"> Attack</b> : {0}<br>Amount of damage the player inflicts during an attack.<br><sprite name="AttackBase"> increase permanent Attack (current: <b>{1}</b>)<br><sprite name="AttackTemp"> increase additional Attack for this turn only (current: <b>{2}</b>)
 $GOLD_STAT	<b><sprite name="GoldHero"> Gold</b>: {0}<br>Game currency.<br><sprite name="Gold"> increase the Hero's coins<br><sprite name="Purse"> increase the size of the Hero's Purse.
