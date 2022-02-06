@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Utility
 {
@@ -8,11 +11,54 @@ namespace Utility
     {
         public bool completeTutorial;
 
-        public SaveFile()
+        //default save file
+        public SaveFile() 
         {
-            completeTutorial = GameManager.Instance.tutorialComplete;
+            completeTutorial = false;
+        }
 
+        //save file
+        public SaveFile(CoreManager core)
+        {
+            completeTutorial = core.completeTutorial;
+        }
+    }
 
+    public class SaveManager
+    {
+#if UNITY_EDITOR
+        public static string savePath = Application.persistentDataPath + "/saveFile.json";
+
+#else
+        public static string savePath = Application.persistentDataPath + "/saveFile.json";
+
+#endif
+        public static SaveFile Load()
+        {
+            string saveString = GetSaveString();
+
+            if (saveString != string.Empty)
+                return JsonConvert.DeserializeObject<SaveFile>(saveString);
+            else return new SaveFile();
+        }
+
+        public static string GetSaveString()
+        {
+            //eventually add decode in here
+            if (File.Exists(savePath))
+                return File.ReadAllText(savePath);
+            else return string.Empty;
+        }
+
+        public static void Save(SaveFile save)
+        {
+            Dictionary<string, object> saveParameters = new Dictionary<string, object>();
+
+            saveParameters.Add("completeTutorial", save.completeTutorial);
+
+            string data = JsonConvert.SerializeObject(saveParameters, Formatting.Indented);
+
+            File.WriteAllText(savePath, data);
         }
     }
 }

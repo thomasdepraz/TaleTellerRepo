@@ -1,20 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using NaughtyAttributes;
 
 public class TitleScreenManager : MonoBehaviour
 {
-    public void StartGame()
+    public Image panel;
+    public GameObject tutorialButton;
+
+    [Scene]public int gameScene;
+
+    public void Start()
     {
-        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+        InitButtons();
+        FadePanel();
+    }
+    public void InitButtons()
+    {
+        if(CoreManager.Instance.completeTutorial)
+        {
+            //appear tutorial button
+            tutorialButton.SetActive(true);
+        }
+        else
+        {
+            //Hide tutorial button
+            tutorialButton.SetActive(false);
+        }
     }
 
-    public void GoToTitleScreen()
+    public void FadePanel()
     {
-        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
+        LeanTween.value(panel.gameObject, panel.color, Color.clear, 1).setOnUpdate((Color col)=> 
+        {
+            panel.color = col;
+        }).setOnComplete(()=> panel.gameObject.SetActive(false)).setDelay(0.5f);
+    }
+
+    public void StartGame()
+    {
+        AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(gameScene);
+        sceneLoad.allowSceneActivation = false;
+        FadeAndLoad(sceneLoad);
+    }
+
+    public void StartTutorial()
+    {
+        CoreManager.Instance.playTutorial = true;
+        AsyncOperation sceneLoad = SceneManager.LoadSceneAsync(gameScene);
+        sceneLoad.allowSceneActivation = false;
+        FadeAndLoad(sceneLoad);
+    }
+
+    void FadeAndLoad(AsyncOperation sceneToActivate)
+    {
+        panel.gameObject.SetActive(true);
+        LeanTween.value(panel.gameObject, panel.color, Color.black, 1).setOnUpdate((Color col) =>
+        {
+            panel.color = col;
+        }).setOnComplete(() => sceneToActivate.allowSceneActivation = true);
     }
 
     public void Setting()

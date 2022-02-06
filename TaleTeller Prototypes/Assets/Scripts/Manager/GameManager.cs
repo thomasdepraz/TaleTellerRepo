@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using NaughtyAttributes;
+using Utility;
 
 public enum GameState {GAME, TUTORIAL}
 public class GameManager : Singleton<GameManager>
@@ -19,21 +20,37 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector]public bool pause;
     public GameState currentState = GameState.TUTORIAL;
-    public bool tutorialComplete;
+
 
     public void Awake()
     {
         CreateSingleton(false);
         instructionsData = Instantiate(instructionsData);
+    }
 
-        if (!tutorialComplete)
+    public void Start()
+    {
+        #region Load Save
+        if (CoreManager.Instance.playTutorial || !CoreManager.Instance.completeTutorial)
+        {
+            CoreManager.Instance.playTutorial = false;
             currentState = GameState.TUTORIAL;
+        }
         else
+        {
             currentState = GameState.GAME;
+        }
+        #endregion
     }
 
     public void Update()
     {
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
+        {
+            SaveFile save = new SaveFile();
+            SaveManager.Save(save);
+        }
+
         if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
         {
             if (Time.timeScale > 1)
