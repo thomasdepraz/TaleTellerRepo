@@ -170,10 +170,10 @@ MonoBehaviour:
   instructionDataBase: {fileID: 11400000, guid: c69571b22f9deee41a7b15fd2dde620b, type: 2}
   schemesDatabase: {fileID: 4900000, guid: 43639d8aec9811542b070f4ebf798e20, type: 3}
   tooltipDatabase: {fileID: 4900000, guid: 0736e88167c49e246b0e962976cc000c, type: 3}
-  cardsDatabase: {fileID: 4900000, guid: 1185ad5e48afbf549b5cfe8b5d258ecb, type: 3}
+  cardsDatabase: {fileID: 4900000, guid: 0add74dcea810d34da943cce56d09d67, type: 3}
   popupDatabase: {fileID: 4900000, guid: 4a71ee7f64a2a67449977c2b5049352a, type: 3}
   screenDatabase: {fileID: 4900000, guid: bf45a927c971ea64c9d3e4726f646f9a, type: 3}
-  tutorielDataBase: {fileID: 4900000, guid: 0b0da462311bc484c8fb9322982f6f7c, type: 3}
+  tutorielDataBase: {fileID: 4900000, guid: ebefcb7443a0d864e9a52b27ba371642, type: 3}
 --- !u!114 &4076653973841923050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +204,8 @@ MonoBehaviour:
   tutorialConditions:
   - indexToCompare: 0000000001000000
     conditions: 0
+  - indexToCompare: 0200000003000000
+    conditions: 1
   tutorialPlotCard: {fileID: 11400000, guid: f8e5fe63533f4e54d9d2f8dd95fd6cc5, type: 2}
 --- !u!1 &3417540031349418613
 GameObject:

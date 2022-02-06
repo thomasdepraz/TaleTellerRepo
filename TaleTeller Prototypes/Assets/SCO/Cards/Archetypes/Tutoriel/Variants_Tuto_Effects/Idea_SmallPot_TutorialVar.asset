@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ec14bb802af1d245b844367175d23da, type: 3}
-  m_Name: Idea_SmallPot_Tutorial
+  m_Name: Idea_SmallPot_TutorialVar
   m_EditorClassIdentifier: 
   dataReference: {fileID: 11400000}
   cardName: Small Pot
@@ -21,6 +21,7 @@ MonoBehaviour:
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
+  - {fileID: 3556877211440382782}
   - {fileID: 1654987334391570826}
   effects: []
   cardTypeReference: {fileID: 8511251313027250986}
@@ -48,6 +49,27 @@ MonoBehaviour:
     value: 1
     type: 5
     op: 1
+--- !u!114 &3556877211440382782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9171e8d2e77a29499ddb032f52c3d71, type: 3}
+  m_Name: Effect1
+  m_EditorClassIdentifier: 
+  linkedData: {fileID: 0}
+  description: 
+  appendWithNext: 0
+  trigger: 1
+  target: 0
+  range: 
+  values: []
+  doOnce: 1
+  message: $Dialogue_T1_07
 --- !u!114 &8511251313027250986
 MonoBehaviour:
   m_ObjectHideFlags: 0

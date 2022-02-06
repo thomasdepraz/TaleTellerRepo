@@ -13,7 +13,7 @@ public class TutorialEffect : Effect
     {
         if(effectAvailable)
         {
-            TutorialScreen screen = new TutorialScreen(tutorialText, "$TUTORIAL$", tutorialIllustration);
+            TutorialScreen screen = new TutorialScreen(LocalizationManager.Instance.GetString(LocalizationManager.Instance.tutorielDictionary, tutorialText), "", tutorialIllustration);
             bool wait = true;
             screen.Open(()=> wait = false);
             while (wait) { yield return new WaitForEndOfFrame(); }

@@ -60,7 +60,7 @@ public class StoryManager : Singleton<StoryManager>
             }
         }
 
-        if(GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.TurnCount == 3)
+        if(GameManager.Instance.currentState == GameState.TUTORIAL && GameManager.Instance.tutorialManager.TurnCount == 2)
         {
             EventQueue appearQueue = new EventQueue();
             GameManager.Instance.tutorialManager.AppearPlot(appearQueue);

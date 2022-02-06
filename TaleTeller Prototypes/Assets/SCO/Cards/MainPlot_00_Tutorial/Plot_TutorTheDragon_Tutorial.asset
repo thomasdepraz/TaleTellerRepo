@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlotObjective_KillPlotObj
   m_EditorClassIdentifier: 
   linkedPlotData: {fileID: 0}
-  objectiveName: 
+  objectiveName: $MP_Tutorial_TutorTheDragon_Objective
   linkedJunkedCards: []
   junkSpawnLocations: 
   junksPositionsInDeck: 
@@ -59,7 +59,7 @@ MonoBehaviour:
   rarity: 0
   archetype: 0
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 2eab1df56b59ad149ba5ea557506752e, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences: []

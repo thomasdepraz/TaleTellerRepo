@@ -17,7 +17,7 @@ MonoBehaviour:
   rarity: 1
   archetype: 1
   manaCost: 1
-  cardGraph: {fileID: 0}
+  cardGraph: {fileID: 21300000, guid: 4b2371e4308fe034da922e01d32dc281, type: 3}
   currentContainer: {fileID: 0}
   description: 
   effectsReferences:
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: Effect0
   m_EditorClassIdentifier: 
   linkedData: {fileID: 0}
-  description: 
+  description: $Idea_BabySlime_Tutorial_Effect0
   appendWithNext: 0
   trigger: 8
   target: 1
