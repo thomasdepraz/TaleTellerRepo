@@ -541,6 +541,7 @@ public class TutorialManager : MonoBehaviour
         while (wait4) { yield return new WaitForEndOfFrame(); }
 
         //Save
+        CoreManager.Instance.completeTutorial = true;
         SaveManager.Save(new SaveFile(CoreManager.Instance));
         yield return new WaitForSeconds(0.5f);//TEMP : Wait for save writing
 
