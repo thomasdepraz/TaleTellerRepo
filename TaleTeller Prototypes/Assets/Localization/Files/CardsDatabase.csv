@@ -66,7 +66,7 @@ $Idea_Yeti_Berserk_Effect0	<b>LAST WISH : </b>Draw $drawValue$.
 $Idea_Yeti_Berserk_Effect1	<b>LAST WISH : </b>+$gainValue$<sprite name="AttackTemp">.
 $Idea_Battlefield_Berserk_Effect0	/
 $Idea_BabySlime_Tutorial_Effect0	<b>LAST WISH :</b> +$gainValue$ <sprite name="Heal">.
-$Idea_SmallPlain_Tutorial_Effect0	+$modifierValue$<sprite name="Heal">.
+$Idea_SmallPlain_Tutorial_Effect0	+$modifierValue$<sprite name="AttackTemp">.
 $Idea_SmallPot_Tutorial_Effect0	Draw $drawValue$.
 $DI_CuriousStew_Effect0	<b>OBSESSING</b>
 $DI_CuriousStew_Effect1	£append£<b>BUY($buyValue$)</b> : 

@@ -21,7 +21,7 @@ MonoBehaviour:
   values: []
   modifierValue:
     value: 1
-    type: 0
+    type: 1
     op: 1
   behaviourTargeted: 0
   forSpecificCard: 0

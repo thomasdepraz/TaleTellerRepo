@@ -170,7 +170,7 @@ MonoBehaviour:
   instructionDataBase: {fileID: 11400000, guid: c69571b22f9deee41a7b15fd2dde620b, type: 2}
   schemesDatabase: {fileID: 4900000, guid: 43639d8aec9811542b070f4ebf798e20, type: 3}
   tooltipDatabase: {fileID: 4900000, guid: cca9db233306cb340835d2f047e4289a, type: 3}
-  cardsDatabase: {fileID: 4900000, guid: aab8bf80b3e226942835e3c34d47f489, type: 3}
+  cardsDatabase: {fileID: 4900000, guid: 95d13badbd03cb34aa632788c09379c5, type: 3}
   popupDatabase: {fileID: 4900000, guid: 4a71ee7f64a2a67449977c2b5049352a, type: 3}
   screenDatabase: {fileID: 4900000, guid: bf45a927c971ea64c9d3e4726f646f9a, type: 3}
   tutorielDataBase: {fileID: 4900000, guid: 2a69951efef6bcf4baeb6d98d802ddeb, type: 3}
@@ -219,7 +219,7 @@ MonoBehaviour:
     conditions: 0
   - indexToCompare: 0200000003000000
     conditions: 1
-  - indexToCompare: 09000000
+  - indexToCompare: 0c000000
     conditions: 0
   tutorialPlotCard: {fileID: 11400000, guid: f8e5fe63533f4e54d9d2f8dd95fd6cc5, type: 2}
   canUseGoButton: 0
