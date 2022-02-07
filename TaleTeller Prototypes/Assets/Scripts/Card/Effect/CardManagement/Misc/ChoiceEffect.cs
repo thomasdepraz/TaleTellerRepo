@@ -69,7 +69,7 @@ public class ChoiceEffect : CardManagementMiscEffects
                 cardsForChoice.Add(targets[x]);
             }
 
-            if (targets.Count > 0)
+            if (cardsForChoice.Count > 0)
             {
 
                 CardPickerScreen screen = new CardPickerScreen(PickScreenMode.CHOICE, 1, cardsForChoice, true);

@@ -339,21 +339,26 @@ public class Deck : MonoBehaviour
             }
         }
 
-        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, CardManager.Instance.cardHand.GetHandDataList(), false);
-        bool wait = true;
-        screen.Open(() => wait = false);
-        while (wait) { yield return new WaitForEndOfFrame(); }
-
-        while (screen.open) { yield return new WaitForEndOfFrame(); }
-        wait = true;
-        screen.Close(() => wait = false);
-        while (wait) { yield return new WaitForEndOfFrame(); }
-        //Discard the pickedCards and deal the new one
-        for (int i = 0; i < screen.pickedCards.Count; i++)
+        
+        if(CardManager.Instance.cardHand.GetHandDataList().Count>0)
         {
-            CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, overdrawQueue);
+            CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, CardManager.Instance.cardHand.GetHandDataList(), false);
+            bool wait = true;
+            screen.Open(() => wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
 
+            while (screen.open) { yield return new WaitForEndOfFrame(); }
+            wait = true;
+            screen.Close(() => wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
+            //Discard the pickedCards and deal the new one
+            for (int i = 0; i < screen.pickedCards.Count; i++)
+            {
+                CardManager.Instance.CardHandToDiscard(screen.pickedCards[i].container.data.currentContainer, overdrawQueue);
+
+            }
         }
+
         Deal(overdrawQueue, dealtCard);
        
         overdrawQueue.StartQueue();

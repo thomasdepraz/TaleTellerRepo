@@ -255,17 +255,6 @@ public class CardManager : Singleton<CardManager>
         {
             if (cardHand.GetHandCount() == cardHand.maxHandSize)//if max cards in hand make the player select a card
             {
-                //EventQueue pickQueue = new EventQueue();
-                //List<CardData> pickedCards = new List<CardData>();
-
-                //string instruction = LocalizationManager.Instance.GetString(LocalizationManager.Instance.instructionsDictionary, GameManager.Instance.instructionsData.chooseCardInstruction);
-                //cardPicker.Pick(pickQueue, cardHand.GetHandDataList(), pickedCards, 1, instruction);
-
-                //pickQueue.StartQueue();
-                //while (!pickQueue.resolved)
-                //{
-                //    yield return new WaitForEndOfFrame();
-                //}
 
                 //MAKE the player pick a card and discard it
                 CardPickerScreen screen = new CardPickerScreen(PickScreenMode.REPLACE, 1, cardHand.GetHandDataList(), true);
@@ -452,35 +441,40 @@ public class CardManager : Singleton<CardManager>
     }
     IEnumerator DiscardFromDeckRoutine(int countToDiscard, EventQueue queue)
     {
-        CardPickerScreen screen = new CardPickerScreen(PickScreenMode.WITHDRAW, countToDiscard, GetCurrentCards(), true);
-        bool wait = true;
-        screen.Open(()=> wait = false);
-        while (wait) { yield return new WaitForEndOfFrame(); }
+        List<CardData> cards = GetCurrentCards();
 
-        while(screen.open) { yield return new WaitForEndOfFrame(); }
-        wait = true;
-        screen.Close(()=> wait = false);
-        while (wait) { yield return new WaitForEndOfFrame(); }
-
-        for (int i = 0; i < screen.pickedCards.Count; i++)
+        if(cards.Count>0)
         {
-            if(cardDeck.cardDeck.Contains(screen.pickedCards[i].container.data))
-                cardDeck.cardDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+            CardPickerScreen screen = new CardPickerScreen(PickScreenMode.WITHDRAW, countToDiscard, cards, true);
+            bool wait = true;
+            screen.Open(()=> wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
 
-            else if (cardDeck.discardPile.Contains(screen.pickedCards[i].container.data))
-                cardDeck.discardPile.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+            while(screen.open) { yield return new WaitForEndOfFrame(); }
+            wait = true;
+            screen.Close(()=> wait = false);
+            while (wait) { yield return new WaitForEndOfFrame(); }
 
-            else if (cardHand.IsInHand(screen.pickedCards[i].container.data.currentContainer))
-                screen.pickedCards[i].container.data.currentContainer.ResetContainer();
-            
-            else if(board.IsCardOnBoard(screen.pickedCards[i].container.data))
-                screen.pickedCards[i].container.data.currentContainer.ResetContainer();
-
-
-            if (screen.pickedCards[i].container.data.currentContainer != null)
+            for (int i = 0; i < screen.pickedCards.Count; i++)
             {
-                screen.pickedCards[i].container.data.UnsubscribeEvents(screen.pickedCards[i].container.data) ;
-                StoryManager.Instance.cardsToDestroy.Add(screen.pickedCards[i].container.data);
+                if(cardDeck.cardDeck.Contains(screen.pickedCards[i].container.data))
+                    cardDeck.cardDeck.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+
+                else if (cardDeck.discardPile.Contains(screen.pickedCards[i].container.data))
+                    cardDeck.discardPile.Remove(screen.pickedCards[i].container.data); //TODO Animate this with a card management method such as SendToOblivion
+
+                else if (cardHand.IsInHand(screen.pickedCards[i].container.data.currentContainer))
+                    screen.pickedCards[i].container.data.currentContainer.ResetContainer();
+            
+                else if(board.IsCardOnBoard(screen.pickedCards[i].container.data))
+                    screen.pickedCards[i].container.data.currentContainer.ResetContainer();
+
+
+                if (screen.pickedCards[i].container.data.currentContainer != null)
+                {
+                    screen.pickedCards[i].container.data.UnsubscribeEvents(screen.pickedCards[i].container.data) ;
+                    StoryManager.Instance.cardsToDestroy.Add(screen.pickedCards[i].container.data);
+                }
             }
         }
 
