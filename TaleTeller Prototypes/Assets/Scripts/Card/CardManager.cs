@@ -197,6 +197,7 @@ public class CardManager : Singleton<CardManager>
             cardTweening.MoveCard(card.currentContainer, oblivionTransfrom.position, true, true, feedback);
             while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
             cardDeck.cardDeck.Remove(card);
+            card.currentContainer.ResetContainer();
         }
         else if (cardDeck.discardPile.Contains(card))
         {
@@ -207,6 +208,7 @@ public class CardManager : Singleton<CardManager>
             cardTweening.MoveCard(card.currentContainer, oblivionTransfrom.position, true, true, feedback);
             while (!feedback.resolved) { yield return new WaitForEndOfFrame(); }
             cardDeck.discardPile.Remove(card);
+            card.currentContainer.ResetContainer();
         }
 
         queue.UpdateQueue();

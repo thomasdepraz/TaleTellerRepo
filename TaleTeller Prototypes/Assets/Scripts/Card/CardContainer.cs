@@ -38,7 +38,7 @@ public class CardContainer : MonoBehaviour
     
     private void Update()
     {
-        if(isDragging && Input.GetMouseButtonUp(0))
+        if(isDragging && (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)))
         {
             isDragging = false;
             canvasGroup.blocksRaycasts = true;

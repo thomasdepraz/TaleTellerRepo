@@ -62,7 +62,7 @@ MonoBehaviour:
   target: 0
   range: 
   values: []
-  doOnce: 0
+  doOnce: 1
   message: $Dialogue_T2_02
 --- !u!114 &11400000
 MonoBehaviour:
@@ -110,6 +110,6 @@ MonoBehaviour:
   target: 0
   range: 
   values: []
-  doOnce: 0
+  doOnce: 1
   tutorialText: $Slide_T2_02
   tutorialIllustration: {fileID: 21300000, guid: 1ce344c5759592349b485dcf9333c490, type: 3}

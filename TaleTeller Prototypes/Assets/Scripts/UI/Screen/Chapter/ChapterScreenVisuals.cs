@@ -148,10 +148,12 @@ public class ChapterScreenVisuals : GameScreenVisuals
         for (int i = 0; i < illustrationButtons.Count; i++)
         {
             illustrationButtons[i].gameObject.SetActive(false);
+            illustrationButtons[i].selected = false;
         }
         for (int i = 0; i < cardsPlacholders.Count; i++)
         {
             cardsPlacholders[i].gameObject.SetActive(false);
+            cardsPlacholders[i].selected = false;
         }
 
         for (int i = 0; i < titles.Count; i++)
