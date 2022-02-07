@@ -35,7 +35,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   stats:
-    baseLifePoints: 3
+    baseLifePoints: 7
     baseAttackDamage: 1
   behaviour: 2
   fightingRange: 3
@@ -68,7 +68,7 @@ MonoBehaviour:
   cardTypeReference: {fileID: -2216689539044958781}
   cardType: {fileID: 0}
   objective: {fileID: -7258997109705444086}
-  completionTimer: 4
+  completionTimer: 5
   isMainPlot: 1
   isFinal: 0
   plotChoiceDescription: 
