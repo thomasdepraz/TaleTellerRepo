@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - id: MUS_TITLE
-    clip: {fileID: 8300000, guid: 30cd098dafbe7414799b3f27ee570fa1, type: 3}
+    clip: {fileID: 8300000, guid: 448aeedea88fed84babd1a12efb195d7, type: 3}
   - id: MUS_THEME01
     clip: {fileID: 8300000, guid: c3b8d6fe1e4a0b54498503f045d5a3a5, type: 3}
   - id: MUS_THEME02

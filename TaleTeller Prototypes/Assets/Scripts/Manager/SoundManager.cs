@@ -173,7 +173,18 @@ public class SoundManager : Singleton<SoundManager>
 
     void LaunchMusic(int sceneIndex)
     {
-        AudioSource availableSource = allMusicSources.Where(s => !s.isPlaying).First();
+        var possibleSources = allMusicSources.Where(s => !s.isPlaying);
+        AudioSource availableSource = null;
+
+        if (possibleSources.Count() <= 0)
+        {
+            availableSource = allMusicSources.Where(s => s.time == allMusicSources.Max(source => source.time)).First();
+            availableSource.Stop();
+        }
+        else
+            availableSource = allMusicSources.Where(s => !s.isPlaying).First();
+
+
         AudioSource busySource = allMusicSources.Where(s => s.isPlaying).FirstOrDefault();
         Sound soundToPlay = null;
 
@@ -209,7 +220,6 @@ public class SoundManager : Singleton<SoundManager>
         while (timeElapsed < musicLength)
         {
             yield return new WaitForEndOfFrame();
-            //Debug.Log("Sound tick");
             timeElapsed += Time.deltaTime;
         }
 

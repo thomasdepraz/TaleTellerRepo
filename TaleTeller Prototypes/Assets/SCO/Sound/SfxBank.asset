@@ -28,7 +28,7 @@ MonoBehaviour:
   - id: SFX_WRONGPLACEMENT
     clip: {fileID: 8300000, guid: 4d6316eed581c1b44bf305987bf1d769, type: 3}
   - id: SFX_ATKFROMHERO
-    clip: {fileID: 8300000, guid: 9f394f0d2c117444498e873ad3d6b29b, type: 3}
+    clip: {fileID: 8300000, guid: 9e06cc0822ff7944c9e600129864c951, type: 3}
   - id: SFX_DISCARD
     clip: {fileID: 8300000, guid: 9be149895a98b1a4d8e114e2dc078e76, type: 3}
   - id: SFX_DRAW
@@ -38,7 +38,7 @@ MonoBehaviour:
   - id: SFX_ATKFIREBALL
     clip: {fileID: 8300000, guid: 9c62c4162ae22bb4bb936f4d2ef72f84, type: 3}
   - id: SFX_ATKSWORD
-    clip: {fileID: 8300000, guid: 676e77b9435a5e9469d91635d6d7d2bf, type: 3}
+    clip: {fileID: 8300000, guid: 7bdbade2623eead429fbaf7a51067d7a, type: 3}
   - id: SFX_CARDPLACED
     clip: {fileID: 8300000, guid: 0a4d547b7167b084aa67e3f6f4c12ca2, type: 3}
   - id: SFX_CARDTODECK

@@ -66,7 +66,7 @@ MonoBehaviour:
   data: {fileID: 0}
   stats:
     baseLifePoints: 2
-    baseAttackDamage: 25
+    baseAttackDamage: 2
   behaviour: 2
   fightingRange: 3
   doubleStrike: 0

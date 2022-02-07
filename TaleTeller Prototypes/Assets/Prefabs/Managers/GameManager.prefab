@@ -173,7 +173,7 @@ MonoBehaviour:
   cardsDatabase: {fileID: 4900000, guid: 0add74dcea810d34da943cce56d09d67, type: 3}
   popupDatabase: {fileID: 4900000, guid: 4a71ee7f64a2a67449977c2b5049352a, type: 3}
   screenDatabase: {fileID: 4900000, guid: bf45a927c971ea64c9d3e4726f646f9a, type: 3}
-  tutorielDataBase: {fileID: 4900000, guid: a18b6a9c5257214499e7c3d0a5cd4761, type: 3}
+  tutorielDataBase: {fileID: 4900000, guid: 2a69951efef6bcf4baeb6d98d802ddeb, type: 3}
 --- !u!114 &4076653973841923050
 MonoBehaviour:
   m_ObjectHideFlags: 0
